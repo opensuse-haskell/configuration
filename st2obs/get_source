@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+
+from rpm import spec
+
+
+def get_source(name):
+    x = spec(name)
+
+    for item in x.sources:
+        if (item[1] == 0) and (item[2] == 1):
+            return item[0]
+
+if __name__ == "__main__":
+    import sys
+    name = sys.argv[1]
+    print(get_source(name))
