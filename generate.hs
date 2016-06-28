@@ -10,14 +10,10 @@ main :: IO ()
 main = do
   hackage <- readHackage
   stackage <- parseCabalConfig <$> readFile "cabal.config"
-  forM_ stackage $ \p@(PackageIdentifier (PackageName n) v) -> do
-    let pn = n
-        pv = display v
-        pid = display p
-        dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
-        tar = dir ++ "/" ++ pid ++ ".tar.gz"
-    putStrLn (unwords ["all::", tar])
-  putStrLn ""
+  let targets = flip Prelude.map stackage $ \p@(PackageIdentifier (PackageName pn) v) ->
+                  let dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
+                  in  dir ++ "/" ++ display p ++ ".tar.gz"
+  putStrLn $ unwords $ ["all:"] ++ targets ++ ["\n"]
   mapM_ (putStrLn . toMakefile hackage) stackage
 
 isLibrary :: Hackage -> PackageIdentifier -> Bool
