@@ -2,7 +2,7 @@ module Main where
 
 import Control.Monad
 import Data.Maybe
-import Distribution.Hackage.DB hiding ( null, map )
+import Distribution.Hackage.DB hiding ( null, map, filter )
 import Distribution.Text
 import Distribution.Version
 import System.Environment
@@ -43,7 +43,10 @@ toMakefile hackage p@(PackageIdentifier n v) =
     \\tspec-cleaner -i $@\n"
 
 parseCabalConfig :: String -> [PackageIdentifier]
-parseCabalConfig buf = dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
+parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
+  where
+    cleanup :: PackageIdentifier -> Bool
+    cleanup (PackageIdentifier (PackageName n) _) = n `notElem` (corePackages ++ bannedPackages)
 
 parseCabalConfigLine :: String -> Maybe Dependency
 parseCabalConfigLine ('-':'-':_) = Nothing
@@ -55,3 +58,36 @@ dependencyToId :: Dependency -> PackageIdentifier
 dependencyToId d@(Dependency n vr) = PackageIdentifier n v
   where v   = fromMaybe err (isSpecificVersion vr)
         err = error ("dependencyToId: unexpected argument " ++ show d)
+
+corePackages :: [String]
+corePackages = [ "ghc"
+               , "array"
+               , "base"
+               , "bin-package-db"
+               , "binary"
+               , "bytestring"
+               , "Cabal"
+               , "containers"
+               , "deepseq"
+               , "directory"
+               , "filepath"
+               , "ghc-prim"
+               , "haskeline"
+               , "hoopl"
+               , "hpc"
+               , "integer-gmp"
+               , "pretty"
+               , "process"
+               , "template-haskell"
+               , "time"
+               , "transformers"
+               , "unix"
+               ]
+
+bannedPackages :: [String]
+bannedPackages = [ "bytestring-builder"
+                 , "nats"
+                 , "Win32"
+                 , "Win32-extras"
+                 , "Win32-notify"
+                 ]
