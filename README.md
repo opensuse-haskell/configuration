@@ -1,9 +1,14 @@
-# SOME dirty scripts
+# stackage2obs
 
-## st2obs
+This repository provides tools to (semi-)automatically create, update, and
+maintain OBS projects that mirror a given Stackage release. Just run
 
-Stackage to OBS sctript in zsh + helper get_source in python3.
+    $ cabal update
+    $ gmake -j -l$(nproc)
 
-Run this script inside of an OBS checkout as follows:
+to set up a repository. The build requires:
 
-    conf_dir=~/src/suse-haskell-scripts/.config/st2obs ~/src/suse-haskell-scripts/st2obs/st2obs lts
+- A recent version of GHC.
+- The [http://hackage.haskell.org/package/hackage-db](hackage-db) library.
+- [http://hackage.haskell.org/package/cabal-rpm](cabal-rpm)
+- [http://hackage.haskell.org/package/cabal-install](cabal-install)
