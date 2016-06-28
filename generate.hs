@@ -1,29 +1,42 @@
 module Main where
 
+import Control.Monad
+import Data.Maybe
 import Distribution.Hackage.DB
 import Distribution.Text
 import Distribution.Version
-import Data.Maybe
 
 main :: IO ()
 main = do
   hackage <- readHackage
   stackage <- parseCabalConfig <$> readFile "cabal.config"
-  mapM_ (putStrLn . toMakefile) stackage
+  forM_ stackage $ \p@(PackageIdentifier (PackageName n) v) -> do
+    let pn = n
+        pv = display v
+        pid = display p
+        dir = (if isLibrary hackage p then "ghc-" else "") ++ pn
+        spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
+        tar = dir ++ "/" ++ pid ++ ".tar.gz"
+    putStrLn (unwords ["all::", spec, tar])
+  putStrLn ""
+  mapM_ (putStrLn . toMakefile hackage) stackage
 
-toMakefile :: PackageIdentifier -> String
-toMakefile p@(PackageIdentifier n v) =
+isLibrary :: Hackage -> PackageIdentifier -> Bool
+isLibrary hackage (PackageIdentifier (PackageName n) v) =
+  isJust (condLibrary (hackage ! n ! v))
+
+toMakefile :: Hackage -> PackageIdentifier -> String
+toMakefile hackage p@(PackageIdentifier n v) =
   let pn = display n
       pv = display v
       pid = display p
-      dir = "ghc-" ++ pn
-      spec = dir ++ "/ghc-" ++ pn ++ ".spec"
+      dir = (if isLibrary hackage p then "ghc-" else "") ++ pn
+      spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
       tar = dir ++ "/" ++ pid ++ ".tar.gz"
   in
-    "all:: " ++ spec ++ " " ++ tar ++ "\n\
-    \\n\
-    \" ++ tar ++ ":\n\
+    tar ++ ":\n\
     \\tmkdir -p " ++ dir ++ "\n\
+    \\trm -f " ++ dir ++ "/*.tar.gz\n\
     \\tcd " ++ dir ++ " && wget -q http://hackage.haskell.org/package/" ++ pid ++ "/" ++ pid ++ ".tar.gz\n\
     \\n\
     \" ++ spec ++ ":\n\
