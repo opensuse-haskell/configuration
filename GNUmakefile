@@ -1,13 +1,15 @@
 # GNUmakefile
 
-OBSDIR := obs
+VERSION := lts-6
+
+OBSDIR := obs-$(VERSION)
 
 .PHONY: all
 
-include config.mk
+include $(VERSION).mk
 
-config.mk : generate.hs cabal.config
-	runhaskell generate.hs >$@
+$(VERSION).mk : generate.hs cabal-$(VERSION).config
+	runhaskell generate.hs cabal-$(VERSION).config >$@
 
-cabal.config:
-	wget -q https://www.stackage.org/lts/cabal.config
+cabal-$(VERSION).config:
+	curl -L -s https://www.stackage.org/$(VERSION)/cabal.config >$@

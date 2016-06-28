@@ -1,5 +1,5 @@
 # ignore generated files
 
-/cabal.config
-/config.mk
-/obs/*
+/*.mk
+/cabal-*.config
+/obs-*/*

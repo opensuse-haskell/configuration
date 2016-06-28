@@ -2,15 +2,19 @@ module Main where
 
 import Control.Monad
 import Data.Maybe
-import Distribution.Hackage.DB
+import Distribution.Hackage.DB hiding ( null, map )
 import Distribution.Text
 import Distribution.Version
+import System.Environment
 
 main :: IO ()
 main = do
+  args <- getArgs
+  let cabalConfig | null args = "cabal.config"
+                  | otherwise = head args
   hackage <- readHackage
-  stackage <- parseCabalConfig <$> readFile "cabal.config"
-  let targets = flip Prelude.map stackage $ \p@(PackageIdentifier (PackageName pn) v) ->
+  stackage <- parseCabalConfig <$> readFile cabalConfig
+  let targets = flip map stackage $ \p@(PackageIdentifier (PackageName pn) v) ->
                   let dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
                   in  dir ++ "/" ++ display p ++ ".tar.gz"
   putStrLn $ unwords $ ["all:"] ++ targets ++ ["\n"]
