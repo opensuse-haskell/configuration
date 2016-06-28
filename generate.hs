@@ -14,7 +14,7 @@ main = do
     let pn = n
         pv = display v
         pid = display p
-        dir = (if isLibrary hackage p then "ghc-" else "") ++ pn
+        dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
         spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
         tar = dir ++ "/" ++ pid ++ ".tar.gz"
     putStrLn (unwords ["all::", spec, tar])
@@ -30,7 +30,7 @@ toMakefile hackage p@(PackageIdentifier n v) =
   let pn = display n
       pv = display v
       pid = display p
-      dir = (if isLibrary hackage p then "ghc-" else "") ++ pn
+      dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
       spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
       tar = dir ++ "/" ++ pid ++ ".tar.gz"
   in
