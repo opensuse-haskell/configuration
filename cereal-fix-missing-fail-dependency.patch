@@ -1,0 +1,13 @@
+Index: ghc-cereal.spec
+===================================================================
+--- ghc-cereal.spec (revision 1)
++++ ghc-cereal.spec (revision 2)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-bytestring-devel
+ BuildRequires:  ghc-containers-devel
++BuildRequires:  ghc-fail-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ %if %{with tests}
+

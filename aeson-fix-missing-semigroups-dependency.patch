@@ -1,0 +1,13 @@
+Index: ghc-aeson.spec
+===================================================================
+--- ghc-aeson.spec	(revision 1)
++++ ghc-aeson.spec	(working copy)
+@@ -38,6 +38,7 @@
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-scientific-devel
++BuildRequires:  ghc-semigroups-devel
+ BuildRequires:  ghc-syb-devel
+ BuildRequires:  ghc-tagged-devel
+ BuildRequires:  ghc-template-haskell-devel
+
