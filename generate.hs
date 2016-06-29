@@ -1,5 +1,6 @@
 module Main where
 
+import Control.Exception ( assert )
 import Control.Monad
 import Data.Maybe
 import Distribution.Hackage.DB hiding ( null, map, filter, lookup )
@@ -73,34 +74,69 @@ dependencyToId d@(Dependency n vr) = PackageIdentifier n v
         err = error ("dependencyToId: unexpected argument " ++ show d)
 
 corePackages :: [String]
-corePackages = [ "ghc"
-               , "array"
-               , "base"
-               , "bin-package-db"
-               , "binary"
-               , "bytestring"
-               , "Cabal"
-               , "containers"
-               , "deepseq"
-               , "directory"
-               , "filepath"
-               , "ghc-prim"
-               , "haskeline"
-               , "hoopl"
-               , "hpc"
-               , "integer-gmp"
-               , "pretty"
-               , "process"
-               , "template-haskell"
-               , "time"
-               , "transformers"
-               , "unix"
-               ]
+corePackages =
+  [ "ghc"
+  , "array"
+  , "base"
+  , "bin-package-db"
+  , "binary"
+  , "bytestring"
+  , "Cabal"
+  , "containers"
+  , "deepseq"
+  , "directory"
+  , "filepath"
+  , "ghc-prim"
+  , "haskeline"
+  , "hoopl"
+  , "hpc"
+  , "integer-gmp"
+  , "pretty"
+  , "process"
+  , "template-haskell"
+  , "time"
+  , "transformers"
+  , "unix"
+  ]
 
 bannedPackages :: [String]
-bannedPackages = [ "bytestring-builder"
-                 , "nats"
-                 , "Win32"
-                 , "Win32-extras"
-                 , "Win32-notify"
-                 ]
+bannedPackages =
+  [ "bytestring-builder"
+  , "nats"
+  , "Win32"
+  , "Win32-extras"
+  , "Win32-notify"
+  ]
+
+forcedExecutablePackages :: [String]
+forcedExecutablePackages =
+  [ "alex"
+  , "BNFC"
+  , "bustle"
+  , "c2hs"
+  , "cab"
+  , "cabal-install"
+  , "cabal-rpm"
+  , "cpphs"
+  , "darcs"
+  , "ghc-mod"
+  , "git-annex"
+  , "gtk2hs-buildtools"
+  , "happy"
+  , "hdevtools"
+  , "highlighting-kate"
+  , "hindent"
+  , "hlint"
+  , "hpack"
+  , "hscolour"
+  , "lhs2tex"
+  , "pandoc"
+  , "pointfree"
+  , "pointful"
+  , "shake"
+  , "ShellCheck"
+  , "stack"
+  , "texmath"
+  , "xmobar"
+  , "xmonad"
+  ]
