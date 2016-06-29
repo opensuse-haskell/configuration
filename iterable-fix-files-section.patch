@@ -1,0 +1,18 @@
+Index: ghc-iterable.spec
+===================================================================
+--- ghc-iterable.spec	(revision 2)
++++ ghc-iterable.spec	(working copy)
+@@ -77,9 +77,11 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
++%dir %{_datadir}/%{pkg_name}-%{version}
++%{_datadir}/%{pkg_name}-%{version}/*
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc README.md changelog
++%doc changelog
+ 
+ %changelog
+

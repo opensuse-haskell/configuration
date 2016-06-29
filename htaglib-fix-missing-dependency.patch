@@ -1,13 +1,13 @@
-Index: ghc-cereal.spec
+Index: ghc-htaglib.spec
 ===================================================================
---- ghc-cereal.spec (revision 1)
-+++ ghc-cereal.spec (revision 2)
+--- ghc-htaglib.spec	(revision 2)
++++ ghc-htaglib.spec	(working copy)
 @@ -31,6 +31,7 @@
- BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-bytestring-devel
- BuildRequires:  ghc-containers-devel
-+BuildRequires:  ghc-fail-devel
  BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-text-devel
++BuildRequires:  libtag-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
+ BuildRequires:  ghc-HUnit-devel
 

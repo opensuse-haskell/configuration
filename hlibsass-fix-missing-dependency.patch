@@ -1,0 +1,13 @@
+Index: ghc-hlibsass.spec
+===================================================================
+--- ghc-hlibsass.spec	(revision 2)
++++ ghc-hlibsass.spec	(working copy)
+@@ -26,6 +26,7 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++BuildRequires:  gcc-c++
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+
