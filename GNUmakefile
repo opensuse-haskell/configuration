@@ -8,7 +8,7 @@ OBSDIR := obs-$(VERSION)
 
 include $(VERSION).mk
 
-$(VERSION).mk : generate.hs cabal-$(VERSION).config
+$(VERSION).mk : generate.hs cabal-$(VERSION).config $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
 	runhaskell generate.hs cabal-$(VERSION).config >$@
 
 cabal-$(VERSION).config:
