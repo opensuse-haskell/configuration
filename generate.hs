@@ -40,7 +40,9 @@ toMakefile hackage p@(PackageIdentifier n v) =
     \" ++ spec ++ ":\n\
     \\tmkdir -p " ++ dir ++ "\n\
     \\tcd " ++ dir ++ " && rm -f *.spec && cblrpm spec " ++ pid ++ "\n\
-    \\tspec-cleaner -i $@\n"
+    \\tspec-cleaner -i $@\n\
+    \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../" ++ pn ++ "-*.patch; do patch <$$n; done\n\
+    \\n"
 
 parseCabalConfig :: String -> [PackageIdentifier]
 parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
