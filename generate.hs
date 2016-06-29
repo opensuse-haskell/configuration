@@ -2,7 +2,7 @@ module Main where
 
 import Control.Monad
 import Data.Maybe
-import Distribution.Hackage.DB hiding ( null, map, filter )
+import Distribution.Hackage.DB hiding ( null, map, filter, lookup )
 import Distribution.Text
 import Distribution.Version
 import System.Environment
@@ -17,8 +17,12 @@ main = do
   let targets = flip map stackage $ \p@(PackageIdentifier (PackageName pn) v) ->
                   let dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
                   in  dir ++ "/" ++ display p ++ ".tar.gz"
-  putStrLn $ unwords $ ["all:"] ++ targets ++ ["\n"]
-  mapM_ (putStrLn . toMakefile hackage) stackage
+  putStrLn $ unwords $ ["all:"] ++ targets
+  mapM_ (putStr . toMakefile hackage) stackage
+
+hackageRevision :: Hackage -> PackageIdentifier -> Int
+hackageRevision hackage (PackageIdentifier (PackageName n) v) =
+  maybe 0 read (lookup "x-revision" (customFieldsPD (packageDescription (hackage ! n ! v))))
 
 isLibrary :: Hackage -> PackageIdentifier -> Bool
 isLibrary hackage (PackageIdentifier (PackageName n) v) =
@@ -28,21 +32,28 @@ toMakefile :: Hackage -> PackageIdentifier -> String
 toMakefile hackage p@(PackageIdentifier n v) =
   let pn = display n
       pv = display v
+      r = hackageRevision hackage p
       pid = display p
       dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
       spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
+      tarsrc = "~/.cabal/packages/hackage.haskell.org/" ++ pn ++ "/" ++ pv ++ "/" ++ pid ++ ".tar.gz"
       tar = dir ++ "/" ++ pid ++ ".tar.gz"
+      cbl = dir ++ "/" ++ show r ++ ".cabal"
+      cblurl = "https://hackage.haskell.org/package/" ++ pid ++ "/revision/" ++ show r ++ ".cabal"
   in
-    tar ++ " : " ++ spec ++ "\n\
+    "\n" ++
+    tar ++ " : " ++ spec ++ (if r > 0 then " " ++ cbl else "") ++ "\n\
     \\trm -f " ++ dir ++ "/*.tar.gz\n\
-    \\tcp ~/.cabal/packages/hackage.haskell.org/" ++ pn ++ "/" ++ pv ++ "/" ++ pid ++ ".tar.gz " ++ dir ++"/\n\
+    \\tcp " ++ tarsrc ++ " " ++ dir ++"/\n\
     \\n\
     \" ++ spec ++ ":\n\
     \\tmkdir -p " ++ dir ++ "\n\
     \\tcd " ++ dir ++ " && rm -f *.spec && cblrpm spec " ++ pid ++ "\n\
     \\tspec-cleaner -i $@\n\
     \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../" ++ pn ++ "-*.patch; do patch <$$n; done\n\
-    \\n"
+    \\n\
+    \" ++ dir ++ "/" ++ show r ++ ".cabal:\n\
+    \\tcd " ++ dir ++ " && rm -f *.cabal && wget -q " ++ cblurl ++ "\n"
 
 parseCabalConfig :: String -> [PackageIdentifier]
 parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
