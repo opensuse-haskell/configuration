@@ -107,6 +107,7 @@ bannedPackages :: [String]
 bannedPackages =
   [ "bytestring-builder"
   , "nats"
+  , "hfsevents"
   , "Win32"
   , "Win32-extras"
   , "Win32-notify"
