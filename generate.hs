@@ -16,7 +16,9 @@ main = do
   hackage <- readHackage
   stackage <- parseCabalConfig <$> readFile cabalConfig
   let targets = flip map stackage $ \p@(PackageIdentifier (PackageName pn) v) ->
-                  let dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
+                  let forcedExe = pn `elem` forcedExecutablePackages
+                      isExe = forcedExe || not (isLibrary hackage p)
+                      dir = "$(OBSDIR)/" ++ (if isExe then "" else "ghc-") ++ pn
                   in  dir ++ "/" ++ display p ++ ".tar.gz"
   putStrLn $ unwords $ ["all:"] ++ targets
   mapM_ (putStr . toMakefile hackage) stackage
@@ -35,8 +37,10 @@ toMakefile hackage p@(PackageIdentifier n v) =
       pv = display v
       r = hackageRevision hackage p
       pid = display p
-      dir = "$(OBSDIR)/" ++ (if isLibrary hackage p then "ghc-" else "") ++ pn
-      spec = dir ++ (if isLibrary hackage p then "/ghc-" else "/") ++ pn ++ ".spec"
+      forcedExe = unPackageName n `elem` forcedExecutablePackages
+      isExe = forcedExe || not (isLibrary hackage p)
+      dir = "$(OBSDIR)/" ++ (if isExe then "" else "ghc-") ++ pn
+      spec = dir ++ (if isExe then "/" else "/ghc-") ++ pn ++ ".spec"
       tarsrc = "~/.cabal/packages/hackage.haskell.org/" ++ pn ++ "/" ++ pv ++ "/" ++ pid ++ ".tar.gz"
       tar = dir ++ "/" ++ pid ++ ".tar.gz"
       cbl = dir ++ "/" ++ show r ++ ".cabal"
@@ -49,7 +53,7 @@ toMakefile hackage p@(PackageIdentifier n v) =
     \\n\
     \" ++ spec ++ ":\n\
     \\tmkdir -p " ++ dir ++ "\n\
-    \\tcd " ++ dir ++ " && rm -f *.spec && cblrpm spec " ++ pid ++ "\n\
+    \\tcd " ++ dir ++ " && rm -f *.spec && cblrpm " ++ (if forcedExe then "-b " else " ") ++ "spec " ++ pid ++ "\n\
     \\tspec-cleaner -i $@\n\
     \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../" ++ pn ++ "-*.patch; do patch <$$n; done\n\
     \\n\
