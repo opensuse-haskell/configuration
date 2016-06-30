@@ -2,4 +2,6 @@
 
 /*.mk
 /cabal-*.config
+/cabal2obs.cabal
+/dist/*
 /obs-*/*
