@@ -115,7 +115,8 @@ bannedPackages =
 
 forcedExecutablePackages :: [String]
 forcedExecutablePackages =
-  [ "alex"
+  [ "Agda"
+  , "alex"
   , "BNFC"
   , "bustle"
   , "c2hs"
@@ -134,6 +135,7 @@ forcedExecutablePackages =
   , "hlint"
   , "hpack"
   , "hscolour"
+  , "idris"
   , "lhs2tex"
   , "pandoc"
   , "pointfree"
