@@ -1,0 +1,14 @@
+Index: ghc-cairo.spec
+===================================================================
+--- ghc-cairo.spec	(revision 2)
++++ ghc-cairo.spec	(working copy)
+@@ -86,6 +86,8 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc COPYRIGHT
++%dir %{_datadir}/%{pkg_name}-%{version}
++%{_datadir}/%{pkg_name}-%{version}/*
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

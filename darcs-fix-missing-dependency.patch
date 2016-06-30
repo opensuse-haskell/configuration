@@ -1,0 +1,13 @@
+Index: darcs.spec
+===================================================================
+--- darcs.spec (revision 1)
++++ darcs.spec (revision 2)
+@@ -28,6 +28,7 @@
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ # Begin cabal-rpm deps:
+ BuildRequires:  chrpath
++BuildRequires:  curl-devel
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-array-devel
+
