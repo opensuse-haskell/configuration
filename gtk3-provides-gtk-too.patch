@@ -1,0 +1,21 @@
+Index: ghc-gtk3.spec
+===================================================================
+--- ghc-gtk3.spec	(revision 2)
++++ ghc-gtk3.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(gthread-2.0)
+ BuildRequires:  pkgconfig(gtk+-3.0)
++Provides:       ghc-gtk = %{version}
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+@@ -63,6 +64,7 @@
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
+ # End cabal-rpm deps
++Provides:       ghc-gtk-devel = %{version}
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+

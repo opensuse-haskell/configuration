@@ -1,0 +1,13 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 1)
++++ pandoc.spec	(working copy)
+@@ -158,6 +158,7 @@
+ %doc README changelog
+ %{_bindir}/%{name}
+ %{_datadir}/%{name}-%{version}
++%{_mandir}/man1/pandoc.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+
