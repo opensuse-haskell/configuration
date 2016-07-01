@@ -53,9 +53,9 @@ toMakefile hackage p@(PackageIdentifier n v) =
     \\n\
     \" ++ spec ++ ":\n\
     \\tmkdir -p " ++ dir ++ "\n\
-    \\tcd " ++ dir ++ " && rm -f *.spec && cblrpm " ++ (if forcedExe then "-b " else " ") ++ "spec " ++ pid ++ "\n\
+    \\tcd " ++ dir ++ " && rm -f *.spec && cabal-rpm --compiler=ghc-7.10 " ++ (if forcedExe then "-b " else " ") ++ "spec " ++ pid ++ "\n\
     \\tspec-cleaner -i $@\n\
-    \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../" ++ pn ++ "-*.patch; do patch <$$n; done\n\
+    \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../../$(VERSION)/patches/" ++ pn ++ "-*.patch; do patch <$$n; done\n\
     \\n\
     \" ++ dir ++ "/" ++ show r ++ ".cabal:\n\
     \\tcd " ++ dir ++ " && rm -f *.cabal && wget -q " ++ cblurl ++ "\n"
