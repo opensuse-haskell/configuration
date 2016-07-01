@@ -1,0 +1,6 @@
+[submodule "tools/cabal2obs"]
+	path = tools/cabal2obs
+	url = git://github.com/opensuse-haskell/cabal2obs.git
+[submodule "tools/cabal-rpm"]
+	path = tools/cabal-rpm
+	url = git://github.com/opensuse-haskell/cabal-rpm.git
