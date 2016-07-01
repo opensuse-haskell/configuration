@@ -1,0 +1,13 @@
+Index: happy.spec
+===================================================================
+--- happy.spec	(revision 1)
++++ happy.spec	(working copy)
+@@ -65,5 +65,7 @@
+ %doc LICENSE
+ %doc doc examples TODO README
+ %{_bindir}/%{name}
++%dir %{_datadir}/%{name}-%{version}
++%{_datadir}/%{name}-%{version}/*
+ 
+ %changelog
+

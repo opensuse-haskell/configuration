@@ -1,0 +1,16 @@
+Index: ghc-pretty-show.spec
+===================================================================
+--- ghc-pretty-show.spec	(revision 1)
++++ ghc-pretty-show.spec	(working copy)
+@@ -79,6 +79,10 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
++%dir %{_datadir}/%{pkg_name}-%{version}
++%dir %{_datadir}/%{pkg_name}-%{version}/style
++%{_datadir}/%{pkg_name}-%{version}/style/*.js
++%{_datadir}/%{pkg_name}-%{version}/style/*.css
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

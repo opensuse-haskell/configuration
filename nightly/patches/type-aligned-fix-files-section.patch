@@ -1,0 +1,17 @@
+Index: ghc-type-aligned.spec
+===================================================================
+--- ghc-type-aligned.spec	(revision 2)
++++ ghc-type-aligned.spec	(working copy)
+@@ -65,9 +65,10 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
++%dir %{_datadir}/%{pkg_name}-%{version}
++%{_datadir}/%{pkg_name}-%{version}/*
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc ChangeLog
+ 
+ %changelog
+

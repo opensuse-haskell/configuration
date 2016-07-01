@@ -1,0 +1,14 @@
+Index: ghc-commutative.spec
+===================================================================
+--- ghc-commutative.spec	(revision 1)
++++ ghc-commutative.spec	(working copy)
+@@ -58,6 +58,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ 
+ %build
+
