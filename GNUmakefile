@@ -2,17 +2,14 @@
 
 VERSION := lts-6
 
-OBSDIR := obs-$(VERSION)
+OBSDIR := $(VERSION)/_obs
 
 .PHONY: all
 
-include $(VERSION).mk
+include $(VERSION)/_obs.mk
 
-$(VERSION).mk : generate.hs cabal-$(VERSION).config $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
-	runhaskell generate.hs cabal-$(VERSION).config >$@
+$(VERSION)/_obs.mk : tools/cabal2obs/Main.hs $(VERSION)/_obs.config $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
+	runhaskell tools/cabal2obs/Main.hs $(VERSION)/_obs.config >$@
 
-cabal-$(VERSION).config:
+$(VERSION)/_obs.config:
 	curl -L -s https://www.stackage.org/$(VERSION)/cabal.config >$@
-
-cabal2obs.cabal : package.yaml
-	hpack
