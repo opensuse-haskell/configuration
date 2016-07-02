@@ -1,0 +1,28 @@
+-- This file has been generated from package.yaml by hpack version 0.14.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           cabal2obs
+version:        20160630
+synopsis:       Convert a set of Cabal files into an OBS project
+description:    Convert a set of Cabal files into an OBS project.
+category:       Distribution
+homepage:       https://github.com/opensuse-haskell/cabal2obs#readme
+bug-reports:    https://github.com/opensuse-haskell/cabal2obs/issues
+maintainer:     opensuse-haskell@opensuse.org
+license:        GPL-3
+license-file:   LICENSE
+tested-with:    GHC > 7 && < 8.1
+build-type:     Simple
+cabal-version:  >= 1.10
+
+source-repository head
+  type: git
+  location: https://github.com/opensuse-haskell/cabal2obs
+
+executable generate
+  main-is: generate.hs
+  ghc-options: -Wall
+  build-depends:
+      base < 5, hackage-db, Cabal
+  default-language: Haskell2010
