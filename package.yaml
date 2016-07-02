@@ -7,7 +7,7 @@ license:                GPL-3
 license-file:           LICENSE
 github:                 opensuse-haskell/cabal2obs
 category:               Distribution
-tested-with:            GHC > 7 && < 8.1
+tested-with:            GHC > 7.10 && < 8.1
 
 ghc-options:            -Wall
 
