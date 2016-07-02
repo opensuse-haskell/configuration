@@ -58,7 +58,7 @@ toMakefile hackage p@(PackageIdentifier n v) =
     \\tshopt -s nullglob && cd " ++ dir ++ " && for n in ../../../$(VERSION)/patches/" ++ pn ++ "-*.patch; do patch <$$n; done\n\
     \\n\
     \" ++ dir ++ "/" ++ show r ++ ".cabal:\n\
-    \\tcd " ++ dir ++ " && rm -f *.cabal && wget -q " ++ cblurl ++ "\n"
+    \\tmkdir -p " ++ dir ++ " && cd " ++ dir ++ " && rm -f *.cabal && wget -q " ++ cblurl ++ "\n"
 
 parseCabalConfig :: String -> [PackageIdentifier]
 parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
