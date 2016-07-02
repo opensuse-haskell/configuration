@@ -21,7 +21,7 @@ source-repository head
   location: https://github.com/opensuse-haskell/cabal2obs
 
 executable generate
-  main-is: generate.hs
+  main-is: Main.hs
   ghc-options: -Wall
   build-depends:
       base < 5, hackage-db, Cabal

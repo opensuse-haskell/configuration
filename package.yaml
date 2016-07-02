@@ -13,5 +13,5 @@ ghc-options:            -Wall
 
 executables:
   generate:
-    main:               generate.hs
+    main:               Main.hs
     dependencies:       base < 5, hackage-db, Cabal
