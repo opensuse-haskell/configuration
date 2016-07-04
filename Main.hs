@@ -64,7 +64,7 @@ main = do
 
         spec %> \out -> do
           compiler <- stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
-          patches <- sort <$> getDirectoryFiles pkgDir ["../../../" ++ stackageVersion ++ "/patches/" ++ pn ++ "-*.patch"]
+          patches <- sort <$> getDirectoryFiles pkgDir ["../../../" ++ stackageVersion ++ "/patches/" ++ pn ++ "/*.patch"]
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --compiler=" ++
