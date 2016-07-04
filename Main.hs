@@ -1,15 +1,12 @@
-module Main where
+module Main ( main ) where
 
-import Control.Exception ( assert )
 import Control.Monad
 import Data.Char
 import Data.List
 import Data.Maybe
 import Development.Shake
-import Development.Shake.Command
 import Development.Shake.FilePath
-import Development.Shake.Util
-import Distribution.Hackage.DB hiding ( null, map, filter, lookup )
+import Distribution.Hackage.DB hiding ( null, map, filter, lookup, pkgName )
 import Distribution.Text
 import Distribution.Version
 import System.Directory
@@ -63,7 +60,7 @@ main = do
           editedCabalFile %> \_ ->
             bash ["cd " ++ pkgDir, "rm -f *.cabal", "wget -q " ++ editedCabalFileUrl]
 
-        spec %> \out -> do
+        spec %> \_ -> do
           compiler <- stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
           patches <- sort <$> getDirectoryFiles pkgDir ["../../../" ++ stackageVersion ++ "/patches/" ++ pn ++ "/*.patch"]
           bash $ [ "cd " ++ pkgDir
@@ -72,7 +69,7 @@ main = do
                    compiler ++ (if forcedExe then " -b " else " ") ++ "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
                  ] ++
-                 [ "patch --no-backup-if-mismatch --force <" ++ p | p <- patches ]
+                 [ "patch --no-backup-if-mismatch --force <" ++ pt | pt <- patches ]
 
 bash :: [String] -> Action ()
 bash cmds = command_ [] "bash" ["-c", intercalate "; " cmds']
@@ -89,44 +86,6 @@ hackageRevision hackage (PackageIdentifier (PackageName n) v) =
 isLibrary :: Hackage -> PackageIdentifier -> Bool
 isLibrary hackage (PackageIdentifier (PackageName n) v) =
   isJust (condLibrary (hackage ! n ! v))
-
-toMakefile :: Hackage -> PackageIdentifier -> String
-toMakefile hackage p@(PackageIdentifier n v) =
-  let pn = display n
-      pv = display v
-      r = hackageRevision hackage p
-      pid = display p
-      forcedExe = unPackageName n `elem` forcedExecutablePackages
-      isExe = forcedExe || not (isLibrary hackage p)
-      dir = "$(OBSDIR)/" ++ (if isExe then "" else "ghc-") ++ pn
-      spec = dir ++ (if isExe then "/" else "/ghc-") ++ pn ++ ".spec"
-      tarsrc = "$(HOME)/.cabal/packages/hackage.haskell.org/" ++ pn ++ "/" ++ pv ++ "/" ++ pid ++ ".tar.gz"
-      tar = dir ++ "/" ++ pid ++ ".tar.gz"
-      cbl = dir ++ "/" ++ show r ++ ".cabal"
-      cblurl = "https://hackage.haskell.org/package/" ++ pid ++ "/revision/" ++ show r ++ ".cabal"
-  in unlines $
-  [ ""
-  , unwords [tar, ":", tarsrc]
-  , unwords ["\t", "mkdir", "-p", dir]
-  , unwords ["\t", "rm", "-f", dir ++ "/*.tar.gz"]
-  , unwords ["\t", "cp", "$<", "$@"]
-  , ""
-  , unwords [tarsrc ++ ":"]
-  , unwords ["\t", "cabal", "fetch", "-v0", "--no-dependencies", "--", pid]
-  ]
-  -- "\n\
-  -- \" ++ tar ++ " : " ++ tarsrc ++ " \n\
-  -- \\trm -f " ++ dir ++ "/*.tar.gz\n\
-  -- \\tcp " ++ tarsrc ++ " " ++ dir ++"/\n\
-  -- \\n\
-  -- \" ++ spec ++ ": " ++ tar ++ (if r > 0 then " " ++ cbl else "") ++ "\n\
-  -- \\tmkdir -p " ++ dir ++ "\n\
-  -- \\tcd " ++ dir ++ " && rm -f *.spec && cabal-rpm --compiler=ghc-7.10 " ++ (if forcedExe then "-b " else " ") ++ "spec " ++ pid ++ "\n\
-  -- \\tspec-cleaner -i $@\n\
-  -- \\tshopt -s nullglob && set -e && cd " ++ dir ++ " && for n in $(SRCDIR)/$(VERSION)/patches/" ++ pn ++ "-*.patch; do patch <$$n; done\n\
-  -- \\n\
-  -- \" ++ dir ++ "/" ++ show r ++ ".cabal:\n\
-  -- \\tmkdir -p " ++ dir ++ " && cd " ++ dir ++ " && rm -f *.cabal && wget -q " ++ cblurl ++ "\n"
 
 parseCabalConfig :: String -> [PackageIdentifier]
 parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
