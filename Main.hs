@@ -54,8 +54,9 @@ main = do
         want [spec, tar]
 
         tar %> \out -> do
-          bash ["rm -f " ++ pkgDir ++ "*.tar.gz"]
-          copyFileChanged tarsrc tar
+          b <- liftIO $ System.Directory.doesFileExist tar
+          when (not b) $ do
+            bash [ "rm -f " ++ pkgDir ++ "/*.tar.gz", "cp " ++ tarsrc ++ " " ++ out ]
 
         when (rv > 0) $ do
           want [editedCabalFile]
