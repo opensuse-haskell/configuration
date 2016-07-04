@@ -30,10 +30,10 @@ main = do
           tarsrc = homeDir </> ".cabal/packages/hackage.haskell.org" </> pn </> pv </> pid <.> "tar.gz"
       tarsrc %> \out -> do
         b <- liftIO $ System.Directory.doesFileExist out
-        when (not b) $
+        unless b $
           command_ [] "cabal" ["fetch", "-v0", "--no-dependencies", "--", display p]
 
-    forM_ (zip stackageVersions packageSets) $ \(stackageVersion,stackage) -> do
+    forM_ (zip stackageVersions packageSets) $ \(stackageVersion,stackage) ->
       forM_ stackage $ \p@(PackageIdentifier (PackageName pn) v) -> do
         let forcedExe = pn `elem` forcedExecutablePackages
             isExe = forcedExe || not (isLibrary hackage p)
@@ -52,7 +52,7 @@ main = do
 
         tar %> \out -> do
           b <- liftIO $ System.Directory.doesFileExist tar
-          when (not b) $ do
+          unless b $
             bash [ "rm -f " ++ pkgDir ++ "/*.tar.gz", "cp " ++ tarsrc ++ " " ++ out ]
 
         when (rv > 0) $ do
