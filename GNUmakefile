@@ -1,15 +1,20 @@
 # GNUmakefile
 
-VERSION := lts-6
+.PHONY: all cabal-rpm cabal2obs update
 
-OBSDIR := $(VERSION)/_obs
+all:		lts-6/config/stackage-packages.txt
+all:		nightly/config/stackage-packages.txt
+all:		cabal-rpm cabal2obs
+	env PATH=$(PWD)/tools/cabal-rpm/dist/build/cabal-rpm:$$PATH tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc)
 
-.PHONY: all
+cabal-rpm:
+	@cd tools/cabal-rpm && cabal build
 
-include $(VERSION)/_obs.mk
+cabal2obs:
+	@cd tools/cabal2obs && cabal build
 
-$(VERSION)/_obs.mk : tools/cabal2obs/Main.hs $(VERSION)/_obs.config $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
-	runhaskell tools/cabal2obs/Main.hs $(VERSION)/_obs.config >$@
+%/config/stackage-packages.txt:
+	curl -L -s "https://www.stackage.org/$*/cabal.config" >$@
 
-$(VERSION)/_obs.config:
-	curl -L -s https://www.stackage.org/$(VERSION)/cabal.config >$@
+update:
+	f=$$(ls */config/stackage-packages.txt); rm $$f; $(MAKE) $$f
