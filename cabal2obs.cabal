@@ -20,9 +20,9 @@ source-repository head
   type: git
   location: https://github.com/opensuse-haskell/cabal2obs
 
-executable generate
+executable cabal2obs
   main-is: Main.hs
-  ghc-options: -Wall
+  ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
       base < 5, hackage-db, Cabal, shake, directory
   default-language: Haskell2010

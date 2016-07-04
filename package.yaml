@@ -12,6 +12,7 @@ tested-with:            GHC > 7.10 && < 8.1
 ghc-options:            -Wall
 
 executables:
-  generate:
+  cabal2obs:
     main:               Main.hs
     dependencies:       base < 5, hackage-db, Cabal, shake, directory
+    ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
