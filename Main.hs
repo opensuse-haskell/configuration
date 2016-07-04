@@ -72,8 +72,7 @@ main = do
                    compiler ++ (if forcedExe then " -b " else " ") ++ "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
                  ] ++
-                 [ "patch --force <" ++ p | p <- patches ] ++
-                 [ "rm -f *.orig" ]
+                 [ "patch --no-backup-if-mismatch --force <" ++ p | p <- patches ]
 
 bash :: [String] -> Action ()
 bash cmds = command_ [] "bash" ["-c", intercalate "; " cmds']
