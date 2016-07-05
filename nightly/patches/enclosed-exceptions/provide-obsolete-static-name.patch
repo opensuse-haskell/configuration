@@ -1,0 +1,13 @@
+Index: ghc-enclosed-exceptions.spec
+===================================================================
+--- ghc-enclosed-exceptions.spec	(revision 1)
++++ ghc-enclosed-exceptions.spec	(working copy)
+@@ -56,6 +56,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
++Provides:       %{name}-static = %{version}-%{release}
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development
+

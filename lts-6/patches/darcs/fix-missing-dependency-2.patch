@@ -1,0 +1,67 @@
+Index: darcs.spec
+===================================================================
+--- darcs.spec	(revision 3)
++++ darcs.spec	(working copy)
+@@ -18,17 +18,16 @@
+ 
+ %global pkg_name darcs
+ %bcond_with tests
+-Name:           %{pkg_name}
++Name:           darcs
+ Version:        2.12.0
+ Release:        0
+ Summary:        A distributed, interactive, smart revision control system
+-License:        GPL-1.0+
++License:        GPL-2.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+-# Begin cabal-rpm deps:
++Source4:        %{name}.changes
+ BuildRequires:  chrpath
+-BuildRequires:  curl-devel
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-array-devel
+@@ -71,6 +70,9 @@
+ BuildRequires:  ghc-vector-devel
+ BuildRequires:  ghc-zip-archive-devel
+ BuildRequires:  ghc-zlib-devel
++# Begin cabal-rpm deps:
++BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(libcurl)
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ %if %{with tests}
+ BuildRequires:  ghc-FindBin-devel
+@@ -123,6 +125,11 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-flag    pkgconfig   True
++modified="$(sed -n '/^----/n;s/ - .*$//;p;q' "%{SOURCE4}")"
++DATE="\"$(date -d "${modified}" "+%%b %%e %%Y")\""
++TIME="\"$(date -d "${modified}" "+%%R")\""
++find .  -name '*.[ch]' | xargs sed -i "s/__DATE__/${DATE}/g;s/__TIME__/${TIME}/g"
+ 
+ 
+ %build
+@@ -150,8 +157,9 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc COPYING
+-%doc CHANGELOG README.md
++%doc README.md
+ %{_bindir}/%{name}
++%{_mandir}/man1/%{name}.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+@@ -159,6 +167,6 @@
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc CHANGELOG README.md
++%doc README.md
+ 
+ %changelog
+

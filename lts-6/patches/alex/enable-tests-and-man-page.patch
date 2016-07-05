@@ -1,0 +1,84 @@
+Index: alex.spec
+===================================================================
+--- alex.spec	(revision 3)
++++ alex.spec	(working copy)
+@@ -2,6 +2,7 @@
+ # spec file for package alex
+ #
+ # Copyright (c) 2016 SUSE LINUX GmbH, Nuernberg, Germany.
++# Copyright (c) 2012 Peter Trommler peter.trommler@ohm-hochschule.de
+ #
+ # All modifications and additions to the file contributed by third parties
+ # remain the property of their copyright owners, unless otherwise agreed
+@@ -16,27 +17,23 @@
+ #
+ 
+ 
+-%bcond_with tests
++%bcond_without tests
+ Name:           alex
+ Version:        3.1.7
+ Release:        0
+-Summary:        Alex is a tool for generating lexical analysers in Haskell
++Summary:        Tool for generating lexical analysers in Haskell
+ License:        BSD-3-Clause
+-Group:          System/Libraries
+-Url:            https://hackage.haskell.org/package/%{name}
+-Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Group:          Development/Languages/Other
++Url:            http://hackage.haskell.org/package/%{name}
++Source0:        http://hackage.haskell.org/packages/archive/%{name}/%{version}/%{name}-%{version}.tar.gz
++BuildRequires:  autoconf
+ BuildRequires:  ghc-Cabal-devel
+-# Begin cabal-rpm deps:
+ BuildRequires:  ghc-QuickCheck-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-directory-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+-%if %{with tests}
+-BuildRequires:  ghc-process-devel
+-%endif
+-# End cabal-rpm deps
+ 
+ %description
+ Alex is a tool for generating lexical analysers in Haskell. It takes a
+@@ -47,25 +44,24 @@
+ %prep
+ %setup -q
+ 
+-
+ %build
+ %ghc_bin_build
+-
++cd doc
++test -f configure || autoreconf
++# FIXME: you should use the %%configure macro
++./configure
+ 
+ %install
+ %ghc_bin_install
+-
+-
+-%check
+-%if %{with tests}
+-%{cabal} test
+-%endif
+-
++mkdir -p %{buildroot}/%{_mandir}/man1
++cp doc/alex.1 %{buildroot}/%{_mandir}/man1
+ 
+ %files
+ %defattr(-,root,root,-)
+-%doc LICENSE
+-%doc CHANGELOG.md README TODO doc examples
+-%{_bindir}/%{name}
++%doc LICENSE README TODO CHANGELOG.md
++%doc examples
++%attr(755,root,root) %{_bindir}/%{name}
++%{_datadir}/%{name}-%{version}
++%{_mandir}/man1/*
+ 
+ %changelog
+
