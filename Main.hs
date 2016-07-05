@@ -74,7 +74,8 @@ main = do
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --compiler=" ++
-                   compiler ++ (if forcedExe then " -b " else " ") ++ "spec " ++ pid ++ " >/dev/null"
+                   compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE "++
+                   "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
                  ] ++
                  [ "patch --no-backup-if-mismatch --force <" ++ pt | pt <- patches ]
