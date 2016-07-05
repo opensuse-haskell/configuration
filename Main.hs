@@ -1,3 +1,5 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+
 module Main ( main ) where
 
 import Control.Monad
@@ -6,11 +8,14 @@ import Data.List
 import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
+import Development.Shake.Classes
 import Distribution.Hackage.DB hiding ( null, map, filter, lookup, pkgName )
 import Distribution.Text
 import Distribution.Version
 import System.Directory
 import System.Environment
+
+newtype StackageVersion = StackageVersion String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
 main :: IO ()
 main = do
@@ -23,6 +28,9 @@ main = do
     parseCabalConfig <$> readFile cabalConfig
 
   shakeArgs shakeOptions {shakeFiles=buildDir, shakeProgress=progressSimple} $ do
+
+    getCompilerVersion <- addOracle $ \(StackageVersion stackageVersion) ->
+      stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
 
     forM_ (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName pn) v) -> do
       let pv = display v
@@ -61,7 +69,7 @@ main = do
             bash ["cd " ++ pkgDir, "rm -f *.cabal", "wget -q " ++ editedCabalFileUrl]
 
         spec %> \_ -> do
-          compiler <- stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
+          compiler <- getCompilerVersion (StackageVersion stackageVersion)
           patches <- sort <$> getDirectoryFiles pkgDir ["../../../" ++ stackageVersion ++ "/patches/" ++ pn ++ "/*.patch"]
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
