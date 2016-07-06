@@ -10,6 +10,7 @@ import Development.Shake
 import Development.Shake.FilePath
 import Development.Shake.Classes
 import Distribution.Hackage.DB hiding ( null, map, filter, lookup, pkgName )
+import qualified Distribution.Hackage.DB as DB
 import Distribution.Text
 import Distribution.Version
 import System.Directory
@@ -25,7 +26,10 @@ main = do
   let stackageVersions = ["lts-6","nightly"]
   packageSets <- forM stackageVersions $ \stackageVersion -> do
     let cabalConfig = stackageVersion </> "config" </> "stackage-packages.txt"
-    parseCabalConfig <$> readFile cabalConfig
+        extraConfig = stackageVersion </> "config" </> "extra-packages.txt"
+    ps1 <- parseCabalConfig <$> readFile cabalConfig
+    ps2 <- parseExtraConfig hackage <$> readFile extraConfig
+    return (ps1 ++ ps2)
 
   shakeArgs shakeOptions {shakeFiles=buildDir, shakeProgress=progressSimple} $ do
 
@@ -187,3 +191,12 @@ forcedExecutablePackages =
   , "xmobar"
   , "xmonad"
   ]
+
+parseExtraConfig :: Hackage -> String -> [PackageIdentifier]
+parseExtraConfig hackage = map f . lines
+  where
+    f :: String -> PackageIdentifier
+    f n = PackageIdentifier (PackageName n) (fst (findMax (getPkg n)))
+
+    getPkg :: String -> Map Version GenericPackageDescription
+    getPkg n = fromMaybe (error ("undefined package " ++ show n)) (DB.lookup n hackage)
