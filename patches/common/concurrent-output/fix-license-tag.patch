@@ -1,0 +1,14 @@
+Index: ghc-concurrent-output.spec
+===================================================================
+--- ghc-concurrent-output.spec	(revision 2)
++++ ghc-concurrent-output.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.7.6
+ Release:        0
+ Summary:        Ungarble output from several threads or commands
+-License:        BSD
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

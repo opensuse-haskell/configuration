@@ -1,0 +1,81 @@
+Index: ghc-citeproc-hs.spec
+===================================================================
+--- ghc-citeproc-hs.spec	(revision 2)
++++ ghc-citeproc-hs.spec	(working copy)
+@@ -66,6 +66,14 @@
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+ 
++%package locales
++Summary:        Locale files for Haskell %{pkg_name} library
++Group:          Development/Libraries/Other
++Requires:       %{name} = %{version}-%{release}
++
++%description locales
++Contains locale files for Haskell library %{pkg_name}.
++
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ 
+@@ -87,56 +95,10 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%dir %{_datadir}/%{pkg_name}-%{version}
+-%dir %{_datadir}/%{pkg_name}-%{version}/locales
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-af-ZA.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ar-AR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-bg-BG.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ca-AD.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-cs-CZ.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-da-DK.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-de-AT.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-de-CH.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-de-DE.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-el-GR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-en-GB.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-en-US.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-es-ES.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-et-EE.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-eu.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-fa-IR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-fi-FI.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-fr-CA.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-fr-FR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-he-IL.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-hr-HR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-hu-HU.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-is-IS.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-it-IT.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ja-JP.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-km-KH.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ko-KR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-lt-LT.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-lv-LV.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-mn-MN.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-nb-NO.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-nl-NL.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-nn-NO.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-pl-PL.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-pt-BR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-pt-PT.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ro-RO.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-ru-RU.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-sk-SK.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-sl-SI.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-sr-RS.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-sv-SE.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-th-TH.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-tr-TR.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-uk-UA.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-vi-VN.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-zh-CN.xml
+-%{_datadir}/%{pkg_name}-%{version}/locales/locales-zh-TW.xml
++
++%files locales
++%defattr(-,root,root,-)
++%{_datadir}/%{pkg_name}-%{version}
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

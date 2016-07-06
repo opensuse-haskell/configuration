@@ -1,0 +1,46 @@
+Index: alex.spec
+===================================================================
+--- alex.spec	(revision 5)
++++ alex.spec	(working copy)
+@@ -16,7 +16,7 @@
+ #
+ 
+ 
+-%bcond_with tests
++%bcond_without tests
+ Name:           alex
+ Version:        3.1.7
+ Release:        0
+@@ -26,6 +26,7 @@
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ BuildRequires:  ghc-Cabal-devel
++BuildRequires:  autoconf
+ # Begin cabal-rpm deps:
+ BuildRequires:  ghc-QuickCheck-devel
+ BuildRequires:  ghc-array-devel
+@@ -51,10 +52,15 @@
+ %build
+ %ghc_bin_build
+ 
++cd doc
++test -f configure || autoreconf
++./configure
+ 
+ %install
+ %ghc_bin_install
+ 
++mkdir -p %{buildroot}/%{_mandir}/man1
++cp doc/alex.1 %{buildroot}/%{_mandir}/man1
+ 
+ %check
+ %if %{with tests}
+@@ -67,5 +73,7 @@
+ %doc LICENSE
+ %doc CHANGELOG.md README TODO doc examples
+ %{_bindir}/%{name}
++%{_datadir}/%{name}-%{version}
++%{_mandir}/man1/*
+ 
+ %changelog
+

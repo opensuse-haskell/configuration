@@ -1,0 +1,14 @@
+Index: ghc-semigroupoids.spec
+===================================================================
+--- ghc-semigroupoids.spec	(revision 3)
++++ ghc-semigroupoids.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        5.0.1
+ Release:        0
+ Summary:        Semigroupoids: Category sans id
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
