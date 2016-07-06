@@ -59,6 +59,7 @@ main = do
         want [spec, tar]
 
         tar %> \out -> do
+          need [tarsrc]
           b <- liftIO $ System.Directory.doesFileExist tar
           unless b $
             bash [ "rm -f " ++ pkgDir ++ "/*.tar.gz", "cp " ++ tarsrc ++ " " ++ out ]
