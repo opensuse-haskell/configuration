@@ -148,8 +148,7 @@ corePackages =
 
 bannedPackages :: [String]
 bannedPackages =
-  [ "bytestring-builder"
-  , "gtk"
+  [ "gtk"
   , "hfsevents"
   , "Win32"
   , "Win32-extras"
