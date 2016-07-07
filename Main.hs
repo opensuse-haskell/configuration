@@ -149,7 +149,6 @@ corePackages =
 bannedPackages :: [String]
 bannedPackages =
   [ "bytestring-builder"
-  , "nats"
   , "gtk"
   , "hfsevents"
   , "Win32"
