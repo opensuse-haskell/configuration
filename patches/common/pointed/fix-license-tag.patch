@@ -1,0 +1,14 @@
+Index: ghc-pointed.spec
+===================================================================
+--- ghc-pointed.spec	(revision 2)
++++ ghc-pointed.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        4.2.0.2
+ Release:        0
+ Summary:        Pointed and copointed data
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

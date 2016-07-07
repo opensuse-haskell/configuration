@@ -1,0 +1,18 @@
+Index: ghc-X11.spec
+===================================================================
+--- ghc-X11.spec	(revision 2)
++++ ghc-X11.spec	(working copy)
+@@ -34,6 +34,12 @@
+ BuildRequires:  libXrandr-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(x11)
++BuildRequires:  pkgconfig(x11-xcb)
++BuildRequires:  pkgconfig(xext)
++BuildRequires:  pkgconfig(xinerama)
++BuildRequires:  pkgconfig(xrandr)
+ 
+ %description
+ A Haskell binding to the X11 graphics library. The binding is a direct
+

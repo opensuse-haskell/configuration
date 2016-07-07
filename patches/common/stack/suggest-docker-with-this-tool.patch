@@ -1,0 +1,13 @@
+Index: stack.spec
+===================================================================
+--- stack.spec	(revision 3)
++++ stack.spec	(working copy)
+@@ -119,6 +119,7 @@
+ BuildRequires:  ghc-hspec-devel
+ %endif
+ # End cabal-rpm deps
++Suggests:       docker
+ 
+ %description
+ Please see the README.md for usage information, and the wiki on Github for more
+

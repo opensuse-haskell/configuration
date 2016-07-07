@@ -1,0 +1,14 @@
+Index: ghc-filelock.spec
+===================================================================
+--- ghc-filelock.spec	(revision 2)
++++ ghc-filelock.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.1.0.1
+ Release:        0
+ Summary:        Portable interface to file locking (flock / LockFileEx)
+-License:        SUSE-Public-Domain
++License:        CC0-1.0
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

@@ -1,0 +1,14 @@
+Index: ghc-punycode.spec
+===================================================================
+--- ghc-punycode.spec	(revision 2)
++++ ghc-punycode.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        2.0
+ Release:        0
+ Summary:        Encode unicode strings to ascii forms according to RFC 3492
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

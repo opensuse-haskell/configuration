@@ -1,0 +1,81 @@
+Index: bustle.spec
+===================================================================
+--- bustle.spec	(revision 5)
++++ bustle.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.5.4
+ Release:        0
+ Summary:        Draw sequence diagrams of D-Bus traffic
+-License:        Unknown
++License:        LGPL-2.1+ and GPL-2.0+ and GPL-3.0
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+@@ -46,9 +46,16 @@
+ BuildRequires:  ghc-setlocale-devel
+ BuildRequires:  ghc-text-devel
+ BuildRequires:  ghc-time-devel
++BuildRequires:  help2man
++BuildRequires:  intltool
++BuildRequires:  libpcap-devel
+ # End cabal-rpm deps
+ BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(gio-2.0)
++BuildRequires:  pkgconfig(gio-unix-2.0)
+ BuildRequires:  pkgconfig(glib-2.0)
++Requires(post): update-desktop-files
++Requires(postun): update-desktop-files
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ %if %{with tests}
+ BuildRequires:  ghc-HUnit-devel
+@@ -62,15 +69,25 @@
+ 
+ %prep
+ %setup -q
++sed -i -e 's/\/usr\/local/\%{_prefix}/g' Makefile
+ 
+ 
+ %build
+ %ghc_bin_build
+-
++make %{?_smp_mflags}
+ 
+ %install
+ %ghc_bin_install
++%make_install
++rm %{buildroot}%{_datadir}/%{name}-%{version}/LICENSE
+ 
++%post
++%desktop_database_post
++%icon_theme_cache_post
++
++%postun
++%desktop_database_postun
++%icon_theme_cache_postun
+ 
+ %check
+ %if %{with tests}
+@@ -81,14 +98,14 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%doc LICENSE.bundled-libraries NEWS.md README.md
++%doc README.md LICENSE.bundled-libraries
+ %{_bindir}/%{name}
+-%dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}/data
+-%{_datadir}/%{name}-%{version}/data/dfeet-method.png
+-%{_datadir}/%{name}-%{version}/data/dfeet-signal.png
+-%{_datadir}/%{name}-%{version}/data/bustle.ui
+-%{_datadir}/%{name}-%{version}/data/OpenTwoDialog.ui
+-%{_datadir}/%{name}-%{version}/LICENSE
++%{_bindir}/%{name}-pcap
++%{_mandir}/man1/%{name}-pcap.1*
++%{_datadir}/applications/%{name}.desktop
++%dir %{_datadir}/appdata
++%{_datadir}/appdata/%{name}.appdata.xml
++%{_datadir}/icons/hicolor/*/*/*
++%{_datadir}/%{name}-%{version}
+ 
+ %changelog
+

@@ -1,13 +1,13 @@
-Index: ghc-concurrent-output.spec
+Index: ghc-wai-logger.spec
 ===================================================================
---- ghc-concurrent-output.spec	(revision 2)
-+++ ghc-concurrent-output.spec	(working copy)
-@@ -21,7 +21,7 @@
- Version:        1.7.6
+--- ghc-wai-logger.spec	(revision 2)
++++ ghc-wai-logger.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        2.2.7
  Release:        0
- Summary:        Ungarble output from several threads or commands
--License:        BSD
-+License:        BSD-2-Clause
+ Summary:        A logging system for WAI
+-License:        BSD-3-Clause
++License:        MIT
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

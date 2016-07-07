@@ -1,0 +1,45 @@
+Index: highlighting-kate.spec
+===================================================================
+--- highlighting-kate.spec	(revision 3)
++++ highlighting-kate.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.6.2.1
+ Release:        0
+ Summary:        Syntax highlighting
+-License:        GPL-1.0+
++License:        GPL-2.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+@@ -43,6 +43,7 @@
+ BuildRequires:  ghc-process-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  chrpath
+ 
+ %description
+ Highlighting-kate is a syntax highlighting library with support for nearly one
+@@ -74,12 +75,13 @@
+ 
+ 
+ %build
++%define cabal_configure_options -f'executable'
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-
++%ghc_fix_dynamic_rpath highlighting-kate
+ 
+ %check
+ %if %{with tests}
+@@ -97,6 +99,7 @@
+ %defattr(-,root,root,-)
+ %doc LICENSE
+ %doc README.md changelog
++%{_bindir}/highlighting-kate
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+

@@ -1,0 +1,14 @@
+Index: ghc-bifunctors.spec
+===================================================================
+--- ghc-bifunctors.spec	(revision 2)
++++ ghc-bifunctors.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        5.2
+ Release:        0
+ Summary:        Bifunctors
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

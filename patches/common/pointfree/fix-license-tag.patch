@@ -1,0 +1,14 @@
+Index: pointfree.spec
+===================================================================
+--- pointfree.spec	(revision 2)
++++ pointfree.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.1.1.1
+ Release:        0
+ Summary:        Tool for refactoring expressions into pointfree form
+-License:        Unknown
++License:        MIT
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

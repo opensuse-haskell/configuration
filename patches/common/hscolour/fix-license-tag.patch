@@ -1,0 +1,14 @@
+Index: hscolour.spec
+===================================================================
+--- hscolour.spec	(revision 4)
++++ hscolour.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.24.1
+ Release:        0
+ Summary:        Colourise Haskell code
+-License:        LGPL-2.0+
++License:        LGPL-2.1+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

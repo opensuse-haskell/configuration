@@ -1,0 +1,13 @@
+Index: lhs2tex.spec
+===================================================================
+--- lhs2tex.spec	(revision 2)
++++ lhs2tex.spec	(working copy)
+@@ -32,6 +32,7 @@
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-regex-compat-devel
+ BuildRequires:  ghc-rpm-macros
++BuildRequires:  texlive-kpathsea-bin
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
+ 
+

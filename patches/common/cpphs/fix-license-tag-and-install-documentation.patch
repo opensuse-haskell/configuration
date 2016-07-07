@@ -1,0 +1,62 @@
+Index: cpphs.spec
+===================================================================
+--- cpphs.spec	(revision 4)
++++ cpphs.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.20.1
+ Release:        0
+ Summary:        A liberalised re-implementation of cpp, the C pre-processor
+-License:        LGPL-2.0+
++License:        GPL-2.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+@@ -47,6 +47,7 @@
+ 
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
++License:        LGPL-2.1
+ Group:          System/Libraries
+ 
+ %description -n ghc-%{name}
+@@ -54,6 +55,7 @@
+ 
+ %package -n ghc-%{name}-devel
+ Summary:        Haskell %{name} library development files
++License:        LGPL-2.1
+ Group:          Development/Libraries/Other
+ Requires:       ghc-%{name} = %{version}-%{release}
+ Requires:       ghc-compiler = %{ghc_version}
+@@ -70,10 +72,10 @@
+ %build
+ %ghc_lib_build
+ 
+-
+ %install
+ %ghc_lib_install
+-
++install -D --mode=444 docs/cpphs.1 %{buildroot}%{_mandir}/man1/cpphs.1
++chmod a-x LICENCE-* README docs/*
+ 
+ %post -n ghc-%{name}-devel
+ %ghc_pkg_recache
+@@ -84,8 +86,9 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc LICENCE-LGPL
+-%doc CHANGELOG LICENCE-GPL LICENCE-commercial README docs
++%doc LICENCE-GPL LICENCE-commercial README docs
+ %{_bindir}/%{name}
++%{_mandir}/man1/cpphs.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+@@ -93,6 +96,6 @@
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc CHANGELOG LICENCE-GPL LICENCE-commercial README docs
++%doc LICENCE-GPL LICENCE-commercial README docs
+ 
+ %changelog
+

@@ -1,0 +1,14 @@
+Index: ghc-http-conduit.spec
+===================================================================
+--- ghc-http-conduit.spec	(revision 3)
++++ ghc-http-conduit.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        2.1.11
+ Release:        0
+ Summary:        HTTP client package with conduit interface and HTTPS support
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

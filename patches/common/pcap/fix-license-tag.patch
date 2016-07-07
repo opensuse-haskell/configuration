@@ -1,0 +1,13 @@
+Index: ghc-pcap.spec
+===================================================================
+--- ghc-pcap.spec	(revision 2)
++++ ghc-pcap.spec	(working copy)
+@@ -33,6 +33,7 @@
+ BuildRequires:  ghc-time-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  libpcap-devel
+ 
+ %description
+ A system-independent interface for user-level packet capture.
+

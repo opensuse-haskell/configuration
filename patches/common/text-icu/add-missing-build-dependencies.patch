@@ -1,0 +1,29 @@
+Index: ghc-text-icu.spec
+===================================================================
+--- ghc-text-icu.spec	(revision 2)
++++ ghc-text-icu.spec	(working copy)
+@@ -45,6 +45,12 @@
+ BuildRequires:  ghc-test-framework-quickcheck2-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(icu-i18n)
++BuildRequires:  pkgconfig(icu-io)
++BuildRequires:  pkgconfig(icu-le)
++BuildRequires:  pkgconfig(icu-lx)
++BuildRequires:  pkgconfig(icu-uc)
+ 
+ %description
+ Haskell bindings to the International Components for Unicode (ICU) libraries.
+@@ -83,6 +89,10 @@
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
+ # End cabal-rpm deps
++Requires:       pkgconfig(icu-i18n)
++Requires:       pkgconfig(icu-io)
++Requires:       pkgconfig(icu-le)
++Requires:       pkgconfig(icu-lx)
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+

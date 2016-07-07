@@ -1,0 +1,14 @@
+Index: ghc-mwc-random.spec
+===================================================================
+--- ghc-mwc-random.spec	(revision 2)
++++ ghc-mwc-random.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.13.4.0
+ Release:        0
+ Summary:        Fast, high quality pseudo random number generation
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

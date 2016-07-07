@@ -1,0 +1,41 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 2)
++++ xmobar.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Release:        0
+ Summary:        A Minimalistic Text Based Status Bar
+ License:        BSD-3-Clause
+-Group:          System/Libraries
++Group:          System/GUI/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ BuildRequires:  ghc-Cabal-devel
+@@ -43,10 +43,11 @@
+ BuildRequires:  ghc-transformers-devel
+ BuildRequires:  ghc-unix-devel
+ BuildRequires:  ghc-utf8-string-devel
+-BuildRequires:  libXrandr-devel
+-BuildRequires:  libXrender-devel
++BuildRequires:  libiw-devel
++BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(xpm)
++BuildRequires:  pkgconfig(xrandr)
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+-# End cabal-rpm deps
+ 
+ %description
+ Xmobar is a minimalistic text based status bar.
+@@ -57,10 +58,9 @@
+ %prep
+ %setup -q
+ 
+-
+ %build
++%define cabal_configure_options -f"with_thread with_utf8 with_xft with_xpm with_mpris with_dbus with_iwlib with_inotify"
+ %ghc_bin_build
+-
+ 
+ %install
+ %ghc_bin_install
+

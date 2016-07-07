@@ -1,0 +1,31 @@
+Index: ghc-pango.spec
+===================================================================
+--- ghc-pango.spec	(revision 3)
++++ ghc-pango.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.13.1.1
+ Release:        0
+ Summary:        Binding to the Pango text rendering engine
+-License:        LGPL-2+
++License:        LGPL-2.0+
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+@@ -39,6 +39,7 @@
+ BuildRequires:  ghc-text-devel
+ BuildRequires:  gtk2hs-buildtools
+ # End cabal-rpm deps
++BuildRequires:  fdupes
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(cairo)
+ BuildRequires:  pkgconfig(pango)
+@@ -78,7 +79,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
++%fdupes %{buildroot}%{_prefix}
+ 
+ %post devel
+ %ghc_pkg_recache
+

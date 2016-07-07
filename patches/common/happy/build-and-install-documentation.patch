@@ -1,6 +1,6 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 3)
+--- happy.spec	(revision 5)
 +++ happy.spec	(working copy)
 @@ -21,12 +21,17 @@
  Version:        1.19.5
@@ -38,12 +38,10 @@ Index: happy.spec
  
  
  %check
-@@ -67,7 +76,7 @@
+@@ -67,5 +76,7 @@
  %doc LICENSE
  %doc README TODO doc examples
  %{_bindir}/%{name}
--%dir %{_datadir}/%{name}-%{version}
--%{_datadir}/%{name}-%{version}/*
 +%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/*
  
