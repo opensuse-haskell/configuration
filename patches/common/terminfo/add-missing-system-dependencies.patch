@@ -1,0 +1,14 @@
+Index: ghc-terminfo.spec
+===================================================================
+--- ghc-terminfo.spec	(revision 1)
++++ ghc-terminfo.spec	(working copy)
+@@ -28,6 +28,8 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++BuildRequires:  pkgconfig
++BuildRequires:  pkgconfig(ncurses)
+ 
+ %description
+ This library provides an interface to the terminfo database (via bindings to
+

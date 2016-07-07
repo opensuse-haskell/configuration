@@ -1,0 +1,13 @@
+Index: ghc-repa-devil.spec
+===================================================================
+--- ghc-repa-devil.spec	(revision 1)
++++ ghc-repa-devil.spec	(working copy)
+@@ -32,6 +32,7 @@
+ BuildRequires:  ghc-transformers-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  DevIL-devel
+ 
+ %description
+ The repa-image library adds support for reading and writing images in many
+

@@ -1,0 +1,13 @@
+Index: ghc-hs-GeoIP.spec
+===================================================================
+--- ghc-hs-GeoIP.spec	(revision 1)
++++ ghc-hs-GeoIP.spec	(working copy)
+@@ -32,6 +32,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  libGeoIP-devel
+ 
+ %description
+ This library provides fast, idiomatic Haskell bindings to MaxMind's GeoIPCity
+

@@ -1,0 +1,14 @@
+Index: ghc-loop.spec
+===================================================================
+--- ghc-loop.spec	(revision 1)
++++ ghc-loop.spec	(working copy)
+@@ -55,6 +55,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ 
+ %build
+

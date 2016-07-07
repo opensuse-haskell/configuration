@@ -1,0 +1,14 @@
+Index: ghc-vector-algorithms.spec
+===================================================================
+--- ghc-vector-algorithms.spec	(revision 2)
++++ ghc-vector-algorithms.spec	(working copy)
+@@ -38,6 +38,8 @@
+ BuildRequires:  ghc-containers-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  ghc-mtl-devel
++BuildRequires:  ghc-mwc-random-devel
+ 
+ %description
+ Efficient algorithms for vector arrays.
+

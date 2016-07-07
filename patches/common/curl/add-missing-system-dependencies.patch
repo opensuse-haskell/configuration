@@ -1,0 +1,13 @@
+Index: ghc-curl.spec
+===================================================================
+--- ghc-curl.spec	(revision 1)
++++ ghc-curl.spec	(working copy)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  curl-devel
+ 
+ %description
+ Libcurl is a client-side URL transfer library, supporting FTP, FTPS, HTTP,
+

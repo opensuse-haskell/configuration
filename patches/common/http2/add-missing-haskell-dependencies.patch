@@ -1,0 +1,17 @@
+Index: ghc-http2.spec
+===================================================================
+--- ghc-http2.spec	(revision 2)
++++ ghc-http2.spec	(working copy)
+@@ -52,6 +52,11 @@
+ BuildRequires:  ghc-word8-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  ghc-aeson-devel
++BuildRequires:  ghc-aeson-pretty-devel
++BuildRequires:  ghc-hex-devel
++BuildRequires:  ghc-vector-devel
++BuildRequires:  ghc-word8-devel
+ 
+ %description
+ HTTP/2.0 library including frames and HPACK.
+

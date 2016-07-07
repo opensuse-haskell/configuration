@@ -1,0 +1,13 @@
+Index: ghc-hxt-curl.spec
+===================================================================
+--- ghc-hxt-curl.spec	(revision 1)
++++ ghc-hxt-curl.spec	(working copy)
+@@ -34,6 +34,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  curl-devel
+ 
+ %description
+ LibCurl interface for HXT.
+

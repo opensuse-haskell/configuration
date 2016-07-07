@@ -1,0 +1,13 @@
+Index: ghc-yi-rope.spec
+===================================================================
+--- ghc-yi-rope.spec	(revision 1)
++++ ghc-yi-rope.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  ghc-quickcheck-instances-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  libstdc++6
+ 
+ %description
+ A rope data structure used by Yi.
+

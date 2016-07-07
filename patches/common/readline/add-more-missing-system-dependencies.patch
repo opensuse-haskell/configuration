@@ -1,0 +1,13 @@
+Index: ghc-readline.spec
+===================================================================
+--- ghc-readline.spec	(revision 2)
++++ ghc-readline.spec	(working copy)
+@@ -44,6 +44,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
++Requires:       readline
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+

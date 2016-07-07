@@ -1,0 +1,13 @@
+Index: ghc-mysql.spec
+===================================================================
+--- ghc-mysql.spec	(revision 2)
++++ ghc-mysql.spec	(working copy)
+@@ -53,6 +53,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
++Requires:       libmysqlclient
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+

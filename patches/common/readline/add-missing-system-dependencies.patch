@@ -1,0 +1,13 @@
+Index: ghc-readline.spec
+===================================================================
+--- ghc-readline.spec	(revision 1)
++++ ghc-readline.spec	(working copy)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  readline-devel
+ 
+ %description
+ More information on readline can be found at
+

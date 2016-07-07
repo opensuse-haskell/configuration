@@ -1,0 +1,13 @@
+Index: ghc-xmonad-contrib.spec
+===================================================================
+--- ghc-xmonad-contrib.spec	(revision 2)
++++ ghc-xmonad-contrib.spec	(working copy)
+@@ -45,6 +45,7 @@
+ BuildRequires:  ghc-xmonad-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  libXinerama-devel
+ 
+ %description
+ Third party tiling algorithms, configurations and scripts to xmonad, a tiling
+

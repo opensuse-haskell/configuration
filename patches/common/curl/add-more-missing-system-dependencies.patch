@@ -1,0 +1,13 @@
+Index: ghc-curl.spec
+===================================================================
+--- ghc-curl.spec	(revision 2)
++++ ghc-curl.spec	(working copy)
+@@ -49,6 +49,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
++Requires:       curl
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+

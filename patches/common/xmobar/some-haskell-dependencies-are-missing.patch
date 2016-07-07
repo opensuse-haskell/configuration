@@ -1,0 +1,15 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 3)
++++ xmobar.spec	(working copy)
+@@ -48,6 +48,9 @@
+ BuildRequires:  pkgconfig(xpm)
+ BuildRequires:  pkgconfig(xrandr)
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++BuildRequires:  ghc-X11-xft-devel
++BuildRequires:  ghc-dbus-devel
++BuildRequires:  ghc-hinotify-devel
+ 
+ %description
+ Xmobar is a minimalistic text based status bar.
+

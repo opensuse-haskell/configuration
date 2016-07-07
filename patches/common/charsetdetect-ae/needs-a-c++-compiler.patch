@@ -1,0 +1,14 @@
+Index: ghc-charsetdetect-ae.spec
+===================================================================
+--- ghc-charsetdetect-ae.spec	(revision 1)
++++ ghc-charsetdetect-ae.spec	(working copy)
+@@ -31,6 +31,8 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  gcc-c++
++BuildRequires:  libstdc++-devel
+ 
+ %description
+ Mozilla have developed a robust and efficient character set detection algorithm
+
