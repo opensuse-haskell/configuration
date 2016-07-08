@@ -1,0 +1,14 @@
+Index: ghc-ghc-heap-view.spec
+===================================================================
+--- ghc-ghc-heap-view.spec	(revision 2)
++++ ghc-ghc-heap-view.spec	(working copy)
+@@ -15,6 +15,8 @@
+ # Please submit bugfixes or comments via http://bugs.opensuse.org/
+ #
+ 
++# This package cannot be compiled with profiling enabled.
++%global without_prof 1
+ 
+ %global pkg_name ghc-heap-view
+ %bcond_with tests
+
