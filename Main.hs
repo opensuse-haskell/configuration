@@ -148,7 +148,9 @@ corePackages =
 
 bannedPackages :: [String]
 bannedPackages =
-  [ "hfsevents"
+  [ "reedsolomon"       -- needs an old version of LLVM
+  , "hfsevents"
+  , "lhs2tex"           -- build is hard to fix
   , "Win32"
   , "Win32-extras"
   , "Win32-notify"
