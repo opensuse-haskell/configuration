@@ -1,0 +1,14 @@
+Index: ghc-poly-arity.spec
+===================================================================
+--- ghc-poly-arity.spec	(revision 1)
++++ ghc-poly-arity.spec	(working copy)
+@@ -49,6 +49,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ 
+ %build
+

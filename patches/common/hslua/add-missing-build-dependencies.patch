@@ -14,7 +14,7 @@ Index: ghc-hslua.spec
  Requires:       ghc-compiler = %{ghc_version}
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
-+Requires:       lua51
++Requires:       lua51-devel
  
  %description devel
  This package provides the Haskell %{pkg_name} library development files.

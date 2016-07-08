@@ -6,7 +6,7 @@ Index: ghc-cairo.spec
  # Begin cabal-rpm deps:
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-bytestring-devel
-+BuildRequires:  ghc-gtk2hs-buildtools-devel
++BuildRequires:  gtk2hs-buildtools
  BuildRequires:  ghc-mtl-devel
  BuildRequires:  ghc-rpm-macros
  BuildRequires:  ghc-text-devel

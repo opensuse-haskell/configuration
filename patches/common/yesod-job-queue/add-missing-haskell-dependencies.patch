@@ -1,0 +1,13 @@
+Index: ghc-yesod-job-queue.spec
+===================================================================
+--- ghc-yesod-job-queue.spec	(revision 1)
++++ ghc-yesod-job-queue.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  ghc-yesod-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  ghc-persistent-sqlite-devel
+ 
+ %description
+ Background jobs library for Yesod
+

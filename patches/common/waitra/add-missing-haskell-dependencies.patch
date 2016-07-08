@@ -1,0 +1,14 @@
+Index: ghc-waitra.spec
+===================================================================
+--- ghc-waitra.spec	(revision 2)
++++ ghc-waitra.spec	(working copy)
+@@ -46,6 +46,8 @@
+ BuildRequires:  ghc-wai-extra-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  ghc-wai-app-static-devel
++BuildRequires:  ghc-warp-devel
+ 
+ %description
+ Waitra is a very simple router. It's useful for writing simple API
+

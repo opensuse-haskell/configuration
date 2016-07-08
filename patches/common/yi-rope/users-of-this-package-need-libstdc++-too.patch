@@ -1,12 +1,12 @@
-Index: ghc-mysql.spec
+Index: ghc-yi-rope.spec
 ===================================================================
---- ghc-mysql.spec	(revision 2)
-+++ ghc-mysql.spec	(working copy)
-@@ -53,6 +53,7 @@
+--- ghc-yi-rope.spec	(revision 4)
++++ ghc-yi-rope.spec	(working copy)
+@@ -56,6 +56,7 @@
  Requires:       ghc-compiler = %{ghc_version}
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
-+Requires:       libmysqlclient-devel
++Requires:       libstdc++-devel
  
  %description devel
  This package provides the Haskell %{pkg_name} library development files.

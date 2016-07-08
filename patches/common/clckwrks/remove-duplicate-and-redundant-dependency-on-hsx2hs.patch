@@ -1,0 +1,13 @@
+Index: ghc-clckwrks.spec
+===================================================================
+--- ghc-clckwrks.spec	(revision 2)
++++ ghc-clckwrks.spec	(working copy)
+@@ -75,7 +75,6 @@
+ BuildRequires:  ghc-web-routes-hsp-devel
+ BuildRequires:  ghc-web-routes-th-devel
+ BuildRequires:  ghc-xss-sanitize-devel
+-BuildRequires:  hsx2hs
+ BuildRequires:  libopenssl-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
+

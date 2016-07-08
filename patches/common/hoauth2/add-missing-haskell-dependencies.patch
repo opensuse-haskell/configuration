@@ -1,0 +1,14 @@
+Index: ghc-hoauth2.spec
+===================================================================
+--- ghc-hoauth2.spec	(revision 1)
++++ ghc-hoauth2.spec	(working copy)
+@@ -35,6 +35,8 @@
+ BuildRequires:  ghc-text-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  ghc-wai-devel
++BuildRequires:  ghc-warp-devel
+ 
+ %description
+ Haskell OAuth2 authentication client. Tested with the following services:
+

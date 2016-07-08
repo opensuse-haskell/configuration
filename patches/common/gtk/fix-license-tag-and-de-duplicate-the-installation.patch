@@ -1,0 +1,32 @@
+Index: ghc-gtk.spec
+===================================================================
+--- ghc-gtk.spec	(revision 3)
++++ ghc-gtk.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.14.2
+ Release:        0
+ Summary:        Binding to the Gtk+ graphical user interface library
+-License:        LGPL-2+
++License:        LGPL-2.1+
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+@@ -43,6 +43,7 @@
+ BuildRequires:  pkgconfig(gthread-2.0)
+ BuildRequires:  pkgconfig(gtk+-2.0)
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++BuildRequires:  fdupes
+ 
+ %description
+ This is the core library of the Gtk2Hs suite of libraries for Haskell based on
+@@ -75,7 +76,8 @@
+ 
+ %install
+ %ghc_lib_install
+-
++# TODO: repack in all gtk2hs packages examples in right way
++%fdupes %{buildroot}%{_prefix}
+ 
+ %post devel
+ %ghc_pkg_recache
+

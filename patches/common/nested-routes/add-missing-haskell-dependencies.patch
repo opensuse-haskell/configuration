@@ -1,0 +1,13 @@
+Index: ghc-nested-routes.spec
+===================================================================
+--- ghc-nested-routes.spec	(revision 1)
++++ ghc-nested-routes.spec	(working copy)
+@@ -54,6 +54,7 @@
+ BuildRequires:  ghc-http-types-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  ghc-warp-devel
+ 
+ %description
+ A method to writing Wai responses
+

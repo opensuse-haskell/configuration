@@ -1,0 +1,13 @@
+Index: github-backup.spec
+===================================================================
+--- github-backup.spec	(revision 1)
++++ github-backup.spec	(working copy)
+@@ -50,6 +50,7 @@
+ BuildRequires:  ghc-vector-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  git-core
+ 
+ %description
+ Github-backup is a simple tool you run in a git repository you cloned from
+

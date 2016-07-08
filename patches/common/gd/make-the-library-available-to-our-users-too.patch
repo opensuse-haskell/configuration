@@ -1,12 +1,12 @@
-Index: ghc-mysql.spec
+Index: ghc-gd.spec
 ===================================================================
---- ghc-mysql.spec	(revision 2)
-+++ ghc-mysql.spec	(working copy)
-@@ -53,6 +53,7 @@
- Requires:       ghc-compiler = %{ghc_version}
+--- ghc-gd.spec	(revision 2)
++++ ghc-gd.spec	(working copy)
+@@ -60,6 +60,7 @@
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
-+Requires:       libmysqlclient-devel
+ # End cabal-rpm deps
++BuildRequires:  gd-devel
  
  %description devel
  This package provides the Haskell %{pkg_name} library development files.

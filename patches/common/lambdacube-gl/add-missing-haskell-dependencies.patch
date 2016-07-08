@@ -1,0 +1,17 @@
+Index: ghc-lambdacube-gl.spec
+===================================================================
+--- ghc-lambdacube-gl.spec	(revision 1)
++++ ghc-lambdacube-gl.spec	(working copy)
+@@ -38,6 +38,11 @@
+ BuildRequires:  ghc-vector-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  ghc-GLFW-b-devel
++BuildRequires:  ghc-base64-bytestring-devel
++BuildRequires:  ghc-exceptions-devel
++BuildRequires:  ghc-network-devel
++BuildRequires:  ghc-websockets-devel
+ 
+ %description
+ OpenGL 3.3 Core Profile backend for LambdaCube 3D.
+

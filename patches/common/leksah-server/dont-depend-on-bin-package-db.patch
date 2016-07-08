@@ -1,0 +1,13 @@
+Index: ghc-leksah-server.spec
+===================================================================
+--- ghc-leksah-server.spec	(revision 2)
++++ ghc-leksah-server.spec	(working copy)
+@@ -31,7 +31,6 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-attoparsec-devel
+-BuildRequires:  ghc-bin-package-db-devel
+ BuildRequires:  ghc-binary-devel
+ BuildRequires:  ghc-binary-shared-devel
+ BuildRequires:  ghc-bytestring-devel
+

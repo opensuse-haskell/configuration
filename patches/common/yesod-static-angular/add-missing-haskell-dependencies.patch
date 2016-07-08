@@ -1,0 +1,13 @@
+Index: ghc-yesod-static-angular.spec
+===================================================================
+--- ghc-yesod-static-angular.spec	(revision 1)
++++ ghc-yesod-static-angular.spec	(working copy)
+@@ -51,6 +51,7 @@
+ BuildRequires:  ghc-yesod-test-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  ghc-yesod-devel
+ 
+ %description
+ Yesod-static supports generators which run at compile time which create static
+
