@@ -6,7 +6,7 @@ Index: ghc-gd.spec
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
  # End cabal-rpm deps
-+BuildRequires:  gd-devel
++Requires:  gd-devel
  
  %description devel
  This package provides the Haskell %{pkg_name} library development files.
