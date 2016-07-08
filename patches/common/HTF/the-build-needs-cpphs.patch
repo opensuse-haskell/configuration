@@ -1,0 +1,13 @@
+Index: ghc-HTF.spec
+===================================================================
+--- ghc-HTF.spec	(revision 1)
++++ ghc-HTF.spec	(working copy)
+@@ -63,6 +63,7 @@
+ BuildRequires:  ghc-unordered-containers-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  cpphs
+ 
+ %description
+ The Haskell Test Framework (/HTF/ for short) lets you define unit tests
+

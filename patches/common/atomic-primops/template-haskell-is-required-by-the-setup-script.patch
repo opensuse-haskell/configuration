@@ -1,0 +1,13 @@
+Index: ghc-atomic-primops.spec
+===================================================================
+--- ghc-atomic-primops.spec	(revision 1)
++++ ghc-atomic-primops.spec	(working copy)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++BuildRequires:  ghc-template-haskell-devel
+ 
+ %description
+ After GHC 7.4 a new `casMutVar#` primop became available, but it's difficult to
+
