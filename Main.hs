@@ -80,6 +80,7 @@ main = do
           patches <- sort <$> getDirectoryFiles "" [ "patches/common/" ++ pn ++ "/*.patch"
                                                    , "patches/" ++ stackageVersion ++ "/" ++ pn ++ "/*.patch"
                                                    ]
+          let clvid = unwords ["version", pv, "revision", show rv]
           need patches
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
@@ -87,6 +88,8 @@ main = do
                    compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE "++
                    "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
+                 , "grep -q -s -F -e '" ++ clvid ++ "' " ++ pkgName <.> "changes" ++
+                   "|| osc vc -m 'Update to " ++ clvid ++ " with cabal2obs.'"
                  ] ++
                  [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ]
 
