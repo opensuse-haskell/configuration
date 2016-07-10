@@ -148,7 +148,8 @@ corePackages =
 
 bannedPackages :: [String]
 bannedPackages =
-  [ "freenect"          -- we have no working freenect
+  [ "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+  , "freenect"          -- we have no working freenect
   , "reedsolomon"       -- needs an old version of LLVM
   , "hfsevents"
   , "lhs2tex"           -- build is hard to fix
