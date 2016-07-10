@@ -75,9 +75,10 @@ main = do
 
         spec %> \_ -> do
           compiler <- getCompilerVersion (StackageVersion stackageVersion)
-          patches <- sort <$> getDirectoryFiles pkgDir [ "../../../patches/common/" ++ pn ++ "/*.patch"
-                                                       , "../../../patches/" ++ stackageVersion ++ "/" ++ pn ++ "/*.patch"
-                                                       ]
+          patches <- sort <$> getDirectoryFiles "" [ "patches/common/" ++ pn ++ "/*.patch"
+                                                   , "patches/" ++ stackageVersion ++ "/" ++ pn ++ "/*.patch"
+                                                   ]
+          need patches
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --strict --compiler=" ++
@@ -85,7 +86,7 @@ main = do
                    "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
                  ] ++
-                 [ "patch --no-backup-if-mismatch --force <" ++ pt | pt <- patches ]
+                 [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ]
 
 bash :: [String] -> Action ()
 bash cmds = command_ [] "bash" ["-c", intercalate "; " cmds']
