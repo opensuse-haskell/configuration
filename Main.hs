@@ -70,10 +70,12 @@ main = do
 
         when (rv > 0) $ do
           want [editedCabalFile]
-          editedCabalFile %> \_ -> -- TODO: deleting the spec file here is a hack!
-            bash ["cd " ++ pkgDir, "rm -f *.cabal *.spec", "wget -q " ++ editedCabalFileUrl]
+          editedCabalFile %> \_ ->
+            bash ["cd " ++ pkgDir, "rm -f *.cabal", "wget -q " ++ editedCabalFileUrl]
 
         spec %> \_ -> do
+          when (rv > 0) $ do
+            need [editedCabalFile]
           compiler <- getCompilerVersion (StackageVersion stackageVersion)
           patches <- sort <$> getDirectoryFiles "" [ "patches/common/" ++ pn ++ "/*.patch"
                                                    , "patches/" ++ stackageVersion ++ "/" ++ pn ++ "/*.patch"
