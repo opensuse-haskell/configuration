@@ -1,13 +1,13 @@
-Index: ghc-hs-GeoIP.spec
+Index: ghc-mysql.spec
 ===================================================================
---- ghc-hs-GeoIP.spec	(revision 1)
-+++ ghc-hs-GeoIP.spec	(working copy)
+--- ghc-mysql.spec	(revision 5)
++++ ghc-mysql.spec	(working copy)
 @@ -32,6 +32,7 @@
  BuildRequires:  ghc-rpm-macros
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  # End cabal-rpm deps
-+BuildRequires:  libGeoIP-devel
++BuildRequires:  libmysqlclient-devel
  
  %description
- This library provides fast, idiomatic Haskell bindings to MaxMind's GeoIPCity
+ A low-level client library for the MySQL database, implemented as bindings to
 

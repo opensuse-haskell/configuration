@@ -1,0 +1,14 @@
+Index: darcs.spec
+===================================================================
+--- darcs.spec	(revision 12)
++++ darcs.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        2.12.0
+ Release:        0
+ Summary:        A distributed, interactive, smart revision control system
+-License:        GPL-1.0+
++License:        GPL-2.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

@@ -1,6 +1,6 @@
 Index: ghc-terminfo.spec
 ===================================================================
---- ghc-terminfo.spec	(revision 1)
+--- ghc-terminfo.spec	(revision 3)
 +++ ghc-terminfo.spec	(working copy)
 @@ -28,6 +28,8 @@
  BuildRequires:  ghc-Cabal-devel

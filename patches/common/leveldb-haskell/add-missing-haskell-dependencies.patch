@@ -1,12 +1,12 @@
 Index: ghc-leveldb-haskell.spec
 ===================================================================
---- ghc-leveldb-haskell.spec	(revision 2)
+--- ghc-leveldb-haskell.spec	(revision 4)
 +++ ghc-leveldb-haskell.spec	(working copy)
 @@ -46,6 +46,7 @@
+ BuildRequires:  ghc-temporary-devel
  %endif
  # End cabal-rpm deps
- BuildRequires:   leveldb-devel
-+BuildRequires:   ghc-async-devel
++BuildRequires:  ghc-async-devel
  
  %description
  From <http://code.google.com/p/snappy>:

@@ -1,0 +1,13 @@
+Index: ghc-hlibsass.spec
+===================================================================
+--- ghc-hlibsass.spec	(revision 3)
++++ ghc-hlibsass.spec	(working copy)
+@@ -61,6 +61,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%define cabal_configure_options -fexternalLibsass
+ 
+ 
+ %build
+

@@ -1,0 +1,13 @@
+Index: darcs.spec
+===================================================================
+--- darcs.spec	(revision 13)
++++ darcs.spec	(working copy)
+@@ -155,6 +155,7 @@
+ %doc COPYING
+ %doc CHANGELOG README.md
+ %{_bindir}/%{name}
++%{_mandir}/man1/%{name}.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+
