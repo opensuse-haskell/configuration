@@ -1,3 +1,4 @@
+applicative-quoters
 BNFC
 bytestring-show
 cab
