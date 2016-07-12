@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+
+foo()
+{
+  echo $#: $@
+}
+
+if [ $# -eq 0 ]; then
+  echo >&2 "*** command line syntax error"
+  echo >%1 "Usage: $0 non-empty commit message"
+  exit 1
+fi
+
+projects=$( osc st | sed -r -e 's|^. +([^/]+)(/.+)?$|\1|' | uniq )
+
+osc commit -m "$*" $projects
