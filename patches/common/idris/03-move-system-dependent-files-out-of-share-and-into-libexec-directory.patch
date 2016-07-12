@@ -1,0 +1,13 @@
+Index: idris.spec
+===================================================================
+--- idris.spec (revision 8)
++++ idris.spec (revision 9)
+@@ -126,6 +126,7 @@
+ 
+ 
+ %build
++cabal_configure_extra_options="--datasubdir=%{_libexecdir}"
+ %ghc_lib_build
+ 
+ 
+

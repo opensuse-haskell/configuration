@@ -1,0 +1,15 @@
+Index: ghc-hmatrix-gsl-stats.spec
+===================================================================
+--- ghc-hmatrix-gsl-stats.spec	(revision 6)
++++ ghc-hmatrix-gsl-stats.spec	(working copy)
+@@ -67,6 +67,9 @@
+ 
+ 
+ %build
++# The build generates plenty of compiler warnings that are harmless but do
++# upset our post-build checks, so we disable that particular warning.
++%define cabal_configure_options --ghc-option=-optc-Wno-return-type
+ %ghc_lib_build
+ 
+ 
+
