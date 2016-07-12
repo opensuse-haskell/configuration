@@ -14,6 +14,7 @@ SDL-image
 SDL-mixer
 ShellCheck
 stringprep
+structured-haskell-mode
 X11-xft
 xmobar
 xmonad-contrib
