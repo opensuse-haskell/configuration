@@ -1,21 +1,32 @@
 Index: ghc-terminfo.spec
 ===================================================================
---- ghc-terminfo.spec	(revision 10)
+--- ghc-terminfo.spec	(revision 8)
 +++ ghc-terminfo.spec	(working copy)
-@@ -28,6 +28,7 @@
+@@ -28,8 +28,7 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-rpm-macros
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+-BuildRequires:  pkgconfig
+-BuildRequires:  pkgconfig(ncurses)
 +BuildRequires:  ncurses-devel
  
  %description
  This library provides an interface to the terminfo database (via bindings to
-@@ -42,6 +43,7 @@
+@@ -44,14 +43,14 @@
  Requires:       ghc-compiler = %{ghc_version}
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
+-Requires:       pkgconfig
+-Requires:       pkgconfig(ncurses)
 +Requires:       ncurses-devel
  
  %description devel
  This package provides the Haskell %{pkg_name} library development files.
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++sed -i -e 's/-ltinfo/-lprefer-ncurses/g' configure
+ 
+ 
+ %build
 
