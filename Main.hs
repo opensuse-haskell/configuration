@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Main ( main ) where
@@ -7,16 +8,30 @@ import Data.Char
 import Data.List
 import Data.Maybe
 import Development.Shake
-import Development.Shake.FilePath
 import Development.Shake.Classes
-import Distribution.Hackage.DB hiding ( null, map, filter, lookup, pkgName )
+import Development.Shake.FilePath
 import qualified Distribution.Hackage.DB as DB
+import Distribution.Hackage.DB hiding ( null, map, filter, lookup, pkgName )
 import Distribution.Text
 import Distribution.Version
+import GHC.Generics ( Generic )
 import System.Directory
 import System.Environment
 
 newtype StackageVersion = StackageVersion String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
+
+instance Hashable PackageIdentifier
+instance Hashable PackageName
+
+data SusePackageDescription = SusePackageDescription
+  { _rv :: Int
+  , _isExe :: Bool
+  }
+  deriving (Show,Typeable,Eq,Generic)
+
+instance Hashable SusePackageDescription
+instance Binary SusePackageDescription
+instance NFData SusePackageDescription
 
 main :: IO ()
 main = do
@@ -32,6 +47,12 @@ main = do
     return (ps1 ++ ps2)
 
   shakeArgs shakeOptions {shakeFiles=buildDir, shakeProgress=progressSimple} $ do
+
+    getSusePkgDescription <- addOracle $ \p@(PackageIdentifier (PackageName pn) v) -> do
+      let forcedExe = pn `elem` forcedExecutablePackages
+          isExe = forcedExe || not (isLibrary hackage p)
+          rv = hackageRevision hackage p
+      return $ SusePackageDescription rv isExe
 
     getCompilerVersion <- addOracle $ \(StackageVersion stackageVersion) ->
       stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
@@ -70,10 +91,12 @@ main = do
 
         when (rv > 0) $ do
           want [editedCabalFile]
-          editedCabalFile %> \_ ->
+          editedCabalFile %> \_ -> do
+            SusePackageDescription _ _ <- getSusePkgDescription p
             bash ["cd " ++ pkgDir, "rm -f *.cabal", "wget -q " ++ editedCabalFileUrl]
 
         spec %> \_ -> do
+          SusePackageDescription _ _ <- getSusePkgDescription p
           when (rv > 0) $ do
             need [editedCabalFile]
           compiler <- getCompilerVersion (StackageVersion stackageVersion)
