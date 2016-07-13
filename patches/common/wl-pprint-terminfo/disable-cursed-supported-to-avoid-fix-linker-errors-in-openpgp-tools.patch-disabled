@@ -1,0 +1,13 @@
+Index: ghc-wl-pprint-terminfo.spec
+===================================================================
+--- ghc-wl-pprint-terminfo.spec	(revision 3)
++++ ghc-wl-pprint-terminfo.spec	(working copy)
+@@ -59,6 +59,7 @@
+ 
+ 
+ %build
++%define cabal_configure_options -f-cursed
+ %ghc_lib_build
+ 
+ 
+
