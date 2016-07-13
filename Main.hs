@@ -170,6 +170,7 @@ corePackages =
   , "pretty"
   , "process"
   , "template-haskell"
+  , "terminfo"
   , "time"
   , "transformers"
   , "unix"
