@@ -18,3 +18,4 @@ cabal2obs:
 
 update:
 	f=$$(ls */config/stackage-packages.txt); rm $$f; $(MAKE) $$f
+	cabal update
