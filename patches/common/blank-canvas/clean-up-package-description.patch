@@ -1,0 +1,26 @@
+Index: ghc-blank-canvas.spec
+===================================================================
+--- ghc-blank-canvas.spec	(revision 5)
++++ ghc-blank-canvas.spec	(working copy)
+@@ -66,19 +66,7 @@
+ onto their web browsers. 'blank-canvas' gives the user a single full-window
+ canvas, and provides many well-documented functions for rendering images.
+ 
+-' &#123;-&#35; LANGUAGE OverloadedStrings &#35;-&#125; module Main where import
+-Graphics.Blank -- import the blank canvas
+-
+-main = blankCanvas 3000 $ \ context -> do -- start blank canvas on port 3000
+-&#32;&#32;send context $ do -- send commands to this specific context
+-&#32;&#32;&#32;&#32;moveTo(50,50) &#32;&#32;&#32;&#32;lineTo(200,100)
+-&#32;&#32;&#32;&#32;lineWidth 10 &#32;&#32;&#32;&#32;strokeStyle "red"
+-&#32;&#32;&#32;&#32;stroke() -- this draws the ink into the canvas '
+-
+-<<https://github.com/ku-fpg/blank-canvas/wiki/images/Red_Line.png>>
+-
+-For more details, read the <https://github.com/ku-fpg/blank-canvas/wiki
+-blank-canvas wiki>. .
++For more details, read <https://github.com/ku-fpg/blank-canvas/wiki>.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

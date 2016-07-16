@@ -1,0 +1,14 @@
+Index: ghc-blank-canvas.spec
+===================================================================
+--- ghc-blank-canvas.spec	(revision 4)
++++ ghc-blank-canvas.spec	(working copy)
+@@ -97,6 +97,8 @@
+ 
+ 
+ %build
++# Required to fix build errors on i586: https://github.com/ku-fpg/blank-canvas/issues/76
++%define cabal_configure_options --ghc-option=-fsimpl-tick-factor=200
+ %ghc_lib_build
+ 
+ 
+
