@@ -221,6 +221,8 @@ forcedExecutablePackages =
   , "ShellCheck"
   , "stack"
   , "texmath"
+  , "werewolf"
+  , "wordpass"
   , "xmobar"
   , "xmonad"
   , "yi"
