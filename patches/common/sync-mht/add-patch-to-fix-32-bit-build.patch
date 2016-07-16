@@ -1,0 +1,21 @@
+Index: ghc-sync-mht.spec
+===================================================================
+--- ghc-sync-mht.spec	(revision 3)
++++ ghc-sync-mht.spec	(working copy)
+@@ -54,6 +54,7 @@
+ BuildRequires:  ghc-zlib-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++Source10:       https://github.com/ekarayel/sync-mht/commit/aa0047ec9f3688ddab34d385faddc478c8c24bf2.patch
+ 
+ %description
+ A command line tool that can be used to incrementally synchronize a directory
+@@ -79,6 +80,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++patch -p1 <%{SOURCE10}
+ 
+ 
+ %build
+
