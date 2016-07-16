@@ -25,4 +25,6 @@ executable cabal2obs
   ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
       base < 5, hackage-db, Cabal, shake, directory
+  other-modules:
+      Orphans
   default-language: Haskell2010

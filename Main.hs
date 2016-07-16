@@ -17,11 +17,9 @@ import Distribution.Version
 import GHC.Generics ( Generic )
 import System.Directory
 import System.Environment
+import Orphans ()
 
 newtype StackageVersion = StackageVersion String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
-
-instance Hashable PackageIdentifier
-instance Hashable PackageName
 
 data SusePackageDescription = SusePackageDescription
   { _rv :: Int

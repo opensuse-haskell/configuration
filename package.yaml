@@ -16,3 +16,5 @@ executables:
     main:               Main.hs
     dependencies:       base < 5, hackage-db, Cabal, shake, directory
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
+    other-modules:
+      - Orphans
