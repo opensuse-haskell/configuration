@@ -46,7 +46,7 @@ main = do
 
   shakeArgs shakeOptions {shakeFiles=buildDir, shakeProgress=progressSimple} $ do
 
-    getSusePkgDescription <- addOracle $ \p@(PackageIdentifier (PackageName pn) v) -> do
+    getSusePkgDescription <- addOracle $ \p@(PackageIdentifier (PackageName pn) _) -> do
       let forcedExe = pn `elem` forcedExecutablePackages
           isExe = forcedExe || not (isLibrary hackage p)
           rv = hackageRevision hackage p
