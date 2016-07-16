@@ -223,6 +223,7 @@ forcedExecutablePackages =
   , "texmath"
   , "xmobar"
   , "xmonad"
+  , "yi"
   ]
 
 parseExtraConfig :: Hackage -> String -> [PackageIdentifier]
