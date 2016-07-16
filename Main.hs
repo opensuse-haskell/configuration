@@ -38,8 +38,8 @@ main = do
   hackage <- readHackage
   let stackageVersions = ["lts-6","nightly"]
   packageSets <- forM stackageVersions $ \stackageVersion -> do
-    let cabalConfig = stackageVersion </> "config" </> "stackage-packages.txt"
-        extraConfig = stackageVersion </> "config" </> "extra-packages.txt"
+    let cabalConfig = "config" </> stackageVersion </> "stackage-packages.txt"
+        extraConfig = "config" </> stackageVersion </> "extra-packages.txt"
     ps1 <- parseCabalConfig <$> readFile cabalConfig
     ps2 <- parseExtraConfig hackage <$> readFile extraConfig
     return (ps1 ++ ps2)
@@ -53,7 +53,7 @@ main = do
       return $ SusePackageDescription rv isExe
 
     getCompilerVersion <- addOracle $ \(StackageVersion stackageVersion) ->
-      stripSpaces <$> readFile' (stackageVersion </> "config" </> "compiler")
+      stripSpaces <$> readFile' ("config" </> stackageVersion </> "compiler")
 
     forM_ (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName pn) v) -> do
       let pv = display v
