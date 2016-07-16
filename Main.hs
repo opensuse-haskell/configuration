@@ -182,7 +182,9 @@ bannedPackages =
   , "freenect"          -- we have no working freenect
   , "reedsolomon"       -- needs an old version of LLVM
   , "hfsevents"
+  , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "lhs2tex"           -- build is hard to fix
+  , "wl-pprint-terminfo"-- https://github.com/opensuse-haskell/configuration/issues/7
   , "Win32"
   , "Win32-extras"
   , "Win32-notify"
