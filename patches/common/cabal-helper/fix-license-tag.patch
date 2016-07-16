@@ -1,6 +1,6 @@
 Index: ghc-cabal-helper.spec
 ===================================================================
---- ghc-cabal-helper.spec	(revision 2)
+--- ghc-cabal-helper.spec	(revision 7)
 +++ ghc-cabal-helper.spec	(working copy)
 @@ -22,7 +22,7 @@
  Version:        0.6.3.1
@@ -11,23 +11,4 @@ Index: ghc-cabal-helper.spec
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-@@ -86,6 +86,7 @@
- 
- 
- %build
-+%define cabal_configure_options --libexecdir=%{_libexecdir}
- %ghc_lib_build
- 
- 
-@@ -108,9 +109,9 @@
- %files -f %{name}.files
- %defattr(-,root,root,-)
- %doc LICENSE
-+%{_libexecdir}/cabal-helper-wrapper
- 
- %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
--%{_bindir}/cabal-helper-wrapper
- 
- %changelog
 
