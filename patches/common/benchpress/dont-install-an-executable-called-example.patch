@@ -1,0 +1,25 @@
+Index: ghc-benchpress.spec
+===================================================================
+--- ghc-benchpress.spec	(revision 3)
++++ ghc-benchpress.spec	(working copy)
+@@ -60,7 +60,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
++rm %{buildroot}%{_bindir}/example
+ 
+ %post devel
+ %ghc_pkg_recache
+@@ -71,10 +71,8 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc example
+ 
+ %changelog
+
