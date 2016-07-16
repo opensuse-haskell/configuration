@@ -176,12 +176,14 @@ corePackages =
 
 bannedPackages :: [String]
 bannedPackages =
-  [ "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+  [ "blake2"            -- doesn't work on 32 bit: https://github.com/centromere/blake2/issues/2
+  , "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
   , "freenect"          -- we have no working freenect
   , "reedsolomon"       -- needs an old version of LLVM
   , "hfsevents"
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "lhs2tex"           -- build is hard to fix
+  , "seqalign"          -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "wl-pprint-terminfo"-- https://github.com/opensuse-haskell/configuration/issues/7
   , "Win32"
   , "Win32-extras"
