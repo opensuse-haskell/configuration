@@ -1,5 +1,5 @@
 name:                   cabal2obs
-version:                "20160630"
+version:                "0"
 synopsis:               Convert a set of Cabal files into an OBS project
 description:            Convert a set of Cabal files into an OBS project.
 maintainer:             opensuse-haskell@opensuse.org
