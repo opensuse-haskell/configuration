@@ -1,0 +1,25 @@
+Index: ghc-yes-precure5-command.spec
+===================================================================
+--- ghc-yes-precure5-command.spec	(revision 3)
++++ ghc-yes-precure5-command.spec	(working copy)
+@@ -70,8 +70,8 @@
+ 
+ %install
+ %ghc_lib_install
+-
+-%ghc_fix_dynamic_rpath yes
++mv %{buildroot}%{_bindir}/yes %{buildroot}%{_bindir}/yes-precure5
++%ghc_fix_dynamic_rpath yes-precure5
+ 
+ 
+ %check
+@@ -89,7 +89,7 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/yes
++%{_bindir}/yes-precure5
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

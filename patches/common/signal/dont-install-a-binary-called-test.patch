@@ -1,0 +1,23 @@
+Index: ghc-signal.spec
+===================================================================
+--- ghc-signal.spec	(revision 3)
++++ ghc-signal.spec	(working copy)
+@@ -57,8 +57,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
+-%ghc_fix_dynamic_rpath test
++rm -Rf %{buildroot}/%{_bindir}/test
+ 
+ 
+ %post devel
+@@ -70,7 +69,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/test
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+
