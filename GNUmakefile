@@ -5,7 +5,7 @@
 all:		config/lts-6/stackage-packages.txt
 all:		config/nightly/stackage-packages.txt
 all:		cabal-rpm cabal2obs
-	env PATH=$(PWD)/tools/cabal-rpm/dist/build/cabal-rpm:$$PATH tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc)
+	nice -n20 tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc)
 
 cabal-rpm:
 	@cd tools/cabal-rpm && cabal build
