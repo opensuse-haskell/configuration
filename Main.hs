@@ -179,15 +179,21 @@ bannedPackages =
   [ "blake2"            -- doesn't work on 32 bit: https://github.com/centromere/blake2/issues/2
   , "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
   , "freenect"          -- we have no working freenect
-  , "reedsolomon"       -- needs an old version of LLVM
   , "hfsevents"
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
+  , "ide-backend-rts"   -- deprecated
   , "lhs2tex"           -- build is hard to fix
+  , "reedsolomon"       -- needs an old version of LLVM
   , "seqalign"          -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
-  , "wl-pprint-terminfo"-- https://github.com/opensuse-haskell/configuration/issues/7
+  , "stackage-build-plan" -- deprecated
+  , "stackage-sandbox"  -- deprecated
+  , "stackage-setup"    -- deprecated
+  , "stackage-cabal"    -- deprecated
+  , "stackage-cli"      -- deprecated
   , "Win32"
   , "Win32-extras"
   , "Win32-notify"
+  , "wl-pprint-terminfo" -- https://github.com/opensuse-haskell/configuration/issues/7
   ]
 
 forcedExecutablePackages :: [String]
@@ -201,6 +207,7 @@ forcedExecutablePackages =
   , "cabal-install"
   , "cabal-rpm"
   , "cpphs"
+  , "cryptol"
   , "darcs"
   , "ghc-mod"
   , "git-annex"
@@ -210,16 +217,31 @@ forcedExecutablePackages =
   , "highlighting-kate"
   , "hindent"
   , "hlint"
+  , "hoogle"
   , "hpack"
   , "hscolour"
+  , "hsdev"
+  , "hspec-discover"
+  , "ide-backend"
   , "idris"
+  , "keter"
   , "lhs2tex"
+  , "markdown-unlit"
+  , "microformats2-parser"
+  , "misfortune"
+  , "modify-fasta"
+  , "osdkeys"
   , "pandoc"
   , "pointfree"
   , "pointful"
+  , "postgresql-schema"
+  , "purescript"
   , "shake"
   , "ShellCheck"
   , "stack"
+  , "stack-run-auto"
+  , "stackage-curator"
+  , "stylish-haskell"
   , "texmath"
   , "werewolf"
   , "wordpass"
