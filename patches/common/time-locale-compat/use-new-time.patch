@@ -2,18 +2,7 @@ Index: ghc-time-locale-compat.spec
 ===================================================================
 --- ghc-time-locale-compat.spec	(revision 3)
 +++ ghc-time-locale-compat.spec	(working copy)
-@@ -26,9 +26,8 @@
- Url:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
- BuildRequires:  ghc-Cabal-devel
-+BuildRequires:  ghc-rpm-macros
- # Begin cabal-rpm deps:
--BuildRequires:  ghc-old-locale-devel
--BuildRequires:  ghc-rpm-macros
- BuildRequires:  ghc-time-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
-@@ -50,7 +49,7 @@
+@@ -50,7 +50,7 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
