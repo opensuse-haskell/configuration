@@ -183,13 +183,16 @@ bannedPackages =
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "ide-backend-rts"   -- deprecated
   , "lhs2tex"           -- build is hard to fix
+  , "luminance-samples" -- example / tutorial code
   , "reedsolomon"       -- needs an old version of LLVM
   , "seqalign"          -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "stackage-build-plan" -- deprecated
-  , "stackage-sandbox"  -- deprecated
-  , "stackage-setup"    -- deprecated
+  , "stackage"          -- no dummy packages here
   , "stackage-cabal"    -- deprecated
   , "stackage-cli"      -- deprecated
+  , "stackage-sandbox"  -- deprecated
+  , "stackage-setup"    -- deprecated
+  , "stackage-types"    -- deprecated
   , "Win32"
   , "Win32-extras"
   , "Win32-notify"
@@ -206,15 +209,38 @@ forcedExecutablePackages =
   , "cab"
   , "cabal-install"
   , "cabal-rpm"
+  , "codex"
   , "cpphs"
+  , "apply-refact"
+  , "BlogLiterately"
+  , "asciidiagram"
   , "cryptol"
   , "darcs"
+  , "dixi"
+  , "derive"
+  , "find-clumpiness"
+  , "ghc-imported-from"
+  , "doctest-discover"
+  , "haskintex"
   , "ghc-mod"
+  , "hledger"
+  , "msi-kb-backlit"
+  , "diagrams-haddock"
+  , "doctest"
+  , "handwriting"
+  , "hapistrano"
+  , "leksah-server"
+  , "ghcid"
+  , "HaXml"
+  , "holy-project"
   , "git-annex"
   , "gtk2hs-buildtools"
+  , "hackage-mirror"
+  , "hackmanager"
   , "happy"
   , "HaRe"
   , "hdevtools"
+  , "hdocs"
   , "highlighting-kate"
   , "hindent"
   , "hlint"
@@ -231,6 +257,7 @@ forcedExecutablePackages =
   , "microformats2-parser"
   , "misfortune"
   , "modify-fasta"
+  , "omnifmt"
   , "osdkeys"
   , "pandoc"
   , "pointfree"
@@ -242,6 +269,8 @@ forcedExecutablePackages =
   , "stack"
   , "stack-run-auto"
   , "stackage-curator"
+  , "stackage-curator"
+  , "cabal2nix"
   , "stylish-haskell"
   , "texmath"
   , "werewolf"
