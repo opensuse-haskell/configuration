@@ -7,8 +7,8 @@ pkg=${pkg##ghc-}
 reason=$@
 
 mkdir -p ../../../patches/common/$pkg
-osc diff >../../../patches/common/$pkg/${reason// /-}.patch
+osc diff *.spec >../../../patches/common/$pkg/${reason// /-}.patch
 
 echo $pkg: created ${reason// /-}.patch
 
-osc commit -m "$reason" .
+osc commit -m "$reason" *.spec
