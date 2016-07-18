@@ -213,6 +213,7 @@ forcedExecutablePackages =
   , "git-annex"
   , "gtk2hs-buildtools"
   , "happy"
+  , "HaRe"
   , "hdevtools"
   , "highlighting-kate"
   , "hindent"
