@@ -1,0 +1,13 @@
+Index: cryptol.spec
+===================================================================
+--- cryptol.spec	(revision 1)
++++ cryptol.spec	(working copy)
+@@ -66,6 +66,7 @@
+ BuildRequires:  happy
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ # End cabal-rpm deps
++Requires:       z3
+ 
+ %description
+ Cryptol is a domain-specific language for specifying cryptographic algorithms.
+

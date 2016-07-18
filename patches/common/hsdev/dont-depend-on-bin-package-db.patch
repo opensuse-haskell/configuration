@@ -1,7 +1,7 @@
-Index: ghc-hsdev.spec
+Index: hsdev.spec
 ===================================================================
---- ghc-hsdev.spec	(revision 1)
-+++ ghc-hsdev.spec	(working copy)
+--- hsdev.spec	(revision 1)
++++ hsdev.spec	(working copy)
 @@ -35,7 +35,6 @@
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-async-devel
