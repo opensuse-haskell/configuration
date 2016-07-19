@@ -1,0 +1,29 @@
+Index: ghc-direct-sqlite.spec
+===================================================================
+--- ghc-direct-sqlite.spec	(revision 2)
++++ ghc-direct-sqlite.spec	(working copy)
+@@ -40,6 +40,7 @@
+ BuildRequires:  ghc-temporary-devel
+ %endif
+ # End cabal-rpm deps
++BuildRequires:  sqlite3-devel
+ 
+ %description
+ This package is not very different from the other SQLite3 bindings out there,
+@@ -58,6 +59,7 @@
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
+ # End cabal-rpm deps
++Requires:       sqlite3-devel
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+@@ -67,6 +69,7 @@
+ 
+ 
+ %build
++%define cabal_configure_options -fsystemlib
+ %ghc_lib_build
+ 
+ 
+

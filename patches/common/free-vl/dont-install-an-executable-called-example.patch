@@ -1,0 +1,23 @@
+Index: ghc-free-vl.spec
+===================================================================
+--- ghc-free-vl.spec	(revision 4)
++++ ghc-free-vl.spec	(working copy)
+@@ -75,8 +75,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
+-%ghc_fix_dynamic_rpath examples
++rm %{buildroot}%{_bindir}/examples
+ 
+ 
+ %check
+@@ -94,7 +93,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/examples
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+
