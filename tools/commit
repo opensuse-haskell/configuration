@@ -15,4 +15,7 @@ fi
 
 projects=$( osc st | sed -r -e 's|^. +([^/]+)(/.+)?$|\1|' | uniq )
 
+test -n "${projects:-}" || exit 1
+
+echo committing: $projects
 osc commit -m "$*" $projects
