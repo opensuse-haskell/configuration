@@ -1,7 +1,7 @@
-Index: ghc-leksah-server.spec
+Index: leksah-server.spec
 ===================================================================
---- ghc-leksah-server.spec	(revision 2)
-+++ ghc-leksah-server.spec	(working copy)
+--- leksah-server.spec	(revision 2)
++++ leksah-server.spec	(working copy)
 @@ -31,7 +31,6 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-HTTP-devel

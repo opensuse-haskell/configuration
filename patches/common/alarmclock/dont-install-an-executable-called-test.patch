@@ -1,0 +1,23 @@
+Index: ghc-alarmclock.spec
+===================================================================
+--- ghc-alarmclock.spec	(revision 3)
++++ ghc-alarmclock.spec	(working copy)
+@@ -59,8 +59,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
+-%ghc_fix_dynamic_rpath test
++rm %{buildroot}/%{_bindir}/test
+ 
+ 
+ %post devel
+@@ -72,7 +71,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/test
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

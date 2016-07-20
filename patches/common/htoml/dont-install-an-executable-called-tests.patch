@@ -1,0 +1,23 @@
+Index: ghc-htoml.spec
+===================================================================
+--- ghc-htoml.spec	(revision 3)
++++ ghc-htoml.spec	(working copy)
+@@ -73,8 +73,7 @@
+ 
+ %install
+ %ghc_lib_install
+-
+-%ghc_fix_dynamic_rpath tests
++rm %{buildroot}/%{_bindir}/tests
+ 
+ 
+ %check
+@@ -92,7 +91,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/tests
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+
