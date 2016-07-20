@@ -1,0 +1,59 @@
+From 13e115e6c6ce9bdd9f5ea6f7fa352c22e94f520b Mon Sep 17 00:00:00 2001
+From: Peter Simons <simons@cryp.to>
+Date: Wed, 20 Jul 2016 23:50:28 +0200
+Subject: [PATCH 5/5] add PDF sub-package
+
+---
+ pandoc.spec | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/pandoc.spec b/pandoc.spec
+index 446498b..0773f76 100644
+--- a/pandoc.spec
++++ b/pandoc.spec
+@@ -27,6 +27,7 @@ Group:          Productivity/Publishing/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal
++Source10:       pandoc-pdf.readme
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+@@ -107,6 +108,15 @@ format and produce a native representation of the document, and a set of
+ writers, which convert this native representation into a target format.
+ Thus, adding an input or output format requires only adding a reader or writer.
+ 
++%package pdf
++Summary:        Meta package for support generating pdf with pandoc
++Group:          Productivity/Publishing/PDF
++Requires:       %{name} = %{version}
++Requires:       texlive-latex-bin-bin
++
++%description pdf
++Meta package for support generating pdf with pandoc.
++
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+ Group:          System/Libraries
+@@ -128,6 +138,7 @@ This package provides the Haskell %{name} library development files.
+ %prep
+ %setup -q
+ cp -p %{SOURCE1} %{name}.cabal
++cp %{SOURCE10} .
+ 
+ 
+ %build
+@@ -163,6 +174,10 @@ rm %{buildroot}%{_datadir}/%{pkg_name}-%{version}/README
+ %{_datadir}/%{name}-%{version}
+ %{_mandir}/man1/pandoc.1%{ext_man}
+ 
++%files pdf
++%defattr(-,root,root,-)
++%doc pandoc-pdf.readme
++
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+ %doc COPYING
+-- 
+2.9.0
+
