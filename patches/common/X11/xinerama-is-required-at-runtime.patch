@@ -2,10 +2,9 @@ Index: ghc-X11.spec
 ===================================================================
 --- ghc-X11.spec	(revision 3)
 +++ ghc-X11.spec	(working copy)
-@@ -58,6 +58,7 @@
+@@ -58,5 +58,6 @@
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
- # End cabal-rpm deps
 +Requires:       libXinerama-devel
  
  %description devel

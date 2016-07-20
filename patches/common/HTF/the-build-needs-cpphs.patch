@@ -2,10 +2,9 @@ Index: ghc-HTF.spec
 ===================================================================
 --- ghc-HTF.spec	(revision 1)
 +++ ghc-HTF.spec	(working copy)
-@@ -63,6 +63,7 @@
+@@ -63,5 +63,6 @@
  BuildRequires:  ghc-unordered-containers-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  cpphs
  
  %description

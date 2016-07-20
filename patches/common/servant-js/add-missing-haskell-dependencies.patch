@@ -2,10 +2,9 @@ Index: ghc-servant-js.spec
 ===================================================================
 --- ghc-servant-js.spec	(revision 1)
 +++ ghc-servant-js.spec	(working copy)
-@@ -42,6 +42,8 @@
+@@ -42,5 +42,7 @@
  BuildRequires:  ghc-servant-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-servant-server-devel
 +BuildRequires:  ghc-warp-devel
  

@@ -2,10 +2,9 @@ Index: ghc-yi-rope.spec
 ===================================================================
 --- ghc-yi-rope.spec	(revision 1)
 +++ ghc-yi-rope.spec	(working copy)
-@@ -44,6 +44,7 @@
+@@ -44,5 +44,6 @@
  BuildRequires:  ghc-quickcheck-instances-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  libstdc++-devel
  
  %description

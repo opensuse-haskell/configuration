@@ -2,11 +2,10 @@ Index: ghc-turtle-options.spec
 ===================================================================
 --- ghc-turtle-options.spec	(revision 3)
 +++ ghc-turtle-options.spec	(working copy)
-@@ -64,8 +64,7 @@
+@@ -64,7 +64,7 @@
  
  %install
  %ghc_lib_install
--
 -%ghc_fix_dynamic_rpath example
 +rm %{buildroot}%{_bindir}/example
  

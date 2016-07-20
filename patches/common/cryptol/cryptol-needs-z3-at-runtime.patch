@@ -2,10 +2,9 @@ Index: cryptol.spec
 ===================================================================
 --- cryptol.spec	(revision 1)
 +++ cryptol.spec	(working copy)
-@@ -66,6 +66,7 @@
+@@ -66,5 +66,6 @@
  BuildRequires:  happy
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +Requires:       z3
  
  %description

@@ -2,10 +2,9 @@ Index: ghc-country-codes.spec
 ===================================================================
 --- ghc-country-codes.spec	(revision 1)
 +++ ghc-country-codes.spec	(working copy)
-@@ -38,6 +38,7 @@
+@@ -38,5 +38,6 @@
  BuildRequires:  ghc-HUnit-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-tagsoup-devel
  
  %description

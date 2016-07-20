@@ -19,7 +19,7 @@ Index: ghc-mod.spec
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-doctest-devel
-@@ -102,14 +103,22 @@
+@@ -102,13 +103,21 @@
  
  
  %build
@@ -35,7 +35,6 @@ Index: ghc-mod.spec
 +touch %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
 +echo 'export cabal_helper_libexecdir=%{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
 +echo 'setenv cabal_helper_libexecdir %{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
- 
 -%ghc_fix_dynamic_rpath %{pkg_name} ghc-modi
 -
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/LICENSE

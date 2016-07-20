@@ -2,7 +2,7 @@ Index: pandoc.spec
 ===================================================================
 --- pandoc.spec	(revision 5)
 +++ pandoc.spec	(working copy)
-@@ -22,11 +22,11 @@
+@@ -22,10 +22,10 @@
  Version:        1.17.1
  Release:        0
  Summary:        Conversion between markup formats
@@ -14,7 +14,6 @@ Index: pandoc.spec
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 -Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal
 +Source10:       pandoc-pdf.readme
- # Begin cabal-rpm deps:
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
 @@ -76,6 +76,7 @@
@@ -25,10 +24,9 @@ Index: pandoc.spec
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-Diff-devel
-@@ -88,6 +89,7 @@
+@@ -88,5 +89,6 @@
  BuildRequires:  ghc-test-framework-quickcheck2-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  fdupes
  
  %description

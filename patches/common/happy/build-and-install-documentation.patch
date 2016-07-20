@@ -2,7 +2,7 @@ Index: happy.spec
 ===================================================================
 --- happy.spec	(revision 5)
 +++ happy.spec	(working copy)
-@@ -21,12 +21,17 @@
+@@ -21,11 +21,16 @@
  Version:        1.19.5
  Release:        0
  Summary:        Happy is a parser generator for Haskell
@@ -19,7 +19,6 @@ Index: happy.spec
 +BuildRequires:  docbook-xsl-stylesheets
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
- # Begin cabal-rpm deps:
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-containers-devel
 @@ -50,10 +55,14 @@

@@ -2,10 +2,9 @@ Index: ghc-cheapskate.spec
 ===================================================================
 --- ghc-cheapskate.spec	(revision 2)
 +++ ghc-cheapskate.spec	(working copy)
-@@ -41,6 +41,10 @@
+@@ -41,5 +41,9 @@
  BuildRequires:  ghc-xss-sanitize-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-aeson-devel
 +BuildRequires:  ghc-http-types-devel
 +BuildRequires:  ghc-wai-devel

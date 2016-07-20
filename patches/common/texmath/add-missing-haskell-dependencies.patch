@@ -2,10 +2,9 @@ Index: texmath.spec
 ===================================================================
 --- texmath.spec	(revision 3)
 +++ texmath.spec	(working copy)
-@@ -47,6 +47,8 @@
+@@ -47,5 +47,7 @@
  BuildRequires:  ghc-utf8-string-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-network-uri-devel
 +BuildRequires:  ghc-split-devel
  

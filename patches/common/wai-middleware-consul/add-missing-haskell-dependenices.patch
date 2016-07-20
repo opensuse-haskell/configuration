@@ -2,10 +2,9 @@ Index: ghc-wai-middleware-consul.spec
 ===================================================================
 --- ghc-wai-middleware-consul.spec	(revision 1)
 +++ ghc-wai-middleware-consul.spec	(working copy)
-@@ -49,6 +49,9 @@
+@@ -49,5 +49,8 @@
  BuildRequires:  ghc-wai-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-wai-app-static-devel
 +BuildRequires:  ghc-wai-extra-devel
 +BuildRequires:  ghc-warp-devel

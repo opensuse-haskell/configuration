@@ -1,0 +1,25 @@
+From 547456f5e356fe347b6ccfdd26e2098049aed3f3 Mon Sep 17 00:00:00 2001
+From: Peter Simons <simons@cryp.to>
+Date: Wed, 20 Jul 2016 21:24:03 +0200
+Subject: [PATCH 1/2] fix license tag
+
+---
+ ghc-pango.spec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ghc-pango.spec b/ghc-pango.spec
+index fc1967b..ff249d3 100644
+--- a/ghc-pango.spec
++++ b/ghc-pango.spec
+@@ -21,7 +21,7 @@ Name:           ghc-%{pkg_name}
+ Version:        0.13.1.1
+ Release:        0
+ Summary:        Binding to the Pango text rendering engine
+-License:        LGPL-2+
++License:        LGPL-2.0+
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-- 
+2.9.0
+

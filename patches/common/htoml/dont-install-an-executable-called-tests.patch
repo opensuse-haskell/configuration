@@ -2,11 +2,10 @@ Index: ghc-htoml.spec
 ===================================================================
 --- ghc-htoml.spec	(revision 3)
 +++ ghc-htoml.spec	(working copy)
-@@ -73,8 +73,7 @@
+@@ -73,7 +73,7 @@
  
  %install
  %ghc_lib_install
--
 -%ghc_fix_dynamic_rpath tests
 +rm %{buildroot}/%{_bindir}/tests
  

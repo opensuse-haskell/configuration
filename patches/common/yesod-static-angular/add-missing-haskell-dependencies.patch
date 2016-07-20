@@ -2,10 +2,9 @@ Index: ghc-yesod-static-angular.spec
 ===================================================================
 --- ghc-yesod-static-angular.spec	(revision 1)
 +++ ghc-yesod-static-angular.spec	(working copy)
-@@ -51,6 +51,7 @@
+@@ -51,5 +51,6 @@
  BuildRequires:  ghc-yesod-test-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-yesod-devel
  
  %description

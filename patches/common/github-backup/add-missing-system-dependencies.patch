@@ -2,10 +2,9 @@ Index: github-backup.spec
 ===================================================================
 --- github-backup.spec	(revision 1)
 +++ github-backup.spec	(working copy)
-@@ -50,6 +50,7 @@
+@@ -50,5 +50,6 @@
  BuildRequires:  ghc-vector-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  git-core
  
  %description

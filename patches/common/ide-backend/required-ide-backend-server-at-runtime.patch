@@ -2,10 +2,9 @@ Index: ide-backend.spec
 ===================================================================
 --- ide-backend.spec	(revision 1)
 +++ ide-backend.spec	(working copy)
-@@ -77,6 +77,7 @@
+@@ -77,5 +77,6 @@
  BuildRequires:  ghc-test-framework-hunit-devel
  %endif
- # End cabal-rpm deps
 +Requires:       ide-backend-server
  
  %description

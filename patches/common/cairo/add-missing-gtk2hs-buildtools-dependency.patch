@@ -2,8 +2,7 @@ Index: ghc-cairo.spec
 ===================================================================
 --- ghc-cairo.spec	(revision 2)
 +++ ghc-cairo.spec	(working copy)
-@@ -29,6 +29,7 @@
- # Begin cabal-rpm deps:
+@@ -29,5 +29,6 @@
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-bytestring-devel
 +BuildRequires:  gtk2hs-buildtools

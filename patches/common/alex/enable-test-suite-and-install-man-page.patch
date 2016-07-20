@@ -11,12 +11,11 @@ Index: alex.spec
  Name:           alex
  Version:        3.1.7
  Release:        0
-@@ -26,6 +26,7 @@
+@@ -26,5 +26,6 @@
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  BuildRequires:  ghc-Cabal-devel
 +BuildRequires:  autoconf
- # Begin cabal-rpm deps:
  BuildRequires:  ghc-QuickCheck-devel
  BuildRequires:  ghc-array-devel
 @@ -51,10 +52,15 @@

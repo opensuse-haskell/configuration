@@ -2,10 +2,9 @@ Index: ghc-http2.spec
 ===================================================================
 --- ghc-http2.spec	(revision 2)
 +++ ghc-http2.spec	(working copy)
-@@ -52,6 +52,11 @@
+@@ -52,5 +52,10 @@
  BuildRequires:  ghc-word8-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-aeson-devel
 +BuildRequires:  ghc-aeson-pretty-devel
 +BuildRequires:  ghc-hex-devel

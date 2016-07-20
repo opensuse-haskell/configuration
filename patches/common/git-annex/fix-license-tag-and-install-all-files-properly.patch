@@ -11,10 +11,9 @@ Index: git-annex.spec
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-@@ -115,6 +115,22 @@
+@@ -115,5 +115,21 @@
  BuildRequires:  ghc-yesod-static-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +# Manually added dependencies which the Cabal file does not declare
 +BuildRequires:  git-core
 +BuildRequires:  rsync

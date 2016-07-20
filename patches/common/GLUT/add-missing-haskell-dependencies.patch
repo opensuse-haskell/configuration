@@ -2,10 +2,9 @@ Index: ghc-GLUT.spec
 ===================================================================
 --- ghc-GLUT.spec	(revision 3)
 +++ ghc-GLUT.spec	(working copy)
-@@ -36,6 +36,7 @@
+@@ -36,5 +36,6 @@
  BuildRequires:  ghc-transformers-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-random-devel
  
  %description

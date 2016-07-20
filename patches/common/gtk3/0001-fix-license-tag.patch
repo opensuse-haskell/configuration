@@ -1,0 +1,25 @@
+From e2eebca3ec713d8d3c9e68082ec194ea81f63048 Mon Sep 17 00:00:00 2001
+From: Peter Simons <simons@cryp.to>
+Date: Wed, 20 Jul 2016 21:31:57 +0200
+Subject: [PATCH 1/2] fix license tag
+
+---
+ ghc-gtk3.spec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ghc-gtk3.spec b/ghc-gtk3.spec
+index 1d2dc3e..c6262de 100644
+--- a/ghc-gtk3.spec
++++ b/ghc-gtk3.spec
+@@ -21,7 +21,7 @@ Name:           ghc-%{pkg_name}
+ Version:        0.14.2
+ Release:        0
+ Summary:        Binding to the Gtk+ 3 graphical user interface library
+-License:        LGPL-2+
++License:        LGPL-2.1+
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-- 
+2.9.0
+

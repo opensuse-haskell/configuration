@@ -2,11 +2,10 @@ Index: hlint.spec
 ===================================================================
 --- hlint.spec	(revision 4)
 +++ hlint.spec	(working copy)
-@@ -76,8 +76,8 @@
+@@ -76,7 +76,8 @@
  
  %install
  %ghc_lib_install
--
  %ghc_fix_dynamic_rpath %{pkg_name}
 +install -D --mode=444 data/hlint.1 %{buildroot}%{_mandir}/man1/hlint.1
  

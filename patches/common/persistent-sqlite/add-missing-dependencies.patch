@@ -2,18 +2,16 @@ Index: ghc-persistent-sqlite.spec
 ===================================================================
 --- ghc-persistent-sqlite.spec	(revision 2)
 +++ ghc-persistent-sqlite.spec	(working copy)
-@@ -48,6 +48,7 @@
+@@ -48,5 +48,6 @@
  BuildRequires:  ghc-persistent-template-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  sqlite3-devel
  
  %description
  This package includes a thin sqlite3 wrapper based on the direct-sqlite
-@@ -63,6 +64,7 @@
+@@ -63,5 +64,6 @@
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
- # End cabal-rpm deps
 +Requires:       sqlite3-devel
  
  %description devel

@@ -2,12 +2,11 @@ Index: pandoc.spec
 ===================================================================
 --- pandoc.spec	(revision 6)
 +++ pandoc.spec	(working copy)
-@@ -26,6 +26,7 @@
+@@ -26,5 +26,6 @@
  Group:          Productivity/Publishing/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 +Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal
  Source10:       pandoc-pdf.readme
- # Begin cabal-rpm deps:
  BuildRequires:  chrpath
 

@@ -11,14 +11,13 @@ Index: bustle.spec
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-@@ -46,9 +46,16 @@
+@@ -46,8 +46,15 @@
  BuildRequires:  ghc-setlocale-devel
  BuildRequires:  ghc-text-devel
  BuildRequires:  ghc-time-devel
 +BuildRequires:  help2man
 +BuildRequires:  intltool
 +BuildRequires:  libpcap-devel
- # End cabal-rpm deps
  BuildRequires:  pkgconfig
 +BuildRequires:  pkgconfig(gio-2.0)
 +BuildRequires:  pkgconfig(gio-unix-2.0)

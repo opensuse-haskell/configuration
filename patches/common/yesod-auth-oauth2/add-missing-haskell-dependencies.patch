@@ -2,10 +2,9 @@ Index: ghc-yesod-auth-oauth2.spec
 ===================================================================
 --- ghc-yesod-auth-oauth2.spec	(revision 3)
 +++ ghc-yesod-auth-oauth2.spec	(working copy)
-@@ -50,6 +50,8 @@
+@@ -50,5 +50,7 @@
  BuildRequires:  ghc-hspec-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-load-env-devel
 +BuildRequires:  ghc-yesod-devel
  

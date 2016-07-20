@@ -2,18 +2,16 @@ Index: ghc-direct-sqlite.spec
 ===================================================================
 --- ghc-direct-sqlite.spec	(revision 2)
 +++ ghc-direct-sqlite.spec	(working copy)
-@@ -40,6 +40,7 @@
+@@ -40,5 +40,6 @@
  BuildRequires:  ghc-temporary-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  sqlite3-devel
  
  %description
  This package is not very different from the other SQLite3 bindings out there,
-@@ -58,6 +59,7 @@
+@@ -58,5 +59,6 @@
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
- # End cabal-rpm deps
 +Requires:       sqlite3-devel
  
  %description devel

@@ -1,0 +1,21 @@
+diff --git a/ghc-gtk3.spec b/ghc-gtk3.spec
+index 6887f2a..4ec88d3 100644
+--- a/ghc-gtk3.spec
++++ b/ghc-gtk3.spec
+@@ -38,6 +38,7 @@ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-pango-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-text-devel
++BuildRequires:  fdupes
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(gthread-2.0)
+ BuildRequires:  pkgconfig(gtk+-3.0)
+@@ -73,6 +74,8 @@ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %install
+ %ghc_lib_install
++# TODO: repack in all gtk2hs packages examples in right way
++%fdupes %{buildroot}%{_prefix}
+ 
+ 
+ %post devel

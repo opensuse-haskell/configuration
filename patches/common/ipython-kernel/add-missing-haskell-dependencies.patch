@@ -2,10 +2,9 @@ Index: ghc-ipython-kernel.spec
 ===================================================================
 --- ghc-ipython-kernel.spec	(revision 3)
 +++ ghc-ipython-kernel.spec	(working copy)
-@@ -45,6 +45,7 @@
+@@ -45,5 +45,6 @@
  BuildRequires:  ghc-zeromq4-haskell-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-parsec-devel
  
  %description

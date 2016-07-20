@@ -2,10 +2,9 @@ Index: ghc-Earley.spec
 ===================================================================
 --- ghc-Earley.spec	(revision 1)
 +++ ghc-Earley.spec	(working copy)
-@@ -37,6 +37,7 @@
+@@ -37,5 +37,6 @@
  BuildRequires:  ghc-tasty-quickcheck-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-unordered-containers-devel
  
  %description

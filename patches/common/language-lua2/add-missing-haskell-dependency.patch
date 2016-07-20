@@ -2,10 +2,9 @@ Index: ghc-language-lua2.spec
 ===================================================================
 --- ghc-language-lua2.spec	(revision 1)
 +++ ghc-language-lua2.spec	(working copy)
-@@ -48,6 +48,7 @@
+@@ -48,5 +48,6 @@
  BuildRequires:  ghc-tasty-quickcheck-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  ghc-optparse-applicative-devel
  
  %description

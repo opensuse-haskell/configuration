@@ -2,10 +2,9 @@ Index: ghc-generics-eot.spec
 ===================================================================
 --- ghc-generics-eot.spec	(revision 2)
 +++ ghc-generics-eot.spec	(working copy)
-@@ -42,6 +42,7 @@
+@@ -42,5 +42,6 @@
  BuildRequires:  ghc-shake-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  markdown-unlit
  
  %description

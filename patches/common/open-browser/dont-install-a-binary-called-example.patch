@@ -2,11 +2,10 @@ Index: ghc-open-browser.spec
 ===================================================================
 --- ghc-open-browser.spec	(revision 4)
 +++ ghc-open-browser.spec	(working copy)
-@@ -58,8 +58,7 @@
+@@ -58,7 +58,7 @@
  
  %install
  %ghc_lib_install
--
 -%ghc_fix_dynamic_rpath example
 +rm %{buildroot}/%{_bindir}/example
  

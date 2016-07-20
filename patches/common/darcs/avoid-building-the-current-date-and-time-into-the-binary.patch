@@ -2,10 +2,9 @@ Index: darcs.spec
 ===================================================================
 --- darcs.spec	(revision 15)
 +++ darcs.spec	(working copy)
-@@ -84,6 +84,7 @@
+@@ -84,5 +84,6 @@
  BuildRequires:  ghc-test-framework-quickcheck2-devel
  %endif
- # End cabal-rpm deps
 +Source4:        %{name}.changes
  
  %description

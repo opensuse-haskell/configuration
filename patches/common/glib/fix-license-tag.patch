@@ -11,8 +11,7 @@ Index: ghc-glib.spec
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-@@ -29,7 +29,6 @@
- # Begin cabal-rpm deps:
+@@ -29,6 +29,5 @@
  BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-containers-devel
 -BuildRequires:  ghc-gtk2hs-buildtools-devel

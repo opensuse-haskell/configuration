@@ -2,8 +2,7 @@ Index: ghc-nix-paths.spec
 ===================================================================
 --- ghc-nix-paths.spec	(revision 2)
 +++ ghc-nix-paths.spec	(working copy)
-@@ -30,10 +30,6 @@
- # Begin cabal-rpm deps:
+@@ -30,8 +30,4 @@
  BuildRequires:  ghc-process-devel
  BuildRequires:  ghc-rpm-macros
 -BuildRequires:  nix-build
@@ -11,7 +10,6 @@ Index: ghc-nix-paths.spec
 -BuildRequires:  nix-instantiate
 -BuildRequires:  nix-store
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
  
 @@ -58,6 +54,7 @@
  

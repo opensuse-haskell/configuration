@@ -2,8 +2,7 @@ Index: ghc-pcre-light.spec
 ===================================================================
 --- ghc-pcre-light.spec	(revision 2)
 +++ ghc-pcre-light.spec	(working copy)
-@@ -32,6 +32,9 @@
- # End cabal-rpm deps
+@@ -32,5 +32,8 @@
  BuildRequires:  pkgconfig
  BuildRequires:  pkgconfig(libpcre)
 +BuildRequires:  pkgconfig(libpcre16)
@@ -12,10 +11,9 @@ Index: ghc-pcre-light.spec
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
  %description
-@@ -55,6 +58,9 @@
+@@ -55,5 +58,8 @@
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
- # End cabal-rpm deps
 +Requires:       pkgconfig(libpcre16)
 +Requires:       pkgconfig(libpcrecpp)
 +Requires:       pkgconfig(libpcreposix)

@@ -2,10 +2,9 @@ Index: ghc-wai-middleware-verbs.spec
 ===================================================================
 --- ghc-wai-middleware-verbs.spec	(revision 1)
 +++ ghc-wai-middleware-verbs.spec	(working copy)
-@@ -42,6 +42,9 @@
+@@ -42,5 +42,8 @@
  BuildRequires:  ghc-wai-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-wai-middleware-content-type-devel
 +BuildRequires:  ghc-wai-transformers-devel
 +BuildRequires:  ghc-warp-devel

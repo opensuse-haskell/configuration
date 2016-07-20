@@ -2,10 +2,9 @@ Index: ghc-farmhash.spec
 ===================================================================
 --- ghc-farmhash.spec	(revision 1)
 +++ ghc-farmhash.spec	(working copy)
-@@ -36,6 +36,7 @@
+@@ -36,5 +36,6 @@
  BuildRequires:  ghc-hspec-devel
  %endif
- # End cabal-rpm deps
 +BuildRequires:  gcc-c++
  
  %description

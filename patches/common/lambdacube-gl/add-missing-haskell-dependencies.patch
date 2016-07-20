@@ -2,10 +2,9 @@ Index: ghc-lambdacube-gl.spec
 ===================================================================
 --- ghc-lambdacube-gl.spec	(revision 1)
 +++ ghc-lambdacube-gl.spec	(working copy)
-@@ -38,6 +38,11 @@
+@@ -38,5 +38,10 @@
  BuildRequires:  ghc-vector-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  ghc-GLFW-b-devel
 +BuildRequires:  ghc-base64-bytestring-devel
 +BuildRequires:  ghc-exceptions-devel

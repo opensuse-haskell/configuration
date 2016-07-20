@@ -2,10 +2,9 @@ Index: ghc-mysql.spec
 ===================================================================
 --- ghc-mysql.spec	(revision 5)
 +++ ghc-mysql.spec	(working copy)
-@@ -32,6 +32,7 @@
+@@ -32,5 +32,6 @@
  BuildRequires:  ghc-rpm-macros
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
- # End cabal-rpm deps
 +BuildRequires:  libmysqlclient-devel
  
  %description
