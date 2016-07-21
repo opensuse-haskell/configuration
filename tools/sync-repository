@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+
+tmp="/tmp/sync-repository-tmp.$$"
+trap "rm -f $tmp" 0
+
+for i in *; do
+  test -d "$i" || continue
+  pushd >/dev/null "$i"
+  # What about libnettle? It does not exist, but sr -d causes no error.
+  osc sr -d devel:languages:haskell >$tmp
+  lines=$(wc -l "$tmp" | cut -f1 -d' ')
+  if [ $lines -gt 3 ]; then
+    echo submit $i
+  else
+    echo dont submit $i
+  fi
+  popd >/dev/null
+done
