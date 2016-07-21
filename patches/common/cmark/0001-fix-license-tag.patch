@@ -1,0 +1,25 @@
+From b9d02b3d046614862cb5e1234873d48313c2e46b Mon Sep 17 00:00:00 2001
+From: Peter Simons <simons@cryp.to>
+Date: Thu, 21 Jul 2016 11:21:08 +0200
+Subject: [PATCH 1/2] fix license tag
+
+---
+ ghc-cmark.spec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ghc-cmark.spec b/ghc-cmark.spec
+index 0f6d8ee..b1d2e14 100644
+--- a/ghc-cmark.spec
++++ b/ghc-cmark.spec
+@@ -22,7 +22,7 @@ Name:           ghc-%{pkg_name}
+ Version:        0.5.2.1
+ Release:        0
+ Summary:        Fast, accurate CommonMark (Markdown) parser and renderer
+-License:        BSD-3-Clause
++License:        BSD-3-Clause and BSD-2-Clause and MIT
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-- 
+2.9.0
+

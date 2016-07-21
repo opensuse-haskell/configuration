@@ -1,8 +1,17 @@
-Index: ghc-cmark.spec
-===================================================================
---- ghc-cmark.spec	(revision 2)
-+++ ghc-cmark.spec	(working copy)
-@@ -17,12 +17,19 @@
+From d332734962298fe44dfac488af374399046600a2 Mon Sep 17 00:00:00 2001
+From: Peter Simons <simons@cryp.to>
+Date: Thu, 21 Jul 2016 11:22:20 +0200
+Subject: [PATCH 2/2] Fix build on older SUSE distributions like Leap or SLE12
+
+---
+ ghc-cmark.spec | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/ghc-cmark.spec b/ghc-cmark.spec
+index b1d2e14..46b7b4b 100644
+--- a/ghc-cmark.spec
++++ b/ghc-cmark.spec
+@@ -17,6 +17,13 @@
  
  
  %global pkg_name cmark
@@ -16,14 +25,7 @@ Index: ghc-cmark.spec
  %bcond_with tests
  Name:           ghc-%{pkg_name}
  Version:        0.5.2.1
- Release:        0
- Summary:        Fast, accurate CommonMark (Markdown) parser and renderer
--License:        BSD-3-Clause
-+License:        BSD-3-Clause and BSD-2-Clause and MIT
- Group:          System/Libraries
- Url:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-@@ -32,6 +39,10 @@
+@@ -31,6 +38,10 @@ BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-rpm-macros
  BuildRequires:  ghc-text-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -34,14 +36,12 @@ Index: ghc-cmark.spec
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel
  %endif
-@@ -48,15 +59,21 @@
- Group:          Development/Libraries/Other
- Requires:       %{name} = %{version}-%{release}
+@@ -48,12 +59,19 @@ Requires:       %{name} = %{version}-%{release}
  Requires:       ghc-compiler = %{ghc_version}
-+Requires:       pkgconfig
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
 +%if 0%{?is_tumble} || 0%{?is_sp2up}
++Requires:       pkgconfig
 +Requires:       pkgconfig(libcmark)
 +%endif
  
@@ -50,11 +50,12 @@ Index: ghc-cmark.spec
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
--
 +%if 0%{?is_tumble} || 0%{?is_sp2up}
 +cabal-tweak-flag    pkgconfig   True
 +%endif
  
+ 
  %build
- %ghc_lib_build
+-- 
+2.9.0
 
