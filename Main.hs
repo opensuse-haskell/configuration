@@ -18,6 +18,8 @@ import GHC.Generics ( Generic )
 import System.Directory
 import System.Environment
 import Orphans ()
+import qualified Data.Map as Map
+import qualified Data.Set as Set
 
 newtype StackageVersion = StackageVersion String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 

@@ -14,7 +14,13 @@ ghc-options:            -Wall
 executables:
   cabal2obs:
     main:               Main.hs
-    dependencies:       base < 5, hackage-db, Cabal, shake, directory
+    dependencies:
+      - base < 5
+      - Cabal
+      - containers
+      - directory
+      - hackage-db
+      - shake
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
       - Orphans
