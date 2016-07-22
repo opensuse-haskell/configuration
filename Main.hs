@@ -191,7 +191,7 @@ bannedPackages =
   , "stackage"          -- no dummy packages here
   , "stackage-build-plan" -- deprecated
   , "stackage-cabal"    -- deprecated
-  , "stackage-cli"      -- deprecated
+--  , "stackage-cli"      -- deprecated (but still dependency of stackage-curator)
   , "stackage-sandbox"  -- deprecated
   , "stackage-setup"    -- deprecated
   , "stackage-types"    -- deprecated
