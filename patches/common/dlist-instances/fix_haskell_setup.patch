@@ -1,0 +1,15 @@
+Index: ghc-dlist-instances.spec
+===================================================================
+--- ghc-dlist-instances.spec	(revision 7)
++++ ghc-dlist-instances.spec	(working copy)
+@@ -49,7 +49,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+-
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
