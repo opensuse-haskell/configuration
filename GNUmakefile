@@ -17,5 +17,5 @@ config/%/stackage-packages.txt:
 	curl -L -s "https://www.stackage.org/$*/cabal.config" >$@
 
 update:
-	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
 	cabal update
+	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
