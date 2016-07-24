@@ -1,43 +1,62 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+module HackageOracle where
 
-module Main where
-
-import Distribution.Hackage.DB as DB
+import qualified Data.Map as Map
+import Data.Maybe
+import qualified Data.Set as Set
 import Development.Shake
 import Development.Shake.FilePath
-import Development.Shake.Classes
-import Orphans ()
-import GHC.Generics ( Generic )
+import Distribution.Hackage.DB ( Hackage, hackagePath, readHackage', (!) )
+import Distribution.Text
+import Distribution.Package
+import Distribution.PackageDescription
+import Distribution.Version
+import Config
 
-newtype QueryHackage = QueryHackage PackageName
-  deriving (Show, Typeable, Eq, Hashable, Binary, NFData)
-
-getHackageDB :: Rules (() -> Action Hackage)
-getHackageDB = newCache $ \() -> do
+cacheHackageDB :: Rules (() -> Action Hackage)
+cacheHackageDB = newCache $ \() -> do
   p <- liftIO hackagePath
   need [p]
   liftIO (readHackage' p)
 
-main :: IO ()
-main = do
-  let buildDir = "/tmp/_build"
-  shakeArgs shakeOptions { shakeFiles=buildDir, shakeProgress=progressSimple } $ do
-    -- Load the configuration
-    getHackage <- newCache $ \() -> do
-      p <- liftIO hackagePath
-      need [p]
-      liftIO (readHackage' p)
+resolveConstraint :: Monad m => Dependency -> Hackage -> m GenericPackageDescription
+resolveConstraint c@(Dependency (PackageName name) vrange) hackage
+  | Just vset' <- Map.lookup name hackage
+  , vset <- Set.filter (`withinRange` vrange) (Map.keysSet vset')
+  , not (Set.null vset) = return (vset' ! Set.findMax vset)
+  | otherwise           = fail ("cannot resolve " ++ show (display c) ++ " in Hackage")
 
-    findPackageVersions <- addOracle $ \(PackageName n) -> do
-      DB.lookup n <$> getHackage ()
+hackageOracle :: Action Hackage -> Rules (Dependency -> Action BuildDescription)
+hackageOracle getHackage = addOracle $ \x -> do
+  getHackage >>= resolveConstraint x >>= return . cabal2bd
 
+cabal2bd :: GenericPackageDescription -> BuildDescription
+cabal2bd cabal = BuildDescription
+  { pid = packageId cabal
+  , prv = Revision (maybe 0 read (lookup "x-revision" (customFieldsPD pd)))
+  , hasLib = isJust (library pd)
+  , hasExe = map exeName (executables pd)
+  , forcedExe = False
+  , flags = []
+  }
+  where
+    pd = packageDescription cabal
 
-    -- Define the rules.
-    "latest-*.txt" %> \out -> do
-      let pkgname = drop 7 (takeBaseName out)
-      vs <- findPackageVersions (PackageName pkgname)
-      putNormal $ "building: " ++ out ++ " from " ++ show (pkgname,vs)
+-- main :: IO ()
+-- main = do
+--   let buildDir = "/tmp/_build"
+--   shakeArgs shakeOptions { shakeFiles=buildDir, shakeProgress=progressSimple } $ do
+--     -- Load the configuration
+--     getHackage <- cacheHackageDB
+--     resolveInHackage <- hackageOracle (getHackage ())
 
-    -- Go.
-    return ()
+--     -- Define the rules.
+--     "latest-*.txt" %> \out -> do
+--       putNormal $ "building " ++ out
+--       let pkgname = drop 7 (takeBaseName out)
+--       bd <- resolveInHackage (Dependency (PackageName pkgname) anyVersion)
+--       let v = packageVersion bd
+--           Revision r = prv bd
+--       writeFileChanged out (display v ++ "-r" ++ show r ++ "\n")
+
+--     -- Go.
+--     want ["latest-async.txt", "latest-linux-ptrace.txt"]

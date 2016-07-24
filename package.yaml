@@ -23,4 +23,6 @@ executables:
       - shake
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
+      - Config
+      - HackageOracle
       - Orphans

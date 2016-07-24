@@ -31,5 +31,7 @@ executable cabal2obs
     , hackage-db
     , shake
   other-modules:
+      Config
+      HackageOracle
       Orphans
   default-language: Haskell2010
