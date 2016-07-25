@@ -57,6 +57,9 @@ main = do
     getCompilerVersion <- addOracle $ \(StackageVersion stackageVersion) ->
       stripSpaces <$> readFile' ("config" </> stackageVersion </> "compiler")
 
+    getFlagAssignment <- addOracle $ \(PackageName pn) ->
+      return (flagAssignment pn)
+
     forM_ (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName pn) v) -> do
       let pv = display v
           pid = display p
@@ -105,10 +108,12 @@ main = do
                                                    ]
           let clvid = unwords ["version", pv, "revision", show rv]
           need patches
+          flags <- getFlagAssignment (PackageName pn)
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --strict --compiler=" ++
-                   compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE "++
+                   compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE " ++
+                   flags ++ " " ++
                    "spec " ++ pid ++ " >/dev/null"
                  , "spec-cleaner -i " ++ pkgName <.> "spec"
                  , "grep -q -s -F -e '" ++ clvid ++ "' " ++ pkgName <.> "changes" ++
@@ -283,6 +288,38 @@ forcedExecutablePackages =
   , "xmonad"
   , "yi"
   ]
+
+flagAssignment :: String -> String
+flagAssignment "cheapskate" = "-fdingus"
+flagAssignment "country-codes" = "-fgenerate"
+flagAssignment "csv-conduit" = "-fbench"
+flagAssignment "Earley" = "-fexamples"
+flagAssignment "GLUT" = "-fbuildexamples"
+flagAssignment "gtk3" = "-fbuild_demos"
+flagAssignment "highlighting-kate" = "-fexecutable -fpcre-light"
+flagAssignment "hoauth2" = "-ftest"
+flagAssignment "hslogger" = "-fbuildtests"
+flagAssignment "http2" = "-fdevel"
+flagAssignment "ipython-kernel" = "-fexamples"
+flagAssignment "lambdacube-gl" = "-ftestclient -fexample"
+flagAssignment "language-lua2" = "-fexes"
+flagAssignment "leveldb-haskell" = "-fexamples"
+flagAssignment "nested-routes" = "-fexample"
+flagAssignment "network-transport-zeromq" = "-finstall-benchmarks"
+flagAssignment "pandoc-citeproc" = "-ftest_citeproc"
+flagAssignment "rethinkdb" = "-fdev"
+flagAssignment "servant-js" = "-fexample"
+flagAssignment "SHA" = "-fexe"
+flagAssignment "texmath" = "-fnetwork-uri -fexecutable"
+flagAssignment "vector-algorithms" = "-fbench"
+flagAssignment "wai-middleware-consul" = "-fexamples"
+flagAssignment "wai-middleware-verbs" = "-fexamples"
+flagAssignment "waitra" = "-fexamples"
+flagAssignment "weigh" = "-fweigh-maps"
+flagAssignment "yesod-auth-oauth2" = "-fexample -fnetwork-uri"
+flagAssignment "yesod-job-queue" = "-fexample"
+flagAssignment "yesod-static-angular" = "-fexample"
+flagAssignment _ = ""
 
 parseExtraConfig :: Hackage -> String -> [PackageIdentifier]
 parseExtraConfig hackage = map f . lines
