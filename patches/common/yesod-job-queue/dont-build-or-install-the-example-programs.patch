@@ -1,0 +1,36 @@
+Index: ghc-yesod-job-queue.spec
+===================================================================
+--- ghc-yesod-job-queue.spec	(revision 5)
++++ ghc-yesod-job-queue.spec	(working copy)
+@@ -25,7 +25,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-aeson-devel
+ BuildRequires:  ghc-api-field-json-th-devel
+@@ -72,13 +71,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexample
++%define cabal_configure_options -f-example
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath yesod-job-queue-example
+ 
+ 
+ %post devel
+@@ -90,7 +88,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/yesod-job-queue-example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

@@ -1,0 +1,39 @@
+Index: ghc-http2.spec
+===================================================================
+--- ghc-http2.spec	(revision 12)
++++ ghc-http2.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-aeson-devel
+ BuildRequires:  ghc-aeson-pretty-devel
+@@ -71,13 +70,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fdevel
++%define cabal_configure_options -f-devel
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath frame-encode hpack-debug hpack-encode hpack-stat
+ 
+ 
+ %check
+@@ -93,10 +91,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/frame-encode
+-%{_bindir}/hpack-debug
+-%{_bindir}/hpack-encode
+-%{_bindir}/hpack-stat
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

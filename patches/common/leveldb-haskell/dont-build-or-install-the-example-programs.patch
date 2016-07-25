@@ -1,0 +1,39 @@
+Index: ghc-leveldb-haskell.spec
+===================================================================
+--- ghc-leveldb-haskell.spec	(revision 10)
++++ ghc-leveldb-haskell.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-async-devel
+ BuildRequires:  ghc-bytestring-devel
+@@ -78,13 +77,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexamples
++%define cabal_configure_options -f-examples
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath leveldb-example-comparator leveldb-example-features leveldb-example-filterpolicy leveldb-example-iterforkio
+ 
+ 
+ %check
+@@ -100,10 +98,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/leveldb-example-comparator
+-%{_bindir}/leveldb-example-features
+-%{_bindir}/leveldb-example-filterpolicy
+-%{_bindir}/leveldb-example-iterforkio
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

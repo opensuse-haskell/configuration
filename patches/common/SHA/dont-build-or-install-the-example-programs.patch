@@ -1,0 +1,40 @@
+Index: ghc-SHA.spec
+===================================================================
+--- ghc-SHA.spec	(revision 7)
++++ ghc-SHA.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-binary-devel
+@@ -64,13 +63,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexe
++%define cabal_configure_options -f-exe
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath sha1 sha224 sha256 sha384 sha512
+ 
+ 
+ %check
+@@ -86,11 +84,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/sha1
+-%{_bindir}/sha224
+-%{_bindir}/sha256
+-%{_bindir}/sha384
+-%{_bindir}/sha512
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

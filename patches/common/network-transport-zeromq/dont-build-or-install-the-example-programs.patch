@@ -1,0 +1,38 @@
+Index: ghc-network-transport-zeromq.spec
+===================================================================
+--- ghc-network-transport-zeromq.spec	(revision 10)
++++ ghc-network-transport-zeromq.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-async-devel
+ BuildRequires:  ghc-binary-devel
+@@ -79,13 +78,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -finstall-benchmarks -fdistributed-process-tests
++%define cabal_configure_options -f-install-benchmarks -f-distributed-process-tests
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath bench-dp-channels bench-dp-latency bench-dp-throughput
+ 
+ 
+ %check
+@@ -101,9 +99,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/bench-dp-channels
+-%{_bindir}/bench-dp-latency
+-%{_bindir}/bench-dp-throughput
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

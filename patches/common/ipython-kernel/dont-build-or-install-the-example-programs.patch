@@ -1,0 +1,37 @@
+Index: ghc-ipython-kernel.spec
+===================================================================
+--- ghc-ipython-kernel.spec	(revision 14)
++++ ghc-ipython-kernel.spec	(working copy)
+@@ -25,7 +25,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-SHA-devel
+ BuildRequires:  ghc-aeson-devel
+@@ -69,13 +68,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexamples
++%define cabal_configure_options -f-examples
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath fun-calc-example simple-calc-example
+ 
+ 
+ %post devel
+@@ -87,8 +85,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/fun-calc-example
+-%{_bindir}/simple-calc-example
+ %dir %{_datadir}/%{pkg_name}-%{version}
+ %{_datadir}/%{pkg_name}-%{version}/calc_profile.tar
+ 
+

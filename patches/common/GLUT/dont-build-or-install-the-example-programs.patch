@@ -1,0 +1,124 @@
+Index: ghc-GLUT.spec
+===================================================================
+--- ghc-GLUT.spec	(revision 9)
++++ ghc-GLUT.spec	(working copy)
+@@ -25,7 +25,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-OpenGL-devel
+ BuildRequires:  ghc-OpenGLRaw-devel
+@@ -60,13 +59,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fbuildexamples
++%define cabal_configure_options -f-buildexamples
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath BOGLGP01-OnYourOwn1 BOGLGP01-Simple BOGLGP02-OnYourOwn1.hs BOGLGP02-OpenGLApplication.hs BOGLGP03-Lines BOGLGP03-OnYourOwn1 BOGLGP03-Points BOGLGP03-Polygons BOGLGP03-TrianglesQuads Misc-ARBOcclude Misc-ColorTriangle Misc-ExtractContours Misc-Gears Misc-Pitfall14 Misc-SmoothOpenGL3 Misc-Triangulate OrangeBook-Brick RedBook4-AAIndex RedBook4-AARGB RedBook4-AccAnti RedBook4-AccPersp RedBook4-Alpha RedBook4-Alpha3D RedBook4-BezCurve RedBook4-BezMesh RedBook4-BezSurf RedBook4-BlendEqn RedBook4-Checker RedBook4-Clip RedBook4-ColorMat RedBook4-ColorMatrix RedBook4-ColorTable RedBook4-Combiner RedBook4-Convolution RedBook4-Cube RedBook4-CubeMap RedBook4-DList RedBook4-DOF RedBook4-Double RedBook4-DrawF RedBook4-Feedback RedBook4-Fog RedBook4-FogCoord RedBook4-FogIndex RedBook4-Font RedBook4-Hello RedBook4-Histogram RedBook4-Image RedBook4-Light RedBook4-Lines RedBook4-MVArray RedBook4-Material RedBook4-Minmax RedBook4-Mipmap RedBook4-Model RedBook4-MoveLight RedBook4-MultiTex RedBook4-Multisamp RedBook4-PickDepth RedBook4-PickSquare RedBook4-Planet RedBook4-PointP RedBook4-PolyOff RedBook4-Polys RedBook4-Quadric RedBook4-Robot RedBook4-Scene RedBook4-Select RedBook4-ShadowMap RedBook4-Smooth RedBook4-Stencil RedBook4-Stroke RedBook4-SurfPoints RedBook4-Surface RedBook4-Teapots RedBook4-Tess RedBook4-TessWind RedBook4-TexBind RedBook4-TexGen RedBook4-TexProx RedBook4-TexSub RedBook4-Texture3D RedBook4-TextureSurf RedBook4-Torus RedBook4-Trim RedBook4-UnProject RedBook4-VArray RedBook4-Wrap RedBook8-Triangles
+ 
+ 
+ %post devel
+@@ -78,95 +76,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/BOGLGP01-OnYourOwn1
+-%{_bindir}/BOGLGP01-Simple
+-%{_bindir}/BOGLGP02-OnYourOwn1.hs
+-%{_bindir}/BOGLGP02-OpenGLApplication.hs
+-%{_bindir}/BOGLGP03-Lines
+-%{_bindir}/BOGLGP03-OnYourOwn1
+-%{_bindir}/BOGLGP03-Points
+-%{_bindir}/BOGLGP03-Polygons
+-%{_bindir}/BOGLGP03-TrianglesQuads
+-%{_bindir}/Misc-ARBOcclude
+-%{_bindir}/Misc-ColorTriangle
+-%{_bindir}/Misc-ExtractContours
+-%{_bindir}/Misc-Gears
+-%{_bindir}/Misc-Pitfall14
+-%{_bindir}/Misc-SmoothOpenGL3
+-%{_bindir}/Misc-Triangulate
+-%{_bindir}/OrangeBook-Brick
+-%{_bindir}/RedBook4-AAIndex
+-%{_bindir}/RedBook4-AARGB
+-%{_bindir}/RedBook4-AccAnti
+-%{_bindir}/RedBook4-AccPersp
+-%{_bindir}/RedBook4-Alpha
+-%{_bindir}/RedBook4-Alpha3D
+-%{_bindir}/RedBook4-BezCurve
+-%{_bindir}/RedBook4-BezMesh
+-%{_bindir}/RedBook4-BezSurf
+-%{_bindir}/RedBook4-BlendEqn
+-%{_bindir}/RedBook4-Checker
+-%{_bindir}/RedBook4-Clip
+-%{_bindir}/RedBook4-ColorMat
+-%{_bindir}/RedBook4-ColorMatrix
+-%{_bindir}/RedBook4-ColorTable
+-%{_bindir}/RedBook4-Combiner
+-%{_bindir}/RedBook4-Convolution
+-%{_bindir}/RedBook4-Cube
+-%{_bindir}/RedBook4-CubeMap
+-%{_bindir}/RedBook4-DList
+-%{_bindir}/RedBook4-DOF
+-%{_bindir}/RedBook4-Double
+-%{_bindir}/RedBook4-DrawF
+-%{_bindir}/RedBook4-Feedback
+-%{_bindir}/RedBook4-Fog
+-%{_bindir}/RedBook4-FogCoord
+-%{_bindir}/RedBook4-FogIndex
+-%{_bindir}/RedBook4-Font
+-%{_bindir}/RedBook4-Hello
+-%{_bindir}/RedBook4-Histogram
+-%{_bindir}/RedBook4-Image
+-%{_bindir}/RedBook4-Light
+-%{_bindir}/RedBook4-Lines
+-%{_bindir}/RedBook4-MVArray
+-%{_bindir}/RedBook4-Material
+-%{_bindir}/RedBook4-Minmax
+-%{_bindir}/RedBook4-Mipmap
+-%{_bindir}/RedBook4-Model
+-%{_bindir}/RedBook4-MoveLight
+-%{_bindir}/RedBook4-MultiTex
+-%{_bindir}/RedBook4-Multisamp
+-%{_bindir}/RedBook4-PickDepth
+-%{_bindir}/RedBook4-PickSquare
+-%{_bindir}/RedBook4-Planet
+-%{_bindir}/RedBook4-PointP
+-%{_bindir}/RedBook4-PolyOff
+-%{_bindir}/RedBook4-Polys
+-%{_bindir}/RedBook4-Quadric
+-%{_bindir}/RedBook4-Robot
+-%{_bindir}/RedBook4-Scene
+-%{_bindir}/RedBook4-Select
+-%{_bindir}/RedBook4-ShadowMap
+-%{_bindir}/RedBook4-Smooth
+-%{_bindir}/RedBook4-Stencil
+-%{_bindir}/RedBook4-Stroke
+-%{_bindir}/RedBook4-SurfPoints
+-%{_bindir}/RedBook4-Surface
+-%{_bindir}/RedBook4-Teapots
+-%{_bindir}/RedBook4-Tess
+-%{_bindir}/RedBook4-TessWind
+-%{_bindir}/RedBook4-TexBind
+-%{_bindir}/RedBook4-TexGen
+-%{_bindir}/RedBook4-TexProx
+-%{_bindir}/RedBook4-TexSub
+-%{_bindir}/RedBook4-Texture3D
+-%{_bindir}/RedBook4-TextureSurf
+-%{_bindir}/RedBook4-Torus
+-%{_bindir}/RedBook4-Trim
+-%{_bindir}/RedBook4-UnProject
+-%{_bindir}/RedBook4-VArray
+-%{_bindir}/RedBook4-Wrap
+-%{_bindir}/RedBook8-Triangles
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

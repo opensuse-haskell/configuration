@@ -1,0 +1,14 @@
+Index: highlighting-kate.spec
+===================================================================
+--- highlighting-kate.spec	(revision 8)
++++ highlighting-kate.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.6.2.1
+ Release:        0
+ Summary:        Syntax highlighting
+-License:        GPL-1.0+
++License:        GPL-2.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

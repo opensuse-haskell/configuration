@@ -1,0 +1,36 @@
+Index: ghc-nested-routes.spec
+===================================================================
+--- ghc-nested-routes.spec	(revision 7)
++++ ghc-nested-routes.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-attoparsec-devel
+ BuildRequires:  ghc-bytestring-devel
+@@ -84,13 +83,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexample
++%define cabal_configure_options -f-example
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath example
+ 
+ 
+ %check
+@@ -106,7 +104,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

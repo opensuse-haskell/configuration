@@ -1,6 +1,6 @@
 Index: ghc-ipython-kernel.spec
 ===================================================================
---- ghc-ipython-kernel.spec	(revision 2)
+--- ghc-ipython-kernel.spec	(revision 13)
 +++ ghc-ipython-kernel.spec	(working copy)
 @@ -64,6 +64,8 @@
  

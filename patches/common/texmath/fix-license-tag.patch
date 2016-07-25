@@ -1,0 +1,14 @@
+Index: texmath.spec
+===================================================================
+--- texmath.spec	(revision 11)
++++ texmath.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.8.6.4
+ Release:        0
+ Summary:        Conversion between formats used to represent mathematics
+-License:        GPL-1.0+
++License:        GPL-2.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

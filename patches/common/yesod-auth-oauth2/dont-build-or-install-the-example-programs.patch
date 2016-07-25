@@ -1,0 +1,36 @@
+Index: ghc-yesod-auth-oauth2.spec
+===================================================================
+--- ghc-yesod-auth-oauth2.spec	(revision 7)
++++ ghc-yesod-auth-oauth2.spec	(working copy)
+@@ -26,7 +26,6 @@
+ Group:          System/Libraries
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-aeson-devel
+ BuildRequires:  ghc-authenticate-devel
+@@ -74,13 +73,12 @@
+ 
+ 
+ %build
+-%define cabal_configure_options -fexample -fnetwork-uri
++%define cabal_configure_options -f-example -fnetwork-uri
+ %ghc_lib_build
+ 
+ 
+ %install
+ %ghc_lib_install
+-%ghc_fix_dynamic_rpath yesod-auth-oauth2-example
+ 
+ 
+ %check
+@@ -96,7 +94,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/yesod-auth-oauth2-example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+
