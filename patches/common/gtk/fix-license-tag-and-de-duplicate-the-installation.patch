@@ -8,7 +8,7 @@ Index: ghc-gtk.spec
  Summary:        Binding to the Gtk+ graphical user interface library
 -License:        LGPL-2+
 +License:        LGPL-2.1+
- Group:          System/Libraries
+ Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 @@ -43,6 +43,7 @@

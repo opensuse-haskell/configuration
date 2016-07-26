@@ -8,7 +8,7 @@ Index: ghc-gio.spec
  Summary:        Binding to GIO
 -License:        LGPL-2+
 +License:        LGPL-2.1+ and LGPL-3.0+
- Group:          System/Libraries
+ Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -3,7 +3,7 @@ Index: ghc-gtk3.spec
 --- ghc-gtk3.spec	(revision 25)
 +++ ghc-gtk3.spec	(working copy)
 @@ -25,6 +25,8 @@
- Group:          System/Libraries
+ Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 +# PATCH-FIX-OPENSUSE work-around-pixel-define.patch -- mimi.vx@gmail.com .. undefine pixel, patch by debian

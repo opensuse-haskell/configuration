@@ -8,7 +8,7 @@ Index: ghc-MonadRandom.spec
  Summary:        Random-number generation monad
 -License:        Unknown
 +License:        MIT
- Group:          System/Libraries
+ Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

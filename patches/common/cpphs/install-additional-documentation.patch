@@ -1,0 +1,33 @@
+Index: cpphs.spec
+===================================================================
+--- cpphs.spec	(revision 10)
++++ cpphs.spec	(working copy)
+@@ -73,6 +73,8 @@
+ 
+ %install
+ %ghc_lib_install
++install -D --mode=444 docs/cpphs.1 %{buildroot}%{_mandir}/man1/cpphs.1
++chmod a-x LICENCE-* README docs/*
+ 
+ 
+ %post -n ghc-%{name}-devel
+@@ -84,8 +86,9 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc LICENCE-LGPL
+-%doc CHANGELOG LICENCE-GPL LICENCE-commercial README docs
++%doc LICENCE-GPL LICENCE-commercial README docs
+ %{_bindir}/%{name}
++%{_mandir}/man1/cpphs.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+@@ -93,6 +96,6 @@
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc CHANGELOG LICENCE-GPL LICENCE-commercial README docs
++%doc LICENCE-GPL LICENCE-commercial README docs
+ 
+ %changelog
+

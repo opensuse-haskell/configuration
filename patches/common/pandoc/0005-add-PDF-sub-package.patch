@@ -34,7 +34,7 @@ index 446498b..0773f76 100644
 +
  %package -n ghc-%{name}
  Summary:        Haskell %{name} library
- Group:          System/Libraries
+ Group:          Development/Languages/Other
 @@ -128,6 +138,7 @@ This package provides the Haskell %{name} library development files.
  %prep
  %setup -q
