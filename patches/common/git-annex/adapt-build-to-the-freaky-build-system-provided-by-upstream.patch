@@ -1,17 +1,9 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 2)
+--- git-annex.spec	(revision 8)
 +++ git-annex.spec	(working copy)
-@@ -20,7 +20,7 @@
- Version:        6.20160511
- Release:        0
- Summary:        Manage files with git, without checking their contents into git
--License:        GPL-3.0+
-+License:        GPL-3.0+ and AGPL-3.0+
- Group:          System/Libraries
- Url:            https://hackage.haskell.org/package/%{name}
- Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-@@ -115,5 +115,21 @@
+@@ -113,6 +113,22 @@
+ BuildRequires:  ghc-yesod-form-devel
  BuildRequires:  ghc-yesod-static-devel
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +# Manually added dependencies which the Cabal file does not declare
@@ -33,7 +25,7 @@ Index: git-annex.spec
  
  %description
  Git-annex allows managing files with git, without checking the file contents
-@@ -134,6 +150,16 @@
+@@ -132,6 +148,16 @@
  transferring them to other computers. The git-annex webapp makes it easy to set
  up and use git-annex this way.
  
@@ -50,7 +42,7 @@ Index: git-annex.spec
  %prep
  %setup -q
  
-@@ -141,15 +167,39 @@
+@@ -139,15 +165,39 @@
  %build
  %ghc_bin_build
  

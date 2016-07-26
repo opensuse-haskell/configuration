@@ -1,13 +1,13 @@
-Index: ghc-gio.spec
+Index: ghc-gtksourceview3.spec
 ===================================================================
---- ghc-gio.spec	(revision 9)
-+++ ghc-gio.spec	(working copy)
+--- ghc-gtksourceview3.spec	(revision 4)
++++ ghc-gtksourceview3.spec	(working copy)
 @@ -21,7 +21,7 @@
- Version:        0.13.1.1
+ Version:        0.13.2.1
  Release:        0
- Summary:        Binding to GIO
+ Summary:        Binding to the GtkSourceView library
 -License:        LGPL-2+
-+License:        LGPL-2.1+ and LGPL-3.0+
++License:        LGPL-2.1+
  Group:          System/Libraries
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

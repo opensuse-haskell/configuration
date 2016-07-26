@@ -7,7 +7,7 @@ Index: cpphs.spec
  Release:        0
  Summary:        A liberalised re-implementation of cpp, the C pre-processor
 -License:        LGPL-2.0+
-+License:        GPL-2.0+
++License:        GPL-2.0 and LGPL-2.1
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
