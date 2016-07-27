@@ -10,19 +10,16 @@ Index: ghc-language-lua2.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-Earley-devel
  BuildRequires:  ghc-containers-devel
-@@ -68,13 +67,12 @@
- 
+@@ -68,10 +67,9 @@
  
  %build
 -%define cabal_configure_options -fexes
 +%define cabal_configure_options -f-exes
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath lex parse
- 
  
  %check
 @@ -90,8 +88,6 @@

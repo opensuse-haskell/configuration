@@ -2,20 +2,17 @@ Index: ghc-cheapskate.spec
 ===================================================================
 --- ghc-cheapskate.spec	(revision 11)
 +++ ghc-cheapskate.spec	(working copy)
-@@ -71,13 +71,13 @@
- 
+@@ -71,10 +71,10 @@
  
  %build
 -%define cabal_configure_options -fdingus
 +%define cabal_configure_options -f-dingus
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath %{pkg_name} cheapskate-dingus
 +%ghc_fix_dynamic_rpath %{pkg_name}
- 
  
  %post devel
 @@ -90,7 +90,6 @@

@@ -1,15 +1,16 @@
 Index: idris.spec
 ===================================================================
---- idris.spec	(revision 14)
+--- idris.spec	(revision 22)
 +++ idris.spec	(working copy)
-@@ -135,6 +135,9 @@
- 
+@@ -131,6 +131,10 @@
+ %ghc_lib_install
  %ghc_fix_dynamic_rpath %{pkg_name} idris-codegen-c idris-codegen-javascript idris-codegen-node
  
 +# Fix unnecessary executable permission bits on header and library files.
 +find "%{buildroot}%{_libexecdir}/%{name}-%{version}" -name "*.a" -exec chmod -x {} +
 +find "%{buildroot}%{_libexecdir}/%{name}-%{version}" -name "*.h" -exec chmod -x {} +
- 
++
  %check
- %if %{with tests}
+ %cabal_test
+ 
 

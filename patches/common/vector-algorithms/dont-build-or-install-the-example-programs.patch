@@ -10,19 +10,16 @@ Index: ghc-vector-algorithms.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-mtl-devel
-@@ -60,13 +59,12 @@
- 
+@@ -60,10 +59,9 @@
  
  %build
 -%define cabal_configure_options -fbench
 +%define cabal_configure_options -f-bench
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath vector-algorithms-bench
- 
  
  %check
 @@ -82,7 +80,6 @@

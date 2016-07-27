@@ -2,11 +2,10 @@ Index: ghc-email-validate.spec
 ===================================================================
 --- ghc-email-validate.spec	(revision 3)
 +++ ghc-email-validate.spec	(working copy)
-@@ -57,7 +57,7 @@
+@@ -57,6 +57,7 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
--
 +sed -i 's/\r//' LICENSE
  
  %build

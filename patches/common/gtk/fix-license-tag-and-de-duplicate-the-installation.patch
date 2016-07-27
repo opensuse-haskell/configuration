@@ -19,11 +19,10 @@ Index: ghc-gtk.spec
  
  %description
  This is the core library of the Gtk2Hs suite of libraries for Haskell based on
-@@ -75,7 +76,8 @@
+@@ -75,6 +76,8 @@
  
  %install
  %ghc_lib_install
--
 +# TODO: repack in all gtk2hs packages examples in right way
 +%fdupes %{buildroot}%{_prefix}
  

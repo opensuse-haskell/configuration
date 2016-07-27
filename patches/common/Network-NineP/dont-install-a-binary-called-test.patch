@@ -2,11 +2,10 @@ Index: ghc-Network-NineP.spec
 ===================================================================
 --- ghc-Network-NineP.spec	(revision 3)
 +++ ghc-Network-NineP.spec	(working copy)
-@@ -71,7 +71,7 @@
+@@ -71,6 +71,7 @@
  
  %install
  %ghc_lib_install
--
 +rm %{buildroot}/%{_bindir}/test
  
  %post devel

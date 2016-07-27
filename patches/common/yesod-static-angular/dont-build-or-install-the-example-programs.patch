@@ -10,19 +10,16 @@ Index: ghc-yesod-static-angular.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-aeson-devel
  BuildRequires:  ghc-blaze-builder-devel
-@@ -77,13 +76,12 @@
- 
+@@ -77,10 +76,9 @@
  
  %build
 -%define cabal_configure_options -fexample
 +%define cabal_configure_options -f-example
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath example-dev example-production
- 
  
  %check
 @@ -99,8 +97,6 @@

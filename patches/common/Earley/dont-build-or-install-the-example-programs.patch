@@ -10,19 +10,16 @@ Index: ghc-Earley.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-ListLike-devel
  BuildRequires:  ghc-rpm-macros
-@@ -58,13 +57,12 @@
- 
+@@ -58,10 +57,9 @@
  
  %build
 -%define cabal_configure_options -fexamples
 +%define cabal_configure_options -f-examples
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath earley-english earley-expr earley-expr2 earley-infinite earley-mixfix earley-very-ambiguous earley-words
- 
  
  %check
 @@ -80,13 +78,6 @@

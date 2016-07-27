@@ -1,16 +1,16 @@
 Index: idris.spec
 ===================================================================
---- idris.spec	(revision 13)
+--- idris.spec	(revision 21)
 +++ idris.spec	(working copy)
-@@ -126,6 +126,7 @@
- 
+@@ -124,6 +124,7 @@
+ %setup -q
  
  %build
 +cabal_configure_extra_options="--datasubdir=%{_libexecdir}/%{name}-%{version}"
  %ghc_lib_build
  
- 
-@@ -155,41 +156,8 @@
+ %install
+@@ -147,41 +148,8 @@
  %{_bindir}/idris-codegen-c
  %{_bindir}/idris-codegen-javascript
  %{_bindir}/idris-codegen-node

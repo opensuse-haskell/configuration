@@ -21,11 +21,10 @@ Index: happy.spec
 +BuildRequires:  libxslt
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-containers-devel
-@@ -50,10 +55,14 @@
+@@ -50,8 +55,13 @@
  
  %build
  %ghc_bin_build
--
 +cd doc
 +autoreconf
 +%configure
@@ -34,7 +33,6 @@ Index: happy.spec
  %install
  %ghc_bin_install
 +install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
- 
  
  %check
 @@ -67,5 +76,7 @@

@@ -2,13 +2,12 @@ Index: ghc-ipython-kernel.spec
 ===================================================================
 --- ghc-ipython-kernel.spec	(revision 13)
 +++ ghc-ipython-kernel.spec	(working copy)
-@@ -64,6 +64,8 @@
+@@ -64,5 +64,7 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
- 
  
  %build
 

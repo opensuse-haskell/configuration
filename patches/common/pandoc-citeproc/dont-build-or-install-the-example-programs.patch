@@ -2,20 +2,17 @@ Index: ghc-pandoc-citeproc.spec
 ===================================================================
 --- ghc-pandoc-citeproc.spec	(revision 13)
 +++ ghc-pandoc-citeproc.spec	(working copy)
-@@ -90,13 +90,13 @@
- 
+@@ -90,10 +90,10 @@
  
  %build
 -%define cabal_configure_options -ftest_citeproc
 +%define cabal_configure_options -f-test_citeproc
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath %{pkg_name} test-citeproc
 +%ghc_fix_dynamic_rpath %{pkg_name}
- 
  
  %check
 @@ -113,7 +113,6 @@

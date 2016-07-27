@@ -2,11 +2,10 @@ Index: ghc-benchpress.spec
 ===================================================================
 --- ghc-benchpress.spec	(revision 3)
 +++ ghc-benchpress.spec	(working copy)
-@@ -60,7 +60,7 @@
+@@ -60,6 +60,7 @@
  
  %install
  %ghc_lib_install
--
 +rm %{buildroot}%{_bindir}/example
  
  %post devel

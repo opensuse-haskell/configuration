@@ -10,19 +10,16 @@ Index: ghc-lambdacube-gl.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-GLFW-b-devel
  BuildRequires:  ghc-JuicyPixels-devel
-@@ -66,13 +65,12 @@
- 
+@@ -66,10 +65,9 @@
  
  %build
 -%define cabal_configure_options -ftestclient -fexample
 +%define cabal_configure_options -f-testclient -f-example
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath lambdacube-gl-hello lambdacube-gl-hello-obj lambdacube-gl-test-client
- 
  
  %post devel
 @@ -84,9 +82,6 @@

@@ -1,16 +1,16 @@
 Index: ShellCheck.spec
 ===================================================================
---- ShellCheck.spec	(revision 3)
+--- ShellCheck.spec	(revision 7)
 +++ ShellCheck.spec	(working copy)
-@@ -84,6 +84,7 @@
- 
+@@ -78,6 +78,7 @@
+ %install
+ %ghc_lib_install
  %ghc_fix_dynamic_rpath shellcheck
- 
 +install -Dpm 0644 shellcheck.1 %{buildroot}%{_mandir}/man1/shellcheck.1
  
  %check
- %if %{with tests}
-@@ -102,6 +103,7 @@
+ %cabal_test
+@@ -93,6 +94,7 @@
  %doc LICENSE
  %doc README.md
  %{_bindir}/shellcheck

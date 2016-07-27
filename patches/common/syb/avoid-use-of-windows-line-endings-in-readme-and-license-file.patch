@@ -2,11 +2,10 @@ Index: ghc-syb.spec
 ===================================================================
 --- ghc-syb.spec	(revision 3)
 +++ ghc-syb.spec	(working copy)
-@@ -65,7 +65,7 @@
+@@ -65,6 +65,7 @@
  
  %install
  %ghc_lib_install
--
 +sed -i 's/\r$//' README LICENSE
  
  %check

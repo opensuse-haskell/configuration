@@ -21,9 +21,8 @@ index dbe6fc7..446498b 100644
  
  %description
  Pandoc is a Haskell library for converting from one markup format to another,
-@@ -138,10 +139,15 @@ cp -p %{SOURCE1} %{name}.cabal
+@@ -138,8 +139,14 @@ cp -p %{SOURCE1} %{name}.cabal
  %ghc_fix_dynamic_rpath %{pkg_name}
- 
  
 +# These files will be installed in the standard _docdir
 +rm %{buildroot}%{_datadir}/%{pkg_name}-%{version}/COPYRIGHT
@@ -34,7 +33,6 @@ index dbe6fc7..446498b 100644
  %check
  %cabal_test
  
--
  %post -n ghc-%{name}-devel
  %ghc_pkg_recache
  

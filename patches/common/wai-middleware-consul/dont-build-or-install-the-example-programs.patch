@@ -10,19 +10,16 @@ Index: ghc-wai-middleware-consul.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-async-devel
  BuildRequires:  ghc-base-prelude-devel
-@@ -72,13 +71,12 @@
- 
+@@ -72,10 +71,9 @@
  
  %build
 -%define cabal_configure_options -fexample
 +%define cabal_configure_options -f-example
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath wai-middleware-consul-example
- 
  
  %post devel
 @@ -90,7 +88,6 @@

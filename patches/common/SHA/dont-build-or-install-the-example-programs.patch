@@ -10,19 +10,16 @@ Index: ghc-SHA.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-binary-devel
-@@ -64,13 +63,12 @@
- 
+@@ -64,10 +63,9 @@
  
  %build
 -%define cabal_configure_options -fexe
 +%define cabal_configure_options -f-exe
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath sha1 sha224 sha256 sha384 sha512
- 
  
  %check
 @@ -86,11 +84,6 @@

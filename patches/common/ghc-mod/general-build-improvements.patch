@@ -19,13 +19,11 @@ Index: ghc-mod.spec
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-doctest-devel
-@@ -102,13 +103,21 @@
- 
+@@ -102,10 +103,19 @@
  
  %build
 +%define cabal_configure_options --libexecdir=%{_libexecdir}
  %ghc_lib_build
- 
  
  %install
  %ghc_lib_install
@@ -36,7 +34,6 @@ Index: ghc-mod.spec
 +echo 'export cabal_helper_libexecdir=%{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
 +echo 'setenv cabal_helper_libexecdir %{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
 -%ghc_fix_dynamic_rpath %{pkg_name} ghc-modi
--
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/LICENSE
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/COPYING.AGPL3
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/COPYING.BSD3

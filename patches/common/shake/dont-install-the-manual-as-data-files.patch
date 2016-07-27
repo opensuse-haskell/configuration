@@ -2,11 +2,10 @@ Index: shake.spec
 ===================================================================
 --- shake.spec	(revision 5)
 +++ shake.spec	(working copy)
-@@ -99,7 +99,7 @@
+@@ -99,6 +99,7 @@
  
  %install
  %ghc_lib_install
--
 +rm -Rf %{buildroot}/%{_datadir}/%{name}-%{version}/docs
  
  %check

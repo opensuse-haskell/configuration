@@ -27,23 +27,21 @@ Index: bustle.spec
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel
-@@ -62,15 +69,25 @@
+@@ -62,12 +69,24 @@
  
  %prep
  %setup -q
 +sed -i -e 's/\/usr\/local/\%{_prefix}/g' Makefile
  
- 
  %build
  %ghc_bin_build
--
 +make %{?_smp_mflags}
  
  %install
  %ghc_bin_install
 +%make_install
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/LICENSE
- 
++ 
 +%post
 +%desktop_database_post
 +%icon_theme_cache_post

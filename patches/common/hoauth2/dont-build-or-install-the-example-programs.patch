@@ -10,19 +10,16 @@ Index: ghc-hoauth2.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-aeson-devel
  BuildRequires:  ghc-bytestring-devel
-@@ -69,13 +68,12 @@
- 
+@@ -69,10 +68,9 @@
  
  %build
 -%define cabal_configure_options -ftest
 +%define cabal_configure_options -f-test
  %ghc_lib_build
  
- 
  %install
  %ghc_lib_install
 -%ghc_fix_dynamic_rpath test-douban test-facebook test-fitbit test-github test-google test-stackexchange test-weibo
- 
  
  %post devel
 @@ -87,13 +85,6 @@
