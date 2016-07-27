@@ -69,6 +69,7 @@ main = do
         unless b $
           command_ [] "cabal" ["fetch", "-v0", "--no-dependencies", "--", display p]
 
+    -- TODO: use pattern rules instead of a loop (https://github.com/opensuse-haskell/cabal2obs/issues/2)
     forM_ (zip stackageVersions packageSets) $ \(stackageVersion,stackage) ->
       forM_ stackage $ \p@(PackageIdentifier (PackageName pn) v) -> do
         let forcedExe = pn `elem` forcedExecutablePackages
@@ -154,6 +155,7 @@ dependencyToId d@(Dependency n vr) = PackageIdentifier n v
   where v   = fromMaybe err (isSpecificVersion vr)
         err = error ("dependencyToId: unexpected argument " ++ show d)
 
+-- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 corePackages :: [String]
 corePackages =
   [ "array"
@@ -181,6 +183,7 @@ corePackages =
   , "unix"
   ]
 
+-- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 bannedPackages :: [String]
 bannedPackages =
   [ "blake2"            -- doesn't work on 32 bit: https://github.com/centromere/blake2/issues/2
@@ -206,6 +209,7 @@ bannedPackages =
   , "wl-pprint-terminfo" -- https://github.com/opensuse-haskell/configuration/issues/7
   ]
 
+-- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 forcedExecutablePackages :: [String]
 forcedExecutablePackages =
   [ "Agda"
@@ -289,6 +293,7 @@ forcedExecutablePackages =
   , "yi"
   ]
 
+-- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 flagAssignment :: String -> String
 flagAssignment "cheapskate" = "-fdingus"
 flagAssignment "country-codes" = "-fgenerate"
