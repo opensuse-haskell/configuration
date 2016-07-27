@@ -20,12 +20,10 @@ Index: cabal-rpm.spec
 +Recommends:     yum-utils
  BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
-@@ -53,6 +56,8 @@
+@@ -53,5 +56,6 @@
  %build
  %ghc_bin_build
- 
 +install -p -m 0644 -D man/cblrpm.1 %{buildroot}%{_mandir}/man1/cblrpm.1
-+
  
  %install
  %ghc_bin_install
