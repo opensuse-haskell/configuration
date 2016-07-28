@@ -186,8 +186,7 @@ corePackages =
 -- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 bannedPackages :: [String]
 bannedPackages =
-  [ "blake2"            -- doesn't work on 32 bit: https://github.com/centromere/blake2/issues/2
-  , "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+  [ "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
   , "freenect"          -- we have no working freenect
   , "hfsevents"
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
