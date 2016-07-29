@@ -36,17 +36,17 @@ instance NFData SusePackageDescription
 main :: IO ()
 main = do
   let buildDir = "_build"
-  homeDir <- System.Environment.getEnv "HOME"
-  hackage <- readHackage
-  let stackageVersions = ["lts-6","nightly"]
-  packageSets <- forM stackageVersions $ \stackageVersion -> do
-    let cabalConfig = "config" </> stackageVersion </> "stackage-packages.txt"
-        extraConfig = "config" </> stackageVersion </> "extra-packages.txt"
-    ps1 <- parseCabalConfig <$> readFile cabalConfig
-    ps2 <- parseExtraConfig hackage <$> readFile extraConfig
-    return (ps1 ++ ps2)
-
   shakeArgs shakeOptions {shakeFiles=buildDir, shakeProgress=progressSimple} $ do
+
+    homeDir <- liftIO $ System.Environment.getEnv "HOME"
+    hackage <- liftIO readHackage
+    let stackageVersions = ["lts-6","nightly"]
+    packageSets <- forM stackageVersions $ \stackageVersion -> do
+      let cabalConfig = "config" </> stackageVersion </> "stackage-packages.txt"
+          extraConfig = "config" </> stackageVersion </> "extra-packages.txt"
+      ps1 <- parseCabalConfig <$> liftIO (readFile cabalConfig)
+      ps2 <- parseExtraConfig hackage <$> liftIO (readFile extraConfig)
+      return (ps1 ++ ps2)
 
     getSusePkgDescription <- addOracle $ \p@(PackageIdentifier (PackageName pn) _) -> do
       let forcedExe = pn `elem` forcedExecutablePackages
