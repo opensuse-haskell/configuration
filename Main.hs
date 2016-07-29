@@ -18,8 +18,6 @@ import GHC.Generics ( Generic )
 import System.Directory
 import System.Environment
 import Orphans ()
-import qualified Data.Map as Map
-import qualified Data.Set as Set
 
 newtype StackageVersion = StackageVersion String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
@@ -101,7 +99,7 @@ main = do
 
         spec %> \_ -> do
           SusePackageDescription _ _ <- getSusePkgDescription p
-          when (rv > 0) $ do
+          when (rv > 0) $
             need [editedCabalFile]
           compiler <- getCompilerVersion (StackageVersion stackageVersion)
           patches <- sort <$> getDirectoryFiles "" [ "patches/common/" ++ pn ++ "/*.patch"

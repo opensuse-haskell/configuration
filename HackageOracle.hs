@@ -26,8 +26,8 @@ resolveConstraint c@(Dependency (PackageName name) vrange) hackage
   | otherwise           = fail ("cannot resolve " ++ show (display c) ++ " in Hackage")
 
 hackageOracle :: Action Hackage -> Rules (Dependency -> Action BuildDescription)
-hackageOracle getHackage = addOracle $ \x -> do
-  getHackage >>= resolveConstraint x >>= return . cabal2bd
+hackageOracle getHackage = addOracle $ \x ->
+  fmap cabal2bd (getHackage >>= resolveConstraint x)
 
 cabal2bd :: GenericPackageDescription -> BuildDescription
 cabal2bd cabal = BuildDescription

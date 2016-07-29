@@ -5,17 +5,17 @@
 
 module Orphans ( ) where
 
-import Data.Map as Map
-import Data.Set as Set
+-- import Data.Map as Map
+-- import Data.Set as Set
 import Development.Shake.Classes
-import Distribution.Compiler
-import Distribution.License
-import Distribution.ModuleName
+-- import Distribution.Compiler
+-- import Distribution.License
+-- import Distribution.ModuleName
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.System
+-- import Distribution.System
 import Distribution.Version
-import Language.Haskell.Extension
+-- import Language.Haskell.Extension
 
 instance Hashable PackageIdentifier
 instance Hashable PackageName
