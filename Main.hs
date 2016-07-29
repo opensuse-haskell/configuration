@@ -58,6 +58,15 @@ main = do
     getFlagAssignment <- addOracle $ \(PackageName pn) ->
       return (flagAssignment pn)
 
+    action $ do
+      ls <- forM (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName n) v) -> do
+        SusePackageDescription _ isExe <- getSusePkgDescription p
+        let pn = (if isExe then "" else "ghc-") ++ n
+            pv = display v
+            url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ pn
+        return $ show n ++ "," ++ show pv ++ "," ++ show url
+      liftIO $ writeFile (buildDir </> "package-list.csv") (intercalate "\n" ls)
+
     forM_ (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName pn) v) -> do
       let pv = display v
           pid = display p
