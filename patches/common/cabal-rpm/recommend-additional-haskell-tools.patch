@@ -1,0 +1,15 @@
+Index: cabal-rpm.spec
+===================================================================
+--- cabal-rpm.spec	(revision 9)
++++ cabal-rpm.spec	(working copy)
+@@ -32,6 +32,9 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-time-devel
+ BuildRequires:  ghc-unix-devel
++Recommends:     cabal-install
++Recommends:     ghc
++Recommends:     yum-utils
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+
