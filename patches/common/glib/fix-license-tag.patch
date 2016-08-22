@@ -11,11 +11,4 @@ Index: ghc-glib.spec
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-@@ -29,6 +29,5 @@
- BuildRequires:  ghc-bytestring-devel
- BuildRequires:  ghc-containers-devel
--BuildRequires:  ghc-gtk2hs-buildtools-devel
- BuildRequires:  ghc-rpm-macros
- BuildRequires:  ghc-text-devel
- BuildRequires:  ghc-utf8-string-devel
 
