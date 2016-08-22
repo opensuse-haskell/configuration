@@ -194,6 +194,7 @@ corePackages =
 bannedPackages :: [String]
 bannedPackages =
   [ "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+  , "cabal2nix"         -- needs obsolete dependencies we don't want to provide
   , "freenect"          -- we have no working freenect
   , "hfsevents"
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
