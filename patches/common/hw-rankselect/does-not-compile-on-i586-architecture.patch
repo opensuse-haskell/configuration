@@ -1,0 +1,14 @@
+Index: ghc-hw-rankselect.spec
+===================================================================
+--- ghc-hw-rankselect.spec	(revision 6)
++++ ghc-hw-rankselect.spec	(working copy)
+@@ -37,6 +37,8 @@
+ BuildRequires:  ghc-QuickCheck-devel
+ BuildRequires:  ghc-hspec-devel
+ %endif
++# https://github.com/haskell-works/hw-bits/issues/1
++ExcludeArch:    %{ix86}
+ 
+ %description
+ Please see README.md.
+

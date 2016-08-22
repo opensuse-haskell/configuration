@@ -1,0 +1,14 @@
+Index: ghc-hw-succinct.spec
+===================================================================
+--- ghc-hw-succinct.spec	(revision 5)
++++ ghc-hw-succinct.spec	(working copy)
+@@ -41,6 +41,8 @@
+ BuildRequires:  ghc-vector-devel
+ BuildRequires:  ghc-word8-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++# https://github.com/haskell-works/hw-bits/issues/1
++ExcludeArch:    %{ix86}
+ 
+ %description
+ Please see README.md.
+

@@ -1,0 +1,14 @@
+Index: ghc-hw-json.spec
+===================================================================
+--- ghc-hw-json.spec	(revision 7)
++++ ghc-hw-json.spec	(working copy)
+@@ -54,6 +54,8 @@
+ BuildRequires:  ghc-parsec-devel
+ BuildRequires:  ghc-transformers-devel
+ %endif
++# https://github.com/haskell-works/hw-bits/issues/1
++ExcludeArch:    %{ix86}
+ 
+ %description
+ Please see README.md.
+

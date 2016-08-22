@@ -1,0 +1,14 @@
+Index: ghc-hw-conduit.spec
+===================================================================
+--- ghc-hw-conduit.spec	(revision 6)
++++ ghc-hw-conduit.spec	(working copy)
+@@ -40,6 +40,8 @@
+ %if %{with tests}
+ BuildRequires:  ghc-hspec-devel
+ %endif
++# https://github.com/haskell-works/hw-bits/issues/1
++ExcludeArch:    %{ix86}
+ 
+ %description
+ Please see README.md.
+
