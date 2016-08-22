@@ -1,0 +1,15 @@
+Index: ghc-secp256k1.spec
+===================================================================
+--- ghc-secp256k1.spec	(revision 1)
++++ ghc-secp256k1.spec	(working copy)
+@@ -45,6 +45,9 @@
+ BuildRequires:  ghc-test-framework-hunit-devel
+ BuildRequires:  ghc-test-framework-quickcheck2-devel
+ %endif
++BuildRequires:  autoconf
++BuildRequires:  automake
++BuildRequires:  libtool
+ 
+ %description
+ Please see README.md.
+
