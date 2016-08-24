@@ -1,13 +1,13 @@
-Index: ghc-amazonka-route53.spec
+Index: ghc-hxt-curl.spec
 ===================================================================
---- ghc-amazonka-route53.spec (revision 5)
-+++ ghc-amazonka-route53.spec (revision 6)
-@@ -22,7 +22,7 @@
- Version:        1.4.3
+--- ghc-hxt-curl.spec	(revision 7)
++++ ghc-hxt-curl.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        9.1.1.1
  Release:        0
- Summary:        Amazon Route 53 SDK
+ Summary:        LibCurl interface for HXT
 -License:        Unknown
-+License:        MPL-2.0
++License:        MIT
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

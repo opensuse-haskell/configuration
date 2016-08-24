@@ -1,13 +1,13 @@
-Index: ghc-amazonka-route53.spec
+Index: ghc-mongoDB.spec
 ===================================================================
---- ghc-amazonka-route53.spec (revision 5)
-+++ ghc-amazonka-route53.spec (revision 6)
+--- ghc-mongoDB.spec	(revision 7)
++++ ghc-mongoDB.spec	(working copy)
 @@ -22,7 +22,7 @@
- Version:        1.4.3
+ Version:        2.1.1
  Release:        0
- Summary:        Amazon Route 53 SDK
+ Summary:        Driver (client) for MongoDB, a free, scalable, fast, document DBMS
 -License:        Unknown
-+License:        MPL-2.0
++License:        Apache-2.0
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

@@ -1,11 +1,11 @@
-Index: ghc-amazonka-route53.spec
+Index: ghc-ede.spec
 ===================================================================
---- ghc-amazonka-route53.spec (revision 5)
-+++ ghc-amazonka-route53.spec (revision 6)
+--- ghc-ede.spec	(revision 1)
++++ ghc-ede.spec	(working copy)
 @@ -22,7 +22,7 @@
- Version:        1.4.3
+ Version:        0.2.8.5
  Release:        0
- Summary:        Amazon Route 53 SDK
+ Summary:        Templating language with similar syntax and features to Liquid or Jinja2
 -License:        Unknown
 +License:        MPL-2.0
  Group:          Development/Languages/Other
