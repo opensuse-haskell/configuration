@@ -1,0 +1,14 @@
+Index: ghc-amazonka-glacier.spec
+===================================================================
+--- ghc-amazonka-glacier.spec	(revision 5)
++++ ghc-amazonka-glacier.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.3
+ Release:        0
+ Summary:        Amazon Glacier SDK
+-License:        Unknown
++License:        MPL-2.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
