@@ -1,0 +1,14 @@
+Index: hindent.spec
+===================================================================
+--- hindent.spec	(revision 9)
++++ hindent.spec	(working copy)
+@@ -23,7 +23,7 @@
+ Release:        0
+ Summary:        Extensible Haskell pretty printer
+ License:        BSD-3-Clause
+-Group:          Development/Languages/Other
++Group:          Development/Tools/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/2.cabal
+
