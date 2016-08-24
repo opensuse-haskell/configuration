@@ -1,0 +1,14 @@
+Index: ghc-xml-conduit-parse.spec
+===================================================================
+--- ghc-xml-conduit-parse.spec	(revision 5)
++++ ghc-xml-conduit-parse.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.3.1.0
+ Release:        0
+ Summary:        Streaming XML parser based on conduits
+-License:        Unknown
++License:        SUSE-Public-Domain
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

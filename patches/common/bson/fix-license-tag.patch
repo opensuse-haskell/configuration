@@ -1,0 +1,14 @@
+Index: ghc-bson.spec
+===================================================================
+--- ghc-bson.spec	(revision 6)
++++ ghc-bson.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.3.2.3
+ Release:        0
+ Summary:        BSON documents are JSON-like objects with a standard binary encoding
+-License:        Unknown
++License:        Apache-2.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

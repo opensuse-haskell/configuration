@@ -1,0 +1,14 @@
+Index: ghc-dependent-map.spec
+===================================================================
+--- ghc-dependent-map.spec	(revision 5)
++++ ghc-dependent-map.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.2.2.0
+ Release:        0
+ Summary:        Dependent finite maps (partial dependent products)
+-License:        Unknown
++License:        MIT and BSD-3-Clause
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

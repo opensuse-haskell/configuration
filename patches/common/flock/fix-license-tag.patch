@@ -1,0 +1,14 @@
+Index: ghc-flock.spec
+===================================================================
+--- ghc-flock.spec	(revision 6)
++++ ghc-flock.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.3.1.8
+ Release:        0
+ Summary:        Wrapper for flock(2)
+-License:        Unknown
++License:        GPL-2.0+ or BSD-3-Clause
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
