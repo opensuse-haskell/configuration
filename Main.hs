@@ -198,6 +198,7 @@ bannedPackages =
   [ "eventstore"        -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
   , "cabal2nix"         -- needs obsolete dependencies we don't want to provide
   , "freenect"          -- we have no working freenect
+  , "github-types"      -- no license information: https://github.com/wereHamster/github-types/issues/2
   , "hfsevents"
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "ide-backend-rts"   -- deprecated
