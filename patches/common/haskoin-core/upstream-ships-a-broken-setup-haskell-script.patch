@@ -1,0 +1,14 @@
+Index: ghc-haskoin-core.spec
+===================================================================
+--- ghc-haskoin-core.spec	(revision 1)
++++ ghc-haskoin-core.spec	(working copy)
+@@ -90,6 +90,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
