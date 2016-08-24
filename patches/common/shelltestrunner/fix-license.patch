@@ -1,0 +1,14 @@
+Index: shelltestrunner.spec
+===================================================================
+--- shelltestrunner.spec	(revision 6)
++++ shelltestrunner.spec	(working copy)
+@@ -20,7 +20,7 @@
+ Version:        1.3.5
+ Release:        0
+ Summary:        A tool for testing command-line programs
+-License:        GPL-1.0+
++License:        GPL-3.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+
