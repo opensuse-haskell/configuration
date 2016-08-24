@@ -129,7 +129,7 @@ main = do
                  ] ++
                  [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ] ++
                  [ "if grep >&2 -E '^License:.*Unknown' " ++ pkgName <.> "spec" ++ "; then exit 1; fi"
-                 ]
+                 ] ++ if rv == 0 then ["rm -f ?.cabal"] else []
 
 bash :: [String] -> Action ()
 bash cmds = command_ [] "bash" ["-c", intercalate "; " cmds']
