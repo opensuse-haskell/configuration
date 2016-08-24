@@ -2,20 +2,38 @@
 
 set -eu -o pipefail
 
+DEBUG="true"
+
 tmp="/tmp/sync-repository-tmp.$$"
 trap "rm -f $tmp" 0
 
+isChangeSignificant()
+{
+  grep --silent -E "^[+-](Version|License):" "$1"
+}
+
 for i in *; do
+  # Make sure we're looking only at Haskell packages checked into OBS.
   test -d "$i" || continue
-  grep -s ghc-rpm-macros "$i/$i.spec" || { echo "skip $i"; continue }
+  test -d "$i/.osc" || continue
+  if ! grep --silent ghc-rpm-macros "$i/$i.spec"; then
+   test -z "${DEBUG:-}" || echo >&2 "$i: skip non-Haskell package"
+   continue
+  fi
+
+  # Diff the current package against devel:languages:haskell and check whether
+  # the changes are significant.
   pushd >/dev/null "$i"
-  # What about libnettle? It does not exist, but sr -d causes no error.
   osc sr -d devel:languages:haskell >$tmp
   lines=$(wc -l "$tmp" | cut -f1 -d' ')
-  if [ $lines -gt 3 ]; then
-    echo submit $i
+  if [ "$lines" -gt 3 ]; then
+    if isChangeSignificant "$tmp"; then
+      echo "$i"
+    else
+      test -z "${DEBUG:-}" || echo >&2 "$i: no significant changes"
+    fi
   else
-    echo dont submit $i
+    test -z "${DEBUG:-}" || echo >&2 "$i: no changes"
   fi
   popd >/dev/null
 done
