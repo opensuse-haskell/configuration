@@ -127,7 +127,9 @@ main = do
                  , "grep -q -s -F -e '" ++ clvid ++ "' " ++ pkgName <.> "changes" ++
                    "|| osc vc -m 'Update to " ++ clvid ++ " with cabal2obs.'"
                  ] ++
-                 [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ]
+                 [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ] ++
+                 [ "if grep >&2 -E '^License:.*Unknown' " ++ pkgName <.> "spec" ++ "; then exit 1; fi"
+                 ]
 
 bash :: [String] -> Action ()
 bash cmds = command_ [] "bash" ["-c", intercalate "; " cmds']
