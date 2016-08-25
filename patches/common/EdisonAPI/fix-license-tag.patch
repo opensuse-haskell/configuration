@@ -1,0 +1,14 @@
+Index: ghc-EdisonAPI.spec
+===================================================================
+--- ghc-EdisonAPI.spec	(revision 5)
++++ ghc-EdisonAPI.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.3
+ Release:        0
+ Summary:        A library of efficent, purely-functional data structures (API)
+-License:        Unknown
++License:        MIT
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
