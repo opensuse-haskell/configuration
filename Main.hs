@@ -200,7 +200,8 @@ bannedPackages =
   , "cabal2nix"         -- needs obsolete dependencies we don't want to provide
   , "freenect"          -- we have no working freenect
   , "github-types"      -- no license information: https://github.com/wereHamster/github-types/issues/2
-  , "hfsevents"
+  , "github-webhook-handler"  -- depends on broken github-types
+  , "hfsevents"         -- doesn't work on Linux
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "ide-backend-rts"   -- deprecated
   , "lhs2tex"           -- build is hard to fix
@@ -214,9 +215,9 @@ bannedPackages =
   , "stackage-sandbox"  -- deprecated
   , "stackage-setup"    -- deprecated
   , "stackage-types"    -- deprecated
-  , "Win32"
-  , "Win32-extras"
-  , "Win32-notify"
+  , "Win32"             -- doesn't work on Linux
+  , "Win32-extras"      -- doesn't work on Linux
+  , "Win32-notify"      -- doesn't work on Linux
   , "wl-pprint-terminfo" -- https://github.com/opensuse-haskell/configuration/issues/7
   ]
 
