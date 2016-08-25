@@ -119,6 +119,7 @@ main = do
           flags <- getFlagAssignment (PackageName pn)
           bash $ [ "cd " ++ pkgDir
                  , "rm -f *.spec"
+                 , "rm -rf " ++ display p       -- cabal-rpm fails if such a directory exists
                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --strict --compiler=" ++
                    compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE " ++
                    flags ++ " " ++
