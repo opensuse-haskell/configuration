@@ -9,7 +9,7 @@ trap "rm -f $tmp" 0
 
 isChangeSignificant()
 {
-  grep --silent -E "^[+-](Version|License):" "$1"
+  grep --silent -E "^[+-](Version|License|Source[0-9]*):" "$1"
 }
 
 for i in *; do
