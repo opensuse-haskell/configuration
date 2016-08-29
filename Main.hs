@@ -202,6 +202,7 @@ bannedPackages =
   , "github-types"      -- no license information: https://github.com/wereHamster/github-types/issues/2
   , "github-webhook-handler"  -- depends on broken github-types
   , "hfsevents"         -- doesn't work on Linux
+  , "hocilib"           -- we don't have libocilib.so
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
   , "ide-backend-rts"   -- deprecated
   , "lhs2tex"           -- build is hard to fix
