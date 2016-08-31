@@ -4,3 +4,7 @@
 [submodule "tools/cabal-rpm"]
 	path = tools/cabal-rpm
 	url = git://github.com/opensuse-haskell/cabal-rpm.git
+[submodule "hackage"]
+	path = hackage
+	url = git://github.com/commercialhaskell/all-cabal-files.git
+	branch = hackage
