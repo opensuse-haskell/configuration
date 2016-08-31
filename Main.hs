@@ -200,7 +200,8 @@ bannedPackages =
   , "cabal2nix"         -- needs obsolete dependencies we don't want to provide
   , "freenect"          -- we have no working freenect
   , "github-types"      -- no license information: https://github.com/wereHamster/github-types/issues/2
-  , "github-webhook-handler"  -- depends on broken github-types
+  , "github-webhook-handler"            -- depends on broken github-types
+  , "github-webhook-handler-snap"       -- depends on broken github-types
   , "hfsevents"         -- doesn't work on Linux
   , "hocilib"           -- we don't have libocilib.so
   , "hopenpgp-tools"    -- depends on broken wl-pprint-terminfo
