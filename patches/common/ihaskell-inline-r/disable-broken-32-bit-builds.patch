@@ -1,0 +1,14 @@
+Index: ghc-ihaskell-inline-r.spec
+===================================================================
+--- ghc-ihaskell-inline-r.spec	(revision 5)
++++ ghc-ihaskell-inline-r.spec	(working copy)
+@@ -37,6 +37,8 @@
+ BuildRequires:  ghc-template-haskell-devel
+ BuildRequires:  ghc-temporary-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++# Does not build in 32 bit platforms: https://github.com/tweag/HaskellR/issues/258.
++ExcludeArch:    %{ix86}
+ 
+ %description
+ Embed R quasiquotes and plots in IHaskell notebooks.
+
