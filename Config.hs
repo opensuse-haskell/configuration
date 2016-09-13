@@ -22,6 +22,9 @@ import Orphans ()
 import Distribution.Version
 import Distribution.PackageDescription.Parse
 
+import HackageOracle
+import ParseUtils
+
 newtype BuildName = BuildName { unBuildName :: String }
   deriving (Show, Eq, Ord)
 
@@ -74,27 +77,26 @@ readPackageSetConfig p (PackageSetId psid) = do
   compilerIdBuf <- readFile' (p </> psid </> "compiler.txt")
   stackagePackageList <- parseCabalConfig <$> readFile' (p </> psid </> "stackage-packages.txt")
   cid <- parseText "compiler id" compilerIdBuf
-  let stackagePackages = Prelude.filter (\(PackageIdentifier pn _) -> pn `notElem` bannedPackagesList) stackagePackageList
+
+  vs <- forP extraPackagesList resolveConstraint
+
+  let stackagePackages =  Prelude.filter (\(PackageIdentifier pn _) -> pn `notElem` bannedPackagesList) stackagePackageList
+                       ++ [ PackageIdentifier pn v  | (Dependency pn _, v) <- zip extraPackagesList vs ]
+
   need [ p </> ".." </>  cabalFilePath pId | pId <- stackagePackageList ]
   pkgs <- forP stackagePackages $ \pId@(PackageIdentifier pn@(PackageName n) _) -> do
     cabal <- liftIO $ readPackageDescription silent (p </> ".." </> cabalFilePath pId)
-    let bn = BuildName n
-        bd = BuildDescription
-                 { pid = pId
-                 , prv = Revision (maybe 0 read (Prelude.lookup "x-revision" (customFieldsPD (packageDescription cabal))))
-                 , hasLib = isJust (library (packageDescription cabal))
-                 , hasExe = Prelude.map exeName (executables (packageDescription cabal))
-                 , forcedExe = pn `elem` forcedExecutableList
-                 , flags = fromMaybe "" (Prelude.lookup n flagAssignment)
-                 }
+    let bd = BuildDescription
+               { pid = pId
+               , prv = Revision (maybe 0 read (Prelude.lookup "x-revision" (customFieldsPD (packageDescription cabal))))
+               , hasLib = isJust (library (packageDescription cabal))
+               , hasExe = Prelude.map exeName (executables (packageDescription cabal))
+               , forcedExe = pn `elem` forcedExecutableList
+               , flags = fromMaybe "" (Prelude.lookup n flagAssignment)
+               }
+        bn = BuildName $ (if hasLib bd && not (forcedExe bd) then "ghc-" else "") ++ n
     return (bn,bd)
   return $ PackageSet (Map.fromList pkgs) cid
-
-parseText :: (Text a, Monad m) => String -> String -> m a
-parseText errM buf =
-  maybe (fail ("invalid " ++ errM ++ ": " ++ show buf))
-        return
-        (simpleParse buf)
 
 readConfigFile :: FilePath -> Action [String]
 readConfigFile p = do

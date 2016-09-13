@@ -26,3 +26,4 @@ executables:
       - Config
       - HackageOracle
       - Orphans
+      - ParseUtils
