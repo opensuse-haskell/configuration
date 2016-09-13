@@ -154,16 +154,16 @@ parseCabalConfig buf = filter cleanup $ dependencyToId <$> catMaybes (parseCabal
     cleanup :: PackageIdentifier -> Bool
     cleanup (PackageIdentifier (PackageName n) _) = n `notElem` (corePackages ++ bannedPackages)
 
-parseCabalConfigLine :: String -> Maybe Dependency
-parseCabalConfigLine ('-':'-':_) = Nothing
-parseCabalConfigLine ('c':'o':'n':'s':'t':'r':'a':'i':'n':'t':'s':':':l) = parseCabalConfigLine l
-parseCabalConfigLine (' ':l) = parseCabalConfigLine l
-parseCabalConfigLine l = simpleParse (if last l == ',' then init l else l)
+    parseCabalConfigLine :: String -> Maybe Dependency
+    parseCabalConfigLine ('-':'-':_) = Nothing
+    parseCabalConfigLine ('c':'o':'n':'s':'t':'r':'a':'i':'n':'t':'s':':':l) = parseCabalConfigLine l
+    parseCabalConfigLine (' ':l) = parseCabalConfigLine l
+    parseCabalConfigLine l = simpleParse (if last l == ',' then init l else l)
 
-dependencyToId :: Dependency -> PackageIdentifier
-dependencyToId d@(Dependency n vr) = PackageIdentifier n v
-  where v   = fromMaybe err (isSpecificVersion vr)
-        err = error ("dependencyToId: unexpected argument " ++ show d)
+    dependencyToId :: Dependency -> PackageIdentifier
+    dependencyToId d@(Dependency n vr) = PackageIdentifier n v
+      where v   = fromMaybe err (isSpecificVersion vr)
+            err = error ("dependencyToId: unexpected argument " ++ show d)
 
 -- TODO: move into config file (https://github.com/opensuse-haskell/cabal2obs/issues/3)
 corePackages :: [String]
