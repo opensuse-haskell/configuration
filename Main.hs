@@ -38,7 +38,7 @@ main = do
 
     homeDir <- liftIO $ System.Environment.getEnv "HOME"
     hackage <- liftIO readHackage
-    let stackageVersions = ["lts-6","nightly"]
+    let stackageVersions = ["lts-7","lts-6","nightly"]
     packageSets <- forM stackageVersions $ \stackageVersion -> do
       let cabalConfig = "config" </> stackageVersion </> "stackage-packages.txt"
           extraConfig = "config" </> stackageVersion </> "extra-packages.txt"
