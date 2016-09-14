@@ -19,11 +19,15 @@ executables:
       - Cabal
       - containers
       - directory
-      - hackage-db
       - shake
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
       - Config
-      - HackageOracle
+      - Oracle
+      - Oracle.Compiler
+      - Oracle.FlagAssignment
+      - Oracle.ForcedExecutables
+      - Oracle.Hackage
+      - Oracle.PackageList
       - Orphans
       - ParseUtils

@@ -22,14 +22,13 @@ import Orphans ()
 import Distribution.Version
 import Distribution.PackageDescription.Parse
 
-import HackageOracle
 import ParseUtils
 
 newtype BuildName = BuildName { unBuildName :: String }
   deriving (Show, Eq, Ord)
 
 newtype PackageSetId = PackageSetId { unPackageSetId :: String }
-  deriving (Show, Eq, Ord)
+  deriving (Show, Eq, Ord, Hashable, NFData, Binary)
 
 newtype Revision = Revision { unRevision :: Int }
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)
@@ -51,89 +50,68 @@ instance Binary BuildDescription
 instance Package BuildDescription where
   packageId = pid
 
-data PackageSet = PackageSet
-  { packages :: Map BuildName BuildDescription
-  , compiler :: CompilerId
-  }
-  deriving (Show, Eq, Ord)
+-- data PackageSet = PackageSet
+--   { packages :: Map BuildName BuildDescription
+--   , compiler :: CompilerId
+--   }
+--   deriving (Show, Eq, Ord)
 
-type Config = Map PackageSetId PackageSet
+-- type Config = Map PackageSetId PackageSet
 
-readConfig :: FilePath -> Action Config
-readConfig p = do
-  psetTargets <- fmap PackageSetId <$> getDirectoryDirs p
-  psets <- mapM (readPackageSetConfig p) psetTargets
-  return $ Map.fromList (zip psetTargets psets)
+-- readConfig :: FilePath -> Action Config
+-- readConfig p = do
+--   psetTargets <- fmap PackageSetId <$> getDirectoryDirs p
+--   psets <- mapM (readPackageSetConfig p) psetTargets
+--   return $ Map.fromList (zip psetTargets psets)
 
-cabalFilePath :: PackageIdentifier -> FilePath
-cabalFilePath (PackageIdentifier (PackageName n) v) = "hackage" </> n </> display v </> n <.> "cabal"
+-- readPackageSetConfig :: FilePath -> PackageSetId -> Action PackageSet
+-- readPackageSetConfig p (PackageSetId psid) = do
+--   bannedPackagesList <- readPackageNameList (p </> psid </> "banned-packages.txt")
+--   extraPackagesList <- readConstraintList (p </> psid </> "extra-packages.txt")
+--   forcedExecutableList <- readPackageNameList (p </> psid </> "forced-executable-packages.txt")
+--   flagAssignment <- undefined
+--   compilerIdBuf <- readFile' (p </> psid </> "compiler.txt")
+--   stackagePackageList <- undefined
+--   cid <- parseText "compiler id" compilerIdBuf
 
-readPackageSetConfig :: FilePath -> PackageSetId -> Action PackageSet
-readPackageSetConfig p (PackageSetId psid) = do
-  bannedPackagesList <- readPackageNameList (p </> psid </> "banned-packages.txt")
-  extraPackagesList <- readConstraintList (p </> psid </> "extra-packages.txt")
-  forcedExecutableList <- readPackageNameList (p </> psid </> "forced-executable-packages.txt")
-  flagAssignment <- readFlagAssignents (p </> psid </> "flag-assignment.txt")
-  compilerIdBuf <- readFile' (p </> psid </> "compiler.txt")
-  stackagePackageList <- parseCabalConfig <$> readFile' (p </> psid </> "stackage-packages.txt")
-  cid <- parseText "compiler id" compilerIdBuf
+--   vs <- forP extraPackagesList undefined -- resolveConstraint
 
-  vs <- forP extraPackagesList resolveConstraint
+--   let stackagePackages =  Prelude.filter (\(PackageIdentifier pn _) -> pn `notElem` bannedPackagesList) stackagePackageList
+--                        ++ [ PackageIdentifier pn v  | (Dependency pn _, v) <- zip extraPackagesList vs ]
 
-  let stackagePackages =  Prelude.filter (\(PackageIdentifier pn _) -> pn `notElem` bannedPackagesList) stackagePackageList
-                       ++ [ PackageIdentifier pn v  | (Dependency pn _, v) <- zip extraPackagesList vs ]
+--   need [ p </> ".." </>  cabalFilePath pId | pId <- stackagePackageList ]
+--   pkgs <- forP stackagePackages $ \pId@(PackageIdentifier pn@(PackageName n) _) -> do
+--     cabal <- liftIO $ readPackageDescription silent (p </> ".." </> cabalFilePath pId)
+--     let bd = BuildDescription
+--                { pid = pId
+--                , prv = Revision (maybe 0 read (Prelude.lookup "x-revision" (customFieldsPD (packageDescription cabal))))
+--                , hasLib = isJust (library (packageDescription cabal))
+--                , hasExe = Prelude.map exeName (executables (packageDescription cabal))
+--                , forcedExe = pn `elem` forcedExecutableList
+--                , flags = fromMaybe "" (Prelude.lookup n flagAssignment)
+--                }
+--         bn = BuildName $ (if hasLib bd && not (forcedExe bd) then "ghc-" else "") ++ n
+--     return (bn,bd)
+--   return $ PackageSet (Map.fromList pkgs) cid
 
-  need [ p </> ".." </>  cabalFilePath pId | pId <- stackagePackageList ]
-  pkgs <- forP stackagePackages $ \pId@(PackageIdentifier pn@(PackageName n) _) -> do
-    cabal <- liftIO $ readPackageDescription silent (p </> ".." </> cabalFilePath pId)
-    let bd = BuildDescription
-               { pid = pId
-               , prv = Revision (maybe 0 read (Prelude.lookup "x-revision" (customFieldsPD (packageDescription cabal))))
-               , hasLib = isJust (library (packageDescription cabal))
-               , hasExe = Prelude.map exeName (executables (packageDescription cabal))
-               , forcedExe = pn `elem` forcedExecutableList
-               , flags = fromMaybe "" (Prelude.lookup n flagAssignment)
-               }
-        bn = BuildName $ (if hasLib bd && not (forcedExe bd) then "ghc-" else "") ++ n
-    return (bn,bd)
-  return $ PackageSet (Map.fromList pkgs) cid
+-- readConfigFile :: FilePath -> Action [String]
+-- readConfigFile p = do
+--   buf <- readFileLines p
+--   return [ l | l@(c:_) <- buf, c /= '#' ]
 
-readConfigFile :: FilePath -> Action [String]
-readConfigFile p = do
-  buf <- readFileLines p
-  return [ l | l@(c:_) <- buf, c /= '#' ]
+-- readConstraintList :: FilePath -> Action [Dependency]
+-- readConstraintList p = readConfigFile p >>= \x -> liftIO $  fileErrorContext p (mapM (parseText "constraint") x)
 
-readConstraintList :: FilePath -> Action [Dependency]
-readConstraintList p = readConfigFile p >>= \x -> liftIO $  fileErrorContext p (mapM (parseText "constraint") x)
+-- readPackageNameList :: FilePath -> Action [PackageName]
+-- readPackageNameList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (mapM (parseText "package name") x)
 
-readPackageNameList :: FilePath -> Action [PackageName]
-readPackageNameList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (mapM (parseText "package name") x)
+-- fileErrorContext :: FilePath -> IO a -> IO a
+-- fileErrorContext p = modifyIOError (\e -> annotateIOError e "" Nothing (Just p))
 
-readFlagAssignents :: FilePath -> Action [(String,String)]
-readFlagAssignents p = fmap (fmap (unwords . words . tail) . break (==':')) <$> readConfigFile p
-
-fileErrorContext :: FilePath -> IO a -> IO a
-fileErrorContext p = modifyIOError (\e -> annotateIOError e "" Nothing (Just p))
-
--- TODO: error handling
-parseCabalConfig :: String -> [PackageIdentifier]
-parseCabalConfig buf = dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
-  where
-    parseCabalConfigLine :: String -> Maybe Dependency
-    parseCabalConfigLine ('-':'-':_) = Nothing
-    parseCabalConfigLine ('c':'o':'n':'s':'t':'r':'a':'i':'n':'t':'s':':':l) = parseCabalConfigLine l
-    parseCabalConfigLine (' ':l) = parseCabalConfigLine l
-    parseCabalConfigLine l = simpleParse (if last l == ',' then init l else l)
-
-    dependencyToId :: Dependency -> PackageIdentifier
-    dependencyToId d@(Dependency n vr) = PackageIdentifier n v
-      where v   = fromMaybe err (isSpecificVersion vr)
-            err = error ("dependencyToId: unexpected argument " ++ show d)
-
-main :: IO ()
-main = do
-  let buildDir = "/tmp/_build"
-  shakeArgs shakeOptions { shakeFiles=buildDir, shakeProgress=progressSimple } $
-    action $ do
-      config <- readConfig "../../config"
-      putNormal (show config)
+-- main :: IO ()
+-- main = do
+--   let buildDir = "/tmp/_build"
+--   shakeArgs shakeOptions { shakeFiles=buildDir, shakeProgress=progressSimple } $
+--     action $ do
+--       config <- readConfig "../../config"
+--       putNormal (show config)

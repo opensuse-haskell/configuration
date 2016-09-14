@@ -8,7 +8,7 @@ module Orphans ( ) where
 -- import Data.Map as Map
 -- import Data.Set as Set
 import Development.Shake.Classes
--- import Distribution.Compiler
+import Distribution.Compiler
 -- import Distribution.License
 -- import Distribution.ModuleName
 import Distribution.Package
@@ -39,7 +39,8 @@ instance Hashable VersionRange
 -- instance Hashable Extension
 -- instance Hashable KnownExtension
 -- instance Hashable Language
--- instance Hashable CompilerFlavor
+instance Hashable CompilerFlavor
+instance Hashable CompilerId
 -- instance Hashable Flag
 instance Hashable FlagName
 -- instance Hashable TestType
@@ -73,7 +74,8 @@ instance NFData VersionRange
 -- instance NFData Extension
 -- instance NFData KnownExtension
 -- instance NFData Language
--- instance NFData CompilerFlavor
+instance NFData CompilerFlavor
+instance NFData CompilerId
 -- instance NFData Flag
 instance NFData FlagName
 -- instance NFData TestType
