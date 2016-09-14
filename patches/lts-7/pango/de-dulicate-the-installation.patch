@@ -1,0 +1,20 @@
+diff --git a/ghc-pango.spec b/ghc-pango.spec
+index c8c1b9f..4863aab 100644
+--- a/ghc-pango.spec
++++ b/ghc-pango.spec
+@@ -36,6 +36,7 @@ BuildRequires:  ghc-pretty-devel
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-text-devel
++BuildRequires:  fdupes
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(cairo)
+ BuildRequires:  pkgconfig(pango)
+@@ -73,6 +74,7 @@ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %install
+ %ghc_lib_install
++%fdupes %{buildroot}%{_prefix}
+ 
+ 
+ %post devel
