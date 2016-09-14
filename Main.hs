@@ -6,12 +6,15 @@ import Config
 import ParseUtils
 
 import Control.Monad
+import Data.List
+import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
-import Distribution.Text
 import Distribution.Package
+import Distribution.Text
 import System.Directory
 import System.Environment
+import System.Exit
 
 main :: IO ()
 main = do
@@ -33,6 +36,7 @@ main = do
     packageList <- getPackageList configDir resolver
     forcedExes <- getForcedExes configDir
     compilerId <- getCompiler configDir
+    flagAssignments <- getFlagAssignments configDir
 
     -- Compute all configured builds and register the required targets.
     action $ do
@@ -70,7 +74,51 @@ main = do
         (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz")
         out
 
---
+    -- Pattern rule that copies the required source tarballs from cabal's
+    -- internal cache into our build tree.
+    buildDir </> "*/*/*.spec" %> \out -> do
+       let [_,psid,bn,_] = splitDirectories out
+       pset <- packageList (GetPackageList (PackageSetId psid))
+       let findPkg n = find (\(PackageIdentifier (PackageName n') _) -> n' == n) pset
+       pkgid@(PackageIdentifier pn@(PackageName n) v) <-
+         case findPkg bn of
+           Just pkgid -> return pkgid
+           Nothing -> case stripPrefix "ghc-" bn of
+                        Nothing  -> fail ("package " ++ bn ++ " is unknown")
+                        Just bn' -> case findPkg bn' of
+                                      Just pkgid -> return pkgid
+                                      Nothing -> fail ("package " ++ bn ++ " is unknown")
+       let isExe = n == bn
+           pkgDir = takeDirectory out
+       cid <- compilerId (GetCompiler (PackageSetId psid))
+       fas <- flagAssignments (GetFlagAssignments (PackageSetId psid))
+       cabal <- getCabal pkgid
+       let rev = packageRevision cabal
+       if rev == 0
+          then liftIO $ removeFiles pkgDir ["*.cabal"]
+          else need [ show rev <.> "cabal" ]
+       -- cabal-rpm breaks if these files exist when it's run.
+       liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
+       command_ [Cwd pkgDir, EchoStdout False]
+                "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
+                ([ "--strict"
+                 , "--distro=SUSE"
+                 , "--compiler=" ++ display cid
+                 ] ++ (if isExe then ["-b"] else []) ++ maybe [] words (lookup n fas) ++
+                 [ "spec"
+                 , display pkgid
+                 ])
+       command_ [] "spec-cleaner" ["-i", out]
+       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
+                                       , "patches/" ++ psid ++ "/" ++ n ++ "/*.patch"
+                                       ]
+       need patches
+       forM_ (sort patches) $ \p -> do
+         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
+       Exit c <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
+       when (c == ExitSuccess) $ fail "invalid license type 'Unknown'"
+
+
 --     getCompilerVersion <- addOracle $ \(StackageVersion stackageVersion) ->
 --       stripSpaces <$> readFile' ("config" </> stackageVersion </> "compiler")
 --
