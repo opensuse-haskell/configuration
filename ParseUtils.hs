@@ -4,6 +4,7 @@ import Development.Shake
 import Distribution.Package
 import Distribution.Text
 import System.IO.Error
+import Data.Char
 
 readConfigFile :: FilePath -> Action [String]
 readConfigFile p = do
@@ -24,3 +25,6 @@ parseText errM buf =
   maybe (fail ("invalid " ++ errM ++ ": " ++ show buf))
         return
         (simpleParse buf)
+
+stripSpaces :: String -> String
+stripSpaces = reverse . dropWhile isSpace . reverse . dropWhile isSpace
