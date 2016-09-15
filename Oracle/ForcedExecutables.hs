@@ -2,15 +2,14 @@
 
 module Oracle.ForcedExecutables where
 
+import Orphans ( )
 import ParseUtils
+import Types
 
 import Development.Shake
 import Development.Shake.FilePath
 import Development.Shake.Classes
 import Distribution.Package
-
-import Orphans ( )
-import Config ( PackageSetId(..) )
 
 newtype GetForcedExes = GetForcedExes PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)

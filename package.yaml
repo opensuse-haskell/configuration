@@ -22,7 +22,6 @@ executables:
       - shake
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
-      - Config
       - Oracle
       - Oracle.Compiler
       - Oracle.FlagAssignment
@@ -31,3 +30,4 @@ executables:
       - Oracle.PackageList
       - Orphans
       - ParseUtils
+      - Types

@@ -1,13 +1,12 @@
 module Main ( main ) where
 
-import Orphans ()
 import Oracle
-import Config
+import Orphans ()
 import ParseUtils
+import Types
 
 import Control.Monad
 import Data.List
-import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Package
@@ -123,7 +122,7 @@ main = do
                 ([ "--strict"
                  , "--distro=SUSE"
                  , "--compiler=" ++ display cid
-                 ] ++ (if isExe then ["-b"] else []) ++ maybe [] words (lookup n fas) ++
+                 ] ++ ["-b" | isExe] ++ maybe [] words (lookup n fas) ++
                  [ "spec"
                  , display pkgid
                  ])
@@ -132,7 +131,7 @@ main = do
                                        , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
                                        ]
        need patches
-       forM_ (sort patches) $ \p -> do
+       forM_ (sort patches) $ \p ->
          command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
        Exit c <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
        when (c == ExitSuccess) $ fail "invalid license type 'Unknown'"

@@ -2,15 +2,14 @@
 
 module Oracle.Compiler where
 
+import Orphans ( )
 import ParseUtils
+import Types
 
 import Development.Shake
 import Development.Shake.FilePath
 import Development.Shake.Classes
 import Distribution.Compiler
-
-import Orphans ( )
-import Config ( PackageSetId(..) )
 
 newtype GetCompiler = GetCompiler PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)

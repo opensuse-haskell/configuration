@@ -2,9 +2,9 @@
 
 module Oracle.FlagAssignment where
 
-import Config
 import Orphans ()
 import ParseUtils
+import Types
 
 import Development.Shake
 import Development.Shake.FilePath

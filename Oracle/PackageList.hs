@@ -2,9 +2,9 @@
 
 module Oracle.PackageList where
 
-import Config
 import Orphans ()
 import ParseUtils
+import Types
 
 import Data.Maybe
 import Development.Shake
