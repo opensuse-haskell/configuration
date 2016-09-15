@@ -95,6 +95,7 @@ main = do
     buildDir </> "*/*/*.tar.gz" %> \out -> do
       let pkgid = dropExtension (takeBaseName out)
       PackageIdentifier (PackageName n) v <- parseText "package id" pkgid
+      liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
       copyFile'
         (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz")
         out
