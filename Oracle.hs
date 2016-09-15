@@ -1,6 +1,6 @@
 module Oracle
   ( -- * Access to Hackage
-    resolveConstraint, hackageDB, packageRevision, hasLibrary
+    resolveConstraint, hackageDB, packageRevision, hasLibrary, cabalFilePath
 
     -- * Access to configured package lists
   , getPackageList, GetPackageList(..)
