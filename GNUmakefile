@@ -19,4 +19,5 @@ config/%/stackage-packages.txt:
 
 update:
 	cabal update
+	@cd hackage && git pull
 	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
