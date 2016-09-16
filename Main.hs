@@ -112,9 +112,9 @@ main = do
        fas <- flagAssignments (GetFlagAssignments psid)
        cabal <- getCabal pkgid
        let rev = packageRevision cabal
-       if rev == 0
-          then liftIO $ removeFiles pkgDir ["*.cabal"]
-          else copyFileChanged (cabalFilePath hackageDir pkgid) (pkgDir </> show rev <.> "cabal")
+       liftIO $ removeFiles pkgDir ["*.cabal"]
+       when (rev > 0) $
+          copyFileChanged (cabalFilePath hackageDir pkgid) (pkgDir </> show rev <.> "cabal")
        -- cabal-rpm breaks if these files exist when it's run.
        liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
        command_ [Cwd pkgDir, EchoStdout False]
