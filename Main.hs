@@ -133,6 +133,7 @@ main = do
        need patches
        forM_ (sort patches) $ \p ->
          command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
+       unless (null patches) $ command_ [] "spec-cleaner" ["-i", out]
        Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
        when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
 
