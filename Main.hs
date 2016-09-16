@@ -74,7 +74,7 @@ main = do
               isExe = isForcedExe || not (hasLibrary cabal)
               bn = (if isExe then "" else "ghc-") ++ n
               pkgDir = buildDir </> unPackageSetId psid </> bn
-          return [ pkgDir </> bn <.> "spec" ]
+          return [ pkgDir </> bn <.> "spec", pkgDir </> (display pkgid <.> "tar.gz") ]
       need (concat (concat targets))
 
     -- Pattern target to trigger source tarball downloads with "cabal get". We
