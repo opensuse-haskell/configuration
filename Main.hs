@@ -105,7 +105,7 @@ main = do
        let [_,psid',bn',_] = splitDirectories out
            psid = PackageSetId psid'
            bn = BuildName bn'
-       pkgid@(PackageIdentifier (PackageName n) _) <- pkgidFromPath (psid,bn)
+       pkgid@(PackageIdentifier (PackageName n) v) <- pkgidFromPath (psid,bn)
        let isExe = n == bn'
            pkgDir = takeDirectory out
        cid <- compilerId (GetCompiler psid)
@@ -133,8 +133,14 @@ main = do
        need patches
        forM_ (sort patches) $ \p ->
          command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
-       Exit c <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
-       when (c == ExitSuccess) $ fail "invalid license type 'Unknown'"
+       Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
+       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
+
+       let versionString = unwords $ ["version", display v] ++
+                                     if rev==0  then [] else ["revision", show rev]
+       Exit c2 <- command [] "grep" ["-q", "-s", "-F", "-e", versionString, out -<.> "changes"]
+       when (c2 /= ExitSuccess) $
+         command_ [Cwd pkgDir] "osc" ["vc", "-m", "Update to " ++ versionString ++ " with cabal2obs."]
 
    -- Pattern rule to copy revised Cabal files into the package directory.
    -- buildDir </> "*/*/*.cabal" %> \out -> undefined
