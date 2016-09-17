@@ -7,6 +7,7 @@ import Types
 
 import Control.Monad
 import Data.List
+import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Package
@@ -36,6 +37,10 @@ main = do
     forcedExes <- getForcedExes configDir
     compilerId <- getCompiler configDir
     flagAssignments <- getFlagAssignments configDir
+
+    getFlags <- addOracle $ \(psid@(PackageSetId _), (PackageName n)) -> do
+      fas <- flagAssignments (GetFlagAssignments psid)
+      return $ fromMaybe [] (lookup n fas)
 
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier _ _)) -> do
       fexeset <- forcedExes (GetForcedExes psid)
@@ -109,7 +114,7 @@ main = do
        let isExe = n == bn'
            pkgDir = takeDirectory out
        cid <- compilerId (GetCompiler psid)
-       fas <- flagAssignments (GetFlagAssignments psid)
+       fa <- getFlags (psid, PackageName n)
        cabal <- getCabal pkgid
        let rev = packageRevision cabal
        liftIO $ removeFiles pkgDir ["*.cabal"]
@@ -122,7 +127,7 @@ main = do
                 ([ "--strict"
                  , "--distro=SUSE"
                  , "--compiler=" ++ display cid
-                 ] ++ ["-b" | isExe] ++ maybe [] words (lookup n fas) ++
+                 ] ++ ["-b" | isExe] ++ words fa ++
                  [ "spec"
                  , display pkgid
                  ])
