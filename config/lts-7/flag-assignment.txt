@@ -1,35 +1,27 @@
-cheapskate:                     -fdingus
-country-codes:                  -fgenerate
+# config/lts-7/flag-assignment.txt
+
+# Don't build hardware-specific optimizations into the binary based on what the
+# build machine supports or doesn't support.
 cryptonite:                     -f-support_aesni -f-support_rdrand -f-support_blake2_sse
-csv-conduit:                    -fbench
+
+# Don't use the bundled sqlite3 library.
 direct-sqlite:                  -fsystemlib
-Earley:                         -fexamples
-GLUT:                           -fbuildexamples
-gtk3:                           -fbuild-demos
+
+# Build the standalone executable and prefer pcre-light, which uses the system
+# library rather than a bundled copy.
 highlighting-kate:              -fexecutable -fpcre-light
+
+# Don't use the bundled sass library.
 hlibsass:                       -fexternalLibsass
-hoauth2:                        -ftest
-hslogger:                       -fbuildtests
+
+# Don't use the bundled lua library.
 hslua:                          -fsystem-lua
-http2:                          -fdevel
-ipython-kernel:                 -fexamples
-lambdacube-gl:                  -ftestclient -fexample
-language-lua2:                  -fexes
-leveldb-haskell:                -fexamples
-nested-routes:                  -fexample
-network-transport-zeromq:       -finstall-benchmarks -fdistributed-process-tests
+
+# Allow compilation without having Nix installed.
 nix-paths:                      -fallow-relative-paths
-pandoc-citeproc:                -ftest_citeproc
-rethinkdb:                      -fdev
-servant-js:                     -fexample
-SHA:                            -fexe
-texmath:                        -fnetwork-uri -fexecutable
-vector-algorithms:              -fbench
-wai-middleware-consul:          -fexample
-wai-middleware-verbs:           -fexample
-waitra:                         -fexamples
-weigh:                          -fweigh-maps
+
+# Build the standalone executable.
+texmath:                        -fexecutable
+
+# Enable almost all extensions.
 xmobar:                         -fwith_thread -fwith_utf8 -fwith_xft -fwith_xpm -fwith_mpris -fwith_dbus -fwith_iwlib -fwith_inotify
-yesod-auth-oauth2:              -fexample -fnetwork-uri
-yesod-job-queue:                -fexample
-yesod-static-angular:           -fexample
