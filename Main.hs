@@ -7,6 +7,7 @@ import Types
 
 import Control.Monad
 import Data.List
+import Data.Function
 import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
@@ -136,7 +137,7 @@ main = do
                                        , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
                                        ]
        need patches
-       forM_ (sort patches) $ \p ->
+       forM_ (sortBy (compare `on` takeFileName) patches) $ \p ->
          command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
        unless (null patches) $ command_ [] "spec-cleaner" ["-i", out]
        Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
