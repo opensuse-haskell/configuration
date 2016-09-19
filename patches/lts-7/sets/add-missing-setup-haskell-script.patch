@@ -1,0 +1,14 @@
+Index: ghc-sets.spec
+===================================================================
+--- ghc-sets.spec	(revision 2)
++++ ghc-sets.spec	(working copy)
+@@ -72,6 +72,8 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ 
+ %build
+
