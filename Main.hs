@@ -81,7 +81,7 @@ main = do
               bn = (if isExe then "" else "ghc-") ++ n
               pkgDir = buildDir </> unPackageSetId psid </> bn
           return [ pkgDir </> bn <.> "spec", pkgDir </> (display pkgid <.> "tar.gz") ]
-      need (concat (concat targets))
+      need ((buildDir </> "packages.csv") : concat (concat targets))
 
     -- Pattern target to trigger source tarball downloads with "cabal get". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
@@ -149,69 +149,11 @@ main = do
        when (c2 /= ExitSuccess) $
          command_ [Cwd pkgDir] "osc" ["vc", "-m", "Update to " ++ versionString ++ " with cabal2obs."]
 
-   -- Pattern rule to copy revised Cabal files into the package directory.
-   -- buildDir </> "*/*/*.cabal" %> \out -> undefined
-
---     action $ do
---       ls <- forM (nub (concat packageSets)) $ \p@(PackageIdentifier (PackageName n) v) -> do
---         SusePackageDescription _ isExe <- getSusePkgDescription p
---         let pn = (if isExe then "" else "ghc-") ++ n
---             pv = display v
---             url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ pn
---         return $ show n ++ "," ++ show pv ++ "," ++ show url
---       liftIO $ writeFile (buildDir </> "package-list.csv") (intercalate "\n" ls)
---
---     forM_ (zip stackageVersions packageSets) $ \(stackageVersion,stackage) ->
---       forM_ stackage $ \p@(PackageIdentifier (PackageName pn) v) -> do
---         let forcedExe = pn `elem` forcedExecutablePackages
---             isExe = forcedExe || not (isLibrary hackage p)
---             rv = hackageRevision hackage p
---             pkgName = (if isExe then "" else "ghc-") ++ pn
---             pkgDir = "_build" </> stackageVersion </> pkgName
---             spec = pkgDir </> pkgName <.> "spec"
---             pv = display v
---             pid = display p
---             tar = pkgDir </> pid <.> "tar.gz"
---             tarsrc = homeDir </> ".cabal/packages/hackage.haskell.org" </> pn </> pv </> pid <.> "tar.gz"
---             editedCabalFile = pkgDir </> show rv <.> "cabal"
---             editedCabalFileUrl = "https://hackage.haskell.org/package/" ++ pid ++ "/revision/" ++ show rv ++ ".cabal"
---
---         want [spec, tar]
---
---         tar %> \out -> do
---           need [tarsrc]
---           b <- liftIO $ System.Directory.doesFileExist tar
---           unless b $
---             bash [ "rm -f " ++ pkgDir ++ "/*.tar.gz", "cp " ++ tarsrc ++ " " ++ out ]
---
---         when (rv > 0) $ do
---           want [editedCabalFile]
---           editedCabalFile %> \_ -> do
---             SusePackageDescription _ _ <- getSusePkgDescription p
---             bash ["cd " ++ pkgDir, "rm -f *.cabal", "wget -q " ++ editedCabalFileUrl]
---
---         spec %> \_ -> do
---           SusePackageDescription _ _ <- getSusePkgDescription p
---           when (rv > 0) $
---             need [editedCabalFile]
---           compiler <- getCompilerVersion (StackageVersion stackageVersion)
---           patches <- sort <$> getDirectoryFiles "" [ "patches/common/" ++ pn ++ "/*.patch"
---                                                    , "patches/" ++ stackageVersion ++ "/" ++ pn ++ "/*.patch"
---                                                    ]
---           let clvid = unwords ["version", pv, "revision", show rv]
---           need patches
---           flags <- getFlagAssignment (PackageName pn)
---           bash $ [ "cd " ++ pkgDir
---                  , "rm -f *.spec"
---                  , "rm -rf " ++ display p       -- cabal-rpm fails if such a directory exists
---                  , "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm --strict --compiler=" ++
---                    compiler ++ (if forcedExe then " -b " else " ") ++ "--distro=SUSE " ++
---                    flags ++ " " ++
---                    "spec " ++ pid ++ " >/dev/null"
---                  , "spec-cleaner -i " ++ pkgName <.> "spec"
---                  , "grep -q -s -F -e '" ++ clvid ++ "' " ++ pkgName <.> "changes" ++
---                    "|| osc vc -m 'Update to " ++ clvid ++ " with cabal2obs.'"
---                  ] ++
---                  [ "patch --no-backup-if-mismatch --force <../../../" ++ pt | pt <- patches ] ++
---                  [ "if grep >&2 -E '^License:.*Unknown' " ++ pkgName <.> "spec" ++ "; then exit 1; fi"
---                  ] ++ if rv == 0 then ["rm -f ?.cabal"] else []
+    buildDir </> "packages.csv" %> \out -> do
+      let psid = PackageSetId "lts-7"
+      pset <- packageList (GetPackageList psid)
+      ls <- forP pset $ \pkgid@(PackageIdentifier (PackageName n) v) -> do
+        BuildName bn <- getBuildName (psid, pkgid)
+        let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
+        return $ intercalate "," [ show n, show (display v), show url]
+      writeFile' out (intercalate "\n" ls)
