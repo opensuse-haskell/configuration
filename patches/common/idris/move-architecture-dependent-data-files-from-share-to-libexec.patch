@@ -2,11 +2,12 @@ Index: idris.spec
 ===================================================================
 --- idris.spec	(revision 21)
 +++ idris.spec	(working copy)
-@@ -124,6 +124,7 @@
+@@ -124,7 +124,7 @@
  %setup -q
  
  %build
-+cabal_configure_extra_options="--datasubdir=%{_libexecdir}/%{name}-%{version}"
+-%define cabal_configure_options -fffi -fgmp
++%define cabal_configure_options -fffi -fgmp --datasubdir=%{_libexecdir}/%{name}-%{version}
  %ghc_lib_build
  
  %install

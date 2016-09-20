@@ -1,3 +1,5 @@
+# config/lts-6/extra-packages.txt
+
 applicative-quoters
 BNFC
 bytestring-show
@@ -19,3 +21,6 @@ structured-haskell-mode
 X11-xft
 xmobar
 xmonad-contrib
+
+# Required to build Idris with +ffi Cabal flag.
+libffi

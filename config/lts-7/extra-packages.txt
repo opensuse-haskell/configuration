@@ -1,5 +1,20 @@
-applicative-quoters
+# config/lts-7/extra-packages.txt
+
+# Used by psimons@suse.com.
 BNFC
+structured-haskell-mode
+applicative-quoters
+
+# Used by osukup@suse.com.
+pointfree
+X11-xft
+xmobar
+xmonad-contrib
+
+# Required to build Idris with +ffi Cabal flag.
+libffi
+
+# Do we still need those?
 bytestring-show
 cab
 cryptohash-sha256
@@ -7,7 +22,6 @@ ed25519
 hackage-security
 idna
 intern
-pointfree
 publicsuffixlist
 punycode
 SDL
@@ -15,7 +29,3 @@ SDL-image
 SDL-mixer
 ShellCheck
 stringprep
-structured-haskell-mode
-X11-xft
-xmobar
-xmonad-contrib

@@ -1,3 +1,5 @@
+# config/lts-6/flag-assignment.txt
+
 cheapskate:                     -fdingus
 country-codes:                  -fgenerate
 cryptonite:                     -f-support_aesni -f-support_rdrand -f-support_blake2_sse
@@ -33,3 +35,6 @@ xmobar:                         -fwith_thread -fwith_utf8 -fwith_xft -fwith_xpm 
 yesod-auth-oauth2:              -fexample -fnetwork-uri
 yesod-job-queue:                -fexample
 yesod-static-angular:           -fexample
+
+# Enable additional features
+idris:                          -fffi -fgmp
