@@ -1,0 +1,24 @@
+Index: ghc-esqueleto.spec
+===================================================================
+--- ghc-esqueleto.spec	(revision 1)
++++ ghc-esqueleto.spec	(working copy)
+@@ -49,6 +49,9 @@
+ BuildRequires:  ghc-persistent-sqlite-devel
+ BuildRequires:  ghc-persistent-template-devel
+ %endif
++# https://github.com/prowdsponsor/esqueleto/pull/149
++Patch1:         0001-Port-to-Stackage-Nightly-and-persistent-2.6.patch
++Patch2:         0002-Fix-warnings-for-persistent-2.6.patch
+ 
+ %description
+ 'esqueleto' is a bare bones, type-safe EDSL for SQL queries that works with
+@@ -91,6 +94,8 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++%patch1 -p1
++%patch2 -p1
+ 
+ %build
+ %ghc_lib_build
+
