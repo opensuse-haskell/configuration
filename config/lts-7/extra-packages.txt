@@ -6,7 +6,9 @@ structured-haskell-mode
 applicative-quoters
 
 # Used by osukup@suse.com.
+cab
 pointfree
+ShellCheck
 X11-xft
 xmobar
 xmonad-contrib
@@ -14,18 +16,37 @@ xmonad-contrib
 # Required to build Idris with +ffi Cabal flag.
 libffi
 
-# Do we still need those?
-bytestring-show
-cab
-cryptohash-sha256
-ed25519
-hackage-security
-idna
-intern
-publicsuffixlist
-punycode
+# Needed by games repository somewhere.
 SDL
 SDL-image
 SDL-mixer
-ShellCheck
-stringprep
+
+# Needed for cabal-install.
+hackage-security
+cryptohash-sha256
+ed25519
+
+# Do we still need those?
+# bytestring-show
+# intern
+# punycode
+# idna
+# publicsuffixlist
+# stringprep
+
+# Test-building those.
+aeson-extra
+bloomfilter
+data-default-instances-base
+esqueleto
+fdo-notify
+git-annex
+gnuidn
+gnutls
+gsasl
+network-multicast
+network-protocol-xmpp
+recursion-schemes
+regex-tdfa-rc
+torrent
+yesod-default
