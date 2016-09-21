@@ -107,46 +107,45 @@ main = do
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
-       let [_,psid',bn',_] = splitDirectories out
-           psid = PackageSetId psid'
-           bn = BuildName bn'
-       pkgid@(PackageIdentifier (PackageName n) v) <- pkgidFromPath (psid,bn)
-       let isExe = n == bn'
-           pkgDir = takeDirectory out
-       cid <- compilerId (GetCompiler psid)
-       fa <- getFlags (psid, PackageName n)
-       cabal <- getCabal pkgid
-       let rev = packageRevision cabal
-       liftIO $ removeFiles pkgDir ["*.cabal"]
-       when (rev > 0) $
-          command_ [] "dos2unix" ["--quiet", "--keepdate", "-n", cabalFilePath hackageDir pkgid, pkgDir </> n <.> "cabal"]
-       -- cabal-rpm breaks if these files exist when it's run.
-       liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
-       command_ [Cwd pkgDir, EchoStdout False]
-                "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
-                ([ "--strict"
-                 , "--distro=SUSE"
-                 , "--compiler=" ++ display cid
-                 ] ++ ["-b" | isExe] ++ words fa ++
-                 [ "spec"
-                 , display pkgid
-                 ])
-       command_ [] "spec-cleaner" ["-i", out]
-       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
-                                       , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
-                                       ]
-       need patches
-       forM_ (sortBy (compare `on` takeFileName) patches) $ \p ->
-         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
-       unless (null patches) $ command_ [] "spec-cleaner" ["-i", out]
-       Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
-       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
-
-       let versionString = unwords $ ["version", display v] ++
-                                     if rev==0  then [] else ["revision", show rev]
-       Exit c2 <- command [] "grep" ["-q", "-s", "-F", "-e", versionString, out -<.> "changes"]
-       when (c2 /= ExitSuccess) $
-         command_ [Cwd pkgDir] "osc" ["vc", "-m", "Update to " ++ versionString ++ " with cabal2obs."]
+      let [_,psid',bn',_] = splitDirectories out
+          psid = PackageSetId psid'
+          bn = BuildName bn'
+      pkgid@(PackageIdentifier (PackageName n) v) <- pkgidFromPath (psid,bn)
+      let isExe = n == bn'
+          pkgDir = takeDirectory out
+      cid <- compilerId (GetCompiler psid)
+      fa <- getFlags (psid, PackageName n)
+      cabal <- getCabal pkgid
+      let rev = packageRevision cabal
+      liftIO $ removeFiles pkgDir ["*.cabal"]
+      when (rev > 0) $
+         command_ [] "dos2unix" ["--quiet", "--keepdate", "-n", cabalFilePath hackageDir pkgid, pkgDir </> n <.> "cabal"]
+      -- cabal-rpm breaks if these files exist when it's run.
+      liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
+      command_ [Cwd pkgDir, EchoStdout False]
+               "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
+               ([ "--strict"
+                , "--distro=SUSE"
+                , "--compiler=" ++ display cid
+                ] ++ ["-b" | isExe] ++ words fa ++
+                [ "spec"
+                , display pkgid
+                ])
+      command_ [] "spec-cleaner" ["-i", out]
+      patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
+                                      , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
+                                      ]
+      need patches
+      forM_ (sortBy (compare `on` takeFileName) patches) $ \p ->
+        command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
+      unless (null patches) $ command_ [] "spec-cleaner" ["-i", out]
+      Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
+      when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
+      let versionString = unwords $ ["version", display v] ++
+                                    if rev==0  then [] else ["revision", show rev]
+      Exit c2 <- command [] "grep" ["-q", "-s", "-F", "-e", versionString, out -<.> "changes"]
+      when (c2 /= ExitSuccess) $
+        command_ [Cwd pkgDir] "osc" ["vc", "-m", "Update to " ++ versionString ++ " with cabal2obs."]
 
     buildDir </> "packages.csv" %> \out -> do
       let psid = PackageSetId "lts-7"
