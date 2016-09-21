@@ -1,0 +1,42 @@
+Index: happy.spec
+===================================================================
+--- happy.spec	(revision 792cfc2a78d3c293ca804b3a0707d635)
++++ happy.spec	(working copy)
+@@ -31,6 +31,11 @@
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-rpm-macros
++BuildRequires:  autoconf
++BuildRequires:  docbook-dtd
++BuildRequires:  docbook-xsl-stylesheets
++BuildRequires:  libxml2
++BuildRequires:  libxslt
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ %if %{with tests}
+ BuildRequires:  ghc-process-devel
+@@ -47,9 +52,14 @@
+ 
+ %build
+ %ghc_bin_build
++cd doc
++autoreconf
++%configure
++make %{?_smp_mflags} html
+ 
+ %install
+ %ghc_bin_install
++install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+ 
+ %check
+ %cabal_test
+@@ -57,6 +67,9 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc LICENSE
++%doc README TODO doc examples
+ %{_bindir}/%{name}
++%{_datadir}/%{name}-%{version}
++%{_mandir}/man1/*
+ 
+ %changelog
+

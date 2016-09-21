@@ -1,0 +1,37 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 24a2128fdf7e6dab71c561b9bed4289a)
++++ pandoc.spec	(working copy)
+@@ -87,6 +87,7 @@
+ BuildRequires:  ghc-test-framework-hunit-devel
+ BuildRequires:  ghc-test-framework-quickcheck2-devel
+ %endif
++Source10:       pandoc-pdf.readme
+ 
+ %description
+ Pandoc is a Haskell library for converting from one markup format to another,
+@@ -106,6 +107,15 @@
+ writers, which convert this native representation into a target format.
+ Thus, adding an input or output format requires only adding a reader or writer.
+ 
++%package pdf
++Summary:        Meta package for support generating pdf with pandoc
++Group:          Productivity/Publishing/PDF
++Requires:       %{name} = %{version}
++Requires:       texlive-latex-bin-bin
++
++%description pdf
++Meta package for support generating pdf with pandoc.
++
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+ Group:          System/Libraries
+@@ -127,6 +137,7 @@
+ %prep
+ %setup -q
+ cp -p %{SOURCE1} %{name}.cabal
++cp %{SOURCE10} .
+ 
+ %build
+ %ghc_lib_build
+
