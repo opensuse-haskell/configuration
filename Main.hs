@@ -105,8 +105,7 @@ main = do
         (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz")
         out
 
-    -- Pattern rule that copies the required source tarballs from cabal's
-    -- internal cache into our build tree.
+    -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
        let [_,psid',bn',_] = splitDirectories out
            psid = PackageSetId psid'
