@@ -33,9 +33,9 @@ ed25519
 # idna
 # publicsuffixlist
 # stringprep
+# aeson-extra: broken
 
 # Test-building those.
-aeson-extra
 bloomfilter
 data-default-instances-base
 esqueleto
