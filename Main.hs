@@ -120,7 +120,7 @@ main = do
        let rev = packageRevision cabal
        liftIO $ removeFiles pkgDir ["*.cabal"]
        when (rev > 0) $
-          copyFileChanged (cabalFilePath hackageDir pkgid) (pkgDir </> show rev <.> "cabal")
+          copyFileChanged (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
        -- cabal-rpm breaks if these files exist when it's run.
        liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
        command_ [Cwd pkgDir, EchoStdout False]
