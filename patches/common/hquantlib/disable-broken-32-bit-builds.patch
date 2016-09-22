@@ -1,0 +1,14 @@
+Index: ghc-hquantlib.spec
+===================================================================
+--- ghc-hquantlib.spec	(revision 1)
++++ ghc-hquantlib.spec	(working copy)
+@@ -47,6 +47,8 @@
+ BuildRequires:  ghc-test-framework-hunit-devel
+ BuildRequires:  ghc-test-framework-quickcheck2-devel
+ %endif
++# https://github.com/paulrzcz/hquantlib/issues/24
++ExcludeArch:    %{ix86}
+ 
+ %description
+ HQuantLib is intended to be a functional style port of QuantLib
+
