@@ -1,0 +1,14 @@
+Index: ghc-api-field-json-th.spec
+===================================================================
+--- ghc-api-field-json-th.spec	(revision 5)
++++ ghc-api-field-json-th.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.1.0.1
+ Release:        0
+ Summary:        Option of aeson's deriveJSON
+-License:        BSD-3-Clause
++License:        MIT
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
