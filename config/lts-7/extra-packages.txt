@@ -26,16 +26,7 @@ hackage-security
 cryptohash-sha256
 ed25519
 
-# Do we still need those?
-# bytestring-show
-# intern
-# punycode
-# idna
-# publicsuffixlist
-# stringprep
-# aeson-extra: broken
-
-# Test-building those.
+# These packages are dependencies of git-annex and/or cabal-install.
 bloomfilter
 data-default-instances-base
 esqueleto
