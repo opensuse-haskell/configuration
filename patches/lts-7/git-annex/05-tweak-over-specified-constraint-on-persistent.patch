@@ -1,0 +1,13 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 1)
++++ git-annex.spec	(working copy)
+@@ -160,6 +160,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver persistent '< 2.5' '< 2.7'
+ 
+ %build
+ %ghc_bin_build
+
