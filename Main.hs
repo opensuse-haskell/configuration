@@ -136,9 +136,9 @@ main = do
                                       , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
                                       ]
       need patches
-      forM_ (sortBy (compare `on` takeFileName) patches) $ \p ->
+      forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
-      unless (null patches) $ command_ [] "spec-cleaner" ["-i", out]
+        command_ [] "spec-cleaner" ["-i", out]
       Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
       let versionString = unwords $ ["version", display v] ++
