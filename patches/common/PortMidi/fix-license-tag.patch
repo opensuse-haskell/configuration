@@ -1,0 +1,14 @@
+Index: ghc-PortMidi.spec
+===================================================================
+--- ghc-PortMidi.spec	(revision 5)
++++ ghc-PortMidi.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.1.6.0
+ Release:        0
+ Summary:        A binding for PortMedia/PortMidi
+-License:        BSD-3-Clause
++License:        Zlib
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
