@@ -1,0 +1,13 @@
+Index: hsdev.spec
+===================================================================
+--- hsdev.spec	(revision 1)
++++ hsdev.spec	(working copy)
+@@ -35,7 +35,6 @@
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-async-devel
+ BuildRequires:  ghc-attoparsec-devel
+-BuildRequires:  ghc-bin-package-db-devel
+ BuildRequires:  ghc-bytestring-devel
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-cpphs-devel
+
