@@ -2,17 +2,26 @@
 
 set -eu -o pipefail
 
-DEBUG="true"
+# DEBUG="true"
 
 tmp="/tmp/sync-repository-tmp.$$"
 trap "rm -f $tmp" 0
 
 isChangeSignificant()
 {
-  grep --silent -E "^[+-](Version|License|Source[0-9]*):" "$1"
+  grep --silent -E "^[+-](Version|License|Source0|Patch[0-9]*):" "$1"
+}
+
+isInFactory()
+{
+  osc ls "openSUSE:Factory/$1/$1.spec" >/dev/null 2>&1
 }
 
 for i in *; do
+  # if ! isInFactory $i; then
+  #   continue
+  # fi
+
   # Make sure we're looking only at Haskell packages checked into OBS.
   test -d "$i" || continue
   test -d "$i/.osc" || continue
