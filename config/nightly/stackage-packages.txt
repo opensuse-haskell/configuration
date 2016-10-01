@@ -1,7 +1,7 @@
--- Stackage snapshot from: http://www.stackage.org/snapshot/nightly-2016-09-30
+-- Stackage snapshot from: http://www.stackage.org/snapshot/nightly-2016-10-01
 -- Please place this file next to your .cabal file as cabal.config
 -- To only use tested packages, uncomment the following line:
--- remote-repo: stackage-nightly-2016-09-30:http://www.stackage.org/nightly-2016-09-30
+-- remote-repo: stackage-nightly-2016-10-01:http://www.stackage.org/nightly-2016-10-01
 constraints: abstract-deque ==0.3,
              abstract-par ==0.3.3,
              AC-Vector ==2.3.2,
@@ -132,6 +132,7 @@ constraints: abstract-deque ==0.3,
              bson-lens ==0.1.1,
              btrfs ==0.1.2.0,
              bumper ==0.6.0.3,
+             bv ==0.4.1,
              byteable ==0.1.1,
              bytedump ==1.0,
              byteorder ==1.0.4,
@@ -467,6 +468,7 @@ constraints: abstract-deque ==0.3,
              freer ==0.2.3.0,
              friendly-time ==0.4,
              frisby ==0.2,
+             from-sum ==0.1.0.0,
              frontmatter ==0.1.0.2,
              fsnotify ==0.2.1,
              fsnotify-conduit ==0.1.0.0,
@@ -775,7 +777,7 @@ constraints: abstract-deque ==0.3,
              hspec-expectations-pretty-diff ==0.7.2.4,
              hspec-golden-aeson ==0.2.0.3,
              hspec-jenkins ==0.1.1,
-             hspec-megaparsec ==0.2.1,
+             hspec-megaparsec ==0.3.0,
              hspec-meta ==2.2.1,
              hspec-setup ==0.2.1.0,
              hspec-smallcheck ==0.4.1,
