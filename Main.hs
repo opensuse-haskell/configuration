@@ -27,6 +27,8 @@ main = do
       shopts = shakeOptions
                { shakeFiles = buildDir
                , shakeProgress = progressSimple
+               , shakeThreads = 0       -- autodetect the number of available cores
+               , shakeVersion = "1"     -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
