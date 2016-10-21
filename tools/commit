@@ -18,4 +18,5 @@ projects=$( osc st | sed -r -e 's|^. +([^/]+)(/.+)?$|\1|' | uniq )
 test -n "${projects:-}" || exit 1
 
 echo committing: $projects
-osc commit -m "$*" $projects
+# --noservice due to https://github.com/openSUSE/obs-service-format_spec_file/issues/17
+osc commit --noservice -m "$*" $projects
