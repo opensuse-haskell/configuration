@@ -9,7 +9,6 @@ HaXml
 # Used by osukup@suse.com.
 cab
 pointfree
-ShellCheck
 X11-xft
 xmobar
 xmonad-contrib
