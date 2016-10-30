@@ -32,17 +32,20 @@ for i in *; do
 
   # Diff the current package against devel:languages:haskell and check whether
   # the changes are significant.
-  pushd >/dev/null "$i"
-  osc sr -d devel:languages:haskell >$tmp
+  if [ ! -e "$HOME/src/obs/haskell/$i/$i.spec" ]; then
+    test -z "${DEBUG:-}" || echo >&2 "$i: new submission"
+    echo "$i"
+    continue
+  fi
+  diff -ub "$HOME/src/obs/haskell/$i/$i.spec" "$i/$i.spec" >"$tmp" || true
   lines=$(wc -l "$tmp" | cut -f1 -d' ')
   if [ "$lines" -gt 3 ]; then
-    if isChangeSignificant "$tmp"; then
-      echo "$i"
-    else
-      test -z "${DEBUG:-}" || echo >&2 "$i: no significant changes"
-    fi
+      if isChangeSignificant "$tmp"; then
+          echo "$i"
+      else
+        test -z "${DEBUG:-}" || echo >&2 "$i: no significant changes"
+      fi
   else
     test -z "${DEBUG:-}" || echo >&2 "$i: no changes"
   fi
-  popd >/dev/null
 done
