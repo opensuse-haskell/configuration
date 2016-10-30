@@ -1,0 +1,126 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 1b5160d5429efeca2344c97ff35db394)
++++ pandoc.spec	(working copy)
+@@ -78,6 +78,7 @@
+ BuildRequires:  ghc-zlib-devel
+ Suggests:       texlive-latex-bin-bin
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++BuildRequires:  fdupes
+ %if %{with tests}
+ BuildRequires:  ghc-Diff-devel
+ BuildRequires:  ghc-HUnit-devel
+@@ -146,6 +147,12 @@
+ %ghc_lib_install
+ %ghc_fix_dynamic_rpath %{pkg_name}
+ 
++# These files will be installed in the standard _docdir
++rm %{buildroot}%{_datadir}/%{pkg_name}-%{version}/COPYRIGHT
++rm %{buildroot}%{_datadir}/%{pkg_name}-%{version}/README
++# Link duplicate template files
++%fdupes %{buildroot}%{_datadir}/%{pkg_name}-%{version}/data/templates/
++
+ %check
+ %cabal_test
+ 
+@@ -158,84 +165,15 @@
+ %files
+ %defattr(-,root,root,-)
+ %doc COPYING
++%doc README
++%doc BUGS CONTRIBUTING.md COPYRIGHT changelog
+ %{_bindir}/%{name}
+-%dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}/data
+-%dir %{_datadir}/%{name}-%{version}/data/templates
+-%dir %{_datadir}/%{name}-%{version}/data/docx
+-%dir %{_datadir}/%{name}-%{version}/data/docx/_rels
+-%dir %{_datadir}/%{name}-%{version}/data/docx/docProps
+-%dir %{_datadir}/%{name}-%{version}/data/docx/word
+-%dir %{_datadir}/%{name}-%{version}/data/docx/word/_rels
+-%dir %{_datadir}/%{name}-%{version}/data/docx/word/theme
+-%dir %{_datadir}/%{name}-%{version}/data/odt
+-%dir %{_datadir}/%{name}-%{version}/data/odt/Configurations2
+-%dir %{_datadir}/%{name}-%{version}/data/odt/Configurations2/accelerator
+-%dir %{_datadir}/%{name}-%{version}/data/odt/Thumbnails
+-%dir %{_datadir}/%{name}-%{version}/data/odt/META-INF
+-%dir %{_datadir}/%{name}-%{version}/data/dzslides
+-%{_datadir}/%{name}-%{version}/data/templates/default.html
+-%{_datadir}/%{name}-%{version}/data/templates/default.html5
+-%{_datadir}/%{name}-%{version}/data/templates/default.docbook
+-%{_datadir}/%{name}-%{version}/data/templates/default.docbook5
+-%{_datadir}/%{name}-%{version}/data/templates/default.tei
+-%{_datadir}/%{name}-%{version}/data/templates/default.beamer
+-%{_datadir}/%{name}-%{version}/data/templates/default.opendocument
+-%{_datadir}/%{name}-%{version}/data/templates/default.icml
+-%{_datadir}/%{name}-%{version}/data/templates/default.opml
+-%{_datadir}/%{name}-%{version}/data/templates/default.latex
+-%{_datadir}/%{name}-%{version}/data/templates/default.context
+-%{_datadir}/%{name}-%{version}/data/templates/default.texinfo
+-%{_datadir}/%{name}-%{version}/data/templates/default.man
+-%{_datadir}/%{name}-%{version}/data/templates/default.markdown
+-%{_datadir}/%{name}-%{version}/data/templates/default.commonmark
+-%{_datadir}/%{name}-%{version}/data/templates/default.rst
+-%{_datadir}/%{name}-%{version}/data/templates/default.plain
+-%{_datadir}/%{name}-%{version}/data/templates/default.mediawiki
+-%{_datadir}/%{name}-%{version}/data/templates/default.dokuwiki
+-%{_datadir}/%{name}-%{version}/data/templates/default.rtf
+-%{_datadir}/%{name}-%{version}/data/templates/default.s5
+-%{_datadir}/%{name}-%{version}/data/templates/default.slidy
+-%{_datadir}/%{name}-%{version}/data/templates/default.slideous
+-%{_datadir}/%{name}-%{version}/data/templates/default.revealjs
+-%{_datadir}/%{name}-%{version}/data/templates/default.dzslides
+-%{_datadir}/%{name}-%{version}/data/templates/default.asciidoc
+-%{_datadir}/%{name}-%{version}/data/templates/default.haddock
+-%{_datadir}/%{name}-%{version}/data/templates/default.textile
+-%{_datadir}/%{name}-%{version}/data/templates/default.org
+-%{_datadir}/%{name}-%{version}/data/templates/default.epub
+-%{_datadir}/%{name}-%{version}/data/templates/default.epub3
+-%{_datadir}/%{name}-%{version}/data/docx/[Content_Types].xml
+-%{_datadir}/%{name}-%{version}/data/docx/_rels/.rels
+-%{_datadir}/%{name}-%{version}/data/docx/docProps/app.xml
+-%{_datadir}/%{name}-%{version}/data/docx/docProps/core.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/document.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/fontTable.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/footnotes.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/numbering.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/settings.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/webSettings.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/styles.xml
+-%{_datadir}/%{name}-%{version}/data/docx/word/_rels/document.xml.rels
+-%{_datadir}/%{name}-%{version}/data/docx/word/_rels/footnotes.xml.rels
+-%{_datadir}/%{name}-%{version}/data/docx/word/theme/theme1.xml
+-%{_datadir}/%{name}-%{version}/data/odt/mimetype
+-%{_datadir}/%{name}-%{version}/data/odt/manifest.rdf
+-%{_datadir}/%{name}-%{version}/data/odt/styles.xml
+-%{_datadir}/%{name}-%{version}/data/odt/content.xml
+-%{_datadir}/%{name}-%{version}/data/odt/meta.xml
+-%{_datadir}/%{name}-%{version}/data/odt/settings.xml
+-%{_datadir}/%{name}-%{version}/data/odt/Configurations2/accelerator/current.xml
+-%{_datadir}/%{name}-%{version}/data/odt/Thumbnails/thumbnail.png
+-%{_datadir}/%{name}-%{version}/data/odt/META-INF/manifest.xml
+-%{_datadir}/%{name}-%{version}/data/epub.css
+-%{_datadir}/%{name}-%{version}/data/LaTeXMathML.js
+-%{_datadir}/%{name}-%{version}/data/MathMLinHTML.js
+-%{_datadir}/%{name}-%{version}/data/dzslides/template.html
+-%{_datadir}/%{name}-%{version}/data/sample.lua
+-%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
+-%{_datadir}/%{name}-%{version}/README
+-%{_datadir}/%{name}-%{version}/COPYRIGHT
++%{_datadir}/%{name}-%{version}
++%{_mandir}/man1/pandoc.1%{ext_man}
++
++%files pdf
++%defattr(-,root,root,-)
++%doc pandoc-pdf.readme
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+@@ -243,5 +181,6 @@
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %defattr(-,root,root,-)
++%doc README
+ 
+ %changelog
+

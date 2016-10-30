@@ -1,0 +1,37 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 1)
++++ pandoc.spec	(working copy)
+@@ -26,6 +26,7 @@
+ Group:          Productivity/Publishing/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Source10:       pandoc-pdf.readme
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+@@ -107,6 +108,15 @@
+ writers, which convert this native representation into a target format.
+ Thus, adding an input or output format requires only adding a reader or writer.
+ 
++%package pdf
++Summary:        Meta package for support generating pdf with pandoc
++Group:          Productivity/Publishing/PDF
++Requires:       %{name} = %{version}
++Requires:       texlive-latex-bin-bin
++
++%description pdf
++Meta package for support generating pdf with pandoc.
++
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+ Group:          System/Libraries
+@@ -127,6 +137,7 @@
+ 
+ %prep
+ %setup -q
++cp %{SOURCE10} .
+ 
+ %build
+ %ghc_lib_build
+
