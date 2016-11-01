@@ -1,0 +1,13 @@
+Index: ghc-mod.spec
+===================================================================
+--- ghc-mod.spec	(revision 12)
++++ ghc-mod.spec	(working copy)
+@@ -65,6 +65,7 @@
+ BuildRequires:  ghc-doctest-devel
+ BuildRequires:  ghc-hspec-devel
+ %endif
++Suggests:       emacs-haskell-mode
+ 
+ %description
+ Ghc-mod is a backend program to enrich Haskell programming in editors.
+

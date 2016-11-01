@@ -1,0 +1,21 @@
+Index: ghc-mod.spec
+===================================================================
+--- ghc-mod.spec	(revision 14)
++++ ghc-mod.spec	(working copy)
+@@ -119,6 +119,7 @@
+ 
+ %files
+ %defattr(-,root,root,-)
++%doc LICENSE
+ %doc COPYING.BSD3
+ %doc COPYING.AGPL3
+ %{_bindir}/%{name}
+@@ -133,6 +134,7 @@
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
++%doc LICENSE
+ %doc COPYING.BSD3
+ %doc COPYING.AGPL3
+ 
+

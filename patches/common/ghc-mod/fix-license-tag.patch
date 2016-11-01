@@ -1,0 +1,14 @@
+Index: ghc-mod.spec
+===================================================================
+--- ghc-mod.spec	(revision 9)
++++ ghc-mod.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        5.5.0.0
+ Release:        0
+ Summary:        Happy Haskell Programming
+-License:        AGPL-3.0
++License:        AGPL-3.0+ and BSD-3-Clause
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

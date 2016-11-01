@@ -1,0 +1,38 @@
+Index: ghc-mod.spec
+===================================================================
+--- ghc-mod.spec	(revision 15)
++++ ghc-mod.spec	(working copy)
+@@ -102,11 +102,15 @@
+ cp -p %{SOURCE1} %{name}.cabal
+ 
+ %build
++%define cabal_configure_options --libexecdir=%{_libexecdir}
+ %ghc_lib_build
+ 
+ %install
+ %ghc_lib_install
+ %ghc_fix_dynamic_rpath %{pkg_name} ghc-modi
++mkdir -p %{buildroot}%{_sysconfdir}/profile.d
++echo 'export cabal_helper_libexecdir=%{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
++echo 'setenv cabal_helper_libexecdir %{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
+ 
+ %check
+ %cabal_test
+@@ -124,13 +128,9 @@
+ %doc COPYING.AGPL3
+ %{_bindir}/%{name}
+ %{_bindir}/ghc-modi
+-%dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}/elisp
+-%{_datadir}/%{name}-%{version}/elisp/Makefile
+-%{_datadir}/%{name}-%{version}/elisp/*.el
+-%{_datadir}/%{name}-%{version}/LICENSE
+-%{_datadir}/%{name}-%{version}/COPYING.BSD3
+-%{_datadir}/%{name}-%{version}/COPYING.AGPL3
++%{_datadir}/%{name}-%{version}
++%config %{_sysconfdir}/profile.d/ghc-mod.sh
++%config %{_sysconfdir}/profile.d/ghc-mod.csh
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+
