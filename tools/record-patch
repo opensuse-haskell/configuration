@@ -11,4 +11,4 @@ osc diff *.spec >../../../patches/common/$pkg/${reason// /-}.patch
 
 echo $pkg: created ${reason// /-}.patch
 
-osc commit -m "$reason" *.spec
+osc commit --noservice -m "$reason" *.spec
