@@ -19,7 +19,7 @@ Index: ghc-GLUT.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath BOGLGP01-OnYourOwn1 BOGLGP01-Simple BOGLGP02-OnYourOwn1.hs BOGLGP02-OpenGLApplication.hs BOGLGP03-Lines BOGLGP03-OnYourOwn1 BOGLGP03-Points BOGLGP03-Polygons BOGLGP03-TrianglesQuads Misc-ARBOcclude Misc-ColorTriangle Misc-ExtractContours Misc-Gears Misc-Pitfall14 Misc-SmoothOpenGL3 Misc-Triangulate OrangeBook-Brick RedBook4-AAIndex RedBook4-AARGB RedBook4-AccAnti RedBook4-AccPersp RedBook4-Alpha RedBook4-Alpha3D RedBook4-BezCurve RedBook4-BezMesh RedBook4-BezSurf RedBook4-BlendEqn RedBook4-Checker RedBook4-Clip RedBook4-ColorMat RedBook4-ColorMatrix RedBook4-ColorTable RedBook4-Combiner RedBook4-Convolution RedBook4-Cube RedBook4-CubeMap RedBook4-DList RedBook4-DOF RedBook4-Double RedBook4-DrawF RedBook4-Feedback RedBook4-Fog RedBook4-FogCoord RedBook4-FogIndex RedBook4-Font RedBook4-Hello RedBook4-Histogram RedBook4-Image RedBook4-Light RedBook4-Lines RedBook4-MVArray RedBook4-Material RedBook4-Minmax RedBook4-Mipmap RedBook4-Model RedBook4-MoveLight RedBook4-MultiTex RedBook4-Multisamp RedBook4-PickDepth RedBook4-PickSquare RedBook4-Planet RedBook4-PointP RedBook4-PolyOff RedBook4-Polys RedBook4-Quadric RedBook4-Robot RedBook4-Scene RedBook4-Select RedBook4-ShadowMap RedBook4-Smooth RedBook4-Stencil RedBook4-Stroke RedBook4-SurfPoints RedBook4-Surface RedBook4-Teapots RedBook4-Tess RedBook4-TessWind RedBook4-TexBind RedBook4-TexGen RedBook4-TexProx RedBook4-TexSub RedBook4-Texture3D RedBook4-TextureSurf RedBook4-Torus RedBook4-Trim RedBook4-UnProject RedBook4-VArray RedBook4-Wrap RedBook8-Triangles
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %post devel
 @@ -78,95 +76,6 @@

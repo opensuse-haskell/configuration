@@ -37,7 +37,7 @@ Index: xmonad.spec
 +install -m0644 -D %{SOURCE10} %{desktop_src}
 +%suse_update_desktop_file %{desktop_src}
 +
- %ghc_fix_dynamic_rpath %{pkg_name}
+ %{ghc_fix_rpath} %{pkg_name}-%{version}
  
  
 @@ -109,8 +124,9 @@

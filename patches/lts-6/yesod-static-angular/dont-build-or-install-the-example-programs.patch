@@ -19,7 +19,7 @@ Index: ghc-yesod-static-angular.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath example-dev example-production
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -99,8 +97,6 @@

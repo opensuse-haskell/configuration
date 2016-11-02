@@ -19,7 +19,7 @@ Index: ghc-ipython-kernel.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath fun-calc-example simple-calc-example
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %post devel
 @@ -87,8 +85,6 @@

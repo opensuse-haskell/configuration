@@ -19,7 +19,7 @@ Index: ghc-language-lua2.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath lex parse
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -90,8 +88,6 @@

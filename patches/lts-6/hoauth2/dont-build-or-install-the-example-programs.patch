@@ -19,7 +19,7 @@ Index: ghc-hoauth2.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath test-douban test-facebook test-fitbit test-github test-google test-stackexchange test-weibo
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %post devel
 @@ -87,13 +85,6 @@

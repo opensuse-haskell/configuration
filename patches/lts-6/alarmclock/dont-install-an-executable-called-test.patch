@@ -6,7 +6,7 @@ Index: ghc-alarmclock.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath test
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
 +rm %{buildroot}/%{_bindir}/test
  
  

@@ -12,7 +12,7 @@ Index: pandoc.spec
  BuildRequires:  ghc-HUnit-devel
 @@ -146,6 +147,12 @@
  %ghc_lib_install
- %ghc_fix_dynamic_rpath %{pkg_name}
+ %{ghc_fix_rpath} %{pkg_name}-%{version}
  
 +# These files will be installed in the standard _docdir
 +rm %{buildroot}%{_datadir}/%{pkg_name}-%{version}/COPYRIGHT

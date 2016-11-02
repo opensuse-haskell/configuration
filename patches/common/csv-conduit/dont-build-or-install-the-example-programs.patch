@@ -19,7 +19,7 @@ Index: ghc-csv-conduit.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath bench
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -122,7 +120,6 @@

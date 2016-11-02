@@ -19,7 +19,7 @@ Index: ghc-vector-algorithms.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath vector-algorithms-bench
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -82,7 +80,6 @@

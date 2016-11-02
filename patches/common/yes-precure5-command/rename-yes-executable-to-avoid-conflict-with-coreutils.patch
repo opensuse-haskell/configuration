@@ -6,9 +6,9 @@ Index: ghc-yes-precure5-command.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath yes
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
 +mv %{buildroot}%{_bindir}/yes %{buildroot}%{_bindir}/yes-precure5
-+%ghc_fix_dynamic_rpath yes-precure5
++%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  
  %check

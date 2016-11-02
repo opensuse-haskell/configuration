@@ -19,7 +19,7 @@ Index: ghc-leveldb-haskell.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath leveldb-example-comparator leveldb-example-features leveldb-example-filterpolicy leveldb-example-iterforkio
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -100,10 +98,6 @@

@@ -19,7 +19,7 @@ Index: ghc-gtk3.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath gtk2hs-demo-actionMenu gtk2hs-demo-arabic gtk2hs-demo-builder gtk2hs-demo-buttonBox gtk2hs-demo-carsim gtk2hs-demo-combodemo gtk2hs-demo-fastDraw gtk2hs-demo-fonts gtk2hs-demo-helloworld gtk2hs-demo-layout gtk2hs-demo-menudemo gtk2hs-demo-notebook gtk2hs-demo-overlay gtk2hs-demo-progress gtk2hs-demo-progressThreadedRTS gtk2hs-demo-statusIcon
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %post devel
 @@ -87,22 +85,6 @@

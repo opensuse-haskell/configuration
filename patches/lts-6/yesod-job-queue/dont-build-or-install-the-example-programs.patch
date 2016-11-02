@@ -19,7 +19,7 @@ Index: ghc-yesod-job-queue.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath yesod-job-queue-example
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %post devel
 @@ -90,7 +88,6 @@

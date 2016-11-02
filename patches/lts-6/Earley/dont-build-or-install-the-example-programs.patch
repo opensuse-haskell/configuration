@@ -19,7 +19,7 @@ Index: ghc-Earley.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath earley-english earley-expr earley-expr2 earley-infinite earley-mixfix earley-very-ambiguous earley-words
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -80,13 +78,6 @@

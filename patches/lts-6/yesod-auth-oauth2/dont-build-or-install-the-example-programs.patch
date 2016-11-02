@@ -19,7 +19,7 @@ Index: ghc-yesod-auth-oauth2.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_dynamic_rpath yesod-auth-oauth2-example
+-%{ghc_fix_rpath} %{pkg_name}-%{version}
  
  %check
 @@ -96,7 +94,6 @@
