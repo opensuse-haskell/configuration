@@ -19,7 +19,7 @@ Index: ghc-waitra.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
 @@ -96,7 +94,6 @@

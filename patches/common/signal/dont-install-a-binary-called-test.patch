@@ -6,7 +6,7 @@ Index: ghc-signal.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
 +rm -Rf %{buildroot}/%{_bindir}/test
  
  

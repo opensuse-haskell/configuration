@@ -19,7 +19,7 @@ Index: ghc-network-transport-zeromq.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
 @@ -101,9 +99,6 @@

@@ -11,8 +11,8 @@ Index: ghc-cheapskate.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
-+%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
++%ghc_fix_rpath %{pkg_name}-%{version}
  
  %post devel
 @@ -90,7 +90,6 @@

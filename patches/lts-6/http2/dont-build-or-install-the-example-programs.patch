@@ -19,7 +19,7 @@ Index: ghc-http2.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
 @@ -93,10 +91,6 @@

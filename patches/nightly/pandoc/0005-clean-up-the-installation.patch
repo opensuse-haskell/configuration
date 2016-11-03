@@ -13,7 +13,7 @@ Index: pandoc.spec
 @@ -145,6 +146,8 @@
  %install
  %ghc_lib_install
- %{ghc_fix_rpath} %{pkg_name}-%{version}
+ %ghc_fix_rpath %{pkg_name}-%{version}
 +# Link duplicate template files
 +%fdupes %{buildroot}%{_datadir}/%{pkg_name}-%{version}/data/templates/
  

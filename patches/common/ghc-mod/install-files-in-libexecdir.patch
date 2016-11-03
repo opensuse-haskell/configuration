@@ -11,7 +11,7 @@ Index: ghc-mod.spec
  
  %install
  %ghc_lib_install
- %{ghc_fix_rpath} %{pkg_name}-%{version}
+ %ghc_fix_rpath %{pkg_name}-%{version}
 +mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 +echo 'export cabal_helper_libexecdir=%{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
 +echo 'setenv cabal_helper_libexecdir %{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh

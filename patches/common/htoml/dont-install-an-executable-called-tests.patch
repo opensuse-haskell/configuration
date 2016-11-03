@@ -6,7 +6,7 @@ Index: ghc-htoml.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
 +rm %{buildroot}/%{_bindir}/tests
  
  

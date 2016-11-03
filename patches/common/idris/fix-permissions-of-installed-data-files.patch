@@ -4,7 +4,7 @@ Index: idris.spec
 +++ idris.spec	(working copy)
 @@ -131,6 +131,10 @@
  %ghc_lib_install
- %{ghc_fix_rpath} %{pkg_name}-%{version}
+ %ghc_fix_rpath %{pkg_name}-%{version}
  
 +# Fix unnecessary executable permission bits on header and library files.
 +find "%{buildroot}%{_libexecdir}/%{name}-%{version}" -name "*.a" -exec chmod -x {} +

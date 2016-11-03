@@ -11,8 +11,8 @@ Index: ghc-pandoc-citeproc.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
-+%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
++%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
 @@ -113,7 +113,6 @@

@@ -19,7 +19,7 @@ Index: ghc-SHA.spec
  
  %install
  %ghc_lib_install
--%{ghc_fix_rpath} %{pkg_name}-%{version}
+-%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
 @@ -86,11 +84,6 @@
