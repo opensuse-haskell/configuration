@@ -104,6 +104,7 @@ main = do
       buildDir </> "*/git-annex/git-annex-*.tar.gz" %> \out -> do
         let pkgDir = takeDirectory out
         need [pkgDir </> "git-annex.spec"]
+        liftIO $ removeFiles pkgDir ["*.tar.gz"]
         command_ [Cwd pkgDir] "osc" ["service", "localrun", "download_files"]
 
       -- Pattern rule that copies the required source tarballs from cabal's
