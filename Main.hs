@@ -28,7 +28,7 @@ main = do
                { shakeFiles = buildDir
                , shakeProgress = progressSimple
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "1"     -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "2"     -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -143,6 +143,8 @@ main = do
                 , display pkgid
                 ])
       command_ [] "spec-cleaner" ["-i", out]
+      command_ [] "sed" ["-i", "-e", "s/%{ghc_fix_rpath}/%ghc_fix_rpath/g", out]
+
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
                                       ]
@@ -150,6 +152,7 @@ main = do
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
         command_ [] "spec-cleaner" ["-i", out]
+        command_ [] "sed" ["-i", "-e", "s/%{ghc_fix_rpath}/%ghc_fix_rpath/g", out]
       Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
       let versionString = unwords $ ["version", display v] ++
