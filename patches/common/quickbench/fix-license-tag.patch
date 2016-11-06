@@ -1,0 +1,14 @@
+Index: ghc-quickbench.spec
+===================================================================
+--- ghc-quickbench.spec	(revision 3)
++++ ghc-quickbench.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.0
+ Release:        0
+ Summary:        Quick & easy benchmarking of command-line programs
+-License:        GPL-1.0+
++License:        GPL-3.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
