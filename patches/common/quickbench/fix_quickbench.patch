@@ -1,0 +1,27 @@
+Index: quickbench.spec
+===================================================================
+--- quickbench.spec	(revision 2)
++++ quickbench.spec	(working copy)
+@@ -21,8 +21,8 @@
+ Version:        1.0
+ Release:        0
+ Summary:        Quick & easy benchmarking of command-line programs
+-License:        GPL-1.0+
+-Group:          Development/Languages/Other
++License:        GPL-3.0+
++Group:          Development/Tools/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ BuildRequires:  chrpath
+@@ -88,10 +88,8 @@
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+-%doc LICENSE
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %defattr(-,root,root,-)
+-%doc CHANGES README.md
+ 
+ %changelog
+
