@@ -1,0 +1,29 @@
+Index: quickbench.spec
+===================================================================
+--- quickbench.spec	(revision 4)
++++ quickbench.spec	(working copy)
+@@ -20,7 +20,7 @@
+ Name:           %{pkg_name}
+ Version:        1.0
+ Release:        0
+-Summary:        Quick & easy benchmarking of command-line programs
++Summary:        Utility for benchmarking command-line programs
+ License:        GPL-3.0+
+ Group:          Development/Tools/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+@@ -40,11 +40,9 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-Quickbench produces very simple output (elapsed seconds), as quickly as
+-possible (running commands just once by default), and tabulates results from
+-multiple executables. I find it very useful for quick and dirty, exploratory,
+-and comparative measurements that you can understand at a glance.
+-Please see the readme for more.
++Quickbench runs one or more commands repeatedly (by default just
++once) and outputs the elapsed seconds in plain or tabulated fashion.
++It can be used for exploratory and comparative measurements.
+ 
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+
