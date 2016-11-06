@@ -64,6 +64,7 @@ pointfree
 pointful
 postgresql-schema
 purescript
+quickbench
 shake
 ShellCheck
 stack

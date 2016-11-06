@@ -7,10 +7,10 @@ trap "rm -f $tmp" 0
 
 pkg="$1"
 
-osc sr devel:languages:haskell:lts:6 "$pkg" devel:languages:haskell -m "license update" -d >"$tmp"
+osc sr devel:languages:haskell:lts:7 "$pkg" devel:languages:haskell -m "license update" -d >"$tmp"
 lines=$(wc -l "$tmp" | cut -f1 -d' ')
 if [ "$lines" -gt 3 ]; then
-  echo y | osc sr -m "license update" devel:languages:haskell:lts:6 "$pkg" devel:languages:haskell >"$tmp" || true
+  echo y | osc sr -m "license update" devel:languages:haskell:lts:7 "$pkg" devel:languages:haskell >"$tmp" || true
   reqid=$(sed -n -e "s/.*created request id //p" "$tmp")
   if [ -z "$reqid" ]; then
     cat "$tmp"
