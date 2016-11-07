@@ -73,6 +73,7 @@ stackage-curator
 stackage-curator
 stylish-haskell
 texmath
+titlecase
 werewolf
 wordpass
 xmobar

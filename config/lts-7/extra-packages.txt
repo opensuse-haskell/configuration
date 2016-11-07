@@ -5,6 +5,7 @@ BNFC
 structured-haskell-mode
 applicative-quoters
 HaXml
+titlecase
 
 # Used by osukup@suse.com.
 cab
