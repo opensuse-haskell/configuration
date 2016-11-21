@@ -25,3 +25,5 @@ update:
 	gzip -k $(CABAL_INSTALL_TARBALL)
 	cabal fetch -v0 --no-dependencies ip6addr
 	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
+	# TODO: We need a way to add Cabal 1.24.1.0 to our package set.
+	sed -i -e "s|cabal-install ==1.24.0.1,|cabal-install ==1.24.0.0,|g" config/*/stackage-packages.txt
