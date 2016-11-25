@@ -97,3 +97,6 @@ Win32-notify
 
 # https://github.com/opensuse-haskell/configuration/issues/7
 wl-pprint-terminfo
+
+# doesn't have a proper license
+timeit
