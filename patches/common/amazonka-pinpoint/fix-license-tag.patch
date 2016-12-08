@@ -1,8 +1,11 @@
-Index: ghc-amazonka-ssm.spec
+Index: ghc-amazonka-pinpoint.spec
 ===================================================================
---- ghc-amazonka-ssm.spec	(revision 3)
-+++ ghc-amazonka-ssm.spec	(working copy)
-@@ -22,4 +22,4 @@
+--- ghc-amazonka-pinpoint.spec	(revision 1)
++++ ghc-amazonka-pinpoint.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.5
+ Release:        0
+ Summary:        Amazon Pinpoint SDK
 -License:        Unknown
 +License:        MPL-2.0
  Group:          Development/Languages/Other

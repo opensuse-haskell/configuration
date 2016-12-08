@@ -1,8 +1,11 @@
-Index: ghc-amazonka-ssm.spec
+Index: ghc-amazonka-opsworks-cm.spec
 ===================================================================
---- ghc-amazonka-ssm.spec	(revision 3)
-+++ ghc-amazonka-ssm.spec	(working copy)
-@@ -22,4 +22,4 @@
+--- ghc-amazonka-opsworks-cm.spec	(revision 1)
++++ ghc-amazonka-opsworks-cm.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.5
+ Release:        0
+ Summary:        Amazon OpsWorks for Chef Automate SDK
 -License:        Unknown
 +License:        MPL-2.0
  Group:          Development/Languages/Other
