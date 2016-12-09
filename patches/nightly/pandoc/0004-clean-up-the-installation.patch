@@ -1,16 +1,16 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 2)
+--- pandoc.spec	(revision 393ea3858e64278ab38545c769c9977f)
 +++ pandoc.spec	(working copy)
-@@ -89,6 +89,7 @@
- BuildRequires:  ghc-test-framework-hunit-devel
- BuildRequires:  ghc-test-framework-quickcheck2-devel
- %endif
+@@ -28,6 +28,7 @@
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source10:       pandoc-pdf.readme
+ BuildRequires:  chrpath
 +BuildRequires:  fdupes
- 
- %description
- Pandoc is a Haskell library for converting from one markup format to another,
-@@ -145,6 +146,8 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-JuicyPixels-devel
+@@ -148,6 +149,8 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
@@ -19,11 +19,10 @@ Index: pandoc.spec
  
  %check
  %cabal_test
-@@ -160,84 +163,12 @@
- %doc COPYING.md
+@@ -164,83 +167,7 @@
  %doc README.md changelog
  %{_bindir}/%{name}
--%dir %{_datadir}/%{name}-%{version}
+ %dir %{_datadir}/%{name}-%{version}
 -%dir %{_datadir}/%{name}-%{version}/data
 -%dir %{_datadir}/%{name}-%{version}/data/templates
 -%dir %{_datadir}/%{name}-%{version}/data/docx
@@ -101,13 +100,8 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
 -%{_datadir}/%{name}-%{version}/MANUAL.txt
 -%{_datadir}/%{name}-%{version}/COPYRIGHT
-+%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/pandoc.1%{ext_man}
-+
-+%files pdf
-+%defattr(-,root,root,-)
-+%doc pandoc-pdf.readme
  
- %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
+ %if 0%{?is_opensuse}
+ %files pdf
 

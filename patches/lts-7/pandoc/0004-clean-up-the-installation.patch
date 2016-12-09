@@ -1,16 +1,16 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 1b5160d5429efeca2344c97ff35db394)
+--- pandoc.spec	(revision ba3da54c4a7b074b56748f7586e6ccc8)
 +++ pandoc.spec	(working copy)
-@@ -78,6 +78,7 @@
- BuildRequires:  ghc-zlib-devel
- Suggests:       texlive-latex-bin-bin
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -30,6 +30,7 @@
+ Source10:       pandoc-pdf.readme
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
 +BuildRequires:  fdupes
- %if %{with tests}
- BuildRequires:  ghc-Diff-devel
- BuildRequires:  ghc-HUnit-devel
-@@ -146,6 +147,12 @@
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-JuicyPixels-devel
+ BuildRequires:  ghc-SHA-devel
+@@ -150,6 +151,12 @@
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
  
@@ -23,10 +23,11 @@ Index: pandoc.spec
  %check
  %cabal_test
  
-@@ -158,84 +165,15 @@
+@@ -162,85 +169,12 @@
  %files
  %defattr(-,root,root,-)
  %doc COPYING
+-%doc changelog
 +%doc README
 +%doc BUGS CONTRIBUTING.md COPYRIGHT changelog
  %{_bindir}/%{name}
@@ -107,20 +108,18 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
 -%{_datadir}/%{name}-%{version}/README
 -%{_datadir}/%{name}-%{version}/COPYRIGHT
++%%{_datadir}/%{name}-%{version}
 +%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/pandoc.1%{ext_man}
-+
-+%files pdf
-+%defattr(-,root,root,-)
-+%doc pandoc-pdf.readme
  
- %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
-@@ -243,5 +181,6 @@
+ %if 0%{?is_opensuse}
+ %files pdf
+@@ -254,6 +188,6 @@
  
  %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
  %defattr(-,root,root,-)
-+%doc README
+-%doc changelog
++%doc README 
  
  %changelog
 
