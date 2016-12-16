@@ -1,16 +1,36 @@
-Index: pandoc.spec
-===================================================================
---- pandoc.spec	(revision ba3da54c4a7b074b56748f7586e6ccc8)
-+++ pandoc.spec	(working copy)
-@@ -30,6 +30,7 @@
+diff --git pandoc.spec pandoc.spec
+index 1b87441..e7fdc86 100644
+--- pandoc.spec
++++ pandoc.spec
+@@ -29,6 +29,7 @@ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
  Source10:       pandoc-pdf.readme
  BuildRequires:  chrpath
- BuildRequires:  ghc-Cabal-devel
 +BuildRequires:  fdupes
+ BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-HTTP-devel
  BuildRequires:  ghc-JuicyPixels-devel
- BuildRequires:  ghc-SHA-devel
-@@ -150,6 +151,12 @@
+@@ -106,19 +107,14 @@ format and produce a native representation of the document, and a set of
+ writers, which convert this native representation into a target format.
+ Thus, adding an input or output format requires only adding a reader or writer.
+ 
+-# pandoc pdf doesn't work on SLE
+-%if 0%{?is_opensuse}
+ %package pdf
+ Summary:        Meta package for support generating pdf with pandoc
+ Group:          Productivity/Publishing/PDF
+ Requires:       %{name} = %{version}
+ Requires:       texlive-latex-bin-bin
+-# bsc#1014590
+-Requires:       texlive-upqoute
+ 
+ %description pdf
+ Meta package for support generating pdf with pandoc.
+-%endif
+ 
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+@@ -150,6 +146,12 @@ cp %{SOURCE10} .
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
  
@@ -23,11 +43,10 @@ Index: pandoc.spec
  %check
  %cabal_test
  
-@@ -162,85 +169,12 @@
+@@ -162,90 +164,15 @@ cp %{SOURCE10} .
  %files
  %defattr(-,root,root,-)
  %doc COPYING
--%doc changelog
 +%doc README
 +%doc BUGS CONTRIBUTING.md COPYRIGHT changelog
  %{_bindir}/%{name}
@@ -108,18 +127,21 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
 -%{_datadir}/%{name}-%{version}/README
 -%{_datadir}/%{name}-%{version}/COPYRIGHT
-+%%{_datadir}/%{name}-%{version}
 +%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/pandoc.1%{ext_man}
  
- %if 0%{?is_opensuse}
+-%if 0%{?is_opensuse}
  %files pdf
-@@ -254,6 +188,6 @@
+ %defattr(-,root,root,-)
+ %doc pandoc-pdf.readme
+-%endif
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %defattr(-,root,root,-)
+@@ -253,5 +180,6 @@ cp %{SOURCE10} .
  
  %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
  %defattr(-,root,root,-)
--%doc changelog
-+%doc README 
++%doc README
  
  %changelog
-
