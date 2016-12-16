@@ -1,28 +1,12 @@
-Index: pandoc.spec
-===================================================================
---- pandoc.spec	(revision 393ea3858e64278ab38545c769c9977f)
-+++ pandoc.spec	(working copy)
-@@ -28,6 +28,7 @@
- Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source10:       pandoc-pdf.readme
- BuildRequires:  chrpath
-+BuildRequires:  fdupes
- BuildRequires:  ghc-Cabal-devel
- BuildRequires:  ghc-HTTP-devel
- BuildRequires:  ghc-JuicyPixels-devel
-@@ -148,6 +149,8 @@
- %install
- %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
-+# Link duplicate template files
-+%fdupes %{buildroot}%{_datadir}/%{pkg_name}-%{version}/data/templates/
- 
- %check
- %cabal_test
-@@ -164,83 +167,7 @@
+diff --git pandoc.spec pandoc.spec
+index 0c3ec58..8e07fc7 100644
+--- pandoc.spec
++++ pandoc.spec
+@@ -166,83 +166,8 @@ cp %{SOURCE10} .
+ %doc COPYING.md
  %doc README.md changelog
  %{_bindir}/%{name}
- %dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}
 -%dir %{_datadir}/%{name}-%{version}/data
 -%dir %{_datadir}/%{name}-%{version}/data/templates
 -%dir %{_datadir}/%{name}-%{version}/data/docx
@@ -94,14 +78,13 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/odt/META-INF/manifest.xml
 -%{_datadir}/%{name}-%{version}/data/epub.css
 -%{_datadir}/%{name}-%{version}/data/LaTeXMathML.js
--%{_datadir}/%{name}-%{version}/data/MathMLinHTML.js
 -%{_datadir}/%{name}-%{version}/data/dzslides/template.html
 -%{_datadir}/%{name}-%{version}/data/sample.lua
 -%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
 -%{_datadir}/%{name}-%{version}/MANUAL.txt
 -%{_datadir}/%{name}-%{version}/COPYRIGHT
++%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/pandoc.1%{ext_man}
  
  %if 0%{?is_opensuse}
  %files pdf
-
