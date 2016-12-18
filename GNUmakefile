@@ -21,7 +21,7 @@ config/%/stackage-packages.txt:
 
 update:
 	rm -f $(CABAL_INSTALL_TARBALL)*
-	cd hackage && git pull && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
+	cd hackage && git checkout hackage && git pull && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
 	gzip -k $(CABAL_INSTALL_TARBALL)
 	cabal fetch -v0 --no-dependencies ip6addr
 	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
