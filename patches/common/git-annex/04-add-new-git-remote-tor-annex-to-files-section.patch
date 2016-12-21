@@ -1,0 +1,21 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 15)
++++ git-annex.spec	(working copy)
+@@ -187,6 +187,7 @@
+ %doc COPYRIGHT README
+ %{_bindir}/%{name}
+ %{_bindir}/%{name}-shell
++%{_bindir}/git-remote-tor-annex
+ %dir %{_datadir}/icons/hicolor
+ %dir %{_datadir}/icons/hicolor/16x16
+ %dir %{_datadir}/icons/hicolor/16x16/apps
+@@ -194,6 +195,7 @@
+ %dir %{_datadir}/icons/hicolor/scalable/apps
+ %{_sysconfdir}/xdg/autostart/git-annex.desktop
+ %{_mandir}/man1/git-annex*.1%{ext_man}
++%{_mandir}/man1/git-remote-tor-annex.1%{ext_man}
+ %{_datadir}/applications/git-annex.desktop
+ %{_datadir}/icons/hicolor/16x16/apps/git-annex.png
+ %{_datadir}/icons/hicolor/scalable/apps/git-annex.svg
+
