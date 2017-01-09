@@ -8,3 +8,6 @@
 	path = hackage
 	url = git://github.com/commercialhaskell/all-cabal-files.git
 	branch = hackage
+[submodule "tools/spec-cleaner"]
+	path = tools/spec-cleaner
+	url = git://github.com/openSUSE/spec-cleaner.git

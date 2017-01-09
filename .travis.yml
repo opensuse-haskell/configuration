@@ -3,21 +3,31 @@
 language: c
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.cabsnap
+    - $HOME/.cabal/packages
+
 addons:
   apt:
     sources:
       - hvr-ghc
+      - deadsnakes
     packages:
       - cabal-install-1.24
       - ghc-8.0.1
+      - python3.5
 
 before_install:
  - unset CC
- - export PATH=$HOME/.cabal/bin:/opt/ghc/8.0.1/bin:/opt/cabal/1.24/bin:$PATH
+ - export PATH=$HOME/.local/bin:$HOME/.cabal/bin:/opt/ghc/8.0.1/bin:/opt/cabal/1.24/bin:$PATH
+ - curl https://bootstrap.pypa.io/ez_setup.py | python3.5 - --user
+ - (cd tools/spec-cleaner && python3.5 setup.py install --user)
 
 install:
  - cabal --version
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
+ - spec-cleaner --version
  - travis_retry cabal update -v
  - sed -i 's/^jobs:/-- jobs:/' ${HOME}/.cabal/config
  - cabal install hpack shake
