@@ -143,7 +143,7 @@ main = do
                 [ "spec"
                 , display pkgid
                 ])
-      command_ [] "spec-cleaner" ["-i", out]
+      command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
@@ -151,7 +151,7 @@ main = do
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
-        command_ [] "spec-cleaner" ["-i", out]
+        command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
       Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
       let versionString = unwords $ ["version", display v] ++
