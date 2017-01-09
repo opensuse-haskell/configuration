@@ -16,6 +16,7 @@ addons:
       - cabal-install-1.24
       - ghc-8.0.1
       - python3.5
+      - rpm
 
 before_install:
  - unset CC
