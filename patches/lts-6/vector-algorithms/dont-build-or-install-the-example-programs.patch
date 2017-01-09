@@ -2,10 +2,11 @@ Index: ghc-vector-algorithms.spec
 ===================================================================
 --- ghc-vector-algorithms.spec	(revision 6)
 +++ ghc-vector-algorithms.spec	(working copy)
-@@ -26,7 +26,6 @@
+@@ -26,8 +26,7 @@
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/1.cabal#/%{pkg_name}.cabal
 -BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-bytestring-devel
