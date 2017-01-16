@@ -9,6 +9,7 @@ import Control.Monad
 import Data.List
 import Data.Function
 import Data.Maybe
+import Data.Time
 import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Package
@@ -97,7 +98,6 @@ main = do
         let pkgid = dropExtension (takeBaseName out)
         command_ [] "cabal" ["fetch", "-v0", "--no-dependencies", "--", pkgid]
 
-
     alternatives $ do
       -- git-annex cannot be built from its Hackage source code because, you
       -- know, upstream is nuts. So we need a special magic rule for this case.
@@ -156,9 +156,13 @@ main = do
       when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
       let versionString = unwords $ ["version", display v] ++
                                     if rev==0  then [] else ["revision", show rev]
-      Exit c2 <- command [] "grep" ["-q", "-s", "-F", "-e", versionString, out -<.> "changes"]
-      when (c2 /= ExitSuccess) $
-        command_ [Cwd pkgDir] "osc" ["vc", "-m", "Update to " ++ versionString ++ " with cabal2obs."]
+          changesFile = out -<.> "changes"
+      liftIO $ do
+        changes <- do changesFileExists <- System.Directory.doesFileExist changesFile
+                      if changesFileExists then readFile changesFile else return ""
+        unless (versionString `isInfixOf` changes) $ do
+           newEntry <- mkChangeEntry versionString "psimons@suse.com"
+           writeFile changesFile (newEntry ++ changes)
 
     buildDir </> "packages.csv" %> \out -> do
       let psid = PackageSetId "lts-7"
@@ -168,3 +172,15 @@ main = do
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
         return $ intercalate "," [ show n, show (display v), show url]
       writeFile' out (intercalate "\n" ls)
+
+
+mkChangeEntry :: String -> String -> IO String
+mkChangeEntry version email = do
+  ts <- formatTime defaultTimeLocale "%a %b %_d %H:%M:%S %Z %Y" <$> getCurrentTime
+  return $ unlines
+    [ "-------------------------------------------------------------------"
+    , unwords [ ts, "-", email ]
+    , ""
+    , unwords [ "- Update to", version, "with cabal2obs." ]
+    , ""
+    ]

@@ -20,6 +20,7 @@ executables:
       - containers
       - directory
       - shake
+      - time
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
       - Oracle
