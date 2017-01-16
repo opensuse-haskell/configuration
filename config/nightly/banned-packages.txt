@@ -110,3 +110,6 @@ jni
 # Its license (Free Public License 1.0.0 a.k.a. FPL-1.0) is not listed by SPDX.
 # https://gitlab.com/twittner/cql/issues/2
 cql
+
+# It's unclear which license this package is under.
+parsec-numeric
