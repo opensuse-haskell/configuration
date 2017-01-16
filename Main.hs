@@ -98,24 +98,18 @@ main = do
         let pkgid = dropExtension (takeBaseName out)
         command_ [] "cabal" ["fetch", "-v0", "--no-dependencies", "--", pkgid]
 
-    alternatives $ do
-      -- git-annex cannot be built from its Hackage source code because, you
-      -- know, upstream is nuts. So we need a special magic rule for this case.
-      buildDir </> "*/git-annex/git-annex-*.tar.gz" %> \out -> do
-        let pkgDir = takeDirectory out
-        need [pkgDir </> "git-annex.spec"]
-        liftIO $ removeFiles pkgDir ["*.tar.gz"]
-        command_ [Cwd pkgDir] "osc" ["service", "localrun", "download_files"]
-
-      -- Pattern rule that copies the required source tarballs from cabal's
-      -- internal cache into our build tree.
-      buildDir </> "*/*/*.tar.gz" %> \out -> do
-        let pkgid = dropExtension (takeBaseName out)
-        PackageIdentifier (PackageName n) v <- parseText "package id" pkgid
-        liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
-        copyFile'
-          (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz")
-          out
+    -- Pattern rule that copies the required source tarballs from cabal's
+    -- internal cache into our build tree.
+    buildDir </> "*/*/*.tar.gz" %> \out -> do
+      liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
+      let pkgid = dropExtension (takeBaseName out)
+      PackageIdentifier (PackageName n) v <- parseText "package id" pkgid
+      if n == "git-annex"
+         then command_ [FileStdout out ] "curl"
+                       [ "-L", "--silent", "--show-error", "--"
+                       , "https://github.com/joeyh/git-annex/archive/" ++ display v ++".tar.gz"
+                       ]
+         else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz") out
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
