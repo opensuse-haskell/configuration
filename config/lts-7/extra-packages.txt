@@ -2,7 +2,7 @@
 
 # Used by psimons@suse.com.
 BNFC
-structured-haskell-mode
+structured-haskell-mode < 1.1.0
 applicative-quoters
 HaXml
 titlecase
