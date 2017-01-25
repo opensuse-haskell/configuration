@@ -8,7 +8,7 @@ all:		config/lts-6/stackage-packages.txt
 all:		config/lts-7/stackage-packages.txt
 all:		config/nightly/stackage-packages.txt
 all:		cabal-rpm cabal2obs
-	nice -n20 tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc) --lint -V
+	nice -n20 tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc) --lint -V $(CABAL2OBS_FLAGS)
 
 cabal-rpm:
 	@cd tools/cabal-rpm && cabal build

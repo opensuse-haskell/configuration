@@ -6,6 +6,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.cabal/packages
+    - $HOME/build/opensuse-haskell/configuration/_build
 
 addons:
   apt:
@@ -33,4 +34,4 @@ install:
  - cabal install hpack shake
 
 script:
-  - make
+  - make CABAL2OBS_FLAGS="--digest --keep-going --no-progress"
