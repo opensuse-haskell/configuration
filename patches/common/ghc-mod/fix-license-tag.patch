@@ -7,7 +7,7 @@ Index: ghc-mod.spec
  Release:        0
  Summary:        Happy Haskell Programming
 -License:        AGPL-3.0
-+License:        AGPL-3.0+ and BSD-3-Clause
++License:        AGPL-3.0+ AND BSD-3-Clause
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

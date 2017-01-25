@@ -5,7 +5,7 @@ Index: git-annex.spec
 @@ -21,7 +21,7 @@
  Release:        0
  Summary:        Manage files with git, without checking their contents into git
- License:        GPL-3.0+ and AGPL-3.0+ and BSD-2-Clause and MIT and GPL-2.0
+ License:        GPL-3.0+ AND AGPL-3.0+ AND BSD-2-Clause AND MIT AND GPL-2.0
 -Group:          Development/Languages/Other
 +Group:          Development/Tools/Version Control
  Url:            https://hackage.haskell.org/package/%{name}

@@ -7,7 +7,7 @@ Index: ghc-etcd.spec
  Release:        0
  Summary:        Client for etcd, a highly-available key value store
 -License:        Unknown
-+License:        Unlicense    # http://unlicense.org/
++License:        Unlicense
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
