@@ -6,9 +6,10 @@ import ParseUtils
 import Types
 
 import Control.Monad
-import Data.List
 import Data.Function
+import Data.List
 import Data.Maybe
+import Data.SPDX
 import Data.Time
 import Development.Shake
 import Development.Shake.FilePath
@@ -16,7 +17,6 @@ import Distribution.Package
 import Distribution.Text
 import System.Directory
 import System.Environment
-import System.Exit
 
 main :: IO ()
 main = do
@@ -42,7 +42,7 @@ main = do
     compilerId <- getCompiler configDir
     flagAssignments <- getFlagAssignments configDir
 
-    getFlags <- addOracle $ \(psid@(PackageSetId _), (PackageName n)) -> do
+    getFlags <- addOracle $ \(psid@(PackageSetId _), PackageName n) -> do
       fas <- flagAssignments (GetFlagAssignments psid)
       return $ fromMaybe [] (lookup n fas)
 
@@ -146,8 +146,8 @@ main = do
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
         command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
-      Exit c1 <- command [] "grep" ["--silent", "-E", "^License:.*Unknown", out]
-      when (c1 == ExitSuccess) $ fail "invalid license type 'Unknown'"
+      Stdout buf <- command [] "sed" ["-n", "-e", "s/^License: *//p", out]
+      mapM_ verifyLicense (lines buf)
       let versionString = unwords $ ["version", display v] ++
                                     if rev==0  then [] else ["revision", show rev]
           changesFile = out -<.> "changes"
@@ -178,3 +178,14 @@ mkChangeEntry version email = do
     , unwords [ "- Update to", version, "with cabal2obs." ]
     , ""
     ]
+
+verifyLicense :: Monad m => String -> m ()
+verifyLicense "SUSE-Public-Domain" = return ()
+verifyLicense license
+  | [l] <- parseExpression license = when (prettyLicenseExpression l /= license) $ fail $
+                                       unwords [ "license expression"
+                                               , license
+                                               , "doesn't match expected"
+                                               , prettyLicenseExpression l
+                                               ]
+  | otherwise                      = fail (unwords ["invalid license expression", show license])

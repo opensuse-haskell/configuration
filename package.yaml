@@ -19,6 +19,7 @@ executables:
       - Cabal
       - containers
       - directory
+      - spdx
       - shake
       - time
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
