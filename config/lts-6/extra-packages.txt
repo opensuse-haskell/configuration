@@ -21,6 +21,7 @@ structured-haskell-mode < 1.1.0
 X11-xft
 xmobar
 xmonad-contrib
+TaxonomyTools < 1.1
 
 # Required to build Idris with +ffi Cabal flag.
 libffi
