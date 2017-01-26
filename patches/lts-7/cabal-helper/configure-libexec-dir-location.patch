@@ -14,8 +14,8 @@ Index: ghc-cabal-helper.spec
  %files -f %{name}.files
  %defattr(-,root,root,-)
  %doc LICENSE
--%{_bindir}/cabal-helper-wrapper-v0.7
-+%{_libexecdir}/cabal-helper-wrapper-v0.7
+-%{_bindir}/cabal-helper-wrapper
++%{_libexecdir}/cabal-helper-wrapper
  
  %files devel -f %{name}-devel.files
  %defattr(-,root,root,-)
