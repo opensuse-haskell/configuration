@@ -1,0 +1,13 @@
+Index: ghc-blake2.spec
+===================================================================
+--- ghc-blake2.spec	(revision 2)
++++ ghc-blake2.spec	(working copy)
+@@ -37,6 +37,7 @@
+ BuildRequires:  ghc-tasty-devel
+ BuildRequires:  ghc-tasty-quickcheck-devel
+ %endif
++ExcludeArch:    %{ix86}
+ 
+ %description
+ This library provides the <https://blake2.net/ BLAKE2> hash algorithms.
+
