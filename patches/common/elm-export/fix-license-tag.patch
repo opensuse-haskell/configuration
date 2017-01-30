@@ -1,0 +1,14 @@
+Index: ghc-elm-export.spec
+===================================================================
+--- ghc-elm-export.spec	(revision 1)
++++ ghc-elm-export.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.6.0.0
+ Release:        0
+ Summary:        A library to generate Elm types from Haskell source
+-License:        Unknown
++License:        EPL-1.0
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
