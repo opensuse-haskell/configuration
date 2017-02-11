@@ -10,7 +10,7 @@ all:		config/nightly/stackage-packages.txt
 all:		cabal-rpm cabal2obs
 	rm -f $(CABAL_INSTALL_TARBALL)*
 	cd hackage && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
-	gzip -k $(CABAL_INSTALL_TARBALL)
+	gzip <$(CABAL_INSTALL_TARBALL) >$(CABAL_INSTALL_TARBALL).gz
 	cabal fetch -v0 --no-dependencies ip6addr
 	nice -n20 tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc) --lint -V $(CABAL2OBS_FLAGS)
 
