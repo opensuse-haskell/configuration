@@ -8,6 +8,10 @@ all:		config/lts-6/stackage-packages.txt
 all:		config/lts-7/stackage-packages.txt
 all:		config/nightly/stackage-packages.txt
 all:		cabal-rpm cabal2obs
+	rm -f $(CABAL_INSTALL_TARBALL)*
+	cd hackage && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
+	gzip -k $(CABAL_INSTALL_TARBALL)
+	cabal fetch -v0 --no-dependencies ip6addr
 	nice -n20 tools/cabal2obs/dist/build/cabal2obs/cabal2obs -j$$(nproc) --lint -V $(CABAL2OBS_FLAGS)
 
 cabal-rpm:
@@ -20,10 +24,7 @@ config/%/stackage-packages.txt:
 	curl -L -s "https://www.stackage.org/$*/cabal.config" >$@
 
 update:
-	rm -f $(CABAL_INSTALL_TARBALL)*
-	cd hackage && git checkout hackage && git pull && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
-	gzip -k $(CABAL_INSTALL_TARBALL)
-	cabal fetch -v0 --no-dependencies ip6addr
+	cd hackage && git checkout hackage && git pull
 	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
 	# TODO: We need a way to add Cabal 1.24.2.0 to our package set.
 	sed -i -e "s|cabal-install ==1.24.*,|cabal-install ==1.24.0.0,|g" config/lts-*/stackage-packages.txt
