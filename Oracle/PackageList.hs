@@ -33,6 +33,10 @@ getPackageList configDir resolveConstraint = addOracle $ \(GetPackageList (Packa
       pset'' = pset' ++ extra'
   return pset''
 
+-- TODO: Recognize and consciously drop "foobar installed" lines; then
+--       implement proper error handling, i.e. fail when something doesn't look
+--       right.
+
 parseCabalConfig :: String -> [PackageIdentifier]
 parseCabalConfig buf = dependencyToId <$> catMaybes (parseCabalConfigLine <$> lines buf)
   where
