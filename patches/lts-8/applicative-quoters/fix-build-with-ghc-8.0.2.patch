@@ -1,0 +1,23 @@
+Index: ghc-applicative-quoters.spec
+===================================================================
+--- ghc-applicative-quoters.spec	(revision 3)
++++ ghc-applicative-quoters.spec	(working copy)
+@@ -26,6 +26,7 @@
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/1.cabal#/%{pkg_name}.cabal
++Patch1:         https://github.com/bmillwood/applicative-quoters/pull/7.patch#/fix-ghc8-build.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-haskell-src-meta-devel
+ BuildRequires:  ghc-rpm-macros
+@@ -54,7 +55,9 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%patch1 -p1
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver template-haskell '< 2.11' ' < 2.12'
+ 
+ %build
+ %ghc_lib_build
+
