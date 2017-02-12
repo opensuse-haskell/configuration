@@ -1,7 +1,7 @@
--- Stackage snapshot from: http://www.stackage.org/snapshot/nightly-2017-02-11
+-- Stackage snapshot from: http://www.stackage.org/snapshot/lts-8.0
 -- Please place this file next to your .cabal file as cabal.config
 -- To only use tested packages, uncomment the following line:
--- remote-repo: stackage-nightly-2017-02-11:http://www.stackage.org/nightly-2017-02-11
+-- remote-repo: stackage-lts-8.0:http://www.stackage.org/lts-8.0
 constraints: abstract-deque ==0.3,
              abstract-par ==0.3.3,
              AC-Vector ==2.3.2,
