@@ -1,7 +1,8 @@
-# GHC 8.0.x core packages
+# config/nightly/banned-packages.txt
+
+# GHC 8.0.2 core packages
 array
 base
-bin-package-db
 binary
 bytestring
 Cabal
@@ -9,7 +10,9 @@ containers
 deepseq
 directory
 filepath
-ghc
+ghc-boot
+ghc-boot-th
+ghci
 ghc-prim
 haskeline
 hoopl
@@ -17,6 +20,7 @@ hpc
 integer-gmp
 pretty
 process
+rts
 template-haskell
 terminfo
 time

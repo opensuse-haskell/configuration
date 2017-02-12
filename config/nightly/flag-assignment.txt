@@ -25,3 +25,6 @@ texmath:                        -fexecutable
 
 # Enable almost all extensions.
 xmobar:                         -fwith_thread -fwith_utf8 -fwith_xft -fwith_xpm -fwith_mpris -fwith_dbus -fwith_iwlib -fwith_inotify
+
+# Enable additional features
+idris:                          -fffi -fgmp
