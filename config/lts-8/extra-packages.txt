@@ -30,7 +30,6 @@ ed25519
 # These packages are dependencies of git-annex and/or cabal-install.
 bloomfilter
 data-default-instances-base
-esqueleto < 2.5
 fdo-notify
 git-annex
 gnuidn
