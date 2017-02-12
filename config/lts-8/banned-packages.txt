@@ -1,0 +1,115 @@
+# GHC 8.0.x core packages
+array
+base
+bin-package-db
+binary
+bytestring
+Cabal
+containers
+deepseq
+directory
+filepath
+ghc
+ghc-prim
+haskeline
+hoopl
+hpc
+integer-gmp
+pretty
+process
+template-haskell
+terminfo
+time
+transformers
+unix
+
+# doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+eventstore
+
+# needs obsolete dependencies we don't want to provide
+cabal2nix
+
+# we have no working freenect
+freenect
+
+# no license information: https://github.com/wereHamster/github-types/issues/2
+github-types
+
+# depends on broken github-types
+github-webhook-handler
+
+# depends on broken github-types
+github-webhook-handler-snap
+
+# doesn't work on Linux
+hfsevents
+
+# we don't have libocilib.so
+hocilib
+
+# depends on broken wl-pprint-terminfo
+hopenpgp-tools
+
+# deprecated
+ide-backend-rts
+
+# build is hard to fix
+lhs2tex
+
+# example / tutorial code
+luminance-samples
+
+# needs an old version of LLVM
+reedsolomon
+
+# doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
+seqalign
+
+# no dummy packages here
+stackage
+
+# deprecated
+stackage-build-plan
+
+# deprecated
+stackage-cabal
+
+# deprecated (but still dependency of stackage-curator)
+# stackage-cli
+
+# deprecated
+stackage-sandbox
+
+# deprecated
+stackage-setup
+
+# deprecated
+stackage-types
+
+# doesn't work on Linux
+Win32
+
+# doesn't work on Linux
+Win32-extras
+
+# doesn't work on Linux
+Win32-notify
+
+# https://github.com/opensuse-haskell/configuration/issues/7
+wl-pprint-terminfo
+
+# doesn't have a proper license
+timeit
+
+# This package needs libjvm, but that library is hidden in a strange location
+# (/usr/lib64/jvm/java-1.8.0-openjdk-1.8.0/jre/lib/amd64/server/libjvm.so) and
+# I don't how to refer to that path in a portable way, i.e. without hardcoding
+# specific version and implementation of JDK.
+jni
+
+# Its license (Free Public License 1.0.0 a.k.a. FPL-1.0) is not listed by SPDX.
+# https://gitlab.com/twittner/cql/issues/2
+cql
+
+# It's unclear which license this package is under.
+parsec-numeric
