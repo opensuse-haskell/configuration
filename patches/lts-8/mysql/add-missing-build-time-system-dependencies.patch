@@ -1,0 +1,13 @@
+Index: ghc-mysql.spec
+===================================================================
+--- ghc-mysql.spec	(revision 1)
++++ ghc-mysql.spec	(working copy)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
++BuildRequires:  libmysqlclient-devel
+ %if %{with tests}
+ BuildRequires:  ghc-hspec-devel
+ %endif
+
