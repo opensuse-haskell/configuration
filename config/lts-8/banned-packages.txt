@@ -108,11 +108,20 @@ timeit
 # I don't how to refer to that path in a portable way, i.e. without hardcoding
 # specific version and implementation of JDK.
 jni
+inline-java
+jvm
+jvm-streaming
+sparkle
 
 # Its license (Free Public License 1.0.0 a.k.a. FPL-1.0) is not listed by SPDX.
 # We probably *could* use 0BSD for these packages.
 cql
+cql-io
 wai-predicates
+wai-routing
 
 # It's unclear which license this package is under.
 parsec-numeric
+
+# https://github.com/fpco/stackage/issues/2305
+invertible
