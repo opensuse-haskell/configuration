@@ -45,3 +45,5 @@ yesod-default
 # No-one knows why Stackage would release an LTS version that doesn't contain ...
 stack <9.9.9
 store
+store-core
+th-utilities
