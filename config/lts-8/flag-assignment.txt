@@ -28,3 +28,6 @@ xmobar:                         -fwith_thread -fwith_utf8 -fwith_xft -fwith_xpm 
 
 # Enable additional features
 idris:                          -fffi -fgmp
+
+# Disable dependencies we don't have.
+invertible:                     -f-hlist -f-piso

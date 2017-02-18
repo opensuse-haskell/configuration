@@ -122,6 +122,3 @@ wai-routing
 
 # It's unclear which license this package is under.
 parsec-numeric
-
-# https://github.com/fpco/stackage/issues/2305
-invertible
