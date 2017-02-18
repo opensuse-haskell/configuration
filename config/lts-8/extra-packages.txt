@@ -1,6 +1,7 @@
 # config/lts-8/extra-packages.txt
 
 # Used by psimons@suse.com.
+arrows
 BNFC
 structured-haskell-mode
 applicative-quoters
