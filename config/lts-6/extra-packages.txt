@@ -6,10 +6,12 @@ bytestring-show
 cab
 cryptohash-sha256
 ed25519
+github-backup
 hackage-security
 idna
 intern
 pointfree
+point-octree
 publicsuffixlist
 punycode
 SDL
@@ -18,10 +20,10 @@ SDL-mixer
 ShellCheck
 stringprep
 structured-haskell-mode < 1.1.0
+TaxonomyTools < 1.1
 X11-xft
 xmobar
 xmonad-contrib == 0.12
-TaxonomyTools < 1.1
 
 # Required to build Idris with +ffi Cabal flag.
 libffi
