@@ -31,13 +31,16 @@ cryptohash-sha256
 ed25519
 
 # These packages are dependencies of git-annex and/or cabal-install.
+aws
 bloomfilter
 data-default-instances-base
+dbus
 fdo-notify
 git-annex
 gnuidn
 gnutls
 gsasl
+libxml-sax
 network-multicast
 network-protocol-xmpp
 recursion-schemes
