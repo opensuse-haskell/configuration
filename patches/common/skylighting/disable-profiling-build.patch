@@ -1,0 +1,13 @@
+Index: ghc-skylighting.spec
+===================================================================
+--- ghc-skylighting.spec	(revision 7)
++++ ghc-skylighting.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name skylighting
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
