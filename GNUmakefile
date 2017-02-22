@@ -1,12 +1,11 @@
 # GNUmakefile
 
 CABAL_INSTALL_TARBALL := $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
+PACKAGE_SETS := $(wildcard config/*/stackage-packages.txt)
 
 .PHONY: all cabal-rpm cabal2obs update
 
-all:		config/lts-6/stackage-packages.txt
-all:		config/lts-7/stackage-packages.txt
-all:		config/nightly/stackage-packages.txt
+all:		$(PACKAGE_SETS)
 all:		cabal-rpm cabal2obs
 	rm -f $(CABAL_INSTALL_TARBALL)*
 	cd hackage && git archive --format=tar -o $(CABAL_INSTALL_TARBALL) HEAD
@@ -25,6 +24,5 @@ config/%/stackage-packages.txt:
 
 update:
 	cd hackage && git checkout hackage && git pull
-	f=$$(ls config/*/stackage-packages.txt); rm $$f; $(MAKE) $$f
-	# TODO: We need a way to add Cabal 1.24.2.0 to our package set.
-	sed -i -e "s|cabal-install ==1.24.*,|cabal-install ==1.24.0.0,|g" config/lts-7/stackage-packages.txt
+	rm -f $(PACKAGE_SETS)
+	$(MAKE) $(PACKAGE_SETS)
