@@ -100,3 +100,6 @@ wl-pprint-terminfo
 
 # doesn't have a proper license
 timeit
+
+# doesn't compile on Leap 42.2 due to missing libXss-devel
+arbtt
