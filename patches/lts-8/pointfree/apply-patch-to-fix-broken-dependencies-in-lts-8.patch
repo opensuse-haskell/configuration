@@ -1,0 +1,21 @@
+Index: pointfree.spec
+===================================================================
+--- pointfree.spec	(revision 1)
++++ pointfree.spec	(working copy)
+@@ -26,6 +26,7 @@
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Patch1:         update-dependencies-for-lts-8.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-containers-devel
+@@ -62,6 +63,7 @@
+ 
+ %prep
+ %setup -q
++%patch1 -p1
+ 
+ %build
+ %ghc_lib_build
+
