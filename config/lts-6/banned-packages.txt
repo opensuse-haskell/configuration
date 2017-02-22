@@ -103,3 +103,7 @@ timeit
 
 # doesn't compile on Leap 42.2 due to missing libXss-devel
 arbtt
+
+# Leap has libnettle 2.x, so projects that required v3.x won't compile
+hOpenPGP
+nettle
