@@ -1,21 +1,23 @@
 Index: ghc-cabal-helper.spec
 ===================================================================
---- ghc-cabal-helper.spec	(revision 11)
+--- ghc-cabal-helper.spec	(revision 3)
 +++ ghc-cabal-helper.spec	(working copy)
-@@ -83,6 +83,7 @@
- %setup -q -n %{pkg_name}-%{version}
+@@ -86,6 +86,7 @@
+ cp -p %{SOURCE1} %{pkg_name}.cabal
  
  %build
 +%define cabal_configure_options --libexecdir=%{_libexecdir}
  %ghc_lib_build
  
  %install
-@@ -100,7 +101,7 @@
+@@ -103,7 +104,9 @@
  %files -f %{name}.files
  %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/cabal-helper-wrapper
-+%{_libexecdir}/cabal-helper-wrapper
++%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}
++%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/cabal-helper-wrapper
  
  %files devel -f %{name}-devel.files
  %defattr(-,root,root,-)
