@@ -122,3 +122,20 @@ wai-routing
 
 # It's unclear which license this package is under.
 parsec-numeric
+
+# Doesn't work on 32 bit: https://github.com/haskell-works/hw-bits/issues/1.
+# Upstream is unresponsive. Poor documentation.
+hw-balancedparens
+hw-bits
+hw-conduit
+hw-diagnostics
+hw-excess
+hw-int
+hw-json
+hw-mquery
+hw-parser
+hw-prim
+hw-rankselect
+hw-rankselect-base
+hw-string-parse
+hw-succinct
