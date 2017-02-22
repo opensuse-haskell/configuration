@@ -1,0 +1,13 @@
+Index: ghc-gogol-compute.spec
+===================================================================
+--- ghc-gogol-compute.spec	(revision 2)
++++ ghc-gogol-compute.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name gogol-compute
+ Name:           ghc-%{pkg_name}
+ Version:        0.1.1
+
