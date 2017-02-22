@@ -6,7 +6,7 @@ Index: ghc-mod.spec
  BuildRequires:  ghc-time-devel
  BuildRequires:  ghc-transformers-base-devel
  BuildRequires:  ghc-transformers-devel
-+Requires:       cabal-helper
++Requires:       ghc-cabal-helper
 +Requires:       ghc
 +Suggests:       cabal-install
  Suggests:       emacs-haskell-mode

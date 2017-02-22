@@ -1,0 +1,21 @@
+Index: ghc-cabal-helper.spec
+===================================================================
+--- ghc-cabal-helper.spec	(revision 5)
++++ ghc-cabal-helper.spec	(working copy)
+@@ -91,6 +91,7 @@
+ 
+ %install
+ %ghc_lib_install
++ln -s %{pkg_name}-%{version} %{buildroot}%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}
+ 
+ %check
+ %cabal_test
+@@ -106,6 +107,7 @@
+ %doc LICENSE
+ %dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}
+ %dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}
+ %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/cabal-helper-wrapper
+ 
+ %files devel -f %{name}-devel.files
+

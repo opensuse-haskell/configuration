@@ -4,8 +4,8 @@ Index: ghc-mod.spec
 +++ ghc-mod.spec	(working copy)
 @@ -111,6 +111,9 @@
  mkdir -p %{buildroot}%{_sysconfdir}/profile.d
- echo 'export cabal_helper_libexecdir=%{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
- echo 'setenv cabal_helper_libexecdir %{_libexecdir}' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
+ echo 'export cabal_helper_libexecdir=%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/cabal-helper' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.sh
+ echo 'setenv cabal_helper_libexecdir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/cabal-helper' > %{buildroot}%{_sysconfdir}/profile.d/ghc-mod.csh
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/LICENSE
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/COPYING.AGPL3
 +rm %{buildroot}%{_datadir}/%{name}-%{version}/COPYING.BSD3
