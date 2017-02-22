@@ -1,11 +1,13 @@
 # config/lts-8/extra-packages.txt
 
 # Used by psimons@suse.com.
+applicative-quoters
 arrows
 BNFC
-structured-haskell-mode
-applicative-quoters
 HaXml
+lazysmallcheck
+Stream
+structured-haskell-mode
 titlecase
 
 # Used by osukup@suse.com.
