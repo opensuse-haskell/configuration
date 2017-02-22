@@ -1,0 +1,13 @@
+Index: ghc-pandoc-citeproc.spec
+===================================================================
+--- ghc-pandoc-citeproc.spec	(revision 2)
++++ ghc-pandoc-citeproc.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name pandoc-citeproc
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+

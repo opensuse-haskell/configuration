@@ -1,0 +1,13 @@
+Index: ghc-wai-middleware-content-type.spec
+===================================================================
+--- ghc-wai-middleware-content-type.spec	(revision 2)
++++ ghc-wai-middleware-content-type.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name wai-middleware-content-type
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
