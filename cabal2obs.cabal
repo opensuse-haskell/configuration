@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.16.0.
+-- This file has been generated from package.yaml by hpack version 0.17.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -9,6 +9,9 @@ description:    Convert a set of Cabal files into an OBS project.
 category:       Distribution
 homepage:       https://github.com/opensuse-haskell/cabal2obs#readme
 bug-reports:    https://github.com/opensuse-haskell/cabal2obs/issues
+author:         Peter Simons,
+                Bryan O'Sullivan,
+                Jens Petersen
 maintainer:     opensuse-haskell@opensuse.org
 license:        GPL-3
 license-file:   LICENSE
@@ -28,10 +31,14 @@ executable cabal2obs
     , Cabal
     , containers
     , directory
-    , spdx
+    , filepath
+    , process
     , shake
+    , spdx
     , time
+    , unix
   other-modules:
+      Cabal2Spec
       Oracle
       Oracle.Compiler
       Oracle.FlagAssignment
