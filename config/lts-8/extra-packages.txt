@@ -13,6 +13,7 @@ titlecase
 # Used by osukup@suse.com.
 cab
 pointfree
+wreq
 X11-xft
 xmobar
 xmonad-contrib
