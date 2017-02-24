@@ -6,10 +6,12 @@ import Orphans ()
 import ParseUtils
 import Types
 
+import Control.Monad
+import Data.List
 import Data.Maybe
 import Development.Shake
-import Development.Shake.FilePath
 import Development.Shake.Classes
+import Development.Shake.FilePath
 import Distribution.Package
 import Distribution.Text
 import Distribution.Version
@@ -17,8 +19,6 @@ import Distribution.Version
 newtype GetPackageList = GetPackageList PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)
 
--- TODO: Report "banned" backages that don't show up in the main package set.
--- TODO: Complain about "banned" backages that show up in the extra packages set.
 -- TODO: Figure out a meaningful way how extra packages override default version choices.
 
 getPackageList :: FilePath
@@ -29,9 +29,15 @@ getPackageList configDir resolveConstraint = addOracle $ \(GetPackageList (Packa
   banned <- readPackageNameList (configDir </> psid </> "banned-packages.txt")
   extra <- readConstraintList (configDir </> psid </> "extra-packages.txt")
   extra' <- forP extra $ \c@(Dependency pn _) -> PackageIdentifier pn <$> resolveConstraint c
+  checkConsistency psid (packageName <$> pset) (packageName <$> extra') banned
   let pset'  = filter (\(PackageIdentifier pn _) -> pn `notElem` banned) pset
       pset'' = pset' ++ extra'
   return pset''
+
+checkConsistency :: String -> [PackageName] -> [PackageName] -> [PackageName] -> Action ()
+checkConsistency psid _ {-stackage-} extra banned = do
+  let bogusBans  = extra `intersect` banned
+  unless (null bogusBans) $ fail (psid ++ " bans extra packages: " ++ intercalate " " (display <$> bogusBans))
 
 -- TODO: Recognize and consciously drop "foobar installed" lines; then
 --       implement proper error handling, i.e. fail when something doesn't look
