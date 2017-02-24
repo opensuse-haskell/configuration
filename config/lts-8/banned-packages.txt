@@ -142,44 +142,45 @@ hw-succinct
 
 # Removed packages that failed to build in d:l:h and which are no longer
 # in lts-8.x anyway.
-angel
-bustle
-apply-refact
-cabal-sort
-find-clumpiness
-ghc-chell-quickcheck
-ghc-dependent-sum-template
-ghc-docvim
-ghc-fb
-ghc-gl
-ghc-haddock-api
-ghc-hashable-extras
-ghc-haskoin-core
-ghc-hbayes
-ghc-hgettext
-ghc-hpack-convert
-ghc-hprotoc
-ghc-hspec-jenkins
-ghc-json-autotype
-ghc-postgresql-query
-ghc-quantum-random
-ghc-quickcheck-combinators
-ghc-shelly
-ghc-smsaero
-ghc-stripe-core
-ghc-twitter-conduit
-ghc-wreq
-ghc-yarr
-ghc-yesod-auth-oauth2
-ghc-zoom-refs
-hackage-mirror
-hackage-whatsnew
-hackmanager
-HaRe
-homplexity
-idris
-moesocks
-omnifmt
-purescript
-stackage-curator
-werewolf
+# angel
+# apply-refact
+# bustle
+# cabal-sort
+# chell-quickcheck
+# dependent-sum-template
+# docvim
+# fb
+# find-clumpiness
+# gl
+# hackage-mirror
+# hackage-whatsnew
+# hackmanager
+# haddock-api
+# HaRe
+# hashable-extras
+# haskoin-core
+# hbayes
+# hgettext
+# homplexity
+# hpack-convert
+# hprotoc
+# hspec-jenkins
+# idris
+# json-autotype
+# moesocks
+# omnifmt
+# pipes-bgzf
+# postgresql-query
+# purescript
+# quantum-random
+# quickcheck-combinators
+# shelly
+# smsaero
+# stackage-curator
+# stripe-core
+# twitter-conduit
+# werewolf
+# wreq
+# yarr
+# yesod-auth-oauth2
+# zoom-refs
