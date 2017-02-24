@@ -457,7 +457,7 @@ testsuiteDependencies pkgDesc self =
 
 main :: IO () -- specFile cabalPath pkgDesc forceBinary flagAssignment = do
 main = do
-  gdesc <- readPackageDescription silent "../../hackage/hsdns/1.7/hsdns.cabal"
+  gdesc <- readPackageDescription silent "hsdns-1.7/hsdns.cabal"
   case finalizePackageDescription [] (const True) (Platform X86_64 Linux) (unknownCompilerInfo (CompilerId GHC (Version [8,0,2] [])) NoAbiTag) [] gdesc of
     Left _ -> fail "duh"
-    Right (desc,_) -> createSpecFile "ghc-hsdns.spec" "hsdns-1.7" desc False [] >>= print
+    Right (desc,_) -> createSpecFile "ghc-hsdns.spec" "hsdns-1.7/hsdns.cabal" desc False [] >>= print
