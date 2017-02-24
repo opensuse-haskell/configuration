@@ -85,6 +85,8 @@ main = do
               pkgDir = buildDir </> unPackageSetId psid </> bn
           return [ pkgDir </> bn <.> "spec", pkgDir </> (display pkgid <.> "tar.gz") ]
       need ((buildDir </> "packages.csv") : concat (concat targets))
+      -- get rid of *.orig and *.rej files created by patch(1).
+      removeFilesAfter buildDir ["*/*/*.orig", "*/*/*.rej"]
 
     -- Pattern target to trigger source tarball downloads with "cabal get". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
