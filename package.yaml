@@ -20,15 +20,12 @@ executables:
     main:               Main.hs
     dependencies:
       - base < 5
-      - Cabal
-      - containers
+      - Cabal > 1.24
       - directory
       - filepath
-      - process
       - shake
       - spdx
       - time
-      - unix
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
       - Cabal2Spec

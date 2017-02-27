@@ -27,25 +27,22 @@ executable cabal2obs
   main-is: Main.hs
   ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
-      base < 5
-    , Cabal
-    , containers
-    , directory
-    , filepath
-    , process
-    , shake
-    , spdx
-    , time
-    , unix
+    base < 5,
+    Cabal > 1.24,
+    directory,
+    filepath,
+    shake,
+    spdx,
+    time
   other-modules:
-      Cabal2Spec
-      Oracle
-      Oracle.Compiler
-      Oracle.FlagAssignment
-      Oracle.ForcedExecutables
-      Oracle.Hackage
-      Oracle.PackageList
-      Orphans
-      ParseUtils
-      Types
+    Cabal2Spec
+    Oracle
+    Oracle.Compiler
+    Oracle.FlagAssignment
+    Oracle.ForcedExecutables
+    Oracle.Hackage
+    Oracle.PackageList
+    Orphans
+    ParseUtils
+    Types
   default-language: Haskell2010
