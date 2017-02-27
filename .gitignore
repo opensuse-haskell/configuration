@@ -1,6 +1,5 @@
 # ignore generated files
 
-/*.mk
 /cabal-*.config
+/dist-newstyle/*
 /dist/*
-/obs-*/*
