@@ -19,7 +19,6 @@ import Distribution.Package
 import Distribution.PackageDescription.Configuration
 import Distribution.System
 import Distribution.Text
-import Distribution.Version
 import System.Directory
 import System.Environment
 
