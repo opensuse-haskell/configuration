@@ -6,14 +6,9 @@ import Data.List
 import Data.Time.Clock
 import Data.Time.Format
 import Data.Version
-import Distribution.Compiler
 import Distribution.License
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.PackageDescription.Configuration
-import Distribution.PackageDescription.Parse
-import Distribution.System
-import Distribution.Verbosity
 import System.Directory
 import System.FilePath
 import System.IO
@@ -205,9 +200,10 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   let licensefiles = licenseFiles pkgDesc
 
   -- remove docs from datafiles (#38)
-  docs <- sort <$> findDocs cabalPath licensefiles
+  docsUnfiltered <- sort <$> findDocs cabalPath licensefiles
   let datafiles = dataFiles pkgDesc
-      dupdocs = docs `intersect` datafiles
+      dupdocs   = docsUnfiltered `intersect` datafiles
+      docs      = docsUnfiltered \\ datafiles
   unless (null dupdocs) $ do
     putStrLn $ "Warning: doc files found in datadir:" +-+ unwords dupdocs
   putNewline
@@ -225,8 +221,6 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
     putInstallScript
     put $ "%postun" +-+ ghcPkgDevel
     putInstallScript
-
-  docs <- sort . filter (`notElem` dataFiles pkgDesc) <$> findDocs cabalPath licensefiles
 
   let license_macro = "%doc"
   let execs = sort $ map exeName $ filter isBuildable $ executables pkgDesc
@@ -453,11 +447,3 @@ testsuiteDependencies :: PackageDescription  -- ^pkg description
                 -> [String]         -- ^depends
 testsuiteDependencies pkgDesc self =
   map showDep . delete self . filter excludedPkgs . nub . map depName $ concatMap (targetBuildDepends . testBuildInfo) (testSuites pkgDesc)
-
-
-main :: IO () -- specFile cabalPath pkgDesc forceBinary flagAssignment = do
-main = do
-  gdesc <- readPackageDescription silent "hsdns-1.7/hsdns.cabal"
-  case finalizePackageDescription [] (const True) (Platform X86_64 Linux) (unknownCompilerInfo (CompilerId GHC (Version [8,0,2] [])) NoAbiTag) [] gdesc of
-    Left _ -> fail "duh"
-    Right (desc,_) -> createSpecFile "ghc-hsdns.spec" "hsdns-1.7/hsdns.cabal" desc False [] >>= print
