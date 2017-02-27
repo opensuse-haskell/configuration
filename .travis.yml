@@ -6,6 +6,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.cabal/packages
+    - $HOME/.cabal/store
     - $HOME/build/opensuse-haskell/configuration/_build
 
 addons:
@@ -31,7 +32,7 @@ install:
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
  - travis_retry cabal update -v
  - sed -i 's/^jobs:/-- jobs:/' ${HOME}/.cabal/config
- - cabal install hpack shake spdx
+ - (cd tools/cabal2obs && cabal new-build)
 
 script:
-  - make CABAL2OBS_FLAGS="--digest --keep-going --no-progress"
+  - tools/cabal2obs/dist-newstyle/build/cabal2obs-0/build/cabal2obs/cabal2obs --digest --keep-going --no-progress
