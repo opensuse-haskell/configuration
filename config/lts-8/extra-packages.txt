@@ -60,7 +60,6 @@ api-field-json-th
 bitcoin-api
 bitcoin-api-extra
 bitcoin-payment-channel
-compdata
 concatenative
 concurrent-extra
 continued-fractions

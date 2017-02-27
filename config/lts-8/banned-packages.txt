@@ -146,6 +146,7 @@ hw-succinct
 # in lts-8.x anyway.
 atndapi
 bustle
+compdata
 hworker-ses
 pipes-bgzf
 pipes-illumina
