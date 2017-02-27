@@ -144,6 +144,7 @@ hw-succinct
 
 # Removed packages that failed to build in d:l:h and which are no longer
 # in lts-8.x anyway.
+atndapi
 bustle
 hworker-ses
 pipes-bgzf
