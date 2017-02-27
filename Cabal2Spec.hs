@@ -27,7 +27,7 @@ mkTools tools' = filter excludedTools $ nub $ map mapTools tools'
     mapTools "gtk2hsTypeGen" = "gtk2hs-buildtools"
     mapTools tool = tool
 
-createSpecFile :: FilePath -> FilePath -> PackageDescription -> ForceBinary -> FlagAssignment -> IO FilePath
+createSpecFile :: FilePath -> FilePath -> PackageDescription -> ForceBinary -> FlagAssignment -> IO ()
 createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   let deps :: [String]
       deps = map showDep deps'
@@ -122,14 +122,14 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
       revision = show $ maybe (0::Int) read (lookup "x-revision" (customFieldsPD pkgDesc))
   putHdr "Name" (if binlib then "%{pkg_name}" else basename)
   putHdr "Version" (showVersion version)
-  putHdr "Release" $ "0"
+  putHdr "Release" "0"
   putHdr "Summary" summary
   putHdr "Group" "Development/Languages/Other"
   putNewline
   putHdr "License" $ showLicense (license pkgDesc)
   putHdr "Url" $ "https://hackage.haskell.org/package/" ++ pkg_name
   putHdr "Source0" $ "https://hackage.haskell.org/package/" ++ pkg_name ++ "-%{version}/" ++ pkg_name ++ "-%{version}.tar.gz"
-  when (revision /= "0") $ do
+  when (revision /= "0") $
     putHdr "Source1" $ "https://hackage.haskell.org/package/" ++ pkg_name ++ "-%{version}/revision/" ++ revision ++ ".cabal#/" ++ pkg_name ++ ".cabal"
   putHdr "BuildRoot" "%{_tmppath}/%{name}-%{version}-build"
   putNewline
@@ -170,7 +170,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
     putHdr "Requires(post)" "ghc-compiler = %{ghc_version}"
     putHdr "Requires(postun)" "ghc-compiler = %{ghc_version}"
     putHdr "Requires" $ (if binlib then "ghc-%{name}" else "%{name}") ++ isa +-+ "= %{version}-%{release}"
-    unless (null $ clibs ++ pkgcfgs) $ do
+    unless (null $ clibs ++ pkgcfgs) $
       mapM_ (putHdr "Requires") $ sort $ map (++ isa) clibs ++ pkgcfgs ++ ["pkgconfig" | not $ null pkgcfgs]
     putNewline
     put $ "%description" +-+ ghcPkgDevel
@@ -179,14 +179,14 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
 
   put "%prep"
   put $ "%setup -q" ++ (if pkgname /= name then " -n %{pkg_name}-%{version}" else "")
-  when (revision /= "0") $ do
+  when (revision /= "0") $
     put $ "cp -p %{SOURCE1}" +-+ pkg_name ++ ".cabal"
   putNewline
 
   put "%build"
   when (flagAssignment /= []) $ do
     let cabalFlags = [ "-f" ++ (if b then "" else "-") ++ n | (FlagName n, b) <- flagAssignment ]
-    put $ "%define cabal_configure_options " ++ intercalate " " cabalFlags
+    put $ "%define cabal_configure_options " ++ unwords cabalFlags
   let pkgType = if hasLib then "lib" else "bin"
   put $ "%ghc_" ++ pkgType ++ "_build"
   putNewline
@@ -194,7 +194,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   put "%install"
   put $ "%ghc_" ++ pkgType ++ "_install"
 
-  when selfdep $ do
+  when selfdep $
     put $ "%ghc_fix_rpath" +-+ "%{pkg_name}-%{version}"
 
   let licensefiles = licenseFiles pkgDesc
@@ -204,7 +204,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   let datafiles = dataFiles pkgDesc
       dupdocs   = docsUnfiltered `intersect` datafiles
       docs      = docsUnfiltered \\ datafiles
-  unless (null dupdocs) $ do
+  unless (null dupdocs) $
     putStrLn $ "Warning: doc files found in datadir:" +-+ unwords dupdocs
   putNewline
 
@@ -263,7 +263,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
 
   put "%changelog"
   hClose h
-  return specFile
+
 
 isBuildable :: Executable -> Bool
 isBuildable exe = buildable $ buildInfo exe
