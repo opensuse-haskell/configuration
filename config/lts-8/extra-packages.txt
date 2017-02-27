@@ -80,7 +80,6 @@ handwriting
 haskoin-core
 hgettext
 httpd-shed
-hworker-ses
 load-env
 murmur3
 mustache

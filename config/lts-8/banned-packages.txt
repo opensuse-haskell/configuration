@@ -144,46 +144,7 @@ hw-succinct
 
 # Removed packages that failed to build in d:l:h and which are no longer
 # in lts-8.x anyway.
-pipes-illumina
-# angel
-# apply-refact
 bustle
-# cabal-sort
-# chell-quickcheck
-# dependent-sum-template
-# docvim
-# fb
-# find-clumpiness
-# gl
-# hackage-mirror
-# hackage-whatsnew
-# hackmanager
-# haddock-api
-# HaRe
-# hashable-extras
-# haskoin-core
-# hbayes
-# hgettext
-# homplexity
-# hpack-convert
-# hprotoc
-# hspec-jenkins
-# idris
-# json-autotype
-# moesocks
-# omnifmt
-# pipes-bgzf
-# postgresql-query
-# purescript
-# quantum-random
-# quickcheck-combinators
+hworker-ses
+pipes-illumina
 shelly
-# smsaero
-# stackage-curator
-# stripe-core
-# twitter-conduit
-# werewolf
-# wreq
-# yarr
-# yesod-auth-oauth2
-# zoom-refs
