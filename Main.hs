@@ -1,5 +1,6 @@
 module Main ( main ) where
 
+import Cabal2Spec
 import Oracle
 import Orphans ()
 import ParseUtils
@@ -13,8 +14,12 @@ import Data.SPDX
 import Data.Time
 import Development.Shake
 import Development.Shake.FilePath
+import Distribution.Compiler
 import Distribution.Package
+import Distribution.PackageDescription.Configuration
+import Distribution.System
 import Distribution.Text
+import Distribution.Version
 import System.Directory
 import System.Environment
 
@@ -125,20 +130,28 @@ main = do
       fa <- getFlags (psid, PackageName n)
       cabal <- getCabal pkgid
       let rev = packageRevision cabal
-      liftIO $ removeFiles pkgDir ["*.cabal"]
-      when (rev > 0) $
-         copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
-      -- cabal-rpm breaks if these files exist when it's run.
-      liftIO $ removeFiles pkgDir ["*.spec", display pkgid]
-      command_ [Cwd pkgDir, EchoStdout False]
-               "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
-               ([ "--strict"
-                , "--distro=SUSE"
-                , "--compiler=" ++ display cid
-                ] ++ ["-b" | isExe] ++ words fa ++
-                [ "spec"
-                , display pkgid
-                ])
+      if (rev > 0)
+         then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
+         else liftIO (removeFiles pkgDir ["*.cabal"])
+
+      -- need [pkgDir </> display pkgid <.> "tar.gz"]
+      liftIO $ removeFiles pkgDir [display pkgid]
+      command_ [Cwd pkgDir] "cabal" ["get", display pkgid]
+
+      case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
+        Left missing -> fail ("finalizePackageDescription: " ++ show missing)
+        Right (desc,_) -> do putNormal $ show ("createSpecFile", out, (pkgDir </> display pkgid </> display pkgid <.> "cabal"), isExe, fa)
+                             liftIO $ void $ createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
+
+      -- command_ [Cwd pkgDir, EchoStdout False]
+      --          "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
+      --          ([ "--strict"
+      --           , "--distro=SUSE"
+      --           , "--compiler=" ++ display cid
+      --           ] ++ ["-b" | isExe] ++ words fa ++
+      --           [ "spec"
+      --           , display pkgid
+      --           ])
       command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
