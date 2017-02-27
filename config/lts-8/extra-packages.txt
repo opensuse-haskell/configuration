@@ -82,6 +82,7 @@ load-env
 murmur3
 mustache
 network-uri-flag
+one-liner
 package-description-remote
 pbkdf
 pcap
