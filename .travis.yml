@@ -16,13 +16,13 @@ addons:
       - deadsnakes
     packages:
       - cabal-install-1.24
-      - ghc-8.0.1
+      - ghc-8.0.2
       - python3.5
       - rpm
 
 before_install:
  - unset CC
- - export PATH=$HOME/.local/bin:$HOME/.cabal/bin:/opt/ghc/8.0.1/bin:/opt/cabal/1.24/bin:$PATH
+ - export PATH=$HOME/.local/bin:$HOME/.cabal/bin:/opt/ghc/bin:/opt/cabal/bin:$PATH
  - mkdir -p $HOME/.local/bin
  - ln -s $(type -p python3.5) $HOME/.local/bin/python3
 
