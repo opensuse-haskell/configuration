@@ -1,3 +1,5 @@
+# config/lts-8/banned-packages.txt
+
 # GHC 8.0.x core packages
 array
 base
