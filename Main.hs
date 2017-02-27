@@ -16,6 +16,7 @@ import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
 import Distribution.Package
+import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
 import Distribution.System
 import Distribution.Text
@@ -33,7 +34,7 @@ main = do
                { shakeFiles = buildDir
                , shakeProgress = progressSimple
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "2"     -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "3"     -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -129,28 +130,16 @@ main = do
       fa <- getFlags (psid, PackageName n)
       cabal <- getCabal pkgid
       let rev = packageRevision cabal
-      if (rev > 0)
+      if rev > 0
          then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
          else liftIO (removeFiles pkgDir ["*.cabal"])
-
       -- need [pkgDir </> display pkgid <.> "tar.gz"]
       liftIO $ removeFiles pkgDir [display pkgid]
       command_ [Cwd pkgDir] "cabal" ["get", display pkgid]
-
       case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
-        Right (desc,_) -> do putNormal $ show ("createSpecFile", out, (pkgDir </> display pkgid </> display pkgid <.> "cabal"), isExe, fa)
-                             liftIO $ void $ createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
-
-      -- command_ [Cwd pkgDir, EchoStdout False]
-      --          "../../../tools/cabal-rpm/dist/build/cabal-rpm/cabal-rpm"
-      --          ([ "--strict"
-      --           , "--distro=SUSE"
-      --           , "--compiler=" ++ display cid
-      --           ] ++ ["-b" | isExe] ++ words fa ++
-      --           [ "spec"
-      --           , display pkgid
-      --           ])
+        Right (desc,_) -> do putNormal $ unwords $ ["createSpecFile", out] ++ ["force-exe" | isExe] ++ (showFlagAssignment <$> fa)
+                             liftIO $ createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
       command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
@@ -195,11 +184,14 @@ mkChangeEntry version email = do
 
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
-verifyLicense license
-  | [l] <- parseExpression license = when (prettyLicenseExpression l /= license) $ fail $
-                                       unwords [ "license expression"
-                                               , license
-                                               , "doesn't match expected"
-                                               , prettyLicenseExpression l
-                                               ]
-  | otherwise                      = fail (unwords ["invalid license expression", show license])
+verifyLicense lic
+  | [l] <- parseExpression lic = when (prettyLicenseExpression l /= lic) $ fail $
+                                   unwords [ "license expression"
+                                           , lic
+                                           , "doesn't match expected"
+                                           , prettyLicenseExpression l
+                                           ]
+  | otherwise                  = fail (unwords ["invalid license expression", show lic])
+
+showFlagAssignment :: (FlagName,Bool) -> String
+showFlagAssignment (FlagName f, v) = "-f" ++ ['-'|not v] ++ f
