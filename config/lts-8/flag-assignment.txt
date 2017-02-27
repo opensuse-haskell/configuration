@@ -2,32 +2,32 @@
 
 # Don't build hardware-specific optimizations into the binary based on what the
 # build machine supports or doesn't support.
-cryptonite:                     -f-support_aesni -f-support_rdrand -f-support_blake2_sse
+cryptonite:                     -support_aesni -support_rdrand -support_blake2_sse
 
 # Don't use the bundled sqlite3 library.
-direct-sqlite:                  -fsystemlib
+direct-sqlite:                  systemlib
 
 # Build the standalone executable and prefer pcre-light, which uses the system
 # library rather than a bundled copy.
-highlighting-kate:              -fexecutable -fpcre-light
+highlighting-kate:              executable pcre-light
 
 # Don't use the bundled sass library.
-hlibsass:                       -fexternalLibsass
+hlibsass:                       externalLibsass
 
 # Don't use the bundled lua library.
-hslua:                          -fsystem-lua
+hslua:                          system-lua
 
 # Allow compilation without having Nix installed.
-nix-paths:                      -fallow-relative-paths
+nix-paths:                      allow-relative-paths
 
 # Build the standalone executable.
-texmath:                        -fexecutable
+texmath:                        executable
 
 # Enable almost all extensions.
-xmobar:                         -fwith_thread -fwith_utf8 -fwith_xft -fwith_xpm -fwith_mpris -fwith_dbus -fwith_iwlib -fwith_inotify
+xmobar:                         with_thread with_utf8 with_xft with_xpm with_mpris with_dbus with_iwlib with_inotify
 
 # Enable additional features
-idris:                          -fffi -fgmp
+idris:                          ffi gmp
 
 # Disable dependencies we don't have.
-invertible:                     -f-hlist -f-piso
+invertible:                     -hlist -piso
