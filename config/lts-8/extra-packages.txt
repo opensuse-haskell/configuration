@@ -93,14 +93,12 @@ pipes-bgzf
 pipes-cliff
 pipes-fastx
 pipes-http
-pipes-illumina
 pipes-network
 quickcheck-properties
 rbpcp-api
 rosezipper
 scrape-changes
 secp256k1
-shelly
 show-type
 stack-run-auto
 th-printf

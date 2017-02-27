@@ -142,9 +142,10 @@ hw-succinct
 
 # Removed packages that failed to build in d:l:h and which are no longer
 # in lts-8.x anyway.
+pipes-illumina
 # angel
 # apply-refact
-# bustle
+bustle
 # cabal-sort
 # chell-quickcheck
 # dependent-sum-template
@@ -174,7 +175,7 @@ hw-succinct
 # purescript
 # quantum-random
 # quickcheck-combinators
-# shelly
+shelly
 # smsaero
 # stackage-curator
 # stripe-core
