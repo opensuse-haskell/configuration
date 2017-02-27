@@ -37,7 +37,7 @@ getPackageList configDir resolveConstraint = addOracle $ \(GetPackageList (Packa
 checkConsistency :: String -> [PackageName] -> [PackageName] -> [PackageName] -> Action ()
 checkConsistency psid _ {-stackage-} extra banned = do
   let bogusBans  = extra `intersect` banned
-  unless (null bogusBans) $ fail (psid ++ " bans extra packages: " ++ intercalate " " (display <$> bogusBans))
+  unless (null bogusBans) $ fail (psid ++ " bans extra packages: " ++ unwords (display <$> bogusBans))
 
 -- TODO: Recognize and consciously drop "foobar installed" lines; then
 --       implement proper error handling, i.e. fail when something doesn't look
