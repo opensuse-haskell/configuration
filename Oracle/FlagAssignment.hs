@@ -23,10 +23,11 @@ readFlagAssignents :: FilePath -> Action [(String,FlagAssignment)]
 readFlagAssignents p = fmap (fmap (readFlagList . words . tail) . break (==':')) <$> readConfigFile p
 
 readFlagList :: [String] -> FlagAssignment
-readFlagList = map (tagWithValue . dropMinusF)
+readFlagList = map (tagWithValue . noMinusF)
   where
     tagWithValue ('-':fname) = (FlagName (lowercase fname), False)
     tagWithValue fname       = (FlagName (lowercase fname), True)
 
-    dropMinusF :: String -> String
-    dropMinusF ('-':'f':x)   = x
+    noMinusF :: String -> String
+    noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
+    noMinusF x           = x
