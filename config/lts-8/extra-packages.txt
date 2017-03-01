@@ -69,7 +69,6 @@ doctest-prop
 explicit-exception
 extract-dependencies
 FindBin
-forecast-io
 freer
 gamma
 genvalidity

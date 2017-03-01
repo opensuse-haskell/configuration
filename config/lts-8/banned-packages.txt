@@ -147,6 +147,7 @@ hw-succinct
 atndapi
 bustle
 compdata
+forecast-io
 hworker-ses
 pipes-bgzf
 pipes-illumina
