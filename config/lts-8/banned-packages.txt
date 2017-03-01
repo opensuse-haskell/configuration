@@ -145,10 +145,13 @@ hw-succinct
 # Removed packages that failed to build in d:l:h and which are no longer
 # in lts-8.x anyway.
 atndapi
+bitcoin-payment-channel
 bustle
 compdata
 forecast-io
+haskoin-core
 hworker-ses
 pipes-bgzf
 pipes-illumina
+rbpcp-api
 shelly

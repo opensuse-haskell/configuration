@@ -59,7 +59,6 @@ th-utilities
 api-field-json-th
 bitcoin-api
 bitcoin-api-extra
-bitcoin-payment-channel
 concatenative
 concurrent-extra
 continued-fractions
@@ -74,7 +73,6 @@ gamma
 genvalidity
 genvalidity-hspec
 handwriting
-haskoin-core
 hgettext
 httpd-shed
 load-env
@@ -91,7 +89,6 @@ pipes-fastx
 pipes-http
 pipes-network
 quickcheck-properties
-rbpcp-api
 rosezipper
 scrape-changes
 secp256k1
