@@ -73,7 +73,6 @@ gamma
 genvalidity
 genvalidity-hspec
 handwriting
-hgettext
 httpd-shed
 load-env
 murmur3

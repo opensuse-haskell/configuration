@@ -150,7 +150,10 @@ bustle
 compdata
 forecast-io
 haskoin-core
+hgettext
 hworker-ses
+hworker-ses
+pipes-bgzf
 pipes-bgzf
 pipes-illumina
 rbpcp-api
