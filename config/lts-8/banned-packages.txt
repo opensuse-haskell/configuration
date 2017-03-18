@@ -156,6 +156,7 @@ hworker-ses
 pipes-bgzf
 pipes-bgzf
 pipes-illumina
+postgresql-schema
 rbpcp-api
 shelly
 
