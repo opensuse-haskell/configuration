@@ -26,6 +26,7 @@ terminfo
 time
 transformers
 unix
+xhtml
 
 # doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
 eventstore
