@@ -1,0 +1,13 @@
+Index: ghc-yesod-markdown.spec
+===================================================================
+--- ghc-yesod-markdown.spec	(revision 1)
++++ ghc-yesod-markdown.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name yesod-markdown
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
