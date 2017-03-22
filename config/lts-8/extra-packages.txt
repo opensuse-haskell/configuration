@@ -72,6 +72,7 @@ freer
 gamma
 genvalidity
 genvalidity-hspec
+genvalidity-property
 handwriting
 httpd-shed
 load-env
