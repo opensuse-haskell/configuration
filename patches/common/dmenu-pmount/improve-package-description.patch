@@ -1,0 +1,14 @@
+Index: dmenu-pmount.spec
+===================================================================
+--- dmenu-pmount.spec	(revision 1)
++++ dmenu-pmount.spec	(working copy)
+@@ -36,7 +36,7 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-See README.md file.
++Mounting and unmounting linux devices as a user with dmenu and pmount.
+ 
+ %prep
+ %setup -q
+

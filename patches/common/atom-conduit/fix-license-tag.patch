@@ -1,13 +1,13 @@
-Index: ghc-base64-string.spec
+Index: ghc-atom-conduit.spec
 ===================================================================
---- ghc-base64-string.spec	(revision 4)
-+++ ghc-base64-string.spec	(working copy)
-@@ -21,7 +21,7 @@
- Version:        0.2
+--- ghc-atom-conduit.spec	(revision 2)
++++ ghc-atom-conduit.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.4.0.1
  Release:        0
- Summary:        Base64 implementation for String's
--License:        Unknown
-+License:        GPL-2.0+ OR BSD-3-Clause
+ Summary:        Streaming parser/renderer for the Atom 1.0 standard (RFC 4287)
+-License:        SUSE-Public-Domain
++License:        WTFPL
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

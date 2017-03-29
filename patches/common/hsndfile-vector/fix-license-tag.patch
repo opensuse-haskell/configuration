@@ -1,13 +1,13 @@
-Index: ghc-base64-string.spec
+Index: ghc-hsndfile-vector.spec
 ===================================================================
---- ghc-base64-string.spec	(revision 4)
-+++ ghc-base64-string.spec	(working copy)
+--- ghc-hsndfile-vector.spec	(revision 1)
++++ ghc-hsndfile-vector.spec	(working copy)
 @@ -21,7 +21,7 @@
- Version:        0.2
+ Version:        0.5.2
  Release:        0
- Summary:        Base64 implementation for String's
--License:        Unknown
-+License:        GPL-2.0+ OR BSD-3-Clause
+ Summary:        Haskell bindings for libsndfile (Data.Vector interface)
+-License:        LGPL-2.0+
++License:        LGPL-2.1+
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

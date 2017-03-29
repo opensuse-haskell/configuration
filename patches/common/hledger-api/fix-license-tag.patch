@@ -1,0 +1,14 @@
+Index: hledger-api.spec
+===================================================================
+--- hledger-api.spec	(revision 1)
++++ hledger-api.spec	(working copy)
+@@ -20,7 +20,7 @@
+ Version:        1.1
+ Release:        0
+ Summary:        Web API server for the hledger accounting tool
+-License:        GPL-1.0+
++License:        GPL-3.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+

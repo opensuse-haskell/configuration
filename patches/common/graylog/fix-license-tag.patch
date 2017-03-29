@@ -7,7 +7,7 @@ Index: ghc-graylog.spec
  Release:        0
  Summary:        Support for graylog output
 -License:        Unknown
-+License:        SUSE-Public-Domain
++License:        WTFPL
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
