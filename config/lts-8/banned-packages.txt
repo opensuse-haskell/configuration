@@ -164,3 +164,8 @@ shelly
 # Does not compile on i686 and upstream is unresponsive.
 # https://github.com/factisresearch/large-hashable/issues/11
 large-hashable
+
+# Uses Facebook's "patent termination clause".
+# https://github.com/facebook/Haxl/issues/67
+haxl
+haxl-amazonka
