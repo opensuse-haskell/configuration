@@ -1,0 +1,16 @@
+Index: ghc-fsnotify-conduit.spec
+===================================================================
+--- ghc-fsnotify-conduit.spec	(revision 1)
++++ ghc-fsnotify-conduit.spec	(working copy)
+@@ -42,7 +42,9 @@
+ %endif
+ 
+ %description
+-Get filesystem notifications as a stream of events.
++Get filesystem notifications as a stream of events, using the conduit package
++to handle the stream. This uses the fsnotify package, which uses OS-specific
++file notification APIs for efficiency.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

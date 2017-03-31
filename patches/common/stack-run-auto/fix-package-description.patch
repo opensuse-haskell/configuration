@@ -1,0 +1,38 @@
+1Index: stack-run-auto.spec
+===================================================================
+--- stack-run-auto.spec	(revision 1)
++++ stack-run-auto.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Name:           %{pkg_name}
+ Version:        0.1.1.4
+ Release:        0
+-Summary:        FIXME
++Summary:        Automatically finds dependencies and runs a Haskell file with stack
+ License:        MIT
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{name}
+@@ -45,7 +45,22 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-FIXME.
++Automatically finds dependencies and runs a Haskell script (no cabal manifest,
++no stack.yaml, no project).
++
++The command "stack-run-auto Test.hs" will ...
++
++ - find the imported modules from this Haskell file and it's local dependencies,
++
++ - find the package containing each of these modules using the Hayoo
++   search-engine to query for the module trying to find from which package it
++   came from,
++
++ - find dependencies for all the packages resolved,
++
++ - cache this on $HOME/.stack-run-auto,
++
++ - run stack runghc File.hs --package package1 --package package2 ...
+ 
+ %package -n ghc-%{name}
+ Summary:        Haskell %{name} library
+

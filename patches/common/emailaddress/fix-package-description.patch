@@ -1,0 +1,20 @@
+Index: ghc-emailaddress.spec
+===================================================================
+--- ghc-emailaddress.spec	(revision 2)
++++ ghc-emailaddress.spec	(working copy)
+@@ -47,7 +47,13 @@
+ %endif
+ 
+ %description
+-Wrapper around email-validate library adding instances for common type classes.
++This Haskell module wraps around the email-validate package, providing a
++newtype wrapper around the EmailAddress type. Our EmailAddress type has
++additional typeclass instances, including aeson's ToJSON and FromJSON. This
++allows us to use the EmailAddress type without fear of orphan instances.
++
++This package exposes the module Text.EmailAddress. It can be used as a drop-in
++replacement for email-validate.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

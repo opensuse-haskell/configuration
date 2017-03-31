@@ -1,0 +1,34 @@
+Index: ghc-say.spec
+===================================================================
+--- ghc-say.spec	(revision 2)
++++ ghc-say.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Name:           ghc-%{pkg_name}
+ Version:        0.1.0.0
+ Release:        0
+-Summary:        FIXME
++Summary:        Send textual messages to a Handle in a thread-friendly way
+ License:        MIT
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+@@ -38,7 +38,18 @@
+ %endif
+ 
+ %description
+-FIXME.
++Send textual messages to a Handle in a thread-friendly way. The functions
++provided in this library guarantee the following properties:
++
++  - Properly handle character encoding settings on the Handle.
++
++  - For reasonably sized messages, ensure that the entire message is written in
++    one chunk to avoid interleaving data with other threads. (This includes the
++    trailing newline character.)
++
++  - Avoid unnecessary memory allocations and copies
++
++  - Minimize locking.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
