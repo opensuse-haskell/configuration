@@ -96,12 +96,10 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   let syn = synopsis pkgDesc
   let initialCapital (c:cs) = toUpper c:cs
       initialCapital [] = []
-  let syn' = if null syn
-             then "Haskell" +-+ name +-+ "package"
-             else (unwords . lines . initialCapital) syn
+  let syn' = if badDescription syn then "FIXME" else (unwords . lines . initialCapital) syn
   let summary = rstrip (== '.') syn'
   let descr = description pkgDesc
-  let descLines = (formatParagraphs . initialCapital . filterSymbols . finalPeriod) $ if null descr then syn' else descr
+  let descLines = (formatParagraphs . initialCapital . filterSymbols . finalPeriod) $ if badDescription descr then syn' else descr
       finalPeriod cs = if last cs == '.' then cs else cs ++ "."
       filterSymbols (c:cs) =
         if c `notElem` "@\\" then c: filterSymbols cs
@@ -447,3 +445,8 @@ testsuiteDependencies :: PackageDescription  -- ^pkg description
                 -> [String]         -- ^depends
 testsuiteDependencies pkgDesc self =
   map showDep . delete self . filter excludedPkgs . nub . map depName $ concatMap (targetBuildDepends . testBuildInfo) (testSuites pkgDesc)
+
+badDescription :: String -> Bool
+badDescription s = null s
+                || "please see readme" `isPrefixOf` map toLower s
+                || "initial project template" `isPrefixOf` map toLower s
