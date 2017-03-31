@@ -6,7 +6,7 @@ Index: ghc-doctemplates.spec
  %endif
  
  %description
--Please see README.md.
+-Pandoc-style document templates.
 +A simple text templating system predominently used by Pandoc.
  
  %package devel
