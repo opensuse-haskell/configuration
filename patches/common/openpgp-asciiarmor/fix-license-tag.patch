@@ -1,13 +1,13 @@
 Index: ghc-openpgp-asciiarmor.spec
 ===================================================================
---- ghc-openpgp-asciiarmor.spec	(revision 5)
+--- ghc-openpgp-asciiarmor.spec	(revision 1)
 +++ ghc-openpgp-asciiarmor.spec	(working copy)
 @@ -22,7 +22,7 @@
  Version:        0.1
  Release:        0
  Summary:        OpenPGP (RFC4880) ASCII Armor codec
 -License:        Unknown
-+License:        SUSE-Public-Domain
++License:        ISC
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
