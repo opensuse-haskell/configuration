@@ -1,0 +1,16 @@
+Index: ghc-envy.spec
+===================================================================
+--- ghc-envy.spec	(revision 2)
++++ ghc-envy.spec	(working copy)
+@@ -42,8 +42,8 @@
+ %endif
+ 
+ %description
+-For package use information see the
+-<https://github.com/dmjio/envy/blob/master/README.md README.md>.
++Formulate powerful queries of environment variables and parse the results
++directly into an ADT.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
