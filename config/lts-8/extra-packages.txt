@@ -108,3 +108,6 @@ wai-request-spec
 yesod-job-queue
 yi
 yi-frontend-pango
+
+# Early alpha-quality software without documentation.
+chart-unit
