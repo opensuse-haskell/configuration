@@ -168,3 +168,6 @@ large-hashable
 # https://github.com/facebook/Haxl/issues/67
 haxl
 haxl-amazonka
+
+# Early alpha-quality software without documentation.
+chart-unit
