@@ -1,0 +1,14 @@
+Index: ghc-pretty-simple.spec
+===================================================================
+--- ghc-pretty-simple.spec	(revision 1)
++++ ghc-pretty-simple.spec	(working copy)
+@@ -41,7 +41,7 @@
+ %endif
+ 
+ %description
+-Please see <https://github.com/cdepillabout/pretty-simple#readme README.md>.
++Pretty printer for data types with a 'Show' instance.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

@@ -1,0 +1,23 @@
+Index: ghc-netpbm.spec
+===================================================================
+--- ghc-netpbm.spec	(revision 1)
++++ ghc-netpbm.spec	(working copy)
+@@ -51,17 +51,6 @@
+ The current implementation parses PPM images at around 10 MB/s on a Core
+ i5-2520M.
+ 
+-CHANGELOG
+-
+-Version 1.0.1
+-
+-* Added required Vector imports necessary for deriving Unbox instances.
+-
+-Version 1.0.0
+-
+-* Use storable instead of unboxed vectors to allow easier integration with Ptr
+-based APIs.
+-
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+ Group:          Development/Libraries/Other
+

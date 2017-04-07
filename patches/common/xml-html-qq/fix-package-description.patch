@@ -1,0 +1,14 @@
+Index: ghc-xml-html-qq.spec
+===================================================================
+--- ghc-xml-html-qq.spec	(revision 1)
++++ ghc-xml-html-qq.spec	(working copy)
+@@ -49,7 +49,7 @@
+ %endif
+ 
+ %description
+-Please see <https://github.com/cdepillabout/xml-html-qq#readme README.md>.
++Quasi-quoters for XML and HTML Documents.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

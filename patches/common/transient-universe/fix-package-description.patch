@@ -1,0 +1,14 @@
+Index: ghc-transient-universe.spec
+===================================================================
+--- ghc-transient-universe.spec	(revision 1)
++++ ghc-transient-universe.spec	(working copy)
+@@ -54,7 +54,7 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-See <http://github.com/transient-haskell/transient>.
++Remote execution and map-reduce: distributed computing for Transient.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
