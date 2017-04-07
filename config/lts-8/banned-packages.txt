@@ -171,3 +171,6 @@ haxl-amazonka
 
 # Early alpha-quality software without documentation.
 chart-unit
+
+# Obsolete package.
+groupoids
