@@ -450,5 +450,6 @@ badDescription :: String -> Bool
 badDescription s = null s
                 || "please see readme" `isPrefixOf` map toLower s
                 || "please see the readme" `isPrefixOf` map toLower s
+                || "see readme" `isPrefixOf` map toLower s
                 || "please refer to readme" `isPrefixOf` map toLower s
                 || "initial project template" `isPrefixOf` map toLower s
