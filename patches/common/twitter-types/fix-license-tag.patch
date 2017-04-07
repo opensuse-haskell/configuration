@@ -1,13 +1,13 @@
-Index: ghc-Network-NineP.spec
+Index: ghc-twitter-types.spec
 ===================================================================
---- ghc-Network-NineP.spec	(revision 1)
-+++ ghc-Network-NineP.spec	(working copy)
-@@ -21,7 +21,7 @@
- Version:        0.4.1
+--- ghc-twitter-types.spec	(revision 1)
++++ ghc-twitter-types.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.7.2.2
  Release:        0
- Summary:        High-level abstraction over 9P protocol
--License:        Unknown
-+License:        WTFPL
+ Summary:        Twitter JSON parser and types
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

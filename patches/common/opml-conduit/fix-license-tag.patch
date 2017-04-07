@@ -1,12 +1,12 @@
-Index: ghc-Network-NineP.spec
+Index: ghc-opml-conduit.spec
 ===================================================================
---- ghc-Network-NineP.spec	(revision 1)
-+++ ghc-Network-NineP.spec	(working copy)
-@@ -21,7 +21,7 @@
- Version:        0.4.1
+--- ghc-opml-conduit.spec	(revision 2)
++++ ghc-opml-conduit.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.6.0.1
  Release:        0
- Summary:        High-level abstraction over 9P protocol
--License:        Unknown
+ Summary:        Streaming parser/renderer for the OPML 2.0 format
+-License:        SUSE-Public-Domain
 +License:        WTFPL
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
