@@ -18,7 +18,7 @@ cabal2obs:
 
 config/%/stackage-packages.txt:
 	curl -L -s "https://www.stackage.org/$*/cabal.config" >$@
-	sed -i -e 's/store-core ==0.4,/store-core ==0.3,/' $@
+	sed -i -e '/ store-core ==/d' -e '/ store ==/d' $@
 
 update:
 	cd hackage && git checkout hackage && git pull
