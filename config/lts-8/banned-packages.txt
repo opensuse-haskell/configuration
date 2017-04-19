@@ -177,3 +177,7 @@ groupoids
 
 # Looks very immature.
 proto-lens-combinators
+
+# hscurses doesn't work reliably, probably a problem on our side.
+hscurses
+mushu
