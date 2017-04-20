@@ -1,0 +1,21 @@
+Index: ghc-hscurses.spec
+===================================================================
+--- ghc-hscurses.spec	(revision 1)
++++ ghc-hscurses.spec	(working copy)
+@@ -33,6 +33,7 @@
+ BuildRequires:  ghc-old-time-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-unix-devel
++BuildRequires:  ncurses-devel
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+@@ -47,6 +48,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
++Requires:       ncurses-devel
+ 
+ %description devel
+ This package provides the Haskell %{pkg_name} library development files.
+
