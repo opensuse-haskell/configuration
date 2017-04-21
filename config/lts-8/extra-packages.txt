@@ -50,7 +50,7 @@ torrent
 yesod-default
 
 # No-one knows why Stackage would release an LTS version that doesn't contain ...
-stack <1.4
+stack <9
 store <0.4
 store-core <0.4
 th-utilities
