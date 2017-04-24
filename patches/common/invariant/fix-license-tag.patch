@@ -3,9 +3,9 @@ Index: ghc-invariant.spec
 --- ghc-invariant.spec	(revision 1)
 +++ ghc-invariant.spec	(working copy)
 @@ -22,7 +22,7 @@
- Version:        0.4
+ Version:        0.4.1
  Release:        0
- Summary:        Haskell 98 invariant functors
+ Summary:        Haskell98 invariant functors
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
  Group:          Development/Languages/Other
