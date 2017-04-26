@@ -35,12 +35,14 @@ Index: cabal-install.spec
  
  %check
  %cabal_test
-@@ -84,4 +96,8 @@
+@@ -84,4 +96,10 @@
  %{_bindir}/cabal
  %{_mandir}/man1/cabal.1%{ext_man}
  
 +%files bash-completion
 +%defattr(-,root,root)
++%dir %{_datadir}/bash-completion
++%dir %{_datadir}/bash-completion/completions
 +%{_datadir}/bash-completion/completions/cabal
 +
  %changelog
