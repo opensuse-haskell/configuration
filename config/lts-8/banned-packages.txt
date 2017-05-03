@@ -75,21 +75,12 @@ stackage
 
 # deprecated
 stackage-build-plan
-
-# deprecated
 stackage-cabal
-
-# deprecated (but still dependency of stackage-curator)
-# stackage-cli
-
-# deprecated
+stackage-cli
 stackage-sandbox
-
-# deprecated
 stackage-setup
-
-# deprecated
 stackage-types
+stackage-query
 
 # doesn't work on Linux
 Win32
