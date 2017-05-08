@@ -1,0 +1,19 @@
+Index: ghc-pinchot.spec
+===================================================================
+--- ghc-pinchot.spec	(revision 3)
++++ ghc-pinchot.spec	(working copy)
+@@ -37,7 +37,12 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-Write grammars, not parsers.
++Pinchot provides a simple language that you use to write a Haskell value that
++describes a context-free grammar. Using this value, you can automatically
++generate data types corresponding to the grammar, as well as an Earley parser
++to parse strings in that grammar.
++
++For more documentation, see the Haddocks for the main Pinchot module.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+

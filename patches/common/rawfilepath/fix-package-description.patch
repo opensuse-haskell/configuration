@@ -1,0 +1,16 @@
+Index: ghc-rawfilepath.spec
+===================================================================
+--- ghc-rawfilepath.spec	(revision 4)
++++ ghc-rawfilepath.spec	(working copy)
+@@ -34,7 +34,9 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-Use RawFilePath instead of FilePath.
++Mid-level system functions for manipulating the 'RawFilePath' data type
++provided by the unix core library, so that it can be used instead of
++'FilePath'.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
