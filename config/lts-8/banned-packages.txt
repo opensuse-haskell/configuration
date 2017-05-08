@@ -178,3 +178,6 @@ list-prompt
 
 # Has shitty documentation and virtually no code content. Isn't by anyone either.
 dataurl
+
+# Shitty documentation. It's unclear how this code relates to the wavefront library.
+wavefront-obj
