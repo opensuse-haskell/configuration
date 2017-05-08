@@ -175,3 +175,6 @@ mushu
 
 # Ambiguous licensing information: https://github.com/yamadapc/list-prompt/pull/2
 list-prompt
+
+# Has shitty documentation and virtually no code content. Isn't by anyone either.
+dataurl
