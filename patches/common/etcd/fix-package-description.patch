@@ -1,0 +1,35 @@
+Index: ghc-etcd.spec
+===================================================================
+--- ghc-etcd.spec	(revision 1)
++++ ghc-etcd.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Name:           ghc-%{pkg_name}
+ Version:        1.0.5
+ Release:        0
+-Summary:        Client for etcd, a highly-available key value store
++Summary:        Client for etcd, a highly-availability key value store
+ License:        Unlicense
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+@@ -43,7 +43,19 @@
+ %endif
+ 
+ %description
+-See <https://coreos.com/using-coreos/etcd/>.
++etcd is a distributed key value store that provides a reliable way to store
++data across a cluster of machines. It’s open-source and available on GitHub.
++etcd gracefully handles leader elections during network partitions and will
++tolerate machine failure, including the leader.
++
++Your applications can read and write data into etcd. A simple use-case is to
++store database connection details or feature flags in etcd as key value pairs.
++These values can be watched, allowing your app to reconfigure itself when they
++change.
++
++Advanced uses take advantage of the consistency guarantees to implement
++database leader elections or do distributed locking across a cluster of
++workers.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
