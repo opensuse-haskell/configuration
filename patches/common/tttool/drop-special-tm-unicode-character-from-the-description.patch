@@ -1,0 +1,14 @@
+Index: tttool.spec
+===================================================================
+--- tttool.spec	(revision 3)
++++ tttool.spec	(working copy)
+@@ -53,7 +53,7 @@
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+ %description
+-The Ravensburger Tiptoi® pen is programmed via special files. Their file format
++The Ravensburger Tiptoi pen is programmed via special files. Their file format
+ has been reverse engineered; this is a tool to analyse and create such files.
+ 
+ %prep
+
