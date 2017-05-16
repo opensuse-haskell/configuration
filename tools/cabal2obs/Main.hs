@@ -33,6 +33,7 @@ main = do
       shopts = shakeOptions
                { shakeFiles = buildDir
                , shakeProgress = progressSimple
+               , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
                , shakeVersion = "3"     -- version of the build rules, bump to trigger full re-build
                }
