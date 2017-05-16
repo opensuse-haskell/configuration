@@ -4,32 +4,19 @@
 applicative-quoters
 arrows
 BNFC
-HaXml
 lazysmallcheck
 Stream
 structured-haskell-mode
-titlecase
 
 # Used by osukup@suse.com.
 cab
 pointfree
-wreq
-X11-xft
 xmobar
-xmonad-contrib
-
-# Required to build Idris with +ffi Cabal flag.
-libffi
 
 # Needed by games repository somewhere.
 SDL
 SDL-image
 SDL-mixer
-
-# Needed for cabal-install.
-hackage-security
-cryptohash-sha256
-ed25519
 
 # These packages are dependencies of git-annex and/or cabal-install.
 aws
@@ -42,9 +29,7 @@ gnuidn
 gnutls
 gsasl
 libxml-sax
-network-multicast
 network-protocol-xmpp
-recursion-schemes
 regex-tdfa-rc
 torrent
 yesod-default
@@ -53,32 +38,22 @@ yesod-default
 stack <9
 store <0.4
 store-core <0.4
-th-utilities
 
 # These packages are in Factory for historical reasons.
 api-field-json-th
-bitcoin-api
-bitcoin-api-extra
 concatenative
 concurrent-extra
 continued-fractions
 converge
-derive
 doctest-prop
-explicit-exception
-extract-dependencies
 FindBin
-freer
 gamma
 genvalidity
 genvalidity-hspec
 genvalidity-property
-handwriting
-httpd-shed
 load-env
 murmur3
 network-uri-flag
-package-description-remote
 pbkdf
 pcap
 pipes-aeson
@@ -88,17 +63,11 @@ pipes-http
 pipes-network
 quickcheck-properties
 rosezipper
-scrape-changes
 secp256k1
 show-type
-stack-run-auto
 th-printf
 tree-view
 tries
-twitter-types
-twitter-types-lens
-unit-constraint
-validation
 validity
 wai-request-spec
 yesod-job-queue
