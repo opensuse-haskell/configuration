@@ -32,6 +32,7 @@ main = do
 
       shopts = shakeOptions
                { shakeFiles = buildDir
+               , shakeVerbosity = Quiet
                , shakeProgress = progressSimple
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
@@ -136,7 +137,7 @@ main = do
          else liftIO (removeFiles pkgDir ["*.cabal"])
       -- need [pkgDir </> display pkgid <.> "tar.gz"]
       liftIO $ removeFiles pkgDir [display pkgid]
-      command_ [Cwd pkgDir] "cabal" ["get", display pkgid]
+      command_ [Cwd pkgDir] "cabal" ["get", "-v0", display pkgid]
       case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
         Right (desc,_) -> do putNormal $ unwords $ ["createSpecFile", out] ++ ["force-exe" | isExe] ++ (showFlagAssignment <$> fa)
@@ -148,7 +149,7 @@ main = do
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
-        command_ [] "patch" ["--no-backup-if-mismatch", "--force", out, p]
+        command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
         command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
       Stdout buf <- command [] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
