@@ -70,6 +70,6 @@ tree-view
 tries
 validity
 wai-request-spec
-yesod-job-queue
+yesod-job-queue < 0.3.0.3
 yi
 yi-frontend-pango
