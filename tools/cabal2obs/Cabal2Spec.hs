@@ -203,7 +203,8 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
       dupdocs   = docsUnfiltered `intersect` datafiles
       docs      = docsUnfiltered \\ datafiles
   unless (null dupdocs) $
-    putStrLn $ "Warning: doc files found in datadir:" +-+ unwords dupdocs
+    -- TODO: What does this warning accomplish?
+    putStrLn $ "*** " ++ pkgname ++ ": doc files found in datadir:" +-+ unwords dupdocs
   putNewline
 
   unless (null testsuiteDeps) $ do
