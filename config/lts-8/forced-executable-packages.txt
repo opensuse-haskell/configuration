@@ -12,6 +12,7 @@ cab
 cabal2nix
 cabal-install
 cabal-rpm
+clash-ghc
 codex
 cpphs
 cryptol
