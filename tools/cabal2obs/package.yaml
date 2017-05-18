@@ -21,6 +21,7 @@ executables:
     dependencies:
       - base < 5
       - Cabal > 1.24
+      - containers
       - directory
       - filepath
       - shake
@@ -29,6 +30,9 @@ executables:
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
     other-modules:
       - Cabal2Spec
+      - Config
+      - Config.LTS8
+      - Config.LTS8.Stackage
       - Oracle
       - Oracle.Compiler
       - Oracle.FlagAssignment

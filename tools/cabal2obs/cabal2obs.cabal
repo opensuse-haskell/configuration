@@ -29,6 +29,7 @@ executable cabal2obs
   build-depends:
     base < 5,
     Cabal > 1.24,
+    containers,
     directory,
     filepath,
     shake,
@@ -36,6 +37,9 @@ executable cabal2obs
     time
   other-modules:
     Cabal2Spec
+    Config
+    Config.LTS8
+    Config.LTS8.Stackage
     Oracle
     Oracle.Compiler
     Oracle.FlagAssignment

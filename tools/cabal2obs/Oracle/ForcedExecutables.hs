@@ -3,17 +3,15 @@
 module Oracle.ForcedExecutables where
 
 import Orphans ( )
-import ParseUtils
 import Types
+import Config
 
 import Development.Shake
-import Development.Shake.FilePath
 import Development.Shake.Classes
 import Distribution.Package
 
 newtype GetForcedExes = GetForcedExes PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)
 
-getForcedExes :: FilePath -> Rules (GetForcedExes -> Action [PackageName])
-getForcedExes configDir = addOracle $ \(GetForcedExes (PackageSetId psid)) ->
-  readPackageNameList (configDir </> psid </> "forced-executable-packages.txt")
+getForcedExes :: Rules (GetForcedExes -> Action [PackageName])
+getForcedExes = addOracle $ \(GetForcedExes psid) -> return (forcedExectables (getConfig psid))

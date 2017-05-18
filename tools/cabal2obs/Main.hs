@@ -5,6 +5,7 @@ import Oracle
 import Orphans ()
 import ParseUtils
 import Types
+import Config ( knownPackageSets )
 
 import Control.Monad
 import Data.Function
@@ -27,7 +28,6 @@ main :: IO ()
 main = do
   homeDir <- System.Environment.getEnv "HOME"
   let buildDir = "_build"
-      configDir = "config"
       hackageDir = "hackage"
 
       shopts = shakeOptions
@@ -44,12 +44,12 @@ main = do
     -- Register our custom oracles to query the configuration files.
     getCabal <- hackageDB hackageDir
     resolver <- resolveConstraint hackageDir
-    packageList <- getPackageList configDir resolver
-    forcedExes <- getForcedExes configDir
-    compilerId <- getCompiler configDir
-    flagAssignments <- getFlagAssignments configDir
+    packageList <- getPackageList resolver
+    forcedExes <- getForcedExes
+    compilerId <- getCompiler
+    flagAssignments <- getFlagAssignments
 
-    getFlags <- addOracle $ \(psid@(PackageSetId _), PackageName n) -> do
+    getFlags <- addOracle $ \(psid@(PackageSetId _), n) -> do
       fas <- flagAssignments (GetFlagAssignments psid)
       return $ fromMaybe [] (lookup n fas)
 
@@ -80,8 +80,7 @@ main = do
 
     -- Compute all configured builds and register the required targets.
     action $ do
-      psets <- fmap PackageSetId <$> getDirectoryDirs configDir
-      targets <- forP psets $ \psid -> do
+      targets <- forP knownPackageSets $ \psid -> do
         pset <- packageList (GetPackageList psid)
         fexeset <- forcedExes (GetForcedExes psid)
         forP pset $ \pkgid@(PackageIdentifier pn@(PackageName n) _) -> do
