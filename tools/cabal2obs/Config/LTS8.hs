@@ -8,16 +8,22 @@ import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.Text
+import Distribution.Version
 
 lts8 :: PackageSetConfig
 lts8 = PackageSetConfig
     { compiler = fromJust (simpleParse "ghc-8.0.2")
-    , stackagePackages = stackage
+    , stackagePackages = filter goodStackagePackage stackage
     , extraPackages = map (fromJust . simpleParse) extraPackageNames
     , bannedPackages = map (fromJust . simpleParse) bannedPackageNames
     , flagAssignments = readFlagAssignents flagList
     , forcedExectables = map (fromJust . simpleParse) forcedExectableNames
     }
+
+goodStackagePackage :: Dependency ->  Bool
+goodStackagePackage (Dependency (PackageName "store") _)      = False
+goodStackagePackage (Dependency (PackageName "store-core") _) = False
+goodStackagePackage (Dependency _ v)                          = v /= noVersion
 
 extraPackageNames :: [String]
 extraPackageNames =
