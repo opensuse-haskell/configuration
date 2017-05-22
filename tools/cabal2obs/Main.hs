@@ -1,11 +1,12 @@
 module Main ( main ) where
 
 import Cabal2Spec
+import Config ( knownPackageSets )
 import Oracle
 import Orphans ()
+import ParseStackageConfig
 import ParseUtils
 import Types
-import Config ( knownPackageSets )
 
 import Control.Monad
 import Data.Function
@@ -171,6 +172,20 @@ main = do
         return $ intercalate "," [ show n, show (display v), show url]
       writeFile' out (intercalate "\n" ls)
 
+    buildDir </> "cabal-lts-*.config" %> \out -> do
+      alwaysRerun
+      let lts = drop 10 (takeBaseName out)
+          url = "https://www.stackage.org/lts-" ++ lts ++"/cabal.config"
+      command_ [FileStdout out] "curl" ["-L", "-s", url]
+
+    "tools/cabal2obs/Config/LTS*/Stackage.hs" %> \out -> do
+      let lts = drop 3 (takeBaseName (takeDirectory out))
+      buf <- readFile' (buildDir </> "cabal-lts-" ++ lts <.> "config")
+      deps <- runP stackageConfig buf
+      writeFileChanged out (mkStackagePackageSetSourcefile lts deps)
+
+    phony "update" $ need $
+      [ "tools/cabal2obs/Config/LTS"++drop 4 psid++"/Stackage.hs" | PackageSetId psid <- knownPackageSets ]
 
 mkChangeEntry :: String -> String -> IO String
 mkChangeEntry version email = do
@@ -196,3 +211,16 @@ verifyLicense lic
 
 showFlagAssignment :: (FlagName,Bool) -> String
 showFlagAssignment (FlagName f, v) = "-f" ++ ['-'|not v] ++ f
+
+mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
+mkStackagePackageSetSourcefile vers deps = unlines $
+  [ "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
+  , ""
+  , "module Config.LTS" ++ vers ++ ".Stackage where"
+  , ""
+  , "import Distribution.Package"
+  , "import Distribution.Version"
+  , ""
+  , "stackage :: [Dependency]"
+  , "stackage = " ++ show deps
+  ]
