@@ -194,7 +194,7 @@ mkChangeEntry version email = do
     [ "-------------------------------------------------------------------"
     , unwords [ ts, "-", email ]
     , ""
-    , unwords [ "- Update to", version, "with cabal2obs." ]
+    , "- Update to " ++ version ++ "."
     , ""
     ]
 
