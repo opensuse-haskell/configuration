@@ -1,7 +1,6 @@
 # GNUmakefile
 
 CABAL_INSTALL_TARBALL := $(HOME)/.cabal/packages/hackage.haskell.org/00-index.tar
-PACKAGE_SETS := $(wildcard config/*/stackage-packages.txt)
 
 .PHONY: all cabal2obs update
 
@@ -16,11 +15,5 @@ all:		cabal2obs
 cabal2obs:
 	@cd tools/cabal2obs && hpack && cabal build
 
-config/%/stackage-packages.txt:
-	curl -L -s "https://www.stackage.org/$*/cabal.config" >$@
-	sed -i -e '/ store-core ==/d' -e '/ store ==/d' $@
-
-update:
+update:		# TODO: move this code into cabal2obs
 	cd hackage && git checkout hackage && git pull
-	rm -f $(PACKAGE_SETS)
-	$(MAKE) $(PACKAGE_SETS)
