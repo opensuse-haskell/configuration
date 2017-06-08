@@ -285,6 +285,10 @@ bannedPackageNames =
 
     -- Shitty documentation. It's unclear how this code relates to the wavefront library.
   , "wavefront-obj"
+
+    -- Inconsistent license: https://github.com/transient-haskell/transient-universe/issues/34
+  , "transient-haskell"
+  , "ghc-ghcjs-hplay"
   ]
 
 forcedExectableNames :: [String]
