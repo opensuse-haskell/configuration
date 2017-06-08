@@ -22,7 +22,7 @@ Index: pandoc.spec
 +Requires:       %{name} = %{version}
 +Requires:       texlive-latex-bin-bin
 +# bsc#1014590
-+Requires:       texlive-upqoute
++Requires:       texlive-upquote
 +
 +%description pdf
 +Meta package for support generating pdf with pandoc.
