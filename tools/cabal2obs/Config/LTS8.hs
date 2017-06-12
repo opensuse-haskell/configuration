@@ -287,8 +287,8 @@ bannedPackageNames =
   , "wavefront-obj"
 
     -- Inconsistent license: https://github.com/transient-haskell/transient-universe/issues/34
-  , "transient-haskell"
-  , "ghc-ghcjs-hplay"
+  , "transient-universe"
+  , "ghcjs-hplay"
   ]
 
 forcedExectableNames :: [String]
