@@ -98,8 +98,8 @@ extraPackageNames =
   , "validity"
   , "wai-request-spec"
   , "yesod-job-queue < 0.3.0.3"
-  , "yi"
-  , "yi-frontend-pango"
+  , "yi < 0.14"
+  , "yi-frontend-pango < 0.14"
   ]
 
 bannedPackageNames :: [String]
