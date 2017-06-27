@@ -1,0 +1,64 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+shopt -s nullglob
+
+tmpfile=$(mktemp)
+
+error_exit()
+{
+    echo >&2 "*** $0:" "$@"
+    regular_exit=true
+    exit 1
+}
+
+exit_trap()
+{
+    local lc="$BASH_COMMAND" rc=$?
+    test "$rc" -eq 0 || test -n "${regular_exit:-}" || echo "*** error $rc: $lc"
+    test ! -f "$tmpfile" || rm -f "$tmpfile"
+}
+
+trap exit_trap EXIT
+
+cd "$(dirname "$0")"/..
+
+# git -C hackage checkout -q hackage
+# git -C hackage pull -q &
+# parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
+# wait
+
+# msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
+# if [ -n "$(git status --porcelain hackage)" ]; then
+#    git commit -q -m "$msg" hackage
+# fi
+
+# parallel "cd {} && osc status" ::: _build/lts-* >$tmpfile
+# if [ -s "$tmpfile" ]; then
+#     error_exit osc checkouts contain uncommitted changes
+# fi
+
+cd tools/cabal2obs && hpack --silent && cabal new-build -v0 && cd ../..
+cabal2obs=$( echo $PWD/tools/cabal2obs/dist-newstyle/build/cabal2obs-*/build/cabal2obs/cabal2obs )
+$cabal2obs --no-progress --lint update
+for n in $(git status --porcelain tools/cabal2obs/Config/LTS* | sed -e 's/^ M //'); do
+    v=$(basename $(dirname $n))
+    v=${v##LTS}
+    v=$(head -n1 _build/cabal-lts-$v.config | sed -e 's,.*/,,')
+    git commit -q -m "update to $v" $n
+done
+
+# git status --porcelain >$tmpfile
+# if [ -s "$tmpfile" ]; then
+#     error_exit git repository has uncommitted changes
+# fi
+
+cd tools/cabal2obs && cabal new-build -v0 && cd ../..
+CABAL_INSTALL_TARBALL="$HOME/.cabal/packages/hackage.haskell.org/00-index.tar"
+rm -f $CABAL_INSTALL_TARBALL*
+git -C hackage archive --format=tar -o $CABAL_INSTALL_TARBALL HEAD
+gzip <$CABAL_INSTALL_TARBALL >$CABAL_INSTALL_TARBALL.gz
+cabal fetch -v0 --no-dependencies ip6addr
+$cabal2obs --no-progress --lint
+
+parallel "cd {} && ../../tools/commit" ::: _build/lts-*
