@@ -32,8 +32,10 @@ osc addremove * >/dev/null
 
 projects=$( osc st | sed -r -e 's|^. +([^/]+)(/.+)?$|\1|' | uniq )
 
-test -n "${projects:-}" || exit 1
-
-echo committing: $projects
-# --noservice due to https://github.com/openSUSE/obs-service-format_spec_file/issues/17
-osc commit --noservice -m "$*" $projects
+if [ -n "${projects:-}" ]; then
+    echo committing: "$projects"
+    # --noservice due to https://github.com/openSUSE/obs-service-format_spec_file/issues/17
+    osc commit --noservice -m "$*" $projects
+else
+    echo Nothing to commit.
+fi
