@@ -209,9 +209,6 @@ verifyLicense lic
                                            ]
   | otherwise                  = fail (unwords ["invalid license expression", show lic])
 
-showFlagAssignment :: (FlagName,Bool) -> String
-showFlagAssignment (FlagName f, v) = "-f" ++ ['-'|not v] ++ f
-
 mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
 mkStackagePackageSetSourcefile vers deps = unlines
   [ "{-# LANGUAGE OverloadedStrings #-}"
