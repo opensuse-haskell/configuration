@@ -18,7 +18,6 @@ import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
 import Distribution.Package
-import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
 import Distribution.System
 import Distribution.Text
@@ -90,7 +89,7 @@ main = do
               isExe = isForcedExe || not (hasLibrary cabal)
               bn = (if isExe then "" else "ghc-") ++ n
               pkgDir = buildDir </> unPackageSetId psid </> bn
-          return [ pkgDir </> bn <.> "spec", pkgDir </> (display pkgid <.> "tar.gz") ]
+          return [ pkgDir </> bn <.> "spec" ]
       need ((buildDir </> "packages.csv") : concat (concat targets))
       -- get rid of *.orig and *.rej files created by patch(1).
       removeFilesAfter buildDir ["*/*/*.orig", "*/*/*.rej"]
@@ -135,13 +134,14 @@ main = do
       if rev > 0
          then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
          else liftIO (removeFiles pkgDir ["*.cabal"])
-      -- need [pkgDir </> display pkgid <.> "tar.gz"]
-      liftIO $ removeFiles pkgDir [display pkgid]
-      command_ [Cwd pkgDir, Traced "cabal-get"] "cabal" ["get", "-v0", display pkgid]
+      need [pkgDir </> display pkgid <.> "tar.gz"]
       case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
-        Right (desc,_) -> traced "cabal2spec" $
-                            createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
+        Right (desc,_) -> withTempDir $ \tmpDir -> do
+                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> display pkgid <.> "tar.gz"]
+                            copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> n <.> "cabal")
+                            traced "cabal2spec" $ do
+                              createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
