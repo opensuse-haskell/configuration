@@ -2,16 +2,33 @@
 
 set -eu -o pipefail
 
-foo()
-{
-  echo $#: $@
-}
+if [ ! -f .osc/_packages ]; then
+    echo >&2 "*** $0 must be run inside of an OBS project"
+    exit 1
+fi
+
+tmpfile=$(mktemp)
+trap "rm -v '$tmpfile'" EXIT
 
 if [ $# -eq 0 ]; then
-  echo >&2 "*** command line syntax error"
-  echo >%1 "Usage: $0 non-empty commit message"
-  exit 1
+    git status --porcelain >$tmpfile
+    if [ -s "$tmpfile" ]; then
+        echo >&2 git repository has uncommitted changes:
+        cat >&2 $tmpfile
+        exit 1
+    fi
+    myVersion=$(git describe --always)
+    myUrl="https://github.com/opensuse-haskell/configuration/commit/$myVersion"
+    set -- update auto-generated from "$myUrl"
 fi
+
+while true; do
+    osc addremove >$tmpfile
+    if [ "$(stat -c %s $tmpfile)" -eq 0 ]; then
+        break
+    fi
+done
+osc addremove * >/dev/null
 
 projects=$( osc st | sed -r -e 's|^. +([^/]+)(/.+)?$|\1|' | uniq )
 
