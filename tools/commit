@@ -17,9 +17,8 @@ if [ $# -eq 0 ]; then
         cat >&2 "$tmpfile"
         exit 1
     fi
-    myVersion=$(git describe --always)
-    myUrl="https://github.com/opensuse-haskell/configuration/commit/$myVersion"
-    set -- update auto-generated from "$myUrl"
+    rev=$(git describe --always)
+    set -- auto-generated from https://github.com/opensuse-haskell/configuration revision "$rev"
 fi
 
 while true; do
