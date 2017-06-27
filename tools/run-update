@@ -23,20 +23,20 @@ trap exit_trap EXIT
 
 cd "$(dirname "$0")"/..
 
-# git -C hackage checkout -q hackage
-# git -C hackage pull -q &
-# parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
-# wait
+git -C hackage checkout -q hackage
+git -C hackage pull -q &
+parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
+wait
 
-# msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
-# if [ -n "$(git status --porcelain hackage)" ]; then
-#    git commit -q -m "$msg" hackage
-# fi
+msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
+if [ -n "$(git status --porcelain hackage)" ]; then
+   git commit -q -m "$msg" hackage
+fi
 
-# parallel "cd {} && osc status" ::: _build/lts-* >$tmpfile
-# if [ -s "$tmpfile" ]; then
-#     error_exit osc checkouts contain uncommitted changes
-# fi
+parallel "cd {} && osc status" ::: _build/lts-* >$tmpfile
+if [ -s "$tmpfile" ]; then
+    error_exit osc checkouts contain uncommitted changes
+fi
 
 cd tools/cabal2obs && hpack --silent && cabal new-build -v0 && cd ../..
 cabal2obs=$( echo $PWD/tools/cabal2obs/dist-newstyle/build/cabal2obs-*/build/cabal2obs/cabal2obs )
@@ -48,10 +48,10 @@ for n in $(git status --porcelain tools/cabal2obs/Config/LTS* | sed -e 's/^ M //
     git commit -q -m "update to $v" $n
 done
 
-# git status --porcelain >$tmpfile
-# if [ -s "$tmpfile" ]; then
-#     error_exit git repository has uncommitted changes
-# fi
+git status --porcelain >$tmpfile
+if [ -s "$tmpfile" ]; then
+    error_exit git repository has uncommitted changes
+fi
 
 cd tools/cabal2obs && cabal new-build -v0 && cd ../..
 CABAL_INSTALL_TARBALL="$HOME/.cabal/packages/hackage.haskell.org/00-index.tar"
