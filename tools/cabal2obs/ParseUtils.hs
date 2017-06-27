@@ -12,7 +12,7 @@ readConfigFile p = do
   return [ l | l@(c:_) <- buf, c /= '#' ]
 
 readConstraintList :: FilePath -> Action [Dependency]
-readConstraintList p = readConfigFile p >>= \x -> liftIO $  fileErrorContext p (mapM (parseText "constraint") x)
+readConstraintList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (mapM (parseText "constraint") x)
 
 readPackageNameList :: FilePath -> Action [PackageName]
 readPackageNameList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (mapM (parseText "package name") x)

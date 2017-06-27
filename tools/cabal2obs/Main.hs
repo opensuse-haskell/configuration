@@ -184,7 +184,7 @@ main = do
       deps <- runP stackageConfig buf
       writeFileChanged out (mkStackagePackageSetSourcefile lts deps)
 
-    phony "update" $ need $
+    phony "update" $ need
       [ "tools/cabal2obs/Config/LTS"++drop 4 psid++"/Stackage.hs" | PackageSetId psid <- knownPackageSets ]
 
 mkChangeEntry :: String -> String -> IO String
