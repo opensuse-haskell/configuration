@@ -213,14 +213,17 @@ showFlagAssignment :: (FlagName,Bool) -> String
 showFlagAssignment (FlagName f, v) = "-f" ++ ['-'|not v] ++ f
 
 mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
-mkStackagePackageSetSourcefile vers deps = unlines $
-  [ "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
+mkStackagePackageSetSourcefile vers deps = unlines
+  [ "{-# LANGUAGE OverloadedStrings #-}"
+  , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
   , ""
   , "module Config.LTS" ++ vers ++ ".Stackage where"
   , ""
+  , "import Orphans ( )"
   , "import Distribution.Package"
-  , "import Distribution.Version"
   , ""
   , "stackage :: [Dependency]"
-  , "stackage = " ++ show deps
+  , "stackage ="
+  , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
+  , "  ]"
   ]
