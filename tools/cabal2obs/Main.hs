@@ -48,10 +48,10 @@ main = do
     packageList <- getPackageList resolver
     forcedExes <- getForcedExes
     compilerId <- getCompiler
-    flagAssignments <- getFlagAssignments
+    flagOverrides <- getFlagAssignments
 
     getFlags <- addOracle $ \(psid@(PackageSetId _), n) -> do
-      fas <- flagAssignments (GetFlagAssignments psid)
+      fas <- flagOverrides (GetFlagAssignments psid)
       return $ fromMaybe [] (lookup n fas)
 
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier _ _)) -> do
