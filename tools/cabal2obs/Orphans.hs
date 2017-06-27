@@ -5,9 +5,12 @@
 
 module Orphans ( ) where
 
+import Data.Maybe
+import Data.String
 -- import Data.Map as Map
 -- import Data.Set as Set
 import Development.Shake.Classes
+import Distribution.Text
 import Distribution.Compiler
 -- import Distribution.License
 -- import Distribution.ModuleName
@@ -94,3 +97,9 @@ instance NFData FlagName
 
 -- instance (Hashable a) => Hashable (Set a) where
 --   hashWithSalt = Set.foldl' hashWithSalt
+
+instance IsString Dependency where
+  fromString = parseText "Dependency"
+
+parseText :: (Text a) => String -> String -> a
+parseText errM buf = fromMaybe (error ("invalid " ++ errM ++ ": " ++ show buf)) (simpleParse buf)
