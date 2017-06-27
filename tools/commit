@@ -8,13 +8,13 @@ if [ ! -f .osc/_packages ]; then
 fi
 
 tmpfile=$(mktemp)
-trap "rm -v '$tmpfile'" EXIT
+trap "rm -f '$tmpfile'" EXIT
 
 if [ $# -eq 0 ]; then
-    git status --porcelain >$tmpfile
+    git status --porcelain >"$tmpfile"
     if [ -s "$tmpfile" ]; then
         echo >&2 git repository has uncommitted changes:
-        cat >&2 $tmpfile
+        cat >&2 "$tmpfile"
         exit 1
     fi
     myVersion=$(git describe --always)
@@ -23,8 +23,8 @@ if [ $# -eq 0 ]; then
 fi
 
 while true; do
-    osc addremove >$tmpfile
-    if [ "$(stat -c %s $tmpfile)" -eq 0 ]; then
+    osc addremove >"$tmpfile"
+    if [ "$(stat -c %s "$tmpfile")" -eq 0 ]; then
         break
     fi
 done
