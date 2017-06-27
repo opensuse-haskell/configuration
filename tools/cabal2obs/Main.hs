@@ -105,7 +105,7 @@ main = do
       -- file was created.
       unless exists $ do
         let pkgid = dropExtension (takeBaseName out)
-        command_ [] "cabal" ["fetch", "-v0", "--no-dependencies", "--", pkgid]
+        command_ [Traced "cabal-fetch"] "cabal" ["fetch", "-v0", "--no-dependencies", "--", pkgid]
 
     -- Pattern rule that copies the required source tarballs from cabal's
     -- internal cache into our build tree.
@@ -114,7 +114,7 @@ main = do
       let pkgid = dropExtension (takeBaseName out)
       PackageIdentifier (PackageName n) v <- parseText "package id" pkgid
       if n == "git-annex"
-         then command_ [FileStdout out ] "curl"
+         then command_ [FileStdout out] "curl"
                        [ "-L", "--silent", "--show-error", "--"
                        , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
                        ]
@@ -140,9 +140,9 @@ main = do
       command_ [Cwd pkgDir] "cabal" ["get", "-v0", display pkgid]
       case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
-        Right (desc,_) -> do putNormal $ unwords $ ["createSpecFile", out] ++ ["force-exe" | isExe] ++ (showFlagAssignment <$> fa)
-                             liftIO $ createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
-      command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
+        Right (desc,_) -> traced (unwords $ ["createSpecFile"] ++ ["force-exe" | isExe] ++ (showFlagAssignment <$> fa))
+                                 (createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa)
+      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
@@ -150,8 +150,8 @@ main = do
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "tools/spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
-      Stdout buf <- command [] "sed" ["-n", "-e", "s/^License: *//p", out]
+        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
+      Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
       let versionString = unwords $ ["version", display v] ++
                                     if rev==0  then [] else ["revision", show rev]
