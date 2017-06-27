@@ -95,7 +95,7 @@ main = do
       -- get rid of *.orig and *.rej files created by patch(1).
       removeFilesAfter buildDir ["*/*/*.orig", "*/*/*.rej"]
 
-    -- Pattern target to trigger source tarball downloads with "cabal get". We
+    -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
     homeDir </> ".cabal/packages/hackage.haskell.org/*/*/*.tar.gz" %> \out -> do
