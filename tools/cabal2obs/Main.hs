@@ -137,11 +137,11 @@ main = do
          else liftIO (removeFiles pkgDir ["*.cabal"])
       -- need [pkgDir </> display pkgid <.> "tar.gz"]
       liftIO $ removeFiles pkgDir [display pkgid]
-      command_ [Cwd pkgDir] "cabal" ["get", "-v0", display pkgid]
+      command_ [Cwd pkgDir, Traced "cabal-get"] "cabal" ["get", "-v0", display pkgid]
       case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
-        Right (desc,_) -> traced (unwords $ ["createSpecFile"] ++ ["force-exe" | isExe] ++ (showFlagAssignment <$> fa))
-                                 (createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa)
+        Right (desc,_) -> traced "cabal2spec" $
+                            createSpecFile out (pkgDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
