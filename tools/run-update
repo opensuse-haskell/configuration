@@ -61,4 +61,4 @@ gzip <$CABAL_INSTALL_TARBALL >$CABAL_INSTALL_TARBALL.gz
 cabal fetch -v0 --no-dependencies ip6addr
 $cabal2obs --no-progress --lint
 
-parallel "cd {} && ../../tools/commit" ::: _build/lts-*
+parallel "cd {} && ../../tools/commit >/dev/null" ::: _build/lts-*
