@@ -1,0 +1,22 @@
+Index: ghc-hackernews.spec
+===================================================================
+--- ghc-hackernews.spec	(revision 2)
++++ ghc-hackernews.spec	(working copy)
+@@ -67,6 +67,8 @@
+ %install
+ %ghc_lib_install
+ %ghc_fix_rpath %{pkg_name}-%{version}
++rm %{buildroot}%{_bindir}/example
++rmdir %{buildroot}%{_bindir}
+ 
+ %check
+ %cabal_test
+@@ -80,7 +82,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

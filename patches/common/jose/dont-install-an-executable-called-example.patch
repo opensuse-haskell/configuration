@@ -1,0 +1,22 @@
+Index: ghc-jose.spec
+===================================================================
+--- ghc-jose.spec	(revision 4)
++++ ghc-jose.spec	(working copy)
+@@ -93,6 +93,8 @@
+ %install
+ %ghc_lib_install
+ %ghc_fix_rpath %{pkg_name}-%{version}
++rm %{buildroot}%{_bindir}/example
++rmdir %{buildroot}%{_bindir}
+ 
+ %check
+ %cabal_test
+@@ -106,7 +108,6 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+
