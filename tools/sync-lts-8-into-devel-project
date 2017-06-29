@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+
+status=$(
+          osc api '/build/devel:languages:haskell:lts:8/_result?repository=openSUSE_Tumbleweed' | \
+          sed -n -r -e '/code="disabled"/d' -e 's/.*package=.* code="([^"]+)".*/\1/p' | \
+          sort | \
+          uniq
+      )
+
+if [ "$status" != "succeeded" ]; then
+    echo "doing nothing: '$status' != 'succeeded'"
+    exit 0
+fi
+
+osc prdiff devel:languages:haskell:lts:8 devel:languages:haskell | \
+    sed -n -e "s/^differs:[ \t]*//p" | \
+    parallel "osc copypac --keep-develproject --keep-link --keep-maintainers devel:languages:haskell:lts:8 {} devel:languages:haskell"
