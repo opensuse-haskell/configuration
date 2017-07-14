@@ -7,7 +7,7 @@ status=$(
           sed -n -r -e '/code="disabled"/d' -e 's/.*package=.* code="([^"]+)".*/\1/p' | \
           sort | \
           uniq
-      )
+        )
 
 if [ "$status" != "succeeded" ]; then
     echo "doing nothing: '$status' != 'succeeded'"
