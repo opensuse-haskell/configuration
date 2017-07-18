@@ -129,7 +129,6 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   putHdr "Source0" $ "https://hackage.haskell.org/package/" ++ pkg_name ++ "-%{version}/" ++ pkg_name ++ "-%{version}.tar.gz"
   when (revision /= "0") $
     putHdr "Source1" $ "https://hackage.haskell.org/package/" ++ pkg_name ++ "-%{version}/revision/" ++ revision ++ ".cabal#/" ++ pkg_name ++ ".cabal"
-  putHdr "BuildRoot" "%{_tmppath}/%{name}-%{version}-build"
   putNewline
   putHdr "BuildRequires" "ghc-Cabal-devel"
   putHdr "BuildRequires" "ghc-rpm-macros"
@@ -234,7 +233,6 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
 
   when hasExecPkg $ do
     put "%files"
-    put "%defattr(-,root,root,-)"
     -- Add the license file to the main package only if it wouldn't
     -- otherwise be empty.
     mapM_ (\ l -> put $ license_macro +-+ l) licensefiles

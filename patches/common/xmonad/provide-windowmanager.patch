@@ -2,14 +2,13 @@ Index: xmonad.spec
 ===================================================================
 --- xmonad.spec	(revision 76fddaf4bd7f3b1206e6f66a340f02aa)
 +++ xmonad.spec	(working copy)
-@@ -46,6 +46,9 @@
+@@ -46,5 +46,8 @@
  BuildRequires:  pkgconfig(xinerama)
  Suggests:       ghc-xmonad-contrib-devel
  Suggests:       ghc-xmonad-devel
 +# windowmanager is a generic provides for every WM - there are things (like Xvnc)
 +# That rely on the prsence of 'a WM', but do not care which one it is
 +Provides:       windowmanager
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-QuickCheck-devel
 

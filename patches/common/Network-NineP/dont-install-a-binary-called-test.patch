@@ -10,12 +10,10 @@ Index: ghc-Network-NineP.spec
  
  %post devel
  %ghc_pkg_recache
-@@ -82,7 +82,6 @@
+@@ -82,5 +82,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/test
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

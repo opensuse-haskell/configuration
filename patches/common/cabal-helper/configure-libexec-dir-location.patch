@@ -10,9 +10,8 @@ Index: ghc-cabal-helper.spec
  %ghc_lib_build
  
  %install
-@@ -103,7 +104,9 @@
+@@ -103,5 +104,7 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/cabal-helper-wrapper
 +%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}
@@ -20,5 +19,4 @@ Index: ghc-cabal-helper.spec
 +%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/cabal-helper-wrapper
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

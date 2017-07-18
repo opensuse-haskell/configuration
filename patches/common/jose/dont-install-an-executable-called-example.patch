@@ -11,12 +11,10 @@ Index: ghc-jose.spec
  
  %check
  %cabal_test
-@@ -106,7 +108,6 @@
+@@ -106,5 +108,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

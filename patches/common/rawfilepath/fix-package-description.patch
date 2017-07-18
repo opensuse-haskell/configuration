@@ -2,8 +2,7 @@ Index: ghc-rawfilepath.spec
 ===================================================================
 --- ghc-rawfilepath.spec	(revision 4)
 +++ ghc-rawfilepath.spec	(working copy)
-@@ -34,7 +34,9 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -34,6 +34,8 @@
  
  %description
 -Use RawFilePath instead of FilePath.

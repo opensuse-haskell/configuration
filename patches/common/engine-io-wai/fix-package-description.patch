@@ -11,8 +11,7 @@ Index: ghc-engine-io-wai.spec
  License:        BSD-3-Clause
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{pkg_name}
-@@ -43,8 +43,8 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -43,7 +43,7 @@
  
  %description
 -This package provides an 'engine-io' 'ServerAPI' that is compatible with

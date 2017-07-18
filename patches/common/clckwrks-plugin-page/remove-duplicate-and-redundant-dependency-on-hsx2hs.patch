@@ -2,11 +2,10 @@ Index: ghc-clckwrks-plugin-page.spec
 ===================================================================
 --- ghc-clckwrks-plugin-page.spec	(revision 1)
 +++ ghc-clckwrks-plugin-page.spec	(working copy)
-@@ -57,6 +57,5 @@
+@@ -57,5 +57,4 @@
  BuildRequires:  ghc-web-routes-devel
  BuildRequires:  ghc-web-routes-happstack-devel
  BuildRequires:  ghc-web-routes-th-devel
 -BuildRequires:  hsx2hs
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
 

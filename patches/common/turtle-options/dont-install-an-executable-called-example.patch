@@ -11,12 +11,10 @@ Index: ghc-turtle-options.spec
  
  
  %check
-@@ -83,7 +82,6 @@
+@@ -83,5 +82,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

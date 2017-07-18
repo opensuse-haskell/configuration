@@ -2,9 +2,8 @@ Index: ghc-atomic-primops.spec
 ===================================================================
 --- ghc-atomic-primops.spec	(revision 1)
 +++ ghc-atomic-primops.spec	(working copy)
-@@ -31,5 +31,6 @@
+@@ -31,4 +31,5 @@
  BuildRequires:  ghc-rpm-macros
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  ghc-template-haskell-devel
  
  %description

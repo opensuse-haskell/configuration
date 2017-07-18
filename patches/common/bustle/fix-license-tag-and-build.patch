@@ -11,7 +11,7 @@ Index: bustle.spec
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
-@@ -46,8 +46,15 @@
+@@ -46,7 +46,14 @@
  BuildRequires:  ghc-setlocale-devel
  BuildRequires:  ghc-text-devel
  BuildRequires:  ghc-time-devel
@@ -24,7 +24,6 @@ Index: bustle.spec
  BuildRequires:  pkgconfig(glib-2.0)
 +Requires(post): update-desktop-files
 +Requires(postun): update-desktop-files
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel
 @@ -62,12 +69,24 @@
@@ -52,9 +51,8 @@ Index: bustle.spec
  
  %check
  %if %{with tests}
-@@ -81,14 +98,14 @@
+@@ -81,13 +98,13 @@
  %files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%doc LICENSE.bundled-libraries NEWS.md README.md
 +%doc README.md LICENSE.bundled-libraries

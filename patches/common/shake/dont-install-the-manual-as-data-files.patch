@@ -10,7 +10,7 @@ Index: shake.spec
  
  %check
  %if %{with tests}
-@@ -120,18 +120,10 @@
+@@ -120,17 +120,9 @@
  %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}
  %dir %{_datadir}/%{name}-%{version}/html
@@ -28,5 +28,4 @@ Index: shake.spec
 -%{_datadir}/%{name}-%{version}/docs/manual/main.c
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 

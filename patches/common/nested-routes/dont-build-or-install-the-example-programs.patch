@@ -22,12 +22,10 @@ Index: ghc-nested-routes.spec
 -%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
-@@ -106,7 +104,6 @@
+@@ -106,5 +104,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

@@ -11,16 +11,14 @@ Index: ghc-colour.spec
  
  
  %post devel
-@@ -66,11 +68,9 @@
+@@ -66,9 +68,7 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%dir %{_datadir}/%{pkg_name}-%{version}
 -%{_datadir}/%{pkg_name}-%{version}/README
 -%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 +%doc README
  
  %changelog

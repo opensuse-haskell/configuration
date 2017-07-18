@@ -2,13 +2,12 @@ Index: ghc-hslua.spec
 ===================================================================
 --- ghc-hslua.spec	(revision 10)
 +++ ghc-hslua.spec	(working copy)
-@@ -29,7 +29,7 @@
+@@ -29,6 +29,6 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-rpm-macros
 -BuildRequires:  lua-devel
 +BuildRequires:  lua51-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel
 @@ -54,7 +54,7 @@

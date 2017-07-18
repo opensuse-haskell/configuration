@@ -2,11 +2,10 @@ Index: ghc-clckwrks-theme-bootstrap.spec
 ===================================================================
 --- ghc-clckwrks-theme-bootstrap.spec	(revision 3)
 +++ ghc-clckwrks-theme-bootstrap.spec	(working copy)
-@@ -37,6 +37,5 @@
+@@ -37,5 +37,4 @@
  BuildRequires:  ghc-rpm-macros
  BuildRequires:  ghc-text-devel
  BuildRequires:  ghc-web-plugins-devel
 -BuildRequires:  hsx2hs
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
 

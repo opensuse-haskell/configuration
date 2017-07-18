@@ -2,10 +2,9 @@ Index: ghc-terminfo.spec
 ===================================================================
 --- ghc-terminfo.spec	(revision 10)
 +++ ghc-terminfo.spec	(working copy)
-@@ -28,6 +28,7 @@
+@@ -28,5 +28,6 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-rpm-macros
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  ncurses-devel
  
  %description

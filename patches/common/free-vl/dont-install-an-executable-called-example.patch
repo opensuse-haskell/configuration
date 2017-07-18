@@ -11,12 +11,10 @@ Index: ghc-free-vl.spec
  
  
  %check
-@@ -94,7 +93,6 @@
+@@ -94,5 +93,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/examples
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

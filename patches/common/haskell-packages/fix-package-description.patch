@@ -2,8 +2,7 @@ Index: ghc-haskell-packages.spec
 ===================================================================
 --- ghc-haskell-packages.spec	(revision 2)
 +++ ghc-haskell-packages.spec	(working copy)
-@@ -43,7 +43,25 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -43,6 +43,24 @@
  
  %description
 -See <http://documentup.com/haskell-suite/haskell-packages>.

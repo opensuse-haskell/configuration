@@ -11,8 +11,7 @@
  License:        MIT
  Group:          Development/Languages/Other
  Url:            https://hackage.haskell.org/package/%{name}
-@@ -45,7 +45,22 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -45,6 +45,21 @@
  
  %description
 -FIXME.

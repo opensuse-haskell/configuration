@@ -11,8 +11,7 @@ Index: quickbench.spec
  License:        GPL-3.0+
  Group:          Development/Tools/Other
  Url:            https://hackage.haskell.org/package/%{name}
-@@ -40,11 +40,9 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -40,10 +40,8 @@
  
  %description
 -Quickbench produces very simple output (elapsed seconds), as quickly as

@@ -2,9 +2,8 @@ Index: cryptol.spec
 ===================================================================
 --- cryptol.spec	(revision 1)
 +++ cryptol.spec	(working copy)
-@@ -66,5 +66,6 @@
+@@ -66,4 +66,5 @@
  BuildRequires:  happy
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +Requires:       z3
  
  %description

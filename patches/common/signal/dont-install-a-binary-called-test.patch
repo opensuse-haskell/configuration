@@ -11,12 +11,10 @@ Index: ghc-signal.spec
  
  
  %post devel
-@@ -70,7 +69,6 @@
+@@ -70,5 +69,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/test
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

@@ -2,8 +2,7 @@ Index: ghc-hpp.spec
 ===================================================================
 --- ghc-hpp.spec	(revision 1)
 +++ ghc-hpp.spec	(working copy)
-@@ -37,7 +37,31 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -37,6 +37,30 @@
  
  %description
 -See the README for usage examples.

@@ -2,9 +2,8 @@ Index: ghc-pcap.spec
 ===================================================================
 --- ghc-pcap.spec	(revision 2)
 +++ ghc-pcap.spec	(working copy)
-@@ -33,5 +33,6 @@
+@@ -33,4 +33,5 @@
  BuildRequires:  ghc-time-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  libpcap-devel
  
  %description

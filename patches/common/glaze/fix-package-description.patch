@@ -2,8 +2,7 @@ Index: ghc-glaze.spec
 ===================================================================
 --- ghc-glaze.spec	(revision 1)
 +++ ghc-glaze.spec	(working copy)
-@@ -31,7 +31,8 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -31,6 +31,7 @@
  
  %description
 -Framework for rendering things with metadata/headers and values.

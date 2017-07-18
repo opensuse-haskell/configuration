@@ -13,14 +13,12 @@ Index: quickbench.spec
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  BuildRequires:  chrpath
-@@ -88,10 +88,8 @@
+@@ -88,8 +88,6 @@
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 -%doc LICENSE
  
  %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
- %defattr(-,root,root,-)
 -%doc CHANGES README.md
  
  %changelog

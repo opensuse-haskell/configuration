@@ -2,8 +2,7 @@ Index: ghc-pinchot.spec
 ===================================================================
 --- ghc-pinchot.spec	(revision 3)
 +++ ghc-pinchot.spec	(working copy)
-@@ -37,7 +37,12 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -37,6 +37,11 @@
  
  %description
 -Write grammars, not parsers.

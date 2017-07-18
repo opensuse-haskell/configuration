@@ -2,13 +2,12 @@ Index: ghc-pcre-light.spec
 ===================================================================
 --- ghc-pcre-light.spec	(revision 2)
 +++ ghc-pcre-light.spec	(working copy)
-@@ -32,5 +32,8 @@
+@@ -32,4 +32,7 @@
  BuildRequires:  pkgconfig
  BuildRequires:  pkgconfig(libpcre)
 +BuildRequires:  pkgconfig(libpcre16)
 +BuildRequires:  pkgconfig(libpcrecpp)
 +BuildRequires:  pkgconfig(libpcreposix)
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
  %description
 @@ -55,5 +58,8 @@

@@ -2,8 +2,7 @@ Index: ghc-wai-handler-launch.spec
 ===================================================================
 --- ghc-wai-handler-launch.spec	(revision 1)
 +++ ghc-wai-handler-launch.spec	(working copy)
-@@ -39,8 +39,7 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -39,7 +39,6 @@
  
  %description
 -API docs and the README are available at

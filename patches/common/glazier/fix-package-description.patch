@@ -2,8 +2,7 @@ Index: ghc-glazier.spec
 ===================================================================
 --- ghc-glazier.spec	(revision 1)
 +++ ghc-glazier.spec	(working copy)
-@@ -36,7 +36,11 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -36,6 +36,10 @@
  
  %description
 -Composable widgets framework.
