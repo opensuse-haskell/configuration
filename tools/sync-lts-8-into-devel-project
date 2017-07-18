@@ -14,6 +14,6 @@ if [ "$status" != "succeeded" ]; then
     exit 0
 fi
 
-osc prdiff devel:languages:haskell:lts:8 devel:languages:haskell | \
-    sed -n -e "s/^differs:[ \t]*//p" | \
+osc prdiff --show-not-in-new devel:languages:haskell:lts:8 devel:languages:haskell | \
+    sed -n -e "s/^differs:[ \t]*//p" -e "s/^old only:[ \t]*//p" | \
     parallel "osc copypac --keep-develproject --keep-link --keep-maintainers devel:languages:haskell:lts:8 {} devel:languages:haskell"
