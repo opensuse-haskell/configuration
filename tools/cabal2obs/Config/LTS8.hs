@@ -289,6 +289,10 @@ bannedPackageNames =
     -- Inconsistent license: https://github.com/transient-haskell/transient-universe/issues/34
   , "transient-universe"
   , "ghcjs-hplay"
+
+    -- https://github.com/bartavelle/hruby/issues/21
+  , "hruby"
+  , "language-puppet"
   ]
 
 forcedExectableNames :: [String]
