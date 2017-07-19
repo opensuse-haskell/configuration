@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Config.LTS8 ( lts8 ) where
 
 import Config.LTS8.Stackage
@@ -21,9 +23,9 @@ lts8 = PackageSetConfig
     }
 
 goodStackagePackage :: Dependency ->  Bool
-goodStackagePackage (Dependency (PackageName "store") _)      = False
-goodStackagePackage (Dependency (PackageName "store-core") _) = False
-goodStackagePackage (Dependency _ v)                          = v /= noVersion
+goodStackagePackage (Dependency "store" _)      = False
+goodStackagePackage (Dependency "store-core" _) = False
+goodStackagePackage (Dependency _ v)            = v /= noVersion
 
 extraPackageNames :: [String]
 extraPackageNames =
@@ -421,8 +423,8 @@ readFlagAssignents xs = [ (fromJust (simpleParse name), readFlagList (words assi
 readFlagList :: [String] -> FlagAssignment
 readFlagList = map (tagWithValue . noMinusF)
   where
-    tagWithValue ('-':fname) = (FlagName (lowercase fname), False)
-    tagWithValue fname       = (FlagName (lowercase fname), True)
+    tagWithValue ('-':fname) = (mkFlagName (lowercase fname), False)
+    tagWithValue fname       = (mkFlagName (lowercase fname), True)
 
     noMinusF :: String -> String
     noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"

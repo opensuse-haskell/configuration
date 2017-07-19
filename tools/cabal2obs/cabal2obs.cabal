@@ -28,7 +28,7 @@ executable cabal2obs
   ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
     base < 5,
-    Cabal > 1.24 && < 2,
+    Cabal > 2,
     containers,
     directory,
     filepath,

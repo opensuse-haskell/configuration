@@ -20,7 +20,7 @@ executables:
     main:               Main.hs
     dependencies:
       - base < 5
-      - Cabal > 1.24 && < 2
+      - Cabal > 2
       - containers
       - directory
       - filepath

@@ -19,8 +19,8 @@ import ParseUtils
 -- <https://github.com/commercialhaskell/all-cabal-files> repository.
 
 resolveConstraint :: FilePath -> Rules (Dependency -> Action Version)
-resolveConstraint hackageDir = addOracle $ \c@(Dependency (PackageName name) vrange) -> do
-  vs <- getDirectoryDirs (hackageDir </> name) >>= mapM (parseText "version number")
+resolveConstraint hackageDir = addOracle $ \c@(Dependency name vrange) -> do
+  vs <- getDirectoryDirs (hackageDir </> unPackageName name) >>= mapM (parseText "version number")
   case filter (`withinRange` vrange) vs of
     []  -> fail ("cannot resolve " ++ show (display c) ++ " in Hackage")
     vs' -> return (maximum vs')
@@ -31,8 +31,8 @@ resolveConstraint hackageDir = addOracle $ \c@(Dependency (PackageName name) vra
 -- <https://github.com/commercialhaskell/all-cabal-files> repository.
 
 cabalFilePath :: FilePath -> PackageIdentifier -> FilePath
-cabalFilePath hackageDir (PackageIdentifier (PackageName n) v) =
-  hackageDir </> n </> display v </> n <.> "cabal"
+cabalFilePath hackageDir (PackageIdentifier n v) =
+  hackageDir </> unPackageName n </> display v </> unPackageName n <.> "cabal"
 
 -- | Cached access to parsed ADT that represent the Cabal files registered in
 -- Hackage.
@@ -41,7 +41,7 @@ hackageDB :: FilePath -> Rules (PackageIdentifier -> Action GenericPackageDescri
 hackageDB hackageDir = newCache $ \pid -> do
   let p = cabalFilePath hackageDir pid
   need [p]
-  liftIO (readPackageDescription silent p)
+  liftIO (readGenericPackageDescription silent p)
 
 -- | Extract the @x-revision@ header added by Hackage.
 

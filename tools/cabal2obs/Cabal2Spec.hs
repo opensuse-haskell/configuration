@@ -5,10 +5,14 @@ import Data.Char
 import Data.List
 import Data.Time.Clock
 import Data.Time.Format
-import Data.Version
 import Distribution.License
 import Distribution.Package
 import Distribution.PackageDescription
+import Distribution.Text
+import Distribution.Types.LegacyExeDependency
+import Distribution.Types.PkgconfigDependency
+import Distribution.Types.UnqualComponentName
+import Distribution.Version
 import System.Directory
 import System.FilePath
 import System.IO
@@ -46,7 +50,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
       chrpath = ["chrpath" | selfdep]
 
       pkg = package pkgDesc
-      PackageName name = packageName pkg
+      name = unPackageName (packageName pkg)
       hasExec = hasExes pkgDesc
       hasLib = hasLibs pkgDesc
   (pkgname, binlib) <- getPkgName (Just specFile) pkgDesc forceBinary
@@ -119,7 +123,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   let version = packageVersion pkg
       revision = show $ maybe (0::Int) read (lookup "x-revision" (customFieldsPD pkgDesc))
   putHdr "Name" (if binlib then "%{pkg_name}" else basename)
-  putHdr "Version" (showVersion version)
+  putHdr "Version" (display version)
   putHdr "Release" "0"
   putHdr "Summary" summary
   putHdr "Group" "Development/Languages/Other"
@@ -183,7 +187,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
 
   put "%build"
   when (flagAssignment /= []) $ do
-    let cabalFlags = [ "-f" ++ (if b then "" else "-") ++ n | (FlagName n, b) <- flagAssignment ]
+    let cabalFlags = [ "-f" ++ (if b then "" else "-") ++ unFlagName n | (n, b) <- flagAssignment ]
     put $ "%define cabal_configure_options " ++ unwords cabalFlags
   let pkgType = if hasLib then "lib" else "bin"
   put $ "%ghc_" ++ pkgType ++ "_build"
@@ -222,7 +226,8 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
     putInstallScript
 
   let license_macro = "%doc"
-  let execs = sort $ map exeName $ filter isBuildable $ executables pkgDesc
+  let execs :: [String]
+      execs = sort $ map (unUnqualComponentName . exeName) $ filter isBuildable $ executables pkgDesc
 
   let listDataFiles = do unless (null (dataFiles pkgDesc)) $ do
                            put ("%dir %{_datadir}/" ++ pkg_name ++ "-%{version}")
@@ -281,14 +286,15 @@ findDocs cabalPath licensefiles = do
         unlikely name = not $ any (`isSuffixOf` name) ["~"]
 
 normalizeVersion :: Version -> Version
-normalizeVersion (Version [v] vt) = Version [v,0] vt
-normalizeVersion v = v
+normalizeVersion v = case versionNumbers v of
+                       [i] -> mkVersion [i,0]
+                       _   -> v
 
 showLicense :: License -> String
 showLicense (GPL Nothing) = "GPL-1.0+"
-showLicense (GPL (Just ver)) = "GPL-" ++ showVersion (normalizeVersion ver) ++ "+"
+showLicense (GPL (Just ver)) = "GPL-" ++ display (normalizeVersion ver) ++ "+"
 showLicense (LGPL Nothing) = "LGPL-2.0+"
-showLicense (LGPL (Just ver)) = "LGPL-" ++ showVersion (normalizeVersion ver) ++ "+"
+showLicense (LGPL (Just ver)) = "LGPL-" ++ display (normalizeVersion ver) ++ "+"
 showLicense BSD3 = "BSD-3-Clause"
 showLicense BSD4 = "BSD-4-Clause"
 showLicense MIT = "MIT"
@@ -297,11 +303,11 @@ showLicense AllRightsReserved = "SUSE-NonFree"
 showLicense OtherLicense = "Unknown"
 showLicense (UnknownLicense l) = "Unknown" +-+ l
 showLicense (Apache Nothing) = "Apache-2.0"
-showLicense (Apache (Just ver)) = "Apache-" ++ showVersion (normalizeVersion ver)
+showLicense (Apache (Just ver)) = "Apache-" ++ display (normalizeVersion ver)
 showLicense (AGPL Nothing) = "AGPLv?"
-showLicense (AGPL (Just ver)) = "AGPLv" ++ showVersion ver
+showLicense (AGPL (Just ver)) = "AGPLv" ++ display ver
 showLicense BSD2 = "BSD-2-Clause"
-showLicense (MPL ver) = "MPL-" ++ showVersion (normalizeVersion ver)
+showLicense (MPL ver) = "MPL-" ++ display (normalizeVersion ver)
 showLicense ISC = "ISC"
 showLicense UnspecifiedLicense = "Unspecified license!"
 
@@ -333,12 +339,12 @@ rstrip p = reverse . dropWhile p . reverse
 
 getPkgName :: Maybe FilePath -> PackageDescription -> Bool -> IO (String, Bool)
 getPkgName (Just spec) pkgDesc binary = do
-  let PackageName name = packageName $ package pkgDesc
+  let name = unPackageName (packageName (package pkgDesc))
       pkgname = takeBaseName spec
       hasLib = hasLibs pkgDesc
   return $ if name == pkgname || binary then (name, hasLib) else (pkgname, False)
 getPkgName Nothing pkgDesc binary = do
-  let PackageName name = packageName $ package pkgDesc
+  let name = unPackageName (packageName (package pkgDesc))
       hasExec = hasExes pkgDesc
       hasLib = hasLibs pkgDesc
   return $ if binary || hasExec && not hasLib then (name, hasLib) else ("ghc-" ++ name, False)
@@ -361,8 +367,17 @@ buildDependencies pkgDesc self =
   in
     (filter excludedPkgs (delete self deps), self `elem` deps && hasExes pkgDesc)
 
-depName :: Dependency -> String
-depName (Dependency (PackageName n) _) = n
+class IsDependency a where
+  depName :: a -> String
+
+instance IsDependency Dependency where
+  depName (Dependency n _) = unPackageName n
+
+instance IsDependency PkgconfigDependency where
+  depName (PkgconfigDependency n _) = unPkgconfigName n
+
+instance IsDependency LegacyExeDependency where
+  depName (LegacyExeDependency n _) = n
 
 showDep :: String -> String
 showDep p = "ghc-" ++ p ++ "-devel"

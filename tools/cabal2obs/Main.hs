@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main ( main ) where
 
 import Cabal2Spec
@@ -19,6 +21,7 @@ import Development.Shake.FilePath
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription.Configuration
+import Distribution.Types.ComponentRequestedSpec
 import Distribution.System
 import Distribution.Text
 import System.Directory
@@ -63,13 +66,13 @@ main = do
 
     pkgidFromPath <- addOracle $ \(PackageSetId psid, BuildName bn) -> do
       pset <- askOracle (GetPackageList (PackageSetId psid)) :: Action [PackageIdentifier]
-      id1 <- case find (\(PackageIdentifier (PackageName n) _) -> n == bn) pset of
+      id1 <- case find (\(PackageIdentifier n _) -> unPackageName n == bn) pset of
                Nothing -> return Nothing
                Just pkgid -> do BuildName bn' <- getBuildName (PackageSetId psid, pkgid)
                                 return (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
                Nothing -> return Nothing
-               Just bn' -> case find (\(PackageIdentifier (PackageName n) _) -> n == bn') pset of
+               Just bn' -> case find (\(PackageIdentifier n _) -> unPackageName n == bn') pset of
                              Nothing -> return Nothing
                              Just pkgid -> do BuildName bn'' <- getBuildName (PackageSetId psid, pkgid)
                                               return (if bn == bn'' then Just pkgid else Nothing)
@@ -83,11 +86,11 @@ main = do
       targets <- forP knownPackageSets $ \psid -> do
         pset <- packageList (GetPackageList psid)
         fexeset <- forcedExes (GetForcedExes psid)
-        forP pset $ \pkgid@(PackageIdentifier pn@(PackageName n) _) -> do
+        forP pset $ \pkgid@(PackageIdentifier pn _) -> do
           cabal <- getCabal pkgid
           let isForcedExe = pn `elem` fexeset
               isExe = isForcedExe || not (hasLibrary cabal)
-              bn = (if isExe then "" else "ghc-") ++ n
+              bn = (if isExe then "" else "ghc-") ++ unPackageName pn
               pkgDir = buildDir </> unPackageSetId psid </> bn
           return [ pkgDir </> bn <.> "spec" ]
       need ((buildDir </> "packages.csv") : concat (concat targets))
@@ -111,41 +114,41 @@ main = do
     buildDir </> "*/*/*.tar.gz" %> \out -> do
       liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
       let pkgid = dropExtension (takeBaseName out)
-      PackageIdentifier (PackageName n) v <- parseText "package id" pkgid
+      PackageIdentifier n v <- parseText "package id" pkgid
       if n == "git-annex"
          then command_ [FileStdout out] "curl"
                        [ "-L", "--silent", "--show-error", "--"
                        , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
                        ]
-         else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> pkgid <.> "tar.gz") out
+         else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
       let [_,psid',bn',_] = splitDirectories out
           psid = PackageSetId psid'
           bn = BuildName bn'
-      pkgid@(PackageIdentifier (PackageName n) v) <- pkgidFromPath (psid,bn)
-      let isExe = n == bn'
+      pkgid@(PackageIdentifier n v) <- pkgidFromPath (psid,bn)
+      let isExe = unPackageName n == bn'
           pkgDir = takeDirectory out
       cid <- compilerId (GetCompiler psid)
-      fa <- getFlags (psid, PackageName n)
+      fa <- getFlags (psid, n)
       cabal <- getCabal pkgid
       let rev = packageRevision cabal
       if rev > 0
-         then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> n <.> "cabal")
+         then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> unPackageName n <.> "cabal")
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz"]
-      case finalizePackageDescription fa (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
+      case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
         Right (desc,_) -> withTempDir $ \tmpDir -> do
-                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", homeDir </> ".cabal/packages/hackage.haskell.org" </> n </> display v </> display pkgid <.> "tar.gz"]
-                            copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> n <.> "cabal")
+                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", homeDir </> ".cabal/packages/hackage.haskell.org" </> display n </> display v </> display pkgid <.> "tar.gz"]
+                            copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> display n <.> "cabal")
                             traced "cabal2spec" $ do
                               createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
-      patches <- getDirectoryFiles "" [ "patches/common/" ++ n ++ "/*.patch"
-                                      , "patches/" ++ psid' ++ "/" ++ n ++ "/*.patch"
+      patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
+                                      , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
@@ -166,7 +169,7 @@ main = do
     buildDir </> "packages.csv" %> \out -> do
       let psid = PackageSetId "lts-8"
       pset <- packageList (GetPackageList psid)
-      ls <- forP pset $ \pkgid@(PackageIdentifier (PackageName n) v) -> do
+      ls <- forP pset $ \pkgid@(PackageIdentifier n v) -> do
         BuildName bn <- getBuildName (psid, pkgid)
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
         return $ intercalate "," [ show n, show (display v), show url]
