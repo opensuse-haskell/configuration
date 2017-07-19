@@ -38,6 +38,9 @@ checkConsistency psid stackage extra banned = do
   unless (null bogusBans) $ fail (show psid ++ " bans extra packages: " ++ unwords (display <$> bogusBans))
   let duplicate  = extra `intersect` stackage
   unless (null duplicate) $ fail (show psid ++ " lists stackage packages in extra: " ++ unwords (display <$> duplicate))
+  -- TODO: This fails because of core packages etc.
+  -- let unknownBanned = banned \\ (stackage `union` extra)
+  -- unless (null unknownBanned) $ fail (show psid ++ " bans unknown packages: " ++ unwords (display <$> unknownBanned))
 
 
 dependencyToId :: Dependency -> PackageIdentifier
