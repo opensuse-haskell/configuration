@@ -293,6 +293,9 @@ bannedPackageNames =
     -- https://github.com/bartavelle/hruby/issues/21
   , "hruby"
   , "language-puppet"
+
+   -- We don't have symengine.
+  , "symengine", "symengine-hs"
   ]
 
 forcedExectableNames :: [String]
