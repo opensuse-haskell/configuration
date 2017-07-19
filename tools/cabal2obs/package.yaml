@@ -7,7 +7,7 @@ license:        GPL-3
 license-file:   LICENSE
 github:         opensuse-haskell/cabal2obs
 category:       Distribution
-tested-with:    GHC > 7.10 && < 8.1
+tested-with:    GHC > 7.10 && < 8.3
 author:
  - Peter Simons
  - Bryan O'Sullivan
@@ -20,7 +20,7 @@ executables:
     main:               Main.hs
     dependencies:
       - base < 5
-      - Cabal > 1.24
+      - Cabal > 1.24 && < 2
       - containers
       - directory
       - filepath
