@@ -1,0 +1,14 @@
+Index: ghc-yjtools.spec
+===================================================================
+--- ghc-yjtools.spec	(revision 3)
++++ ghc-yjtools.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.9.18
+ Release:        0
+ Summary:        Some tools for Monad, List, Tuple and so on
+-License:        LGPL-2.0+
++License:        LGPL-3.0+
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
