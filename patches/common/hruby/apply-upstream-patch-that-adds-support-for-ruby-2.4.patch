@@ -1,0 +1,28 @@
+Index: ghc-hruby.spec
+===================================================================
+--- ghc-hruby.spec	(revision 1c7d239fa9e3a720e22d3e198aaeb58a)
++++ ghc-hruby.spec	(working copy)
+@@ -1,5 +1,5 @@
+ #
+-# spec file for package ghc-hruby
++# spec file for package ghc
+ #
+ # Copyright (c) 2017 SUSE LINUX GmbH, Nuernberg, Germany.
+ #
+@@ -26,6 +26,7 @@
+ Group:          Development/Languages/Other
+ Url:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch1:         https://github.com/bartavelle/hruby/commit/ab6e3492ad1db9aa1236e2b61738cd63a69996ce.patch#/add-ruby-2.4-support.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-aeson-devel
+ BuildRequires:  ghc-attoparsec-devel
+@@ -60,6 +61,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%patch1 -p1
+ 
+ %build
+ %define cabal_configure_options --extra-include-dir=%{_includedir}/ruby-2.4.0 --extra-include-dir=%{_includedir}/ruby-2.4.0/%{_target}%{_gnu} --configure-option="--rubyversion=24 --rubylib=ruby2.4"
+
