@@ -1,0 +1,72 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+
+isChangeSignificant()
+{
+  grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$1"
+}
+
+tmp="/tmp/sync-devel-project-into-factory-tmp.$$"
+tmp="/tmp/sync-devel-project-into-factory"
+# trap "rm -f $tmp" 0
+
+# osc prdiff --show-not-in-new devel:languages:haskell openSUSE:Factory >$tmp
+
+# new=$( sed -n -e "s/^old only:[ \t]*//p" "$tmp" )
+changed=$( sed -n -e "s/^differs:[ \t]*//p" "$tmp" )
+
+for n in $changed; do
+    test -f "$tmp-$n.diff" || osc rdiff openSUSE:Factory "$n" devel:languages:haskell >"$tmp-$n.diff"
+    if grep --silent -F "$n.changes" "$tmp-$n.diff"; then
+        updated+=" $n"
+    elif grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$tmp-$n.diff"; then
+        cosmetic+=" $n"
+    fi
+done
+
+echo updated = "$updated"
+echo cosmetic = "$cosmetic"
+
+
+
+
+##
+##
+## isInFactory()
+## {
+##   osc ls "openSUSE:Factory/$1/$1.spec" >/dev/null 2>&1
+## }
+##
+## for i in *; do
+##   # if ! isInFactory $i; then
+##   #   continue
+##   # fi
+##
+##   # Make sure we're looking only at Haskell packages checked into OBS.
+##   test -d "$i" || continue
+##   test -d "$i/.osc" || continue
+##   if ! grep --silent ghc-rpm-macros "$i/$i.spec"; then
+##    test -z "${DEBUG:-}" || echo >&2 "$i: skip non-Haskell package"
+##    continue
+##   fi
+##
+##   # Diff the current package against devel:languages:haskell and check whether
+##   # the changes are significant.
+##   if [ ! -e "$HOME/src/obs/haskell/$i/$i.spec" ]; then
+##     test -z "${DEBUG:-}" || echo >&2 "$i: new submission"
+##     echo "$i"
+##     continue
+##   fi
+##   diff -ub "$HOME/src/obs/haskell/$i/$i.spec" "$i/$i.spec" >"$tmp" || true
+##   lines=$(wc -l "$tmp" | cut -f1 -d' ')
+##   if [ "$lines" -gt 3 ]; then
+##       if isChangeSignificant "$tmp"; then
+##           echo "$i"
+##       else
+##         test -z "${DEBUG:-}" || echo >&2 "$i: no significant changes"
+##       fi
+##   else
+##     test -z "${DEBUG:-}" || echo >&2 "$i: no changes"
+##   fi
+## done
