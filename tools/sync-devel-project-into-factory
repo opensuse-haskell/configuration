@@ -2,31 +2,54 @@
 
 set -eu -o pipefail
 
-isChangeSignificant()
-{
-  grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$1"
-}
-
-tmp="/tmp/sync-devel-project-into-factory-tmp.$$"
 tmp="/tmp/sync-devel-project-into-factory"
-# trap "rm -f $tmp" 0
 
-# osc prdiff --show-not-in-new devel:languages:haskell openSUSE:Factory >$tmp
+test -f "$tmp/status" || osc prdiff --show-not-in-new devel:languages:haskell openSUSE:Factory >"$tmp/status"
 
-# new=$( sed -n -e "s/^old only:[ \t]*//p" "$tmp" )
-changed=$( sed -n -e "s/^differs:[ \t]*//p" "$tmp" )
+new=$( sed -n -e "s/^old only:[ \t]*//p" "$tmp/status" )
+changed=$( sed -n -e "s/^differs:[ \t]*//p" "$tmp/status" )
 
 for n in $changed; do
-    test -f "$tmp-$n.diff" || osc rdiff openSUSE:Factory "$n" devel:languages:haskell >"$tmp-$n.diff"
-    if grep --silent -F "$n.changes" "$tmp-$n.diff"; then
+    test -f "$tmp/$n.diff" || osc rdiff openSUSE:Factory "$n" devel:languages:haskell >"$tmp/$n.diff"
+    if grep --silent -F "$n.changes" "$tmp/$n.diff"; then
         updated+=" $n"
-    elif grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$tmp-$n.diff"; then
-        cosmetic+=" $n"
+    elif grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$tmp/$n.diff"; then
+        suspicious+=" $n"
     fi
 done
 
-echo updated = "$updated"
-echo cosmetic = "$cosmetic"
+echo
+echo "# =============== new packages ==============="
+echo
+for n in $new; do
+    test -f "$tmp/$n.requests" || osc rq list devel:languages:haskell "$n" >"$tmp/$n.requests"
+    if grep --silent -F "No results for package" "$tmp/$n.requests"; then
+        echo osc sr devel:languages:haskell "$n" openSUSE:Factory
+    else
+        echo "# $n has been submitted already: $tmp/$n.requests"
+    fi
+done
+
+echo
+echo "# =============== modified packages ==============="
+echo
+for n in $updated; do
+    test -f "$tmp/$n.requests" || osc rq list devel:languages:haskell "$n" >"$tmp/$n.requests"
+    if grep --silent -F "No results for package" "$tmp/$n.requests"; then
+        echo osc sr devel:languages:haskell "$n" openSUSE:Factory
+    else
+        echo "# $n has been submitted already: $tmp/$n.requests"
+    fi
+done
+
+echo
+echo "# =============== suspicious modified packages without change log ==============="
+echo
+echo "emacsclient "
+for n in $suspicious; do
+    echo -n " $tmp/$n.diff"
+done
+echo
 
 
 
