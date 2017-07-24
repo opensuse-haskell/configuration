@@ -3,6 +3,7 @@
 set -eu -o pipefail
 
 tmp="/tmp/sync-devel-project-into-factory"
+mkdir -p "$tmp"
 
 test -f "$tmp/status" || osc prdiff --show-not-in-new devel:languages:haskell openSUSE:Factory >"$tmp/status"
 
@@ -45,51 +46,8 @@ done
 echo
 echo "# =============== suspicious modified packages without change log ==============="
 echo
-echo "emacsclient "
+echo -n "emacsclient "
 for n in $suspicious; do
     echo -n " $tmp/$n.diff"
 done
 echo
-
-
-
-
-##
-##
-## isInFactory()
-## {
-##   osc ls "openSUSE:Factory/$1/$1.spec" >/dev/null 2>&1
-## }
-##
-## for i in *; do
-##   # if ! isInFactory $i; then
-##   #   continue
-##   # fi
-##
-##   # Make sure we're looking only at Haskell packages checked into OBS.
-##   test -d "$i" || continue
-##   test -d "$i/.osc" || continue
-##   if ! grep --silent ghc-rpm-macros "$i/$i.spec"; then
-##    test -z "${DEBUG:-}" || echo >&2 "$i: skip non-Haskell package"
-##    continue
-##   fi
-##
-##   # Diff the current package against devel:languages:haskell and check whether
-##   # the changes are significant.
-##   if [ ! -e "$HOME/src/obs/haskell/$i/$i.spec" ]; then
-##     test -z "${DEBUG:-}" || echo >&2 "$i: new submission"
-##     echo "$i"
-##     continue
-##   fi
-##   diff -ub "$HOME/src/obs/haskell/$i/$i.spec" "$i/$i.spec" >"$tmp" || true
-##   lines=$(wc -l "$tmp" | cut -f1 -d' ')
-##   if [ "$lines" -gt 3 ]; then
-##       if isChangeSignificant "$tmp"; then
-##           echo "$i"
-##       else
-##         test -z "${DEBUG:-}" || echo >&2 "$i: no significant changes"
-##       fi
-##   else
-##     test -z "${DEBUG:-}" || echo >&2 "$i: no changes"
-##   fi
-## done
