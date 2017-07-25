@@ -4,6 +4,7 @@ module Config.LTS8 ( lts8 ) where
 
 import Config.LTS8.Stackage
 import Types
+import Orphans ()
 
 import Data.Maybe
 import Distribution.Package
@@ -14,12 +15,12 @@ import Distribution.Version
 
 lts8 :: PackageSetConfig
 lts8 = PackageSetConfig
-    { compiler = fromJust (simpleParse "ghc-8.0.2")
+    { compiler = "ghc-8.0.2"
     , stackagePackages = filter goodStackagePackage stackage
-    , extraPackages = map (fromJust . simpleParse) extraPackageNames
-    , bannedPackages = map (fromJust . simpleParse) bannedPackageNames
+    , extraPackages = extraPackageNames
+    , bannedPackages = bannedPackageNames
     , flagAssignments = readFlagAssignents flagList
-    , forcedExectables = map (fromJust . simpleParse) forcedExectableNames
+    , forcedExectables = forcedExectableNames
     }
 
 goodStackagePackage :: Dependency ->  Bool
@@ -27,7 +28,7 @@ goodStackagePackage (Dependency "store" _)      = False
 goodStackagePackage (Dependency "store-core" _) = False
 goodStackagePackage (Dependency _ v)            = v /= noVersion
 
-extraPackageNames :: [String]
+extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
     "applicative-quoters"
@@ -104,7 +105,7 @@ extraPackageNames =
   , "yi-frontend-pango < 0.14"
   ]
 
-bannedPackageNames :: [String]
+bannedPackageNames :: [PackageName]
 bannedPackageNames =
   [ -- GHC 8.0.x core packages
     "array"
@@ -296,7 +297,7 @@ bannedPackageNames =
   , "symengine", "symengine-hs"
   ]
 
-forcedExectableNames :: [String]
+forcedExectableNames :: [PackageName]
 forcedExectableNames =
   [ "Agda"
   , "alex"

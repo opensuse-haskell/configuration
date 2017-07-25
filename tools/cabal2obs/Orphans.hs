@@ -32,5 +32,8 @@ instance NFData FlagName
 instance IsString Dependency where
   fromString = parseText "Dependency"
 
+instance IsString CompilerId where
+  fromString = parseText "CompilerId"
+
 parseText :: (Text a) => String -> String -> a
 parseText errM buf = fromMaybe (error ("invalid " ++ errM ++ ": " ++ show buf)) (simpleParse buf)
