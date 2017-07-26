@@ -24,9 +24,7 @@ lts8 = PackageSetConfig
     }
 
 goodStackagePackage :: Dependency ->  Bool
-goodStackagePackage (Dependency "store" _)      = False
-goodStackagePackage (Dependency "store-core" _) = False
-goodStackagePackage (Dependency _ v)            = v /= noVersion
+goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
 extraPackageNames =
@@ -66,8 +64,6 @@ extraPackageNames =
 
     -- No-one knows why Stackage would release an LTS version that doesn't contain ...
   , "stack <9"
-  , "store <0.4"
-  , "store-core <0.4"
 
     -- These packages are in Factory for historical reasons.
   , "api-field-json-th"
