@@ -33,6 +33,8 @@ executables:
       - Config
       - Config.LTS8
       - Config.LTS8.Stackage
+      - Config.LTS9
+      - Config.LTS9.Stackage
       - Oracle
       - Oracle.Compiler
       - Oracle.FlagAssignment
