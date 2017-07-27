@@ -183,11 +183,25 @@ bannedPackageNames =
     -- doesn't work on Linux
   , "Win32-notify"
 
+    -- doesn't work on Linux
+  , "clr-host"
+
     -- https://github.com/opensuse-haskell/configuration/issues/7
   , "wl-pprint-terminfo"
 
     -- doesn't have a proper license
   , "timeit"
+
+    -- depends on libmp3lame-devel, which exists only on packman
+  , "lame"
+
+    -- we don't have libtensor
+  , "tensorflow"
+  , "tensorflow-core-ops"
+  , "tensorflow-opgen"
+  , "tensorflow-ops"
+  , "tensorflow-proto"
+  , "tensorflow-test"
 
     -- This package needs libjvm, but that library is hidden in a strange location
     -- (/usr/lib64/jvm/java-1.8.0-openjdk-1.8.0/jre/lib/amd64/server/libjvm.so) and
