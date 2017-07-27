@@ -141,7 +141,7 @@ main = do
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePackageDescription: " ++ show missing)
         Right (desc,_) -> withTempDir $ \tmpDir -> do
-                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", homeDir </> ".cabal/packages/hackage.haskell.org" </> display n </> display v </> display pkgid <.> "tar.gz"]
+                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", pkgDir </> display pkgid <.> "tar.gz"]
                             copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> display n <.> "cabal")
                             traced "cabal2spec" $ do
                               createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
