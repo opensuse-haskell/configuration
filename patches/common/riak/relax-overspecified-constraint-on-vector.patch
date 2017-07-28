@@ -1,0 +1,13 @@
+Index: ghc-riak.spec
+===================================================================
+--- ghc-riak.spec	(revision 1)
++++ ghc-riak.spec	(working copy)
+@@ -109,6 +109,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver vector '< 0.12' ' < 1'
+ 
+ %build
+ %ghc_lib_build
+

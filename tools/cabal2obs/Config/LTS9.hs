@@ -84,6 +84,7 @@ extraPackageNames =
   , "pipes-network"
   , "quickcheck-properties"
   , "rosezipper"
+  , "servant-aeson-specs"
   , "secp256k1"
   , "show-type"
   , "th-printf"
