@@ -1,0 +1,13 @@
+Index: ghc-ChasingBottoms.spec
+===================================================================
+--- ghc-ChasingBottoms.spec	(revision 1)
++++ ghc-ChasingBottoms.spec	(working copy)
+@@ -134,6 +134,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver syb '< 0.7' ' < 0.8'
+ 
+ %build
+ %ghc_lib_build
+
