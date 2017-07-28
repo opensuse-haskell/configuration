@@ -170,6 +170,9 @@ bannedPackageNames =
     -- needs an old version of LLVM
   , "reedsolomon"
 
+    -- does not compile
+  , "llvm-hs"
+
     -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "seqalign"
 
@@ -195,7 +198,7 @@ bannedPackageNames =
   , "Win32-notify"
 
     -- doesn't work on Linux
-  , "clr-host"
+  , "clr-host", "clr-inline", "clr-marshal"
 
     -- https://github.com/opensuse-haskell/configuration/issues/7
   , "wl-pprint-terminfo"
@@ -278,7 +281,7 @@ bannedPackageNames =
   , "haxl-amazonka"
 
     -- Early alpha-quality software without documentation.
-  , "chart-unit"
+  , "chart-unit", "perf"
 
     -- Obsolete package.
   , "groupoids"
