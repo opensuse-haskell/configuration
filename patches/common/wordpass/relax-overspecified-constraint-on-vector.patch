@@ -1,0 +1,13 @@
+Index: wordpass.spec
+===================================================================
+--- wordpass.spec	(revision 1)
++++ wordpass.spec	(working copy)
+@@ -71,6 +71,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver vector '<0.12' ' < 1'
+ 
+ %build
+ %ghc_lib_build
+
