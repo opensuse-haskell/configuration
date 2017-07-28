@@ -68,6 +68,7 @@ extraPackageNames =
   , "genvalidity"
   , "genvalidity-hspec"
   , "genvalidity-property"
+  , "ghc-mod"
   , "load-env"
   , "murmur3"
   , "network-uri-flag"
