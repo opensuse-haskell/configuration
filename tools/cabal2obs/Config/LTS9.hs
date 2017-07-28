@@ -170,6 +170,9 @@ bannedPackageNames =
     -- needs an old version of LLVM
   , "reedsolomon"
 
+    -- does not compile: https://github.com/psibi/tldr-hs/issues/4
+  , "tldr"
+
     -- does not compile
   , "llvm-hs"
 
