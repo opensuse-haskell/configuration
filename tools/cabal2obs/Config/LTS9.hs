@@ -70,6 +70,7 @@ extraPackageNames =
   , "genvalidity-property"
   , "ghc-mod"
   , "google-translate"
+  , "HaRe"
   , "haskell-names"   -- https://github.com/haskell-suite/haskell-names/issues/97
   , "load-env"
   , "katip-elasticsearch"
