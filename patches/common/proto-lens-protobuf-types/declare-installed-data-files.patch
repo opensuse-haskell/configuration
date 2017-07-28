@@ -1,0 +1,15 @@
+Index: ghc-proto-lens-protobuf-types.spec
+===================================================================
+--- ghc-proto-lens-protobuf-types.spec	(revision 1)
++++ ghc-proto-lens-protobuf-types.spec	(working copy)
+@@ -64,6 +64,9 @@
+ %files -f %{name}.files
+ %defattr(-,root,root,-)
+ %doc LICENSE
++%{_datadir}/proto-lens-protobuf-types-0.2.1.0/proto-lens-imports/google/protobuf/any.proto
++%{_datadir}/proto-lens-protobuf-types-0.2.1.0/proto-lens-imports/google/protobuf/duration.proto
++%{_datadir}/proto-lens-protobuf-types-0.2.1.0/proto-lens-imports/google/protobuf/wrappers.proto
+ 
+ %files devel -f %{name}-devel.files
+ %defattr(-,root,root,-)
+

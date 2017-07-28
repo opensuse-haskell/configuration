@@ -1,0 +1,13 @@
+Index: ghc-proto-lens-protobuf-types.spec
+===================================================================
+--- ghc-proto-lens-protobuf-types.spec	(revision 1)
++++ ghc-proto-lens-protobuf-types.spec	(working copy)
+@@ -27,6 +27,7 @@
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-proto-lens-protoc-devel
++BuildRequires:  ghc-protobuf-simple
+ BuildRequires:  ghc-rpm-macros
+ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+ 
+
