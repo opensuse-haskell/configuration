@@ -147,6 +147,7 @@ bannedPackageNames =
 
     -- https://github.com/fpco/stackage/issues/2668
   , "h2c"
+  , "bno055-haskell"
 
     -- doesn't work on Linux
   , "hfsevents"
@@ -301,6 +302,7 @@ bannedPackageNames =
     -- Inconsistent license: https://github.com/transient-haskell/transient-universe/issues/34
   , "transient-universe"
   , "ghcjs-hplay"
+  , "axiom"
 
    -- We don't have symengine.
   , "symengine", "symengine-hs"

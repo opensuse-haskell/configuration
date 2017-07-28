@@ -1,0 +1,14 @@
+Index: ghc-eventful-postgresql.spec
+===================================================================
+--- ghc-eventful-postgresql.spec	(revision 1)
++++ ghc-eventful-postgresql.spec	(working copy)
+@@ -61,6 +61,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

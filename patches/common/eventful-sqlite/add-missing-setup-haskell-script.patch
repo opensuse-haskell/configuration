@@ -1,0 +1,14 @@
+Index: ghc-eventful-sqlite.spec
+===================================================================
+--- ghc-eventful-sqlite.spec	(revision 1)
++++ ghc-eventful-sqlite.spec	(working copy)
+@@ -62,6 +62,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

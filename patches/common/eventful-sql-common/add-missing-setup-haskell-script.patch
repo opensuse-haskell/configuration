@@ -1,0 +1,14 @@
+Index: ghc-eventful-sql-common.spec
+===================================================================
+--- ghc-eventful-sql-common.spec	(revision 1)
++++ ghc-eventful-sql-common.spec	(working copy)
+@@ -54,6 +54,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

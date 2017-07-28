@@ -1,0 +1,14 @@
+Index: ghc-eventful-dynamodb.spec
+===================================================================
+--- ghc-eventful-dynamodb.spec	(revision 1)
++++ ghc-eventful-dynamodb.spec	(working copy)
+@@ -66,6 +66,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
