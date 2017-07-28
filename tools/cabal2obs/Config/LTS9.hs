@@ -69,6 +69,7 @@ extraPackageNames =
   , "genvalidity-hspec"
   , "genvalidity-property"
   , "ghc-mod"
+  , "google-translate"
   , "load-env"
   , "murmur3"
   , "network-uri-flag"
