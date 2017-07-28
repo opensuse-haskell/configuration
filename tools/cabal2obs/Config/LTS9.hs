@@ -70,6 +70,7 @@ extraPackageNames =
   , "genvalidity-property"
   , "ghc-mod"
   , "google-translate"
+  , "haskell-names"   -- https://github.com/haskell-suite/haskell-names/issues/97
   , "load-env"
   , "murmur3"
   , "network-uri-flag"
