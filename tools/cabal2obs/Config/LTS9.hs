@@ -92,6 +92,7 @@ extraPackageNames =
   , "tree-view"
   , "validity"
   , "wai-request-spec"
+  , "xmlhtml"   -- https://github.com/snapframework/xmlhtml/issues/34
   , "yi < 0.14"
   , "yi-frontend-pango < 0.14"
   ]
