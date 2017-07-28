@@ -140,6 +140,9 @@ bannedPackageNames =
     -- depends on broken github-types
   , "github-webhook-handler-snap"
 
+    -- https://github.com/fpco/stackage/issues/2668
+  , "h2c"
+
     -- doesn't work on Linux
   , "hfsevents"
 
