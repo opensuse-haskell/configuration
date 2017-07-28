@@ -1,0 +1,13 @@
+Index: ghc-stripe-core.spec
+===================================================================
+--- ghc-stripe-core.spec	(revision 1)
++++ ghc-stripe-core.spec	(working copy)
+@@ -59,6 +59,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver aeson '< 1.1' ' < 2'
+ 
+ %build
+ %ghc_lib_build
+
