@@ -1,0 +1,13 @@
+Index: ghc-happstack-authenticate.spec
+===================================================================
+--- ghc-happstack-authenticate.spec	(revision 1)
++++ ghc-happstack-authenticate.spec	(working copy)
+@@ -84,6 +84,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver email-validate '< 2.3' ' < 2.4'
+ 
+ %build
+ %ghc_lib_build
+
