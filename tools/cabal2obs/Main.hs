@@ -172,7 +172,7 @@ main = do
       ls <- forP pset $ \pkgid@(PackageIdentifier n v) -> do
         BuildName bn <- getBuildName (psid, pkgid)
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
-        return $ intercalate "," [ show n, show (display v), show url]
+        return $ intercalate "," [ show (display n), show (display v), show url]
       writeFile' out (intercalate "\n" ls)
 
     buildDir </> "cabal-lts-*.config" %> \out -> do
