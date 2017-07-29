@@ -85,14 +85,12 @@ extraPackageNames =
   , "pipes-network"
   , "quickcheck-properties"
   , "rosezipper"
-  , "servant-aeson-specs"
   , "secp256k1"
   , "show-type"
   , "th-printf"
   , "tree-view"
   , "validity"
   , "wai-request-spec"
-  , "xmlhtml"   -- https://github.com/snapframework/xmlhtml/issues/34
   , "yi < 0.14"
   , "yi-frontend-pango < 0.14"
   ]
@@ -310,8 +308,11 @@ bannedPackageNames =
   , "ghcjs-hplay"
   , "axiom"
 
-   -- We don't have symengine.
+    -- We don't have symengine.
   , "symengine", "symengine-hs"
+
+    -- These packages no longer compile with recent versions of servant.
+  , "xlsior", "telegram-api"
   ]
 
 forcedExectableNames :: [PackageName]
