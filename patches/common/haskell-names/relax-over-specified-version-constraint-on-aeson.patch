@@ -1,0 +1,13 @@
+Index: ghc-haskell-names.spec
+===================================================================
+--- ghc-haskell-names.spec	(revision 1)
++++ ghc-haskell-names.spec	(working copy)
+@@ -63,6 +63,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver aeson '< 1.1' ' < 2'
+ 
+ %build
+ %ghc_lib_build
+
