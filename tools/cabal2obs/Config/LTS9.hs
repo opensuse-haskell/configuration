@@ -24,6 +24,7 @@ lts9 = PackageSetConfig
     }
 
 goodStackagePackage :: Dependency ->  Bool
+goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -56,6 +57,9 @@ extraPackageNames =
 
     -- No-one knows why Stackage would release an LTS version that doesn't contain ...
   , "stack <9"
+
+    -- Re-add this package with the modified constraint.
+  , "traverse-with-class < 1"
 
     -- These packages are in Factory for historical reasons.
   , "concatenative"
