@@ -14,7 +14,7 @@ for n in $changed; do
     test -f "$tmp/$n.diff" || osc rdiff openSUSE:Factory "$n" devel:languages:haskell >"$tmp/$n.diff"
     if grep --silent -F "$n.changes" "$tmp/$n.diff"; then
         updated+=" $n"
-    elif grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$tmp/$n.diff"; then
+    else # if grep --silent -E "^[+-](Version|License|Source[0-9]|Patch[0-9]*):" "$tmp/$n.diff"; then
         suspicious+=" $n"
     fi
 done
