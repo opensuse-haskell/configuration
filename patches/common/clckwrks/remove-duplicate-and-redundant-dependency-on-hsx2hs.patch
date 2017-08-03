@@ -2,11 +2,10 @@ Index: ghc-clckwrks.spec
 ===================================================================
 --- ghc-clckwrks.spec	(revision 2)
 +++ ghc-clckwrks.spec	(working copy)
-@@ -75,6 +75,5 @@
+@@ -75,5 +75,4 @@
  BuildRequires:  ghc-web-routes-hsp-devel
  BuildRequires:  ghc-web-routes-th-devel
  BuildRequires:  ghc-xss-sanitize-devel
 -BuildRequires:  hsx2hs
  BuildRequires:  libopenssl-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 

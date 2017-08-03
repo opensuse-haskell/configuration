@@ -2,8 +2,7 @@ Index: ghc-stm-extras.spec
 ===================================================================
 --- ghc-stm-extras.spec	(revision 3)
 +++ ghc-stm-extras.spec	(working copy)
-@@ -31,7 +31,8 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -31,6 +31,7 @@
  
  %description
 -Extra STM functions.

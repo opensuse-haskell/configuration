@@ -11,7 +11,7 @@ Index: idris.spec
  %ghc_lib_build
  
  %install
-@@ -147,41 +148,8 @@
+@@ -147,40 +148,7 @@
  %{_bindir}/idris-codegen-c
  %{_bindir}/idris-codegen-javascript
  %{_bindir}/idris-codegen-node
@@ -54,5 +54,4 @@ Index: idris.spec
 +%{_mandir}/man1/%{name}.1%{ext_man}
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 

@@ -2,9 +2,8 @@ Index: ghc-X11.spec
 ===================================================================
 --- ghc-X11.spec	(revision 2)
 +++ ghc-X11.spec	(working copy)
-@@ -34,5 +34,11 @@
+@@ -34,4 +34,10 @@
  BuildRequires:  libXrandr-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  pkgconfig
 +BuildRequires:  pkgconfig(x11)
 +BuildRequires:  pkgconfig(x11-xcb)

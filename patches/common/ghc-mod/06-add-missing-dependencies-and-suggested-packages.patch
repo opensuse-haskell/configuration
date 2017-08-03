@@ -2,7 +2,7 @@ Index: ghc-mod.spec
 ===================================================================
 --- ghc-mod.spec	(revision 2)
 +++ ghc-mod.spec	(working copy)
-@@ -64,7 +64,11 @@
+@@ -64,6 +64,10 @@
  BuildRequires:  ghc-time-devel
  BuildRequires:  ghc-transformers-base-devel
  BuildRequires:  ghc-transformers-devel
@@ -11,7 +11,6 @@ Index: ghc-mod.spec
 +Suggests:       cabal-install
  Suggests:       emacs-haskell-mode
 +Suggests:       hlint
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-doctest-devel
 

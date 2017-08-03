@@ -10,12 +10,11 @@ Index: ShellCheck.spec
  
  %check
  %cabal_test
-@@ -93,6 +94,7 @@
+@@ -93,5 +94,6 @@
  %doc LICENSE
  %doc README.md
  %{_bindir}/shellcheck
 +%{_mandir}/man1/shellcheck.1*
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 

@@ -2,10 +2,9 @@ Index: ghc-gtk.spec
 ===================================================================
 --- ghc-gtk.spec	(revision 3)
 +++ ghc-gtk.spec	(working copy)
-@@ -43,6 +43,7 @@
+@@ -43,5 +43,6 @@
  BuildRequires:  pkgconfig(gthread-2.0)
  BuildRequires:  pkgconfig(gtk+-2.0)
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  fdupes
  
  %description

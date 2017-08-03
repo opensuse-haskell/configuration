@@ -2,11 +2,10 @@ Index: ghc-clckwrks-plugin-media.spec
 ===================================================================
 --- ghc-clckwrks-plugin-media.spec	(revision 2)
 +++ ghc-clckwrks-plugin-media.spec	(working copy)
-@@ -50,6 +50,5 @@
+@@ -50,5 +50,4 @@
  BuildRequires:  ghc-web-plugins-devel
  BuildRequires:  ghc-web-routes-devel
  BuildRequires:  ghc-web-routes-th-devel
 -BuildRequires:  hsx2hs
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  
 

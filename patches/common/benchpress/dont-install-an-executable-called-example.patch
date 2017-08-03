@@ -10,14 +10,12 @@ Index: ghc-benchpress.spec
  
  %post devel
  %ghc_pkg_recache
-@@ -71,10 +71,8 @@
+@@ -71,8 +71,6 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 -%doc example
  
  %changelog

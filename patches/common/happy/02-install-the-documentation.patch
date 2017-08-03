@@ -2,7 +2,7 @@ Index: happy.spec
 ===================================================================
 --- happy.spec	(revision 792cfc2a78d3c293ca804b3a0707d635)
 +++ happy.spec	(working copy)
-@@ -31,6 +31,11 @@
+@@ -31,5 +31,10 @@
  BuildRequires:  ghc-containers-devel
  BuildRequires:  ghc-mtl-devel
  BuildRequires:  ghc-rpm-macros
@@ -11,7 +11,6 @@ Index: happy.spec
 +BuildRequires:  docbook-xsl-stylesheets
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-process-devel
 @@ -47,9 +52,14 @@
@@ -29,9 +28,8 @@ Index: happy.spec
  
  %check
  %cabal_test
-@@ -57,7 +67,9 @@
+@@ -57,6 +67,8 @@
  %files
- %defattr(-,root,root,-)
  %doc LICENSE
  %doc CHANGES README TODO doc examples
  %{_bindir}/%{name}

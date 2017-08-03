@@ -11,12 +11,10 @@ Index: ghc-open-browser.spec
  
  
  %post devel
-@@ -71,7 +70,6 @@
+@@ -71,5 +70,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

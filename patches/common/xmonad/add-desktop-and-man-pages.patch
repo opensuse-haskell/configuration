@@ -9,7 +9,7 @@ Index: xmonad.spec
 +Source10:       xmonad.desktop
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
-@@ -41,10 +42,15 @@
+@@ -41,9 +42,14 @@
  BuildRequires:  ghc-setlocale-devel
  BuildRequires:  ghc-unix-devel
  BuildRequires:  ghc-utf8-string-devel
@@ -18,7 +18,6 @@ Index: xmonad.spec
 +BuildRequires:  pkgconfig(xinerama)
 +Suggests:       ghc-xmonad-contrib-devel
 +Suggests:       ghc-xmonad-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
  %if %{with tests}
  BuildRequires:  ghc-QuickCheck-devel
  %endif
@@ -40,7 +39,7 @@ Index: xmonad.spec
  %ghc_fix_rpath %{pkg_name}-%{version}
  
  
-@@ -109,8 +124,9 @@
+@@ -109,7 +124,8 @@
  %dir %{_datadir}/%{name}-%{version}
  %dir %{_datadir}/%{name}-%{version}/man
  %{_datadir}/%{name}-%{version}/man/xmonad.hs
@@ -50,5 +49,4 @@ Index: xmonad.spec
 +%{_datadir}/xsessions/xmonad.desktop
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 

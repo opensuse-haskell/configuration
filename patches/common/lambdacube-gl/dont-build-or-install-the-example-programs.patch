@@ -22,14 +22,12 @@ Index: ghc-lambdacube-gl.spec
 -%ghc_fix_rpath %{pkg_name}-%{version}
  
  %post devel
-@@ -84,9 +82,6 @@
+@@ -84,7 +82,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/lambdacube-gl-hello
 -%{_bindir}/lambdacube-gl-hello-obj
 -%{_bindir}/lambdacube-gl-test-client
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

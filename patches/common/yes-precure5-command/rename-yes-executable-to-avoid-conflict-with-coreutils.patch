@@ -12,13 +12,11 @@ Index: ghc-yes-precure5-command.spec
  
  
  %check
-@@ -89,7 +89,7 @@
+@@ -89,5 +89,5 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/yes
 +%{_bindir}/yes-precure5
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

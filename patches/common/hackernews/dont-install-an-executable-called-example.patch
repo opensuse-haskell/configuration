@@ -11,12 +11,10 @@ Index: ghc-hackernews.spec
  
  %check
  %cabal_test
-@@ -80,7 +82,6 @@
+@@ -80,5 +82,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

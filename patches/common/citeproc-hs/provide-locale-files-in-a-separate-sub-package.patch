@@ -17,9 +17,8 @@ Index: ghc-citeproc-hs.spec
  %prep
  %setup -q -n %{pkg_name}-%{version}
  
-@@ -87,56 +95,10 @@
+@@ -87,54 +95,7 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%dir %{_datadir}/%{pkg_name}-%{version}
 -%dir %{_datadir}/%{pkg_name}-%{version}/locales
@@ -73,9 +72,7 @@ Index: ghc-citeproc-hs.spec
 -%{_datadir}/%{pkg_name}-%{version}/locales/locales-zh-TW.xml
 +
 +%files locales
-+%defattr(-,root,root,-)
 +%{_datadir}/%{pkg_name}-%{version}
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

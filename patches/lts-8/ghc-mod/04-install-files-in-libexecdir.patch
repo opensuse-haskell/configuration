@@ -12,7 +12,7 @@ Index: ghc-mod.spec
  
  %check
  %cabal_test
-@@ -124,13 +128,9 @@
+@@ -124,12 +128,8 @@
  %doc COPYING.AGPL3
  %{_bindir}/%{name}
  %{_bindir}/ghc-modi
@@ -28,5 +28,4 @@ Index: ghc-mod.spec
 +%config %{_sysconfdir}/profile.d/ghc-mod.csh
  
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
 

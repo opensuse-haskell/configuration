@@ -14,13 +14,11 @@ Index: ghc-ConfigFile.spec
 +Url:            http://software.complete.org/configfile
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
  BuildRequires:  ghc-Cabal-devel
-@@ -79,7 +79,7 @@
+@@ -79,5 +79,5 @@
  
  %files -f %{name}.files
- %defattr(-,root,root,-)
 -%doc COPYRIGHT
 +%doc BSD3 COPYRIGHT LGPL-2.1
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

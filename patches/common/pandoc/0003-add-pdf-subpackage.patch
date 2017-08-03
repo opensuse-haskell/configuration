@@ -40,17 +40,15 @@ Index: pandoc.spec
  
  %build
  %ghc_lib_build
-@@ -227,6 +242,12 @@
+@@ -227,5 +242,10 @@
  %{_datadir}/%{name}-%{version}/MANUAL.txt
  %{_datadir}/%{name}-%{version}/COPYRIGHT
  
 +%if 0%{?is_opensuse}
 +%files pdf
-+%defattr(-,root,root,-)
 +%doc pandoc-pdf.readme
 +%endif
 +
  %files -n ghc-%{name} -f ghc-%{name}.files
- %defattr(-,root,root,-)
  %doc COPYING.md
 

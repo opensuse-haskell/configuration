@@ -2,9 +2,8 @@ Index: ghc-readline.spec
 ===================================================================
 --- ghc-readline.spec	(revision 7)
 +++ ghc-readline.spec	(working copy)
-@@ -31,5 +31,6 @@
+@@ -31,4 +31,5 @@
  BuildRequires:  ghc-rpm-macros
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  readline-devel
  
  %description

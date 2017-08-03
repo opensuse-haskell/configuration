@@ -2,8 +2,7 @@ Index: ghc-servant-subscriber.spec
 ===================================================================
 --- ghc-servant-subscriber.spec	(revision 2)
 +++ ghc-servant-subscriber.spec	(working copy)
-@@ -58,7 +58,10 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -58,6 +58,9 @@
  
  %description
 -When REST is not enough ...

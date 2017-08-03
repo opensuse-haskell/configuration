@@ -2,8 +2,7 @@ Index: ghc-transient-universe.spec
 ===================================================================
 --- ghc-transient-universe.spec	(revision 1)
 +++ ghc-transient-universe.spec	(working copy)
-@@ -54,7 +54,7 @@
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+@@ -54,6 +54,6 @@
  
  %description
 -See <http://github.com/transient-haskell/transient>.

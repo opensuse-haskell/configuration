@@ -25,10 +25,9 @@ index b1d2e14..46b7b4b 100644
  %bcond_with tests
  Name:           ghc-%{pkg_name}
  Version:        0.5.2.1
-@@ -31,6 +38,10 @@ BuildRequires:  ghc-bytestring-devel
+@@ -31,5 +38,9 @@ BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-rpm-macros
  BuildRequires:  ghc-text-devel
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +%if 0%{?is_tumble} || 0%{?is_sp2up}
 +BuildRequires:  pkgconfig
 +BuildRequires:  pkgconfig(libcmark)

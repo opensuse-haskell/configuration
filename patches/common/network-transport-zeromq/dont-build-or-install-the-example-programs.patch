@@ -22,14 +22,12 @@ Index: ghc-network-transport-zeromq.spec
 -%ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
-@@ -101,9 +99,6 @@
+@@ -101,7 +99,4 @@
  %files -f %{name}.files
- %defattr(-,root,root,-)
  %doc LICENSE
 -%{_bindir}/bench-dp-channels
 -%{_bindir}/bench-dp-latency
 -%{_bindir}/bench-dp-throughput
  
  %files devel -f %{name}-devel.files
- %defattr(-,root,root,-)
 

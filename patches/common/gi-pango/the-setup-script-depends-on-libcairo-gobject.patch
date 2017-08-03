@@ -2,10 +2,9 @@ Index: ghc-gi-pango.spec
 ===================================================================
 --- ghc-gi-pango.spec	(revision 3)
 +++ ghc-gi-pango.spec	(working copy)
-@@ -40,6 +40,7 @@
+@@ -40,5 +40,6 @@
  BuildRequires:  pkgconfig
  BuildRequires:  pkgconfig(pango)
- BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 +BuildRequires:  libcairo-gobject2
  
  %description
