@@ -6,7 +6,7 @@ Index: cabal-rpm.spec
  Release:        0
  Summary:        RPM packaging tool for Haskell Cabal-based packages
  License:        GPL-3.0+
--Group:          Development/Languages/Other
+-Group:          Development/Languages/Haskell
 +Group:          Development/Tools/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

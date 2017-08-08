@@ -8,7 +8,7 @@ Index: cpphs.spec
  Summary:        A liberalised re-implementation of cpp, the C pre-processor
 -License:        LGPL-2.0+
 +License:        GPL-2.0 AND LGPL-2.1
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 @@ -45,6 +45,7 @@
@@ -24,7 +24,7 @@ Index: cpphs.spec
  %package -n ghc-%{name}-devel
  Summary:        Haskell %{name} library development files
 +License:        LGPL-2.1
- Group:          Development/Libraries/Other
+ Group:          Development/Libraries/Haskell
  Requires:       ghc-%{name} = %{version}-%{release}
  Requires:       ghc-compiler = %{ghc_version}
 

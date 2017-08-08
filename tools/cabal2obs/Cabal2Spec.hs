@@ -126,7 +126,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   putHdr "Version" (display version)
   putHdr "Release" "0"
   putHdr "Summary" summary
-  putHdr "Group" "Development/Languages/Other"
+  putHdr "Group" "Development/Languages/Haskell"
   putNewline
   putHdr "License" $ showLicense (license pkgDesc)
   putHdr "Url" $ "https://hackage.haskell.org/package/" ++ pkg_name
@@ -166,7 +166,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
       putNewline
     put $ "%package" +-+ ghcPkgDevel
     putHdr "Summary" $ "Haskell" +-+ pkg_name +-+ "library development files"
-    putHdr "Group" "Development/Libraries/Other"
+    putHdr "Group" "Development/Libraries/Haskell"
     putHdr "Requires" "ghc-compiler = %{ghc_version}"
     putHdr "Requires(post)" "ghc-compiler = %{ghc_version}"
     putHdr "Requires(postun)" "ghc-compiler = %{ghc_version}"

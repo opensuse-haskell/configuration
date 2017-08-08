@@ -9,7 +9,7 @@ Index: ghc-say.spec
 -Summary:        FIXME
 +Summary:        Send textual messages to a Handle in a thread-friendly way
  License:        MIT
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{pkg_name}
 @@ -38,7 +38,18 @@
  %endif

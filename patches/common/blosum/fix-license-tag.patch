@@ -8,7 +8,7 @@ Index: ghc-blosum.spec
  Summary:        BLOSUM generator
 -License:        GPL-2.0+
 +License:        GPL-3.0+
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -3,7 +3,7 @@ Index: ghc-network-transport-zeromq.spec
 --- ghc-network-transport-zeromq.spec	(revision 10)
 +++ ghc-network-transport-zeromq.spec	(working copy)
 @@ -26,7 +26,6 @@
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 -BuildRequires:  chrpath

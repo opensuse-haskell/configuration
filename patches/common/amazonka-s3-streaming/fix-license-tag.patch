@@ -8,7 +8,7 @@ Index: ghc-amazonka-s3-streaming.spec
  Summary:        Provides conduits to upload data to S3 using the Multipart API
 -License:        BSD-3-Clause
 +License:        MIT
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

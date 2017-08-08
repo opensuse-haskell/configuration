@@ -8,7 +8,7 @@ Index: pointfree.spec
  Summary:        Tool for refactoring expressions into pointfree form
 -License:        Unknown
 +License:        MIT
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

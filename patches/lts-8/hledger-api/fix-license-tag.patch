@@ -8,7 +8,7 @@ Index: hledger-api.spec
  Summary:        Web API server for the hledger accounting tool
 -License:        GPL-1.0+
 +License:        GPL-3.0+
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

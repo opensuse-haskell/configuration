@@ -8,7 +8,7 @@ Index: ghc-citeproc-hs.spec
  
 +%package locales
 +Summary:        Locale files for Haskell %{pkg_name} library
-+Group:          Development/Libraries/Other
++Group:          Development/Libraries/Haskell
 +Requires:       %{name} = %{version}-%{release}
 +
 +%description locales

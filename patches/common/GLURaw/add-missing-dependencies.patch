@@ -11,7 +11,7 @@ Index: ghc-GLURaw.spec
  BuildRequires:  ghc-OpenGLRaw-devel
  BuildRequires:  ghc-rpm-macros
 @@ -50,5 +52,7 @@
- Group:          Development/Libraries/Other
+ Group:          Development/Libraries/Haskell
  Requires:       %{name} = %{version}-%{release}
  Requires:       ghc-compiler = %{ghc_version}
 +Requires:       pkgconfig

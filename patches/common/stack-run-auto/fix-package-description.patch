@@ -9,7 +9,7 @@
 -Summary:        FIXME
 +Summary:        Automatically finds dependencies and runs a Haskell file with stack
  License:        MIT
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
 @@ -45,6 +45,21 @@
  

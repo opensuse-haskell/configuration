@@ -8,7 +8,7 @@ Index: ghc-amazonka-codedeploy.spec
  Summary:        Amazon CodeDeploy SDK
 -License:        Unknown
 +License:        MPL-2.0
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

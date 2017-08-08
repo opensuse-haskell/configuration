@@ -8,7 +8,7 @@ Index: happy.spec
  Summary:        Happy is a parser generator for Haskell
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

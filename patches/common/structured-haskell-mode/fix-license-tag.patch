@@ -8,7 +8,7 @@ Index: structured-haskell-mode.spec
  Summary:        Structured editing Emacs mode for Haskell
 -License:        BSD-3-Clause
 +License:        BSD-3-Clause AND GPL-3.0+
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

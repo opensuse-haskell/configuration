@@ -6,7 +6,7 @@ Index: xmobar.spec
  Release:        0
  Summary:        A Minimalistic Text Based Status Bar
  License:        BSD-3-Clause
--Group:          Development/Languages/Other
+-Group:          Development/Languages/Haskell
 +Group:          System/GUI/Other
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

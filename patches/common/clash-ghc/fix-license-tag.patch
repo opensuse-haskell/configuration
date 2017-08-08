@@ -8,7 +8,7 @@ Index: clash-ghc.spec
  Summary:        CAES Language for Synchronous Hardware
 -License:        BSD-2-Clause
 +License:        BSD-3-Clause
- Group:          Development/Languages/Other
+ Group:          Development/Languages/Haskell
  Url:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 
