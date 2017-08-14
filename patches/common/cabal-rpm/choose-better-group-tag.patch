@@ -8,7 +8,7 @@ Index: cabal-rpm.spec
  License:        GPL-3.0+
 -Group:          Development/Languages/Haskell
 +Group:          Development/Tools/Other
- Url:            https://hackage.haskell.org/package/%{name}
+ URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  BuildRequires:  ghc-Cabal-devel
 

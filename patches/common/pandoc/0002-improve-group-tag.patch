@@ -17,7 +17,7 @@ index e097434..dbe6fc7 100644
  License:        GPL-2.0+
 -Group:          Development/Languages/Haskell
 +Group:          Productivity/Publishing/Other
- Url:            https://hackage.haskell.org/package/%{name}
+ URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal
 -- 

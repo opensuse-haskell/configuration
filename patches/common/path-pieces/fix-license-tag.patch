@@ -9,6 +9,6 @@ Index: ghc-path-pieces.spec
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
  Group:          Development/Languages/Haskell
- Url:            https://hackage.haskell.org/package/%{pkg_name}
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 
