@@ -8,7 +8,7 @@ Index: hscolour.spec
  Summary:        Colourise Haskell code
 -License:        LGPL-2.0+
 +License:        LGPL-2.1+
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

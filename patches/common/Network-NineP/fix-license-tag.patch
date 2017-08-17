@@ -8,7 +8,7 @@ Index: ghc-Network-NineP.spec
  Summary:        High-level abstraction over 9P protocol
 -License:        Unknown
 +License:        WTFPL
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

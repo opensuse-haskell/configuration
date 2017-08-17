@@ -3,7 +3,7 @@ Index: cab.spec
 --- cab.spec	(revision 2)
 +++ cab.spec	(working copy)
 @@ -25,5 +25,6 @@
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 +Requires:       cabal-install

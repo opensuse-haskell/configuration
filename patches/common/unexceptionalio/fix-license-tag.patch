@@ -8,7 +8,7 @@ Index: ghc-unexceptionalio.spec
  Summary:        IO without any non-error, synchronous exceptions
 -License:        Unknown
 +License:        ISC
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

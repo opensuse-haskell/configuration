@@ -126,7 +126,7 @@ createSpecFile specFile cabalPath pkgDesc forceBinary flagAssignment = do
   putHdr "Version" (display version)
   putHdr "Release" "0"
   putHdr "Summary" summary
-  putHdr "Group" "Development/Languages/Haskell"
+  putHdr "Group" "Development/Libraries/Haskell"
   putNewline
   putHdr "License" $ showLicense (license pkgDesc)
   putHdr "Url" $ "https://hackage.haskell.org/package/" ++ pkg_name

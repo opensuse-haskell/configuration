@@ -8,7 +8,7 @@ Index: Agda.spec
  Summary:        A dependently typed functional programming language and proof assistant
 -License:        Unknown
 +License:        MIT AND BSD-3-Clause
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

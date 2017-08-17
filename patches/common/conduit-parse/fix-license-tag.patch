@@ -8,7 +8,7 @@ Index: ghc-conduit-parse.spec
  Summary:        Parsing framework based on conduit
 -License:        SUSE-Public-Domain
 +License:        WTFPL
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

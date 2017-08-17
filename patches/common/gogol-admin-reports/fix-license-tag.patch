@@ -8,7 +8,7 @@ Index: ghc-gogol-admin-reports.spec
  Summary:        Google Admin Reports SDK
 -License:        Unknown
 +License:        MPL-2.0
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

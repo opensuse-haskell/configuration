@@ -17,7 +17,7 @@ index 0f6d8ee..b1d2e14 100644
  Summary:        Fast, accurate CommonMark (Markdown) parser and renderer
 -License:        BSD-3-Clause
 +License:        BSD-3-Clause AND BSD-2-Clause AND MIT
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 -- 

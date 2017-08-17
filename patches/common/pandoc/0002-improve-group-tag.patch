@@ -15,7 +15,7 @@ index e097434..dbe6fc7 100644
  Release:        0
  Summary:        Conversion between markup formats
  License:        GPL-2.0+
--Group:          Development/Languages/Haskell
+-Group:          Development/Libraries/Haskell
 +Group:          Productivity/Publishing/Other
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

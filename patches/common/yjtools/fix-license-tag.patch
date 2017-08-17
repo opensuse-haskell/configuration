@@ -8,7 +8,7 @@ Index: ghc-yjtools.spec
  Summary:        Some tools for Monad, List, Tuple and so on
 -License:        LGPL-2.0+
 +License:        LGPL-3.0+
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

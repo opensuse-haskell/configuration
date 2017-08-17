@@ -7,7 +7,7 @@ Index: quickbench.spec
  Release:        0
  Summary:        Quick & easy benchmarking of command-line programs
 -License:        GPL-1.0+
--Group:          Development/Languages/Haskell
+-Group:          Development/Libraries/Haskell
 +License:        GPL-3.0+
 +Group:          Development/Tools/Other
  URL:            https://hackage.haskell.org/package/%{name}

@@ -7,7 +7,7 @@ Index: ghc-ConfigFile.spec
  Release:        0
  Summary:        Configuration file reading & writing
 -License:        BSD-3-Clause
--Group:          Development/Languages/Haskell
+-Group:          Development/Libraries/Haskell
 -URL:            https://hackage.haskell.org/package/%{pkg_name}
 +License:        LGPL-2.1+ OR BSD-3-Clause
 +Group:          Development/Libraries/Haskell

@@ -8,7 +8,7 @@ Index: ghc-monadLib.spec
  Summary:        A collection of monad transformers
 -License:        BSD-3-Clause
 +License:        MIT
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

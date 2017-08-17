@@ -9,7 +9,7 @@ Index: ghc-etcd.spec
 -Summary:        Client for etcd, a highly-available key value store
 +Summary:        Client for etcd, a highly-availability key value store
  License:        Unlicense
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
 @@ -43,7 +43,19 @@
  %endif

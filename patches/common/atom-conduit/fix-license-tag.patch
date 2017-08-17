@@ -8,7 +8,7 @@ Index: ghc-atom-conduit.spec
  Summary:        Streaming parser/renderer for the Atom 1.0 standard (RFC 4287)
 -License:        SUSE-Public-Domain
 +License:        WTFPL
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -8,7 +8,7 @@ Index: hledger-web.spec
  Summary:        Web interface for the hledger accounting tool
 -License:        GPL-1.0+
 +License:        GPL-3.0+
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

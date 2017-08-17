@@ -3,7 +3,7 @@ Index: ghc-buffer-builder.spec
 --- ghc-buffer-builder.spec	(revision 2)
 +++ ghc-buffer-builder.spec	(working copy)
 @@ -26,5 +26,6 @@
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 +BuildRequires:  gcc-c++

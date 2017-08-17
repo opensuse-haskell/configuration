@@ -8,7 +8,7 @@ Index: ghc-direct-sqlite.spec
  Summary:        Low-level binding to SQLite3.  Includes UTF8 and BLOB support
 -License:        BSD-3-Clause
 +License:        MIT
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

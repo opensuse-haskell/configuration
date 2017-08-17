@@ -9,7 +9,7 @@ Index: ghc-wai-middleware-caching-lru.spec
 -Summary:        FIXME
 +Summary:        Provide caching ability to WAI middlewares
  License:        BSD-3-Clause
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
 @@ -37,6 +37,6 @@
  

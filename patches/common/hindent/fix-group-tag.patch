@@ -6,7 +6,7 @@ Index: hindent.spec
  Release:        0
  Summary:        Extensible Haskell pretty printer
  License:        BSD-3-Clause
--Group:          Development/Languages/Haskell
+-Group:          Development/Libraries/Haskell
 +Group:          Development/Tools/Other
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

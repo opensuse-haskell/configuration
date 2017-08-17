@@ -3,7 +3,7 @@ Index: ghc-lambdacube-gl.spec
 --- ghc-lambdacube-gl.spec	(revision 10)
 +++ ghc-lambdacube-gl.spec	(working copy)
 @@ -25,7 +25,6 @@
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 -BuildRequires:  chrpath

@@ -8,7 +8,7 @@ Index: ghc-IfElse.spec
  Summary:        Anaphoric and miscellaneous useful control-flow
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

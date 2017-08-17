@@ -8,7 +8,7 @@ Index: ghc-hsndfile-vector.spec
  Summary:        Haskell bindings for libsndfile (Data.Vector interface)
 -License:        LGPL-2.0+
 +License:        LGPL-2.1+
- Group:          Development/Languages/Haskell
+ Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 
