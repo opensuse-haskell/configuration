@@ -10,7 +10,7 @@ Index: ghc-hslua.spec
 +BuildRequires:  lua51-devel
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel
-@@ -54,7 +54,7 @@
+@@ -54,6 +54,6 @@
  Group:          Development/Libraries/Haskell
  Requires:       %{name} = %{version}-%{release}
  Requires:       ghc-compiler = %{ghc_version}
@@ -18,5 +18,9 @@ Index: ghc-hslua.spec
 +Requires:       lua51-devel
  Requires(post): ghc-compiler = %{ghc_version}
  Requires(postun): ghc-compiler = %{ghc_version}
- 
+@@ -66,3 +66,3 @@
+ %build
+-%define cabal_configure_options -fsystem-lua
++%define cabal_configure_options -fsystem-lua --extra-include-dirs=/usr/include/lua5.1
+ %ghc_lib_build
 
