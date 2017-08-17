@@ -21,6 +21,6 @@ Index: ghc-hslua.spec
 @@ -66,3 +66,3 @@
  %build
 -%define cabal_configure_options -fsystem-lua
-+%define cabal_configure_options -fsystem-lua --extra-include-dirs=/usr/include/lua5.1
++%define cabal_configure_options -fsystem-lua --extra-include-dirs=$(pkg-config --variable=includedir lua)
  %ghc_lib_build
 
