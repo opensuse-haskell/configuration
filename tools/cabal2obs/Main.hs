@@ -198,6 +198,7 @@ mkChangeEntry version email = do
     , unwords [ ts, "-", email ]
     , ""
     , "- Update to " ++ version ++ "."
+    , "  A more detailed change log is not available."
     , ""
     ]
 
