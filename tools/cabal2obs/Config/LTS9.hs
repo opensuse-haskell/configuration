@@ -25,6 +25,7 @@ lts9 = PackageSetConfig
 
 goodStackagePackage :: Dependency ->  Bool
 goodStackagePackage (Dependency "traverse-with-class" _) = False
+goodStackagePackage (Dependency "git-annex" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -47,7 +48,7 @@ extraPackageNames =
   , "SDL-image"
   , "SDL-mixer"
 
-    -- These packages are dependencies of git-annex and/or cabal-install.
+    -- These packages are dependencies of cabal-install.
   , "data-default-instances-base"
   , "gnuidn"
   , "gnutls"
@@ -58,8 +59,9 @@ extraPackageNames =
     -- No-one knows why Stackage would release an LTS version that doesn't contain ...
   , "stack <9"
 
-    -- Re-add this package with the modified constraint.
+    -- Re-add these packages with modified constrains.
   , "traverse-with-class < 1"
+  , "git-annex"
 
     -- These packages are in Factory for historical reasons.
   , "concatenative"
