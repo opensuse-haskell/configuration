@@ -44,7 +44,6 @@ extraPackageNames =
   , "xmobar"
 
     -- Needed by games repository somewhere.
-  , "SDL"
   , "SDL-image"
   , "SDL-mixer"
 
