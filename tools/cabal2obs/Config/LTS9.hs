@@ -318,6 +318,9 @@ bannedPackageNames =
 
     -- These packages no longer compile with recent versions of servant.
   , "xlsior", "telegram-api"
+
+    -- These builds are broken in recent versions of Factory and we don't know why.
+  , "download", "convert-annotation", "H", "inline-r"
   ]
 
 forcedExectableNames :: [PackageName]
