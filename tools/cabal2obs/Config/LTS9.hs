@@ -321,6 +321,9 @@ bannedPackageNames =
 
     -- These builds are broken in recent versions of Factory and we don't know why.
   , "download", "convert-annotation", "H", "inline-r"
+
+    -- Conflict in "/usr/bin" with other packages.
+  , "dice", "protobuf-simple", "postgresql-simple-migration", "proto-lens-protobuf-types"
   ]
 
 forcedExectableNames :: [PackageName]
