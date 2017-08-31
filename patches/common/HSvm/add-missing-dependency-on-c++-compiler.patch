@@ -1,0 +1,13 @@
+Index: ghc-HSvm.spec
+===================================================================
+--- ghc-HSvm.spec	(revision 1)
++++ ghc-HSvm.spec	(working copy)
+@@ -28,6 +28,7 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-rpm-macros
++BuildRequires:  gcc-c++
+ BuildRequires:  libstdc++-devel
+ 
+ %description
+
