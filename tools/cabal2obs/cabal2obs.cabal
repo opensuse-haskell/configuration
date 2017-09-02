@@ -49,6 +49,7 @@ executable cabal2obs
     Oracle.Hackage
     Oracle.PackageList
     Orphans
+    ParseStackageConfig
     ParseUtils
     Types
   default-language: Haskell2010

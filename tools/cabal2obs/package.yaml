@@ -42,5 +42,6 @@ executables:
       - Oracle.Hackage
       - Oracle.PackageList
       - Orphans
+      - ParseStackageConfig
       - ParseUtils
       - Types
