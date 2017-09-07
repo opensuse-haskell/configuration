@@ -26,6 +26,7 @@ lts9 = PackageSetConfig
 goodStackagePackage :: Dependency ->  Bool
 goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency "git-annex" _) = False
+goodStackagePackage (Dependency "happy" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -61,6 +62,10 @@ extraPackageNames =
     -- Re-add these packages with modified constrains.
   , "traverse-with-class < 1"
   , "git-annex"
+
+    -- lts-9.x has the newer 1.19.6+, which is supposed to be API compatible
+    -- but in fact breaks Agda, cryptol, fortran-src, and language-python.
+  , "happy == 1.19.5"
 
     -- These packages are in Factory for historical reasons.
   , "concatenative"
