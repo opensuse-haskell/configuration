@@ -329,6 +329,9 @@ bannedPackageNames =
 
     -- Conflict in "/usr/bin" with other packages.
   , "dice", "protobuf-simple", "postgresql-simple-migration", "proto-lens-protobuf-types"
+
+    -- These packages depend on the obsolete, unmaintained webkitgtk-3.0 library.
+  , "gi-webkit", "gi-javascriptcore", "webkitgtk3", "webkitgtk3-javascriptcore"
   ]
 
 forcedExectableNames :: [PackageName]
