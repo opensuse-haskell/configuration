@@ -24,9 +24,16 @@ lts9 = PackageSetConfig
     }
 
 goodStackagePackage :: Dependency ->  Bool
-goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency "git-annex" _) = False
 goodStackagePackage (Dependency "happy" _) = False
+goodStackagePackage (Dependency "hledger" _) = False
+goodStackagePackage (Dependency "hledger-api" _) = False
+goodStackagePackage (Dependency "hledger-iadd" _) = False
+goodStackagePackage (Dependency "hledger-interest" _) = False
+goodStackagePackage (Dependency "hledger-lib" _) = False
+goodStackagePackage (Dependency "hledger-ui" _) = False
+goodStackagePackage (Dependency "hledger-web" _) = False
+goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -38,6 +45,8 @@ extraPackageNames =
   , "lazysmallcheck"
   , "Stream"
   , "structured-haskell-mode"
+  , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
+  , "hledger-api", "hledger-iadd", "hledger-web"
 
     -- Used by osukup@suse.com.
   , "cab"
