@@ -46,7 +46,7 @@ extraPackageNames =
   , "Stream"
   , "structured-haskell-mode"
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
-  , "hledger-api", "hledger-iadd", "hledger-web"
+  , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
 
     -- Used by osukup@suse.com.
   , "cab"
