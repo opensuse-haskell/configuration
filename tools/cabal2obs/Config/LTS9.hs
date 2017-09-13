@@ -188,7 +188,7 @@ extraPackageNames =
   , "test-invariant"
   , "test-simple"
   , "th-printf"
-  , "tibetan-utils"
+  , "tibetan-utils == 0.1.1.2"
   , "tree-view"
   , "type-eq"
   , "unagi-chan"
