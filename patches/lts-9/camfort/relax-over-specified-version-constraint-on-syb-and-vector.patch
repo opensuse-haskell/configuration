@@ -1,0 +1,14 @@
+Index: ghc-camfort.spec
+===================================================================
+--- ghc-camfort.spec	(revision 2)
++++ ghc-camfort.spec	(working copy)
+@@ -75,6 +75,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver syb '< 0.7' ' < 0.8'
++cabal-tweak-dep-ver vector '< 0.12' ' < 0.13'
+ 
+ %build
+ %ghc_lib_build
+
