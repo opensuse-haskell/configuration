@@ -1,0 +1,13 @@
+Index: ghc-stripe-http-streams.spec
+===================================================================
+--- ghc-stripe-http-streams.spec	(revision 1)
++++ ghc-stripe-http-streams.spec	(working copy)
+@@ -63,6 +63,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver io-streams '< 1.4' ' < 2'
+ 
+ %build
+ %ghc_lib_build
+
