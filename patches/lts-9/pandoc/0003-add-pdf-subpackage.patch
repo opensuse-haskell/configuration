@@ -30,6 +30,14 @@ Index: pandoc.spec
  %package -n ghc-%{name}
  Summary:        Haskell %{name} library
  Group:          System/Libraries
+@@ -126,6 +140,7 @@
+ 
+ %prep
+ %setup -q
++cp %{SOURCE10} .
+ 
+ %build
+ %ghc_lib_build
 @@ -227,5 +242,10 @@
  %{_datadir}/%{name}-%{version}/MANUAL.txt
  %{_datadir}/%{name}-%{version}/COPYRIGHT
