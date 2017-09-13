@@ -1,0 +1,14 @@
+Index: ghc-fortran-src.spec
+===================================================================
+--- ghc-fortran-src.spec	(revision 3)
++++ ghc-fortran-src.spec	(working copy)
+@@ -15,7 +15,7 @@
+ # Please submit bugfixes or comments via http://bugs.opensuse.org/
+ #
+ 
+-
++%global without_prof 1
+ %global pkg_name fortran-src
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
