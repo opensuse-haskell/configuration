@@ -105,7 +105,6 @@ extraPackageNames =
   , "fay"
   , "fay-base"
   , "fay-builder"
-  , "fay-jquery"
   , "fay-uri"
   , "FindBin"
   , "FloatingHex"
@@ -434,7 +433,7 @@ bannedPackageNames =
 
     -- Current version don't compile with up-to-date dependencies.
   , "distributed-process-simplelocalnet"
-  , "fay-dom", "yesod-fay", "fay-text"
+  , "fay-dom", "yesod-fay", "fay-text", "fay-jquery"
   ]
 
 forcedExectableNames :: [PackageName]
