@@ -101,14 +101,11 @@ extraPackageNames =
   , "crypto-pubkey"
   , "datasets"
   , "distributed-process"
-  , "distributed-process-simplelocalnet"
   , "doctest-prop"
   , "fay"
   , "fay-base"
   , "fay-builder"
-  , "fay-dom"
   , "fay-jquery"
-  , "fay-text"
   , "fay-uri"
   , "FindBin"
   , "FloatingHex"
@@ -203,7 +200,6 @@ extraPackageNames =
   , "wai-request-spec"
   , "wavefront"
   , "wordpass"
-  , "yesod-fay"
   , "yi < 0.14"
   , "yi-frontend-pango < 0.14"
   ]
@@ -410,7 +406,7 @@ bannedPackageNames =
     -- Ambiguous licensing information: https://github.com/yamadapc/list-prompt/pull/2
   , "list-prompt"
 
-    -- Has shitty documentation and virtually no code content. Isn't by anyone either.
+    -- Has no documentation and virtually no code content. Isn't used by anyone either.
   , "dataurl"
 
     -- Shitty documentation. It's unclear how this code relates to the wavefront library.
@@ -435,6 +431,10 @@ bannedPackageNames =
 
     -- These packages depend on the obsolete, unmaintained webkitgtk-3.0 library.
   , "gi-webkit", "gi-javascriptcore", "webkitgtk3", "webkitgtk3-javascriptcore"
+
+    -- Current version don't compile with up-to-date dependencies.
+  , "distributed-process-simplelocalnet"
+  , "fay-dom", "yesod-fay", "fay-text"
   ]
 
 forcedExectableNames :: [PackageName]
