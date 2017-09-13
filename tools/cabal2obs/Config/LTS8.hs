@@ -291,6 +291,9 @@ bannedPackageNames =
 
    -- We don't have symengine.
   , "symengine", "symengine-hs"
+
+  -- These builds are broken in recent versions of Factory and we don't know why.
+  , "download", "convert-annotation", "H", "inline-r"
   ]
 
 forcedExectableNames :: [PackageName]
