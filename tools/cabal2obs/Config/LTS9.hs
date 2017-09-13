@@ -80,7 +80,7 @@ extraPackageNames =
   , "acid-state"
   , "bzlib"
   , "camfort"
-  , "cassava-megaparsec"
+  , "cassava-megaparsec < 1"
   , "ChasingBottoms"
   , "clckwrks"
   , "clckwrks-cli"
