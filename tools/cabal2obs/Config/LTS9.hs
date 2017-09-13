@@ -33,6 +33,7 @@ goodStackagePackage (Dependency "hledger-interest" _) = False
 goodStackagePackage (Dependency "hledger-lib" _) = False
 goodStackagePackage (Dependency "hledger-ui" _) = False
 goodStackagePackage (Dependency "hledger-web" _) = False
+goodStackagePackage (Dependency "swagger2" _) = False
 goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
@@ -47,6 +48,9 @@ extraPackageNames =
   , "structured-haskell-mode"
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
   , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
+
+    -- Newer versions break the build of hledger-api 1.3.1.
+  , "swagger2 >= 2.1 && < 2.1.5"
 
     -- Used by osukup@suse.com.
   , "cab"
