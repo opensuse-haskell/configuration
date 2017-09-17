@@ -26,6 +26,7 @@ lts9 = PackageSetConfig
 goodStackagePackage :: Dependency ->  Bool
 goodStackagePackage (Dependency "git-annex" _) = False
 goodStackagePackage (Dependency "happy" _) = False
+goodStackagePackage (Dependency "haskell-names" _) = False
 goodStackagePackage (Dependency "hledger" _) = False
 goodStackagePackage (Dependency "hledger-api" _) = False
 goodStackagePackage (Dependency "hledger-iadd" _) = False
@@ -48,6 +49,9 @@ extraPackageNames =
   , "structured-haskell-mode"
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
   , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
+
+    -- Newer versions require traverse-with-class >=1.0.0.0 && <1.1
+  , "haskell-names < 0.9"
 
     -- Newer versions break the build of hledger-api 1.3.1.
   , "swagger2 >= 2.1 && < 2.1.5"
