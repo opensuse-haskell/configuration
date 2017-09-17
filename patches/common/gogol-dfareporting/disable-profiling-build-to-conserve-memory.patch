@@ -1,0 +1,13 @@
+Index: ghc-gogol-dfareporting.spec
+===================================================================
+--- ghc-gogol-dfareporting.spec	(revision 7)
++++ ghc-gogol-dfareporting.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name gogol-dfareporting
+ Name:           ghc-%{pkg_name}
+ Version:        0.3.0
+
