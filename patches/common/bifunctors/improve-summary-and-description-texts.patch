@@ -1,0 +1,23 @@
+Index: ghc-bifunctors.spec
+===================================================================
+--- ghc-bifunctors.spec	(revision 6)
++++ ghc-bifunctors.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Name:           ghc-%{pkg_name}
+ Version:        5.4.2
+ Release:        0
+-Summary:        Bifunctors
++Summary:        Collection Haskell 98 bifunctors, bifoldables and bitraversables
+ License:        BSD-2-Clause
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+@@ -42,7 +42,7 @@
+ %endif
+ 
+ %description
+-Bifunctors.
++Bifunctor, bifoldable, and bitraversable instances for Haskell 98.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
