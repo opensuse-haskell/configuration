@@ -1,0 +1,13 @@
+Index: ghc-amazonka-ec2.spec
+===================================================================
+--- ghc-amazonka-ec2.spec	(revision 6)
++++ ghc-amazonka-ec2.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name amazonka-ec2
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
