@@ -1,0 +1,22 @@
+Index: cryptol.spec
+===================================================================
+--- cryptol.spec (revision 2)
++++ cryptol.spec (revision 3)
+@@ -26,6 +26,8 @@
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
++#PATCH-FIX-UPSTREAM powerpc64-gmp-limits.patch ptrommler@icloud.com -- Define limits for gmp on PowerPC 64-bit platforms.
++Patch:          powerpc64-gmp-limits.patch
+ BuildRequires:  alex
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+@@ -93,6 +95,7 @@
+ %prep
+ %setup -q
+ cp -p %{SOURCE1} %{name}.cabal
++%patch -p1
+ 
+ %build
+ %ghc_lib_build
+
