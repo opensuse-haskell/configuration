@@ -1,0 +1,13 @@
+Index: ghc-amazonka-lightsail.spec
+===================================================================
+--- ghc-amazonka-lightsail.spec	(revision 6)
++++ ghc-amazonka-lightsail.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%global without_prof 1
+ %global pkg_name amazonka-lightsail
+ %bcond_with tests
+ Name:           ghc-%{pkg_name}
+
