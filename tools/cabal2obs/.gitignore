@@ -3,3 +3,4 @@
 /cabal-*.config
 /dist-newstyle/*
 /dist/*
+/.*.environment.*
