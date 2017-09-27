@@ -25,6 +25,7 @@ cd "$(dirname "$0")"/..
 
 git -C hackage checkout -q hackage
 git -C hackage pull -q &
+cabal -v0 update &
 parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
 wait
 
@@ -38,9 +39,10 @@ if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-cd tools/cabal2obs && hpack --silent && cabal new-build -v0 && cd ../..
-cabal2obs=$( echo $PWD/tools/cabal2obs/dist-newstyle/build/cabal2obs-*/build/cabal2obs/cabal2obs )
-$cabal2obs --no-progress --lint update
+cd tools/cabal2obs
+hpack --silent
+cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
+cd ../..
 for n in $(git status --porcelain tools/cabal2obs/Config/LTS* | sed -e 's/^ M //'); do
     v=$(basename $(dirname "$n"))
     v=${v##LTS}
@@ -53,12 +55,8 @@ if [ -s "$tmpfile" ]; then
     error_exit git repository has uncommitted changes
 fi
 
-cd tools/cabal2obs && cabal new-build -v0 && cd ../..
-tarball="$HOME/.cabal/packages/hackage.haskell.org/00-index.tar"
-rm -f "$tarball"*
-git -C hackage archive --format=tar -o "$tarball" HEAD
-gzip <"$tarball" >"$tarball".gz
-cabal fetch -v0 --no-dependencies ip6addr
-$cabal2obs --no-progress --lint
+cd tools/cabal2obs
+cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint
+cd ../..
 
 parallel "cd {} && ../../tools/commit >/dev/null" ::: _build/lts-*
