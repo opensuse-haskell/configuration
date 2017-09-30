@@ -1,0 +1,14 @@
+Index: ghc-cmark.spec
+===================================================================
+--- ghc-cmark.spec	(revision 8)
++++ ghc-cmark.spec	(working copy)
+@@ -64,6 +64,8 @@
+ 
+ %install
+ %ghc_lib_install
++# Drop erroneous library path that Cabal records in the package's config file. [boo#1061183]
++sed -i -e "s|/usr//usr/|/usr/|g" %{buildroot}%{ghclibdir}/package.conf.d/%{pkg_name}*.conf
+ 
+ %check
+ %cabal_test
+
