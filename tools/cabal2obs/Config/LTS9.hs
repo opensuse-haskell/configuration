@@ -567,6 +567,10 @@ flagList =
     -- Since version 6.20170925, the test suite can no longer be run outside of
     -- a checked-out copy of the git repository.
   , ("git-annex",                      "-testsuite")
+
+    -- Compile against the system library, not the one bundled in the Haskell
+    -- source tarball.
+  , ("cmark",                          "pkgconfig")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
