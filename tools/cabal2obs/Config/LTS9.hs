@@ -563,6 +563,10 @@ flagList =
 
     -- Disable dependencies we don't have.
   , ("invertible",                     "-hlist -piso")
+
+    -- Since version 6.20170925, the test suite can no longer be run outside of
+    -- a checked-out copy of the git repository.
+  , ("git-annex",                      "-testsuite")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]

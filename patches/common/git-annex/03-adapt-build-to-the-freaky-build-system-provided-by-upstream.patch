@@ -41,16 +41,13 @@ Index: git-annex.spec
  %prep
  %setup -q
  
-@@ -139,12 +165,37 @@
+@@ -139,12 +165,34 @@
  %build
  %ghc_bin_build
  
  %install
  %ghc_bin_install
 +make DESTDIR=%{buildroot} BUILDER=./Setup install-misc install-mans
-+
-+%check
-+make %{?_smp_mflags} DESTDIR=%{buildroot} BUILDER=./Setup test
 +
 +%post
 +%desktop_database_post
