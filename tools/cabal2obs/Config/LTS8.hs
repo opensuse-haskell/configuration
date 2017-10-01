@@ -47,7 +47,7 @@ extraPackageNames =
   , "SDL-mixer"
 
     -- These packages are dependencies of git-annex and/or cabal-install.
-  , "aws"
+  , "aws <0.17"
   , "bloomfilter"
   , "data-default-instances-base"
   , "dbus"
