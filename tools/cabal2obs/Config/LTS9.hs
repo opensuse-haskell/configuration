@@ -44,6 +44,7 @@ extraPackageNames =
     "applicative-quoters"
   , "arrows"
   , "BNFC"
+  , "json-autotype"
   , "lazysmallcheck"
   , "Stream"
   , "structured-haskell-mode"
