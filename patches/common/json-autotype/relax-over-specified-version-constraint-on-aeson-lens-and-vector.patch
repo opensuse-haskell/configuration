@@ -1,0 +1,16 @@
+Index: ghc-json-autotype.spec
+===================================================================
+--- ghc-json-autotype.spec	(revision 1)
++++ ghc-json-autotype.spec	(working copy)
+@@ -85,6 +85,10 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver aeson '<0.12' '<1.2'
++cabal-tweak-dep-ver aeson '<0.13' '<1.2'
++cabal-tweak-dep-ver lens '<4.15' '<4.16'
++cabal-tweak-dep-ver vector '<0.12' '<0.13'
+ 
+ %build
+ %ghc_lib_build
+
