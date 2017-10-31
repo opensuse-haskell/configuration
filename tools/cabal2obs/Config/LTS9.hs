@@ -74,9 +74,6 @@ extraPackageNames =
   , "network-protocol-xmpp"
   , "regex-tdfa-rc"
 
-    -- No-one knows why Stackage would release an LTS version that doesn't contain ...
-  , "stack <9"
-
     -- Re-add these packages with modified constrains.
   , "traverse-with-class < 1"
   , "git-annex"
