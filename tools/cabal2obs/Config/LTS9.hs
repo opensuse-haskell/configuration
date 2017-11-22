@@ -51,6 +51,14 @@ extraPackageNames =
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
   , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
 
+    -- Needed for lambdabot libraries and MCP.
+  , "dependent-sum-template"
+  , "lambdabot-core"
+  , "lambdabot-irc-plugins"
+  , "lambdabot-reference-plugins"
+  , "lambdabot-social-plugins"
+  , "prim-uniq"
+
     -- Newer versions require traverse-with-class >=1.0.0.0 && <1.1
   , "haskell-names < 0.9"
 
