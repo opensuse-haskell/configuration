@@ -24,7 +24,7 @@ executables:
       - containers
       - directory
       - filepath
-      - shake
+      - shake >= 0.16
       - spdx
       - time
     ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb

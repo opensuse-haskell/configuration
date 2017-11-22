@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Main ( main ) where
 
@@ -20,12 +21,17 @@ import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
 import Distribution.Package
+import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
 import Distribution.Types.ComponentRequestedSpec
 import Distribution.System
 import Distribution.Text
 import System.Directory
 import System.Environment
+
+type instance RuleResult (PackageSetId, PackageName) = FlagAssignment
+type instance RuleResult (PackageSetId, BuildName) = PackageIdentifier
+type instance RuleResult (PackageSetId, PackageIdentifier) = BuildName
 
 main :: IO ()
 main = do

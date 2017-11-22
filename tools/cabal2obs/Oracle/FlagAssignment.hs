@@ -1,4 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Oracle.FlagAssignment where
 
@@ -13,6 +14,8 @@ import Distribution.PackageDescription
 
 newtype GetFlagAssignments = GetFlagAssignments PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)
+
+type instance RuleResult GetFlagAssignments = [(PackageName,FlagAssignment)]
 
 getFlagAssignments :: Rules (GetFlagAssignments -> Action [(PackageName,FlagAssignment)])
 getFlagAssignments = addOracle $ \(GetFlagAssignments psid) ->

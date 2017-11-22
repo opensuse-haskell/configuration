@@ -32,7 +32,7 @@ executable cabal2obs
     containers,
     directory,
     filepath,
-    shake == 0.15.*,
+    shake >= 0.16,
     spdx,
     time
   other-modules:

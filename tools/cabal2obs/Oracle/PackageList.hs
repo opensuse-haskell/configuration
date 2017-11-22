@@ -1,4 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Oracle.PackageList where
 
@@ -17,6 +18,8 @@ import Distribution.Version
 
 newtype GetPackageList = GetPackageList PackageSetId
   deriving (Show, Eq, Ord, Hashable, NFData, Binary)
+
+type instance RuleResult GetPackageList = [PackageIdentifier]
 
 -- TODO: Figure out a meaningful way how extra packages override default version choices.
 

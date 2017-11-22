@@ -1,3 +1,5 @@
+{-# LANGUAGE TypeFamilies #-}
+
 module Oracle.Hackage where
 
 import Data.Maybe
@@ -12,6 +14,8 @@ import Distribution.Version
 
 import Orphans ()
 import ParseUtils
+
+type instance RuleResult Dependency = Version
 
 -- | Resolve a Hackage 'Dependency' into the latest 'Version' that satisfies
 -- the constraint or report an error via 'fail'. The first `FilePath` argument
