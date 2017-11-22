@@ -25,6 +25,7 @@ source-repository head
 
 executable cabal2obs
   main-is: Main.hs
+  other-extensions: CPP DeriveAnyClass DeriveGeneric GeneralizedNewtypeDeriving OverloadedStrings TypeFamilies
   ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
     base < 5,

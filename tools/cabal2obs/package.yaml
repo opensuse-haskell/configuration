@@ -45,3 +45,10 @@ executables:
       - ParseStackageConfig
       - ParseUtils
       - Types
+    other-extensions:
+      - CPP
+      - DeriveAnyClass
+      - DeriveGeneric
+      - GeneralizedNewtypeDeriving
+      - OverloadedStrings
+      - TypeFamilies
