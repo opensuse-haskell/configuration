@@ -134,7 +134,7 @@ extraPackageNames =
   , "hjpath"
   , "hjson"
   , "hmatrix-repa"
-  , "hmt"
+  , "hmt ==0.15"
   , "hOpenPGP"
   , "ixset"
   , "json-ast"
