@@ -35,6 +35,8 @@ executables:
       - Config.LTS8.Stackage
       - Config.LTS9
       - Config.LTS9.Stackage
+      - Config.Nightly
+      - Config.Nightly.Stackage
       - Oracle
       - Oracle.Compiler
       - Oracle.FlagAssignment
