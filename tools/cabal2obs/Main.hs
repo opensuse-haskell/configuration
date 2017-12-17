@@ -4,7 +4,7 @@
 module Main ( main ) where
 
 import Cabal2Spec
-import Config ( knownPackageSets )
+import Config
 import Oracle
 import Orphans ()
 import ParseStackageConfig
@@ -12,6 +12,7 @@ import ParseUtils
 import Types
 
 import Control.Monad
+import Data.Char
 import Data.Function
 import Data.List
 import Data.Maybe
@@ -23,9 +24,9 @@ import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
-import Distribution.Types.ComponentRequestedSpec
 import Distribution.System
 import Distribution.Text
+import Distribution.Types.ComponentRequestedSpec
 import System.Directory
 import System.Environment
 
@@ -149,7 +150,7 @@ main = do
         Right (desc,_) -> withTempDir $ \tmpDir -> do
                             command_ [] "tar" ["-C", tmpDir, "-x", "-f", pkgDir </> display pkgid <.> "tar.gz"]
                             copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> display n <.> "cabal")
-                            traced "cabal2spec" $ do
+                            traced "cabal2spec" $
                               createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
 
@@ -181,20 +182,23 @@ main = do
         return $ intercalate "," [ show (display n), show (display v), show url]
       writeFile' out (intercalate "\n" ls)
 
-    buildDir </> "cabal-lts-*.config" %> \out -> do
+    buildDir </> "cabal-*.config" %> \out -> do
       alwaysRerun
-      let lts = drop 10 (takeBaseName out)
-          url = "https://www.stackage.org/lts-" ++ lts ++"/cabal.config"
+      let lts = drop 6 (takeBaseName out)
+          url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
       command_ [FileStdout out] "curl" ["-L", "-s", url]
 
-    "tools/cabal2obs/Config/LTS*/Stackage.hs" %> \out -> do
-      let lts = drop 3 (takeBaseName (takeDirectory out))
-      buf <- readFile' (buildDir </> "cabal-lts-" ++ lts <.> "config")
+    "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
+      let dirname = takeBaseName (takeDirectory out)
+          psid = case map toLower dirname of
+                   'l':'t':'s':x -> 'l':'t':'s':'-':x
+                   x             -> x
+      buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
       deps <- runP stackageConfig buf
-      writeFileChanged out (mkStackagePackageSetSourcefile lts deps)
+      writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
 
     phony "update" $ need
-      [ "tools/cabal2obs/Config/LTS"++drop 4 psid++"/Stackage.hs" | PackageSetId psid <- knownPackageSets ]
+      [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
 
 mkChangeEntry :: String -> String -> IO String
 mkChangeEntry version email = do
@@ -224,7 +228,7 @@ mkStackagePackageSetSourcefile vers deps = unlines
   [ "{-# LANGUAGE OverloadedStrings #-}"
   , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
   , ""
-  , "module Config.LTS" ++ vers ++ ".Stackage where"
+  , "module Config." ++ vers ++ ".Stackage where"
   , ""
   , "import Orphans ( )"
   , "import Distribution.Package"
