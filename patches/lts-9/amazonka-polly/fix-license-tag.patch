@@ -1,0 +1,14 @@
+Index: ghc-amazonka-polly.spec
+===================================================================
+--- ghc-amazonka-polly.spec	(revision 3)
++++ ghc-amazonka-polly.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.5
+ Release:        0
+ Summary:        Amazon Polly SDK
+-License:        Unknown
++License:        MPL-2.0
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

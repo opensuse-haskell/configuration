@@ -1,0 +1,14 @@
+Index: ghc-amazonka-stepfunctions.spec
+===================================================================
+--- ghc-amazonka-stepfunctions.spec	(revision 1)
++++ ghc-amazonka-stepfunctions.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.5
+ Release:        0
+ Summary:        Amazon Step Functions SDK
+-License:        Unknown
++License:        MPL-2.0
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

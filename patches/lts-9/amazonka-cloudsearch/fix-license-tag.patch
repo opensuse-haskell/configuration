@@ -1,0 +1,14 @@
+Index: ghc-amazonka-cloudsearch.spec
+===================================================================
+--- ghc-amazonka-cloudsearch.spec	(revision 5)
++++ ghc-amazonka-cloudsearch.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        1.4.3
+ Release:        0
+ Summary:        Amazon CloudSearch SDK
+-License:        Unknown
++License:        MPL-2.0
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

@@ -1,0 +1,14 @@
+Index: ghc-amazonka-test.spec
+===================================================================
+--- ghc-amazonka-test.spec	(revision 5)
++++ ghc-amazonka-test.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        1.4.3
+ Release:        0
+ Summary:        Common functionality for Amazonka library test-suites
+-License:        Unknown
++License:        MPL-2.0
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
