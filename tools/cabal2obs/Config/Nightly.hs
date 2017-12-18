@@ -123,7 +123,6 @@ extraPackageNames =
   , "hmt ==0.15"
   , "json-ast"
   , "lazy-csv"
-  , "load-env"
   , "mersenne-random"
   , "microbench"
   , "monadLib"
