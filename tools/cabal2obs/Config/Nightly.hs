@@ -399,6 +399,9 @@ bannedPackageNames =
     -- Current version don't compile with up-to-date dependencies.
   , "distributed-process-simplelocalnet"
   , "fay-dom", "yesod-fay", "fay-text", "fay-jquery"
+
+    -- We don't have liboath.
+  , "liboath-hs"
   ]
 
 forcedExectableNames :: [PackageName]
