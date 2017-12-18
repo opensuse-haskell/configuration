@@ -26,7 +26,7 @@ cd "$(dirname "$0")"/..
 git -C hackage checkout -q hackage
 git -C hackage pull -q &
 cabal -v0 update &
-parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
+parallel "cd {} && osc update >/dev/null" ::: _build/{lts-*,nightly} &
 wait
 
 msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
@@ -34,7 +34,7 @@ if [ -n "$(git status --porcelain hackage)" ]; then
    git commit -q -m "$msg" hackage
 fi
 
-parallel "cd {} && osc status" ::: _build/lts-* >"$tmpfile"
+parallel "cd {} && osc status" ::: _build/{lts-*,nightly} >"$tmpfile"
 if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
@@ -43,10 +43,14 @@ cd tools/cabal2obs
 hpack --silent
 cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
 cd ../..
-for n in $(git status --porcelain tools/cabal2obs/Config/LTS* | sed -e 's/^ M //'); do
+for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
     v=$(basename $(dirname "$n"))
-    v=${v##LTS}
-    v=$(head -n1 "_build/cabal-lts-$v.config" | sed -e 's,.*/,,')
+    case "$v" in
+        LTS*)    v=lts-${v##LTS} ;;
+        Nightly) v=nightly;;
+        *)       error_exit unexpected file modification of "$n" during update ;;
+    esac
+    v=$(head -n1 "_build/cabal-$v.config" | sed -e 's,.*/,,')
     git commit -q -m "update to $v" "$n"
 done
 
@@ -59,4 +63,4 @@ cd tools/cabal2obs
 cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint
 cd ../..
 
-parallel "cd {} && ../../tools/commit >/dev/null" ::: _build/lts-*
+parallel "cd {} && ../../tools/commit >/dev/null" ::: _build/{lts-*,nightly}
