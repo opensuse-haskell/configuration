@@ -174,7 +174,7 @@ main = do
            writeFile changesFile (newEntry ++ changes)
 
     buildDir </> "packages.csv" %> \out -> do
-      let psid = PackageSetId "lts-8"
+      let psid = PackageSetId "lts-10"
       pset <- packageList (GetPackageList psid)
       ls <- forP pset $ \pkgid@(PackageIdentifier n v) -> do
         BuildName bn <- getBuildName (psid, pkgid)

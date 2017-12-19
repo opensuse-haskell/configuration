@@ -2,15 +2,17 @@ module Config where
 
 import Config.LTS8
 import Config.LTS9
+import Config.LTS10
 import Config.Nightly
 import Types
 
 knownPackageSets :: [PackageSetId]
-knownPackageSets = [PackageSetId "lts-8", PackageSetId "lts-9", PackageSetId "nightly"]
+knownPackageSets = [PackageSetId "lts-8", PackageSetId "lts-9", PackageSetId "lts-10"]
 
 getConfig :: PackageSetId -> PackageSetConfig
 getConfig (PackageSetId "lts-8")   = lts8
 getConfig (PackageSetId "lts-9")   = lts9
+getConfig (PackageSetId "lts-10")  = lts10
 getConfig (PackageSetId "nightly") = nightly
 getConfig psid                     = error $ "getConfig: unknown package set " ++ show psid
 

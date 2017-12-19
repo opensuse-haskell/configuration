@@ -43,6 +43,8 @@ executable cabal2obs
     Config.LTS8.Stackage
     Config.LTS9
     Config.LTS9.Stackage
+    Config.LTS10
+    Config.LTS10.Stackage
     Config.Nightly
     Config.Nightly.Stackage
     Oracle
