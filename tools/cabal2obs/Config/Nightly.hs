@@ -25,8 +25,6 @@ nightly = PackageSetConfig
 
 goodStackagePackage :: Dependency ->  Bool
 goodStackagePackage (Dependency "git-annex" _) = False
-goodStackagePackage (Dependency "happy" _) = False
-goodStackagePackage (Dependency "haskell-names" _) = False
 goodStackagePackage (Dependency "hledger" _) = False
 goodStackagePackage (Dependency "hledger-api" _) = False
 goodStackagePackage (Dependency "hledger-iadd" _) = False
@@ -34,8 +32,6 @@ goodStackagePackage (Dependency "hledger-interest" _) = False
 goodStackagePackage (Dependency "hledger-lib" _) = False
 goodStackagePackage (Dependency "hledger-ui" _) = False
 goodStackagePackage (Dependency "hledger-web" _) = False
-goodStackagePackage (Dependency "swagger2" _) = False
-goodStackagePackage (Dependency "traverse-with-class" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -52,12 +48,6 @@ extraPackageNames =
   , "lambdabot-reference-plugins"
   , "lambdabot-social-plugins"
   , "prim-uniq"
-
-    -- Newer versions require traverse-with-class >=1.0.0.0 && <1.1
-  , "haskell-names < 0.9"
-
-    -- Newer versions break the build of hledger-api 1.3.1.
-  , "swagger2 >= 2.1 && < 2.1.5"
 
     -- Used by osukup@suse.com.
   , "cab"
@@ -77,12 +67,7 @@ extraPackageNames =
   , "regex-tdfa-rc"
 
     -- Re-add these packages with modified constrains.
-  , "traverse-with-class < 1"
   , "git-annex"
-
-    -- lts-9.x has the newer 1.19.6+, which is supposed to be API compatible
-    -- but in fact breaks Agda, cryptol, fortran-src, and language-python.
-  , "happy == 1.19.5"
 
     -- These packages are in Factory for historical reasons.
   , "acid-state"
