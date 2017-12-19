@@ -100,7 +100,6 @@ extraPackageNames =
   , "happstack-authenticate"
   , "happstack-clientsession"
   , "HaRe"
-  , "haskell-names"   -- https://github.com/haskell-suite/haskell-names/issues/97
   , "hflags"
   , "hgal"
   , "hjpath"
