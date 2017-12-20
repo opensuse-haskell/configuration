@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.18.1.
+-- This file has been generated from package.yaml by hpack version 0.21.2.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: c463ff40a857c66682c77d2ab7079815bde608c4f1f20979830ea36ab32ec9b4
 
 name:           cabal2obs
 version:        0
@@ -28,12 +30,12 @@ executable cabal2obs
   other-extensions: CPP DeriveAnyClass DeriveGeneric GeneralizedNewtypeDeriving OverloadedStrings TypeFamilies
   ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:
-    base < 5,
-    Cabal > 2,
+    Cabal >2,
+    base <5,
     containers,
     directory,
     filepath,
-    shake >= 0.16,
+    shake >=0.16,
     spdx,
     time
   other-modules:
