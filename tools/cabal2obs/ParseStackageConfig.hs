@@ -20,8 +20,8 @@ installed = Dependency <$> parse <*> (token (string "installed") *> pure noVersi
 token :: ReadP r a -> ReadP r a
 token p = skipSpaces *> p
 
-comment :: ReadP r String
-comment = string "--" *> munch (/= '\n') <* char '\n'
+comment :: ReadP r ()
+comment = optional (string "--" *> munch (/= '\n')) <* char '\n'
 
 runP :: Monad m => ReadP a a -> String -> m a
 runP p str = case [ r | (r,"") <- readP_to_S p str] of
