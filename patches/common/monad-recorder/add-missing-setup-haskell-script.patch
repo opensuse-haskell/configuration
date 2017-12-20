@@ -1,0 +1,14 @@
+Index: ghc-monad-recorder.spec
+===================================================================
+--- ghc-monad-recorder.spec	(revision 1)
++++ ghc-monad-recorder.spec	(working copy)
+@@ -58,6 +58,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

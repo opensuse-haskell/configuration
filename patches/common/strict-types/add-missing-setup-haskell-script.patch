@@ -1,0 +1,14 @@
+Index: ghc-strict-types.spec
+===================================================================
+--- ghc-strict-types.spec	(revision 1)
++++ ghc-strict-types.spec	(working copy)
+@@ -52,6 +52,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
