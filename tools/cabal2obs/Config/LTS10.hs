@@ -514,6 +514,9 @@ flagList =
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.
   , ("cmark",                          "pkgconfig")
+
+    -- Make sure our package compiles with GHC 8.2.2.
+  , ("cassava",                        "-bytestring--lt-0_10_4")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
