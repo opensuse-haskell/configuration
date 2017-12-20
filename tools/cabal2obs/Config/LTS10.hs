@@ -85,7 +85,6 @@ extraPackageNames =
   , "conversion-bytestring"
   , "conversion-case-insensitive"
   , "conversion-text"
-  , "cryptol"
   , "doctest-prop"
   , "fay"
   , "fay-base"
