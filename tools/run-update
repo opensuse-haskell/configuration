@@ -50,7 +50,7 @@ for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 
         Nightly) v=nightly;;
         *)       error_exit unexpected file modification of "$n" during update ;;
     esac
-    v=$(head -n1 "_build/cabal-$v.config" | sed -e 's,.*/,,')
+    v=$(sed -r -n 's,^-- .* http://www.stackage.org/snapshot/(.*)$,\1,p' "_build/cabal-$v.config")
     git commit -q -m "update to $v" "$n"
 done
 
