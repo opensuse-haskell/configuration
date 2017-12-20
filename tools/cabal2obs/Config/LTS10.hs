@@ -490,7 +490,7 @@ flagList =
   , ("hlibsass",                       "externalLibsass")
 
     -- Don't use the bundled lua library.
-  , ("hslua",                          "system-lua")
+  , ("hslua",                          "system-lua lua502")
 
     -- Allow compilation without having Nix installed.
   , ("nix-paths",                      "allow-relative-paths")
