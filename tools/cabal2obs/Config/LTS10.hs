@@ -71,8 +71,7 @@ extraPackageNames =
 
     -- These packages are in Factory for historical reasons.
   , "acid-state"
-  , "camfort"
-  , "cassava-megaparsec < 1"
+  , "cassava-megaparsec"
   , "ChasingBottoms"
   , "clckwrks"
   , "clckwrks-cli"
