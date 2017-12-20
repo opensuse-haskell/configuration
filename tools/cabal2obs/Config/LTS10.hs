@@ -385,6 +385,9 @@ bannedPackageNames =
 
     -- We don't have liboath.
   , "liboath-hs"
+
+    -- Non-free license.
+  , "cuda"
   ]
 
 forcedExectableNames :: [PackageName]
