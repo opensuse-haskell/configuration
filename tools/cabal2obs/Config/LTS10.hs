@@ -490,8 +490,9 @@ flagList =
     -- Don't use the bundled sass library.
   , ("hlibsass",                       "externalLibsass")
 
-    -- Don't use the bundled lua library.
-  , ("hslua",                          "system-lua lua502")
+    -- Use the bundled lua library. People expect this package to provide LUA
+    -- 5.3, but we don't have that yet in openSUSE.
+  , ("hslua",                          "-system-lua")
 
     -- Allow compilation without having Nix installed.
   , ("nix-paths",                      "allow-relative-paths")
