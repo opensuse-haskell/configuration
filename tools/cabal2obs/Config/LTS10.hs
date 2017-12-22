@@ -71,7 +71,6 @@ extraPackageNames =
 
     -- These packages are in Factory for historical reasons.
   , "acid-state"
-  , "cassava-megaparsec"
   , "ChasingBottoms"
   , "clckwrks"
   , "clckwrks-cli"
