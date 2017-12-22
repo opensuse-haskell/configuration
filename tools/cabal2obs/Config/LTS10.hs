@@ -95,7 +95,6 @@ extraPackageNames =
   , "fortran-src"
   , "gamma"
   , "ghc-mod"
-  , "gipeda"
   , "GraphSCC"
   , "HaRe"
   , "hflags"
