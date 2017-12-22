@@ -1,0 +1,13 @@
+Index: ghc-yoga.spec
+===================================================================
+--- ghc-yoga.spec	(revision 3)
++++ ghc-yoga.spec	(working copy)
+@@ -30,6 +30,7 @@
+ BuildRequires:  ghc-ieee754-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  libstdc++-devel
++BuildRequires:  gcc-c++
+ 
+ %description
+ The <https://facebook.github.com/yoga Yoga> library from
+

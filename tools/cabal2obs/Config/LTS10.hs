@@ -577,6 +577,9 @@ bannedPackageNames =
 
     -- Can't find xlocale.h on Tumbleweed.
   , "mercury-api"
+
+    -- Build fails, probably because our c++ compiler is too new.
+  , "yoga"
   ]
 
 forcedExectableNames :: [PackageName]
