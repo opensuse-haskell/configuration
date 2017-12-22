@@ -94,7 +94,6 @@ extraPackageNames =
   , "ghc-mod"
   , "gipeda"
   , "GraphSCC"
-  , "happstack-clientsession"
   , "HaRe"
   , "hflags"
   , "hgal"
