@@ -1,0 +1,13 @@
+Index: pointfree.spec
+===================================================================
+--- pointfree.spec	(revision 2)
++++ pointfree.spec	(working copy)
+@@ -61,6 +61,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver base '< 4.10' '<5'
+ 
+ %build
+ %ghc_lib_build
+
