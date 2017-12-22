@@ -1,0 +1,14 @@
+Index: ghc-inline-c-cpp.spec
+===================================================================
+--- ghc-inline-c-cpp.spec	(revision 3)
++++ ghc-inline-c-cpp.spec	(working copy)
+@@ -54,6 +54,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

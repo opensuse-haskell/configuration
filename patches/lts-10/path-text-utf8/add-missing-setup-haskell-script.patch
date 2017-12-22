@@ -1,0 +1,14 @@
+Index: ghc-path-text-utf8.spec
+===================================================================
+--- ghc-path-text-utf8.spec	(revision 1)
++++ ghc-path-text-utf8.spec	(working copy)
+@@ -50,6 +50,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ cp -p %{SOURCE1} %{pkg_name}.cabal
+ 
+ %build
+

@@ -1,0 +1,13 @@
+Index: ghc-log-warper.spec
+===================================================================
+--- ghc-log-warper.spec	(revision 1)
++++ ghc-log-warper.spec	(working copy)
+@@ -36,6 +36,7 @@
+ BuildRequires:  ghc-filepath-devel
+ BuildRequires:  ghc-fmt-devel
+ BuildRequires:  ghc-markdown-unlit-devel
++BuildRequires:  markdown-unlit
+ BuildRequires:  ghc-microlens-platform-devel
+ BuildRequires:  ghc-mmorph-devel
+ BuildRequires:  ghc-monad-control-devel
+
