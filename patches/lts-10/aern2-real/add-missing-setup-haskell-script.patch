@@ -1,0 +1,14 @@
+Index: ghc-aern2-real.spec
+===================================================================
+--- ghc-aern2-real.spec	(revision 1)
++++ ghc-aern2-real.spec	(working copy)
+@@ -60,6 +60,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
