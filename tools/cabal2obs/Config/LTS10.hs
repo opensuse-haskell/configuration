@@ -140,7 +140,6 @@ extraPackageNames =
   , "Unixutils"
   , "uuid-orphans"
   , "wai-request-spec"
-  , "wordpass"
   , "yi < 0.14"
   , "yi-frontend-pango < 0.14"
 
