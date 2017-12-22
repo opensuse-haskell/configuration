@@ -133,7 +133,6 @@ extraPackageNames =
   , "taggy"
   , "taggy-lens"
   , "test-invariant"
-  , "test-simple"
   , "th-printf"
   , "tree-view"
   , "type-eq"
