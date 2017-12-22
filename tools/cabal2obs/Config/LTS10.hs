@@ -136,7 +136,6 @@ extraPackageNames =
   , "taggy-lens"
   , "test-invariant"
   , "tree-view"
-  , "type-eq"
   , "Unixutils"
   , "uuid-orphans"
   , "wai-request-spec"
