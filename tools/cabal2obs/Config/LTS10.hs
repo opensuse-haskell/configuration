@@ -42,6 +42,9 @@ extraPackageNames =
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
   , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
 
+    -- Used by ptrommler@icloud.com.
+  , "lhs2tex"
+
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
   , "lambdabot-irc-plugins"
@@ -394,9 +397,6 @@ bannedPackageNames =
 
     -- deprecated
   , "ide-backend-rts"
-
-    -- build is hard to fix
-  , "lhs2tex"
 
     -- example / tutorial code
   , "luminance-samples"
