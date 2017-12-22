@@ -579,6 +579,9 @@ bannedPackageNames =
 
     -- Build fails, probably because our c++ compiler is too new.
   , "yoga"
+
+    -- Hard-codes linker flags that break the build: https://github.com/serokell/importify/issues/88
+  , "importify"
   ]
 
 forcedExectableNames :: [PackageName]
