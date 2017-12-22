@@ -574,6 +574,9 @@ bannedPackageNames =
 
     -- Fails during configure stage.
   , "direct-rocksdb"
+
+    -- Can't find cblas.h header.
+  , "hmatrix-morpheus"
   ]
 
 forcedExectableNames :: [PackageName]
