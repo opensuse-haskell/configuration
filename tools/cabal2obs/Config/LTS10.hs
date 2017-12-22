@@ -75,11 +75,6 @@ extraPackageNames =
     -- These packages are in Factory for historical reasons.
   , "acid-state"
   , "ChasingBottoms"
-  , "clckwrks"
-  , "clckwrks-cli"
-  , "clckwrks-plugin-media"
-  , "clckwrks-plugin-page"
-  , "clckwrks-theme-bootstrap"
   , "concatenative"
   , "continued-fractions"
   , "converge"
