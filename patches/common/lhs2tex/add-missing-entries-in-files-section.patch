@@ -1,0 +1,13 @@
+diff --git a/lhs2tex.spec b/lhs2tex.spec
+index fa5709a..978b8c9 100644
+--- a/lhs2tex.spec
++++ b/lhs2tex.spec
+@@ -58,5 +58,8 @@ in another mode to just extract the Haskell code.
+ %doc LICENSE
+ %doc AUTHORS CHANGELOG Examples TODO doc
+ %{_bindir}/lhs2TeX
++%dir %{_datadir}/%{name}-%{version}
++%{_datadir}/%{name}-%{version}/*
++%{_mandir}/man1/lhs2TeX.1*
+ 
+ %changelog
