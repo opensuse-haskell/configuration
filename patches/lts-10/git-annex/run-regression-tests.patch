@@ -1,0 +1,15 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 4)
++++ git-annex.spec	(working copy)
+@@ -165,6 +165,9 @@
+ %build
+ %ghc_bin_build
+ 
++%check
++make %{?_smp_mflags} DESTDIR=%{buildroot} BUILDER=./Setup test
++
+ %install
+ %ghc_bin_install
+ make DESTDIR=%{buildroot} BUILDER=./Setup install-misc install-mans
+
