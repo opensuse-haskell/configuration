@@ -572,7 +572,7 @@ bannedPackageNames =
   , "cuda"
 
     -- Fails during configure stage.
-  , "direct-rocksdb"
+  , "direct-rocksdb", "tasty-auto"
 
     -- Can't find cblas.h header.
   , "hmatrix-morpheus"
