@@ -1,0 +1,14 @@
+Index: ghc-aern2-mp.spec
+===================================================================
+--- ghc-aern2-mp.spec	(revision 1)
++++ ghc-aern2-mp.spec	(working copy)
+@@ -74,6 +74,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ cp -p %{SOURCE1} %{pkg_name}.cabal
+ 
+ %build
+
