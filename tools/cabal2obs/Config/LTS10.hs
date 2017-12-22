@@ -573,6 +573,9 @@ bannedPackageNames =
 
     -- Non-free license.
   , "cuda"
+
+    -- Fails during configure stage.
+  , "direct-rocksdb"
   ]
 
 forcedExectableNames :: [PackageName]
