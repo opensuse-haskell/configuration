@@ -577,6 +577,9 @@ bannedPackageNames =
 
     -- Can't find cblas.h header.
   , "hmatrix-morpheus"
+
+    -- Can't find xlocale.h on Tumbleweed.
+  , "mercury-api"
   ]
 
 forcedExectableNames :: [PackageName]
