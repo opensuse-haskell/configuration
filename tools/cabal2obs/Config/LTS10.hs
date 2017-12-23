@@ -349,7 +349,7 @@ bannedPackageNames =
   , "xhtml"
 
     -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
-  , "eventstore"
+  , "eventstore", "eventsource-geteventstore-store"
 
     -- needs obsolete dependencies we don't want to provide
   , "cabal2nix"
