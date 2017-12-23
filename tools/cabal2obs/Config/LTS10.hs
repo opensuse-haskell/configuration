@@ -554,7 +554,7 @@ bannedPackageNames =
   , "liboath-hs"
 
     -- Non-free license.
-  , "cuda"
+  , "cuda", "nvvm"
 
     -- Fails during configure stage.
   , "direct-rocksdb", "tasty-auto"
