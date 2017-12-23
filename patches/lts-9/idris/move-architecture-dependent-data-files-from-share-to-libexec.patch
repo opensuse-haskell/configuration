@@ -1,0 +1,57 @@
+Index: idris.spec
+===================================================================
+--- idris.spec	(revision 21)
++++ idris.spec	(working copy)
+@@ -124,7 +124,7 @@
+ %setup -q
+ 
+ %build
+-%define cabal_configure_options -fffi -fgmp
++%define cabal_configure_options -fffi -fgmp --datasubdir=%{_libexecdir}/%{name}-%{version}
+ %ghc_lib_build
+ 
+ %install
+@@ -147,40 +148,7 @@
+ %{_bindir}/idris-codegen-c
+ %{_bindir}/idris-codegen-javascript
+ %{_bindir}/idris-codegen-node
+-%dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}/idrisdoc
+-%dir %{_datadir}/%{name}-%{version}/jsrts
+-%dir %{_datadir}/%{name}-%{version}/jsrts/jsbn
+-%dir %{_datadir}/%{name}-%{version}/rts
+-%dir %{_datadir}/%{name}-%{version}/rts/arduino
+-%{_datadir}/%{name}-%{version}/idrisdoc/styles.css
+-%{_datadir}/%{name}-%{version}/jsrts/Runtime-browser.js
+-%{_datadir}/%{name}-%{version}/jsrts/Runtime-common.js
+-%{_datadir}/%{name}-%{version}/jsrts/Runtime-node.js
+-%{_datadir}/%{name}-%{version}/jsrts/jsbn/jsbn.js
+-%{_datadir}/%{name}-%{version}/jsrts/jsbn/LICENSE
+-%{_datadir}/%{name}-%{version}/rts/arduino/idris_main.c
+-%{_datadir}/%{name}-%{version}/rts/idris_bitstring.c
+-%{_datadir}/%{name}-%{version}/rts/idris_bitstring.h
+-%{_datadir}/%{name}-%{version}/rts/idris_gc.c
+-%{_datadir}/%{name}-%{version}/rts/idris_gc.h
+-%{_datadir}/%{name}-%{version}/rts/idris_gmp.c
+-%{_datadir}/%{name}-%{version}/rts/idris_gmp.h
+-%{_datadir}/%{name}-%{version}/rts/idris_heap.c
+-%{_datadir}/%{name}-%{version}/rts/idris_heap.h
+-%{_datadir}/%{name}-%{version}/rts/idris_main.c
+-%{_datadir}/%{name}-%{version}/rts/idris_net.c
+-%{_datadir}/%{name}-%{version}/rts/idris_net.h
+-%{_datadir}/%{name}-%{version}/rts/idris_opts.c
+-%{_datadir}/%{name}-%{version}/rts/idris_opts.h
+-%{_datadir}/%{name}-%{version}/rts/idris_rts.c
+-%{_datadir}/%{name}-%{version}/rts/idris_rts.h
+-%{_datadir}/%{name}-%{version}/rts/idris_stats.c
+-%{_datadir}/%{name}-%{version}/rts/idris_stats.h
+-%{_datadir}/%{name}-%{version}/rts/idris_stdfgn.c
+-%{_datadir}/%{name}-%{version}/rts/idris_stdfgn.h
+-%{_datadir}/%{name}-%{version}/rts/mini-gmp.c
+-%{_datadir}/%{name}-%{version}/rts/mini-gmp.h
+-%{_datadir}/%{name}-%{version}/rts/libtest.c
++%{_libexecdir}/%{name}-%{version}
++%{_mandir}/man1/%{name}.1%{ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+
