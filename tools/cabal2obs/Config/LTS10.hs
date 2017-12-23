@@ -587,7 +587,7 @@ bannedPackageNames =
   , "yi-mode-javascript"
   , "yi-rope"
   , "yi-snippet"
-  , "haskell-lsp"
+  , "haskell-lsp", "haskell-lsp-client"
   ]
 
 flagList :: [(String,String)]
