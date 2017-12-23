@@ -392,7 +392,8 @@ bannedPackageNames =
   , "tldr"
 
     -- does not compile
-  , "llvm-hs"
+  , "llvm-hs", "accelerate-llvm", "accelerate-llvm-native", "accelerate-llvm-ptx"
+  , "accelerate-blas", "accelerate-bignum", "accelerate-examples", "accelerate-fft"
 
     -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "seqalign"
