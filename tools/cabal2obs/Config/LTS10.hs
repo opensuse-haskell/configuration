@@ -254,7 +254,7 @@ extraPackageNames =
   -- , "rotating-log"
   -- , "rss-conduit"
   -- , "scrape-changes"
-  -- , "SDL"
+  , "SDL"
   -- , "sibe"
   -- , "simple-download"
   -- , "smallcaps"
