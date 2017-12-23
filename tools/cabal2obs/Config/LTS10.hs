@@ -395,6 +395,9 @@ bannedPackageNames =
   , "llvm-hs", "accelerate-llvm", "accelerate-llvm-native", "accelerate-llvm-ptx"
   , "accelerate-blas", "accelerate-bignum", "accelerate-examples", "accelerate-fft"
 
+    -- depends on seemingly missing lapack system library
+  , "lapack-ffi"
+
     -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "seqalign"
 
