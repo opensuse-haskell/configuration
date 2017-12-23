@@ -634,6 +634,9 @@ flagList =
 
     -- Make sure our package compiles with GHC 8.2.2.
   , ("cassava",                        "-bytestring--lt-0_10_4")
+
+    -- Avoid dependency on servant-client-core, which is not in LTS-10.
+  , ("alerta",                         "-servant-client-core")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
