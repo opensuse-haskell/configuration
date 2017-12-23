@@ -395,8 +395,8 @@ bannedPackageNames =
   , "llvm-hs", "accelerate-llvm", "accelerate-llvm-native", "accelerate-llvm-ptx"
   , "accelerate-blas", "accelerate-bignum", "accelerate-examples", "accelerate-fft"
 
-    -- depends on seemingly missing lapack system library
-  , "lapack-ffi"
+    -- depends on seemingly missing blas and lapack system libraries
+  , "lapack-ffi", "blas-carray", "blas-ffi", "lapack-carray"
 
     -- doesn't work on 32 bit: https://github.com/eurekagenomics/SeqAlign/issues/2
   , "seqalign"
@@ -558,7 +558,7 @@ bannedPackageNames =
   , "liboath-hs"
 
     -- Non-free license.
-  , "cuda", "nvvm"
+  , "cuda", "nvvm", "cublas", "cufft", "cusolver", "cusparse"
 
     -- Fails during configure stage.
   , "direct-rocksdb", "tasty-auto"
