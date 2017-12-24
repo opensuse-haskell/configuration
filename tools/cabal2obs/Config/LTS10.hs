@@ -428,9 +428,6 @@ bannedPackageNames =
     -- doesn't have a proper license
   , "timeit"
 
-    -- depends on libmp3lame-devel, which exists only on packman
-  , "lame"
-
     -- we don't have libtensor
   , "tensorflow"
   , "tensorflow-core-ops"
