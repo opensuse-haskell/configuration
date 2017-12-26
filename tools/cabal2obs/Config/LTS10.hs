@@ -428,6 +428,9 @@ bannedPackageNames =
     -- doesn't have a proper license
   , "timeit"
 
+    -- build fails: https://github.com/opensuse-haskell/configuration/pull/18#issuecomment-353990383
+  , "lame"
+
     -- we don't have libtensor
   , "tensorflow"
   , "tensorflow-core-ops"
