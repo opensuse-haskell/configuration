@@ -308,7 +308,6 @@ extraPackageNames =
   , "yackage"
   , "yahoo-finance-api"
   , "yesod-auth-account"
-  , "yesod-bin"
   , "yesod-default"
   , "yesod-job-queue"
   , "yesod-markdown"
