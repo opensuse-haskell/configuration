@@ -185,7 +185,7 @@ extraPackageNames =
   , "wai-middleware-verbs"
   , "wai-request-spec"
   , "wild-bind-indicator"
-  , "wild-bind-task-x11"
+  , "wild-bind-task-x11"   -- https://github.com/debug-ito/wild-bind/issues/3
   , "yahoo-finance-api"
   , "yesod-auth-account"
   , "yesod-default"
