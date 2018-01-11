@@ -1,9 +1,3 @@
--- This file has been generated from package.yaml by hpack version 0.21.2.
---
--- see: https://github.com/sol/hpack
---
--- hash: c463ff40a857c66682c77d2ab7079815bde608c4f1f20979830ea36ab32ec9b4
-
 name:           cabal2obs
 version:        0
 synopsis:       Convert a set of Cabal files into an OBS project

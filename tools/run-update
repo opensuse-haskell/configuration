@@ -40,7 +40,6 @@ if [ -s "$tmpfile" ]; then
 fi
 
 cd tools/cabal2obs
-hpack --silent
 cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
 cd ../..
 for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
