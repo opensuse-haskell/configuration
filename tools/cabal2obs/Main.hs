@@ -5,6 +5,7 @@ module Main ( main ) where
 
 import Cabal2Spec
 import Config
+import ChangesFile
 import Oracle
 import Orphans ()
 import ParseStackageConfig
@@ -17,7 +18,6 @@ import Data.Function
 import Data.List
 import Data.Maybe
 import Data.SPDX
-import Data.Time
 import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
@@ -46,7 +46,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "9"     -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "10"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -129,12 +129,26 @@ main = do
                        ]
          else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
-    -- Pattern rule that generates the package's spec file.
-    buildDir </> "*/*/*.spec" %> \out -> do
+    buildDir </> "*/*/*.changes" %> \out -> do
       let [_,psid',bn',_] = splitDirectories out
           psid = PackageSetId psid'
           bn = BuildName bn'
-      pkgid@(PackageIdentifier n v) <- pkgidFromPath (psid,bn)
+      pkgid@(PackageIdentifier _ v) <- pkgidFromPath (psid,bn)
+      cabal <- getCabal pkgid
+      let rev = packageRevision cabal
+          versionString = "version " ++ display v
+      liftIO $ do changes <- readFile out `mplus` return ""
+                  unless (versionString `isInfixOf` changes) $ do
+                     newEntry <- mkChangeEntry pkgid rev "psimons@suse.com"
+                     writeFile out (newEntry ++ changes)
+
+    -- Pattern rule that generates the package's spec file.
+    buildDir </> "*/*/*.spec" %> \out -> do
+      need [out -<.> "changes"]
+      let [_,psid',bn',_] = splitDirectories out
+          psid = PackageSetId psid'
+          bn = BuildName bn'
+      pkgid@(PackageIdentifier n _) <- pkgidFromPath (psid,bn)
       let isExe = unPackageName n == bn'
           pkgDir = takeDirectory out
       cid <- compilerId (GetCompiler psid)
@@ -152,7 +166,9 @@ main = do
                             copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> display n <.> "cabal")
                             traced "cabal2spec" $
                               createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
-      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
+      Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
+      let year = head (lines year')
+      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
 
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
@@ -160,18 +176,9 @@ main = do
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "-i", "../.." </> out]
+        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
-      let versionString = unwords $ ["version", display v] ++
-                                    if rev==0  then [] else ["revision", show rev]
-          changesFile = out -<.> "changes"
-      liftIO $ do
-        changes <- do changesFileExists <- System.Directory.doesFileExist changesFile
-                      if changesFileExists then readFile changesFile else return ""
-        unless (versionString `isInfixOf` changes) $ do
-           newEntry <- mkChangeEntry versionString "psimons@suse.com"
-           writeFile changesFile (newEntry ++ changes)
 
     buildDir </> "packages.csv" %> \out -> do
       let psid = PackageSetId "lts-10"
@@ -199,18 +206,6 @@ main = do
 
     phony "update" $ need
       [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
-
-mkChangeEntry :: String -> String -> IO String
-mkChangeEntry version email = do
-  ts <- formatTime defaultTimeLocale "%a %b %_d %H:%M:%S %Z %Y" <$> getCurrentTime
-  return $ unlines
-    [ "-------------------------------------------------------------------"
-    , unwords [ ts, "-", email ]
-    , ""
-    , "- Update to " ++ version ++ "."
-    , "  A more detailed change log is not available."
-    , ""
-    ]
 
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
