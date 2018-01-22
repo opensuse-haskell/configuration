@@ -32,6 +32,7 @@ goodStackagePackage (Dependency "hledger-interest" _) = False
 goodStackagePackage (Dependency "hledger-lib" _) = False
 goodStackagePackage (Dependency "hledger-ui" _) = False
 goodStackagePackage (Dependency "hledger-web" _) = False
+goodStackagePackage (Dependency "hlint" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
@@ -70,7 +71,7 @@ extraPackageNames =
   , "regex-tdfa-rc"
 
     -- Re-add these packages with modified constrains.
-  , "git-annex"
+  , "git-annex", "hlint"
 
     -- These packages are in Factory for historical reasons.
   , "AC-Vector"
