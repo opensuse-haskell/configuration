@@ -1,0 +1,14 @@
+Index: ghc-HTF.spec
+===================================================================
+--- ghc-HTF.spec	(revision 4)
++++ ghc-HTF.spec	(working copy)
+@@ -22,7 +22,7 @@
+ Version:        0.13.2.2
+ Release:        0
+ Summary:        The Haskell Test Framework
+-License:        LGPL-2.0+
++License:        LGPL-2.1+
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+

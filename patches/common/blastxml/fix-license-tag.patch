@@ -1,0 +1,14 @@
+Index: ghc-blastxml.spec
+===================================================================
+--- ghc-blastxml.spec	(revision 4)
++++ ghc-blastxml.spec	(working copy)
+@@ -21,7 +21,7 @@
+ Version:        0.3.2
+ Release:        0
+ Summary:        Library for reading Blast XML output
+-License:        LGPL-2.0+
++License:        LGPL-2.1+
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
