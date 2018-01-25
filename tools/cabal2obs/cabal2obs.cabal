@@ -1,57 +1,57 @@
-name:           cabal2obs
-version:        0
-synopsis:       Convert a set of Cabal files into an OBS project
-description:    Convert a set of Cabal files into an OBS project.
-category:       Distribution
-homepage:       https://github.com/opensuse-haskell/cabal2obs#readme
-bug-reports:    https://github.com/opensuse-haskell/cabal2obs/issues
-author:         Peter Simons,
-                Bryan O'Sullivan,
-                Jens Petersen
-maintainer:     opensuse-haskell@opensuse.org
-license:        GPL-3
-license-file:   LICENSE
-tested-with:    GHC > 7.10 && < 8.3
-build-type:     Simple
-cabal-version:  >= 1.10
+name:                   cabal2obs
+version:                0
+synopsis:               Convert a set of Cabal files into an OBS project
+category:               Distribution
+homepage:               https://github.com/opensuse-haskell/configuration
+author:                 Peter Simons, Ondřej Súkup
+maintainer:             opensuse-haskell@opensuse.org
+license:                GPL-3
+license-file:           LICENSE
+tested-with:            GHC == 8.2.2
+build-type:             Simple
+cabal-version:          >= 1.10
+
+description:
+  Convert a set of Cabal files into an OBS project. This tool is used mainly to
+  generate <https://build.opensuse.org/project/show/devel:languages:haskell>
+  and its sub-projects.
 
 source-repository head
-  type: git
-  location: https://github.com/opensuse-haskell/cabal2obs
+  type:                 git
+  location:             https://github.com/opensuse-haskell/cabal2obs
 
 executable cabal2obs
-  main-is: Main.hs
-  other-extensions: CPP DeriveAnyClass DeriveGeneric GeneralizedNewtypeDeriving OverloadedStrings TypeFamilies
-  ghc-options: -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
-  build-depends:
-    Cabal >2,
-    base <5,
-    containers,
-    directory,
-    filepath,
-    shake >=0.16,
-    spdx,
-    time
-  other-modules:
-    Cabal2Spec
-    ChangesFile
-    Config
-    Config.LTS8
-    Config.LTS8.Stackage
-    Config.LTS9
-    Config.LTS9.Stackage
-    Config.LTS10
-    Config.LTS10.Stackage
-    Config.Nightly
-    Config.Nightly.Stackage
-    Oracle
-    Oracle.Compiler
-    Oracle.FlagAssignment
-    Oracle.ForcedExecutables
-    Oracle.Hackage
-    Oracle.PackageList
-    Orphans
-    ParseStackageConfig
-    ParseUtils
-    Types
-  default-language: Haskell2010
+  main-is:              Main.hs
+  default-language:     Haskell2010
+  other-extensions:     CPP DeriveAnyClass DeriveGeneric GeneralizedNewtypeDeriving
+                        OverloadedStrings TypeFamilies
+  ghc-options:          -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
+  build-depends:        base <5
+                      , Cabal >2
+                      , cabal2spec >2
+                      , containers
+                      , directory
+                      ,  filepath
+                      , shake >=0.16
+                      , spdx
+                      , time
+  other-modules:        ChangesFile
+                        Config
+                        Config.LTS10
+                        Config.LTS10.Stackage
+                        Config.LTS8
+                        Config.LTS8.Stackage
+                        Config.LTS9
+                        Config.LTS9.Stackage
+                        Config.Nightly
+                        Config.Nightly.Stackage
+                        Oracle
+                        Oracle.Compiler
+                        Oracle.FlagAssignment
+                        Oracle.ForcedExecutables
+                        Oracle.Hackage
+                        Oracle.PackageList
+                        Orphans
+                        ParseStackageConfig
+                        ParseUtils
+                        Types

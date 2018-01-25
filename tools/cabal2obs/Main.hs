@@ -46,7 +46,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "10"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "11"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -160,12 +160,8 @@ main = do
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz"]
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
-        Left missing -> fail ("finalizePackageDescription: " ++ show missing)
-        Right (desc,_) -> withTempDir $ \tmpDir -> do
-                            command_ [] "tar" ["-C", tmpDir, "-x", "-f", pkgDir </> display pkgid <.> "tar.gz"]
-                            copyFile' (cabalFilePath hackageDir pkgid) (tmpDir </> display pkgid </> display n <.> "cabal")
-                            traced "cabal2spec" $
-                              createSpecFile out (tmpDir </> display pkgid </> display pkgid <.> "cabal") desc isExe fa
+        Left missing -> fail ("finalizePD: " ++ show missing)
+        Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe fa)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
       let year = head (lines year')
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
