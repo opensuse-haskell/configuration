@@ -41,4 +41,4 @@ install:
  - (cd tools/cabal2obs && cabal new-build)
 
 script:
- - (cd tools/cabal2obs && cabal new-run cabal2obs -- -C ../.. --digest --keep-going -j2)
+ - (cd tools/cabal2obs && cabal new-run cabal2obs -- -C ../.. -V --keep-going -j2 fetch)
