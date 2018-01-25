@@ -203,6 +203,14 @@ main = do
     phony "update" $ need
       [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
 
+    phony "fetch" $ do
+      pkgs' <- mapM (packageList . GetPackageList) knownPackageSets
+      let pkgs :: [PackageIdentifier]
+          pkgs = sort (nub (concat pkgs'))
+      need [ homeDir </> ".cabal/packages/hackage.haskell.org" </> display pn </> display v </> display pid <.> "tar.gz"
+           | pid@(PackageIdentifier pn v) <- pkgs
+           ]
+
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
 verifyLicense lic
