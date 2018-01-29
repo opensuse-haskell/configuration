@@ -63,7 +63,6 @@ extraPackageNames =
   , "SDL-mixer"
 
     -- These packages are dependencies of cabal-install.
-  , "data-default-instances-base"
   , "gnuidn"
   , "gnutls"
   , "gsasl"
@@ -81,7 +80,6 @@ extraPackageNames =
   , "base-noprelude"
   , "bool-extras"
   , "bytestring-handle"
-  , "ChasingBottoms"
   , "chell"
   , "clustering"
   , "concatenative"
@@ -115,7 +113,6 @@ extraPackageNames =
   , "hPDB"
   , "hPDB-examples"
   , "httpd-shed"
-  , "idris"
   , "imm"
   , "intero"
   , "json-ast"
