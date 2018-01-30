@@ -463,6 +463,9 @@ bannedPackageNames =
   , "yi-rope"
   , "yi-snippet"
   , "haskell-lsp", "haskell-lsp-client"
+
+  -- build is broken: https://github.com/sbidin/sdl2-mixer/issues/4
+  , "sdl2-mixer"
   ]
 
 forcedExectableNames :: [PackageName]
