@@ -56,7 +56,7 @@ extraPackageNames =
     -- Used by osukup@suse.com.
   , "cab"
   , "pointfree"
-  , "xmobar"
+  , "xmobar", "iwlib"
 
     -- Needed by games repository somewhere.
   , "SDL-image"
