@@ -381,7 +381,7 @@ bannedPackageNames =
   , "haxl-amazonka"
 
     -- Early alpha-quality software without documentation.
-  , "chart-unit", "perf"
+  , "chart-unit", "perf", "online"
 
     -- Obsolete package.
   , "groupoids"
