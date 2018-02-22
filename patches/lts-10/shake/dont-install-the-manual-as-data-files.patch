@@ -1,0 +1,37 @@
+Index: shake.spec
+===================================================================
+--- shake.spec	(revision 6)
++++ shake.spec	(working copy)
+@@ -94,6 +94,7 @@
+ 
+ %install
+ %ghc_lib_install
++rm -Rf %{buildroot}/%{_datadir}/%{name}-%{version}/docs
+ 
+ %check
+ %cabal_test
+@@ -109,15 +110,7 @@
+ %doc CHANGES.txt README.md docs
+ %{_bindir}/%{name}
+ %dir %{_datadir}/%{name}-%{version}
+-%dir %{_datadir}/%{name}-%{version}/docs
+-%dir %{_datadir}/%{name}-%{version}/docs/manual
+ %dir %{_datadir}/%{name}-%{version}/html
+-%{_datadir}/%{name}-%{version}/docs/manual/Build.hs
+-%{_datadir}/%{name}-%{version}/docs/manual/build.bat
+-%{_datadir}/%{name}-%{version}/docs/manual/build.sh
+-%{_datadir}/%{name}-%{version}/docs/manual/constants.c
+-%{_datadir}/%{name}-%{version}/docs/manual/constants.h
+-%{_datadir}/%{name}-%{version}/docs/manual/main.c
+ %{_datadir}/%{name}-%{version}/html/profile.html
+ %{_datadir}/%{name}-%{version}/html/progress.html
+ %{_datadir}/%{name}-%{version}/html/shake.js
+@@ -127,6 +120,6 @@
+ %doc LICENSE
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+-%doc CHANGES.txt README.md docs
++%doc CHANGES.txt README.md
+ 
+ %changelog
+
