@@ -1,12 +1,11 @@
 Index: ghc-pandoc-citeproc.spec
 ===================================================================
---- ghc-pandoc-citeproc.spec	(revision 11)
+--- ghc-pandoc-citeproc.spec	(revision 7)
 +++ ghc-pandoc-citeproc.spec	(working copy)
-@@ -122,5 +122,6 @@
- %{_datadir}/%{pkg_name}-%{version}/README.md
- %{_datadir}/%{pkg_name}-%{version}/man/man1/pandoc-citeproc.1
- %{_datadir}/%{pkg_name}-%{version}/changelog
-+%{_mandir}/man1/pandoc-citeproc.1%{ext_man}
+@@ -122,4 +122,5 @@
  
  %files devel -f %{name}-devel.files
+ 
++%{_mandir}/man1/pandoc-citeproc.1%{ext_man}
+ %changelog
 
