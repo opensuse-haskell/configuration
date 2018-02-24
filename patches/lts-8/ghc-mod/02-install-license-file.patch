@@ -2,18 +2,20 @@ Index: ghc-mod.spec
 ===================================================================
 --- ghc-mod.spec	(revision 14)
 +++ ghc-mod.spec	(working copy)
-@@ -119,5 +119,6 @@
- 
- %files
-+%doc LICENSE
- %doc COPYING.BSD3
+@@ -127,6 +127,7 @@
  %doc COPYING.AGPL3
+ %doc COPYING.BSD3
+ %doc ChangeLog
++%doc LICENSE
  %{_bindir}/%{name}
-@@ -133,5 +134,6 @@
- 
+ %{_bindir}/ghc-modi
+ %dir %{_datadir}/%{name}-%{version}
+@@ -140,6 +141,7 @@
  %files -n ghc-%{name} -f ghc-%{name}.files
-+%doc LICENSE
  %doc COPYING.BSD3
  %doc COPYING.AGPL3
++%doc LICENSE
  
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+ %doc ChangeLog
 

@@ -2,7 +2,7 @@ Index: ghc-mod.spec
 ===================================================================
 --- ghc-mod.spec	(revision 15)
 +++ ghc-mod.spec	(working copy)
-@@ -102,6 +102,9 @@
+@@ -113,6 +113,9 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
@@ -12,20 +12,21 @@ Index: ghc-mod.spec
  
  %check
  %cabal_test
-@@ -124,12 +128,8 @@
- %doc COPYING.AGPL3
+@@ -130,13 +133,9 @@
+ %doc LICENSE
  %{_bindir}/%{name}
  %{_bindir}/ghc-modi
 -%dir %{_datadir}/%{name}-%{version}
 -%dir %{_datadir}/%{name}-%{version}/elisp
--%{_datadir}/%{name}-%{version}/elisp/Makefile
--%{_datadir}/%{name}-%{version}/elisp/*.el
--%{_datadir}/%{name}-%{version}/LICENSE
--%{_datadir}/%{name}-%{version}/COPYING.BSD3
 -%{_datadir}/%{name}-%{version}/COPYING.AGPL3
+-%{_datadir}/%{name}-%{version}/COPYING.BSD3
+-%{_datadir}/%{name}-%{version}/LICENSE
+-%{_datadir}/%{name}-%{version}/elisp/*.el
+-%{_datadir}/%{name}-%{version}/elisp/Makefile
 +%{_datadir}/%{name}-%{version}
 +%config %{_sysconfdir}/profile.d/ghc-mod.sh
 +%config %{_sysconfdir}/profile.d/ghc-mod.csh
  
  %files -n ghc-%{name} -f ghc-%{name}.files
+ %doc COPYING.BSD3
 
