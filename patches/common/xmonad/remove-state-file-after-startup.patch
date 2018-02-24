@@ -1,6 +1,6 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 3)
+--- xmonad.spec	(revision 9)
 +++ xmonad.spec	(working copy)
 @@ -27,6 +27,7 @@
  URL:            https://hackage.haskell.org/package/%{name}
@@ -10,7 +10,7 @@ Index: xmonad.spec
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-X11-devel
-@@ -84,6 +85,7 @@
+@@ -83,6 +84,7 @@
  
  %prep
  %setup -q

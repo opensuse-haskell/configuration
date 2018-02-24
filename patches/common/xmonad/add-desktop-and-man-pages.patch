@@ -1,15 +1,16 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 6)
+--- xmonad.spec	(revision 7)
 +++ xmonad.spec	(working copy)
-@@ -26,5 +26,6 @@
+@@ -26,6 +26,7 @@
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 +Source10:       xmonad.desktop
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
-@@ -41,9 +42,14 @@
+ BuildRequires:  ghc-X11-devel
+@@ -40,6 +41,11 @@
  BuildRequires:  ghc-setlocale-devel
  BuildRequires:  ghc-unix-devel
  BuildRequires:  ghc-utf8-string-devel
@@ -21,10 +22,8 @@ Index: xmonad.spec
  %if %{with tests}
  BuildRequires:  ghc-QuickCheck-devel
  %endif
+@@ -80,6 +86,15 @@
  
- %description
- Xmonad is a tiling window manager for X. Windows are arranged automatically to
-@@ -86,5 +92,14 @@
  %install
  %ghc_lib_install
 +install -d %{buildroot}%{_mandir}/man1/
@@ -38,15 +37,16 @@ Index: xmonad.spec
 +
  %ghc_fix_rpath %{pkg_name}-%{version}
  
- 
-@@ -109,7 +124,8 @@
+ %check
+@@ -97,8 +112,9 @@
+ %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}
  %dir %{_datadir}/%{name}-%{version}/man
- %{_datadir}/%{name}-%{version}/man/xmonad.hs
 -%{_datadir}/%{name}-%{version}/man/xmonad.1
 +%{_mandir}/man1/xmonad.1%{ext_man}
  %{_datadir}/%{name}-%{version}/man/xmonad.1.html
 +%{_datadir}/xsessions/xmonad.desktop
+ %{_datadir}/%{name}-%{version}/man/xmonad.hs
  
  %files -n ghc-%{name} -f ghc-%{name}.files
 
