@@ -1,22 +1,23 @@
 Index: ghc-colour.spec
 ===================================================================
---- ghc-colour.spec	(revision 3)
+--- ghc-colour.spec	(revision 6)
 +++ ghc-colour.spec	(working copy)
-@@ -55,6 +55,8 @@
+@@ -59,6 +59,8 @@
  
  %install
  %ghc_lib_install
 +rm %{buildroot}/%{_datadir}/%{pkg_name}-%{version}/README
 +rm %{buildroot}/%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
  
+ %check
+ %cabal_test
+@@ -71,10 +73,8 @@
  
- %post devel
-@@ -66,9 +68,7 @@
  %files -f %{name}.files
  %doc LICENSE
 -%dir %{_datadir}/%{pkg_name}-%{version}
--%{_datadir}/%{pkg_name}-%{version}/README
 -%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
+-%{_datadir}/%{pkg_name}-%{version}/README
  
  %files devel -f %{name}-devel.files
 +%doc README
