@@ -1,8 +1,8 @@
 Index: idris.spec
 ===================================================================
---- idris.spec	(revision 1)
+--- idris.spec	(revision 7)
 +++ idris.spec	(working copy)
-@@ -135,7 +135,7 @@
+@@ -133,7 +133,7 @@
  %setup -q
  
  %build
@@ -11,7 +11,7 @@ Index: idris.spec
  %ghc_lib_build
  
  %install
-@@ -162,42 +162,8 @@
+@@ -160,42 +160,8 @@
  %{_bindir}/idris-codegen-c
  %{_bindir}/idris-codegen-javascript
  %{_bindir}/idris-codegen-node
@@ -22,12 +22,12 @@ Index: idris.spec
 -%dir %{_datadir}/%{name}-%{version}/rts
 -%dir %{_datadir}/%{name}-%{version}/rts/arduino
 -%{_datadir}/%{name}-%{version}/idrisdoc/styles.css
--%{_datadir}/%{name}-%{version}/jsrts/jsbn/jsbn-browser.js
--%{_datadir}/%{name}-%{version}/jsrts/jsbn/jsbn-node.js
 -%{_datadir}/%{name}-%{version}/jsrts/Runtime-common.js
 -%{_datadir}/%{name}-%{version}/jsrts/Runtime-javascript.js
 -%{_datadir}/%{name}-%{version}/jsrts/Runtime-node.js
 -%{_datadir}/%{name}-%{version}/jsrts/jsbn/LICENSE
+-%{_datadir}/%{name}-%{version}/jsrts/jsbn/jsbn-browser.js
+-%{_datadir}/%{name}-%{version}/jsrts/jsbn/jsbn-node.js
 -%{_datadir}/%{name}-%{version}/rts/arduino/idris_main.c
 -%{_datadir}/%{name}-%{version}/rts/idris_bitstring.c
 -%{_datadir}/%{name}-%{version}/rts/idris_bitstring.h
@@ -48,9 +48,9 @@ Index: idris.spec
 -%{_datadir}/%{name}-%{version}/rts/idris_stats.h
 -%{_datadir}/%{name}-%{version}/rts/idris_stdfgn.c
 -%{_datadir}/%{name}-%{version}/rts/idris_stdfgn.h
+-%{_datadir}/%{name}-%{version}/rts/libtest.c
 -%{_datadir}/%{name}-%{version}/rts/mini-gmp.c
 -%{_datadir}/%{name}-%{version}/rts/mini-gmp.h
--%{_datadir}/%{name}-%{version}/rts/libtest.c
 +%{_libexecdir}/%{name}-%{version}
 +%{_mandir}/man1/%{name}.1%{ext_man}
  
