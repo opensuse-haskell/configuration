@@ -1,5 +1,6 @@
 module ParseStackageConfig where
 
+import Data.Functor
 import Distribution.Compat.ReadP
 import Distribution.Package
 import Distribution.Text
@@ -15,7 +16,7 @@ constraint :: ReadP r Dependency
 constraint = parse +++ installed
 
 installed :: ReadP r Dependency
-installed = Dependency <$> parse <*> (token (string "installed") *> pure noVersion)
+installed = Dependency <$> parse <*> (token (string "installed") $> noVersion)
 
 token :: ReadP r a -> ReadP r a
 token p = skipSpaces *> p

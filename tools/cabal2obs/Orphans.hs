@@ -25,9 +25,8 @@ instance Hashable VersionRange
 instance Hashable Version
 instance Hashable ShortText
 
-instance NFData CompilerFlavor
-instance NFData CompilerId
-instance NFData FlagName
+instance Hashable FlagAssignment where
+  hashWithSalt salt = hashWithSalt salt . unFlagAssignment
 
 instance IsString Dependency where
   fromString = parseText "Dependency"

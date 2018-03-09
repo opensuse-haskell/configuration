@@ -2,7 +2,7 @@ module ChangesFile where
 
 import Data.Time
 import Distribution.Package
-import Distribution.Version
+import Distribution.Pretty
 
 type EMailAddress = String
 type Revision = Int
@@ -14,7 +14,7 @@ mkChangeEntry (PackageIdentifier pn v) rev email = do
   ts <- formatTime defaultTimeLocale "%a %b %_d %H:%M:%S %Z %Y" <$> getCurrentTime
   let revisionString = if rev > 0 then "revision " ++ show rev else ""
       blank          = if null revisionString then "" else " "
-      versionString  = showVersion v ++ blank ++ revisionString
+      versionString  = prettyShow v ++ blank ++ revisionString
   return $ unlines
     [ "-------------------------------------------------------------------"
     , unwords [ ts, "-", email ]

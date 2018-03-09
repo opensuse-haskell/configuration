@@ -428,7 +428,7 @@ readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
 readFlagAssignents xs = [ (fromJust (simpleParse name), readFlagList (words assignments)) | (name,assignments) <- xs ]
 
 readFlagList :: [String] -> FlagAssignment
-readFlagList = map (tagWithValue . noMinusF)
+readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
   where
     tagWithValue ('-':fname) = (mkFlagName (lowercase fname), False)
     tagWithValue fname       = (mkFlagName (lowercase fname), True)

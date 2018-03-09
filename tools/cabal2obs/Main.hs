@@ -46,7 +46,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "12"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "13"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -59,9 +59,8 @@ main = do
     compilerId <- getCompiler
     flagOverrides <- getFlagAssignments
 
-    getFlags <- addOracle $ \(psid@(PackageSetId _), n) -> do
-      fas <- flagOverrides (GetFlagAssignments psid)
-      return $ fromMaybe [] (lookup n fas)
+    getFlags <- addOracle $ \(psid@(PackageSetId _), n) ->
+      fromMaybe mempty . lookup n <$> flagOverrides (GetFlagAssignments psid)
 
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier _ _)) -> do
       fexeset <- forcedExes (GetForcedExes psid)

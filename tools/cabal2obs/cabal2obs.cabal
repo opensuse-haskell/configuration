@@ -27,11 +27,11 @@ executable cabal2obs
                         OverloadedStrings TypeFamilies
   ghc-options:          -Wall -threaded -with-rtsopts=-qg -with-rtsopts=-qb
   build-depends:        base <5
-                      , Cabal >2
+                      , Cabal >2.2
                       , cabal2spec >2
                       , containers
                       , directory
-                      ,  filepath
+                      , filepath
                       , shake >=0.16
                       , spdx
                       , time

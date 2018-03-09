@@ -7,7 +7,7 @@ import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.PackageDescription.Parse
+import Distribution.PackageDescription.Parsec
 import Distribution.Text
 import Distribution.Verbosity
 import Distribution.Version
