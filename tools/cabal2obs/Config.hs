@@ -7,7 +7,7 @@ import Config.Nightly
 import Types
 
 knownPackageSets :: [PackageSetId]
-knownPackageSets = [PackageSetId "lts-10"]
+knownPackageSets = [PackageSetId "lts-10", PackageSetId "nightly"]
 
 getConfig :: PackageSetId -> PackageSetConfig
 getConfig (PackageSetId "lts-8")   = lts8
