@@ -53,7 +53,6 @@ extraPackageNames =
   , "gnutls"
   , "gsasl"
   , "network-protocol-xmpp"
-  , "regex-tdfa-rc"
 
     -- Re-add these packages with modified constrains.
   , "git-annex"
