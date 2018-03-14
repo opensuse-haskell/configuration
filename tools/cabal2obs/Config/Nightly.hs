@@ -30,14 +30,15 @@ goodStackagePackage (Dependency _ v) = v /= noVersion
 extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
-    "applicative-quoters"
-  , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
+    "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
+  , "blaze-markup", "csv", "Decimal", "extra", "hashtables", "megaparsec", "uglymemo"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
   , "lambdabot-irc-plugins"
   , "lambdabot-reference-plugins"
   , "lambdabot-social-plugins"
+  , "random-fu", "random-source", "SafeSemaphore"
 
     -- Used by osukup@suse.com.
   , "cab"
