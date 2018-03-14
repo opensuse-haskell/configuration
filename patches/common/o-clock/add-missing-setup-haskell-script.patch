@@ -1,0 +1,14 @@
+Index: ghc-o-clock.spec
+===================================================================
+--- ghc-o-clock.spec	(revision 1)
++++ ghc-o-clock.spec	(working copy)
+@@ -56,6 +56,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
