@@ -176,7 +176,7 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     buildDir </> "packages.csv" %> \out -> do
-      let psid = PackageSetId "lts-10"
+      let psid = PackageSetId "lts-11"
       pset <- packageList (GetPackageList psid)
       ls <- forP pset $ \pkgid@(PackageIdentifier n v) -> do
         BuildName bn <- getBuildName (psid, pkgid)
