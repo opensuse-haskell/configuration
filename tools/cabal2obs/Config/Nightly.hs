@@ -38,7 +38,7 @@ extraPackageNames =
   , "lambdabot-irc-plugins"
   , "lambdabot-reference-plugins"
   , "lambdabot-social-plugins"
-  , "random-fu", "random-source", "SafeSemaphore"
+  , "random-fu", "random-source", "SafeSemaphore", "flexible-defaults"
 
     -- Used by osukup@suse.com.
   , "cab"
