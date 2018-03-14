@@ -25,22 +25,13 @@ nightly = PackageSetConfig
 
 goodStackagePackage :: Dependency ->  Bool
 goodStackagePackage (Dependency "git-annex" _) = False
-goodStackagePackage (Dependency "hledger" _) = False
-goodStackagePackage (Dependency "hledger-api" _) = False
-goodStackagePackage (Dependency "hledger-iadd" _) = False
-goodStackagePackage (Dependency "hledger-interest" _) = False
-goodStackagePackage (Dependency "hledger-lib" _) = False
-goodStackagePackage (Dependency "hledger-ui" _) = False
-goodStackagePackage (Dependency "hledger-web" _) = False
 goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
     "applicative-quoters"
-  , "BNFC"
   , "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
-  , "hledger-api", "hledger-iadd < 1.2.5 || > 1.2.5", "hledger-web"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
@@ -50,7 +41,6 @@ extraPackageNames =
 
     -- Used by osukup@suse.com.
   , "cab"
-  , "pointfree"
   , "xmobar"
 
     -- Needed by games repository somewhere.
