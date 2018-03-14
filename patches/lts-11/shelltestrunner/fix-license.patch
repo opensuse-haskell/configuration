@@ -1,0 +1,11 @@
+Index: shelltestrunner.spec
+===================================================================
+--- shelltestrunner.spec	(revision 6)
++++ shelltestrunner.spec	(working copy)
+@@ -20,4 +20,4 @@
+-License:        GPL-1.0+
++License:        GPL-3.0
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+
