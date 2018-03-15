@@ -31,7 +31,7 @@ extraPackageNames =
   [ -- Used by psimons@suse.com.
     "applicative-quoters"
   , "BNFC"
-  , "cabal2spec"
+  , "cabal2spec <= 2.0.1"
 
     -- Used by ptrommler@icloud.com.
   , "lhs2tex"
