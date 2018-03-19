@@ -164,7 +164,6 @@ main = do
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
       let year = head (lines year')
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
-
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
                                       ]
@@ -193,8 +192,8 @@ main = do
     "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
       let dirname = takeBaseName (takeDirectory out)
           psid = case map toLower dirname of
-                   'l':'t':'s':x -> 'l':'t':'s':'-':x
-                   x             -> x
+                   "lts-next" -> "nightly"
+                   x          -> x
       buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
       deps <- runP stackageConfig buf
       writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
