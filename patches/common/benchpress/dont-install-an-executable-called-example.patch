@@ -12,7 +12,7 @@ Index: ghc-benchpress.spec
  %ghc_pkg_recache
 @@ -71,7 +71,6 @@
  %files -f %{name}.files
- %doc LICENSE
+ %license LICENSE
 -%{_bindir}/example
  
  %files devel -f %{name}-devel.files

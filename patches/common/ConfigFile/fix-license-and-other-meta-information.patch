@@ -17,8 +17,8 @@ Index: ghc-ConfigFile.spec
 @@ -79,5 +79,5 @@
  
  %files -f %{name}.files
--%doc COPYRIGHT
-+%doc BSD3 COPYRIGHT LGPL-2.1
+-%license COPYRIGHT
++%license BSD3 COPYRIGHT LGPL-2.1
  
  %files devel -f %{name}-devel.files
 

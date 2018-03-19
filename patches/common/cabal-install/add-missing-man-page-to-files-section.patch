@@ -3,7 +3,7 @@ Index: cabal-install.spec
 --- cabal-install.spec	(revision 3)
 +++ cabal-install.spec	(working copy)
 @@ -92,5 +92,6 @@
- %doc LICENSE
+ %license LICENSE
  %doc README.md changelog
  %{_bindir}/cabal
 +%{_mandir}/man1/cabal.1%{ext_man}
