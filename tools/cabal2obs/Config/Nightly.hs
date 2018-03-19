@@ -31,7 +31,7 @@ extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
     "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
-  , "csv", "Decimal", "hashtables", "uglymemo"
+  , "hashtables", "uglymemo"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
