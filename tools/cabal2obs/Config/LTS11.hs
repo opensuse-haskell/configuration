@@ -63,7 +63,7 @@ extraPackageNames =
   , "AC-Vector"
   , "acid-state"
   , "aeson-lens"
-  , "base-noprelude"
+-- broken: , "base-noprelude"
   , "bool-extras"
   , "bytestring-handle"
   , "chell"
