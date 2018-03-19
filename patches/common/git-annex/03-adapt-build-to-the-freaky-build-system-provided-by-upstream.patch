@@ -41,7 +41,7 @@ Index: git-annex.spec
  %prep
  %setup -q
  
-@@ -139,12 +165,35 @@
+@@ -139,12 +165,34 @@
  %build
  %ghc_bin_build
  
@@ -58,10 +58,9 @@ Index: git-annex.spec
 +%icon_theme_cache_postun
  
  %files
--%license COPYRIGHT
+-%doc COPYRIGHT
 -%doc CHANGELOG NEWS README doc
-+%license COPYRIGHT
-+%doc README
++%doc COPYRIGHT README
  %{_bindir}/%{name}
 +%{_bindir}/%{name}-shell
 +%dir %{_datadir}/icons/hicolor

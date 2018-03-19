@@ -16,7 +16,7 @@ Index: quickbench.spec
 @@ -88,8 +88,6 @@
  
  %files -n ghc-%{name} -f ghc-%{name}.files
--%license LICENSE
+-%doc LICENSE
  
  %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
 -%doc CHANGES README.md
