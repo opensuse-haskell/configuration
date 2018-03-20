@@ -56,8 +56,11 @@ extraPackageNames =
   , "network-protocol-xmpp"
   , "regex-tdfa-rc"
 
-    -- git-annex and its dependencies
-  , "git-annex", "IfElse", "aws"
+    -- git-annex and its dependencies are currently broken, most due to
+    -- https://github.com/bitemyapp/esqueleto/issues/80.
+  {-
+  , "git-annex", "IfElse", "bloomfilter", "esqueleto", "fdo-notify", "magic", "sandi", "torrent"
+  -}
 
     -- These packages are in Factory for historical reasons.
   , "AC-Vector"
@@ -576,6 +579,9 @@ flagList =
 
     -- Avoid dependency on servant-client-core, which is not in LTS-11.
   , ("alerta",                         "-servant-client-core")
+
+    -- Avoid dependency on aws, which doesn't compile in LTS-11.
+  , ("git-annex",                      "-s3")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
