@@ -429,6 +429,9 @@ flagList =
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.
   , ("cmark",                          "pkgconfig")
+
+    -- Fix build with modern compilers.
+  , ("cassava",                        "-bytestring--lt-0_10_4")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
