@@ -191,9 +191,10 @@ main = do
 
     "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
       let dirname = takeBaseName (takeDirectory out)
-          psid = case map toLower dirname of
-                   "lts-next" -> "nightly"
-                   x          -> x
+          psid = case dirname of
+                   "Nightly"     -> "nightly"
+                   'L':'T':'S':x -> "lts-" ++ x
+                   _              -> error ("invaid cabal2obs config path " ++ show dirname)
       buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
       deps <- runP stackageConfig buf
       writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
