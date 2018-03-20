@@ -104,7 +104,6 @@ extraPackageNames =
   , "language-lua2"
   , "lazy-csv"
   , "libnotify"
-  , "librato"
   , "list-fusion-probe"
   , "mersenne-random"
   , "microbench"
@@ -163,7 +162,6 @@ extraPackageNames =
   , "wai-middleware-verbs"
   , "wai-request-spec"
   , "yahoo-finance-api"
-  , "yesod-auth-account"
   , "yesod-default"
   ]
 
