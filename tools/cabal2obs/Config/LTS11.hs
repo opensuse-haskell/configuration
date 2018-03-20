@@ -56,8 +56,8 @@ extraPackageNames =
   , "network-protocol-xmpp"
   , "regex-tdfa-rc"
 
-    -- Re-add these packages with modified constrains.
-  , "git-annex"
+    -- git-annex and its dependencies
+  , "git-annex", "IfElse", "aws"
 
     -- These packages are in Factory for historical reasons.
   , "AC-Vector"
@@ -89,7 +89,6 @@ extraPackageNames =
   , "GraphSCC"
   , "gtk"
   , "gtk3"
-  , "hakyll-favicon"
   , "hcwiid"
   , "hflags"
   , "hgal"
