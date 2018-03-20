@@ -301,6 +301,9 @@ bannedPackageNames =
 
     -- Does not compile with recent versions of glibc.
   , "mercury-api"
+
+    -- Does not compile.
+  , "yoga"
   ]
 
 forcedExectableNames :: [PackageName]
