@@ -32,7 +32,7 @@ extraPackageNames =
   [ -- Used by psimons@suse.com.
     "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
   , "hashtables", "uglymemo"
-  , "stylish-cabal"
+  , "stylish-cabal", "haddock-library"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
