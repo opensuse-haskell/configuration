@@ -1,0 +1,14 @@
+Index: ghc-hslua.spec
+===================================================================
+--- ghc-hslua.spec	(revision 3)
++++ ghc-hslua.spec	(working copy)
+@@ -70,7 +70,7 @@
+ %setup -q -n %{pkg_name}-%{version}
+ 
+ %build
+-%define cabal_configure_options -fsystem-lua
++%define cabal_configure_options -fsystem-lua --extra-include-dirs=$(pkg-config --variable=includedir lua)
+ %ghc_lib_build
+ 
+ %install
+
