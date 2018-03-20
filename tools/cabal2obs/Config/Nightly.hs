@@ -314,6 +314,7 @@ forcedExectableNames =
   , "cabal-install"
   , "cabal-rpm"
   , "cabal2nix"
+  , "cabal2spec"
   , "clash-ghc"
   , "codex"
   , "cpphs"
