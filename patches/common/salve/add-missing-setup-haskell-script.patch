@@ -1,0 +1,14 @@
+Index: ghc-salve.spec
+===================================================================
+--- ghc-salve.spec	(revision 1)
++++ ghc-salve.spec	(working copy)
+@@ -48,6 +48,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
