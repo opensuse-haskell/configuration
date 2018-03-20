@@ -298,6 +298,9 @@ bannedPackageNames =
 
     -- We don't have liboath.
   , "liboath-hs"
+
+    -- Does not compile with recent versions of glibc.
+  , "mercury-api"
   ]
 
 forcedExectableNames :: [PackageName]
