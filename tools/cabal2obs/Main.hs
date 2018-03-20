@@ -13,7 +13,6 @@ import ParseUtils
 import Types
 
 import Control.Monad
-import Data.Char
 import Data.Function
 import Data.List
 import Data.Maybe
