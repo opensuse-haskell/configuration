@@ -63,7 +63,6 @@ extraPackageNames =
   , "AC-Vector"
   , "acid-state"
   , "aeson-lens"
--- broken: , "base-noprelude"
   , "bool-extras"
   , "bytestring-handle"
   , "chell"
@@ -163,8 +162,6 @@ extraPackageNames =
   , "uuid-orphans"
   , "wai-middleware-verbs"
   , "wai-request-spec"
-  , "wild-bind-indicator == 0.1.*"  -- needed by wild-bind-task-x11 == 0.1.*
-  , "wild-bind-task-x11 == 0.1.*"   -- https://github.com/debug-ito/wild-bind/issues/3
   , "yahoo-finance-api"
   , "yesod-auth-account"
   , "yesod-default"
