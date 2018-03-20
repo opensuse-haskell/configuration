@@ -445,8 +445,11 @@ bannedPackageNames =
   , "yi-snippet"
   , "haskell-lsp", "haskell-lsp-client"
 
-  -- build is broken: https://github.com/sbidin/sdl2-mixer/issues/4
+    -- build is broken: https://github.com/sbidin/sdl2-mixer/issues/4
   , "sdl2-mixer"
+
+    -- Triggers some GHC bug that results in the build failing due to "shadowed dependencies".
+  , "apply-refact"
   ]
 
 forcedExectableNames :: [PackageName]
