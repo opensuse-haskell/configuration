@@ -31,7 +31,7 @@ extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
     "hledger-lib", "hledger", "hledger-ui", "hledger-interest"
-  , "hashtables", "uglymemo"
+  , "uglymemo"
   , "stylish-cabal", "haddock-library"
 
     -- Needed for lambdabot libraries and MCP.
@@ -39,7 +39,7 @@ extraPackageNames =
   , "lambdabot-irc-plugins"
   , "lambdabot-reference-plugins"
   , "lambdabot-social-plugins"
-  , "random-fu", "random-source", "SafeSemaphore", "flexible-defaults"
+  , "random-fu", "random-source", "SafeSemaphore"
 
     -- Used by osukup@suse.com.
   , "cab"
