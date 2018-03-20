@@ -42,7 +42,7 @@ extraPackageNames =
 
     -- Used by osukup@suse.com.
   , "cab"
-  , "pointfree"
+-- broken:, "pointfree"
   , "xmobar", "iwlib"
 
     -- Needed by games repository somewhere.
