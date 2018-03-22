@@ -16,13 +16,15 @@ import Control.Monad
 import Data.Function
 import Data.List
 import Data.Maybe
-import Data.SPDX
 import Development.Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
+import Distribution.Parsec.Class
+import Distribution.Pretty
+import Distribution.SPDX
 import Distribution.System
 import Distribution.Text
 import Distribution.Types.ComponentRequestedSpec
@@ -212,13 +214,8 @@ main = do
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
 verifyLicense lic
-  | [l] <- parseExpression lic = when (prettyLicenseExpression l /= lic) $ fail $
-                                   unwords [ "license expression"
-                                           , lic
-                                           , "doesn't match expected"
-                                           , prettyLicenseExpression l
-                                           ]
-  | otherwise                  = fail (unwords ["invalid license expression", show lic])
+  | Right l <- eitherParsec lic, prettyShow (l :: License) == lic = return ()
+  | otherwise = fail (unwords ["invalid license expression", show lic])
 
 mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
 mkStackagePackageSetSourcefile vers deps = unlines

@@ -33,7 +33,6 @@ executable cabal2obs
                       , directory
                       , filepath
                       , shake >=0.16
-                      , spdx
                       , time
   other-modules:        ChangesFile
                         Config
