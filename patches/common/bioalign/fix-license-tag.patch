@@ -6,8 +6,8 @@ Index: ghc-bioalign.spec
  Version:        0.0.5
  Release:        0
  Summary:        Data structures and helper functions for calculating alignments
--License:        GPL-1.0+
-+License:        GPL-3.0
+-License:        GPL-1.0-or-later
++License:        GPL-3.0-only
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

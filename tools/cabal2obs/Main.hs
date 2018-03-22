@@ -47,7 +47,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "19"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "20"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -213,9 +213,11 @@ main = do
 
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
-verifyLicense lic
-  | Right l <- eitherParsec lic, prettyShow (l :: License) == lic = return ()
-  | otherwise = fail (unwords ["invalid license expression", show lic])
+verifyLicense lic = case eitherParsec lic of
+  Left msg -> fail ("invalid license expression " ++  lic ++ "\n" ++ msg)
+  Right l -> let lic' = prettyShow (l :: License)
+             in unless (lic == lic') $
+               fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
 
 mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
 mkStackagePackageSetSourcefile vers deps = unlines

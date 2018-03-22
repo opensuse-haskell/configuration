@@ -6,8 +6,8 @@ Index: ghc-hmatrix-special.spec
  Version:        0.4.0.1
  Release:        0
  Summary:        Interface to GSL special functions
--License:        GPL-1.0+
-+License:        GPL-3.0+
+-License:        GPL-1.0-or-later
++License:        GPL-3.0-or-later
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

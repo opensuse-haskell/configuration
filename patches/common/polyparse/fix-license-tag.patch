@@ -6,8 +6,8 @@ Index: ghc-polyparse.spec
  Version:        1.12
  Release:        0
  Summary:        A variety of alternative parser combinator libraries
--License:        LGPL-2.0+
-+License:        LGPL-2.1
+-License:        LGPL-2.0-or-later
++License:        LGPL-2.1-only
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

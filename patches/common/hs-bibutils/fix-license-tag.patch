@@ -6,8 +6,8 @@ Index: ghc-hs-bibutils.spec
  Version:        5.5
  Release:        0
  Summary:        Haskell bindings to bibutils, the bibliography conversion utilities
--License:        GPL-1.0+
-+License:        GPL-2.0+
+-License:        GPL-1.0-or-later
++License:        GPL-2.0-or-later
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

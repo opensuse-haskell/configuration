@@ -6,8 +6,8 @@ Index: ghc-incremental-parser.spec
  Version:        0.2.5
  Release:        0
  Summary:        Generic parser library capable of providing partial results from partial input
--License:        GPL-1.0+
-+License:        GPL-3.0+
+-License:        GPL-1.0-or-later
++License:        GPL-3.0-or-later
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

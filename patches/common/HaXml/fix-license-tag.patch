@@ -6,8 +6,8 @@ Index: HaXml.spec
  Version:        1.25.3
  Release:        0
  Summary:        Utilities for manipulating XML documents
--License:        LGPL-2.0+
-+License:        GPL-2.0 AND LGPL-2.1
+-License:        LGPL-2.0-or-later
++License:        GPL-2.0-only AND LGPL-2.1-only
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

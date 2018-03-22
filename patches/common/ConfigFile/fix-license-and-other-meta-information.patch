@@ -9,7 +9,7 @@ Index: ghc-ConfigFile.spec
 -License:        BSD-3-Clause
 -Group:          Development/Libraries/Haskell
 -URL:            https://hackage.haskell.org/package/%{pkg_name}
-+License:        LGPL-2.1+ OR BSD-3-Clause
++License:        (LGPL-2.1-or-later OR BSD-3-Clause)
 +Group:          Development/Libraries/Haskell
 +URL:            http://software.complete.org/configfile
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

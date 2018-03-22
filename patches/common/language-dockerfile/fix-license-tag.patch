@@ -6,7 +6,7 @@ Index: ghc-language-dockerfile.spec
  Version:        0.3.5.0
  Release:        0
  Summary:        Dockerfile linter, parser, pretty-printer and embedded DSL
--License:        GPL-3.0+
+-License:        GPL-3.0-or-later
 +License:        GPL-3.0
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}

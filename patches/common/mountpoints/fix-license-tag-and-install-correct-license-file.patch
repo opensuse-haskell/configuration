@@ -6,8 +6,8 @@ Index: ghc-mountpoints.spec
  Version:        1.0.2
  Release:        0
  Summary:        List mount points
--License:        LGPL-2.0+
-+License:        LGPL-2.1+ AND BSD-3-Clause
+-License:        LGPL-2.0-or-later
++License:        LGPL-2.1-or-later AND BSD-3-Clause
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

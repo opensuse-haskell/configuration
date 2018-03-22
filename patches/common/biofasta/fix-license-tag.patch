@@ -6,8 +6,8 @@ Index: ghc-biofasta.spec
  Version:        0.0.3
  Release:        0
  Summary:        Library for reading fasta sequence files
--License:        GPL-1.0+
-+License:        GPL-3.0
+-License:        GPL-1.0-or-later
++License:        GPL-3.0-only
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

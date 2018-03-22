@@ -6,8 +6,8 @@ Index: texmath.spec
  Version:        0.8.6.4
  Release:        0
  Summary:        Conversion between formats used to represent mathematics
--License:        GPL-1.0+
-+License:        GPL-2.0
+-License:        GPL-1.0-or-later
++License:        GPL-2.0-only
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz

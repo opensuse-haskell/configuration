@@ -15,8 +15,8 @@ index 96400a2..dd39a7a 100644
  Version:        1.17.1
  Release:        0
  Summary:        Conversion between markup formats
--License:        GPL-1.0+
-+License:        GPL-2.0+
+-License:        GPL-1.0-or-later
++License:        GPL-2.0-or-later
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
