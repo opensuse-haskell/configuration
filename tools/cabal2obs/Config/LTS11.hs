@@ -42,7 +42,6 @@ extraPackageNames =
 
     -- Used by osukup@suse.com.
   , "cab"
--- broken:, "pointfree"
   , "xmobar", "iwlib"
 
     -- Needed by games repository somewhere.
@@ -160,7 +159,7 @@ extraPackageNames =
   , "uu-interleaved"
   , "uu-parsinglib"
   , "uuid-orphans"
-  , "wai-middleware-verbs"
+  , "wai-middleware-verbs < 0.4"
   , "wai-request-spec"
   , "yahoo-finance-api"
   , "yesod-default"
