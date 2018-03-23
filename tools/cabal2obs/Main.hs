@@ -47,7 +47,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "20"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "21"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
