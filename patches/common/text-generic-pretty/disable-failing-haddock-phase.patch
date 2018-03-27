@@ -1,0 +1,15 @@
+Index: ghc-text-generic-pretty.spec
+===================================================================
+--- ghc-text-generic-pretty.spec	(revision 3)
++++ ghc-text-generic-pretty.spec	(working copy)
+@@ -92,7 +92,8 @@
+ %setup -q -n %{pkg_name}-%{version}
+ 
+ %build
+-%ghc_lib_build
++# https://github.com/RazvanRanca/GenericPretty/issues/4
++%ghc_lib_build_without_haddock
+ 
+ %install
+ %ghc_lib_install
+
