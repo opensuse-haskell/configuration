@@ -31,7 +31,7 @@ extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
     "hledger-ui"
-  , "stylish-cabal", "haddock-library"
+  , "stylish-cabal"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
