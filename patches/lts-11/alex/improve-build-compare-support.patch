@@ -1,8 +1,8 @@
 Index: alex.spec
 ===================================================================
---- alex.spec	(revision 4)
+--- alex.spec	(revision 6)
 +++ alex.spec	(working copy)
-@@ -59,6 +59,7 @@
+@@ -55,6 +55,7 @@
  %ghc_bin_install
  mkdir -p %{buildroot}/%{_mandir}/man1
  cp doc/alex.1 %{buildroot}/%{_mandir}/man1
