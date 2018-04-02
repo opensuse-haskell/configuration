@@ -1,0 +1,13 @@
+Index: ghc-bindings-libzip.spec
+===================================================================
+--- ghc-bindings-libzip.spec	(revision 3)
++++ ghc-bindings-libzip.spec	(working copy)
+@@ -30,6 +30,7 @@
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(libzip)
++BuildRequires:  libbz2-devel
+ 
+ %description
+ This package provides low-level bindings to libzip (v1.0.1) library.
+
