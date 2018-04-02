@@ -1,0 +1,17 @@
+Index: ghc-approximate.spec
+===================================================================
+--- ghc-approximate.spec	(revision 3)
++++ ghc-approximate.spec	(working copy)
+@@ -67,7 +67,10 @@
+ %setup -q -n %{pkg_name}-%{version}
+ 
+ %build
+-%ghc_lib_build
++# The build tends to run forever during the Haddock generation phase, until it
++# is aborted by OBS. There's probably not much we can do, so we take the easy
++# way out.
++%ghc_lib_build_without_haddock
+ 
+ %install
+ %ghc_lib_install
+
