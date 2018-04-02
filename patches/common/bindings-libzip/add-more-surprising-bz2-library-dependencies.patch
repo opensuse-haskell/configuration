@@ -1,0 +1,13 @@
+Index: ghc-bindings-libzip.spec
+===================================================================
+--- ghc-bindings-libzip.spec	(revision 5)
++++ ghc-bindings-libzip.spec	(working copy)
+@@ -44,6 +44,7 @@
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires:       pkgconfig
+ Requires:       pkgconfig(libzip)
++Requires:       libbz2-devel
+ Requires(post): ghc-compiler = %{ghc_version}
+ Requires(postun): ghc-compiler = %{ghc_version}
+ 
+
