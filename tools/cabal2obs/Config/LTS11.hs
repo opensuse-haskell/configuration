@@ -96,8 +96,6 @@ extraPackageNames =
   , "hgal"
   , "hjpath"
   , "hjson"
-  , "hPDB"
-  , "hPDB-examples"
   , "httpd-shed"
   , "imm"
   , "intero"
