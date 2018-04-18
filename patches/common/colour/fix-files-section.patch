@@ -14,7 +14,7 @@ Index: ghc-colour.spec
 @@ -71,10 +73,8 @@
  
  %files -f %{name}.files
- %doc LICENSE
+ %license LICENSE
 -%dir %{_datadir}/%{pkg_name}-%{version}
 -%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
 -%{_datadir}/%{pkg_name}-%{version}/README

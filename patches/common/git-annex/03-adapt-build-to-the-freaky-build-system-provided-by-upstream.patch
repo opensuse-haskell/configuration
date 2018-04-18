@@ -1,8 +1,9 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 8)
+--- git-annex.spec	(revision 7)
 +++ git-annex.spec	(working copy)
-@@ -113,5 +113,21 @@
+@@ -113,6 +113,22 @@
+ BuildRequires:  ghc-yesod-devel
  BuildRequires:  ghc-yesod-form-devel
  BuildRequires:  ghc-yesod-static-devel
 +# Manually added dependencies which the Cabal file does not declare
@@ -41,9 +42,7 @@ Index: git-annex.spec
  %prep
  %setup -q
  
-@@ -139,12 +165,34 @@
- %build
- %ghc_bin_build
+@@ -141,10 +167,33 @@
  
  %install
  %ghc_bin_install
@@ -58,9 +57,9 @@ Index: git-annex.spec
 +%icon_theme_cache_postun
  
  %files
--%doc COPYRIGHT
+ %license COPYRIGHT
 -%doc CHANGELOG NEWS README doc
-+%doc COPYRIGHT README
++%doc CHANGELOG NEWS README
  %{_bindir}/%{name}
 +%{_bindir}/%{name}-shell
 +%dir %{_datadir}/icons/hicolor

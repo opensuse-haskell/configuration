@@ -14,8 +14,8 @@ Index: ghc-mountpoints.spec
 @@ -65,5 +65,5 @@
  
  %files -f %{name}.files
--%doc LICENSE
-+%doc LICENSE LGPL-2.1
+-%license LICENSE
++%license LICENSE LGPL-2.1
  
  %files devel -f %{name}-devel.files
 
