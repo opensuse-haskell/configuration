@@ -1,0 +1,13 @@
+Index: lhs2tex.spec
+===================================================================
+--- lhs2tex.spec	(revision 5)
++++ lhs2tex.spec	(working copy)
+@@ -53,6 +53,7 @@
+ 
+ %install
+ %ghc_bin_install
++rm -f %{buildroot}/usr/share/licenses/lhs2tex/doc/Guide2.pdf
+ 
+ %files
+ %license LICENSE
+
