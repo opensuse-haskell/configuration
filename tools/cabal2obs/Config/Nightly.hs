@@ -30,8 +30,7 @@ goodStackagePackage (Dependency _ v) = v /= noVersion
 extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by psimons@suse.com.
-    "hledger-ui"
-  , "stylish-cabal"
+    "stylish-cabal"
 
     -- Needed for lambdabot libraries and MCP.
   , "lambdabot-core"
