@@ -32,7 +32,7 @@ extraPackageNames =
     "applicative-quoters"
   , "BNFC"
   , "cabal2spec <= 2.0.1"
-  , "stack <9", "rio"
+  , "stack <1.7", "rio"
 
     -- Used by ptrommler@icloud.com.
   , "lhs2tex"
