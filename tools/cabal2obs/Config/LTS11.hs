@@ -170,7 +170,6 @@ extraPackageNames =
   , "sound-collage"
   , "split-record"
   , "spool"
-  , "spoon"
   , "state-plus"
   , "storablevector-carray"
   , "Stream"
