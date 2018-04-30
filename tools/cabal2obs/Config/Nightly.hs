@@ -15,7 +15,7 @@ import Distribution.Version
 
 nightly :: PackageSetConfig
 nightly = PackageSetConfig
-    { compiler = "ghc-8.4.1"
+    { compiler = "ghc-8.4.2"
     , stackagePackages = filter goodStackagePackage stackage
     , extraPackages = extraPackageNames
     , bannedPackages = bannedPackageNames
