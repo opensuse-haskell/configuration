@@ -289,6 +289,9 @@ bannedPackageNames =
 
     -- Need pkgconfig(lapack), which we don't have.
   , "lapack-ffi", "lapack-carray"
+
+    -- https://github.com/fedora-haskell/ghc-rpm-macros/issues/9
+  , "s3-signer"
   ]
 
 forcedExectableNames :: [PackageName]
