@@ -1,0 +1,23 @@
+Index: ghc-hmatrix-morpheus.spec
+===================================================================
+--- ghc-hmatrix-morpheus.spec	(revision 2)
++++ ghc-hmatrix-morpheus.spec	(working copy)
+@@ -26,7 +26,7 @@
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+-BuildRequires:  blas-devel
++BuildRequires:  cblas-devel
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-hmatrix-devel
+ BuildRequires:  ghc-rpm-macros
+@@ -50,7 +50,7 @@
+ Summary:        Haskell %{pkg_name} library development files
+ Group:          Development/Libraries/Haskell
+ Requires:       %{name} = %{version}-%{release}
+-Requires:       blas-devel
++Requires:       cblas-devel
+ Requires:       ghc-compiler = %{ghc_version}
+ Requires:       lapack-devel
+ Requires(post): ghc-compiler = %{ghc_version}
+
