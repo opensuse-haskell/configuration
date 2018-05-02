@@ -29,33 +29,14 @@ goodStackagePackage (Dependency _ v) = v /= noVersion
 
 extraPackageNames :: [Dependency]
 extraPackageNames =
-  [ -- Used by psimons@suse.com.
-
-
-    -- Needed for lambdabot libraries and MCP.
-    "lambdabot-core"
-  , "lambdabot-irc-plugins"
-  , "lambdabot-reference-plugins"
-  , "lambdabot-social-plugins"
-  , "random-fu", "random-source", "SafeSemaphore"
-
-    -- Used by osukup@suse.com.
-  , "cab"
+  [ -- Used by osukup@suse.com.
+    "cab"
   , "xmobar"
 
     -- Needed by games repository somewhere.
+  , "SDL"
   , "SDL-image"
   , "SDL-mixer"
-
-    -- These packages are dependencies of cabal-install.
-  , "data-default-instances-base"
-  , "gnuidn"
-  , "gnutls"
-  , "gsasl"
-  , "network-protocol-xmpp"
-
-    -- Re-add these packages with modified constrains.
-  , "git-annex"
   ]
 
 bannedPackageNames :: [PackageName]
@@ -302,6 +283,12 @@ bannedPackageNames =
 
     -- Does not compile.
   , "yoga"
+
+    -- Need pkgconfig(blas), which we don't have.
+  , "blas-ffi", "blas-carray"
+
+    -- Need pkgconfig(lapack), which we don't have.
+  , "lapack-ffi", "lapack-carray"
   ]
 
 forcedExectableNames :: [PackageName]
