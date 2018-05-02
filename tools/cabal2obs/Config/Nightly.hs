@@ -292,6 +292,9 @@ bannedPackageNames =
 
     -- https://github.com/fedora-haskell/ghc-rpm-macros/issues/9
   , "s3-signer"
+
+    -- Works only with msodbc, which we don't have.
+  , "odbc"
   ]
 
 forcedExectableNames :: [PackageName]
