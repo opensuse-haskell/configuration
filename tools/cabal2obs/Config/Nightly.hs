@@ -31,7 +31,6 @@ extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by osukup@suse.com.
     "cab"
-  , "xmobar"
 
     -- Needed by games repository somewhere.
   , "SDL"
