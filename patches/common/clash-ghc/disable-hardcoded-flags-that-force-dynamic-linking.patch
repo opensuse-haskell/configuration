@@ -1,0 +1,13 @@
+Index: clash-ghc.spec
+===================================================================
+--- clash-ghc.spec	(revision 2)
++++ clash-ghc.spec	(working copy)
+@@ -108,6 +108,7 @@
+ 
+ %prep
+ %setup -q
++sed -i -e 's/-dynamic//' clash-ghc.cabal
+ 
+ %build
+ %ghc_lib_build
+
