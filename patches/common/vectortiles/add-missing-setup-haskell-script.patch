@@ -1,0 +1,14 @@
+Index: ghc-vectortiles.spec
+===================================================================
+--- ghc-vectortiles.spec	(revision 2)
++++ ghc-vectortiles.spec	(working copy)
+@@ -69,6 +69,8 @@
+ 
+ %build
+ %ghc_lib_build
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %install
+ %ghc_lib_install
+
