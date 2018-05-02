@@ -202,6 +202,7 @@ bannedPackageNames =
   , "hw-rankselect-base"
   , "hw-string-parse"
   , "hw-succinct"
+  , "hw-xml"
 
     -- Removed packages that failed to build in d:l:h and which are no longer
     -- in lts-8.x anyway.
