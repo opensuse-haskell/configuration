@@ -24,7 +24,7 @@ addons:
       - hvr-ghc
     packages:
       - cabal-install-head
-      - ghc-8.2.2
+      - ghc-8.4.2
       - rpm
 
 before_install:
