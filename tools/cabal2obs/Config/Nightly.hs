@@ -295,6 +295,9 @@ bannedPackageNames =
 
     -- Works only with msodbc, which we don't have.
   , "odbc"
+
+    -- No proper license, no upstream contact details.
+  , "peano"
   ]
 
 forcedExectableNames :: [PackageName]
