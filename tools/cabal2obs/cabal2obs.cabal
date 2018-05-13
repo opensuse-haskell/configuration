@@ -31,27 +31,28 @@ executable cabal2obs
                       , cabal2spec >2
                       , containers
                       , directory
+                      , extra
                       , filepath
                       , shake >=0.16
                       , time
   other-modules:        ChangesFile
                         Config
-                        Config.LTS11
-                        Config.LTS11.Stackage
-                        Config.LTS10
-                        Config.LTS10.Stackage
-                        Config.LTS8
-                        Config.LTS8.Stackage
-                        Config.LTS9
-                        Config.LTS9.Stackage
-                        Config.Nightly
-                        Config.Nightly.Stackage
+                        -- Config.LTS11
+                        -- Config.LTS11.Stackage
+                        -- Config.LTS10
+                        -- Config.LTS10.Stackage
+                        -- Config.LTS8
+                        -- Config.LTS8.Stackage
+                        -- Config.LTS9
+                        -- Config.LTS9.Stackage
+                        -- Config.Nightly
+                        -- Config.Nightly.Stackage
                         Oracle
-                        Oracle.Compiler
-                        Oracle.FlagAssignment
-                        Oracle.ForcedExecutables
+                        -- Oracle.Compiler
+                        -- Oracle.FlagAssignment
+                        -- Oracle.ForcedExecutables
                         Oracle.Hackage
-                        Oracle.PackageList
+                        -- Oracle.PackageList
                         Orphans
                         ParseStackageConfig
                         ParseUtils
