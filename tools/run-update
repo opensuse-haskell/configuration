@@ -26,7 +26,7 @@ cd "$(dirname "$0")"/..
 git -C hackage checkout -q hackage
 git -C hackage pull -q &
 cabal -v0 update &
-parallel "test -d {}/.osc && cd {} && osc update >/dev/null" ::: _build/* &
+parallel "test -d {}/.osc && cd {} && osc update --unexpand-link >/dev/null" ::: _build/* &
 wait
 
 msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
