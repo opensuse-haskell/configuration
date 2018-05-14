@@ -8,16 +8,16 @@ import Config
 import ChangesFile
 import Oracle
 import Orphans ()
-import ParseStackageConfig
+-- import ParseStackageConfig
 import ParseUtils
 import Types
 
 import Control.Monad.Extra
 import Data.Function
 import Data.List as List
-import Data.Map.Strict ( Map )
+-- import Data.Map.Strict ( Map )
 import qualified Data.Map.Strict as Map
-import Data.Maybe
+-- import Data.Maybe
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
@@ -239,18 +239,18 @@ verifyLicense lic = case eitherParsec lic of
              in unless (lic == lic') $
                fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
 
-mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
-mkStackagePackageSetSourcefile vers deps = unlines
-  [ "{-# LANGUAGE OverloadedStrings #-}"
-  , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
-  , ""
-  , "module Config." ++ vers ++ ".Stackage where"
-  , ""
-  , "import Orphans ( )"
-  , "import Distribution.Package"
-  , ""
-  , "stackage :: [Dependency]"
-  , "stackage ="
-  , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
-  , "  ]"
-  ]
+-- mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
+-- mkStackagePackageSetSourcefile vers deps = unlines
+--   [ "{-# LANGUAGE OverloadedStrings #-}"
+--   , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
+--   , ""
+--   , "module Config." ++ vers ++ ".Stackage where"
+--   , ""
+--   , "import Orphans ( )"
+--   , "import Distribution.Package"
+--   , ""
+--   , "stackage :: [Dependency]"
+--   , "stackage ="
+--   , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
+--   , "  ]"
+--   ]
