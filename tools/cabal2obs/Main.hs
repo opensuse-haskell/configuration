@@ -110,26 +110,26 @@ main = do
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
     homeDir </> ".cabal/packages/hackage.haskell.org/*/*/*.tar.gz" %> \out -> do
-      exists <- liftIO $ System.Directory.doesFileExist out
       -- The explicit test for existence is necessary because shake will
       -- re-build existing files if its internal database does not know how the
       -- file was created.
-      unless exists $ do
+      unlessM (liftIO (System.Directory.doesFileExist out)) $ do
         let pkgid = dropExtension (takeBaseName out)
         command_ [Traced "cabal-fetch"] "cabal" ["fetch", "-v0", "--no-dependencies", "--", pkgid]
 
     -- Pattern rule that copies the required source tarballs from cabal's
     -- internal cache into our build tree.
-    buildDir </> "*/*/*.tar.gz" %> \out -> do
-      liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
-      let pkgid = dropExtension (takeBaseName out)
-      PackageIdentifier n v <- parseText "PackageIdentifier" pkgid
-      if n == "git-annex"
-         then command_ [FileStdout out] "curl"
-                       [ "-L", "--silent", "--show-error", "--"
-                       , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
-                       ]
-         else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
+    buildDir </> "*/*/*.tar.gz" %> \out ->
+      unlessM (liftIO (System.Directory.doesFileExist out)) $ do
+        liftIO $ removeFiles (takeDirectory out) ["*.tar.gz"]
+        let pkgid = dropExtension (takeBaseName out)
+        PackageIdentifier n v <- parseText "PackageIdentifier" pkgid
+        if n == "git-annex"
+           then command_ [FileStdout out] "curl"
+                         [ "-L", "--silent", "--show-error", "--"
+                         , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
+                         ]
+           else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     -- buildDir </> "*/*/*.changes" %> \out -> do
     --   let [_,psid',bn',_] = splitDirectories out
