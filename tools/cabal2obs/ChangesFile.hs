@@ -20,6 +20,5 @@ mkChangeEntry (PackageIdentifier pn v) rev email = do
     , unwords [ ts, "-", email ]
     , ""
     , "- Update " ++ unPackageName pn ++ " to version " ++ versionString ++ "."
-    , "  A more detailed change log is not available."
     , ""
     ]

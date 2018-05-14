@@ -106,6 +106,15 @@ main = do
           return (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")
         need specFiles
 
+    -- Generate the latest changelog entry template for every TW package.
+    phony "changelogs" $ do
+      let psid = "ghc-8.4.x"
+          pset = getPackageSet psid    -- TODO: hard-coded magic constant
+      changesFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
+         BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
+         return (buildDir </> unPackageSetId psid </> bn </> bn <.> "changes")
+      need changesFiles
+
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
@@ -131,18 +140,19 @@ main = do
                          ]
            else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
-    -- buildDir </> "*/*/*.changes" %> \out -> do
-    --   let [_,psid',bn',_] = splitDirectories out
-    --       psid = PackageSetId psid'
-    --       bn = BuildName bn'
-    --   pkgid@(PackageIdentifier _ v) <- pkgidFromPath (psid,bn)
-    --   cabal <- getCabal pkgid
-    --   let rev = packageRevision cabal
-    --       versionString = "version " ++ display v
-    --   liftIO $ do changes <- readFile out `mplus` return ""
-    --               unless (versionString `isInfixOf` changes) $ do
-    --                  newEntry <- mkChangeEntry pkgid rev "psimons@suse.com"
-    --                  writeFile out (newEntry ++ changes)
+    buildDir </> "*/*/*.changes" %> \out -> do
+      let [_,psid',bn',_] = splitDirectories out
+          psid = PackageSetId psid'
+          bn = BuildName bn'
+      pkgid@(PackageIdentifier _ v) <- pkgidFromPath (psid,bn)
+      cabal <- getCabal pkgid
+      let rev = packageRevision cabal
+          versionString = "version " ++ display v
+      changes <- liftIO (readFile out `mplus` return "")
+      unless (versionString `isInfixOf` changes) $
+         traced "update-changelog" $ do
+           newEntry <- mkChangeEntry pkgid rev "psimons@suse.com" -- TODO: hard-coded magic constant
+           writeFile out (newEntry ++ changes)
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
@@ -164,6 +174,11 @@ main = do
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePD: " ++ show missing)
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe fa)
+      -- TODO: There is a subtle problem here. The change log files affect the
+      -- spec file generate because they determine the copyright year when they
+      -- exist. So, technically, these are dependencies of this rule. We don't
+      -- want them to be, however, because we want change logs to be generated
+      -- only when they are explicitly requested by the user.
       yearFlag <- do haveChanges <- Shake.doesFileExist (out -<.> "changes")
                      if not haveChanges then return [] else do
                         Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
