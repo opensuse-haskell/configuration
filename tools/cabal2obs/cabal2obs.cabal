@@ -47,6 +47,7 @@ executable cabal2obs
                         -- Config.LTS9.Stackage
                         -- Config.Nightly
                         -- Config.Nightly.Stackage
+                        Config.ForcedExecutables
                         Oracle
                         -- Oracle.Compiler
                         -- Oracle.FlagAssignment
