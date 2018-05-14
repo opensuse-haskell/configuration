@@ -3,7 +3,7 @@
 set -eu -o pipefail
 
 status=$(
-          osc api '/build/devel:languages:haskell:lts:11/_result?repository=openSUSE_Tumbleweed' | \
+          osc api '/build/devel:languages:haskell:ghc-8.4.x/_result?repository=openSUSE_Tumbleweed' | \
           sed -n -r -e '/code="disabled"/d' -e 's/.*package=.* code="([^"]+)".*/\1/p' | \
           sort | \
           uniq
@@ -14,6 +14,6 @@ if [ "$status" != "succeeded" ]; then
     exit 0
 fi
 
-osc prdiff --show-not-in-new devel:languages:haskell:lts:11 devel:languages:haskell | \
+osc prdiff --show-not-in-new devel:languages:haskell:ghc-8.4.x devel:languages:haskell | \
     sed -n -e "s/^differs:[ \t]*//p" -e "s/^old only:[ \t]*//p" | \
-    parallel "osc copypac --keep-develproject --keep-link --keep-maintainers devel:languages:haskell:lts:11 {} devel:languages:haskell"
+    parallel "osc copypac --keep-develproject --keep-link --keep-maintainers devel:languages:haskell:ghc-8.4.x {} devel:languages:haskell"
