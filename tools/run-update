@@ -26,7 +26,7 @@ cd "$(dirname "$0")"/..
 git -C hackage checkout -q hackage
 git -C hackage pull -q &
 cabal -v0 update &
-parallel "cd {} && osc update >/dev/null" ::: _build/lts-* &
+parallel "test -d {}/.osc && cd {} && osc update >/dev/null" ::: _build/* &
 wait
 
 msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
@@ -34,24 +34,24 @@ if [ -n "$(git status --porcelain hackage)" ]; then
    git commit -q -m "$msg" hackage
 fi
 
-parallel "cd {} && osc status" ::: _build/lts-* >"$tmpfile"
+parallel "test -d {}/.osc && cd {} && osc status" ::: _build/* >"$tmpfile"
 if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-cd tools/cabal2obs
-cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
-cd ../..
-for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
-    v=$(basename $(dirname "$n"))
-    case "$v" in
-        LTS*)    v=lts-${v##LTS} ;;
-        Nightly) v=nightly;;
-        *)       error_exit unexpected file modification of "$n" during update ;;
-    esac
-    v=$(sed -r -n 's,^-- .* http://www.stackage.org/snapshot/(.*)$,\1,p' "_build/cabal-$v.config")
-    git commit -q -m "update to $v" "$n"
-done
+# cd tools/cabal2obs
+# cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
+# cd ../..
+# for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
+#     v=$(basename $(dirname "$n"))
+#     case "$v" in
+#         LTS*)    v=lts-${v##LTS} ;;
+#         Nightly) v=nightly;;
+#         *)       error_exit unexpected file modification of "$n" during update ;;
+#     esac
+#     v=$(sed -r -n 's,^-- .* http://www.stackage.org/snapshot/(.*)$,\1,p' "_build/cabal-$v.config")
+#     git commit -q -m "update to $v" "$n"
+# done
 
 git status --porcelain >"$tmpfile"
 if [ -s "$tmpfile" ]; then
@@ -62,4 +62,4 @@ cd tools/cabal2obs
 cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint
 cd ../..
 
-parallel "cd {} && ../../tools/commit >/dev/null" ::: _build/lts-*
+parallel "test -d {}/.osc && cd {} && echo ../../tools/commit /dev/null" ::: _build/*
