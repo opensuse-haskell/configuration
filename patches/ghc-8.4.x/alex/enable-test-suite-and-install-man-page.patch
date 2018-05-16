@@ -1,0 +1,46 @@
+Index: alex.spec
+===================================================================
+--- alex.spec	(revision 4)
++++ alex.spec	(working copy)
+@@ -16,7 +16,7 @@
+ #
+ 
+ 
+-%bcond_with tests
++%bcond_without tests
+ Name:           alex
+ Version:        3.2.4
+ Release:        0
+@@ -26,6 +26,7 @@
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ BuildRequires:  ghc-Cabal-devel
++BuildRequires:  autoconf
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-directory-devel
+@@ -45,9 +46,14 @@
+ 
+ %build
+ %ghc_bin_build
++cd doc
++test -f configure || autoreconf
++./configure
+ 
+ %install
+ %ghc_bin_install
++mkdir -p %{buildroot}/%{_mandir}/man1
++cp doc/alex.1 %{buildroot}/%{_mandir}/man1
+ 
+ %check
+ %cabal_test
+@@ -62,6 +68,8 @@
+ %{_datadir}/%{name}-%{version}/AlexTemplate-ghc
+ %{_datadir}/%{name}-%{version}/AlexTemplate-ghc-debug
+ %{_datadir}/%{name}-%{version}/AlexTemplate-ghc-nopred
++%{_datadir}/%{name}-%{version}
++%{_mandir}/man1/*
+ %{_datadir}/%{name}-%{version}/AlexWrapper-basic
+ %{_datadir}/%{name}-%{version}/AlexWrapper-basic-bytestring
+ %{_datadir}/%{name}-%{version}/AlexWrapper-gscan
+
