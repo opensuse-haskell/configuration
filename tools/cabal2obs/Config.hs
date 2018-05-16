@@ -108,6 +108,7 @@ ghc84x = PackageSetConfig
                        , "Glob-0.9.2"
                        , "hackage-security-0.5.3.0"
                        , "haddock-library-1.5.0.1"
+                       , "happy-1.19.9"
                        , "hashable-1.2.7.0"
                        , "haskell-src-exts-1.20.2"
                        , "haskell-src-meta-0.8.0.2"
