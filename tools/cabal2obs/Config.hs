@@ -26,12 +26,12 @@ getPackageSet psid = findWithDefault err psid packageSets
 ghc84x :: PackageSetConfig
 ghc84x = PackageSetConfig
   { compiler         = "ghc-8.4.2"
-  , targetPackages   = [ "alex"
-                       , "cabal-install"
-                       , "happy"
-                       , "pandoc"
-                       , "ShellCheck"
-                       , "stack"
+  , targetPackages   = [ "alex >=3.2.4"
+                       , "cabal-install >=2.2.0.0"
+                       , "happy >=1.19.9"
+                       , "pandoc >=2.2.1"
+                       , "ShellCheck >=0.4.7"
+                       , "stack >=1.7.1"
                        ]
   , packageSet       = [ "aeson-1.2.4.0"
                        , "aeson-compat-0.3.7.1"
