@@ -32,6 +32,12 @@ ghc84x = PackageSetConfig
                        , "pandoc >=2.2.1"
                        , "ShellCheck >=0.4.7"
                        , "stack >=1.7.1"
+
+                         -- Dmitriy Perlow <dap.darkness@gmail.com> needs these
+                         -- packages for games/raincat.
+                       , "SDL >=0.6.6.0"
+                       , "SDL-image >=0.6.1.2"
+                       , "SDL-mixer >=0.6.2.0"
                        ]
   , packageSet       = [ "aeson-1.2.4.0"
                        , "aeson-compat-0.3.7.1"
@@ -206,6 +212,9 @@ ghc84x = PackageSetConfig
                        , "tagsoup-0.14.6"
                        , "tar-0.5.1.0"
                        , "temporary-1.2.1.1"
+                       , "SDL-0.6.6.0"
+                       , "SDL-image-0.6.1.2"
+                       , "SDL-mixer-0.6.2.0"
                        , "texmath-0.11"
                        , "text-metrics-0.3.0"
                        , "tf-random-0.5"
