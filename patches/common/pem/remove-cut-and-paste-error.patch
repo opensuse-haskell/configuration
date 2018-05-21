@@ -1,0 +1,14 @@
+Index: ghc-pem.spec
+===================================================================
+--- ghc-pem.spec	(revision 3)
++++ ghc-pem.spec	(working copy)
+@@ -40,7 +40,7 @@
+ %endif
+ 
+ %description
+-Privacy Enhanced Mail (PEM) format reader and writer. long description.
++Privacy Enhanced Mail (PEM) format reader and writer.
+ 
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+
