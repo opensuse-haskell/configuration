@@ -30,7 +30,7 @@ goodStackagePackage (Dependency _ v) = v /= noVersion
 extraPackageNames :: [Dependency]
 extraPackageNames =
   [ -- Used by osukup@suse.com.
-    "cab"
+    "cab", "xmonad", "xmonad-contrib", "xmobar"
 
     -- Needed by games repository somewhere.
   , "SDL"
