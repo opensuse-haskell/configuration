@@ -414,8 +414,9 @@ flagList =
     -- Build the standalone executable.
   , ("texmath",                        "executable")
 
-    -- Enable almost all extensions.
-  , ("xmobar",                         "with_thread with_utf8 with_xft with_xpm with_mpris with_dbus with_iwlib with_inotify")
+    -- Enable some extensions. There are plenty more, but these need more
+    -- testing and/or fixing before they work with ghc 8.4.x.
+  , ("xmobar",                         "with_utf8 with_xft with_xpm with_thread")
 
     -- Enable additional features
   , ("idris",                          "ffi gmp")
