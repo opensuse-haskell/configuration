@@ -207,7 +207,7 @@ ghc84x = PackageSetConfig
                        , "StateVar-1.1.1.0"
                        , "stm-chans-3.0.0.4"
                        , "store-0.4.3.2"
-                       , "store-core-0.4.1"
+                       , "store-core-0.4.3"
                        , "streaming-commons-0.2.0.0"
                        , "syb-0.7"
                        , "tagged-0.8.5"
