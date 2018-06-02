@@ -62,4 +62,4 @@ cd tools/cabal2obs
 cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint
 cd ../..
 
-parallel "test -d {}/.osc && cd {} && echo ../../tools/commit /dev/null" ::: _build/*
+parallel "test -d {}/.osc && cd {} && ../../tools/commit >/dev/null" ::: _build/*
