@@ -173,7 +173,7 @@ main = do
       need [pkgDir </> display pkgid <.> "tar.gz"]
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePD: " ++ show missing)
-        Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe fa)
+        Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa)
       -- TODO: There is a subtle problem here. The change log files affect the
       -- spec file generate because they determine the copyright year when they
       -- exist. So, technically, these are dependencies of this rule. We don't
