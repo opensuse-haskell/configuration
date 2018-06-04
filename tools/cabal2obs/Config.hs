@@ -25,7 +25,7 @@ getPackageSet psid = findWithDefault err psid packageSets
 
 ghc84x :: PackageSetConfig
 ghc84x = PackageSetConfig
-  { compiler         = "ghc-8.4.2"
+  { compiler         = "ghc-8.4.3"
   , targetPackages   = [ "alex >=3.2.4"
                        , "cabal-install >=2.2.0.0"
                        , "happy >=1.19.9"
