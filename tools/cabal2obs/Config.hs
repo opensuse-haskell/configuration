@@ -4,6 +4,7 @@
 module Config ( getPackageSet, packageSets ) where
 
 import Config.Ghc84x
+import Config.LTS11
 import Orphans ()
 import Types
 
@@ -11,6 +12,7 @@ import Data.Map.Strict ( Map, findWithDefault )
 
 packageSets :: Map PackageSetId PackageSetConfig
 packageSets = [ ("ghc-8.4.x", ghc84x)
+              , ("lts-11",    lts11)
               ]
 
 getPackageSet :: PackageSetId -> PackageSetConfig

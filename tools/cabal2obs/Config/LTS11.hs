@@ -1,11 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedLists #-}
 
 module Config.LTS11 ( lts11 ) where
 
+import Config.ForcedExecutables
 import Config.LTS11.Stackage
 import Types
 import Orphans ()
 
+import Data.Map.Strict ( fromList )
 import Data.Maybe
 import Distribution.Package
 import Distribution.PackageDescription
@@ -16,15 +19,17 @@ import Distribution.Version
 lts11 :: PackageSetConfig
 lts11 = PackageSetConfig
         { compiler = "ghc-8.2.2"
-        , stackagePackages = filter goodStackagePackage stackage
-        , extraPackages = extraPackageNames
-        , bannedPackages = bannedPackageNames
-        , flagAssignments = readFlagAssignents flagList
+        , targetPackages = []
+        , packageSet = myPackageSet
+        , flagAssignments = fromList (readFlagAssignents flagList)
         , forcedExectables = forcedExectableNames
         }
 
-goodStackagePackage :: Dependency ->  Bool
-goodStackagePackage (Dependency _ v) = v /= noVersion
+myPackageSet :: PackageSet
+myPackageSet = fromList
+  [ (pn,v)
+  | Dependency pn vr <- stackage, pn `notElem` bannedPackageNames, Just v <- [isSpecificVersion vr]
+  ]
 
 extraPackageNames :: [Dependency]
 extraPackageNames =
@@ -489,92 +494,6 @@ bannedPackageNames =
 
     -- Triggers some GHC bug that results in the build failing due to "shadowed dependencies".
   , "apply-refact"
-  ]
-
-forcedExectableNames :: [PackageName]
-forcedExectableNames =
-  [ "Agda"
-  , "alex"
-  , "apply-refact"
-  , "asciidiagram"
-  , "BNFC"
-  , "bustle"
-  , "c2hs"
-  , "cab"
-  , "cabal-install"
-  , "cabal-rpm"
-  , "cabal2nix"
-  , "cabal2spec"
-  , "clash-ghc"
-  , "codex"
-  , "cpphs"
-  , "cryptol"
-  , "darcs"
-  , "derive"
-  , "diagrams-haddock"
-  , "dixi"
-  , "doctest"
-  , "doctest-discover"
-  , "find-clumpiness"
-  , "ghc-imported-from"
-  , "ghc-mod"
-  , "ghcid"
-  , "git-annex"
-  , "gtk2hs-buildtools"
-  , "hackage-mirror"
-  , "hackmanager"
-  , "handwriting"
-  , "hapistrano"
-  , "happy"
-  , "HaRe"
-  , "haskintex"
-  , "HaXml"
-  , "hdevtools"
-  , "hdocs"
-  , "highlighting-kate"
-  , "hindent"
-  , "hledger"
-  , "hledger-web"
-  , "hlint"
-  , "holy-project"
-  , "hoogle"
-  , "hpack"
-  , "hpc-coveralls"
-  , "hscolour"
-  , "hsdev"
-  , "hspec-discover"
-  , "hspec-setup"
-  , "ide-backend"
-  , "idris"
-  , "keter"
-  , "leksah-server"
-  , "lhs2tex"
-  , "markdown-unlit"
-  , "microformats2-parser"
-  , "misfortune"
-  , "modify-fasta"
-  , "msi-kb-backlit"
-  , "omnifmt"
-  , "osdkeys"
-  , "pandoc"
-  , "pointfree"
-  , "pointful"
-  , "postgresql-schema"
-  , "purescript"
-  , "quickbench"
-  , "shake"
-  , "ShellCheck"
-  , "stack"
-  , "stack-run-auto"
-  , "stackage-curator"
-  , "stylish-haskell"
-  , "texmath"
-  , "titlecase"
-  , "werewolf"
-  , "wordpass"
-  , "xmobar"
-  , "xmonad"
-  , "yi"
   ]
 
 flagList :: [(String,String)]
