@@ -1,16 +1,15 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 2)
+--- pandoc.spec	(revision 16)
 +++ pandoc.spec	(working copy)
-@@ -27,6 +27,7 @@
- Group:          Productivity/Publishing/Other
- URL:            https://hackage.haskell.org/package/%{name}
+@@ -28,5 +28,6 @@
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/2.cabal#/%{name}.cabal
 +Source10:       pandoc-pdf.readme
- Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
  BuildRequires:  chrpath
- BuildRequires:  fdupes
-@@ -111,6 +112,19 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-Glob-devel
+@@ -110,6 +111,19 @@
  writers, which convert this native representation into a target format.
  Thus, adding an input or output format requires only adding a reader or writer.
  
@@ -30,7 +29,7 @@ Index: pandoc.spec
  %package -n ghc-%{name}
  Summary:        Haskell %{name} library
  Group:          System/Libraries
-@@ -131,6 +145,7 @@
+@@ -130,6 +144,7 @@
  
  %prep
  %setup -q
@@ -38,7 +37,7 @@ Index: pandoc.spec
  cp -p %{SOURCE1} %{name}.cabal
  
  %build
-@@ -305,6 +320,11 @@
+@@ -304,6 +319,11 @@
  %{_datadir}/%{name}-%{version}/data/templates/default.zimwiki
  %{_datadir}/%{name}-%{version}/data/translations/*.yaml
  
@@ -48,6 +47,6 @@ Index: pandoc.spec
 +%endif
 +
  %files -n ghc-%{name} -f ghc-%{name}.files
- %doc COPYING.md
+ %license COPYING.md
  
 

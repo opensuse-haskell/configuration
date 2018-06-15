@@ -1,9 +1,9 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 5)
+--- pandoc.spec	(revision 18)
 +++ pandoc.spec	(working copy)
-@@ -170,155 +170,8 @@
- %doc COPYING.md
+@@ -169,155 +169,8 @@
+ %license COPYING.md
  %doc AUTHORS.md README.md changelog
  %{_bindir}/%{name}
 -%dir %{_datadir}/%{name}-%{version}
@@ -43,7 +43,7 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/LaTeXMathML.js
 -%{_datadir}/%{name}-%{version}/data/abbreviations
 -%{_datadir}/%{name}-%{version}/data/bash_completion.tpl
--%{_datadir}/%{name}-%{version}/data/docx/[Content_Types].xml
+-%{_datadir}/%{name}-%{version}/data/docx/?Content_Types?.xml
 -%{_datadir}/%{name}-%{version}/data/docx/_rels/.rels
 -%{_datadir}/%{name}-%{version}/data/docx/docProps/app.xml
 -%{_datadir}/%{name}-%{version}/data/docx/docProps/core.xml
@@ -73,7 +73,7 @@ Index: pandoc.spec
 -%{_datadir}/%{name}-%{version}/data/odt/styles.xml
 -%{_datadir}/%{name}-%{version}/data/pandoc.List.lua
 -%{_datadir}/%{name}-%{version}/data/pandoc.lua
--%{_datadir}/%{name}-%{version}/data/pptx/[Content_Types].xml
+-%{_datadir}/%{name}-%{version}/data/pptx/?Content_Types?.xml
 -%{_datadir}/%{name}-%{version}/data/pptx/_rels/.rels
 -%{_datadir}/%{name}-%{version}/data/pptx/docProps/app.xml
 -%{_datadir}/%{name}-%{version}/data/pptx/docProps/core.xml
