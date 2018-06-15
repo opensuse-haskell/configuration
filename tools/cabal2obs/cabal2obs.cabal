@@ -37,6 +37,7 @@ executable cabal2obs
                       , time
   other-modules:        ChangesFile
                         Config
+                        Config.Ghc84x
                         -- Config.LTS11
                         -- Config.LTS11.Stackage
                         -- Config.LTS10
