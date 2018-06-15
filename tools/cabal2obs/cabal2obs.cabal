@@ -46,8 +46,8 @@ executable cabal2obs
                         -- Config.LTS8.Stackage
                         -- Config.LTS9
                         -- Config.LTS9.Stackage
-                        -- Config.Nightly
-                        -- Config.Nightly.Stackage
+                        Config.Nightly
+                        Config.Nightly.Stackage
                         Config.ForcedExecutables
                         Oracle
                         -- Oracle.Compiler

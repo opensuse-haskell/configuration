@@ -1,11 +1,14 @@
+{-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Config.Nightly ( nightly ) where
 
+import Config.ForcedExecutables
 import Config.Nightly.Stackage
 import Types
 import Orphans ()
 
+import Data.Map.Strict ( fromList )
 import Data.Maybe
 import Distribution.Package
 import Distribution.PackageDescription
@@ -16,16 +19,17 @@ import Distribution.Version
 nightly :: PackageSetConfig
 nightly = PackageSetConfig
     { compiler = "ghc-8.4.3"
-    , stackagePackages = filter goodStackagePackage stackage
-    , extraPackages = extraPackageNames
-    , bannedPackages = bannedPackageNames
-    , flagAssignments = readFlagAssignents flagList
+    , targetPackages = []
+    , packageSet = myPackageSet
+    , flagAssignments = fromList (readFlagAssignents flagList)
     , forcedExectables = forcedExectableNames
     }
 
-goodStackagePackage :: Dependency ->  Bool
-goodStackagePackage (Dependency "git-annex" _) = False
-goodStackagePackage (Dependency _ v) = v /= noVersion
+myPackageSet :: PackageSet
+myPackageSet = fromList
+  [ (pn,v)
+  | Dependency pn vr <- stackage, pn `notElem` bannedPackageNames, Just v <- [isSpecificVersion vr]
+  ]
 
 extraPackageNames :: [Dependency]
 extraPackageNames =
@@ -300,93 +304,6 @@ bannedPackageNames =
   , "peano"
   ]
 
-forcedExectableNames :: [PackageName]
-forcedExectableNames =
-  [ "Agda"
-  , "alex"
-  , "apply-refact"
-  , "asciidiagram"
-  , "BlogLiterately"
-  , "BNFC"
-  , "bustle"
-  , "c2hs"
-  , "cab"
-  , "cabal-install"
-  , "cabal-rpm"
-  , "cabal2nix"
-  , "cabal2spec"
-  , "clash-ghc"
-  , "codex"
-  , "cpphs"
-  , "cryptol"
-  , "darcs"
-  , "derive"
-  , "diagrams-haddock"
-  , "dixi"
-  , "doctest"
-  , "doctest-discover"
-  , "find-clumpiness"
-  , "ghc-imported-from"
-  , "ghc-mod"
-  , "ghcid"
-  , "git-annex"
-  , "gtk2hs-buildtools"
-  , "hackage-mirror"
-  , "hackmanager"
-  , "handwriting"
-  , "hapistrano"
-  , "happy"
-  , "HaRe"
-  , "haskintex"
-  , "HaXml"
-  , "hdevtools"
-  , "hdocs"
-  , "highlighting-kate"
-  , "hindent"
-  , "hledger"
-  , "hledger-web"
-  , "hlint"
-  , "holy-project"
-  , "hoogle"
-  , "hpack"
-  , "hpc-coveralls"
-  , "hscolour"
-  , "hsdev"
-  , "hspec-discover"
-  , "hspec-setup"
-  , "ide-backend"
-  , "idris"
-  , "keter"
-  , "leksah-server"
-  , "lhs2tex"
-  , "markdown-unlit"
-  , "microformats2-parser"
-  , "misfortune"
-  , "modify-fasta"
-  , "msi-kb-backlit"
-  , "omnifmt"
-  , "osdkeys"
-  , "pandoc"
-  , "pointfree"
-  , "pointful"
-  , "postgresql-schema"
-  , "purescript"
-  , "quickbench"
-  , "shake"
-  , "ShellCheck"
-  , "stack"
-  , "stack-run-auto"
-  , "stackage-curator"
-  , "stylish-cabal"
-  , "stylish-haskell"
-  , "texmath"
-  , "titlecase"
-  , "werewolf"
-  , "wordpass"
-  , "xmobar"
-  , "xmonad"
-  , "yi"
-  ]
 
 flagList :: [(String,String)]
 flagList =
