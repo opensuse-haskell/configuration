@@ -4,11 +4,11 @@
 module Main ( main ) where
 
 import Cabal2Spec
-import Config
 import ChangesFile
+import Config
 import Oracle
 import Orphans ()
--- import ParseStackageConfig
+import ParseStackageConfig
 import ParseUtils
 import Types
 
@@ -204,21 +204,21 @@ main = do
     --     return $ intercalate "," [ show (display n), show (display v), show url]
     --   writeFile' out (intercalate "\n" ls)
 
-    -- buildDir </> "cabal-*.config" %> \out -> do
-    --   alwaysRerun
-    --   let lts = drop 6 (takeBaseName out)
-    --       url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
-    --   command_ [FileStdout out] "curl" ["-L", "-s", url]
+    buildDir </> "cabal-*.config" %> \out -> do
+      alwaysRerun
+      let lts = drop 6 (takeBaseName out)
+          url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
+      command_ [FileStdout out] "curl" ["-L", "-s", url]
 
-    -- "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
-    --   let dirname = takeBaseName (takeDirectory out)
-    --       psid = case dirname of
-    --                "Nightly"     -> "nightly"
-    --                'L':'T':'S':x -> "lts-" ++ x
-    --                _              -> error ("invaid cabal2obs config path " ++ show dirname)
-    --   buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
-    --   deps <- runP stackageConfig buf
-    --   writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
+    "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
+      let dirname = takeBaseName (takeDirectory out)
+          psid = case dirname of
+                   "Nightly"     -> "nightly"
+                   'L':'T':'S':x -> "lts-" ++ x
+                   _              -> error ("invaid cabal2obs config path " ++ show dirname)
+      buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
+      deps <- runP stackageConfig buf
+      writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
 
     -- phony "update" $ need
     --   [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
@@ -239,18 +239,18 @@ verifyLicense lic = case eitherParsec lic of
              in unless (lic == lic') $
                fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
 
--- mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
--- mkStackagePackageSetSourcefile vers deps = unlines
---   [ "{-# LANGUAGE OverloadedStrings #-}"
---   , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
---   , ""
---   , "module Config." ++ vers ++ ".Stackage where"
---   , ""
---   , "import Orphans ( )"
---   , "import Distribution.Package"
---   , ""
---   , "stackage :: [Dependency]"
---   , "stackage ="
---   , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
---   , "  ]"
---   ]
+mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
+mkStackagePackageSetSourcefile vers deps = unlines
+  [ "{-# LANGUAGE OverloadedStrings #-}"
+  , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
+  , ""
+  , "module Config." ++ vers ++ ".Stackage where"
+  , ""
+  , "import Orphans ( )"
+  , "import Distribution.Package"
+  , ""
+  , "stackage :: [Dependency]"
+  , "stackage ="
+  , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
+  , "  ]"
+  ]
