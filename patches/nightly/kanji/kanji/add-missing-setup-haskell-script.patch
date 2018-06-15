@@ -1,8 +1,8 @@
-Index: ghc-streaming-attoparsec.spec
+Index: ghc-kanji.spec
 ===================================================================
---- ghc-streaming-attoparsec.spec	(revision 2)
-+++ ghc-streaming-attoparsec.spec	(working copy)
-@@ -54,7 +54,9 @@
+--- ghc-kanji.spec	(revision 4)
++++ ghc-kanji.spec	(working copy)
+@@ -62,7 +62,9 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}

@@ -302,6 +302,9 @@ bannedPackageNames =
 
     -- No proper license, no upstream contact details.
   , "peano"
+
+    -- Unrecognizable license
+  , "exomizer"
   ]
 
 
