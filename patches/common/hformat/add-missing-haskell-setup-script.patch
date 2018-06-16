@@ -1,0 +1,14 @@
+Index: ghc-hformat.spec
+===================================================================
+--- ghc-hformat.spec (revision 7)
++++ ghc-hformat.spec (revision 8)
+@@ -51,6 +51,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

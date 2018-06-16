@@ -1,0 +1,14 @@
+Index: ghc-amazonka-test.spec
+===================================================================
+--- ghc-amazonka-test.spec	(revision 1)
++++ ghc-amazonka-test.spec	(working copy)
+@@ -69,6 +69,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
