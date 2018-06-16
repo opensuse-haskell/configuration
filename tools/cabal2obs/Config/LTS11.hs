@@ -36,9 +36,9 @@ extraPackages =
   [ -- Used by psimons@suse.com.
     "applicative-quoters-0.1.0.8"
   , "BNFC-2.8.1"
-  -- , "cabal2spec <= 2.0.1"
-  , "stack-1.6.5"
-  , "rio-0.1.2.0"
+  , "cabal2spec-2.0.1"
+  , "stack-1.6.5", "rio-0.1.2.0"
+
 --
 --     -- Used by ptrommler@icloud.com.
 --   , "lhs2tex"
@@ -68,7 +68,7 @@ extraPackages =
 --   , "git-annex", "IfElse", "bloomfilter", "esqueleto", "fdo-notify", "magic", "sandi", "torrent"
 --   -}
 --
---     -- These packages are in Factory for historical reasons.
+  -- These packages are in Factory for historical reasons.
 --   , "AC-Vector"
 --   , "acid-state"
 --   , "aeson-lens"
@@ -101,7 +101,6 @@ extraPackages =
 --   , "enummapset-th"
 --   , "fast-math"
 --   , "fdo-notify"
-  , "flat-0.3"
 --   , "foldl-statistics"
 --   , "fortran-src"
 --   , "freer"
@@ -211,7 +210,6 @@ extraPackages =
 --   , "wild-bind-indicator"
 --   , "yahoo-finance-api"
 --   , "yesod-default"
---   , "zm"
   ]
 
 bannedPackageNames :: [PackageName]

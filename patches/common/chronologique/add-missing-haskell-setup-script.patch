@@ -1,0 +1,14 @@
+Index: ghc-chronologique.spec
+===================================================================
+--- ghc-chronologique.spec	(revision 1)
++++ ghc-chronologique.spec	(working copy)
+@@ -67,6 +67,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

@@ -1,0 +1,28 @@
+Index: ghc-git-vogue.spec
+===================================================================
+--- ghc-git-vogue.spec	(revision 1)
++++ ghc-git-vogue.spec	(working copy)
+@@ -68,6 +68,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%define cabal_configure_options --libexecdir=%{_libexecdir}
+ 
+ %build
+ %ghc_lib_build
+@@ -88,9 +89,11 @@
+ %files -f %{name}.files
+ %license LICENSE
+ %{_bindir}/%{pkg_name}
+-%{_bindir}/git-vogue-hlint
+-%{_bindir}/git-vogue-packunused
+-%{_bindir}/git-vogue-stylish
++%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}
++%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/%{pkg_name}-hlint
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/%{pkg_name}-packunused
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/%{pkg_name}-stylish
+ %dir %{_datadir}/%{pkg_name}-%{version}
+ %dir %{_datadir}/%{pkg_name}-%{version}/templates
+ %{_datadir}/%{pkg_name}-%{version}/templates/pre-commit
+

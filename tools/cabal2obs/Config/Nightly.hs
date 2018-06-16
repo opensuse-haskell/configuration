@@ -8,7 +8,7 @@ import Config.Nightly.Stackage
 import Types
 import Orphans ()
 
-import Data.Map.Strict ( fromList )
+import Data.Map.Strict ( fromList, union )
 import Data.Maybe
 import Distribution.Package
 import Distribution.PackageDescription
@@ -20,7 +20,7 @@ nightly :: PackageSetConfig
 nightly = PackageSetConfig
     { compiler = "ghc-8.4.3"
     , targetPackages = []
-    , packageSet = myPackageSet
+    , packageSet = myPackageSet `union` extraPackages
     , flagAssignments = fromList (readFlagAssignents flagList)
     , forcedExectables = forcedExectableNames
     }
@@ -31,15 +31,10 @@ myPackageSet = fromList
   | Dependency pn vr <- stackage, pn `notElem` bannedPackageNames, Just v <- [isSpecificVersion vr]
   ]
 
-extraPackageNames :: [Dependency]
-extraPackageNames =
+extraPackages :: PackageSet
+extraPackages =
   [ -- Used by osukup@suse.com.
-    "cab", "xmonad", "xmonad-contrib", "xmobar"
-
-    -- Needed by games repository somewhere.
-  , "SDL"
-  , "SDL-image"
-  , "SDL-mixer"
+    "cab-0.2.18", "xmonad-0.13", "xmonad-contrib-0.13", "xmobar-0.26"
   ]
 
 bannedPackageNames :: [PackageName]
@@ -301,7 +296,7 @@ bannedPackageNames =
   , "odbc"
 
     -- No proper license, no upstream contact details.
-  , "peano"
+  , "peano", "natural-induction", "Fin"
 
     -- Unrecognizable license
   , "exomizer"
@@ -354,6 +349,10 @@ flagList =
 
     -- Fix build with modern compilers.
   , ("cassava",                        "-bytestring--lt-0_10_4")
+
+    -- Avoid dependency on 'cborg' and/or 'serialise'.
+  , ("exinst",                         "-serialise")
+  , ("safe-money",                     "-serialise")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]

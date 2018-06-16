@@ -1,0 +1,14 @@
+Index: hledger.spec
+===================================================================
+--- hledger.spec	(revision 10)
++++ hledger.spec	(working copy)
+@@ -104,7 +104,7 @@
+ 
+ %prep
+ %setup -q
+-cp -p %{SOURCE1} %{name}.cabal
++cp -p %{SOURCE1} %{name}.cabal-broken
+ 
+ %build
+ %ghc_lib_build
+
