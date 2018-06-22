@@ -1,0 +1,25 @@
+Index: cpphs.spec
+===================================================================
+--- cpphs.spec	(revision 6)
++++ cpphs.spec	(working copy)
+@@ -80,15 +80,15 @@
+ %ghc_pkg_recache
+ 
+ %files
+-%license LICENCE-LGPL
+-%doc LICENCE-GPL LICENCE-commercial README docs
++%license LICENCE-LGPL LICENCE-GPL LICENCE-commercial
++%doc README docs/index.html
+ %{_bindir}/%{name}
+ %{_mandir}/man1/cpphs.1%{?ext_man}
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+-%license LICENCE-LGPL
++%license LICENCE-LGPL LICENCE-commercial
+ 
+ %files -n ghc-%{name}-devel -f ghc-%{name}-devel.files
+-%doc LICENCE-GPL LICENCE-commercial README docs
++%license LICENCE-LGPL LICENCE-commercial
+ 
+ %changelog
+
