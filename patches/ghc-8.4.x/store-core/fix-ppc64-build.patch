@@ -1,0 +1,65 @@
+Index: ghc-store-core.changes
+===================================================================
+--- ghc-store-core.changes (revision 6)
++++ ghc-store-core.changes (revision 7)
+@@ -1,4 +1,11 @@
+ -------------------------------------------------------------------
++Sun Jun 17 08:44:48 UTC 2018 - ptrommler@icloud.com
++
++- Add fix-force-aligment.patch
++* fixes build on ppc64
++* see upstream issue https://github.com/fpco/store/issues/133 
++
++-------------------------------------------------------------------
+ Wed May 16 14:36:28 UTC 2018 - psimons@suse.com
+ 
+ - Prefer the new %license attribute over %doc.
+Index: ghc-store-core.spec
+===================================================================
+--- ghc-store-core.spec (revision 6)
++++ ghc-store-core.spec (revision 7)
+@@ -25,6 +25,8 @@
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++# PATCH-FIX-UPSTREAM fix-force-alignment.patch ptrommler@icloud.com -- Fix compile error on PowerPC 64-bit. Patch upstreamed. See https://github.com/fpco/store/issues/133
++Patch:          fix-force-alignment.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-bytestring-devel
+ BuildRequires:  ghc-primitive-devel
+@@ -48,6 +50,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%patch -p1
+ 
+ %build
+ %ghc_lib_build
+Index: fix-force-alignment.patch
+===================================================================
+--- fix-force-alignment.patch (added)
++++ fix-force-alignment.patch (revision 7)
+@@ -0,0 +1,22 @@
++Index: store-core-0.4.3/src/Data/Store/Core.hs
++===================================================================
++--- store-core-0.4.3.orig/src/Data/Store/Core.hs
+++++ store-core-0.4.3/src/Data/Store/Core.hs
++@@ -152,7 +152,7 @@ unsafeMakePokeState :: Ptr Word8 -- ^ po
++                     -> IO (Ptr Word8) -- ^ action to produce pokeStateAlignPtr
++                     -> IO PokeState
++ #if ALIGNED_MEMORY
++-unsafeMakePokeState ptr f = PokeState ptr =<< f
+++unsafeMakePokeState ptr f = PokeState ptr <$> f
++ #else
++ unsafeMakePokeState ptr _ = return $ PokeState ptr
++ #endif
++@@ -274,7 +274,7 @@ unsafeMakePeekState :: Ptr Word8 -- ^ pe
++                     -> IO (Ptr Word8) -- ^ action to produce peekStateAlignPtr
++                     -> IO PeekState
++ #if ALIGNED_MEMORY
++-unsafeMakePeekState ptr f = PeekState ptr =<< f
+++unsafeMakePeekState ptr f = PeekState ptr <$> f
++ #else
++ unsafeMakePeekState ptr _ = return $ PeekState ptr
++ #endif
+
