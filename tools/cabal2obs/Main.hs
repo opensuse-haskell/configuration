@@ -215,7 +215,7 @@ main = do
           psid = case dirname of
                    "Nightly"     -> "nightly"
                    'L':'T':'S':x -> "lts-" ++ x
-                   _              -> error ("invaid cabal2obs config path " ++ show dirname)
+                   _              -> error ("invalid cabal2obs config path " ++ show dirname)
       buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
       deps <- runP stackageConfig buf
       writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
