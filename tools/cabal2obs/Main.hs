@@ -15,9 +15,8 @@ import Types
 import Control.Monad.Extra
 import Data.Function
 import Data.List as List
--- import Data.Map.Strict ( Map )
+import Data.Set as Set ( toList )
 import qualified Data.Map.Strict as Map
--- import Data.Maybe
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
@@ -60,7 +59,8 @@ main = do
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier pn _)) -> do
       cabal <- getCabal pkgid
-      let forceExe = pn `elem` forcedExectables (getPackageSet psid)
+      pset <- getPackageSet psid
+      let forceExe = pn `elem` forcedExectables pset
           prefix | forceExe || not (hasLibrary cabal)  = ""
                  | otherwise                           = "ghc-"
       return $ BuildName (prefix ++ unPackageName pn)
@@ -68,8 +68,8 @@ main = do
     -- Map a build directory path back to a Cabal package identifirer. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(psid, BuildName bn) -> do
-      let pset = getPackageSet psid
-          pkgs = packageSet pset
+      pset <- getPackageSet psid
+      let pkgs = packageSet pset
       id1 <- case Map.lookup (mkPackageName bn) pkgs of
                Nothing -> return Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
@@ -96,10 +96,11 @@ main = do
 
     -- Depend on all (phony) package set targets.
     phony "all" $ do
-      need (map unPackageSetId (Map.keys packageSets))
+      need (map unPackageSetId (Set.toList knownPackageSets))
 
     -- Every (phony) package set target depends on the (real) spec file.
-    forM_ (Map.toList packageSets) $ \(psid,pset) -> do
+    forM_ (Set.toList knownPackageSets) $ \psid -> do
+      pset <- getPackageSet psid
       phony (unPackageSetId psid) $ do
         specFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
           BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
@@ -109,7 +110,7 @@ main = do
     -- Generate the latest changelog entry template for every TW package.
     phony "changelogs" $ do
       let psid = "ghc-8.4.x"
-          pset = getPackageSet psid    -- TODO: hard-coded magic constant
+      pset <- getPackageSet psid    -- TODO: hard-coded magic constant
       changesFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
          BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
          return (buildDir </> unPackageSetId psid </> bn </> bn <.> "changes")
@@ -159,7 +160,7 @@ main = do
       let [_,psid',bn',_] = splitDirectories out
           psid = PackageSetId psid'
           bn = BuildName bn'
-          pset = getPackageSet psid
+      pset <- getPackageSet psid
       pkgid@(PackageIdentifier n _) <- pkgidFromPath (psid,bn)
       let isExe = unPackageName n == bn'
           pkgDir = takeDirectory out
