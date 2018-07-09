@@ -75,7 +75,7 @@ else
             die "diff command failed with an error"
         fi
         if [ ! -s out ]; then
-            warning "the diff between $oldVersion and $version is empty"
+            warning "the diff between $pkg $oldVersion and $version is empty"
             echo >>diff "  A detailed changelog is not available from upstream."
         else
             sed >n -r -n -e 's/^@@ -1,([0-9]+) \+1,([0-9]+) @@/\2 - \1/p' out
@@ -94,7 +94,7 @@ else
             fi
         fi
     else
-        warning "$changelog has disappeared from $version"
+        warning "$changelog has disappeared from $pkg $version"
         echo >>diff "  A detailed changelog is not available from upstream."
     fi
 fi
