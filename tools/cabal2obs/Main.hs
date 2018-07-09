@@ -107,15 +107,6 @@ main = do
           return (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")
         need specFiles
 
-    -- Generate the latest changelog entry template for every TW package.
-    phony "changelogs" $ do
-      let psid = "ghc-8.4.x"
-      pset <- getPackageSet psid    -- TODO: hard-coded magic constant
-      changesFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
-         BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
-         return (buildDir </> unPackageSetId psid </> bn </> bn <.> "changes")
-      need changesFiles
-
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
@@ -171,28 +162,20 @@ main = do
       if rev > 0
          then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> unPackageName n <.> "cabal")
          else liftIO (removeFiles pkgDir ["*.cabal"])
-      need [pkgDir </> display pkgid <.> "tar.gz"]
+      need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("finalizePD: " ++ show missing)
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa)
-      -- TODO: There is a subtle problem here. The change log files affect the
-      -- spec file generate because they determine the copyright year when they
-      -- exist. So, technically, these are dependencies of this rule. We don't
-      -- want them to be, however, because we want change logs to be generated
-      -- only when they are explicitly requested by the user.
-      yearFlag <- do haveChanges <- Shake.doesFileExist (out -<.> "changes")
-                     if not haveChanges then return [] else do
-                        Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
-                        let year = head (lines year')
-                        return ["--copyright-year=" ++ year]
-      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner"] ++ yearFlag ++ ["-i", "../.." </> out]
+      Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
+      let year = head (lines year')
+      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner"] ++ yearFlag ++ ["-i", "../.." </> out]
+        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
