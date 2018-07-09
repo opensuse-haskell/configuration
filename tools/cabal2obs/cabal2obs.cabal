@@ -40,6 +40,8 @@ executable cabal2obs
                         Config.Ghc84x
                         Config.LTS11
                         Config.LTS11.Stackage
+                        Config.LTS12
+                        Config.LTS12.Stackage
                         -- Config.LTS10
                         -- Config.LTS10.Stackage
                         -- Config.LTS8
