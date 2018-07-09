@@ -1,0 +1,14 @@
+Index: ghc-foundation.spec
+===================================================================
+--- ghc-foundation.spec	(revision 6)
++++ ghc-foundation.spec	(working copy)
+@@ -64,6 +64,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
