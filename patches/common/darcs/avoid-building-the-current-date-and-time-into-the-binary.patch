@@ -10,10 +10,9 @@ Index: darcs.spec
  
  %description
  Darcs is a free, open source revision control system. It is:
-@@ -123,6 +124,10 @@
+@@ -123,5 +124,9 @@
  %prep
  %setup -q
- cp -p %{SOURCE1} %{name}.cabal
 +modified="$(sed -n '/^----/n;s/ - .*$//;p;q' "%{SOURCE4}")"
 +DATE="\"$(date -d "${modified}" "+%%b %%e %%Y")\""
 +TIME="\"$(date -d "${modified}" "+%%R")\""
