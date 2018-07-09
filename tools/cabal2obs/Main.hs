@@ -77,11 +77,11 @@ main = do
                              return (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
                Nothing  -> return Nothing
-               Just bn' -> do case Map.lookup (mkPackageName bn') pkgs of
-                                Nothing -> return Nothing
-                                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
-                                              BuildName bn'' <- getBuildName (psid, pkgid)
-                                              return (if bn == bn'' then Just pkgid else Nothing)
+               Just bn' -> case Map.lookup (mkPackageName bn') pkgs of
+                             Nothing -> return Nothing
+                             Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
+                                           BuildName bn'' <- getBuildName (psid, pkgid)
+                                           return (if bn == bn'' then Just pkgid else Nothing)
       case (id1,id2) of
         (Nothing, Nothing) -> fail $ "package set " ++ show (unPackageSetId psid) ++ " contains no build called " ++ show bn
         (Just pkgid, _)    -> return pkgid
@@ -95,7 +95,7 @@ main = do
     want ["all"]
 
     -- Depend on all (phony) package set targets.
-    phony "all" $ do
+    phony "all" $
       need (map unPackageSetId (Set.toList knownPackageSets))
 
     -- Every (phony) package set target depends on the (real) spec file.
@@ -110,7 +110,7 @@ main = do
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
-    homeDir </> ".cabal/packages/hackage.haskell.org/*/*/*.tar.gz" %> \out -> do
+    homeDir </> ".cabal/packages/hackage.haskell.org/*/*/*.tar.gz" %> \out ->
       -- The explicit test for existence is necessary because shake will
       -- re-build existing files if its internal database does not know how the
       -- file was created.
@@ -168,14 +168,14 @@ main = do
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
       let year = head (lines year')
-      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" $ ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
