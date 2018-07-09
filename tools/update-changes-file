@@ -1,0 +1,100 @@
+#! /usr/bin/env bash
+
+set -eu -o pipefail
+shopt -s nullglob
+
+warning()
+{
+    echo >&2 "*** warning:" "$@"
+}
+
+die()
+{
+    echo >&2 "***" "$@"
+    exit 1
+}
+
+pkg=$1
+version=$2
+
+tmpdir=$( mktemp -d )
+trap "rm -rf $tmpdir" 0
+
+now=$(date --utc)
+changesFile=$(basename "$PWD").changes
+if [ ! -f "$changesFile" ]; then
+    cat <<eof >"$changesFile"
+-------------------------------------------------------------------
+$now - psimons@suse.com
+
+- Add $pkg at version $version.
+eof
+    exit 0
+fi
+
+vs=( $(sed -r -n "s/^- (Update|Add) ($pkg )?(to|at) version ([0-9.]+)( revision [0-9]+)?( with cabal2obs)?\\.$/\\4/p" "$changesFile") )
+if [ ${#vs[@]} -lt 1 ]; then
+    die "cannot determine previous version number from *.changes file"
+fi
+oldVersion="${vs[0]}"
+if [ "$version" = "$oldVersion" ]; then
+    echo "Nothing to do; new version and old version are identical."
+    exit 0
+fi
+
+pushd >/dev/null "$tmpdir"
+cabal -v0 unpack -- "$pkg-$oldVersion"
+cabal -v0 unpack -- "$pkg-$version"
+
+cat <<eof >diff
+-------------------------------------------------------------------
+$now - psimons@suse.com
+
+- Update $pkg to version $version.
+eof
+
+pushd >/dev/null "$pkg-$oldVersion"
+candidates=( *[cC][hH][aA][nN][gG][eE]* )
+popd >/dev/null
+if [ "${#candidates[@]}" -gt 1 ]; then
+    warning "more than one potential changelog file:" "${candidates[@]}"
+    echo -e >>diff "  The upstream changelog could not be parsed.\\n"
+elif [ "${#candidates[@]}" -eq 0 ]; then
+    echo -e >>diff "  A detailed changelog is not available from upstream.\\n"
+else
+    changelog="${candidates[0]}"
+
+    if [ -f "$pkg-$version/$changelog" ]; then
+        diff >out -ub "$pkg-$oldVersion/$changelog" "$pkg-$version/$changelog" || rc="$?"
+        if [ "${rc:-0}" -eq 2 ]; then
+            die "diff command failed with an error"
+        fi
+        if [ ! -s out ]; then
+            warning "the diff between $oldVersion and $version is empty"
+            echo -e >>diff "  A detailed changelog is not available from upstream.\\n"
+        else
+            sed >n -r -n -e 's/^@@ -1,([0-9]+) \+1,([0-9]+) @@/\2 - \1/p' out
+            if [ "$(wc -l <n)" -lt 1 ]; then
+                echo >>diff "  The upstream changelog could not be parsed. Please consult"
+                echo >>diff "  http://hackage.haskell.org/package/$pkg-$version/src/$changelog"
+                echo >>diff "  for further details."
+                echo >>diff
+            elif [ "$(wc -l <n)" -ne 1 ]; then
+                die "diff output if supposed to contain exactly one hunk"
+            else
+                n=$(( $(cat n)  ))
+                if [ "$n" -le 1 ]; then
+                    die "the diff contains an unexpected number of lines ($n)"
+                fi
+                head -n "$n" "$pkg-$version/$changelog" | sed -r -e 's/^/  /' >>diff
+            fi
+        fi
+    else
+        warning "$changelog has disappeared from $version"
+        echo -e >>diff "  A detailed changelog is not available from upstream.\\n"
+    fi
+fi
+popd >/dev/null
+
+cat "$tmpdir/diff" "$changesFile" >new
+mv new "$changesFile"

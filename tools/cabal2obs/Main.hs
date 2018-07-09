@@ -4,7 +4,6 @@
 module Main ( main ) where
 
 import Cabal2Spec
-import ChangesFile
 import Config
 import Oracle
 import Orphans ()
@@ -136,15 +135,8 @@ main = do
       let [_,psid',bn',_] = splitDirectories out
           psid = PackageSetId psid'
           bn = BuildName bn'
-      pkgid@(PackageIdentifier _ v) <- pkgidFromPath (psid,bn)
-      cabal <- getCabal pkgid
-      let rev = packageRevision cabal
-          versionString = "version " ++ display v
-      changes <- liftIO (readFile out `mplus` return "")
-      unless (versionString `isInfixOf` changes) $
-         traced "update-changelog" $ do
-           newEntry <- mkChangeEntry pkgid rev "psimons@suse.com" -- TODO: hard-coded magic constant
-           writeFile out (newEntry ++ changes)
+      PackageIdentifier pn v <- pkgidFromPath (psid,bn)
+      command_ [Cwd (takeDirectory out)] "../../../tools/update-changes-file" [display pn, display v]
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
