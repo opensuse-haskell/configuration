@@ -1,0 +1,12 @@
+Index: ghc-hsass.spec
+===================================================================
+--- ghc-hsass.spec	(revision 2)
++++ ghc-hsass.spec	(working copy)
+@@ -26,5 +26,6 @@
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++BuildRequires:  gcc-c++
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-bytestring-devel
+

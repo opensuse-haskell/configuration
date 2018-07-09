@@ -1,0 +1,33 @@
+Index: xmonad.spec
+===================================================================
+--- xmonad.spec	(revision 10)
++++ xmonad.spec	(working copy)
+@@ -26,8 +26,10 @@
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Source1:        xmonad.cabal-edited
+ Source10:       xmonad.desktop
+ Patch1:         https://github.com/xmonad/xmonad/pull/91.patch#/remove-state-file-after-startup.patch
++Patch2:         153.patch
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-X11-devel
+@@ -39,6 +41,7 @@
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-rpm-macros
++BuildRequires:  ghc-semigroups-devel
+ BuildRequires:  ghc-setlocale-devel
+ BuildRequires:  ghc-unix-devel
+ BuildRequires:  ghc-utf8-string-devel
+@@ -85,6 +88,8 @@
+ %prep
+ %setup -q
+ %patch1 -p1
++%patch2 -p1
++cp -p %{SOURCE1} %{name}.cabal
+ 
+ %build
+ %ghc_lib_build
+

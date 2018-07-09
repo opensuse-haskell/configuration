@@ -1,0 +1,21 @@
+Index: ghc-xmonad-contrib.spec
+===================================================================
+--- ghc-xmonad-contrib.spec	(revision 4)
++++ ghc-xmonad-contrib.spec	(working copy)
+@@ -25,6 +25,7 @@
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch0:         236.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-X11-devel
+ BuildRequires:  ghc-X11-xft-devel
+@@ -70,6 +71,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++%patch0 -p1
+ 
+ %build
+ %ghc_lib_build
+
