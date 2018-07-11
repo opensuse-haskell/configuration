@@ -24,7 +24,7 @@ addons:
       - hvr-ghc
     packages:
       - cabal-install-head
-      - ghc-8.4.2
+      - ghc-8.4.3
       - rpm
 
 before_install:
@@ -38,7 +38,8 @@ install:
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
  - travis_retry cabal update -v
  - sed -i 's/^jobs:/-- jobs:/' ${HOME}/.cabal/config
- - (cd tools/cabal2obs && cabal new-build)
+ - cabal new-build all
 
 script:
- - (cd tools/cabal2obs && cabal new-run cabal2obs -- -C ../.. --keep-going -j2)
+ - cabal new-test all
+ - cabal new-run cabal2obs -- --keep-going -j2
