@@ -42,7 +42,7 @@ To generate the Haskell OBS repositories for
 
    Note that the initial run of the build system might take ~10 minutes on
    reasonably fast hardware. Shake displays an estimated run-time in the title
-   of the X11 window in which the build was run. Once the inital build has
+   of the X11 window in which the build was run. Once the initial build has
    succeeded, further re-runs will be very fast.
 
 7. Inspect the `build/nightly` and `build/lts-6` hierarchies with `osc status`
