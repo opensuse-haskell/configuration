@@ -21,22 +21,24 @@ die()
 
 pkg=$1
 version=$2
+timestamp=${3:-$(date --utc)}
 
 tmpdir=$( mktemp -d )
+# shellcheck disable=SC2064
 trap "rm -rf $tmpdir" 0
 
-now=$(date --utc)
 changesFile=$(basename "$PWD").changes
 if [ ! -f "$changesFile" ]; then
     cat <<eof >"$changesFile"
 -------------------------------------------------------------------
-$now - psimons@suse.com
+$timestamp - psimons@suse.com
 
 - Add $pkg at version $version.
 eof
     exit 0
 fi
 
+# shellcheck disable=SC2207
 vs=( $(sed -r -n "s/^- (Update|Add) ($pkg )?(to|at) version ([0-9.]+)( revision [0-9]+)?( with cabal2obs)?\\.$/\\4/p" "$changesFile") )
 if [ ${#vs[@]} -lt 1 ]; then
     die "cannot determine previous version number from *.changes file"
@@ -53,7 +55,7 @@ cabal -v0 unpack -- "$pkg-$version"
 
 cat <<eof >diff
 -------------------------------------------------------------------
-$now - psimons@suse.com
+$timestamp - psimons@suse.com
 
 - Update $pkg to version $version.
 eof
@@ -80,9 +82,11 @@ else
         else
             sed >n -r -n -e 's/^@@ -1,([0-9]+) \+1,([0-9]+) @@/\2 - \1/p' out
             if [ "$(wc -l <n)" -lt 1 ]; then
-                echo >>diff "  The upstream changelog could not be parsed. Please consult"
-                echo >>diff "  http://hackage.haskell.org/package/$pkg-$version/src/$changelog"
-                echo >>diff "  for further details."
+                {
+                    echo "  The upstream changelog could not be parsed. Please consult"
+                    echo "  http://hackage.haskell.org/package/$pkg-$version/src/$changelog"
+                    echo "  for further details."
+                } >>diff
             elif [ "$(wc -l <n)" -ne 1 ]; then
                 die "diff output if supposed to contain exactly one hunk"
             else
