@@ -1,5 +1,0 @@
--- cabal.project
-
-packages:
-  cabal2obs.cabal
-  ../cabal2spec/cabal2spec.cabal

@@ -39,27 +39,22 @@ if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-# cd tools/cabal2obs
-# cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint update
-# cd ../..
-# for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
-#     v=$(basename $(dirname "$n"))
-#     case "$v" in
-#         LTS*)    v=lts-${v##LTS} ;;
-#         Nightly) v=nightly;;
-#         *)       error_exit unexpected file modification of "$n" during update ;;
-#     esac
-#     v=$(sed -r -n 's,^-- .* http://www.stackage.org/snapshot/(.*)$,\1,p' "_build/cabal-$v.config")
-#     git commit -q -m "update to $v" "$n"
-# done
+cabal -v0 new-run cabal2obs -- --no-progress --lint tools/cabal2obs/Config/*/Stackage.hs
+for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
+    v=$(basename $(dirname "$n"))
+    case "$v" in
+        LTS*)    v=lts-${v##LTS} ;;
+        Nightly) v=nightly;;
+        *)       error_exit unexpected file modification of "$n" during update ;;
+    esac
+    v=$(sed -r -n 's,^-- .* http://www.stackage.org/snapshot/(.*)$,\1,p' "_build/cabal-$v.config")
+    git commit -q -m "update to $v" "$n"
+done
 
 git status --porcelain >"$tmpfile"
 if [ -s "$tmpfile" ]; then
     error_exit git repository has uncommitted changes
 fi
 
-cd tools/cabal2obs
-cabal -v0 new-run cabal2obs -- -C ../.. --no-progress --lint
-cd ../..
-
+cabal -v0 new-run cabal2obs -- --no-progress --lint
 parallel "test -d {}/.osc && cd {} && ../../tools/commit >/dev/null" ::: _build/*

@@ -1,0 +1,5 @@
+-- cabal.project
+
+packages:
+  tools/cabal2obs/cabal2obs.cabal
+  tools/cabal2spec/cabal2spec.cabal
