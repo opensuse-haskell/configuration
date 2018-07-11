@@ -1,0 +1,42 @@
+###############################################################################
+# Deal with releases that forgot to update the change log file.
+###############################################################################
+
+$$$ rm -f *.changes
+
+$$$ ../../../tools/update-changes-file th-lift 0.7 now
+
+$$$ ../../../tools/update-changes-file th-lift 0.7.8 now
+
+$$$ ../../../tools/update-changes-file th-lift 0.7.10 now
+>>>2
+*** th-lift-0.7.10: warning: the diff between th-lift 0.7.8 and 0.7.10 is empty
+>>>= 0
+
+$$$ cat ghc-th-lift.changes
+>>>
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Update th-lift to version 0.7.10.
+  A detailed changelog is not available from upstream.
+
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Update th-lift to version 0.7.8.
+  2015-01-18  Mathieu Boespflug <mboes@tweag.net>
+
+  	* GHC 8.1 compatibility.
+
+  2015-11-19  Mathieu Boespflug <mboes@tweag.net>
+
+  	* Added makeLift, for cases when it's necessary to write the
+  	instance manually. (Thanks to Ryan Scott).
+  	* Support empty datatypes and unboxed types.
+
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Add th-lift at version 0.7.
+>>>= 0

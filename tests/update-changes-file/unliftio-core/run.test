@@ -1,0 +1,26 @@
+###############################################################################
+# TODO: These changelog entries are not recognized properly.
+###############################################################################
+
+$$$ rm -f *.changes
+
+<<<
+-------------------------------------------------------------------
+Mon May 14 17:02:11 UTC 2018 - psimons@suse.com
+
+- Adding initial version version 0.1.1.0.
+$$$ cat >unliftio-core.changes
+>>>= 0
+
+$$$ ../../../tools/update-changes-file unliftio-core 0.1.1.0 now
+>>>2
+*** unliftio-core-0.1.1.0: error: cannot determine previous version number from *.changes file
+>>>= 1
+
+$$$ cat unliftio-core.changes
+>>>
+-------------------------------------------------------------------
+Mon May 14 17:02:11 UTC 2018 - psimons@suse.com
+
+- Adding initial version version 0.1.1.0.
+>>>= 0

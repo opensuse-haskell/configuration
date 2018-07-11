@@ -58,7 +58,7 @@ now - psimons@suse.com
 
 $$$ ../../../tools/update-changes-file mtl 2.2 now
 >>>2
-*** the diff contains an unexpected number of lines (-4)
+*** mtl-2.2: error: the diff contains an unexpected number of lines (-4)
 >>>= 1
 $$$ cat ghc-mtl.changes
 >>>

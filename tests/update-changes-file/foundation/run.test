@@ -1,0 +1,26 @@
+###############################################################################
+# TODO: Deal with disappearing changelog files in the upstream tarball.
+###############################################################################
+
+$$$ rm -f *.changes
+
+$$$ ../../../tools/update-changes-file foundation 0.0.20 now
+
+$$$ ../../../tools/update-changes-file foundation 0.0.21 now
+>>>2
+*** foundation-0.0.21: warning: CHANGELOG.md has disappeared from foundation 0.0.21
+>>>= 0
+
+$$$ cat foundation.changes
+>>>
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Update foundation to version 0.0.21.
+  A detailed changelog is not available from upstream.
+
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Add foundation at version 0.0.20.
+>>>= 0

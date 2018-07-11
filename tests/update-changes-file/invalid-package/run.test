@@ -1,0 +1,40 @@
+###############################################################################
+# Verify that the script fails properly for incorrect parameters.
+###############################################################################
+
+$$$ rm -f *.changes
+
+$$$ ../../../tools/update-changes-file invalid-package
+>>>2
+../../../tools/update-changes-file: line 7: $2: unbound variable
+>>>= 1
+$$$ find . -name "*.changes"
+>>>= 0
+
+
+# TODO: This should fail!!
+$$$ ../../../tools/update-changes-file invalid-package 0 now
+>>>= 0
+
+$$$ find . -name "*.changes"
+>>>
+./invalid-package.changes
+>>>= 0
+
+
+$$$ ../../../tools/update-changes-file invalid-package 1 now
+>>>2
+cabal: There is no package named 'invalid-package'.
+You may need to run 'cabal update' to get the latest list of available
+packages.
+
+>>>= 1
+
+
+$$$ rm -f *.changes
+$$$ ../../../tools/update-changes-file mtl 1.0
+$$$ ../../../tools/update-changes-file mtl 999.999
+>>>2
+cabal: There is no available version of mtl that satisfies ==999.999
+
+>>>= 1

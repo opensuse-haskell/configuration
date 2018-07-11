@@ -3,6 +3,10 @@
 set -eu -o pipefail
 shopt -s nullglob
 
+pkg=$1
+version=$2
+timestamp=${3:-$(date --utc)}
+
 debug()
 {
     : echo "$@"
@@ -10,18 +14,14 @@ debug()
 
 warning()
 {
-    echo >&2 "*** warning:" "$@"
+    echo >&2 "*** $pkg-$version: warning:" "$@"
 }
 
 die()
 {
-    echo >&2 "***" "$@"
+    echo >&2 "*** $pkg-$version: error:" "$@"
     exit 1
 }
-
-pkg=$1
-version=$2
-timestamp=${3:-$(date --utc)}
 
 tmpdir=$( mktemp -d )
 # shellcheck disable=SC2064
