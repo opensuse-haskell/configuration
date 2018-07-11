@@ -38,7 +38,6 @@ install:
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
  - travis_retry cabal update
  - "sed -i 's/^jobs:.*/jobs: 2/' $HOME/.cabal/config"
- - cat ${HOME}/.cabal/config
  - cabal new-install shelltestrunner
 
 script:
