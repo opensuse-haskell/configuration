@@ -1,0 +1,20 @@
+Index: ghc-lame.spec
+===================================================================
+--- ghc-lame.spec	(revision 1)
++++ ghc-lame.spec	(working copy)
+@@ -15,6 +15,14 @@
+ # Please submit bugfixes or comments via http://bugs.opensuse.org/
+ #
+ 
++# The profiling build fails with ghc-8.4.3:
++#
++#   | When trying UnfoldingDone lvl_spln
++#   | To increase the limit, use -fsimpl-tick-factor=N (default 100).
++#
++# If we use a sufficiently large value, however, then the build requires
++# excessive amounts of memory.
++%global without_prof 1
+ 
+ %global pkg_name lame
+ %bcond_with tests
+
