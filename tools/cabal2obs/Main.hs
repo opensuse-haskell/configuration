@@ -171,14 +171,14 @@ main = do
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
-    -- buildDir </> "packages.csv" %> \out -> do
-    --   let psid = PackageSetId "lts-11"
-    --   pset <- packageList (GetPackageList psid)
-    --   ls <- forP pset $ \pkgid@(PackageIdentifier n v) -> do
-    --     BuildName bn <- getBuildName (psid, pkgid)
-    --     let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
-    --     return $ intercalate "," [ show (display n), show (display v), show url]
-    --   writeFile' out (intercalate "\n" ls)
+    buildDir </> "packages.csv" %> \out -> do
+      let psid = PackageSetId "ghc-8.4.x"
+      pkgs <- packageSet <$> getPackageSet psid
+      ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
+        BuildName bn <- getBuildName (psid, PackageIdentifier pn v)
+        let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
+        return $ intercalate "," [ show (display pn), show (display v), show url]
+      writeFile' out (intercalate "\n" ls) -- cannot use 'unlines' because the file mustn't end with a new line
 
     buildDir </> "cabal-*.config" %> \out -> do
       alwaysRerun
