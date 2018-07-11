@@ -26,7 +26,7 @@ cd "$(dirname "$0")"/..
 git -C hackage checkout -q hackage
 git -C hackage pull -q &
 cabal -v0 update &
-parallel "test -d {}/.osc && cd {} && osc update --unexpand-link >/dev/null" ::: _build/* &
+parallel 'if [ -d {}/.osc ]; then cd {} && osc update --unexpand-link >/dev/null; fi' ::: _build/* &
 wait
 
 msg=$(git -C hackage log -1 | sed -n -e 's/ *Update from //p')
@@ -34,7 +34,7 @@ if [ -n "$(git status --porcelain hackage)" ]; then
    git commit -q -m "$msg" hackage
 fi
 
-parallel "test -d {}/.osc && cd {} && osc status" ::: _build/* >"$tmpfile"
+parallel 'if [ -d {}/.osc ]; then cd {} && osc status; fi' ::: _build/* >"$tmpfile"
 if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
@@ -57,4 +57,4 @@ if [ -s "$tmpfile" ]; then
 fi
 
 cabal -v0 new-run cabal2obs -- --no-progress --lint
-parallel "test -d {}/.osc && cd {} && ../../tools/commit >/dev/null" ::: _build/*
+parallel 'if [ -d {}/.osc ]; then cd {} && ../../tools/commit >/dev/null; fi' ::: _build/*
