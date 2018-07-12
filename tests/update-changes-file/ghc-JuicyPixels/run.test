@@ -1,0 +1,31 @@
+###############################################################################
+# JuicyPixels uses CRLF in its changelog, but these are stripped.
+###############################################################################
+
+$$$ rm -f *.changes
+
+$$$ ../../../tools/update-changes-file JuicyPixels 3.2.9.5 now
+
+$$$ ../../../tools/update-changes-file JuicyPixels 3.3 now
+
+$$$ cat ghc-JuicyPixels.changes
+>>>
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Update JuicyPixels to version 3.3.
+  Change log
+  ==========
+
+  v3.3 July 2018
+  --------------
+
+   * New: Eq instances for image
+   * Fix: color gif resolution offset
+   * New: support for Float Tiff
+
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Add JuicyPixels at version 3.2.9.5.
+>>>= 0

@@ -104,7 +104,7 @@ else
 fi
 popd >/dev/null
 
-sed -i -r -e 's/[  ]+$//' "$tmpdir/diff"
+sed -i -r -e 's/[  ]+$//' "$tmpdir/diff"
 sed -i -e :a -e '/^\n*$/{$d;N;};/\n$/ba' "$tmpdir/diff"
 echo >>"$tmpdir/diff"
 cat "$tmpdir/diff" "$changesFile" >new
