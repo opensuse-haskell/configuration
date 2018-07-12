@@ -32,7 +32,7 @@ guessChangelog oldDir newDir = runExceptT $ do
   -- mapM_ (eprintf (w%"\n")) foot
   unless (length top < 10) (throwError (UnmodifiedTopIsTooLarge clf (fromIntegral (length top))))
   unless topAddOnly (throwError (NotJustTopAdditions clf))
-  return (Text.unlines (map unDiff add))
+  return (Text.stripEnd (Text.stripStart (Text.unlines (map unDiff add))))
 
 data GuessedChangelog = NoCommonChangelogFiles (Set FilePath) (Set FilePath)
                       | MoreThanOneChangelogFile (Set FilePath)

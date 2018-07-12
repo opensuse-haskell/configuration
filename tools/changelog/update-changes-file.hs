@@ -23,7 +23,7 @@ import Distribution.Version
 import Prelude hiding ( FilePath )
 import System.Directory
 -- import System.Environment
-import Turtle hiding ( x )
+import Turtle hiding ( x, l )
 
 type TimeStamp = Text
 type EMail = Text
@@ -66,7 +66,7 @@ updateChangesFile :: Options -> Text -> IO ()
 updateChangesFile (now',changesFile,pkg,vers,email) cl' = do
   now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) return now'
   txt <- readTextFile changesFile <|> pure ""
-  let cl = Text.unlines (map (Text.cons ' ' . Text.cons ' ') (Text.lines (Text.stripEnd (Text.stripStart cl'))))
+  let cl = Text.unlines (map (Text.cons ' ' . Text.cons ' ') (Text.lines cl'))
   writeTextFile changesFile $ format
     ("-------------------------------------------------------------------\n\
      \"%s%" - "%s%"\n\
