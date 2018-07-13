@@ -4,14 +4,14 @@
 
 $$$ rm -f JuicyPixels.changes
 
-$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 joe@example.org
 
-$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 joe@example.org
 
 $$$ cat JuicyPixels.changes
 >>>
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Update JuicyPixels to version 3.3.
   v3.3 July 2018
@@ -24,7 +24,7 @@ now - psimons@suse.com
   					hence the version bump.
 
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Add JuicyPixels at version 3.2.9.5.
 

@@ -4,13 +4,13 @@
 
 $$$ rm -f mtl.changes
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
 >>>= 0
 
 $$$ cat mtl.changes
 >>>
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Add mtl at version 2.2.
 
@@ -20,13 +20,13 @@ now - psimons@suse.com
 # Re-running the update with the same version has no effect.
 ###############################################################################
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
 >>>= 0
 
 $$$ cat mtl.changes
 >>>
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Add mtl at version 2.2.
 
@@ -36,12 +36,12 @@ now - psimons@suse.com
 # Now let's try an update.
 ###############################################################################
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2.0.1 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2.0.1 joe@example.org
 >>>= 0
 $$$ cat mtl.changes
 >>>
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Update mtl to version 2.2.0.1.
   2.2.0.1
@@ -49,7 +49,7 @@ now - psimons@suse.com
   * Fixed a bug caused by the change in how `transformers` 0.4 exports its data types. We will now export `runFooT` for each transformer again!
 
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Add mtl at version 2.2.
 

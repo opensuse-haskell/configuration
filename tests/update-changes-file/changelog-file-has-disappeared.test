@@ -4,22 +4,22 @@
 
 $$$ rm -f foundation.changes
 
-$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.20 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.20 joe@example.org
 
-$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.21 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.21 joe@example.org
 >>>= 0
 
 $$$ cat foundation.changes
 >>>
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Update foundation to version 0.0.21.
   Upstream has removed the change log file they used to maintain
   from the distribution tarball.
 
 -------------------------------------------------------------------
-now - psimons@suse.com
+now - joe@example.org
 
 - Add foundation at version 0.0.20.
 
