@@ -7,7 +7,7 @@ pkg=$1
 version=$2
 timestamp=${3:-$(date --utc)}
 
-# exec cabal -v0 new-run update-changes-file -- -t "$timestamp" "$(basename "$PWD").changes" "$1" "$2" psimons@suse.com
+exec cabal -v0 new-run update-changes-file -- -t "$timestamp" "$(basename "$PWD").changes" "$1" "$2" psimons@suse.com
 
 debug()
 {
