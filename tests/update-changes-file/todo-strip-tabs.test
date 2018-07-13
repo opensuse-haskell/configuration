@@ -1,0 +1,31 @@
+###############################################################################
+# TODO: JuicyPixels uses tabs in its changelog, and we should strip those.
+###############################################################################
+
+$$$ rm -f JuicyPixels.changes
+
+$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 psimons@suse.com
+
+$$$ cabal -v0 new-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 psimons@suse.com
+
+$$$ cat JuicyPixels.changes
+>>>
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Update JuicyPixels to version 3.3.
+  v3.3 July 2018
+  --------------
+
+   * New: Eq instances for image
+   * Fix: color gif resolution offset
+   * New: support for Float Tiff
+   * Breaking change: New `ImageY32` constructor for `Dynamic`
+  					hence the version bump.
+
+-------------------------------------------------------------------
+now - psimons@suse.com
+
+- Add JuicyPixels at version 3.2.9.5.
+
+>>>= 0

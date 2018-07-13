@@ -2,24 +2,20 @@
 # Deal with releases that forgot to update the change log file.
 ###############################################################################
 
-$$$ rm -f *.changes
-
-$$$ ../../../tools/update-changes-file th-lift 0.7 now
-
-$$$ ../../../tools/update-changes-file th-lift 0.7.8 now
-
-$$$ ../../../tools/update-changes-file th-lift 0.7.10 now
->>>2
-*** th-lift-0.7.10: warning: the diff between th-lift 0.7.8 and 0.7.10 is empty
+$$$ rm -f th-lift.changes
+$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7.8 psimons@suse.com
+$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7.10 psimons@suse.com
 >>>= 0
 
-$$$ cat ghc-th-lift.changes
+$$$ cat th-lift.changes
 >>>
 -------------------------------------------------------------------
 now - psimons@suse.com
 
 - Update th-lift to version 0.7.10.
-  A detailed changelog is not available from upstream.
+  Upstream has not updated the file "Changelog" since the last
+  release.
 
 -------------------------------------------------------------------
 now - psimons@suse.com
@@ -39,4 +35,5 @@ now - psimons@suse.com
 now - psimons@suse.com
 
 - Add th-lift at version 0.7.
+
 >>>= 0

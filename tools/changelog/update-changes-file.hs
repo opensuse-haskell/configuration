@@ -41,8 +41,10 @@ main = do
   ifM (notM (testfile changesFile)) (updateChangesFile opts mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
     -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
-    if null oldVs then updateChangesFile opts mempty else sh $ do
-      let oldv = head oldVs
+    when (null oldVs) (die (format ("cannot determine previous version number "%fp%" from") changesFile))
+    let oldv = head oldVs
+    when (oldv > newv) (die (format (fp%": unsupprted downgrade from version "%wp%" to "%wp) changesFile oldv newv))
+    sh $ do
       unless (oldv == newv) $ do
         let oldpkg = format (wp%"-"%wp) pkg oldv
             newpkg = format (wp%"-"%wp) pkg newv
@@ -93,7 +95,7 @@ prettyGuessedChangeLog _ NoChangelogFiles = para "Upstream does not provide a ch
 
 prettyGuessedChangeLog _ (NoCommonChangelogFiles old new)
   | not (null old) && null new = para
-        "Upstream has removed the change log file they used to maintain before from\n\
+        "Upstream has removed the change log file they used to maintain from\n\
         \the distribution tarball."
   | null old && not (null new) = para
         "Upstream added a new change log file in this release. With no previous\n\

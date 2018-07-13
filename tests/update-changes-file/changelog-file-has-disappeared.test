@@ -2,13 +2,11 @@
 # TODO: Deal with disappearing changelog files in the upstream tarball.
 ###############################################################################
 
-$$$ rm -f *.changes
+$$$ rm -f foundation.changes
 
-$$$ ../../../tools/update-changes-file foundation 0.0.20 now
+$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.20 psimons@suse.com
 
-$$$ ../../../tools/update-changes-file foundation 0.0.21 now
->>>2
-*** foundation-0.0.21: warning: CHANGELOG.md has disappeared from foundation 0.0.21
+$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.21 psimons@suse.com
 >>>= 0
 
 $$$ cat foundation.changes
@@ -17,10 +15,12 @@ $$$ cat foundation.changes
 now - psimons@suse.com
 
 - Update foundation to version 0.0.21.
-  A detailed changelog is not available from upstream.
+  Upstream has removed the change log file they used to maintain
+  from the distribution tarball.
 
 -------------------------------------------------------------------
 now - psimons@suse.com
 
 - Add foundation at version 0.0.20.
+
 >>>= 0

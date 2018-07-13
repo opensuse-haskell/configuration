@@ -1,0 +1,4 @@
+# ignore temporary test files
+
+_tmp
+*.changes
