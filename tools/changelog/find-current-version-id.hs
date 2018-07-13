@@ -11,7 +11,7 @@ main = do
   args <- getArgs
   case args of
     [p] -> do vs <- extractVersionUpdates p
-              if (null vs)
+              if null vs
                  then die ("*** cannot recognize any updates in " ++ p)
                  else putStrLn (prettyShow (head vs))
     _   -> syntaxError

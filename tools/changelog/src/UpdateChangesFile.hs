@@ -24,25 +24,24 @@ type TimeStamp = Text
 type EMail = Text
 
 updateChangesFile :: Maybe TimeStamp -> FilePath -> PackageName -> Version -> EMail -> IO ()
-updateChangesFile now' changesFile pkg newv email = do
+updateChangesFile now' changesFile pkg newv email =
   ifM (notM (testfile changesFile)) (commit mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
     -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
     when (null oldVs) (die (format ("cannot determine previous version number "%fp%" from") changesFile))
     let oldv = head oldVs
     when (oldv > newv) (die (format (fp%": unsupprted downgrade from version "%wp%" to "%wp) changesFile oldv newv))
-    sh $ do
-      unless (oldv == newv) $ do
-        let oldpkg = format (wp%"-"%wp) pkg oldv
-            newpkg = format (wp%"-"%wp) pkg newv
-        systemTempDir <- fromString <$> liftIO getTemporaryDirectory
-        tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
-        procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
-        procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
-        gcl <- liftIO (guessChangelog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
-        case gcl of
-          Right txt -> liftIO (commit txt)
-          Left desc -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
+    sh $ unless (oldv == newv) $ do
+      let oldpkg = format (wp%"-"%wp) pkg oldv
+          newpkg = format (wp%"-"%wp) pkg newv
+      systemTempDir <- fromString <$> liftIO getTemporaryDirectory
+      tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
+      procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
+      procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
+      gcl <- liftIO (guessChangelog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
+      case gcl of
+        Right txt -> liftIO (commit txt)
+        Left desc -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
 
   where
     commit :: Text -> IO ()

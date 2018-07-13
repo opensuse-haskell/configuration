@@ -25,7 +25,7 @@ main = do
   case result of
     Right txt -> Text.putStrLn txt
     Left desc -> case desc of
-      NoChangelogFiles            -> eprintf ("no change log files found\n")
+      NoChangelogFiles            -> eprintf "no change log files found\n"
       UndocumentedUpdate p        -> eprintf ("file "%fp%" has not changed between releases\n") p
       NoCommonChangelogFiles l r  -> eprintf ("both directories have no files in common: "%fps%" vs. "%fps%"\n") l r
       MoreThanOneChangelogFile p  -> eprintf ("too many changelog files: "%fps%"\n") p

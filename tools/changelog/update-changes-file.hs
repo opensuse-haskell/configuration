@@ -31,4 +31,4 @@ main = do
   updateChangesFile now changesFile pkg newv email
 
 argParsec :: Parsec a => ArgName -> Optional HelpMessage -> Parser a
-argParsec argname help = arg (simpleParsec . Text.unpack) argname help
+argParsec = arg (simpleParsec . Text.unpack)
