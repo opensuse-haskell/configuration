@@ -132,20 +132,16 @@ main = do
            else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     buildDir </> "*/*/*.changes" %> \out -> do
-      let [_,psid',bn',_] = splitDirectories out
-          psid = PackageSetId psid'
-          bn = BuildName bn'
+      (psid, bn) <- extractPackageSetIdAndBuildName out
       PackageIdentifier pn v <- pkgidFromPath (psid,bn)
       command_ [Cwd (takeDirectory out)] "../../../tools/update-changes-file" [display pn, display v]
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
-      let [_,psid',bn',_] = splitDirectories out
-          psid = PackageSetId psid'
-          bn = BuildName bn'
+      (psid, bn) <- extractPackageSetIdAndBuildName out
       pset <- getPackageSet psid
       pkgid@(PackageIdentifier n _) <- pkgidFromPath (psid,bn)
-      let isExe = unPackageName n == bn'
+      let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
           cid = compiler pset
           fa = Map.findWithDefault mempty n (flagAssignments pset)
@@ -162,7 +158,7 @@ main = do
       let year = head (lines year')
       command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
-                                      , "patches/" ++ psid' ++ "/" ++ display n ++ "/*.patch"
+                                      , "patches/" ++ unPackageSetId psid ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
@@ -230,3 +226,8 @@ mkStackagePackageSetSourcefile vers deps = unlines
   , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
   , "  ]"
   ]
+
+extractPackageSetIdAndBuildName :: Monad m => FilePath -> m (PackageSetId, BuildName)
+extractPackageSetIdAndBuildName p
+  | [_,psid,bn,_] <- splitDirectories p = return (PackageSetId psid, BuildName bn)
+  | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)
