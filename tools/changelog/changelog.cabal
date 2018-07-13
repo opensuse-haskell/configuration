@@ -52,6 +52,7 @@ executable update-changes-file
                     , extra
                     , foldl
                     , optional-args
+                    , pretty
                     , text
                     , time
                     , turtle

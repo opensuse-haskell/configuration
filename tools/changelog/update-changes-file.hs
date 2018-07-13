@@ -6,15 +6,12 @@ module Main ( main ) where
 import ExtractVersionUpdates
 import GuessChangelog
 
-import qualified Control.Foldl as Fold
 import Control.Monad.Extra
 import Data.Maybe
 import Data.Optional ( Optional )
-import Data.Set ( Set )
-import qualified Data.Set as Set
+-- import qualified Data.Set as Set
 import qualified Data.Text as Text
--- import qualified Data.Text.IO as Text
--- import Data.Time.Clock
+import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
 import Data.Time.Format
 import Distribution.Package
 import Distribution.Parsec.Class
@@ -23,7 +20,7 @@ import Distribution.Version
 import Prelude hiding ( FilePath )
 import System.Directory
 -- import System.Environment
-import Turtle hiding ( x, l )
+import Turtle hiding ( x, l, text )
 
 type TimeStamp = Text
 type EMail = Text
@@ -43,10 +40,10 @@ main = do
   opts@(_,changesFile,pkg,newv,_) <- options "Guess the change log entry between two version of a package." parser
   ifM (notM (testfile changesFile)) (updateChangesFile opts mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
-    debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
+    -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
     if null oldVs then updateChangesFile opts mempty else sh $ do
       let oldv = head oldVs
-      if oldv == newv then debug "no update; nothing to do\n" else do
+      unless (oldv == newv) $ do
         let oldpkg = format (wp%"-"%wp) pkg oldv
             newpkg = format (wp%"-"%wp) pkg newv
         systemTempDir <- fromString <$> liftIO getTemporaryDirectory
@@ -56,102 +53,23 @@ main = do
         gcl <- liftIO (guessChangelog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
         case gcl of
           Right txt -> liftIO (updateChangesFile opts txt)
-          Left desc -> case desc of
-            NoCommonChangelogFiles l r  -> undefined
-            MoreThanOneChangelogFile p  -> undefined
-            UnmodifiedTopIsTooLarge p n -> undefined
-            NotJustTopAdditions p       -> undefined
+          Left desc -> liftIO (updateChangesFile opts (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
 
 updateChangesFile :: Options -> Text -> IO ()
 updateChangesFile (now',changesFile,pkg,vers,email) cl' = do
   now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) return now'
   txt <- readTextFile changesFile <|> pure ""
-  let cl = Text.unlines (map (Text.cons ' ' . Text.cons ' ') (Text.lines cl'))
+  let cl = Text.unlines (map (\l -> if Text.null l then l else "  " <> l) (Text.lines cl'))
   writeTextFile changesFile $ format
     ("-------------------------------------------------------------------\n\
      \"%s%" - "%s%"\n\
      \\n\
-     \- Add "%wp%" at version "%wp%".\n"%s%"\n"%s)
-    now email pkg vers cl txt
-
---
---   let debug :: MonadIO io => Format (io ()) r -> r
---       debug = eprintf
---
---   oldCLF <- Set.fromList <$> listShell (findChangelogFiles oldDir)
---   debug ("directory "%fp%" contains changelog files: "%fps%"\n") oldDir oldCLF
---   newCLF <- Set.fromList <$> listShell (findChangelogFiles newDir)
---   debug ("directory "%fp%" contains changelog files: "%fps%"\n") newDir newCLF
---   let clf' = oldCLF `Set.intersection` newCLF
---   debug ("common files are: "%fps%"\n") clf'
---   clf <- case Set.toAscList clf' of
---            []    -> die "no common changelog files found"
---            [clf] -> return clf
---            _     -> die (format ("cannot handle multiple changelog files: "%fps) clf')
---   debug ("check differences between "%fp%" file in both directories\n") clf
---
---   old <- Text.lines <$> Text.readFile (Text.unpack (format fp (oldDir </> clf)))
---   new <- Text.lines <$> Text.readFile (Text.unpack (format fp (newDir </> clf)))
---   let (top,diff) = span inBoth (getDiff old new)
---       (add,foot) = span inSecond diff
---       topAddOnly = all inBoth foot
---   debug ("top "%d%" lines are not modified\n") (length top)
---   unless (length top < 10) $
---     die (format (fp%" contains more than 10 lines before the first addition") clf)
---   unless topAddOnly $
---     die (format (fp%" contains more than just additions at the top") clf)
---   mapM_ Text.putStrLn (map unDiff add)
---
--- inBoth :: Diff a -> Bool
--- inBoth (Both _ _)   = True
--- inBoth _            = False
---
--- -- inFirst :: Diff a -> Bool
--- -- inFirst (First _)   = True
--- -- inFirst _           = False
---
--- inSecond :: Diff a -> Bool
--- inSecond (Second _) = True
--- inSecond _          = False
---
--- unDiff :: Diff a -> a
--- unDiff (First txt)  = txt
--- unDiff (Both txt _) = txt
--- unDiff (Second txt) = txt
---
--- -- legalEdit :: (Range,Char,Range) -> Bool
--- -- legalEdit (left,'a',right) = True
--- -- legalEdit _                = False
---
--- -- type LineNumber = Word
--- -- type Length = Word
--- -- type Range = (LineNumber, Length)
---
--- -- rangePattern :: Pattern Range
--- -- rangePattern = do
--- --   start <- decimal
--- --   end   <- fromMaybe (start+1) <$> optional (char ',' *> decimal)
--- --   when (end <= start) (fail "end is smaller than beginning of range")
--- --   return (start,end-start)
---
--- -- hunkSpecPattern :: Pattern (Range,Char,Range)
--- -- hunkSpecPattern = do
--- --   left  <- rangePattern
--- --   ty    <- choice [oneOf "acd"]
--- --   right <- rangePattern
--- --   pure (left,ty,right)
---
--- findChangelogFiles :: FilePath -> Shell FilePath
--- findChangelogFiles dirPath =
---   onFiles (grepText changelogFilePattern) (filename <$> ls dirPath)
---
--- changelogFilePattern :: Pattern Text
--- changelogFilePattern = star dot <> asciiCI "change" <> star dot
---
--- -- * Utility Functions
---
--- listShell :: MonadIO io => Shell a -> io [a]
--- listShell = flip fold Fold.list
+     \- "%s%" "%wp%" "%s%" version "%wp%".\n"%s%"\n"%s)
+    now email
+    (if Text.null cl' then "Add" else "Update")
+    pkg
+    (if Text.null cl' then "at" else "to")
+    vers cl txt
 
 argParsec :: Parsec a => ArgName -> Optional HelpMessage -> Parser a
 argParsec argname help = arg (simpleParsec . Text.unpack) argname help
@@ -159,18 +77,62 @@ argParsec argname help = arg (simpleParsec . Text.unpack) argname help
 wp :: Pretty a => Format r (a -> r)
 wp = makeFormat (Text.pack . prettyShow)
 
-wpl :: Pretty a => Format r ([a] -> r)
-wpl = makeFormat (Text.intercalate ", " . map (Text.pack . prettyShow))
-
--- fps :: Format r (Set FilePath -> r)
--- fps = makeFormat (Text.intercalate ", " . map (format fp) . Set.toAscList)
-
--- runTest :: IO ()
--- runTest = withArgs ["mtl.changes", "mtl", "2.2"] main
-
-debug :: MonadIO io => Format (io ()) r -> r
-debug = eprintf
+-- wpl :: Pretty a => Format r ([a] -> r)
+-- wpl = makeFormat (Text.intercalate ", " . map (Text.pack . prettyShow))
 
 -- | Appropriate format parameter for 'formatTime' and 'parseTimeM'.
 changeLogDateFormat :: String
 changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
+
+prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangelog -> Doc
+
+prettyGuessedChangeLog _ (UndocumentedUpdate p) = para $
+        "Upstream has not updated the file " ++ show (Text.unpack (format fp p)) ++ " since the last release."
+
+prettyGuessedChangeLog _ NoChangelogFiles = para "Upstream does not provide a change log file."
+
+prettyGuessedChangeLog _ (NoCommonChangelogFiles old new)
+  | not (null old) && null new = para
+        "Upstream has removed the change log file they used to maintain before from\n\
+        \the distribution tarball."
+  | null old && not (null new) = para
+        "Upstream added a new change log file in this release. With no previous\n\
+        \version to compare against, the automatic updater cannot reliable determine\n\
+        \the relevante entries for this release."
+  | otherwise = para
+        "Upstream has renamed and modified the change log file(s) in this release.\n\
+        \Unfortunately, the automatic updater cannot reliable determine relevant\n\
+        \entries for this release."
+
+prettyGuessedChangeLog _ (MoreThanOneChangelogFile _) = error "more than one"
+
+prettyGuessedChangeLog ctx (UnmodifiedTopIsTooLarge p _) = para $
+        "Upstream's change log file format is strange (too much unmodified text at\n\
+        \at the top). The automatic updater cannot extract the relevant additions.\n\
+        \You can find the file at: " ++ hackageCLUrl ctx p
+
+prettyGuessedChangeLog ctx (NotJustTopAdditions p) = para $
+        "Upstream has edited the change log file since the last release in a non-trivial\n\
+        \way, i.e. they did more than just add a new entry at the top. You can review the\n\
+        \file at: " ++ hackageCLUrl ctx p
+
+hackageCLUrl :: (PackageName,Version,Version) -> FilePath -> String
+hackageCLUrl (pkg,_,newv) path = concat
+  [ "http://hackage.haskell.org/package/"
+  , prettyShow pkg, "-", prettyShow newv
+  , "/src/", Text.unpack (format fp path)
+  ]
+
+para :: String -> Doc
+para = fsep . map text . words
+
+-- pluralS :: Foldable t => t a -> Text
+-- pluralS a = if length a > 1
+--                then "s"
+--                else ""
+
+renderChangeLog :: Doc -> String
+renderChangeLog = renderStyle changeLogStyle
+
+changeLogStyle :: Style
+changeLogStyle = style { lineLength = 65, ribbonsPerLine = 1 }

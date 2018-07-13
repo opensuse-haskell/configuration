@@ -16,6 +16,7 @@ guessChangelog :: FilePath -> FilePath -> IO (Either GuessedChangelog Text)
 guessChangelog oldDir newDir = runExceptT $ do
   oldCLF <- Set.fromList <$> listShell (findChangelogFiles oldDir)
   newCLF <- Set.fromList <$> listShell (findChangelogFiles newDir)
+  when (all null [oldCLF,newCLF]) (throwError NoChangelogFiles)
   let clf' = oldCLF `Set.intersection` newCLF
   clf <- case Set.toAscList clf' of
            []    -> throwError (NoCommonChangelogFiles oldCLF newCLF)
@@ -24,17 +25,20 @@ guessChangelog oldDir newDir = runExceptT $ do
   (oec,old) <- shellStrict (format ("git stripspace < "%fp) (oldDir </> clf)) empty
   (nec,new) <- shellStrict (format ("git stripspace < "%fp) (newDir </> clf)) empty
   unless (all (== ExitSuccess) [oec,nec]) $
+    -- TODO: Throw a proper exception here, or even don't even rely on git-stripspace.
     die (format ("git stripspace failed with "%w%"\n") oec)
   let changes    = cleanupEmptyLines (getDiff (Text.lines old) (Text.lines new))
       (top,diff) = span inBoth changes
       (add,foot) = span inSecond diff
       topAddOnly = all inBoth foot
-  -- mapM_ (eprintf (w%"\n")) foot
+  when (all inBoth changes) (throwError (UndocumentedUpdate clf))
   unless (length top < 10) (throwError (UnmodifiedTopIsTooLarge clf (fromIntegral (length top))))
   unless topAddOnly (throwError (NotJustTopAdditions clf))
-  return (Text.stripEnd (Text.stripStart (Text.unlines (map unDiff add))))
+  return (Text.strip (Text.unlines (map unDiff add)))
 
-data GuessedChangelog = NoCommonChangelogFiles (Set FilePath) (Set FilePath)
+data GuessedChangelog = NoChangelogFiles
+                      | UndocumentedUpdate FilePath
+                      | NoCommonChangelogFiles (Set FilePath) (Set FilePath)
                       | MoreThanOneChangelogFile (Set FilePath)
                       | UnmodifiedTopIsTooLarge FilePath Word
                       | NotJustTopAdditions FilePath
