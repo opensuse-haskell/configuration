@@ -11,15 +11,21 @@ cabal-version: >= 1.10
 library
   exposed-modules:    ExtractVersionUpdates
                       GuessChangelog
+                      UpdateChangesFile
   hs-source-dirs:     src
-  build-depends:      base        < 5
-                    , Cabal       > 2.2
+  build-depends:      base          < 5
+                    , Cabal         > 2.2
                     , Diff
                     , containers
+                    , directory
+                    , extra
                     , foldl
                     , mtl
+                    , optional-args
+                    , pretty
                     , regex-posix
                     , text
+                    , time
                     , turtle
   default-language:   Haskell2010
   default-extensions: MonadFailDesugaring
