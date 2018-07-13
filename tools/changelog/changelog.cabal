@@ -21,7 +21,6 @@ library
                     , extra
                     , foldl
                     , mtl
-                    , optional-args
                     , pretty
                     , regex-posix
                     , text
@@ -53,14 +52,8 @@ executable update-changes-file
   build-depends:      base
                     , Cabal
                     , changelog
-                    , containers
-                    , directory
-                    , extra
-                    , foldl
                     , optional-args
-                    , pretty
                     , text
-                    , time
                     , turtle
   default-language:   Haskell2010
   default-extensions: MonadFailDesugaring
