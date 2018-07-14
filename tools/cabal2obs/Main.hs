@@ -10,6 +10,7 @@ import Orphans ()
 import ParseStackageConfig
 import ParseUtils
 import Types
+import UpdateChangesFile
 
 import Control.Monad.Extra
 import Data.Function
@@ -133,8 +134,8 @@ main = do
 
     buildDir </> "*/*/*.changes" %> \out -> do
       (psid, bn) <- extractPackageSetIdAndBuildName out
-      PackageIdentifier pn v <- pkgidFromPath (psid,bn)
-      command_ [Cwd (takeDirectory out)] "../../../tools/update-changes-file" [display pn, display v]
+      PackageIdentifier pn v <- pkgidFromPath (psid,bn)         -- TODO: evil hard-coded constant
+      traced "update-changes-file" $ updateChangesFile Nothing out pn v "psimons@suse.com"
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do

@@ -17,14 +17,15 @@ import Distribution.Package
 import Distribution.Pretty
 import Distribution.Version
 import Prelude hiding ( FilePath )
+import qualified Prelude as Prelude
 import System.Directory
 import Turtle hiding ( x, l, text )
 
 type TimeStamp = Text
 type EMail = Text
 
-updateChangesFile :: Maybe TimeStamp -> FilePath -> PackageName -> Version -> EMail -> IO ()
-updateChangesFile now' changesFile pkg newv email =
+updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> Version -> EMail -> IO ()
+updateChangesFile now' changesFile' pkg newv email = do
   ifM (notM (testfile changesFile)) (commit mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
     -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
@@ -44,6 +45,8 @@ updateChangesFile now' changesFile pkg newv email =
         Left desc -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
 
   where
+    changesFile = fromString changesFile'
+
     commit :: Text -> IO ()
     commit  cl' = do
       now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) return now'

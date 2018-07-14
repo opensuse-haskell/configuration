@@ -40,6 +40,7 @@ executable cabal2obs
   build-depends:      base       < 5
                     , Cabal      > 2.2
                     , cabal2spec > 2
+                    , changelog
                     , containers
                     , directory
                     , extra
