@@ -28,7 +28,7 @@ parser = do
 main :: IO ()
 main = do
   (now,changesFile,pkg,newv,email) <- options "Guess the change log entry between two version of a package." parser
-  updateChangesFile now changesFile pkg newv email
+  updateChangesFile now (Text.unpack (format fp changesFile)) pkg newv email
 
 argParsec :: Parsec a => ArgName -> Optional HelpMessage -> Parser a
 argParsec = arg (simpleParsec . Text.unpack)

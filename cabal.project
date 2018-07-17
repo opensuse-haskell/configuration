@@ -1,6 +1,10 @@
 -- cabal.project
 
+tests: true
+
 packages:
-  tools/cabal2obs/cabal2obs.cabal
-  tools/cabal2spec/cabal2spec.cabal
-  tools/changelog/changelog.cabal
+  ./cabal2obs.cabal
+
+optional-packages:
+  ../distribution-opensuse/distribution-opensuse.cabal
+  ../cabal2spec/cabal2spec.cabal

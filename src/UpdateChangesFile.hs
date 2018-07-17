@@ -6,19 +6,19 @@ module UpdateChangesFile
   where
 
 import ExtractVersionUpdates
-import GuessChangelog
 
 import Control.Monad.Extra
 import Data.Maybe
 import qualified Data.Text as Text
-import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
 import Data.Time.Format
 import Distribution.Package
 import Distribution.Pretty
 import Distribution.Version
-import Prelude hiding ( FilePath )
+import OpenSuse.GuessChangeLog
 import qualified Prelude as Prelude
+import Prelude hiding ( FilePath )
 import System.Directory
+import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
 import Turtle hiding ( x, l, text )
 
 type TimeStamp = Text
@@ -39,7 +39,7 @@ updateChangesFile now' changesFile' pkg newv email = do
       tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
       procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
       procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
-      gcl <- liftIO (guessChangelog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
+      gcl <- liftIO (guessChangeLog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
       case gcl of
         Right txt -> liftIO (commit txt)
         Left desc -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
@@ -70,14 +70,14 @@ wp = makeFormat (Text.pack . prettyShow)
 changeLogDateFormat :: String
 changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
 
-prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangelog -> Doc
+prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangeLog -> Doc
 
 prettyGuessedChangeLog _ (UndocumentedUpdate p) = para $
         "Upstream has not updated the file " ++ show (Text.unpack (format fp p)) ++ " since the last release."
 
-prettyGuessedChangeLog _ NoChangelogFiles = para "Upstream does not provide a change log file."
+prettyGuessedChangeLog _ NoChangeLogFiles = para "Upstream does not provide a change log file."
 
-prettyGuessedChangeLog _ (NoCommonChangelogFiles old new)
+prettyGuessedChangeLog _ (NoCommonChangeLogFiles old new)
   | not (null old) && null new = para
         "Upstream has removed the change log file they used to maintain from\n\
         \the distribution tarball."
@@ -90,7 +90,7 @@ prettyGuessedChangeLog _ (NoCommonChangelogFiles old new)
         \Unfortunately, the automatic updater cannot reliable determine relevant\n\
         \entries for this release."
 
-prettyGuessedChangeLog _ (MoreThanOneChangelogFile _) = error "more than one"
+prettyGuessedChangeLog _ (MoreThanOneChangeLogFile _) = error "more than one"
 
 prettyGuessedChangeLog ctx (UnmodifiedTopIsTooLarge p _) = para $
         "Upstream's change log file format is strange (too much unmodified text at\n\
