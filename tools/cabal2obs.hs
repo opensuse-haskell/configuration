@@ -183,7 +183,7 @@ main = do
           url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
       command_ [FileStdout out] "curl" ["-L", "-s", url]
 
-    "tools/cabal2obs/Config/*/Stackage.hs" %> \out -> do
+    "src/Config/*/Stackage.hs" %> \out -> do
       let dirname = takeBaseName (takeDirectory out)
           psid = case dirname of
                    "Nightly"     -> "nightly"
