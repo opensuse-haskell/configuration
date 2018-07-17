@@ -40,7 +40,7 @@ if [ -s "$tmpfile" ]; then
 fi
 
 cabal -v0 new-run cabal2obs -- --no-progress --lint src/Config/*/Stackage.hs
-for n in $(git status --porcelain tools/cabal2obs/Config/*/Stackage.hs | sed -e 's/^ M //'); do
+for n in $(git status --porcelain src/Config/*/Stackage.hs | sed -e 's/^ M //'); do
     v=$(basename $(dirname "$n"))
     case "$v" in
         LTS*)    v=lts-${v##LTS} ;;
