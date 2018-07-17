@@ -8,6 +8,3 @@
 [submodule "tools/spec-cleaner"]
 	path = tools/spec-cleaner
 	url = git://github.com/openSUSE-haskell/spec-cleaner.git
-[submodule "tools/cabal2spec"]
-	path = tools/cabal2spec
-	url = git://github.com/peti/cabal2spec.git
