@@ -24,12 +24,8 @@ executable cabal2obs
   other-modules:      Config
                       Config.ForcedExecutables
                       Config.Ghc84x
-                      Config.LTS11
-                      Config.LTS11.Stackage
-                      Config.LTS12
-                      Config.LTS12.Stackage
-                      Config.Nightly
-                      Config.Nightly.Stackage
+                      -- Config.LTS12
+                      -- Config.LTS12.Stackage
                       ExtractVersionUpdates
                       Oracle
                       Oracle.Hackage

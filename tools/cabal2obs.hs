@@ -48,13 +48,15 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "28"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "29"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
 
     -- Register our custom oracles to query the configuration files.
     getCabal <- hackageDB hackageDir
+    _ <- addConstraintResolverOracle hackageDir
+    getPackageSet <- addConfigOracle
 
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier pn _)) -> do
@@ -100,8 +102,8 @@ main = do
 
     -- Every (phony) package set target depends on the (real) spec file.
     forM_ (Set.toList knownPackageSets) $ \psid -> do
-      pset <- getPackageSet psid
       phony (unPackageSetId psid) $ do
+        pset <- getPackageSet psid
         specFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
           BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
           return (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")

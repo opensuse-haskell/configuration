@@ -1,25 +1,32 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 
-module Config ( getPackageSet, knownPackageSets ) where
+module Config ( knownPackageSets, addConfigOracle ) where
 
 import Config.Ghc84x
-import Config.LTS12
+-- import Config.LTS12
 import Orphans ()
 import Types
 
 import Data.Map.Strict ( Map, findWithDefault, keysSet )
 import Data.Set ( Set )
+import Development.Shake
 
-packageSets :: Map PackageSetId PackageSetConfig
+type instance RuleResult PackageSetId = PackageSetConfig
+
+addConfigOracle :: Rules (PackageSetId -> Action PackageSetConfig)
+addConfigOracle = addOracle getPackageSet
+
+packageSets :: Map PackageSetId (Action PackageSetConfig)
 packageSets = [ ("ghc-8.4.x", ghc84x)
-              , ("lts-12",    lts12)
-              ]
+ --              , ("lts-12",    lts12)
+               ]
 
 knownPackageSets :: Set PackageSetId
 knownPackageSets = keysSet packageSets
 
-getPackageSet :: Monad m => PackageSetId -> m PackageSetConfig
-getPackageSet psid = return (findWithDefault err psid packageSets)
+getPackageSet :: PackageSetId -> Action PackageSetConfig
+getPackageSet psid = findWithDefault err psid packageSets
   where
-    err = error ("unknown package set " ++ show (unPackageSetId psid))
+    err = fail ("unknown package set " ++ show (unPackageSetId psid))

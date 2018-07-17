@@ -7,14 +7,16 @@
 module Orphans ( ) where
 
 import Data.Maybe
+import Data.Map.Strict as Map
+import Data.Set as Set
 import Data.String
 import Development.Shake.Classes
-import Distribution.Text
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.Version
+import Distribution.Text
 import Distribution.Utils.ShortText
+import Distribution.Version
 
 instance Hashable PackageIdentifier
 instance Hashable PackageName
@@ -28,6 +30,12 @@ instance Hashable ShortText
 
 instance Hashable FlagAssignment where
   hashWithSalt salt = hashWithSalt salt . unFlagAssignment
+
+instance Hashable v => Hashable (Set v) where
+  hashWithSalt s = hashWithSalt s . Set.toAscList
+
+instance (Hashable k, Hashable v) => Hashable (Map k v) where
+  hashWithSalt s = hashWithSalt s . Map.toAscList
 
 instance IsString Dependency where
   fromString = parseText "Dependency"

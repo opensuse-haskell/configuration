@@ -12,6 +12,7 @@ import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Version
 import GHC.Generics ( Generic )
+import Orphans ( )
 
 newtype BuildName = BuildName { unBuildName :: String }
   deriving (Show, Eq, Ord, Hashable, NFData, Binary, Generic)
@@ -33,9 +34,8 @@ type PackageSet = Map PackageName Version
 
 data PackageSetConfig = PackageSetConfig
   { compiler         :: CompilerId
-  , targetPackages   :: ConstraintSet
   , packageSet       :: PackageSet
   , flagAssignments  :: Map PackageName FlagAssignment
   , forcedExectables :: Set PackageName
   }
-  deriving (Show, Binary, Generic)
+  deriving (Show, Binary, Generic, Eq, Hashable, NFData)
