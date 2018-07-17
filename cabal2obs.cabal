@@ -21,8 +21,7 @@ source-repository head
 
 executable cabal2obs
   main-is:            cabal2obs.hs
-  other-modules:      ChangesFile
-                      Config
+  other-modules:      Config
                       Config.ForcedExecutables
                       Config.Ghc84x
                       Config.LTS11
@@ -77,7 +76,6 @@ executable update-changes-file
                     , distribution-opensuse
                     , extra
                     , optional-args
-                    , parsec-class
                     , pretty
                     , regex-posix
                     , text
