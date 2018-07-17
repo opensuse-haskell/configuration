@@ -101,7 +101,7 @@ main = do
       need (map unPackageSetId (Set.toList knownPackageSets))
 
     -- Every (phony) package set target depends on the (real) spec file.
-    forM_ (Set.toList knownPackageSets) $ \psid -> do
+    forM_ (Set.toList knownPackageSets) $ \psid ->
       phony (unPackageSetId psid) $ do
         pset <- getPackageSet psid
         specFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do

@@ -25,8 +25,8 @@ ghc84x = do
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
-                  (forM (toList constraintList) $ \(pn,vr) ->
-                     (,) pn <$> askOracle (Dependency pn vr))
+                  forM (toList constraintList) (\(pn,vr) ->
+                    (,) pn <$> askOracle (Dependency pn vr))
   pure (PackageSetConfig {..})
 
 targetPackages :: ConstraintSet

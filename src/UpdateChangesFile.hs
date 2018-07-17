@@ -15,7 +15,7 @@ import Distribution.Package
 import Distribution.Pretty
 import Distribution.Version
 import OpenSuse.GuessChangeLog
-import qualified Prelude as Prelude
+import qualified Prelude
 import Prelude hiding ( FilePath )
 import System.Directory
 import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
@@ -25,7 +25,7 @@ type TimeStamp = Text
 type EMail = Text
 
 updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> Version -> EMail -> IO ()
-updateChangesFile now' changesFile' pkg newv email = do
+updateChangesFile now' changesFile' pkg newv email =
   ifM (notM (testfile changesFile)) (commit mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
     -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
