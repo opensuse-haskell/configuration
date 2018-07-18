@@ -1,62 +1,62 @@
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Config.LTS12 ( lts12 ) where
 
 import Config.ForcedExecutables
 import Config.LTS12.Stackage
-import Types
+import Oracle.Hackage ( )
 import Orphans ()
+import Types
 
-import Data.Map.Strict ( fromList, union )
+import Control.Monad
+import Data.Map.Strict as Map ( fromList, toList, union, withoutKeys )
+import Data.Set ( Set )
 import Data.Maybe
+import Development.Shake
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.Text
-import Distribution.Version
 
-lts12 :: PackageSetConfig
-lts12 = PackageSetConfig
-    { compiler = "ghc-8.4.3"
-    , targetPackages = []
-    , packageSet = myPackageSet `union` extraPackages
-    , flagAssignments = fromList (readFlagAssignents flagList)
-    , forcedExectables = forcedExectableNames
-    }
+lts12 :: Action PackageSetConfig
+lts12 = do
+  let compiler = "ghc-8.4.3"
+      flagAssignments = fromList (readFlagAssignents flagList)
+      forcedExectables = forcedExectableNames
+      myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
+  packageSet <- fromList <$>
+                  forM (toList myConstraintSet) (\(pn,vr) ->
+                    (,) pn <$> askOracle (Dependency pn vr))
+  pure (PackageSetConfig {..})
 
-myPackageSet :: PackageSet
-myPackageSet = fromList
-  [ (pn,v)
-  | Dependency pn vr <- stackage, pn `notElem` bannedPackageNames, Just v <- [isSpecificVersion vr]
-  ]
-
-extraPackages :: PackageSet
+extraPackages :: ConstraintSet
 extraPackages =
   [ -- Used by osukup@suse.com - xmonad + taffybar
-    "xmonad-0.13"
-  , "xmonad-contrib-0.13"
-  , "xmobar-0.26"
-  , "taffybar-3.0.0"
-  , "ConfigFile-1.1.4"
-  , "dbus-hslogger-0.1.0.1"
-  , "gi-dbusmenu-0.4.1"
-  , "gi-dbusmenugtk3-0.4.2"
-  , "gi-gdkx11-3.0.2"
-  , "gi-xlib-2.0.2"
-  , "gtk-sni-tray-0.1.4.0"
-  , "gtk-strut-0.1.2.1"
-  , "rate-limit-1.4.0"
-  , "spool-0.1"
-  , "status-notifier-item-0.3.0.0"
-  , "taffybar-3.0.0"
-  , "time-units-1.0.0"
-  , "xml-helpers-1.0.0"
+    "xmonad ==0.13"
+  , "xmonad-contrib ==0.13"
+  , "xmobar ==0.26"
+  , "taffybar ==3.0.0"
+  , "ConfigFile ==1.1.4"
+  , "dbus-hslogger ==0.1.0.1"
+  , "gi-dbusmenu ==0.4.1"
+  , "gi-dbusmenugtk3 ==0.4.2"
+  , "gi-gdkx11 ==3.0.2"
+  , "gi-xlib ==2.0.2"
+  , "gtk-sni-tray ==0.1.4.0"
+  , "gtk-strut ==0.1.2.1"
+  , "rate-limit ==1.4.0"
+  , "spool ==0.1"
+  , "status-notifier-item ==0.3.0.0"
+  , "taffybar ==3.0.0"
+  , "time-units ==1.0.0"
+  , "xml-helpers ==1.0.0"
   ]
 
-bannedPackageNames :: [PackageName]
+bannedPackageNames :: Set PackageName
 bannedPackageNames =
-  [ -- GHC 8.4.1 core packages
+  [ -- GHC 8.4.3 core packages
     "array"
   , "base"
   , "binary"
@@ -66,6 +66,7 @@ bannedPackageNames =
   , "deepseq"
   , "directory"
   , "filepath"
+  , "ghc"
   , "ghc-boot"
   , "ghc-boot-th"
   , "ghc-compact"

@@ -1,12 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -fno-warn-deprecations #-}
+{-# LANGUAGE OverloadedLists #-}
 
 module Config.LTS12.Stackage where
 
-import Orphans ( )
-import Distribution.Package
+import Types
 
-stackage :: [Dependency]
+stackage :: ConstraintSet
 stackage =
   [ "abstract-deque ==0.3"
   , "abstract-deque-tests ==0.3"
