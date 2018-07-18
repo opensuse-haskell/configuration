@@ -217,14 +217,13 @@ verifyLicense lic = case eitherParsec lic of
 mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
 mkStackagePackageSetSourcefile vers deps = unlines
   [ "{-# LANGUAGE OverloadedStrings #-}"
-  , "{-# OPTIONS_GHC -fno-warn-deprecations #-}"
+  , "{-# LANGUAGE OverloadedLists #-}"
   , ""
   , "module Config." ++ vers ++ ".Stackage where"
   , ""
-  , "import Orphans ( )"
-  , "import Distribution.Package"
+  , "import Types"
   , ""
-  , "stackage :: [Dependency]"
+  , "stackage :: ConstraintSet"
   , "stackage ="
   , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
   , "  ]"
