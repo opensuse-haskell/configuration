@@ -36,7 +36,7 @@ extraPackages =
   [ -- Used by osukup@suse.com - xmonad + taffybar
     "xmonad-0.13"
   , "xmonad-contrib-0.13"
-  , "xmobar-0.26"
+  , "xmobar-0.27"
   , "taffybar-3.0.0"
   , "ConfigFile-1.1.4"
   , "dbus-hslogger-0.1.0.1"
