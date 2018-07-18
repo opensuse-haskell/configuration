@@ -5,8 +5,7 @@
 module Config.Ghc84x ( ghc84x ) where
 
 import Config.ForcedExecutables
-import Oracle.Hackage
-import Orphans ()
+import Oracle.Hackage ( )
 import Types
 
 import Control.Monad
@@ -17,7 +16,6 @@ import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.Text
-import Distribution.Version
 
 ghc84x :: Action PackageSetConfig
 ghc84x = do
