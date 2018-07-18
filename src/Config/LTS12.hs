@@ -42,6 +42,7 @@ extraPackages =
   , "gi-xlib"
   , "gtk-sni-tray"
   , "gtk-strut"
+  , "parsec-numbers"
   , "rate-limit"
   , "spool"
   , "status-notifier-item"
