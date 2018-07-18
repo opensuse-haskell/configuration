@@ -33,25 +33,24 @@ lts12 = do
 
 extraPackages :: ConstraintSet
 extraPackages =
-  [ -- Used by osukup@suse.com - xmonad + taffybar
-    "xmonad ==0.13"
-  , "xmonad-contrib ==0.13"
-  , "xmobar ==0.26"
-  , "taffybar ==3.0.0"
-  , "ConfigFile ==1.1.4"
-  , "dbus-hslogger ==0.1.0.1"
-  , "gi-dbusmenu ==0.4.1"
-  , "gi-dbusmenugtk3 ==0.4.2"
-  , "gi-gdkx11 ==3.0.2"
-  , "gi-xlib ==2.0.2"
-  , "gtk-sni-tray ==0.1.4.0"
-  , "gtk-strut ==0.1.2.1"
-  , "rate-limit ==1.4.0"
-  , "spool ==0.1"
-  , "status-notifier-item ==0.3.0.0"
-  , "taffybar ==3.0.0"
-  , "time-units ==1.0.0"
-  , "xml-helpers ==1.0.0"
+  [ -- Used by osukup@suse.com - xmonad + xmobar + taffybar + needed dependencies
+    "ConfigFile"
+  , "dbus-hslogger"
+  , "gi-dbusmenu"
+  , "gi-dbusmenugtk3"
+  , "gi-gdkx11"
+  , "gi-xlib"
+  , "gtk-sni-tray"
+  , "gtk-strut"
+  , "rate-limit"
+  , "spool"
+  , "status-notifier-item"
+  , "taffybar"
+  , "time-units"
+  , "xml-helpers"
+  , "xmobar"
+  , "xmonad"
+  , "xmonad-contrib"
   ]
 
 bannedPackageNames :: Set PackageName
