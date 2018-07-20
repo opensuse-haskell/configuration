@@ -41,8 +41,8 @@ updateChangesFile now' changesFile' pkg newv email =
       procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
       gcl <- liftIO (guessChangeLog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
       case gcl of
-        Right txt -> liftIO (commit txt)
-        Left desc -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) desc))))
+        GuessedChangeLog _ txt -> liftIO (commit txt)
+        _                      -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) gcl))))
 
   where
     changesFile = fromString changesFile'
@@ -71,6 +71,9 @@ changeLogDateFormat :: String
 changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
 
 prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangeLog -> Doc
+
+prettyGuessedChangeLog _ (GuessedChangeLog _ _) = error
+        "prettyGuessedChangeLog is not supposed for format guessed entries"
 
 prettyGuessedChangeLog _ (UndocumentedUpdate p) = para $
         "Upstream has not updated the file " ++ show (Text.unpack (format fp p)) ++ " since the last release."
