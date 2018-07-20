@@ -1,11 +1,11 @@
 Index: ghc-math-functions.spec
 ===================================================================
---- ghc-math-functions.spec	(revision 1)
+--- ghc-math-functions.spec	(revision 3)
 +++ ghc-math-functions.spec	(working copy)
 @@ -22,7 +22,7 @@
- Version:        0.3.0.1
+ Version:        0.2.1.0
  Release:        0
- Summary:        Collection of tools for numeric computations
+ Summary:        Special functions and Chebyshev polynomials
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
  Group:          Development/Libraries/Haskell

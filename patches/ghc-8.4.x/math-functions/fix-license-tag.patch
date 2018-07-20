@@ -1,0 +1,13 @@
+Index: ghc-math-functions.spec
+===================================================================
+--- ghc-math-functions.spec	(revision 1)
++++ ghc-math-functions.spec	(working copy)
+@@ -22,6 +22,6 @@
+ Release:        0
+ Summary:        Collection of tools for numeric computations
+-License:        BSD-3-Clause
++License:        BSD-2-Clause
+ Group:          Development/Libraries/Haskell
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+
