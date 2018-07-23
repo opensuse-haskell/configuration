@@ -1,0 +1,34 @@
+Index: ghc-distribution-opensuse.spec
+===================================================================
+--- ghc-distribution-opensuse.spec	(revision 4)
++++ ghc-distribution-opensuse.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  ghc-text-devel
+ BuildRequires:  ghc-time-devel
+ BuildRequires:  ghc-turtle-devel
++BuildRequires:  pandoc
+ 
+ %description
+ This library is a loose collection of types, functions, and tools that users
+@@ -67,10 +68,12 @@
+ 
+ %build
+ %ghc_lib_build
++pandoc -s -t man -o guess-changelog.1 guess-changelog.md
+ 
+ %install
+ %ghc_lib_install
+ %ghc_fix_rpath %{pkg_name}-%{version}
++install -D -m 644 guess-changelog.1 %{buildroot}%{_mandir}/man1/guess-changelog.1
+ 
+ %post devel
+ %ghc_pkg_recache
+@@ -81,6 +84,7 @@
+ %files -f %{name}.files
+ %license LICENSE
+ %{_bindir}/guess-changelog
++%{_mandir}/man1/guess-changelog.1%{?ext_man}
+ 
+ %files devel -f %{name}-devel.files
+ 
+
