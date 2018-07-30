@@ -40,6 +40,7 @@ targetPackages   = [ "alex >=3.2.4"
                    , "SDL-image >=0.6.1.2"  -- SDL packages for games/raincat.
                    , "SDL-mixer >=0.6.2.0"
                    ]
+                   -- "xmonad >= 0.14" "xmobar >= 0.27"
 
 constraintList :: ConstraintSet
 constraintList = [ "aeson == 1.4.0.0"
