@@ -188,6 +188,7 @@ bannedPackageNames =
   , "jvm"
   , "jvm-streaming"
   , "sparkle"
+  , "jvm-batching"
 
     -- Its license (Free Public License 1.0.0 a.k.a. FPL-1.0) is not listed by SPDX.
     -- We probably *could* use 0BSD for these packages.
