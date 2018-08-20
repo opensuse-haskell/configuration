@@ -2,20 +2,11 @@ Index: ghc-say.spec
 ===================================================================
 --- ghc-say.spec	(revision 2)
 +++ ghc-say.spec	(working copy)
-@@ -21,7 +21,7 @@
- Name:           ghc-%{pkg_name}
- Version:        0.1.0.0
- Release:        0
--Summary:        FIXME
-+Summary:        Send textual messages to a Handle in a thread-friendly way
- License:        MIT
- Group:          Development/Libraries/Haskell
- URL:            https://hackage.haskell.org/package/%{pkg_name}
 @@ -38,7 +38,18 @@
  %endif
  
  %description
--FIXME.
+-Send textual messages to a Handle in a thread-friendly way.
 +Send textual messages to a Handle in a thread-friendly way. The functions
 +provided in this library guarantee the following properties:
 +
