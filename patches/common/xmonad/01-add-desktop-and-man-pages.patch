@@ -2,11 +2,10 @@ Index: xmonad.spec
 ===================================================================
 --- xmonad.spec	(revision 7)
 +++ xmonad.spec	(working copy)
-@@ -26,7 +26,8 @@
+@@ -26,6 +26,7 @@
  Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
 +Source10:       xmonad.desktop
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
@@ -23,15 +22,11 @@ Index: xmonad.spec
  %if %{with tests}
  BuildRequires:  ghc-QuickCheck-devel
  %endif
-@@ -80,6 +86,15 @@
+@@ -80,6 +86,11 @@
  
  %install
  %ghc_lib_install
-+install -d %{buildroot}%{_mandir}/man1/
-+mv %{buildroot}%{_datadir}/%{name}-%{version}/man/%{name}.1 %{buildroot}%{_mandir}/man1/
-+gzip %{buildroot}%{_mandir}/man1/%{name}.1
-+# Gzipping here because when we gzip it in %%build step, it breaks cabal setup
-+
++install -D man/%{name}.1 %{buildroot}%{_mandir}/man1/man/%{name}.1
 +%define desktop_src %{buildroot}%{_datadir}/xsessions/xmonad.desktop
 +install -m0644 -D %{SOURCE10} %{desktop_src}
 +%suse_update_desktop_file %{desktop_src}
@@ -39,15 +34,10 @@ Index: xmonad.spec
  %ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
-@@ -97,8 +112,9 @@
+@@ -97,3 +112,5 @@
  %{_bindir}/%{name}
- %dir %{_datadir}/%{name}-%{version}
- %dir %{_datadir}/%{name}-%{version}/man
--%{_datadir}/%{name}-%{version}/man/xmonad.1
 +%{_mandir}/man1/xmonad.1%{ext_man}
- %{_datadir}/%{name}-%{version}/man/xmonad.1.html
 +%{_datadir}/xsessions/xmonad.desktop
- %{_datadir}/%{name}-%{version}/man/xmonad.hs
  
  %files -n ghc-%{name} -f ghc-%{name}.files
 
