@@ -1,0 +1,14 @@
+Index: ghc-relude.spec
+===================================================================
+--- ghc-relude.spec	(revision 3)
++++ ghc-relude.spec	(working copy)
+@@ -109,6 +109,8 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

@@ -1,0 +1,14 @@
+Index: ghc-composition-prelude.spec
+===================================================================
+--- ghc-composition-prelude.spec	(revision 4)
++++ ghc-composition-prelude.spec	(working copy)
+@@ -46,6 +46,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
