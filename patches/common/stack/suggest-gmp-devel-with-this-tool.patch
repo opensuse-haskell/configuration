@@ -6,7 +6,7 @@ Index: stack.spec
  BuildRequires:  ghc-hspec-devel
  BuildRequires:  ghc-smallcheck-devel
  %endif
-+Suggests:       gmp-devel
++Suggests:       gmp-devel gcc make xz tar
  
  %description
  Stack is a cross-platform program for developing Haskell projects. It is aimed
