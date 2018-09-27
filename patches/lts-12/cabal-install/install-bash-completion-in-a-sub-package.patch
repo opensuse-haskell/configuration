@@ -1,0 +1,47 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 2)
++++ cabal-install.spec	(working copy)
+@@ -50,5 +50,6 @@
+ BuildRequires:  ghc-time-devel
+ BuildRequires:  ghc-unix-devel
+ BuildRequires:  ghc-zlib-devel
++Suggests:       %{name}-bash-completion
+ %if %{with tests}
+ BuildRequires:  ghc-QuickCheck-devel
+@@ -65,6 +66,16 @@
+ software by automating the fetching, configuration, compilation and
+ installation of Haskell libraries and programs.
+ 
++%package bash-completion
++Summary:        Bash completion for cabal-install
++Group:          System/Shells
++Requires:       %{name} = %{version}
++Requires:       bash-completion
++Supplements:    packageand(%{name}:bash-completion)
++
++%description bash-completion
++Optional sub-package offering bash completion for cabal-install.
++
+ %prep
+ %setup -q
+ 
+@@ -73,6 +84,7 @@
+ 
+ %install
+ %ghc_bin_install
++install -D -m444 bash-completion/cabal %{buildroot}%{_datadir}/bash-completion/completions/cabal
+ 
+ %check
+ %cabal_test
+@@ -84,4 +96,9 @@
+ %{_bindir}/cabal
+ %{_mandir}/man1/cabal.1%{ext_man}
+ 
++%files bash-completion
++%dir %{_datadir}/bash-completion
++%dir %{_datadir}/bash-completion/completions
++%{_datadir}/bash-completion/completions/cabal
++
+ %changelog
+
