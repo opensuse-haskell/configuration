@@ -24,6 +24,7 @@ executable cabal2obs
   other-modules:      Config
                       Config.ForcedExecutables
                       Config.Ghc84x
+                      Config.Ghc86x
                       Config.LTS12
                       Config.LTS12.Stackage
                       ExtractVersionUpdates
