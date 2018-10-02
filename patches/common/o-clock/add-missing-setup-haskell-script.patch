@@ -2,10 +2,11 @@ Index: ghc-o-clock.spec
 ===================================================================
 --- ghc-o-clock.spec	(revision 1)
 +++ ghc-o-clock.spec	(working copy)
-@@ -56,6 +56,8 @@
+@@ -56,7 +56,9 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
