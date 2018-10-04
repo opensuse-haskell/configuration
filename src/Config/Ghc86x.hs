@@ -93,7 +93,7 @@ constraintList = [ "aeson >= 1.4.1.0"
                  , "managed >= 1.0.6"
                  , "math-functions >= 0.3.0.2"
                  , "mwc-random >= 0.14.0.0"
-                 , "network >= 2.7.0.2"
+                 , "network ^>= 2.7.0.2"                         -- https://github.com/haskell/HTTP/issues/120
                  , "network-uri >= 2.6.1.0"
                  , "old-locale >= 1.0.0.7"
                  , "old-time >= 1.1.0.3"
