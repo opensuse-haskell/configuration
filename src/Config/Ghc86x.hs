@@ -167,6 +167,7 @@ constraintList = [ "adjunctions"
                  , "kan-extensions"
                  , "lens"
                  , "libxml-sax"
+                 , "libyaml"
                  , "lifted-async"
                  , "lifted-base"
                  , "logict"
@@ -347,6 +348,9 @@ flagList =
 
     -- Fix build with modern compilers.
   , ("cassava",                        "-bytestring--lt-0_10_4")
+
+    -- Prefer the system's library over the bundled one.
+  , ("libyaml",                        "system-libyaml")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
