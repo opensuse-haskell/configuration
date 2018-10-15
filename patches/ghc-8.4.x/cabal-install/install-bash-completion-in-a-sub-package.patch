@@ -2,13 +2,12 @@ Index: cabal-install.spec
 ===================================================================
 --- cabal-install.spec	(revision 2)
 +++ cabal-install.spec	(working copy)
-@@ -50,5 +50,6 @@
+@@ -50,4 +50,5 @@
  BuildRequires:  ghc-time-devel
  BuildRequires:  ghc-unix-devel
  BuildRequires:  ghc-zlib-devel
 +Suggests:       %{name}-bash-completion
- %if %{with tests}
- BuildRequires:  ghc-QuickCheck-devel
+ 
 @@ -65,6 +66,16 @@
  software by automating the fetching, configuration, compilation and
  installation of Haskell libraries and programs.

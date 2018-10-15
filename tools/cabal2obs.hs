@@ -96,9 +96,9 @@ main = do
     -- By default we build the (phony) all target.
     want ["all"]
 
-    -- Depend on all (phony) package set targets.
+    -- Depend on all active package set targets.
     phony "all" $
-      need (map unPackageSetId (Set.toList knownPackageSets))
+      need ["ghc-8.6.x", "lts-12"]
 
     -- Every (phony) package set target depends on the (real) spec file.
     forM_ (Set.toList knownPackageSets) $ \psid ->
