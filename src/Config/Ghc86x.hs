@@ -125,7 +125,6 @@ constraintList = [ "adjunctions"
                  , "free"
                  , "fsnotify"
                  , "generic-deriving"
-                 , "githash"
                  , "gitrev"
                  , "Glob"
                  , "hackage-security"
@@ -193,7 +192,6 @@ constraintList = [ "adjunctions"
                  , "open-browser"
                  , "optional-args"
                  , "optparse-applicative"
-                 , "optparse-simple"
                  , "pandoc"
                  , "pandoc-types <1.19 || >1.19"
                  , "parallel"
@@ -351,6 +349,9 @@ flagList =
 
     -- Prefer the system's library over the bundled one.
   , ("libyaml",                        "system-libyaml")
+
+    -- Configure a production-like build environment.
+  , ("stack",                          "hide-dependency-versions disable-git-info supported-build")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
