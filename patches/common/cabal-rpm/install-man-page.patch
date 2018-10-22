@@ -1,8 +1,8 @@
 Index: cabal-rpm.spec
 ===================================================================
---- cabal-rpm.spec	(revision 8)
+--- cabal-rpm.spec	(revision 5)
 +++ cabal-rpm.spec	(working copy)
-@@ -55,10 +55,12 @@
+@@ -59,10 +59,12 @@
  
  %install
  %ghc_bin_install
@@ -10,7 +10,7 @@ Index: cabal-rpm.spec
  
  %files
  %license COPYING
- %doc ChangeLog README.md
+ %doc ChangeLog README.md TODO
  %{_bindir}/%{name}
 +%{_mandir}/man1/cabal-rpm.1*
  
