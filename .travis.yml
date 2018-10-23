@@ -23,8 +23,9 @@ addons:
     sources:
       - hvr-ghc
     packages:
-      - cabal-install-head
-      - ghc-8.4.3
+      - ghc-ppa-tools
+      - cabal-install-2.4
+      - ghc-8.6.1
       - rpm
 
 before_install:
