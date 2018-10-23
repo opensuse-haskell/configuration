@@ -15,7 +15,8 @@ import UpdateChangesFile
 import Control.Monad.Extra
 import Data.Function
 import Data.List as List
-import Data.Set as Set ( toList )
+import Data.Set as Set ( Set )
+import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
 import Development.Shake as Shake
 import Development.Shake.FilePath
@@ -198,8 +199,14 @@ main = do
     -- phony "update" $ need
     --   [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
 
-    -- phony "fetch" $ do
-    --   pkgs' <- mapM (packageList . GetPackageList) knownPackageSets
+    phony "fetch" $ do
+      psets <- mapM (fmap packageSet . askOracle) (Set.toList knownPackageSets)
+      let pids :: [Set PackageIdentifier]
+          pids = Map.foldrWithKey (\pn pv s -> Set.insert (PackageIdentifier pn pv) s) mempty <$> psets
+          tarball pid@(PackageIdentifier pn pv) = homeDir </> ".cabal/packages/hackage.haskell.org" </> display pn </> display pv </> display pid <.> "tar.gz"
+      need (Set.toList (Set.map tarball (Set.unions pids)))
+
+    --  pkgs' <- mapM (packageList . GetPackageList) knownPackageSets
     --   let pkgs :: [PackageIdentifier]
     --       pkgs = sort (nub (concat pkgs'))
     --   need [ homeDir </> ".cabal/packages/hackage.haskell.org" </> display pn </> display v </> display pid <.> "tar.gz"
