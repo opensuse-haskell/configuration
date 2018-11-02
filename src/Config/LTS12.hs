@@ -22,7 +22,7 @@ import Distribution.Text
 
 lts12 :: Action PackageSetConfig
 lts12 = do
-  let compiler = "ghc-8.4.3"
+  let compiler = "ghc-8.4.4"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
