@@ -184,7 +184,7 @@ constraintList = [ "adjunctions"
                  , "mustache"
                  , "mwc-random"
                  , "neat-interpolation"
-                 , "network < 2.8"                    -- https://github.com/haskell/HTTP/issues/120
+                 , "network"
                  , "network-uri"
                  , "old-locale"
                  , "old-time"
