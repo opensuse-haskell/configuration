@@ -19,7 +19,7 @@ import Distribution.Text
 
 ghc86x :: Action PackageSetConfig
 ghc86x = do
-  let compiler = "ghc-8.6.1"
+  let compiler = "ghc-8.6.2"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
