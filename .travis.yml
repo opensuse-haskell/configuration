@@ -42,6 +42,7 @@ install:
   - cabal new-install shelltestrunner
 
 script:
+  - rm -f _build/*/*/*.changes
   - cabal new-run cabal2obs -- --keep-going -j2
   - cabal new-test all
   - tests/run-tests
