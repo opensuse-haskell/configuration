@@ -1,0 +1,13 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 11)
++++ cabal-install.spec	(working copy)
+@@ -77,6 +77,7 @@
+ %prep
+ %setup -q
+ cp -p %{SOURCE1} %{name}.cabal
++cabal-tweak-dep-ver zip-archive '< 0.4' '< 0.5'
+ 
+ %build
+ %ghc_bin_build
+
