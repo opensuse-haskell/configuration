@@ -25,7 +25,7 @@ addons:
     packages:
       - ghc-ppa-tools
       - cabal-install-2.4
-      - ghc-8.6.1
+      - ghc-8.6.3
       - rpm
 
 before_install:
