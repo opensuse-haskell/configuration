@@ -1,7 +1,6 @@
 # .travis.yml
 
 language: c
-sudo: false
 
 cache:
   directories:
