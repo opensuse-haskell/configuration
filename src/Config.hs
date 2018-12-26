@@ -7,6 +7,7 @@ module Config ( knownPackageSets, addConfigOracle ) where
 import Config.Ghc84x
 import Config.Ghc86x
 import Config.LTS12
+import Config.LTS13
 import Orphans ()
 import Types
 
@@ -23,6 +24,7 @@ packageSets :: Map PackageSetId (Action PackageSetConfig)
 packageSets = [ ("ghc-8.4.x", ghc84x)
               , ("ghc-8.6.x", ghc86x)
               , ("lts-12",    lts12)
+              , ("lts-13",    lts13)
               ]
 
 knownPackageSets :: Set PackageSetId

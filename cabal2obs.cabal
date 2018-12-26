@@ -27,6 +27,8 @@ executable cabal2obs
                       Config.Ghc86x
                       Config.LTS12
                       Config.LTS12.Stackage
+                      Config.LTS13
+                      Config.LTS13.Stackage
                       ExtractVersionUpdates
                       Oracle
                       Oracle.Hackage
