@@ -5,7 +5,7 @@ Index: pandoc.spec
 @@ -27,6 +27,7 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/2.cabal#/%{name}.cabal
 +Source10:       pandoc-pdf.readme
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
