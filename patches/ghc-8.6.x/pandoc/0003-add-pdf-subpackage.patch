@@ -2,10 +2,9 @@ Index: pandoc.spec
 ===================================================================
 --- pandoc.spec	(revision 10)
 +++ pandoc.spec	(working copy)
-@@ -27,6 +27,7 @@
+@@ -27,5 +27,6 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/2.cabal#/%{name}.cabal
 +Source10:       pandoc-pdf.readme
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
@@ -30,10 +29,9 @@ Index: pandoc.spec
  %package -n ghc-%{name}
  Summary:        Haskell %{name} library
  Group:          System/Libraries
-@@ -131,6 +145,7 @@
+@@ -131,5 +145,6 @@
  %prep
  %setup -q
- cp -p %{SOURCE1} %{name}.cabal
 +cp %{SOURCE10} .
  
  %build
