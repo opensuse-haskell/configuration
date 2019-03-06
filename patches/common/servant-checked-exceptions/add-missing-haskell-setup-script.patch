@@ -2,10 +2,11 @@ Index: ghc-servant-checked-exceptions.spec
 ===================================================================
 --- ghc-servant-checked-exceptions.spec	(revision 1)
 +++ ghc-servant-checked-exceptions.spec	(working copy)
-@@ -69,6 +69,8 @@
+@@ -69,7 +69,9 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
