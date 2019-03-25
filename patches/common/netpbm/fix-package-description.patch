@@ -1,12 +1,20 @@
 Index: ghc-netpbm.spec
 ===================================================================
---- ghc-netpbm.spec	(revision 1)
+--- ghc-netpbm.spec	(revision 3)
 +++ ghc-netpbm.spec	(working copy)
-@@ -51,17 +51,6 @@
+@@ -49,25 +49,6 @@
  The current implementation parses PPM images at around 10 MB/s on a Core
  i5-2520M.
  
 -CHANGELOG
+-
+-Version 1.0.3
+-
+-* Package maintenance improvements only (base-4.5 excluded). See #3
+-
+-Version 1.0.2
+-
+-* Package maintenance improvements only.
 -
 -Version 1.0.1
 -
