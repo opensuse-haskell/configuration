@@ -9,7 +9,8 @@ import Oracle.Hackage ( )
 import Types
 
 import Control.Monad
-import Data.Map.Strict as Map ( fromList, toList )
+import Data.List ( intercalate )
+import Data.Map.Strict ( fromList, toList, keys, union )
 import Data.Maybe
 import Development.Shake
 import Distribution.Package
@@ -19,7 +20,7 @@ import Distribution.Text
 
 ghc86x :: Action PackageSetConfig
 ghc86x = do
-  let compiler = "ghc-8.6.2"
+  let compiler = "ghc-8.6.4"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
@@ -36,7 +37,7 @@ targetPackages   = [ "alex >=3.2.4"
                    , "pandoc >=2.2.1"
                    , "pandoc-citeproc"
                    , "ShellCheck >=0.4.7"
-                   , "stack >=1.7.1"
+                   , "stack >=1.7.1 && < 9.9.9"
                    , "xmobar >= 0.27"
                    , "xmonad >= 0.14"
                    , "xmonad-contrib >= 0.14"
@@ -44,6 +45,17 @@ targetPackages   = [ "alex >=3.2.4"
                    , "SDL-image >=0.6.1.2"  -- SDL packages for games/raincat.
                    , "SDL-mixer >=0.6.2.0"
                    ]
+
+resolveConstraints :: String
+resolveConstraints = unwords ["cabal", "new-install", "--dry-run", constraints, flags, pkgs]
+  where
+    pkgs = intercalate " " (display <$> keys targetPackages)
+    constraints = "--constraint=" <> intercalate " --constraint=" (show <$> environment)
+    environment = display . uncurry Dependency <$> toList (corePackages `union` targetPackages)
+    flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags])
+                    | pn <- keys targetPackages
+                    , Just flags <- [lookup (unPackageName pn) flagList]
+                    ]
 
 constraintList :: ConstraintSet
 constraintList = [ "adjunctions"
@@ -371,3 +383,39 @@ readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
     noMinusF :: String -> String
     noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
     noMinusF x           = x
+
+corePackages :: ConstraintSet
+corePackages = [ "array ==0.5.3.0"
+               , "base ==4.12.0.0"
+               , "binary ==0.8.6.0"
+               , "bytestring ==0.10.8.2"
+               , "Cabal ==2.4.0.1"
+               , "containers ==0.6.0.1"
+               , "deepseq ==1.4.4.0"
+               , "directory ==1.3.3.0"
+               , "filepath ==1.4.2.1"
+               , "ghc ==8.6.4"
+               , "ghc-boot ==8.6.4"
+               , "ghc-boot-th ==8.6.4"
+               , "ghc-compact ==0.1.0.0"
+               , "ghc-heap ==8.6.4"
+               , "ghc-prim ==0.5.3"
+               , "ghci ==8.6.4"
+               , "haskeline ==0.7.4.3"
+               , "hpc ==0.6.0.3"
+               , "integer-gmp ==1.0.2.0"
+               , "libiserv ==8.6.3"
+               , "mtl ==2.2.2"
+               , "parsec ==3.1.13.0"
+               , "pretty ==1.1.3.6"
+               , "process ==1.6.5.0"
+               , "rts ==1.0"
+               , "stm ==2.5.0.0"
+               , "template-haskell ==2.14.0.0"
+               , "terminfo ==0.4.1.2"
+               , "text ==1.2.3.1"
+               , "time ==1.8.0.2"
+               , "transformers ==0.5.6.2"
+               , "unix ==2.7.2.2"
+               , "xhtml ==3000.2.2.1"
+               ]
