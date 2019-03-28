@@ -258,6 +258,7 @@ constraintList = [ "adjunctions"
                  , "smallcheck"
                  , "socks"
                  , "split"
+                 , "splitmix"  -- dependency of QuickCheck which isn't picked up for some reason
                  , "stack < 9.9.9"
                  , "StateVar"
                  , "stm-chans"
