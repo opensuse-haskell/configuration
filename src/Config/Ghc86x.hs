@@ -193,7 +193,7 @@ constraintList = [ "adjunctions"
                  , "mustache"
                  , "mwc-random"
                  , "neat-interpolation"
-                 , "network"
+                 , "network < 3"  -- blocked by socks, connection, and cabal-install-2.4.0.0
                  , "network-uri"
                  , "old-locale"
                  , "old-time"
