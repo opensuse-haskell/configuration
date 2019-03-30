@@ -217,7 +217,7 @@ constraintList = [ "adjunctions"
                  , "primitive"
                  , "profunctors"
                  , "project-template"
-                 , "QuickCheck == 2.12.*"   -- https://github.com/hspec/hspec/issues/410
+                 , "QuickCheck"
                  , "quickcheck-io"
                  , "random"
                  , "reflection"
