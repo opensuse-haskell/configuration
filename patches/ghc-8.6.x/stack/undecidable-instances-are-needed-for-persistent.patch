@@ -1,0 +1,21 @@
+Index: stack.spec
+===================================================================
+--- stack.spec	(revision 19)
++++ stack.spec	(working copy)
+@@ -121,6 +121,7 @@
+ BuildRequires:  ghc-hspec-devel
+ BuildRequires:  ghc-smallcheck-devel
+ %endif
++Patch01:        enable-undecidable-instances-extension.patch
+ 
+ %description
+ Stack is a cross-platform program for developing Haskell projects. It is aimed
+@@ -152,6 +153,7 @@
+ 
+ %prep
+ %setup -q
++%patch01 -p1
+ cp -p %{SOURCE1} %{name}.cabal-broken
+ 
+ %build
+
