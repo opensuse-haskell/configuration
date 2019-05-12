@@ -2,11 +2,10 @@ Index: ghc-streaming-attoparsec.spec
 ===================================================================
 --- ghc-streaming-attoparsec.spec	(revision 2)
 +++ ghc-streaming-attoparsec.spec	(working copy)
-@@ -54,7 +54,9 @@
+@@ -54,6 +54,8 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
