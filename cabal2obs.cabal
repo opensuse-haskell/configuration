@@ -25,6 +25,7 @@ executable cabal2obs
                       Config.ForcedExecutables
                       Config.Ghc84x
                       Config.Ghc86x
+                      Config.Ghc88x
                       Config.LTS12
                       Config.LTS12.Stackage
                       Config.LTS13
