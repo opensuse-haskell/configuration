@@ -9,7 +9,7 @@ license:       GPL-3
 license-file:  LICENSE
 author:        Peter Simons, Ondřej Súkup
 maintainer:    opensuse-haskell@opensuse.org
-tested-with:   GHC == 8.4.3
+tested-with:   GHC == 8.6.5
 category:      Distribution
 homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
