@@ -22,7 +22,7 @@ import Distribution.Text
 
 lts13 :: Action PackageSetConfig
 lts13 = do
-  let compiler = "ghc-8.6.3"
+  let compiler = "ghc-8.6.5"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
@@ -60,7 +60,7 @@ extraPackages =
 
 bannedPackageNames :: Set PackageName
 bannedPackageNames =
-  [ -- GHC 8.6.3 core packages
+  [ -- GHC 8.6.5 core packages
     "array"
   , "base"
   , "binary"
