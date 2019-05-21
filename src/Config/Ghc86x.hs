@@ -215,7 +215,7 @@ constraintList = [ "adjunctions"
                  , "persistent"
                  , "persistent-sqlite"
                  , "persistent-template"
-                 , "primitive"
+                 , "primitive < 0.7"  -- blocked by aeson-1.4.3.0 and foldl-1.4.5
                  , "profunctors"
                  , "project-template"
                  , "QuickCheck"
