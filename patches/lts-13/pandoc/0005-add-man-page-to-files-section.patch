@@ -1,0 +1,13 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 8)
++++ pandoc.spec	(working copy)
+@@ -314,6 +314,7 @@
+ %{_datadir}/%{name}-%{version}/data/templates/default.textile
+ %{_datadir}/%{name}-%{version}/data/templates/default.zimwiki
+ %{_datadir}/%{name}-%{version}/data/translations/*.yaml
++%{_mandir}/man1/pandoc.1%{ext_man}
+ 
+ %if 0%{?is_opensuse}
+ %files pdf
+
