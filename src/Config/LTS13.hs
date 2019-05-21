@@ -303,7 +303,7 @@ bannedPackageNames =
   , "mercury-api"
 
     -- Does not compile.
-  , "yoga", "cuda"
+  , "yoga", "cuda", "modular", "termbox", "transformers-lift"
 
     -- Need pkgconfig(blas), which we don't have.
   , "blas-ffi", "blas-carray"

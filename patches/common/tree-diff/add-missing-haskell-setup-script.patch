@@ -1,0 +1,14 @@
+Index: ghc-tree-diff.spec
+===================================================================
+--- ghc-tree-diff.spec	(revision 4)
++++ ghc-tree-diff.spec	(working copy)
+@@ -88,6 +88,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
