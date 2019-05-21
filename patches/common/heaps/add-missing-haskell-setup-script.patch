@@ -1,0 +1,14 @@
+Index: ghc-heaps.spec
+===================================================================
+--- ghc-heaps.spec	(revision 2)
++++ ghc-heaps.spec	(working copy)
+@@ -46,6 +46,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

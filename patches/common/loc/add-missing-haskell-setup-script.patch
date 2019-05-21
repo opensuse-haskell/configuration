@@ -1,0 +1,14 @@
+Index: ghc-loc.spec
+===================================================================
+--- ghc-loc.spec	(revision 1)
++++ ghc-loc.spec	(working copy)
+@@ -55,6 +55,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

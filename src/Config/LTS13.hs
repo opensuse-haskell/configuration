@@ -52,6 +52,10 @@ extraPackages =
   , "xmobar"
   , "xmonad"
   , "xmonad-contrib"
+
+    -- LTS-13.x has 2.4.0.1, which we cannot build because we're stuck with the
+    -- compiler's native Cabal library.
+  , "cabal-install == 2.4.0.0"
   ]
 
 bannedPackageNames :: Set PackageName
@@ -299,7 +303,7 @@ bannedPackageNames =
   , "mercury-api"
 
     -- Does not compile.
-  , "yoga"
+  , "yoga", "cuda"
 
     -- Need pkgconfig(blas), which we don't have.
   , "blas-ffi", "blas-carray"
