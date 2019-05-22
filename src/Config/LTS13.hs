@@ -304,7 +304,7 @@ bannedPackageNames =
 
     -- Does not compile.
   , "yoga", "cuda", "modular", "termbox", "transformers-lift", "hmatrix-backprop"
-  , "ghc-esqueleto", "emd", "bins"
+  , "esqueleto", "emd", "bins", "refined"
 
     -- Need pkgconfig(blas), which we don't have.
   , "blas-ffi", "blas-carray"
