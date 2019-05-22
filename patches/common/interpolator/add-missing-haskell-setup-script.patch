@@ -1,0 +1,14 @@
+Index: ghc-interpolator.spec
+===================================================================
+--- ghc-interpolator.spec	(revision 2)
++++ ghc-interpolator.spec	(working copy)
+@@ -60,6 +60,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

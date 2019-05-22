@@ -1,0 +1,14 @@
+Index: ghc-aos-signature.spec
+===================================================================
+--- ghc-aos-signature.spec	(revision 1)
++++ ghc-aos-signature.spec	(working copy)
+@@ -57,6 +57,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

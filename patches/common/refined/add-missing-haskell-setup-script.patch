@@ -1,0 +1,14 @@
+Index: ghc-refined.spec
+===================================================================
+--- ghc-refined.spec	(revision 1)
++++ ghc-refined.spec	(working copy)
+@@ -51,6 +51,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

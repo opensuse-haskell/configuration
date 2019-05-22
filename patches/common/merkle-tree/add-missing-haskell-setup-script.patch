@@ -1,0 +1,14 @@
+Index: ghc-merkle-tree.spec
+===================================================================
+--- ghc-merkle-tree.spec	(revision 1)
++++ ghc-merkle-tree.spec	(working copy)
+@@ -56,6 +56,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

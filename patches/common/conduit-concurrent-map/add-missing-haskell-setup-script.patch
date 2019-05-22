@@ -1,0 +1,14 @@
+Index: ghc-conduit-concurrent-map.spec
+===================================================================
+--- ghc-conduit-concurrent-map.spec	(revision 1)
++++ ghc-conduit-concurrent-map.spec	(working copy)
+@@ -59,6 +59,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

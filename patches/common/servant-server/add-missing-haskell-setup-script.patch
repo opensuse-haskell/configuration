@@ -1,0 +1,14 @@
+Index: ghc-servant-server.spec
+===================================================================
+--- ghc-servant-server.spec	(revision 1)
++++ ghc-servant-server.spec	(working copy)
+@@ -95,6 +95,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

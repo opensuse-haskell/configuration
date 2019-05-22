@@ -1,0 +1,14 @@
+Index: ghc-streamly.spec
+===================================================================
+--- ghc-streamly.spec	(revision 1)
++++ ghc-streamly.spec	(working copy)
+@@ -116,6 +116,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+

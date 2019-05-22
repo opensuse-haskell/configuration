@@ -1,0 +1,14 @@
+Index: ghc-proto-lens-runtime.spec
+===================================================================
+--- ghc-proto-lens-runtime.spec	(revision 1)
++++ ghc-proto-lens-runtime.spec	(working copy)
+@@ -56,6 +56,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build_without_haddock
+
