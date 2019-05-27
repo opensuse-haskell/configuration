@@ -1,0 +1,17 @@
+Index: ghc-postgresql-libpq.spec
+===================================================================
+--- ghc-postgresql-libpq.spec	(revision 1)
++++ ghc-postgresql-libpq.spec	(working copy)
+@@ -30,7 +30,11 @@
+ BuildRequires:  ghc-bytestring-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-unix-devel
++%if 0%{?suse_version} >= 1550
++BuildRequires:  postgresql-server-devel
++%else
+ BuildRequires:  postgresql-devel
++%endif
+ 
+ %description
+ This is a binding to libpq: the C application programmer's interface to
+
