@@ -303,7 +303,7 @@ constraintList = [ "adjunctions"
                  , "x509-system"
                  , "x509-validation"
                  , "xml"
-                 , "xml-conduit"
+                 , "xml-conduit < 1.9" -- breaks dbus: https://github.com/rblaze/haskell-dbus/issues/36
                  , "xml-types"
                  , "xmobar"
                  , "xmonad"
