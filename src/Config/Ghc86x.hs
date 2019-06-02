@@ -112,7 +112,7 @@ constraintList = [ "adjunctions"
                  , "data-default-instances-containers"
                  , "data-default-instances-dlist"
                  , "data-default-instances-old-locale"
-                 , "dbus"
+                 , "dbus < 1.2.8"       -- newer versions require network 3.x
                  , "Diff"
                  , "digest"
                  , "distribution-opensuse"
@@ -303,7 +303,7 @@ constraintList = [ "adjunctions"
                  , "x509-system"
                  , "x509-validation"
                  , "xml"
-                 , "xml-conduit < 1.9" -- breaks dbus: https://github.com/rblaze/haskell-dbus/issues/36
+                 , "xml-conduit < 1.9" -- breaks old dbus, and the new version needs network 3.x
                  , "xml-types"
                  , "xmobar"
                  , "xmonad"
