@@ -340,7 +340,7 @@ flagList =
   , ("texmath",                        "executable")
 
     -- Enable almost all extensions.
-  , ("xmobar",                         "with_thread with_utf8 with_xft with_xpm with_mpris with_dbus with_iwlib with_inotify")
+  , ("xmobar",                         "with_thread with_utf8 with_xft with_xpm with_mpris with_dbus with_iwlib with_inotify with_datezone")
 
     -- Enable additional features
   , ("idris",                          "ffi gmp")
