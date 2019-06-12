@@ -1,0 +1,14 @@
+Index: ghc-time-compat.spec
+===================================================================
+--- ghc-time-compat.spec	(revision 1)
++++ ghc-time-compat.spec	(working copy)
+@@ -67,6 +67,8 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
