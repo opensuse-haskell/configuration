@@ -1,0 +1,23 @@
+Index: happy.spec
+===================================================================
+--- happy.spec	(revision 5)
++++ happy.spec	(working copy)
+@@ -40,6 +40,8 @@
+ %if %{with tests}
+ BuildRequires:  ghc-process-devel
+ %endif
++Patch01:        https://github.com/simonmar/happy/pull/142/commits/a6913dc929b7636a3df71a053ec2a164a20e00bd.patch#/support-cabal-3.x-part-1.patch
++Patch02:        https://github.com/simonmar/happy/pull/142/commits/45e71526ece33091f6ff41c703431154d0d5f612.patch#/support-cabal-3.x-part-2.patch
+ 
+ %description
+ Happy is a parser generator for Haskell. Given a grammar specification in BNF,
+@@ -48,6 +50,8 @@
+ 
+ %prep
+ %setup -q
++%patch01 -p1
++%patch02 -p1
+ 
+ %build
+ %ghc_bin_build
+
