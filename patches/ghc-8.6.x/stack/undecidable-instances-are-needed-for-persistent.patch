@@ -10,12 +10,11 @@ Index: stack.spec
  
  %description
  Stack is a cross-platform program for developing Haskell projects. It is aimed
-@@ -152,6 +153,7 @@
+@@ -152,5 +153,6 @@
  
  %prep
  %setup -q
 +%patch01 -p1
- cp -p %{SOURCE1} %{name}.cabal-broken
  
  %build
 

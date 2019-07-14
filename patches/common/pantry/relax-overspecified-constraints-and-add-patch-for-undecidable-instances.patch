@@ -10,13 +10,10 @@ Index: ghc-pantry-tmp.spec
  
  %description
  Content addressable Haskell package management.
-@@ -116,6 +117,10 @@
+@@ -116,6 +117,7 @@
  cp -p %{SOURCE1} %{pkg_name}.cabal
  echo > Setup.hs 'import Distribution.Simple'
  echo >>Setup.hs 'main = defaultMain'
-+cabal-tweak-dep-ver persistent '<2.10' '< 2.11'
-+cabal-tweak-dep-ver persistent-sqlite '<2.10' '<2.11'
-+cabal-tweak-dep-ver persistent-template '<2.7' '< 2.8'
 +%patch01 -p5
  
  %build
