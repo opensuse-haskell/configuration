@@ -1,8 +1,8 @@
-Index: ghc-servant-checked-exceptions-core.spec
+index: ghc-foundation.spec
 ===================================================================
---- ghc-servant-checked-exceptions-core.spec	(revision 1)
-+++ ghc-servant-checked-exceptions-core.spec	(working copy)
-@@ -62,6 +62,8 @@
+--- ghc-foundation.spec	(revision 6)
++++ ghc-foundation.spec	(working copy)
+@@ -64,6 +64,8 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}

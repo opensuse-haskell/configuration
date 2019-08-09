@@ -23,13 +23,10 @@ executable cabal2obs
   main-is:            cabal2obs.hs
   other-modules:      Config
                       Config.ForcedExecutables
-                      Config.Ghc84x
                       Config.Ghc86x
                       Config.Ghc88x
-                      Config.LTS12
-                      Config.LTS12.Stackage
-                      Config.LTS13
-                      Config.LTS13.Stackage
+                      Config.LTS14
+                      Config.LTS14.Stackage
                       ExtractVersionUpdates
                       Oracle
                       Oracle.Hackage

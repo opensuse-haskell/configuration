@@ -49,7 +49,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "30"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "31"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -99,7 +99,7 @@ main = do
 
     -- Depend on all active package set targets.
     phony "all" $
-      need ["ghc-8.8.x", "ghc-8.6.x", "lts-13"]
+      need ["ghc-8.8.x", "ghc-8.6.x", "lts-14"]
 
     -- Every (phony) package set target depends on the (real) spec file.
     forM_ (Set.toList knownPackageSets) $ \psid ->
