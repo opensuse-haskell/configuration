@@ -235,7 +235,7 @@ constraintList = [ "adjunctions"
                  , "regex-pcre-builtin"
                  , "regex-posix"
                  , "regex-tdfa"
-                 , "resolv"
+                 , "resolv < 0.1.1.3"    -- newer versions needs ghc-8.8.x
                  , "resource-pool"
                  , "resourcet"
                  , "retry"
