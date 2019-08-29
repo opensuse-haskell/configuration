@@ -1,0 +1,13 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 2)
++++ cabal-install.spec	(working copy)
+@@ -63,6 +63,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver base '< 4.13' '< 5'
+ 
+ %build
+ %ghc_bin_build
+
