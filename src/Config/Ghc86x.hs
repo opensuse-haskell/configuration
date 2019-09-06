@@ -87,8 +87,8 @@ constraintList = [ "adjunctions"
                  , "blaze-markup"
                  , "byteable"
                  , "cabal-doctest"
-                 , "cabal-install == 2.4.0.0"
-                 , "cabal2spec"
+                 , "cabal-install == 2.4.0.0"   -- newer versions need Cabal > 2.4.1
+                 , "cabal2spec < 2.3"           -- newer versions need Cabal > 3
                  , "call-stack"
                  , "case-insensitive"
                  , "cereal"
