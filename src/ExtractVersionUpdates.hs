@@ -3,7 +3,7 @@ module ExtractVersionUpdates ( extractVersionUpdates, isVersionUpdate ) where
 import Control.Applicative
 import qualified Data.Text as Text
 import qualified Data.Text.IO as Text
-import Distribution.Parsec.Class
+import Distribution.Parsec
 import Distribution.Version
 import Text.Regex.Posix
 

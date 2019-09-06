@@ -23,7 +23,7 @@ type instance RuleResult Dependency = Version
 -- <https://github.com/commercialhaskell/all-cabal-files> repository.
 
 addConstraintResolverOracle :: FilePath -> Rules (Dependency -> Action Version)
-addConstraintResolverOracle hackageDir = addOracle $ \c@(Dependency name vrange) -> do
+addConstraintResolverOracle hackageDir = addOracle $ \c@(Dependency name vrange _) -> do
   vs <- getDirectoryDirs (hackageDir </> unPackageName name) >>= mapM (parseText "version number")
   case filter (`withinRange` vrange) vs of
     []  -> fail ("cannot resolve " ++ show (display c) ++ " in Hackage")

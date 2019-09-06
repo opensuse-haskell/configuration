@@ -6,18 +6,21 @@
 
 module Orphans ( ) where
 
-import Data.Maybe
 import Data.Map.Strict as Map
+import Data.Maybe
 import Data.Set as Set
 import Data.String
 import Development.Shake.Classes
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.Text
+import Distribution.Parsec
+import Distribution.Types.UnqualComponentName
 import Distribution.Utils.ShortText
 import Distribution.Version
 
+instance Hashable UnqualComponentName
+instance Hashable LibraryName
 instance Hashable PackageIdentifier
 instance Hashable PackageName
 instance Hashable CompilerFlavor
@@ -56,7 +59,7 @@ instance IsString (PackageName, Version) where
   fromString x = (n, v) where PackageIdentifier n v = fromString x
 
 instance IsString (PackageName, VersionRange) where
-  fromString x = (n, vr) where Dependency n vr = fromString x
+  fromString x = (n, vr) where Dependency n vr _ = fromString x
 
-parseText :: (Text a) => String -> String -> a
-parseText errM buf = fromMaybe (error ("invalid " ++ errM ++ ": " ++ show buf)) (simpleParse buf)
+parseText :: (Parsec a) => String -> String -> a
+parseText errM buf = fromMaybe (error ("invalid " ++ errM ++ ": " ++ show buf)) (simpleParsec buf)

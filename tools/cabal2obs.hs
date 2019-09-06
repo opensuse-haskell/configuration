@@ -24,7 +24,7 @@ import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
-import Distribution.Parsec.Class
+import Distribution.Parsec
 import Distribution.Pretty
 import Distribution.SPDX
 import Distribution.System
@@ -49,7 +49,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "31"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "32"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -193,7 +193,7 @@ main = do
                    'L':'T':'S':x -> "lts-" ++ x
                    _              -> error ("invalid cabal2obs config path " ++ show dirname)
       buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
-      deps <- runP stackageConfig buf
+      deps <- parse stackageConfig buf
       writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
 
     -- phony "update" $ need

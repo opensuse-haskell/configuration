@@ -9,7 +9,7 @@ import Data.Maybe
 import Data.Optional ( Optional )
 import qualified Data.Text as Text
 import Distribution.Package
-import Distribution.Parsec.Class
+import Distribution.Parsec
 import Distribution.Version
 import Prelude hiding ( FilePath )
 import Turtle

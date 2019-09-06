@@ -25,7 +25,7 @@ ghc86x = do
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
                   forM (toList constraintList) (\(pn,vr) ->
-                    (,) pn <$> askOracle (Dependency pn vr))
+                    (,) pn <$> askOracle (Dependency pn vr mempty))
   pure (PackageSetConfig {..})
 
 targetPackages :: ConstraintSet
@@ -51,7 +51,7 @@ resolveConstraints = unwords ["cabal", "new-install", "--dry-run", constraints, 
   where
     pkgs = intercalate " " (display <$> keys targetPackages)
     constraints = "--constraint=" <> intercalate " --constraint=" (show <$> environment)
-    environment = display . uncurry Dependency <$> toList (corePackages `union` targetPackages)
+    environment = display . (\(n,v) -> Dependency n v mempty) <$> toList (corePackages `union` targetPackages)
     flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags])
                     | pn <- keys targetPackages
                     , Just flags <- [lookup (unPackageName pn) flagList]

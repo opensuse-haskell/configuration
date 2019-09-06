@@ -2,7 +2,7 @@ module ParseUtils where
 
 import Development.Shake
 import Distribution.Package
-import Distribution.Text
+import Distribution.Parsec
 import System.IO.Error
 import Data.Char
 
@@ -20,11 +20,11 @@ readPackageNameList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (
 fileErrorContext :: FilePath -> IO a -> IO a
 fileErrorContext p = modifyIOError (\e -> annotateIOError e "" Nothing (Just p))
 
-parseText :: (Text a, Monad m) => String -> String -> m a
+parseText :: (Parsec a, Monad m) => String -> String -> m a
 parseText errM buf =
   maybe (fail ("invalid " ++ errM ++ ": " ++ show buf))
         return
-        (simpleParse buf)
+        (simpleParsec buf)
 
 stripSpaces :: String -> String
 stripSpaces = reverse . dropWhile isSpace . reverse . dropWhile isSpace

@@ -28,7 +28,7 @@ lts14 = do
       myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
   packageSet <- fromList <$>
                   forM (toList myConstraintSet) (\(pn,vr) ->
-                    (,) pn <$> askOracle (Dependency pn vr))
+                    (,) pn <$> askOracle (Dependency pn vr mempty))
   pure (PackageSetConfig {..})
 
 extraPackages :: ConstraintSet

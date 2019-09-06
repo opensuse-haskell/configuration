@@ -4,7 +4,7 @@ import ExtractVersionUpdates
 
 import Control.Monad
 import Data.Maybe
-import Distribution.Parsec.Class
+import Distribution.Parsec
 import Distribution.Pretty
 import Distribution.Version
 

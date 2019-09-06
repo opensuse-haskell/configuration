@@ -37,7 +37,7 @@ executable cabal2obs
                       UpdateChangesFile
   hs-source-dirs:     src, tools
   build-depends:      base                  < 5
-                    , Cabal                 > 2.2
+                    , Cabal                 > 3
                     , cabal2spec            > 2
                     , containers
                     , directory
