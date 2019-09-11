@@ -73,7 +73,7 @@ constraintList = [ "adjunctions"
                  , "attoparsec"
                  , "attoparsec-iso8601"
                  , "auto-update"
-                 , "base-compat"
+                 , "base-compat < 0.11"         -- many packages like aeson break
                  , "base-orphans"
                  , "base-prelude"
                  , "base16-bytestring"
