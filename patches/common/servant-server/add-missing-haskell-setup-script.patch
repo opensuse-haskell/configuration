@@ -2,10 +2,11 @@ Index: ghc-servant-server.spec
 ===================================================================
 --- ghc-servant-server.spec	(revision 1)
 +++ ghc-servant-server.spec	(working copy)
-@@ -95,6 +95,8 @@
+@@ -95,7 +95,9 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
