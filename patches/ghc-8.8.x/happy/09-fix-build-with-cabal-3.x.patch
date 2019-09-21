@@ -11,10 +11,11 @@ Index: happy.spec
  
  %description
  Happy is a parser generator for Haskell. Given a grammar specification in BNF,
-@@ -48,6 +50,8 @@
+@@ -48,7 +50,9 @@
  
  %prep
  %setup -q
+ find . -type f -exec chmod -x {} +
 +%patch01 -p1
 +%patch02 -p1
  
