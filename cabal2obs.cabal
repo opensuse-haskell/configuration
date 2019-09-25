@@ -38,6 +38,7 @@ executable cabal2obs
   hs-source-dirs:     src, tools
   build-depends:      base                  < 5
                     , Cabal                 > 3
+                    , bytestring
                     , cabal2spec            > 2
                     , containers
                     , directory
@@ -47,6 +48,7 @@ executable cabal2obs
                     , pretty
                     , regex-posix
                     , shake                 >= 0.16
+                    , tar                   > 0.5
                     , text
                     , time
                     , turtle

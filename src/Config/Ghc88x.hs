@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module Config.Ghc88x ( ghc88x ) where
+module Config.Ghc88x ( ghc88x, resolveConstraints ) where
 
 import Config.ForcedExecutables
 import Oracle.Hackage ( )
@@ -17,6 +17,7 @@ import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.Text
+import Distribution.Types.PackageVersionConstraint
 
 ghc88x :: Action PackageSetConfig
 ghc88x = do
@@ -25,7 +26,7 @@ ghc88x = do
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
                   forM (toList constraintList) (\(pn,vr) ->
-                    (,) pn <$> askOracle (Dependency pn vr mempty))
+                    (,) pn <$> askOracle (PackageVersionConstraint pn vr))
   pure (PackageSetConfig {..})
 
 targetPackages :: ConstraintSet
@@ -51,10 +52,10 @@ resolveConstraints = unwords ["cabal", "new-install", "--dry-run", constraints, 
   where
     pkgs = intercalate " " (display <$> keys targetPackages)
     constraints = "--constraint=" <> intercalate " --constraint=" (show <$> environment)
-    environment = display . (\(n,v) -> Dependency n v mempty) <$> toList (corePackages `union` targetPackages)
-    flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags])
+    environment = display . (\(n,v) -> PackageVersionConstraint n v) <$> toList (corePackages `union` targetPackages)
+    flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags'])
                     | pn <- keys targetPackages
-                    , Just flags <- [lookup (unPackageName pn) flagList]
+                    , Just flags' <- [lookup (unPackageName pn) flagList]
                     ]
 
 constraintList :: ConstraintSet

@@ -12,13 +12,14 @@ import Types
 
 import Control.Monad
 import Data.Map.Strict as Map ( fromList, toList, union, withoutKeys )
-import Data.Set ( Set )
 import Data.Maybe
+import Data.Set ( Set )
 import Development.Shake
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.Text
+import Distribution.Types.PackageVersionConstraint
 
 lts14 :: Action PackageSetConfig
 lts14 = do
@@ -28,7 +29,7 @@ lts14 = do
       myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
   packageSet <- fromList <$>
                   forM (toList myConstraintSet) (\(pn,vr) ->
-                    (,) pn <$> askOracle (Dependency pn vr mempty))
+                    (,) pn <$> askOracle (PackageVersionConstraint pn vr))
   pure (PackageSetConfig {..})
 
 extraPackages :: ConstraintSet

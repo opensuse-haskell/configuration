@@ -6,15 +6,17 @@
 
 module Orphans ( ) where
 
+import OpenSuse.Prelude
+
 import Data.Map.Strict as Map
-import Data.Maybe
 import Data.Set as Set
-import Data.String
 import Development.Shake.Classes
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.Parsec
+import qualified Distribution.Pretty as Cabal
+import Distribution.Types.PackageVersionConstraint
 import Distribution.Types.UnqualComponentName
 import Distribution.Utils.ShortText
 import Distribution.Version
@@ -30,6 +32,7 @@ instance Hashable Dependency
 instance Hashable VersionRange
 instance Hashable Version
 instance Hashable ShortText
+instance Hashable PackageVersionConstraint
 
 instance Hashable FlagAssignment where
   hashWithSalt salt = hashWithSalt salt . unFlagAssignment
@@ -39,6 +42,12 @@ instance Hashable v => Hashable (Set v) where
 
 instance (Hashable k, Hashable v) => Hashable (Map k v) where
   hashWithSalt s = hashWithSalt s . Map.toAscList
+
+instance Pretty Version where
+  pPrint = Cabal.pretty
+
+instance Pretty PackageIdentifier where
+  pPrint = Cabal.pretty
 
 instance IsString Dependency where
   fromString = parseText "Dependency"

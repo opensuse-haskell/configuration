@@ -18,6 +18,7 @@ import Data.List as List
 import Data.Set as Set ( Set )
 import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
+import qualified Data.ByteString as BSS
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
@@ -31,7 +32,6 @@ import Distribution.System
 import Distribution.Text
 import Distribution.Types.ComponentRequestedSpec
 import System.Directory
-import System.Environment
 
 type instance RuleResult (PackageSetId, PackageName) = FlagAssignment
 type instance RuleResult (PackageSetId, BuildName) = PackageIdentifier
@@ -39,10 +39,8 @@ type instance RuleResult (PackageSetId, PackageIdentifier) = BuildName
 
 main :: IO ()
 main = do
-  homeDir <- System.Environment.getEnv "HOME"
+  cabalDir <- getAppUserDataDirectory "cabal"
   let buildDir = "_build"
-      hackageDir = "hackage"
-
       shopts = shakeOptions
                { shakeFiles = buildDir
                , shakeVerbosity = Quiet
@@ -55,13 +53,15 @@ main = do
   shakeArgs shopts $ do
 
     -- Register our custom oracles to query the configuration files.
-    getCabal <- hackageDB hackageDir
-    _ <- addConstraintResolverOracle hackageDir
+    hackage <- addHackageCache
+    _ <- addConstraintResolverOracle hackage
+    getCabal <- addCabalFileCache hackage
+
     getPackageSet <- addConfigOracle
 
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier pn _)) -> do
-      cabal <- getCabal pkgid
+      cabal <- getCabal pkgid >>= parseCabalFile pkgid
       pset <- getPackageSet psid
       let forceExe = pn `elem` forcedExectables pset
           prefix | forceExe || not (hasLibrary cabal)  = ""
@@ -113,7 +113,7 @@ main = do
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
     -- us, too.
-    homeDir </> ".cabal/packages/hackage.haskell.org/*/*/*.tar.gz" %> \out ->
+    cabalDir </> "packages/hackage.haskell.org/*/*/*.tar.gz" %> \out ->
       -- The explicit test for existence is necessary because shake will
       -- re-build existing files if its internal database does not know how the
       -- file was created.
@@ -133,7 +133,7 @@ main = do
                          [ "-L", "--silent", "--show-error", "--"
                          , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
                          ]
-           else copyFile' (homeDir </> ".cabal/packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
+           else copyFile' (cabalDir </> "packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     buildDir </> "*/*/*.changes" %> \out -> do
       (psid, bn) <- extractPackageSetIdAndBuildName out
@@ -149,10 +149,11 @@ main = do
           pkgDir = takeDirectory out
           cid = compiler pset
           fa = Map.findWithDefault mempty n (flagAssignments pset)
-      cabal <- getCabal pkgid
+      cabalFile <- getCabal pkgid
+      cabal <- parseCabalFile pkgid cabalFile
       let rev = packageRevision cabal
       if rev > 0
-         then copyFile' (cabalFilePath hackageDir pkgid) (pkgDir </> unPackageName n <.> "cabal")
+         then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
       case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
@@ -203,15 +204,8 @@ main = do
       psets <- mapM (fmap packageSet . askOracle) (Set.toList knownPackageSets)
       let pids :: [Set PackageIdentifier]
           pids = Map.foldrWithKey (\pn pv s -> Set.insert (PackageIdentifier pn pv) s) mempty <$> psets
-          tarball pid@(PackageIdentifier pn pv) = homeDir </> ".cabal/packages/hackage.haskell.org" </> display pn </> display pv </> display pid <.> "tar.gz"
+          tarball pid@(PackageIdentifier pn pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display pid <.> "tar.gz"
       need (Set.toList (Set.map tarball (Set.unions pids)))
-
-    --  pkgs' <- mapM (packageList . GetPackageList) knownPackageSets
-    --   let pkgs :: [PackageIdentifier]
-    --       pkgs = sort (nub (concat pkgs'))
-    --   need [ homeDir </> ".cabal/packages/hackage.haskell.org" </> display pn </> display v </> display pid <.> "tar.gz"
-    --        | pid@(PackageIdentifier pn v) <- pkgs
-    --        ]
 
 verifyLicense :: Monad m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
