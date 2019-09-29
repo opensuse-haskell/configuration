@@ -23,7 +23,7 @@ trap exit_trap EXIT
 
 cd "$(dirname "$0")"/..
 
-cabal -v0 update &
+cabal -v0 v2-update hackage.haskell.org &
 parallel 'if [ -d {}/.osc ]; then cd {} && osc update --unexpand-link >/dev/null; fi' ::: _build/* &
 wait
 
@@ -32,7 +32,7 @@ if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-cabal -v0 new-run cabal2obs -- --no-progress --lint src/Config/*/Stackage.hs
+cabal -v0 v2-run cabal2obs -- --no-progress --lint src/Config/*/Stackage.hs
 for n in $(git status --porcelain src/Config/*/Stackage.hs | sed -e 's/^ M //'); do
     v=$(basename "$(dirname "$n")")
     case "$v" in
@@ -49,5 +49,5 @@ if [ -s "$tmpfile" ]; then
     error_exit git repository has uncommitted changes
 fi
 
-cabal -v0 new-run cabal2obs -- --no-progress --lint
+cabal -v0 v2-run cabal2obs -- --no-progress --lint
 parallel 'if [ -d {}/.osc ]; then cd {} && ../../tools/commit >/dev/null; fi' ::: _build/*
