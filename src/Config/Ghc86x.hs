@@ -159,8 +159,7 @@ constraintList = [ "adjunctions"
                  , "hspec-discover"
                  , "hspec-expectations"
                  , "hspec-smallcheck"
-                 , "HsYAML ==0.1.1.*"         -- pandoc-2.7.3 and HsYAML-aeson won't cope with newer versions
-                 , "HsYAML-aeson < 0.2"       -- newer versions don't accept newer HsYAMLs
+                 , "HsYAML < 0.2"         -- pandoc-2.7.3 won't cope with newer versions
                  , "HTTP"
                  , "http-api-data"
                  , "http-client"
@@ -209,7 +208,7 @@ constraintList = [ "adjunctions"
                  , "optional-args"
                  , "optparse-applicative"
                  , "pandoc"
-                 , "pandoc-citeproc"
+                 , "pandoc-citeproc == 0.16.2"
                  , "pandoc-types <1.19 || >1.19"
                  , "pantry"
                  , "parallel"
