@@ -159,7 +159,8 @@ constraintList = [ "adjunctions"
                  , "hspec-discover"
                  , "hspec-expectations"
                  , "hspec-smallcheck"
-                 , "HsYAML < 0.2"       -- pandoc-2.7.3 won't cope
+                 , "HsYAML < 0.2"             -- pandoc-2.7.3 won't cope
+                 , "HsYAML-aeson < 0.2"       -- pandoc-2.7.3 won't cope
                  , "HTTP"
                  , "http-api-data"
                  , "http-client"
