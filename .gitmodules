@@ -2,4 +2,4 @@
 
 [submodule "tools/spec-cleaner"]
 	path = tools/spec-cleaner
-	url = git://github.com/openSUSE-haskell/spec-cleaner.git
+	url = git://github.com/openSUSE/spec-cleaner.git
