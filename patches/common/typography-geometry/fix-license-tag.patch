@@ -2,13 +2,12 @@ Index: ghc-typography-geometry.spec
 ===================================================================
 --- ghc-typography-geometry.spec	(revision 1)
 +++ ghc-typography-geometry.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        1.0.0.1
  Release:        0
  Summary:        Drawings for printed text documents
 -License:        GPL-1.0-or-later
 +License:        GPL-2.0-or-later
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

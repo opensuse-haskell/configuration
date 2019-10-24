@@ -2,13 +2,12 @@ Index: ghc-hxt-curl.spec
 ===================================================================
 --- ghc-hxt-curl.spec	(revision 7)
 +++ ghc-hxt-curl.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        9.1.1.1
  Release:        0
  Summary:        LibCurl interface for HXT
 -License:        Unknown
 +License:        MIT
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

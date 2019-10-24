@@ -2,13 +2,12 @@ Index: Agda.spec
 ===================================================================
 --- Agda.spec	(revision 7)
 +++ Agda.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        2.5.1
  Release:        0
  Summary:        A dependently typed functional programming language and proof assistant
 -License:        Unknown
 +License:        MIT AND BSD-3-Clause
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

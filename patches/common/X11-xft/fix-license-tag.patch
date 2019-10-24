@@ -2,13 +2,12 @@ Index: ghc-X11-xft.spec
 ===================================================================
 --- ghc-X11-xft.spec	(revision 5)
 +++ ghc-X11-xft.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.3.1
  Release:        0
  Summary:        Bindings to the Xft, X Free Type interface library, and some Xrender parts
 -License:        LGPL-2.0-or-later
 +License:        LGPL-2.1-or-later
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -2,13 +2,12 @@ Index: ghc-Interpolation.spec
 ===================================================================
 --- ghc-Interpolation.spec	(revision 1)
 +++ ghc-Interpolation.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.3.0
  Release:        0
  Summary:        Multiline strings, interpolation and templating
 -License:        Unknown
 +License:        MIT
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

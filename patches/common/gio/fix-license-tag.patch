@@ -2,13 +2,12 @@ Index: ghc-gio.spec
 ===================================================================
 --- ghc-gio.spec	(revision 9)
 +++ ghc-gio.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.13.1.1
  Release:        0
  Summary:        Binding to GIO
 -License:        LGPL-2.1-or-later
 +License:        LGPL-2.1-or-later AND LGPL-3.0-or-later
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

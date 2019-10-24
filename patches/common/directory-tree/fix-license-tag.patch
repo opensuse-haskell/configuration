@@ -2,13 +2,12 @@ Index: ghc-directory-tree.spec
 ===================================================================
 --- ghc-directory-tree.spec	(revision 1)
 +++ ghc-directory-tree.spec	(working copy)
-@@ -22,7 +22,7 @@
+@@ -22,6 +22,6 @@
  Version:        0.12.1
  Release:        0
  Summary:        A simple directory-like tree datatype, with useful IO functions
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

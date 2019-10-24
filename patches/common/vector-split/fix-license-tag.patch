@@ -2,13 +2,12 @@ Index: ghc-vector-split.spec
 ===================================================================
 --- ghc-vector-split.spec	(revision 1)
 +++ ghc-vector-split.spec	(working copy)
-@@ -22,7 +22,7 @@
+@@ -22,6 +22,6 @@
  Version:        1.0.0.2
  Release:        0
  Summary:        Combinator library for splitting vectors
 -License:        MIT
 +License:        BSD-3-Clause
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

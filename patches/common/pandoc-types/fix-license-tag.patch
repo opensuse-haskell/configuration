@@ -2,13 +2,12 @@ Index: ghc-pandoc-types.spec
 ===================================================================
 --- ghc-pandoc-types.spec	(revision 2)
 +++ ghc-pandoc-types.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        1.16.1
  Release:        0
  Summary:        Types for representing a structured document
 -License:        BSD-3-Clause
 +License:        GPL-2.0-only
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

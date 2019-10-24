@@ -2,13 +2,12 @@ Index: ghc-polynomials-bernstein.spec
 ===================================================================
 --- ghc-polynomials-bernstein.spec	(revision 1)
 +++ ghc-polynomials-bernstein.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        1.1.2
  Release:        0
  Summary:        A solver for systems of polynomial equations in bernstein form
 -License:        GPL-1.0-or-later
 +License:        GPL-2.0-or-later
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -2,13 +2,12 @@ Index: ghc-gogol-script.spec
 ===================================================================
 --- ghc-gogol-script.spec	(revision 5)
 +++ ghc-gogol-script.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.1.0
  Release:        0
  Summary:        Google Apps Script Execution SDK
 -License:        Unknown
 +License:        MPL-2.0
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

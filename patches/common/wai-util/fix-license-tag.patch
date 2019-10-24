@@ -2,13 +2,12 @@ Index: ghc-wai-util.spec
 ===================================================================
 --- ghc-wai-util.spec	(revision 5)
 +++ ghc-wai-util.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.8
  Release:        0
  Summary:        Collection of utility functions for use with WAI
 -License:        Unknown
 +License:        SUSE-Public-Domain
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -2,13 +2,12 @@ Index: ghc-twitter-types.spec
 ===================================================================
 --- ghc-twitter-types.spec	(revision 1)
 +++ ghc-twitter-types.spec	(working copy)
-@@ -22,7 +22,7 @@
+@@ -22,6 +22,6 @@
  Version:        0.7.2.2
  Release:        0
  Summary:        Twitter JSON parser and types
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -2,12 +2,11 @@ Index: ghc-monad-products.spec
 ===================================================================
 --- ghc-monad-products.spec     (revision 2)
 +++ ghc-monad-products.spec     (working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        4.0.1
  Release:        0
  Summary:        Monad products
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz

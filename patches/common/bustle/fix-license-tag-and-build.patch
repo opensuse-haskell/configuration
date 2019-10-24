@@ -2,13 +2,12 @@ Index: bustle.spec
 ===================================================================
 --- bustle.spec	(revision 5)
 +++ bustle.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.5.4
  Release:        0
  Summary:        Draw sequence diagrams of D-Bus traffic
 -License:        Unknown
 +License:        LGPL-2.1+ AND GPL-2.0+ AND GPL-3.0
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 @@ -46,7 +46,14 @@

@@ -2,13 +2,12 @@ Index: ghc-haskell-lexer.spec
 ===================================================================
 --- ghc-haskell-lexer.spec	(revision 1)
 +++ ghc-haskell-lexer.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        1.0.1
  Release:        0
  Summary:        A fully compliant Haskell 98 lexer
 -License:        BSD-3-Clause
 +License:        MIT
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

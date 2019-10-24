@@ -2,13 +2,12 @@ Index: structured-haskell-mode.spec
 ===================================================================
 --- structured-haskell-mode.spec	(revision 3)
 +++ structured-haskell-mode.spec	(working copy)
-@@ -20,7 +20,7 @@
+@@ -20,6 +20,6 @@
  Version:        1.1.0
  Release:        0
  Summary:        Structured editing Emacs mode for Haskell
 -License:        BSD-3-Clause
 +License:        BSD-3-Clause AND GPL-3.0-or-later
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 

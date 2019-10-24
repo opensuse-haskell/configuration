@@ -2,13 +2,12 @@ Index: ghc-Network-NineP.spec
 ===================================================================
 --- ghc-Network-NineP.spec	(revision 1)
 +++ ghc-Network-NineP.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.4.1
  Release:        0
  Summary:        High-level abstraction over 9P protocol
 -License:        Unknown
 +License:        WTFPL
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 

@@ -2,13 +2,12 @@ Index: ghc-base64-string.spec
 ===================================================================
 --- ghc-base64-string.spec	(revision 4)
 +++ ghc-base64-string.spec	(working copy)
-@@ -21,7 +21,7 @@
+@@ -21,6 +21,6 @@
  Version:        0.2
  Release:        0
  Summary:        Base64 implementation for String's
 -License:        Unknown
 +License:        (GPL-2.0-or-later OR BSD-3-Clause)
- Group:          Development/Libraries/Haskell
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 
