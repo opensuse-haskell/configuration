@@ -39,7 +39,7 @@ executable cabal2obs
   build-depends:      base                  < 5
                     , Cabal                 > 3
                     , bytestring
-                    , cabal2spec            > 2
+                    , cabal2spec            >= 2.4
                     , containers
                     , directory
                     , distribution-opensuse > 1.1
