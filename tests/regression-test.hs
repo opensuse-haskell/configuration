@@ -1,5 +1,7 @@
 module Main ( main ) where
 
+import Prelude hiding ( fail )
+
 import ExtractVersionUpdates
 
 import Control.Monad
@@ -11,11 +13,12 @@ import Distribution.Version
 main :: IO ()
 main = forM_ tests $ \(txt,v') -> runTest v' txt
 
-runTest :: Monad m => Version -> String -> m ()
+runTest :: MonadFail m => Version -> String -> m ()
 runTest v' txt = case isVersionUpdate txt of
   Nothing -> fail (unwords ["line", show txt, "failed to parse; should give", prettyShow v'])
   Just v  -> unless (v == v') $
                fail (unwords ["line", show txt, "parsed to", prettyShow v, "when", prettyShow v', "was expected"])
+
 tests :: [(String, Version)]
 tests =
   [ "- Update texmath to version 0.11.0.1."                     ~~> "0.11.0.1"

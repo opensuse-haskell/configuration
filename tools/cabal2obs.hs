@@ -3,6 +3,8 @@
 
 module Main ( main ) where
 
+import Prelude hiding ( fail )
+
 import Cabal2Spec
 import Config
 import Oracle
@@ -207,7 +209,7 @@ main = do
           tarball pid@(PackageIdentifier pn pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display pid <.> "tar.gz"
       need (Set.toList (Set.map tarball (Set.unions pids)))
 
-verifyLicense :: Monad m => String -> m ()
+verifyLicense :: MonadFail m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = return ()
 verifyLicense lic = case eitherParsec lic of
   Left msg -> fail ("invalid license expression " ++  lic ++ "\n" ++ msg)
@@ -230,7 +232,7 @@ mkStackagePackageSetSourcefile vers deps = unlines
   , "  ]"
   ]
 
-extractPackageSetIdAndBuildName :: Monad m => FilePath -> m (PackageSetId, BuildName)
+extractPackageSetIdAndBuildName :: MonadFail m => FilePath -> m (PackageSetId, BuildName)
 extractPackageSetIdAndBuildName p
   | [_,psid,bn,_] <- splitDirectories p = return (PackageSetId psid, BuildName bn)
   | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)

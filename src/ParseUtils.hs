@@ -20,7 +20,7 @@ readPackageNameList p = readConfigFile p >>= \x -> liftIO $ fileErrorContext p (
 fileErrorContext :: FilePath -> IO a -> IO a
 fileErrorContext p = modifyIOError (\e -> annotateIOError e "" Nothing (Just p))
 
-parseText :: (Parsec a, Monad m) => String -> String -> m a
+parseText :: (Parsec a, MonadFail m) => String -> String -> m a
 parseText errM buf =
   maybe (fail ("invalid " ++ errM ++ ": " ++ show buf))
         return

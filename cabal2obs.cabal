@@ -36,7 +36,7 @@ executable cabal2obs
                       Types
                       UpdateChangesFile
   hs-source-dirs:     src, tools
-  build-depends:      base                  < 5
+  build-depends:      base                  >= 4.13 && < 5
                     , Cabal                 > 3
                     , bytestring
                     , cabal2spec            >= 2.4
@@ -53,7 +53,6 @@ executable cabal2obs
                     , time
                     , turtle
   default-language:   Haskell2010
-  default-extensions: MonadFailDesugaring
   other-extensions:   CPP
                       GeneralizedNewtypeDeriving
                       TypeFamilies
@@ -69,7 +68,7 @@ executable update-changes-file
   other-modules:      ExtractVersionUpdates
                       UpdateChangesFile
   hs-source-dirs:     src, tools
-  build-depends:      base                  < 5
+  build-depends:      base                  >= 4.13 && < 5
                     , Cabal
                     , directory
                     , distribution-opensuse
@@ -81,7 +80,6 @@ executable update-changes-file
                     , time
                     , turtle
   default-language:   Haskell2010
-  default-extensions: MonadFailDesugaring
   other-extensions:   CPP
                       GeneralizedNewtypeDeriving
                       TypeFamilies
@@ -98,6 +96,5 @@ test-suite regression-test
   hs-source-dirs:     src, tests
   build-depends:      base, Cabal, regex-posix, text
   default-language:   Haskell2010
-  default-extensions: MonadFailDesugaring
   ghc-options:        -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
                       -Wredundant-constraints -threaded
