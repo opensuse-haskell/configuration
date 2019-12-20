@@ -48,7 +48,7 @@ targetPackages   = [ "alex >=3.2.4"
                    ]
 
 resolveConstraints :: String
-resolveConstraints = unwords ["cabal", "new-install", "--dry-run", constraints, flags, pkgs]
+resolveConstraints = unwords ["cabal", "new-install", "--dry-run", "--minimize-conflict-set", constraints, flags, pkgs]
   where
     pkgs = intercalate " " (display <$> keys targetPackages)
     constraints = "--constraint=" <> intercalate " --constraint=" (show <$> environment)
