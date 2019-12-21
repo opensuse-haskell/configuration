@@ -140,7 +140,7 @@ constraintList = [ "adjunctions"
                  , "fsnotify"
                  , "generic-deriving"
                  , "Glob"
-                 , "hackage-security"
+                 , "hackage-security <0.6.0.0"
                  , "haddock-library == 1.7.*"   -- pandoc-2.7.3 won't cope
                  , "happy"
                  , "hashable < 1.3"
