@@ -1,0 +1,13 @@
+Index: ghc-http-download.spec
+===================================================================
+--- ghc-http-download.spec	(revision 1)
++++ ghc-http-download.spec	(working copy)
+@@ -69,5 +69,7 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++echo > Setup.hs 'import Distribution.Simple'
++echo >>Setup.hs 'main = defaultMain'
+ 
+ %build
+ %ghc_lib_build
+
