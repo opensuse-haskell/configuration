@@ -17,7 +17,7 @@ Index: shake.spec
 -%dir %{_datadir}/%{name}-%{version}/docs
 -%dir %{_datadir}/%{name}-%{version}/docs/manual
  %dir %{_datadir}/%{name}-%{version}/html
--%{_datadir}/%{name}-%{version}/docs/manual/Build.hs
+-%{_datadir}/%{name}-%{version}/docs/manual/Shakefile.hs
 -%{_datadir}/%{name}-%{version}/docs/manual/build.bat
 -%{_datadir}/%{name}-%{version}/docs/manual/build.sh
 -%{_datadir}/%{name}-%{version}/docs/manual/constants.c

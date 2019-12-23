@@ -2,11 +2,12 @@ Index: ghc-from-sum.spec
 ===================================================================
 --- ghc-from-sum.spec	(revision 1)
 +++ ghc-from-sum.spec	(working copy)
-@@ -36,7 +36,13 @@
+@@ -36,8 +36,13 @@
  %endif
  
  %description
--Canonical fromMaybeM and fromEitherM functions.
+-Provides many functions for working with 'Maybe' and 'Either'. Please see
+-'README.md'.
 +This Haskell module exports the "fromEitherM" and "fromMaybeM" convenience
 +functions
 +
