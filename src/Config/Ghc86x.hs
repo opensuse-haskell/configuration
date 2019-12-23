@@ -121,7 +121,7 @@ constraintList = [ "adjunctions"
                  , "distributive"
                  , "dlist"
                  , "doclayout"
-                 , "doctemplates < 0.3"
+                 , "doctemplates ==0.8.*"  -- pandoc needs a specific version
                  , "easy-file"
                  , "echo"
                  , "ed25519"
@@ -144,7 +144,7 @@ constraintList = [ "adjunctions"
                  , "generic-deriving"
                  , "Glob"
                  , "hackage-security <0.6.0.0"
-                 , "haddock-library == 1.7.*"   -- pandoc-2.7.3 won't cope
+                 , "haddock-library ==1.8.*"   -- pandoc needs a specific version
                  , "happy"
                  , "hashable < 1.3"
                  , "hi-file-parser"
@@ -162,7 +162,7 @@ constraintList = [ "adjunctions"
                  , "hspec-discover"
                  , "hspec-expectations"
                  , "hspec-smallcheck"
-                 , "HsYAML < 0.2"         -- pandoc-2.7.3 won't cope with newer versions
+                 , "HsYAML ==0.2.*"         -- pandoc needs a specific version
                  , "HTTP"
                  , "http-api-data"
                  , "http-client"
