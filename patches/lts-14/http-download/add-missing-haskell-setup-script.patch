@@ -2,10 +2,9 @@ Index: ghc-http-download.spec
 ===================================================================
 --- ghc-http-download.spec	(revision 1)
 +++ ghc-http-download.spec	(working copy)
-@@ -69,6 +69,8 @@
+@@ -69,5 +69,7 @@
  %prep
  %setup -q -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
