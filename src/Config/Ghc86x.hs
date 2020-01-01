@@ -221,7 +221,7 @@ constraintList = [ "adjunctions"
                  , "parsec-class"
                  , "parsec-numbers"
                  , "parser-combinators"
-                 , "path"
+                 , "path == 0.6.*"    -- newer versions break stack
                  , "path-io"
                  , "path-pieces"
                  , "pem"
