@@ -6,6 +6,7 @@ module Config ( knownPackageSets, addConfigOracle ) where
 
 import Config.Ghc86x
 import Config.Ghc88x
+import Config.Ghc810x
 import Config.LTS14
 import Orphans ()
 import Types
@@ -20,9 +21,10 @@ addConfigOracle :: Rules (PackageSetId -> Action PackageSetConfig)
 addConfigOracle = addOracle getPackageSet
 
 packageSets :: Map PackageSetId (Action PackageSetConfig)
-packageSets = [ ("ghc-8.6.x", ghc86x)
-              , ("ghc-8.8.x", ghc88x)
-              , ("lts-14",    lts14)
+packageSets = [ ("ghc-8.6.x",  ghc86x)
+              , ("ghc-8.8.x",  ghc88x)
+              , ("ghc-8.10.x", ghc810x)
+              , ("lts-14",     lts14)
               ]
 
 knownPackageSets :: Set PackageSetId
