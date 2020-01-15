@@ -1,0 +1,12 @@
+Index: ghc-blaze-markup.spec
+===================================================================
+--- ghc-blaze-markup.spec	(revision 1)
++++ ghc-blaze-markup.spec	(working copy)
+@@ -56,6 +56,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.14' '< 5'
+ 
+ %build
+ %ghc_lib_build

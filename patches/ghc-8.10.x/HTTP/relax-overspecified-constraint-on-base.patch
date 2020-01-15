@@ -1,0 +1,12 @@
+Index: ghc-HTTP.spec
+===================================================================
+--- ghc-HTTP.spec	(revision 1)
++++ ghc-HTTP.spec	(working copy)
+@@ -94,6 +94,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.14' '< 5'
+ 
+ %build
+ %ghc_lib_build

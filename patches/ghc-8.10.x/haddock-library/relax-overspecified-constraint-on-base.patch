@@ -1,0 +1,12 @@
+Index: ghc-haddock-library.spec
+===================================================================
+--- ghc-haddock-library.spec	(revision 1)
++++ ghc-haddock-library.spec	(working copy)
+@@ -65,6 +65,7 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.14' '< 5'
+ 
+ %build
+ %ghc_lib_build
