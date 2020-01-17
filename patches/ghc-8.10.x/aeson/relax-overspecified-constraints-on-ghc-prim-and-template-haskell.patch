@@ -1,0 +1,13 @@
+Index: ghc-aeson.spec
+===================================================================
+--- ghc-aeson.spec	(revision 1)
++++ ghc-aeson.spec	(working copy)
+@@ -82,6 +82,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver ghc-prim '< 0.6' '< 1'
++cabal-tweak-dep-ver template-haskell '< 2.16' '< 3'
+ 
+ %build
+ %ghc_lib_build
