@@ -1,0 +1,12 @@
+Index: ghc-regex-tdfa.spec
+===================================================================
+--- ghc-regex-tdfa.spec	(revision 1)
++++ ghc-regex-tdfa.spec	(working copy)
+@@ -63,6 +63,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.14' '< 5'
+ 
+ %build
+ %ghc_lib_build
