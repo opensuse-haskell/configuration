@@ -120,7 +120,7 @@ constraintList = [ "adjunctions"
                  , "distributive"
                  , "dlist"
                  , "doclayout < 0.3"    -- constraint via pandoc
-                 , "doctemplates"
+                 , "doctemplates < 0.8.1"
                  , "easy-file"
                  , "echo"
                  , "ed25519"
