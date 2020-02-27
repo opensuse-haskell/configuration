@@ -80,6 +80,7 @@ bannedPackageNames =
   , "ghci"
   , "haskeline"
   , "hpc"
+  , "hsc2hs"
   , "integer-gmp"
   , "libiserv"
   , "mtl"
