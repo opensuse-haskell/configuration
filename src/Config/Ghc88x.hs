@@ -374,6 +374,9 @@ flagList =
     -- Prefer the system's library over the bundled one.
   , ("libyaml",                        "system-libyaml")
 
+    -- Assume base > 4.8 & recent versions of network.
+  , ("hackage-security",               "base48 use-network-uri")
+
     -- Configure a production-like build environment.
   , ("stack",                          "hide-dependency-versions disable-git-info supported-build")
   ]
