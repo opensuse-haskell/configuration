@@ -10,12 +10,13 @@ Index: ghc-hackage-security.spec
  
  %description
  The hackage security library provides both server and client utilities for
-@@ -85,6 +86,8 @@
+@@ -85,6 +86,9 @@
  %prep
  %setup -q -n %{pkg_name}-%{version}
  cp -p %{SOURCE1} %{pkg_name}.cabal
 +%patch01 -p1
 +cabal-tweak-dep-ver base '< 4.13' '< 5'
++cabal-tweak-dep-ver network-uri '< 2.7' '< 3'
  
  %build
  %ghc_lib_build
