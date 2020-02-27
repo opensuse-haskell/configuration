@@ -32,17 +32,19 @@ if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-cabal -v0 v2-run cabal2obs -- --no-progress --lint src/Config/*/Stackage.hs
-for n in $(git status --porcelain src/Config/*/Stackage.hs | sed -e 's/^ M //'); do
-    v=$(basename "$(dirname "$n")")
-    case "$v" in
-        LTS*)    v=lts-${v##LTS} ;;
-        Nightly) v=nightly;;
-        *)       error_exit unexpected file modification of "$n" during update ;;
-    esac
-    v=$(sed -r -n 's,^-- .* http://(www.)?stackage.org/snapshot/(.*)$,\2,p' "_build/cabal-$v.config")
-    git commit -q -m "update to $v" "$n"
-done
+if false; then   # No active LTS package set at the moment.
+  cabal -v0 v2-run cabal2obs -- --no-progress --lint src/Config/*/Stackage.hs
+  for n in $(git status --porcelain src/Config/*/Stackage.hs | sed -e 's/^ M //'); do
+      v=$(basename "$(dirname "$n")")
+      case "$v" in
+          LTS*)    v=lts-${v##LTS} ;;
+          Nightly) v=nightly;;
+          *)       error_exit unexpected file modification of "$n" during update ;;
+      esac
+      v=$(sed -r -n 's,^-- .* http://(www.)?stackage.org/snapshot/(.*)$,\2,p' "_build/cabal-$v.config")
+      git commit -q -m "update to $v" "$n"
+  done
+fi
 
 git status --porcelain >"$tmpfile"
 if [ -s "$tmpfile" ]; then
