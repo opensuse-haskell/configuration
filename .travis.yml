@@ -35,6 +35,6 @@ install:
 
 script:
   - rm -f _build/*/*/*.changes
-  - cabal new-run cabal2obs -- --keep-going -j2 ghc-8.6.x ghc-8.8.x ghc-8.10.x
+  - cabal new-run cabal2obs -- --keep-going -j2
   - cabal new-test all
   - tests/run-tests
