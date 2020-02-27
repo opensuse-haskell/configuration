@@ -2,10 +2,11 @@ Index: ghc-util.spec
 ===================================================================
 --- ghc-util.spec	(revision 3)
 +++ ghc-util.spec	(working copy)
-@@ -44,6 +44,8 @@
+@@ -44,7 +44,9 @@
  
  %prep
  %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
