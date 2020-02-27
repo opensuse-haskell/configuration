@@ -2,11 +2,12 @@ Index: cabal-install.spec
 ===================================================================
 --- cabal-install.spec	(revision 2)
 +++ cabal-install.spec	(working copy)
-@@ -63,6 +63,7 @@
+@@ -63,6 +63,8 @@
  
  %prep
  %setup -q
 +cabal-tweak-dep-ver base '< 4.13' '< 5'
++cabal-tweak-dep-ver network-uri '< 2.7' '< 3'
  
  %build
  %ghc_bin_build
