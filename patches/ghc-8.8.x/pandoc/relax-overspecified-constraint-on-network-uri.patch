@@ -1,0 +1,12 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 13)
++++ pandoc.spec	(working copy)
+@@ -138,6 +138,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver network-uri '< 2.7' '< 3'
+ 
+ %build
+ %ghc_lib_build
