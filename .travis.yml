@@ -22,7 +22,7 @@ before_install:
   - unset CC
   - sudo add-apt-repository ppa:hvr/ghc -y
   - sudo apt-get update -q
-  - sudo apt-get install cabal-install-3.0 ghc-8.8.1 rpm -y
+  - sudo apt-get install cabal-install-3.0 ghc-8.8.2 rpm -y
   - export PATH="$HOME/.cabal/bin:/opt/ghc/bin:/opt/cabal/bin:$PATH"
 
 install:
