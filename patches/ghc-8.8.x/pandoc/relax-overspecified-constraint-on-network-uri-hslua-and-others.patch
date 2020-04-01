@@ -2,11 +2,13 @@ Index: pandoc.spec
 ===================================================================
 --- pandoc.spec	(revision 13)
 +++ pandoc.spec	(working copy)
-@@ -138,6 +138,7 @@
+@@ -138,6 +138,9 @@
  
  %prep
  %setup -q
 +cabal-tweak-dep-ver network-uri '< 2.7' '< 3'
++cabal-tweak-dep-ver hslua '< 1.1' '< 2'
++cabal-tweak-dep-ver jira-wiki-markup '< 1.2' '< 2'
  
  %build
  %ghc_lib_build
