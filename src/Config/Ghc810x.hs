@@ -31,7 +31,7 @@ ghc810x = do
 
 targetPackages :: ConstraintSet
 targetPackages   = [ "alex >=3.2.4"
-                   , "cabal-install >=2.2.0.0"
+                   , "cabal-install ==3.2.*"
                    , "cabal2spec >2.2"
                    , "distribution-opensuse >1"
                    , "happy >=1.19.9"
@@ -82,7 +82,7 @@ constraintList = [ "adjunctions"
                  , "blaze-html"
                  , "blaze-markup"
                  , "cabal-doctest"
-                 , "cabal-install"
+                 , "cabal-install ==3.2.*"
                  , "cabal2spec"
                  , "call-stack"
                  , "case-insensitive"
