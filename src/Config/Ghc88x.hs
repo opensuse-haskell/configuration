@@ -146,7 +146,7 @@ constraintList = [ "adjunctions"
                  , "gitrev"
                  , "Glob"
                  , "hackage-security <0.6.0.0"
-                 , "haddock-library"
+                 , "haddock-library == 1.8.*"           -- pandoc-2.9.2.1 does not support later versions yet
                  , "happy"
                  , "hashable"
                  , "hi-file-parser"
