@@ -7,5 +7,4 @@ packages:
 
 optional-packages:
   ../distribution-opensuse/distribution-opensuse.cabal
--- Disabled until Cabal 3.2.x becomes available on Hackage.
---  ../cabal2spec/cabal2spec.cabal
+  ../cabal2spec/cabal2spec.cabal
