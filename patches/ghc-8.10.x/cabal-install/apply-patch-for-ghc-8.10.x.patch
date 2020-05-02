@@ -1,0 +1,20 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec (revision 4)
++++ cabal-install.spec (revision 5)
+@@ -56,6 +56,7 @@
+ BuildRequires:  ghc-transformers-devel
+ BuildRequires:  ghc-unix-devel
+ BuildRequires:  ghc-zlib-devel
++Patch01:        ghc-8.10-support-for-3.2.patch
+ 
+ %description
+ The 'cabal' command-line program simplifies the process of managing Haskell
+@@ -64,6 +65,7 @@
+ 
+ %prep
+ %setup -q
++%patch01 -p2
+ 
+ %build
+ %ghc_bin_build
