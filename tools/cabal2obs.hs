@@ -16,7 +16,7 @@ import UpdateChangesFile
 
 import Control.Monad.Extra
 import Data.Function
-import Data.List as List
+import Data.List as List ( intercalate, stripPrefix, sortBy )
 import Data.Set as Set ( Set )
 import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
