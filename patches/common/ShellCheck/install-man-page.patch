@@ -2,10 +2,19 @@ Index: ShellCheck.spec
 ===================================================================
 --- ShellCheck.spec	(revision 7)
 +++ ShellCheck.spec	(working copy)
-@@ -78,6 +78,7 @@
+@@ -41,6 +41,7 @@
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-regex-tdfa-devel
+ BuildRequires:  ghc-rpm-macros
++BuildRequires:  pandoc
+ 
+ %description
+ The goals of ShellCheck are:
+@@ -78,6 +78,8 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
++pandoc -s -f markdown-smart -t man shellcheck.1.md -o shellcheck.1 
 +install -Dpm 0644 shellcheck.1 %{buildroot}%{_mandir}/man1/shellcheck.1
  
  %check
