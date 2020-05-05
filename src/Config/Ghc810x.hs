@@ -309,6 +309,9 @@ flagList =
 
     -- Configure a production-like build environment.
   , ("stack",                          "hide-dependency-versions disable-git-info supported-build")
+
+    -- The command-line utility pulls in other dependencies.
+  , ("aeson-pretty",                   "lib-only")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
