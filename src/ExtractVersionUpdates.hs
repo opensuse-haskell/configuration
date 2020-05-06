@@ -26,6 +26,7 @@ isVersionUpdate l = foldl1 (<|>) [ tryMatch i patt l | (i,patt) <- formats ]
       , (2, "^-.* (update|upgrade) to ([0-9.]+) from upstream")
       , (1, "^-.* add .*at version ([0-9.]+).$")
       , (1, "^-.* adding initial .*version ([0-9.]+).$")
+      , (1, "^-.* Downgrade to version ([0-9.]+)\\..*$")
       ]
 
 -- * Utility Functions to Simplify Regular Expression Matching
