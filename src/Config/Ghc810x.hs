@@ -45,6 +45,7 @@ targetPackages   = [ "alex >=3.2.5"
                    , "SDL >=0.6.6.0"        -- Dmitriy Perlow <dap.darkness@gmail.com> needs the
                    , "SDL-image >=0.6.2.0"  -- SDL packages for games/raincat.
                    , "SDL-mixer >=0.6.3.0"
+                   , "postgresql-simple"    -- needed by emu-incident-report
                    ]
 
 resolveConstraints :: String
@@ -176,6 +177,7 @@ constraintList = [ "adjunctions ==4.4"
                  , "parsec-class ==1.0.0.0"
                  , "parsec-numbers ==0.1.0"
                  , "pem ==0.2.4"
+                 , "postgresql-simple"
                  , "primitive ==0.7.0.1"
                  , "profunctors ==5.5.2"
                  , "QuickCheck ==2.13.2"
