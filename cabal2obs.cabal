@@ -60,9 +60,7 @@ executable cabal2obs
                       OverloadedStrings
                       DeriveGeneric
                       DeriveAnyClass
-  ghc-options:        -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
-                      -Wredundant-constraints -threaded -with-rtsopts=-qg
-                      -with-rtsopts=-qb
+  ghc-options:        -threaded -with-rtsopts=-qg -with-rtsopts=-qb
 
 executable update-changes-file
   main-is:            update-changes-file.hs
@@ -87,8 +85,7 @@ executable update-changes-file
                       OverloadedStrings
                       DeriveGeneric
                       DeriveAnyClass
-  ghc-options:        -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
-                      -Wredundant-constraints -threaded
+  ghc-options:        -threaded
 
 test-suite regression-test
   type:               exitcode-stdio-1.0
@@ -97,5 +94,4 @@ test-suite regression-test
   hs-source-dirs:     src, tests
   build-depends:      base, Cabal, regex-posix, text
   default-language:   Haskell2010
-  ghc-options:        -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
-                      -Wredundant-constraints -threaded
+  ghc-options:        -threaded
