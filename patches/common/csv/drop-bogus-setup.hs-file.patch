@@ -1,0 +1,12 @@
+Index: ghc-csv.spec
+===================================================================
+--- ghc-csv.spec	(revision 1)
++++ ghc-csv.spec	(working copy)
+@@ -49,6 +49,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++rm Setup.hs
+ 
+ %build
+ %ghc_lib_build
