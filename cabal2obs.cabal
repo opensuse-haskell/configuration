@@ -43,7 +43,7 @@ executable cabal2obs
                     , cabal2spec            ^>= 2.6.1
                     , containers
                     , directory
-                    , distribution-opensuse > 1.1
+                    , distribution-opensuse ^>= 1.1.1
                     , extra
                     , filepath
                     , pretty
