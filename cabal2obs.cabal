@@ -13,7 +13,7 @@ tested-with:   GHC == 8.6.5
 category:      Distribution
 homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
-cabal-version: >= 1.10
+cabal-version: 2.0
 
 source-repository head
   type:     git
@@ -40,7 +40,7 @@ executable cabal2obs
   build-depends:      base                  >= 4.13 && < 5
                     , Cabal                 > 3
                     , bytestring
-                    , cabal2spec            == 2.6.*
+                    , cabal2spec            ^>= 2.6.1
                     , containers
                     , directory
                     , distribution-opensuse > 1.1
