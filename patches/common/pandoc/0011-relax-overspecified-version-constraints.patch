@@ -1,0 +1,15 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 9)
++++ pandoc.spec	(working copy)
+@@ -141,6 +141,10 @@
+ %prep
+ %setup -q
+ cabal-tweak-dep-ver haddock-library '< 1.9' '< 2'
++cabal-tweak-dep-ver aeson '< 1.5' '< 2'
++cabal-tweak-dep-ver http-client '< 0.7' '< 1'
++cabal-tweak-dep-ver base64-bytestring '< 1.1' '< 2'
++cabal-tweak-dep-ver hslua '< 1.1' '< 2'
+ 
+ %build
+ %ghc_lib_build
