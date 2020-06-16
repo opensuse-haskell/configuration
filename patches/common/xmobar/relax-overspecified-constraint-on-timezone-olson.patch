@@ -1,0 +1,12 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 12)
++++ xmobar.spec	(working copy)
+@@ -94,6 +94,7 @@
+ 
+ %prep
+ %setup -q
++cabal-tweak-dep-ver timezone-olson '== 0.1.*' '< 1'
+ 
+ %build
+ %define cabal_configure_options -fall_extensions
