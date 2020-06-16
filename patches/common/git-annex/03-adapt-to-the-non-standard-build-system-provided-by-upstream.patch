@@ -1,14 +1,13 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 7)
+--- git-annex.spec	(revision 6)
 +++ git-annex.spec	(working copy)
-@@ -113,6 +113,22 @@
+@@ -118,6 +118,22 @@
  BuildRequires:  ghc-yesod-devel
  BuildRequires:  ghc-yesod-form-devel
  BuildRequires:  ghc-yesod-static-devel
-+# Manually added dependencies which the Cabal file does not declare
 +BuildRequires:  git-core
-+BuildRequires:  rsync
++BuildRequires:  rsync gpg2 curl lsof
 +Requires:       git-core
 +BuildRequires:  bash-completion
 +BuildRequires:  curl
@@ -22,10 +21,11 @@ Index: git-annex.spec
 +Recommends:     rsync
 +Recommends:     ssh
 +Suggests:       %{name}-bash-completion
++BuildRequires:  chrpath
  
  %description
  Git-annex allows managing files with git, without checking the file contents
-@@ -132,6 +148,16 @@
+@@ -137,6 +152,16 @@
  transferring them to other computers. The git-annex webapp makes it easy to set
  up and use git-annex this way.
  
@@ -42,11 +42,11 @@ Index: git-annex.spec
  %prep
  %setup -q
  
-@@ -141,10 +167,33 @@
+@@ -146,10 +171,33 @@
  
  %install
  %ghc_bin_install
-+make DESTDIR=%{buildroot} BUILDER=./Setup install-misc install-mans
++make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop
 +
 +%post
 +%desktop_database_post
@@ -77,4 +77,3 @@ Index: git-annex.spec
 +%{_datadir}/bash-completion/completions/git-annex
  
  %changelog
-
