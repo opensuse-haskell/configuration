@@ -1,0 +1,12 @@
+Index: ghc-pandoc-citeproc.spec
+===================================================================
+--- ghc-pandoc-citeproc.spec	(revision 5)
++++ ghc-pandoc-citeproc.spec	(working copy)
+@@ -87,6 +87,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver aeson '< 1.5' '< 2'
+ 
+ %build
+ %ghc_lib_build
