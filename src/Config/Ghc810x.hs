@@ -329,7 +329,7 @@ constraintList = [ "adjunctions"
                  , "skylighting-core"
                  , "socks"
                  , "split"
-                 , "splitmix >=0.0.4 && <0.1"   -- constraints come from QuickCheck-2.14
+                 , "splitmix"
                  , "StateVar"
                  , "stm-chans"
                  , "streaming-commons"
