@@ -1,0 +1,12 @@
+Index: cpphs.spec
+===================================================================
+--- cpphs.spec	(revision 1)
++++ cpphs.spec	(working copy)
+@@ -60,6 +60,7 @@
+ 
+ %prep
+ %setup -q
++find . -type f -exec chmod -x {} +
+ 
+ %build
+ %ghc_lib_build
