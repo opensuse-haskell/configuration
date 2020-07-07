@@ -2,10 +2,9 @@ Index: ghc-pandoc-types.spec
 ===================================================================
 --- ghc-pandoc-types.spec	(revision 7)
 +++ ghc-pandoc-types.spec	(working copy)
-@@ -75,6 +75,7 @@
+@@ -75,5 +75,6 @@
  %prep
  %setup -q -n %{pkg_name}-%{version}
- cabal-tweak-dep-ver QuickCheck '< 2.14' '< 3'
 +cabal-tweak-dep-ver aeson '< 1.5' '< 2'
  
  %build
