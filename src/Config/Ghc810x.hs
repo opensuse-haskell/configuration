@@ -294,7 +294,7 @@ constraintList = [ "adjunctions"
                  , "profunctors"
                  , "psqueues"
                  , "QuickCheck"
-                 , "random"
+                 , "random <1.2"        -- don't update yet (2020-07-07)
                  , "refact"
                  , "reflection"
                  , "regex-base"
