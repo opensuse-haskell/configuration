@@ -226,7 +226,7 @@ constraintList = [ "adjunctions"
                  , "iproute"
                  , "ipynb"
                  , "iwlib"
-                 , "jira-wiki-markup < 1.2"     -- pandoc-2.9.2.1 does not compile with the latest version
+                 , "jira-wiki-markup"
                  , "js-dgtable"
                  , "js-flot"
                  , "js-jquery"
