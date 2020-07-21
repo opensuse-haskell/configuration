@@ -1,0 +1,12 @@
+Index: ghc-aeson.spec
+===================================================================
+--- ghc-aeson.spec	(revision 12)
++++ ghc-aeson.spec	(working copy)
+@@ -84,6 +84,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver dlist '< 0.9' '< 2'
+ 
+ %build
+ %ghc_lib_build
