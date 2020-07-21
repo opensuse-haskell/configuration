@@ -1,0 +1,13 @@
+Index: ghc-git-lfs.spec
+===================================================================
+--- ghc-git-lfs.spec	(revision 1)
++++ ghc-git-lfs.spec	(working copy)
+@@ -50,6 +50,8 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver aeson '<= 1.5' '< 2'
++cabal-tweak-dep-ver http-client '<= 0.7' '< 1'
+ 
+ %build
+ %ghc_lib_build

@@ -1,0 +1,12 @@
+Index: ghc-http-client-restricted.spec
+===================================================================
+--- ghc-http-client-restricted.spec	(revision 1)
++++ ghc-http-client-restricted.spec	(working copy)
+@@ -58,6 +58,7 @@
+ 
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver http-client '< 0.7' '< 1'
+ 
+ %build
+ %ghc_lib_build
