@@ -301,7 +301,7 @@ constraintList = [ "adjunctions"
                  , "pem"
                  , "persistent"
                  , "persistent-sqlite"
-                 , "persistent-template < 2.8.3.0 || > 2.8.3.0"
+                 , "persistent-template < 2.8.3.0"      -- https://github.com/yesodweb/persistent/issues/1101
                  , "polyparse"
                  , "postgresql-libpq"
                  , "postgresql-simple"
