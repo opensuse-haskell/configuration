@@ -276,7 +276,7 @@ constraintList = [ "adjunctions"
                  , "monad-loops"
                  , "mono-traversable"
                  , "mountpoints"
-                 , "mwc-random"
+                 , "mwc-random < 0.15"  -- needs latest randomn, which many packages not support yet (2020-08-04)
                  , "netlink"
                  , "network"
                  , "network-bsd"
