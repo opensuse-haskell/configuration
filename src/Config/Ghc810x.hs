@@ -164,7 +164,7 @@ constraintList = [ "adjunctions"
                  , "disk-free-space"
                  , "distribution-opensuse"
                  , "distributive"
-                 , "dlist < 1"          -- git-annex doesn't compile against the new version
+                 , "dlist"
                  , "doclayout"
                  , "doctemplates"
                  , "dotgen"
