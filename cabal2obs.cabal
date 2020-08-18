@@ -40,7 +40,7 @@ executable cabal2obs
   build-depends:      base                  >= 4.13 && < 5
                     , Cabal                 > 3
                     , bytestring
-                    , cabal2spec            ^>= 2.6.1
+                    , cabal2spec            ^>= 2.6.2
                     , containers
                     , directory
                     , distribution-opensuse ^>= 1.1.1
