@@ -5,7 +5,7 @@ Index: ghc-happstack-authenticate.spec
 @@ -84,6 +84,7 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +cabal-tweak-dep-ver email-validate '< 2.3' ' < 2.4'
  
  %build

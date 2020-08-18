@@ -13,7 +13,7 @@ Index: cryptol.spec
  BuildRequires:  ghc-Cabal-devel
 @@ -93,6 +95,7 @@
  %prep
- %setup -q
+ %autosetup
  cp -p %{SOURCE1} %{name}.cabal
 +%patch -p1
  

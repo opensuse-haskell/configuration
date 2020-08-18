@@ -15,7 +15,7 @@ Index: ghc-citeproc-hs.spec
 +Contains locale files for Haskell library %{pkg_name}.
 +
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
  
 @@ -87,54 +95,7 @@
  %files -f %{name}.files

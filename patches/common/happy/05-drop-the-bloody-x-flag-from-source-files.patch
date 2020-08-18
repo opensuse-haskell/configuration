@@ -5,7 +5,7 @@ Index: happy.spec
 @@ -46,6 +46,7 @@
  
  %prep
- %setup -q
+ %autosetup
 +find . -type f -exec chmod -x {} +
  
  %build

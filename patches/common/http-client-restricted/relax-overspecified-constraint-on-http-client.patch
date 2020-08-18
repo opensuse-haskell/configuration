@@ -5,7 +5,7 @@ Index: ghc-http-client-restricted.spec
 @@ -58,6 +58,7 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +cabal-tweak-dep-ver http-client '< 0.7' '< 1'
  
  %build

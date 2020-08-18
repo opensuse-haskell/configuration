@@ -40,7 +40,7 @@ Index: git-annex.spec
 +Optional dependency offering bash completion for git-annex
 +
  %prep
- %setup -q
+ %autosetup
  
 @@ -146,10 +171,33 @@
  

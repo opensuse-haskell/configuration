@@ -28,7 +28,7 @@ Index: bustle.spec
 @@ -62,12 +69,24 @@
  
  %prep
- %setup -q
+ %autosetup
 +sed -i -e 's/\/usr\/local/\%{_prefix}/g' Makefile
  
  %build

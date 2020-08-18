@@ -5,7 +5,7 @@ Index: ghc-aws.spec
 @@ -93,6 +93,7 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +cabal-tweak-dep-ver base64-bytestring '== 1.0.*' '< 2'
  
  %build

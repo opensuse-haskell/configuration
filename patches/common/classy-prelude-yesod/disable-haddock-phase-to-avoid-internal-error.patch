@@ -3,7 +3,7 @@ Index: ghc-classy-prelude-yesod.spec
 --- ghc-classy-prelude-yesod.spec	(revision 4)
 +++ ghc-classy-prelude-yesod.spec	(working copy)
 @@ -57,7 +57,7 @@
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
  
  %build
 -%ghc_lib_build

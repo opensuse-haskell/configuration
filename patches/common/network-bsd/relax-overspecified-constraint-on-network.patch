@@ -4,7 +4,7 @@ Index: ghc-network-bsd.spec
 +++ ghc-network-bsd.spec	(working copy)
 @@ -80,6 +80,7 @@
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
  cp -p %{SOURCE1} %{pkg_name}.cabal
 +sed -i -e 's/< 3.1.2/< 4/' network-bsd.cabal
  

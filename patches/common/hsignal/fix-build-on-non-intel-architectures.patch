@@ -12,7 +12,7 @@
 @@ -69,6 +71,7 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +%patch -p1
  
  %build

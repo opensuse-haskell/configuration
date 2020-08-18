@@ -5,7 +5,7 @@ Index: wordpass.spec
 @@ -71,6 +71,7 @@
  
  %prep
- %setup -q
+ %autosetup
 +cabal-tweak-dep-ver vector '<0.12' ' < 1'
  
  %build

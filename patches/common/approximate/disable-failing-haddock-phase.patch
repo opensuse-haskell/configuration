@@ -3,7 +3,7 @@ Index: ghc-approximate.spec
 --- ghc-approximate.spec	(revision 3)
 +++ ghc-approximate.spec	(working copy)
 @@ -67,7 +67,10 @@
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
  
  %build
 -%ghc_lib_build

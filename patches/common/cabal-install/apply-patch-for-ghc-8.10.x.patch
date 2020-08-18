@@ -13,7 +13,7 @@ Index: cabal-install.spec
 @@ -64,6 +65,7 @@
  
  %prep
- %setup -q
+ %autosetup
 +%patch01 -p2
  
  %build

@@ -5,7 +5,7 @@ Index: ghc-git-lfs.spec
 @@ -50,6 +50,8 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +cabal-tweak-dep-ver aeson '<= 1.5' '< 2'
 +cabal-tweak-dep-ver http-client '<= 0.7' '< 1'
  

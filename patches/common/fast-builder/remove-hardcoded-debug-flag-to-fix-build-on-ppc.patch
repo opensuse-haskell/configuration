@@ -15,7 +15,7 @@ Index: ghc-fast-builder.spec
 @@ -54,6 +56,7 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +%patch1 -p1
  
  %build

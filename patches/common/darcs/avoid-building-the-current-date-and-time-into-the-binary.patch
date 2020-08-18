@@ -12,7 +12,7 @@ Index: darcs.spec
  Darcs is a free, open source revision control system. It is:
 @@ -123,5 +124,9 @@
  %prep
- %setup -q
+ %autosetup
 +modified="$(sed -n '/^----/n;s/ - .*$//;p;q' "%{SOURCE4}")"
 +DATE="\"$(date -d "${modified}" "+%%b %%e %%Y")\""
 +TIME="\"$(date -d "${modified}" "+%%R")\""

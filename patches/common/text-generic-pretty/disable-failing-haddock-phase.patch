@@ -3,7 +3,7 @@ Index: ghc-text-generic-pretty.spec
 --- ghc-text-generic-pretty.spec	(revision 3)
 +++ ghc-text-generic-pretty.spec	(working copy)
 @@ -92,7 +92,8 @@
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
  
  %build
 -%ghc_lib_build

@@ -5,7 +5,7 @@ Index: ghc-html-entities.spec
 @@ -55,6 +55,8 @@
  
  %prep
- %setup -q -n %{pkg_name}-%{version}
+ %autosetup -n %{pkg_name}-%{version}
 +echo > Setup.hs 'import Distribution.Simple'
 +echo >>Setup.hs 'main = defaultMain'
  
