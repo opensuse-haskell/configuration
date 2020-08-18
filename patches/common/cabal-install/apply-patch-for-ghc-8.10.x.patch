@@ -10,11 +10,11 @@ Index: cabal-install.spec
  
  %description
  The 'cabal' command-line program simplifies the process of managing Haskell
-@@ -64,6 +65,7 @@
+@@ -64,6 +65,6 @@
  
  %prep
- %autosetup
-+%patch01 -p2
+-%autosetup
++%autosetup -p2
  
  %build
  %ghc_bin_build
