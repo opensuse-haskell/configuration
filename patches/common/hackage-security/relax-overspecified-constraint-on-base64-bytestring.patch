@@ -1,0 +1,12 @@
+Index: ghc-hackage-security.spec
+===================================================================
+--- ghc-hackage-security.spec	(revision 13)
++++ ghc-hackage-security.spec	(working copy)
+@@ -89,6 +89,7 @@
+ %prep
+ %setup -q -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base64-bytestring '< 1.2' '< 2'
+ 
+ %build
+ %ghc_lib_build
