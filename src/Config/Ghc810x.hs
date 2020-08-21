@@ -21,7 +21,7 @@ import Distribution.Types.PackageVersionConstraint
 
 ghc810x :: Action PackageSetConfig
 ghc810x = do
-  let compiler = "ghc-8.10.1"
+  let compiler = "ghc-8.10.2"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
   packageSet <- fromList <$>
