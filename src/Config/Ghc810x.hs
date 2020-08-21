@@ -512,6 +512,9 @@ flagList =
 
     -- The command-line utility pulls in other dependencies.
   , ("aeson-pretty",                   "lib-only")
+
+    -- Build the standalone executable for skylighting.
+  , ("skylighting",                    "executable")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
