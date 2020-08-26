@@ -20,6 +20,7 @@ forcedExectableNames =
   , "c2hs"
   , "cab"
   , "cabal-install"
+  , "cabal-plan"
   , "cabal-rpm"
   , "cabal2nix"
   , "cabal2spec"
