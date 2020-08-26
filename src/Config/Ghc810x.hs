@@ -164,6 +164,7 @@ constraintList = [ "adjunctions"
                  , "data-fix"
                  , "DAV"
                  , "dbus"
+                 , "dec"
                  , "Decimal"
                  , "dhall <1.34"        -- the new version breaks weeder-2.1.0
                  , "Diff"
