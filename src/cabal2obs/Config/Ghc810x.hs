@@ -2,15 +2,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module Config.Ghc810x ( ghc810x, resolveConstraints ) where
+module Config.Ghc810x ( ghc810x ) where
 
 import Config.ForcedExecutables
 import Oracle.Hackage ( )
 import Types
 
 import Control.Monad
-import Data.List ( intercalate )
-import Data.Map.Strict ( fromList, toList, keys, union )
+import Data.Map.Strict ( fromList, toList )
 import Data.Maybe
 import Development.Shake
 import Distribution.Package
@@ -29,6 +28,7 @@ ghc810x = do
                     (,) pn <$> askOracle (PackageVersionConstraint pn vr))
   pure (PackageSetConfig {..})
 
+{-
 targetPackages :: ConstraintSet
 targetPackages   = [ "alex >=3.2.5"
                    , "cabal-install ==3.2.*"
@@ -64,6 +64,7 @@ resolveConstraints = unwords ["cabal", "install", "--dry-run", "--minimize-confl
                     | pn <- keys targetPackages
                     , Just flags' <- [lookup (unPackageName pn) flagList]
                     ]
+ -}
 
 constraintList :: ConstraintSet
 constraintList = [ "adjunctions"
@@ -579,6 +580,7 @@ readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
     noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
     noMinusF x           = x
 
+{-
 corePackages :: ConstraintSet
 corePackages = [ "array ==0.5.4.0"
                , "base ==4.14.1.0"
@@ -616,3 +618,4 @@ corePackages = [ "array ==0.5.4.0"
                , "unix ==2.7.2.2"
                , "xhtml ==3000.2.2.1"
                ]
+ -}
