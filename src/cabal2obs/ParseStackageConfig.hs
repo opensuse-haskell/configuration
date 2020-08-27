@@ -24,7 +24,7 @@ token :: CharParsing p => p a -> p a
 token p = spaces *> p
 
 comment :: ParsecParser ()
-comment = skipOptional (string "--" *> (many (satisfy (/= '\n')))) <* (void (char '\n') <|> eof)
+comment = skipOptional (string "--" *> many (satisfy (/= '\n'))) <* (void (char '\n') <|> eof)
 
 parse :: MonadFail m => ParsecParser a -> String -> m a
 parse p x = either (fail . show) return (runParsecParser p "" (fieldLineStreamFromString x))

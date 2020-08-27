@@ -27,7 +27,7 @@ type Constraint = PackageVersionConstraint
 newtype Hackage = Hackage TarIndex
 
 addHackageCache :: Rules (Action Hackage)
-addHackageCache = ($()) <$> newCache f
+addHackageCache = (\f' -> f' ()) <$> newCache f
   where f () = do
           home <- liftIO (getAppUserDataDirectory "cabal")
           let idxFile = home </> "packages/hackage.haskell.org/01-index.tar.idx"
