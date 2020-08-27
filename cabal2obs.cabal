@@ -46,8 +46,6 @@ executable cabal2obs
   other-modules:    Config
                     Config.ForcedExecutables
                     Config.Ghc810x
-                    Config.Ghc86x
-                    Config.Ghc88x
                     Config.LTS14
                     Config.LTS14.Stackage
                     Oracle
