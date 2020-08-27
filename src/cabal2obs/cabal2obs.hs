@@ -49,7 +49,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "36"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "37"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgs shopts $ do
@@ -163,14 +163,14 @@ main = do
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
       let year = head (lines year')
-      command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+      command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ unPackageSetId psid ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "tools/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+        command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
