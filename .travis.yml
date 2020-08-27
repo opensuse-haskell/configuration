@@ -31,10 +31,12 @@ install:
   - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
   - travis_retry cabal v2-update
   - "sed -i 's/^jobs:.*/jobs: 2/' $HOME/.cabal/config"
-  - cabal v2-install shelltestrunner
+  - cabal v2-install shelltestrunner doctest hlint
 
 script:
   - rm -f _build/*/*/*.changes
-  - cabal v2-run cabal2obs -- --keep-going -j2
-  - cabal v2-test all
+  - cabal v2-run --write-ghc-environment-files=always cabal2obs -- --keep-going -j2
+  - cabal v2-test --write-ghc-environment-files=always all
   - tests/run-tests
+  - for n in src/*; do echo doctesting $n ...; doctest $n; done
+  - hlint src

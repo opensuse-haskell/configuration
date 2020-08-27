@@ -19,7 +19,7 @@ import qualified Prelude
 import Prelude hiding ( FilePath )
 import System.Directory
 import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
-import Turtle hiding ( x, l, text )
+import Turtle hiding ( x, l, text, stdout, stderr )
 
 type TimeStamp = Text
 type EMail = Text
