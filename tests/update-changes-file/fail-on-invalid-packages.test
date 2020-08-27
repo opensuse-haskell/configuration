@@ -7,7 +7,7 @@ $$$ rm -f invalid-package.changes
 # TODO: Should this fail? The package does not exist, but we don't notice
 # because "cabal" isn't run when we're creating a new *.changes file from
 # scratch.
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes invalid-package 0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes invalid-package 0 joe@example.org
 >>>= 0
 $$$ cat invalid-package.changes
 >>>
@@ -19,16 +19,16 @@ now - joe@example.org
 >>>= 0
 
 
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes invalid-package 1 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes invalid-package 1 joe@example.org
 >>>2 /There is no package named 'invalid-package'./
 >>>= 1
 
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes mtl 999.999 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 999.999 joe@example.org
 >>>2 /cabal: There is no available version of mtl that satisfies ==0/
 >>>= 1
 
 $$$ rm -f invalid-package.changes
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes mtl 1.0 joe@example.org
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes mtl 999.999 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 1.0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 999.999 joe@example.org
 >>>2 /cabal: There is no available version of mtl that satisfies ==999.999/
 >>>= 1

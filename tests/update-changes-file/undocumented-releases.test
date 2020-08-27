@@ -3,9 +3,9 @@
 ###############################################################################
 
 $$$ rm -f th-lift.changes
-$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7 joe@example.org
-$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7.8 joe@example.org
-$$$ cabal -v0 new-run update-changes-file -- -t now th-lift.changes th-lift 0.7.10 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now th-lift.changes th-lift 0.7 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now th-lift.changes th-lift 0.7.8 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now th-lift.changes th-lift 0.7.10 joe@example.org
 >>>= 0
 
 $$$ cat th-lift.changes

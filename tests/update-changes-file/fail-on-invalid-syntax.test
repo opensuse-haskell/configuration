@@ -2,7 +2,7 @@
 # Verify that the script fails properly for incorrect parameters.
 ###############################################################################
 
-$$$ cabal -v0 new-run update-changes-file -- -t now invalid-package.changes invalid-package
+$$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes invalid-package
 >>>2
 Missing: NEW-VERSION E-MAIL
 

@@ -29,12 +29,12 @@ install:
   - python3 --version
   - cabal --version
   - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
-  - travis_retry cabal new-update
+  - travis_retry cabal v2-update
   - "sed -i 's/^jobs:.*/jobs: 2/' $HOME/.cabal/config"
-  - cabal new-install shelltestrunner
+  - cabal v2-install shelltestrunner
 
 script:
   - rm -f _build/*/*/*.changes
-  - cabal new-run cabal2obs -- --keep-going -j2
-  - cabal new-test all
+  - cabal v2-run cabal2obs -- --keep-going -j2
+  - cabal v2-test all
   - tests/run-tests

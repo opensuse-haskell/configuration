@@ -12,7 +12,7 @@ Mon May 14 17:02:11 UTC 2018 - joe@example.org
 $$$ cat >unliftio-core.changes
 >>>= 0
 
-$$$ cabal -v0 new-run update-changes-file -- -t now unliftio-core.changes unliftio-core 0.1.1.0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now unliftio-core.changes unliftio-core 0.1.1.0 joe@example.org
 >>>2
 update-changes-file: user error (cannot determine previous version number unliftio-core.changes from)
 >>>= 1

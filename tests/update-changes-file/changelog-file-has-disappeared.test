@@ -4,9 +4,9 @@
 
 $$$ rm -f foundation.changes
 
-$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.20 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now foundation.changes foundation 0.0.20 joe@example.org
 
-$$$ cabal -v0 new-run update-changes-file -- -t now foundation.changes foundation 0.0.21 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now foundation.changes foundation 0.0.21 joe@example.org
 >>>= 0
 
 $$$ cat foundation.changes

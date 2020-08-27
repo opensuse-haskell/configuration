@@ -4,7 +4,7 @@
 
 $$$ rm -f mtl.changes
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
 >>>= 0
 
 $$$ cat mtl.changes
@@ -20,7 +20,7 @@ now - joe@example.org
 # Re-running the update with the same version has no effect.
 ###############################################################################
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 2.2 joe@example.org
 >>>= 0
 
 $$$ cat mtl.changes
@@ -36,7 +36,7 @@ now - joe@example.org
 # Now let's try an update.
 ###############################################################################
 
-$$$ cabal -v0 new-run update-changes-file -- -t now mtl.changes mtl 2.2.0.1 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 2.2.0.1 joe@example.org
 >>>= 0
 $$$ cat mtl.changes
 >>>
