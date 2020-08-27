@@ -10,6 +10,6 @@ optional-packages:
   ../cabal2spec/cabal2spec.cabal
 
 package cabal2obs
-  ghc-options:        -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
-                      -Wredundant-constraints -Wunused-packages
-
+  ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
+               -Wredundant-constraints -Wunused-packages
+  ghc-options: -fwrite-ide-info
