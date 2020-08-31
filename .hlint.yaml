@@ -10,10 +10,12 @@
       - ApplicativeDo
       - DeriveAnyClass
       - DeriveGeneric
+      - MultiWayIf
       - NoImplicitPrelude
       - OverloadedLists
       - OverloadedStrings
       - RecordWildCards
+      - TupleSections
       - TypeFamilies
   - { name: FlexibleInstances, within: [Orphans, Oracle.Hackage] }
 

@@ -1,3 +1,5 @@
+{-# LANGUAGE TupleSections #-}
+
 module ExtractVersionUpdates ( extractVersionUpdates, isVersionUpdate, Revision ) where
 
 import Control.Applicative
@@ -18,12 +20,12 @@ extractVersionUpdates fp = do
 
 isVersionUpdate :: String -> Maybe (Version, Revision)
 isVersionUpdate l = foldl1 (<|>) $
-                      accurateMatch : [ (\v -> (v,0)) <$> tryMatch i patt l | (i,patt) <- fuzzyFormats ]
+                      accurateMatch : [ (,0) <$> tryMatch i patt l | (i,patt) <- fuzzyFormats ]
   where
     accurateMatch :: Maybe (Version, Revision)
     accurateMatch =
       case getAllTextSubmatches (match (mkRegex "update .* to version ([0-9.]+) revision ([0-9]+)") l) of
-        [_,v,r] -> (\v -> (v, read r)) <$> simpleParsec v
+        [_,v,r] -> (, read r) <$> simpleParsec v
         _       -> Nothing
 
     fuzzyFormats :: [(SubmatchId, Pattern)]
