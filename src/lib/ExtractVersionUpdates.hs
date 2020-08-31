@@ -1,4 +1,4 @@
-module ExtractVersionUpdates ( extractVersionUpdates, isVersionUpdate ) where
+module ExtractVersionUpdates ( extractVersionUpdates, isVersionUpdate, Revision ) where
 
 import Control.Applicative
 import qualified Data.Text as Text
@@ -9,17 +9,25 @@ import Text.Regex.Posix
 
 type SubmatchId = Int
 type Pattern = String
+type Revision = Int
 
-extractVersionUpdates :: FilePath -> IO [Version]
+extractVersionUpdates :: FilePath -> IO [(Version, Revision)]
 extractVersionUpdates fp = do
   buf <- Text.readFile fp
   return [ v | l <- Text.lines buf, Just v <- [isVersionUpdate (Text.unpack l)] ]
 
-isVersionUpdate :: String -> Maybe Version
-isVersionUpdate l = foldl1 (<|>) [ tryMatch i patt l | (i,patt) <- formats ]
+isVersionUpdate :: String -> Maybe (Version, Revision)
+isVersionUpdate l = foldl1 (<|>) $
+                      accurateMatch : [ (\v -> (v,0)) <$> tryMatch i patt l | (i,patt) <- fuzzyFormats ]
   where
-    formats :: [(SubmatchId, Pattern)]
-    formats =
+    accurateMatch :: Maybe (Version, Revision)
+    accurateMatch =
+      case getAllTextSubmatches (match (mkRegex "update .* to version ([0-9.]+) revision ([0-9]+)") l) of
+        [_,v,r] -> (\v -> (v, read r)) <$> simpleParsec v
+        _       -> Nothing
+
+    fuzzyFormats :: [(SubmatchId, Pattern)]
+    fuzzyFormats =
       [ (1, "^-.* update .*version ([0-9.]+).$")
       , (1, "^-.* update .*version ([0-9.]+) (revision|with cabal2obs)")
       , (1, "^-.* update to ([0-9.]+)$")

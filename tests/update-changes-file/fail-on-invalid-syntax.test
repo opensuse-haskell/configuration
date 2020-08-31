@@ -4,12 +4,12 @@
 
 $$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes invalid-package
 >>>2
-Missing: NEW-VERSION E-MAIL
+Missing: NEW-VERSION NEW-REVISION E-MAIL
 
 Guess the change log entry between two version of a package.
 
 Usage: update-changes-file [-t|--timestamp TIMESTAMP] CHANGES-FILE PACKAGE-NAME
-                           NEW-VERSION E-MAIL
+                           NEW-VERSION NEW-REVISION E-MAIL
 
 Available options:
   -h,--help                Show this help text
@@ -17,5 +17,6 @@ Available options:
   CHANGES-FILE             package change log file to update
   PACKAGE-NAME             name of the Hackage package
   NEW-VERSION              version string of the updated package
+  NEW-REVISION             Hackage revision of the updated package
   E-MAIL                   e-mail address of the revision author
 >>>= 1

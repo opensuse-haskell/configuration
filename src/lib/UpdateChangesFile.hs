@@ -1,7 +1,8 @@
+{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module UpdateChangesFile
-  ( updateChangesFile, TimeStamp, EMail
+  ( updateChangesFile, TimeStamp, EMail, Revision
   )
   where
 
@@ -24,25 +25,28 @@ import Turtle hiding ( x, l, text, stdout, stderr )
 type TimeStamp = Text
 type EMail = Text
 
-updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> Version -> EMail -> IO ()
-updateChangesFile now' changesFile' pkg newv email =
+updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> (Version, Revision) -> EMail -> IO ()
+updateChangesFile now' changesFile' pkg (newv,newrv) email =
   ifM (notM (testfile changesFile)) (commit mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
-    -- debug (fp%" mentions these version updates: "%wpl%"\n") changesFile oldVs
     when (null oldVs) (die (format ("cannot determine previous version number "%fp%" from") changesFile))
-    let oldv = head oldVs
+    let (oldv, oldrv) = head oldVs
     when (oldv > newv) (die (format (fp%": unsupprted downgrade from version "%wp%" to "%wp) changesFile oldv newv))
-    sh $ unless (oldv == newv) $ do
-      let oldpkg = format (wp%"-"%wp) pkg oldv
-          newpkg = format (wp%"-"%wp) pkg newv
-      systemTempDir <- fromString <$> liftIO getTemporaryDirectory
-      tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
-      procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
-      procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
-      gcl <- liftIO (guessChangeLog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
-      case gcl of
-        GuessedChangeLog _ txt -> liftIO (commit txt)
-        _                      -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) gcl))))
+    if oldv == newv
+      then if | oldrv > newrv -> die (format (fp%": unsupprted downgrade from revision "%wp%" to "%wp) changesFile oldrv newrv)
+              | oldrv < newrv -> liftIO (commit "Upstream has revised the Cabal build instructions on Hackage.")
+              | otherwise     -> return ()
+      else sh $ unless (oldv == newv) $ do
+        let oldpkg = format (wp%"-"%wp) pkg oldv
+            newpkg = format (wp%"-"%wp) pkg newv
+        systemTempDir <- fromString <$> liftIO getTemporaryDirectory
+        tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
+        procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
+        procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
+        gcl <- liftIO (guessChangeLog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
+        case gcl of
+          GuessedChangeLog _ txt -> liftIO (commit txt)
+          _                      -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) gcl))))
 
   where
     changesFile = fromString changesFile'
@@ -56,12 +60,14 @@ updateChangesFile now' changesFile' pkg newv email =
         ("-------------------------------------------------------------------\n\
          \"%s%" - "%s%"\n\
          \\n\
-         \- "%s%" "%wp%" "%s%" version "%wp%".\n"%s%"\n"%s)
+         \- "%s%" "%wp%" "%s%" version "%wp%s%".\n"%s%"\n"%s)
         now email
         (if Text.null cl' then "Add" else "Update")
         pkg
         (if Text.null cl' then "at" else "to")
-        newv cl txt
+        newv
+        (if newrv == 0 then "" else format (" revision "%d) newrv)
+        cl txt
 
 wp :: Pretty a => Format r (a -> r)
 wp = makeFormat (Text.pack . prettyShow)
@@ -73,7 +79,7 @@ changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
 prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangeLog -> Doc
 
 prettyGuessedChangeLog _ (GuessedChangeLog _ _) = error
-        "prettyGuessedChangeLog is not supposed for format guessed entries"
+        "prettyGuessedChangeLog is not supposed to be used to format guessed entries"
 
 prettyGuessedChangeLog _ (UndocumentedUpdate p) = para $
         "Upstream has not updated the file " ++ show (Text.unpack (format fp p)) ++ " since the last release."

@@ -4,7 +4,7 @@
 
 $$$ rm -f mtl.changes
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 2.2.2 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 2.2.2 0 joe@example.org
 $$$ cat mtl.changes
 >>>
 -------------------------------------------------------------------
@@ -14,7 +14,7 @@ now - joe@example.org
 
 >>>= 0
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 1.0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now mtl.changes mtl 1.0 0 joe@example.org
 >>>2
 update-changes-file: user error (mtl.changes: unsupprted downgrade from version 2.2.2 to 1.0)
 >>>= 1

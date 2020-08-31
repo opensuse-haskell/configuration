@@ -4,9 +4,9 @@
 
 $$$ rm -f JuicyPixels.changes
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 0 joe@example.org
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 0 joe@example.org
 
 $$$ cat JuicyPixels.changes
 >>>

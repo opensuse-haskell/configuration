@@ -139,8 +139,10 @@ main = do
 
     buildDir </> "*/*/*.changes" %> \out -> do
       (psid, bn) <- extractPackageSetIdAndBuildName out
-      PackageIdentifier pn v <- pkgidFromPath (psid,bn)         -- TODO: evil hard-coded constant
-      traced "update-changes-file" $ updateChangesFile Nothing out pn v "psimons@suse.com"
+      pkgid@(PackageIdentifier pn v) <- pkgidFromPath (psid,bn)
+      cabal <- getCabal pkgid >>= parseCabalFile pkgid
+      let rev = packageRevision cabal
+      traced "update-changes-file" $ updateChangesFile Nothing out pn (v, rev) "psimons@suse.com" -- TODO: evil hard-coded constant
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
