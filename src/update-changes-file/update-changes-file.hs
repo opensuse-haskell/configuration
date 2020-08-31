@@ -12,7 +12,6 @@ import Distribution.Package
 import Distribution.Parsec
 import Distribution.Version
 import Prelude hiding ( FilePath )
-import Text.Read
 import Turtle hiding ( stdout, stderr )
 
 type Options = (Maybe TimeStamp, FilePath, PackageName, Version, Revision, EMail)
