@@ -24,9 +24,9 @@ isVersionUpdate l = foldl1 (<|>) $
   where
     accurateMatch :: Maybe (Version, Revision)
     accurateMatch =
-      case getAllTextSubmatches (match (mkRegex "update .* to version ([0-9.]+) revision ([0-9]+)") l) of
-        [_,v,r] -> (, read r) <$> simpleParsec v
-        _       -> Nothing
+      case getAllTextSubmatches (match (mkRegex "(update|add) .* (to|at) version ([0-9.]+) revision ([0-9]+)") l) of
+        [_,_,_,v,r] -> (, read r) <$> simpleParsec v
+        _           -> Nothing
 
     fuzzyFormats :: [(SubmatchId, Pattern)]
     fuzzyFormats =

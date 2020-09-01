@@ -29,6 +29,7 @@ tests =
   , "- upgrade to 0.6.0.3 from upstream (for pandoc 1.9.1.2)"   ~~> ("0.6.0.3", 0)
   , "- Add unliftio-core at version 0.1.1.0."                   ~~> ("0.1.1.0", 0)
   , "- Adding initial version version 0.1.1.0."                 ~~> ("0.1.1.0", 0)
+  , "- Add ghc-paths at version 0.1.0.12 revision 1."           ~~> ("0.1.0.12", 1)
   ]
 
 (~~>) :: String -> (String, Revision) -> (String, (Version, Revision))
