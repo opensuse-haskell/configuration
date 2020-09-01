@@ -1,0 +1,12 @@
+Index: liquidhaskell.spec
+===================================================================
+--- liquidhaskell.spec	(revision 5)
++++ liquidhaskell.spec	(working copy)
+@@ -99,6 +99,7 @@
+ 
+ %prep
+ %autosetup -p1
++cabal-tweak-dep-ver optparse-applicative '< 0.16.0.0' '< 1'
+ 
+ %build
+ %ghc_lib_build
