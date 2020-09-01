@@ -26,7 +26,7 @@ lts14 = do
   let compiler = "ghc-8.6.5"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
-      myConstraintSet = extraPackages `union` ((stackage `withoutKeys` bannedPackageNames) `withoutKeys` (keysSet corePackages))
+      myConstraintSet = extraPackages `union` ((stackage `withoutKeys` bannedPackageNames) `withoutKeys` keysSet corePackages)
       corePackages    = ghcCorePackages
   packageSet <- fromList <$>
                   forM (toList myConstraintSet) (\(pn,vr) ->
