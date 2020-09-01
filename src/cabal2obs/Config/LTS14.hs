@@ -11,7 +11,7 @@ import Orphans ()
 import Types
 
 import Control.Monad
-import Data.Map.Strict as Map ( fromList, toList, union, withoutKeys )
+import Data.Map.Strict as Map ( fromList, toList, union, withoutKeys, keysSet )
 import Data.Maybe
 import Data.Set ( Set )
 import Development.Shake
@@ -26,7 +26,8 @@ lts14 = do
   let compiler = "ghc-8.6.5"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
-      myConstraintSet = extraPackages `union` (stackage `withoutKeys` bannedPackageNames)
+      myConstraintSet = extraPackages `union` ((stackage `withoutKeys` bannedPackageNames) `withoutKeys` (keysSet corePackages))
+      corePackages    = ghcCorePackages
   packageSet <- fromList <$>
                   forM (toList myConstraintSet) (\(pn,vr) ->
                     (,) pn <$> askOracle (PackageVersionConstraint pn vr))
@@ -61,44 +62,8 @@ extraPackages =
 
 bannedPackageNames :: Set PackageName
 bannedPackageNames =
-  [ -- GHC 8.6.5 core packages
-    "array"
-  , "base"
-  , "binary"
-  , "bytestring"
-  , "Cabal"
-  , "containers"
-  , "deepseq"
-  , "directory"
-  , "filepath"
-  , "ghc"
-  , "ghc-boot"
-  , "ghc-boot-th"
-  , "ghc-compact"
-  , "ghc-heap"
-  , "ghc-prim"
-  , "ghci"
-  , "haskeline"
-  , "hpc"
-  , "hsc2hs"
-  , "integer-gmp"
-  , "libiserv"
-  , "mtl"
-  , "parsec"
-  , "pretty"
-  , "process"
-  , "rts"
-  , "stm"
-  , "template-haskell"
-  , "terminfo"
-  , "text"
-  , "time"
-  , "transformers"
-  , "unix"
-  , "xhtml"
-
-    -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
-  , "eventstore"
+  [ -- doesn't work on 32 bit: https://github.com/YoEight/eventstore/issues/51
+    "eventstore"
 
     -- needs obsolete dependencies we don't want to provide
   , "cabal2nix"
@@ -392,3 +357,39 @@ readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
     noMinusF :: String -> String
     noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
     noMinusF x           = x
+
+ghcCorePackages :: PackageSet
+ghcCorePackages = [ "array-0.5.3.0"
+                  , "base-4.12.0.0"
+                  , "binary-0.8.6.0"
+                  , "bytestring-0.10.8.2"
+                  , "Cabal-2.4.0.1"
+                  , "containers-0.6.0.1"
+                  , "deepseq-1.4.4.0"
+                  , "directory-1.3.3.0"
+                  , "filepath-1.4.2.1"
+                  , "ghc-8.6.5"
+                  , "ghc-boot-8.6.5"
+                  , "ghc-boot-th-8.6.5"
+                  , "ghc-compact-0.1.0.0"
+                  , "ghc-heap-8.6.5"
+                  , "ghc-prim-0.5.3"
+                  , "ghci-8.6.5"
+                  , "haskeline-0.7.4.3"
+                  , "hpc-0.6.0.3"
+                  , "integer-gmp-1.0.2.0"
+                  , "libiserv-8.6.3"
+                  , "mtl-2.2.2"
+                  , "parsec-3.1.13.0"
+                  , "pretty-1.1.3.6"
+                  , "process-1.6.5.0"
+                  , "rts-1.0"
+                  , "stm-2.5.0.0"
+                  , "template-haskell-2.14.0.0"
+                  , "terminfo-0.4.1.2"
+                  , "text-1.2.3.1"
+                  , "time-1.8.0.2"
+                  , "transformers-0.5.6.2"
+                  , "unix-2.7.2.2"
+                  , "xhtml-3000.2.2.1"
+                  ]

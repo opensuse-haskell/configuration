@@ -37,5 +37,6 @@ data PackageSetConfig = PackageSetConfig
   , packageSet       :: PackageSet
   , flagAssignments  :: Map PackageName FlagAssignment
   , forcedExectables :: Set PackageName
+  , corePackages     :: PackageSet
   }
   deriving (Show, Binary, Generic, Eq, Hashable, NFData)
