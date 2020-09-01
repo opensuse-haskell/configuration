@@ -15,12 +15,12 @@ import Types
 import UpdateChangesFile
 
 import Control.Monad.Extra
+import qualified Data.ByteString as BSS
 import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
-import Data.Set as Set ( Set )
-import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
-import qualified Data.ByteString as BSS
+import qualified Data.Set as Set
+import Data.Set as Set ( Set )
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import Distribution.Compiler
@@ -160,8 +160,9 @@ main = do
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
-      case finalizePD fa (ComponentRequestedSpec False False) (const True) (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
-        Left missing -> fail ("finalizePD: " ++ show missing)
+      let lookupPackageSet d = Map.member (depPkgName d) (packageSet pset `Map.union` corePackages pset)
+      case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
+        Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
       let year = head (lines year')
