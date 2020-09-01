@@ -68,6 +68,7 @@ forcedExectableNames =
   , "keter"
   , "leksah-server"
   , "lhs2tex"
+  , "liquidhaskell"
   , "markdown-unlit"
   , "microformats2-parser"
   , "misfortune"
