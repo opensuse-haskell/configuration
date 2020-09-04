@@ -178,7 +178,7 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     buildDir </> "packages.csv" %> \out -> do
-      let psid = PackageSetId "ghc-8.6.x"
+      let psid = PackageSetId "ghc-8.10.x"
       pkgs <- packageSet <$> getPackageSet psid
       ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
         BuildName bn <- getBuildName (psid, PackageIdentifier pn v)
