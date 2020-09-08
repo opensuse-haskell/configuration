@@ -305,7 +305,7 @@ constraintList = [ "adjunctions"
                  , "magic"
                  , "managed"
                  , "math-functions"
-                 , "megaparsec"
+                 , "megaparsec < 9"             -- dhall-1.34.0 and before don't support it
                  , "memory"
                  , "microlens"
                  , "microlens-ghc"
