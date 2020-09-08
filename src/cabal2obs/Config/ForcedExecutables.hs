@@ -31,6 +31,7 @@ forcedExectableNames =
   , "darcs"
   , "derive"
   , "diagrams-haddock"
+  , "distribution-opensuse"
   , "dixi"
   , "doctest"
   , "doctest-discover"
