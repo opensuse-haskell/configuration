@@ -31,9 +31,9 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
     when (null oldVs) (die (format ("cannot determine previous version number "%fp%" from") changesFile))
     let (oldv, oldrv) = head oldVs
-    when (oldv > newv) (die (format (fp%": unsupprted downgrade from version "%wp%" to "%wp) changesFile oldv newv))
+    when (oldv > newv) (die (format (fp%": unsupported downgrade from version "%wp%" to "%wp) changesFile oldv newv))
     if oldv == newv
-      then if | oldrv > newrv -> die (format (fp%": unsupprted downgrade from revision "%wp%" to "%wp) changesFile oldrv newrv)
+      then if | oldrv > newrv -> die (format (fp%": unsupported downgrade from revision "%wp%" to "%wp) changesFile oldrv newrv)
               | oldrv < newrv -> liftIO (commit "Upstream has revised the Cabal build instructions on Hackage.")
               | otherwise     -> return ()
       else sh $ unless (oldv == newv) $ do
