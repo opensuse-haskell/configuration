@@ -1,0 +1,12 @@
+Index: c2hs.spec
+===================================================================
+--- c2hs.spec	(revision 3)
++++ c2hs.spec	(working copy)
+@@ -53,6 +53,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver language-c '< 0.9' '< 1'
+ 
+ %build
+ %ghc_bin_build
