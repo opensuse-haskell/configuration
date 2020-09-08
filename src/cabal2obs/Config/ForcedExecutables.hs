@@ -30,6 +30,8 @@ forcedExectableNames =
   , "cryptol"
   , "darcs"
   , "derive"
+  , "dhall-json"
+  , "dhall-yaml"
   , "diagrams-haddock"
   , "distribution-opensuse"
   , "dixi"
