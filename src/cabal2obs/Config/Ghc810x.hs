@@ -170,7 +170,7 @@ constraintList = [ "adjunctions"
                  , "dbus"
                  , "dec"
                  , "Decimal"
-                 , "dhall <1.34"        -- the new version breaks weeder-2.1.0
+                 , "dhall"
                  , "Diff"
                  , "digest"
                  , "disk-free-space"
