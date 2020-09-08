@@ -1,0 +1,12 @@
+Index: ghc-language-c.spec
+===================================================================
+--- ghc-language-c.spec	(revision 4)
++++ ghc-language-c.spec	(working copy)
+@@ -57,6 +57,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++find . -type f -exec chmod -x {} +
+ 
+ %build
+ %ghc_lib_build
