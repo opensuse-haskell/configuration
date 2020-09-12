@@ -6,7 +6,6 @@ module Config ( knownPackageSets, addConfigOracle ) where
 
 import Config.Ghc810x
 import Config.LTS14
-import Orphans ()
 import Types
 
 import Data.Map.Strict ( Map, findWithDefault, keysSet )

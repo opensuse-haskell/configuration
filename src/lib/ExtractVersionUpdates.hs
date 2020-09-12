@@ -2,11 +2,11 @@
 
 module ExtractVersionUpdates ( extractVersionUpdates, isVersionUpdate, Revision ) where
 
+import MyCabal
+
 import Control.Applicative
 import qualified Data.Text as Text
 import qualified Data.Text.IO as Text
-import Distribution.Parsec
-import Distribution.Version
 import Text.Regex.Posix
 
 type SubmatchId = Int

@@ -1,12 +1,9 @@
 module ParseStackageConfig where
 
+import MyCabal
+
 import Control.Applicative
 import Data.Functor
-import Distribution.Compat.CharParsing
-import Distribution.Package
-import Distribution.Parsec
-import Distribution.Parsec.FieldLineStream
-import Distribution.Version
 
 stackageConfig :: ParsecParser [Dependency]
 stackageConfig = many comment *> constraints

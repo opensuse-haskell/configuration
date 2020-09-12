@@ -17,22 +17,38 @@
       - RecordWildCards
       - TupleSections
       - TypeFamilies
-  - { name: FlexibleInstances, within: [Orphans, Oracle.Hackage] }
+  - { name: FlexibleInstances, within: [MyCabal, Oracle.Hackage] }
 
 - flags:
-  - { name: -fno-warn-orphans, within: [Orphans] }
+  - { name: -fno-warn-orphans, within: [MyCabal] }
 
-# - modules:
-#   - {name: [Data.Set, Data.HashSet], as: Set} # if you import Data.Set qualified, it must be as 'Set'
-#   - {name: Control.Arrow, within: []} # Certain modules are banned entirely
-#
+- modules:
+  - { name: Distribution.Compat.CharParsing, within: [MyCabal] }
+  - { name: Distribution.Compiler, within: [MyCabal] }
+  - { name: Distribution.Package, within: [MyCabal] }
+  - { name: Distribution.PackageDescription, within: [MyCabal] }
+  - { name: Distribution.PackageDescription.Configuration, within: [MyCabal] }
+  - { name: Distribution.PackageDescription.Parsec, within: [MyCabal] }
+  - { name: Distribution.Parsec, within: [MyCabal] }
+  - { name: Distribution.Parsec.FieldLineStream, within: [MyCabal] }
+  - { name: Distribution.Pretty, within: [MyCabal] }
+  - { name: Distribution.Simple.Utils, within: [MyCabal] }
+  - { name: Distribution.SPDX, within: [MyCabal] }
+  - { name: Distribution.System, within: [MyCabal] }
+  - { name: Distribution.Text, within: [MyCabal] }
+  - { name: Distribution.Types.ComponentRequestedSpec, within: [MyCabal] }
+  - { name: Distribution.Types.PackageVersionConstraint, within: [MyCabal] }
+  - { name: Distribution.Types.UnqualComponentName, within: [MyCabal] }
+  - { name: Distribution.Utils.ShortText, within: [MyCabal] }
+  - { name: Distribution.Version, within: [MyCabal] }
+
 # - functions:
 #   - {name: unsafePerformIO, within: []} # unsafePerformIO can only appear in no modules
 
 # Add custom hints for this project
 #
 # Will suggest replacing "wibbleMany [myvar]" with "wibbleOne myvar"
-# - error: {lhs: "wibbleMany [x]", rhs: wibbleOne x}
+# - error: { lhs: "Distribution.Text", rhs: wibbleOne x }
 
 # Turn on hints that are off by default
 - warn: { name: Use explicit module export list }

@@ -8,11 +8,10 @@ import Prelude hiding ( fail )
 import Cabal2Spec
 import Config
 import Oracle
-import Orphans ()
 import ParseStackageConfig
-import ParseUtils
 import Types
 import UpdateChangesFile
+import MyCabal
 
 import Control.Monad.Extra
 import qualified Data.ByteString as BSS
@@ -23,16 +22,6 @@ import qualified Data.Set as Set
 import Data.Set as Set ( Set )
 import Development.Shake as Shake
 import Development.Shake.FilePath
-import Distribution.Compiler
-import Distribution.Package
-import Distribution.PackageDescription
-import Distribution.PackageDescription.Configuration
-import Distribution.Parsec
-import Distribution.Pretty
-import Distribution.SPDX
-import Distribution.System
-import Distribution.Text
-import Distribution.Types.ComponentRequestedSpec
 import System.Directory
 
 type instance RuleResult (PackageSetId, PackageName) = FlagAssignment

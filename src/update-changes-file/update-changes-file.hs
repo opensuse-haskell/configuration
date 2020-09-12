@@ -4,13 +4,11 @@
 module Main ( main ) where
 
 import UpdateChangesFile
+import MyCabal
 
 import Data.Maybe
 import Data.Optional ( Optional )
 import qualified Data.Text as Text
-import Distribution.Package
-import Distribution.Parsec
-import Distribution.Version
 import Prelude hiding ( FilePath )
 import Turtle hiding ( stdout, stderr )
 

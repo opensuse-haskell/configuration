@@ -7,19 +7,14 @@ module Config.LTS14 ( lts14 ) where
 import Config.ForcedExecutables
 import Config.LTS14.Stackage
 import Oracle.Hackage ( )
-import Orphans ()
 import Types
+import MyCabal
 
 import Control.Monad
 import Data.Map.Strict as Map ( fromList, toList, union, withoutKeys, keysSet )
 import Data.Maybe
 import Data.Set ( Set )
 import Development.Shake
-import Distribution.Package
-import Distribution.PackageDescription
-import Distribution.Simple.Utils ( lowercase )
-import Distribution.Text
-import Distribution.Types.PackageVersionConstraint
 
 lts14 :: Action PackageSetConfig
 lts14 = do

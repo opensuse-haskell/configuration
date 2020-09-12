@@ -7,17 +7,15 @@ module UpdateChangesFile
   where
 
 import ExtractVersionUpdates
+import MyCabal
 
 import Control.Monad.Extra
 import Data.Maybe
 import qualified Data.Text as Text
 import Data.Time.Format
-import Distribution.Package
-import Distribution.Pretty
-import Distribution.Version
 import OpenSuse.GuessChangeLog
+import OpenSuse.Prelude
 import qualified Prelude
-import Prelude hiding ( FilePath )
 import System.Directory
 import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
 import Turtle hiding ( x, l, text, stdout, stderr )
@@ -111,7 +109,7 @@ prettyGuessedChangeLog ctx (NotJustTopAdditions p) = para $
         \way, i.e. they did more than just add a new entry at the top. You can review the\n\
         \file at: " ++ hackageCLUrl ctx p
 
-hackageCLUrl :: (PackageName,Version,Version) -> FilePath -> String
+hackageCLUrl :: (PackageName,Version,Version) -> Turtle.FilePath -> String
 hackageCLUrl (pkg,_,newv) path = concat
   [ "http://hackage.haskell.org/package/"
   , prettyShow pkg, "-", prettyShow newv

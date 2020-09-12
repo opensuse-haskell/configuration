@@ -21,15 +21,18 @@ source-repository head
 
 library
   exposed-modules:  ExtractVersionUpdates
+                    MyCabal
                     UpdateChangesFile
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
                   , Cabal                 == 3.2.*
+                  , containers
                   , directory
                   , distribution-opensuse >= 1.1.1 && < 1.2
                   , extra
                   , pretty
                   , regex-posix
+                  , shake
                   , text
                   , time
                   , turtle
@@ -50,9 +53,7 @@ executable cabal2obs
                     Config.LTS14.Stackage
                     Oracle
                     Oracle.Hackage
-                    Orphans
                     ParseStackageConfig
-                    ParseUtils
                     Types
   hs-source-dirs:   src/cabal2obs
   build-depends:    base

@@ -3,11 +3,10 @@ module Main ( main ) where
 import Prelude hiding ( fail )
 
 import ExtractVersionUpdates
+import MyCabal
 
 import Control.Monad
 import Data.Maybe
-import Distribution.Parsec
-import Distribution.Version
 
 main :: IO ()
 main = forM_ tests $ \(txt,v') -> runTest v' txt

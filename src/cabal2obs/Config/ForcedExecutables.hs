@@ -3,10 +3,9 @@
 
 module Config.ForcedExecutables ( forcedExectableNames ) where
 
-import Orphans ()
+import MyCabal
 
 import Data.Set ( Set )
-import Distribution.Package ( PackageName )
 
 forcedExectableNames :: Set PackageName
 forcedExectableNames =

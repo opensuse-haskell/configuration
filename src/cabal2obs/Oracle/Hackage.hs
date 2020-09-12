@@ -4,7 +4,7 @@
 module Oracle.Hackage where
 
 import OpenSuse.Prelude
-import Orphans ()
+import MyCabal
 
 import Codec.Archive.Tar.Index ( TarIndex, TarIndexEntry(..) )
 import Codec.Archive.Tar.Entry as Tar ( entryContent, EntryContent(..) )
@@ -14,11 +14,6 @@ import qualified Data.ByteString.Lazy as BSL
 import Data.Maybe
 import Development.Shake
 import Development.Shake.FilePath
-import Distribution.Package
-import Distribution.PackageDescription
-import Distribution.PackageDescription.Parsec
-import Distribution.Types.PackageVersionConstraint
-import Distribution.Version
 import System.Directory
 import System.IO
 

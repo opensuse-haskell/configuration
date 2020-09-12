@@ -7,16 +7,12 @@ module Config.Ghc810x ( ghc810x ) where
 import Config.ForcedExecutables
 import Oracle.Hackage ( )
 import Types
+import MyCabal
 
 import Control.Monad
 import Data.Map.Strict ( fromList, toList )
 import Data.Maybe
 import Development.Shake
-import Distribution.Package
-import Distribution.PackageDescription
-import Distribution.Simple.Utils ( lowercase )
-import Distribution.Text
-import Distribution.Types.PackageVersionConstraint
 
 ghc810x :: Action PackageSetConfig
 ghc810x = do

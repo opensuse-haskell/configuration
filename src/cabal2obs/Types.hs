@@ -3,16 +3,13 @@
 
 module Types where
 
+import MyCabal
+
 import Data.Map.Strict as Map
 import Data.Set as Set
 import Data.String
 import Development.Shake.Classes
-import Distribution.Compiler
-import Distribution.Package
-import Distribution.PackageDescription
-import Distribution.Version
 import GHC.Generics ( Generic )
-import Orphans ( )
 
 newtype BuildName = BuildName { unBuildName :: String }
   deriving (Show, Eq, Ord, Hashable, NFData, Binary, Generic)
