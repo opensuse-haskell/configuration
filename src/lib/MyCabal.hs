@@ -27,7 +27,6 @@ import Data.Set as Set
 import Development.Shake.Classes
 import Distribution.Compat.CharParsing
 import Distribution.Compiler
-import Distribution.License
 import Distribution.Package
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Configuration
@@ -35,6 +34,7 @@ import Distribution.PackageDescription.Parsec
 import Distribution.Parsec
 import Distribution.Parsec.FieldLineStream
 import qualified Distribution.Pretty as Cabal
+import Distribution.SPDX.License
 import Distribution.Simple.Utils ( lowercase )
 import Distribution.System
 import Distribution.Text
