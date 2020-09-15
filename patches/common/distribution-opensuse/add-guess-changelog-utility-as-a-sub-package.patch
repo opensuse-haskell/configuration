@@ -1,0 +1,29 @@
+Index: ghc-distribution-opensuse.spec
+===================================================================
+--- ghc-distribution-opensuse.spec	(revision 1)
++++ ghc-distribution-opensuse.spec	(working copy)
+@@ -61,6 +61,15 @@
+ This package provides the Haskell %{pkg_name} library development
+ files.
+ 
++%package -n guess-changelog
++Summary:        Guess changes between package versions from their changelog
++
++%description -n guess-changelog
++Given two versions of a package, this utility will find the changelog file in
++each respective version, determine the changes, and write an appropriate
++change log entry to stdout that can be used in an openSUSE *.changes file to
++describe the update.
++
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ 
+@@ -81,6 +90,8 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
++
++%files -n guess-changelog
+ %{_bindir}/guess-changelog
+ %{_mandir}/man1/guess-changelog.1%{?ext_man}
+ 
