@@ -32,7 +32,6 @@ forcedExectableNames =
   , "dhall-json"
   , "dhall-yaml"
   , "diagrams-haddock"
-  , "distribution-opensuse"
   , "dixi"
   , "doctest"
   , "doctest-discover"
