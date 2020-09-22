@@ -92,7 +92,7 @@ constraintList = [ "adjunctions"
                  , "base-noprelude"
                  , "base-orphans"
                  , "base-prelude"
-                 , "base16-bytestring"
+                 , "base16-bytestring < 1"      -- cabal-plan-0.7.1.0 doesn't accept the new version yet
                  , "base64-bytestring"
                  , "basement"
                  , "bencode"
