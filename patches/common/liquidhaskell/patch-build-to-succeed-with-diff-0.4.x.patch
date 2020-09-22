@@ -11,14 +11,13 @@ Index: liquidhaskell.spec
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-Diff-devel
-@@ -97,8 +99,9 @@
+@@ -97,8 +99,7 @@
  This package provides the Haskell %{name} library development files.
  
  %prep
 -%autosetup
-+%setup
- cp -p %{SOURCE1} %{name}.cabal
-+%autopatch -p1
++%autosetup -p1
+-cp -p %{SOURCE1} %{name}.cabal
  
  %build
  %ghc_lib_build

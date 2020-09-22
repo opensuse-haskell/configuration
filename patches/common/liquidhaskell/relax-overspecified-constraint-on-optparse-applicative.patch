@@ -1,11 +1,11 @@
 Index: liquidhaskell.spec
 ===================================================================
---- liquidhaskell.spec	(revision 14)
+--- liquidhaskell.spec	(revision 16)
 +++ liquidhaskell.spec	(working copy)
-@@ -102,6 +102,7 @@
- %setup -q
- cp -p %{SOURCE1} %{name}.cabal
- %autopatch -p1
+@@ -100,6 +100,7 @@
+ 
+ %prep
+ %autosetup -p1
 +cabal-tweak-dep-ver optparse-applicative '< 0.16.0.0' '< 1'
  
  %build
