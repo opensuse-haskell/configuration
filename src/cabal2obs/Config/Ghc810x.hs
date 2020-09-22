@@ -339,7 +339,7 @@ constraintList = [ "adjunctions"
                  , "optparse-simple"
                  , "pandoc"
                  , "pandoc-citeproc"
-                 , "pandoc-types"
+                 , "pandoc-types ==1.21.*"              -- pandoc-2.10.1 doesn't want the latest version yet
                  , "parallel"
                  , "parsec-class"
                  , "parsec-numbers"
