@@ -1,0 +1,12 @@
+Index: ghc-wai-app-static.spec
+===================================================================
+--- ghc-wai-app-static.spec	(revision 5)
++++ ghc-wai-app-static.spec	(working copy)
+@@ -75,6 +75,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver wai-extra '< 3.1' '< 4'
+ 
+ %build
+ %ghc_lib_build

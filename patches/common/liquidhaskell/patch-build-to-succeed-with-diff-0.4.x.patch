@@ -1,9 +1,8 @@
 Index: liquidhaskell.spec
 ===================================================================
---- liquidhaskell.spec	(revision 1)
+--- liquidhaskell.spec	(revision 12)
 +++ liquidhaskell.spec	(working copy)
-@@ -25,7 +25,9 @@
- License:        BSD-3-Clause
+@@ -26,6 +26,8 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
@@ -12,7 +11,7 @@ Index: liquidhaskell.spec
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-Diff-devel
-@@ -96,8 +98,9 @@
+@@ -97,8 +99,9 @@
  This package provides the Haskell %{name} library development files.
  
  %prep
