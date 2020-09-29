@@ -48,9 +48,8 @@ executable cabal2obs
   main-is:          cabal2obs.hs
   other-modules:    Config
                     Config.ForcedExecutables
+                    Config.Ghc90x
                     Config.Ghc810x
-                    Config.LTS14
-                    Config.LTS14.Stackage
                     Oracle
                     Oracle.Hackage
                     ParseStackageConfig
