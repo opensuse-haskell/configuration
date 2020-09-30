@@ -212,6 +212,7 @@ constraintList = [ "adjunctions"
                  , "generic-deriving"
                  , "generic-lens"
                  , "generic-lens-core"
+                 , "ghc-lib-parser == 8.10.*"   -- drop this package ASAP
                  , "ghc-lib-parser-ex"
                  , "ghc-paths"
                  , "ghcid"
