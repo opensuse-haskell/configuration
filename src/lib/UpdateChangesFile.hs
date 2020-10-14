@@ -33,7 +33,7 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
     if oldv == newv
       then if | oldrv > newrv -> die (format (fp%": unsupported downgrade from revision "%wp%" to "%wp) changesFile oldrv newrv)
               | oldrv < newrv -> liftIO (commit "Upstream has revised the Cabal build instructions on Hackage.")
-              | otherwise     -> return ()
+              | otherwise     -> pure ()
       else sh $ unless (oldv == newv) $ do
         let oldpkg = format (wp%"-"%wp) pkg oldv
             newpkg = format (wp%"-"%wp) pkg newv
@@ -51,7 +51,7 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
 
     commit :: Text -> IO ()
     commit  cl' = do
-      now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) return now'
+      now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) pure now'
       txt <- readTextFile changesFile <|> pure ""
       let cl = Text.unlines (map (\l -> if Text.null l then l else "  " <> l) (Text.lines cl'))
       writeTextFile changesFile $ format

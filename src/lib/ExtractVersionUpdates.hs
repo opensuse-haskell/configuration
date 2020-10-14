@@ -16,7 +16,7 @@ type Revision = Int
 extractVersionUpdates :: FilePath -> IO [(Version, Revision)]
 extractVersionUpdates fp = do
   buf <- Text.readFile fp
-  return [ v | l <- Text.lines buf, Just v <- [isVersionUpdate (Text.unpack l)] ]
+  pure [ v | l <- Text.lines buf, Just v <- [isVersionUpdate (Text.unpack l)] ]
 
 isVersionUpdate :: String -> Maybe (Version, Revision)
 isVersionUpdate l = foldl1 (<|>) $

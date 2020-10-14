@@ -24,7 +24,7 @@ comment :: ParsecParser ()
 comment = skipOptional (string "--" *> many (satisfy (/= '\n'))) <* (void (char '\n') <|> eof)
 
 parse :: MonadFail m => ParsecParser a -> String -> m a
-parse p x = either (fail . show) return (runParsecParser p "" (fieldLineStreamFromString x))
+parse p x = either (fail . show) pure (runParsecParser p "" (fieldLineStreamFromString x))
 
 -- input :: IO String
 -- input = readFile "/home/simons/src/opensuse-haskell/_build/cabal-lts-11.config"

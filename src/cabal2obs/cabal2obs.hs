@@ -57,7 +57,7 @@ main = do
       let forceExe = pn `elem` forcedExectables pset
           prefix | forceExe || not (hasLibrary cabal)  = ""
                  | otherwise                           = "ghc-"
-      return $ BuildName (prefix ++ unPackageName pn)
+      pure $ BuildName (prefix ++ unPackageName pn)
 
     -- Map a build directory path back to a Cabal package identifirer. This is
     -- the inverse of 'getBuildName'.
@@ -65,21 +65,21 @@ main = do
       pset <- getPackageSet psid
       let pkgs = packageSet pset
       id1 <- case Map.lookup (mkPackageName bn) pkgs of
-               Nothing -> return Nothing
+               Nothing -> pure Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
                              BuildName bn' <- getBuildName (psid, pkgid)
-                             return (if bn == bn' then Just pkgid else Nothing)
+                             pure (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
-               Nothing  -> return Nothing
+               Nothing  -> pure Nothing
                Just bn' -> case Map.lookup (mkPackageName bn') pkgs of
-                             Nothing -> return Nothing
+                             Nothing -> pure Nothing
                              Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
                                            BuildName bn'' <- getBuildName (psid, pkgid)
-                                           return (if bn == bn'' then Just pkgid else Nothing)
+                                           pure (if bn == bn'' then Just pkgid else Nothing)
       case (id1,id2) of
         (Nothing, Nothing) -> fail $ "package set " ++ show (unPackageSetId psid) ++ " contains no build called " ++ show bn
-        (Just pkgid, _)    -> return pkgid
-        (_, Just pkgid)    -> return pkgid
+        (Just pkgid, _)    -> pure pkgid
+        (_, Just pkgid)    -> pure pkgid
 
 
     -- Removed left-overs from failed attempts to apply patches.
@@ -98,7 +98,7 @@ main = do
         pset <- getPackageSet psid
         specFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
           BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
-          return (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")
+          pure (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")
         need specFiles
 
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
@@ -172,7 +172,7 @@ main = do
       ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
         BuildName bn <- getBuildName (psid, PackageIdentifier pn v)
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
-        return $ intercalate "," [ show (display pn), show (display v), show url]
+        pure $ intercalate "," [ show (display pn), show (display v), show url]
       writeFile' out (intercalate "\n" ls) -- cannot use 'unlines' because the file mustn't end with a new line
 
     buildDir </> "cabal-*.config" %> \out -> do
@@ -202,7 +202,7 @@ main = do
       need (Set.toList (Set.map tarball (Set.unions pids)))
 
 verifyLicense :: MonadFail m => String -> m ()
-verifyLicense "SUSE-Public-Domain" = return ()
+verifyLicense "SUSE-Public-Domain" = pure ()
 verifyLicense lic = case eitherParsec lic of
   Left msg -> fail ("invalid license expression " ++  lic ++ "\n" ++ msg)
   Right l -> let lic' = prettyShow (l :: License)
@@ -226,5 +226,5 @@ mkStackagePackageSetSourcefile vers deps = unlines
 
 extractPackageSetIdAndBuildName :: MonadFail m => FilePath -> m (PackageSetId, BuildName)
 extractPackageSetIdAndBuildName p
-  | [_,psid,bn,_] <- splitDirectories p = return (PackageSetId psid, BuildName bn)
+  | [_,psid,bn,_] <- splitDirectories p = pure (PackageSetId psid, BuildName bn)
   | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)

@@ -108,5 +108,5 @@ parseText' errM buf = fromMaybe (error ("invalid " ++ errM ++ ": " ++ show buf))
 parseText :: (Parsec a, MonadFail m) => String -> String -> m a
 parseText errM buf =
   maybe (fail ("invalid " ++ errM ++ ": " ++ show buf))
-        return
+       pure 
         (simpleParsec buf)
