@@ -46,9 +46,7 @@
 #   - {name: unsafePerformIO, within: []} # unsafePerformIO can only appear in no modules
 
 # Add custom hints for this project
-#
-# Will suggest replacing "wibbleMany [myvar]" with "wibbleOne myvar"
-# - error: { lhs: "Distribution.Text", rhs: wibbleOne x }
+- error: { lhs: return, rhs: pure }
 
 # Turn on hints that are off by default
 - warn: { name: Use explicit module export list }

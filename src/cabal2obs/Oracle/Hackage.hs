@@ -30,7 +30,7 @@ addHackageCache = (\f' -> f' ()) <$> newCache f
           buf <- liftIO (BSS.readFile idxFile)
           case Tar.deserialise buf of
             Nothing -> fail (idxFile <> ": could not parse Hackage tarball index")
-            Just (idx,rest) | BSS.null rest -> return (Hackage idx)
+            Just (idx,rest) | BSS.null rest -> pure (Hackage idx)
                             | otherwise     -> fail (idxFile <> ": unexpected " <> show (BSS.length rest) <> " extra bytes at the end")
 
 type instance RuleResult Constraint = Version
@@ -46,8 +46,8 @@ addConstraintResolverOracle hackage = addOracle $ \(PackageVersionConstraint nam
   es <- case Tar.lookup idx n of
           Nothing               -> fail (n <> " is not a valid Hackage package")
           Just (TarFileEntry _) -> fail ("looking up " <> show n <> " in Hackage gives unexpected file(!) result")
-          Just (TarDir es)      -> return es
-  return $ maximum [ v | (p, TarDir _) <- es, v <- [fromString p], v `withinRange` vrange ]
+          Just (TarDir es)      -> pure es
+  pure $ maximum [ v | (p, TarDir _) <- es, v <- [fromString p], v `withinRange` vrange ]
 
 -- | Helper function that maps a given 'PackageIdentifier' into the 'FilePath'
 -- of the corresponding Cabal file. The first function argument gives the
@@ -66,14 +66,14 @@ addCabalFileCache hackage = newCache $ \pid -> do
   Hackage idx <- hackage
   off <- case Tar.lookup idx (cabalFilePath pid) of
     Nothing                 -> fail (prettyShow pid <> " is not a valid Hackage package")
-    Just (TarFileEntry off) -> return off
+    Just (TarFileEntry off) -> pure off
     Just (TarDir _)         -> fail ("looking up " <> prettyShow pid <> " in Hackage gives unexpected directory(!) result")
   home <- liftIO (getAppUserDataDirectory "cabal")
   let tarball = home </> "packages/hackage.haskell.org/01-index.tar"
   need [tarball]
   e <- liftIO $ withFile tarball ReadMode (`Tar.hReadEntry` off)
   case Tar.entryContent e of
-    NormalFile buf _ -> return (BSL.toStrict buf)
+    NormalFile buf _ -> pure (BSL.toStrict buf)
     x                -> fail (prettyShow pid <> ": unexpected entry type in tarball: " <> show x)
 
 -- | Extract the @x-revision@ header added by Hackage.
@@ -91,4 +91,4 @@ hasLibrary gpd = isJust (library (packageDescription gpd)) || isJust (condLibrar
 
 parseCabalFile :: MonadFail m => PackageIdentifier -> ByteString -> m GenericPackageDescription
 parseCabalFile pid =
-  maybe (fail (prettyShow pid <> ": cannot parse cabal file")) return . parseGenericPackageDescriptionMaybe
+  maybe (fail (prettyShow pid <> ": cannot parse cabal file")) pure . parseGenericPackageDescriptionMaybe
