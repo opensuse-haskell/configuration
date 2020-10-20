@@ -1,0 +1,21 @@
+Index: ghc-generic-lens-core.spec
+===================================================================
+--- ghc-generic-lens-core.spec	(revision 2)
++++ ghc-generic-lens-core.spec	(working copy)
+@@ -24,6 +24,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch1:         https://gitlab.haskell.org/ghc/head.hackage/-/raw/master/patches/generic-lens-core-2.0.0.0.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-indexed-profunctors-devel
+ BuildRequires:  ghc-rpm-macros
+@@ -51,7 +52,7 @@
+ files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p1
+ 
+ %build
+ %ghc_lib_build

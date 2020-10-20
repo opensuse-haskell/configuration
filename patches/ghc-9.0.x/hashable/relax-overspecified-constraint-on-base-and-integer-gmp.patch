@@ -1,0 +1,13 @@
+Index: ghc-hashable.spec
+===================================================================
+--- ghc-hashable.spec	(revision 1)
++++ ghc-hashable.spec	(working copy)
+@@ -60,6 +60,8 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.15' '<5'
++cabal-tweak-dep-ver integer-gmp '< 1.1' '<2'
+ 
+ %build
+ %ifarch i586

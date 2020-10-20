@@ -1,0 +1,21 @@
+Index: alex.spec
+===================================================================
+--- alex.spec	(revision 2)
++++ alex.spec	(working copy)
+@@ -29,6 +29,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Patch1:         https://gitlab.haskell.org/ghc/head.hackage/-/raw/master/patches/alex-3.2.5.patch
+ BuildRequires:  autoconf
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+@@ -46,7 +47,7 @@
+ lex or flex for C/C++.
+ 
+ %prep
+-%autosetup
++%autosetup -p1
+ 
+ %build
+ %ghc_bin_build
