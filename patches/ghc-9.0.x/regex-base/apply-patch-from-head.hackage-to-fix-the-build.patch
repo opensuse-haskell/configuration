@@ -1,0 +1,22 @@
+Index: ghc-regex-base.spec
+===================================================================
+--- ghc-regex-base.spec	(revision 1)
++++ ghc-regex-base.spec	(working copy)
+@@ -25,6 +25,7 @@
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/1.cabal#/%{pkg_name}.cabal
++Patch1:         https://gitlab.haskell.org/ghc/head.hackage/-/raw/master/patches/regex-base-0.94.0.0.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-bytestring-devel
+@@ -61,7 +62,8 @@
+ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p1
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.15' '<5'
+ 
+ %build
