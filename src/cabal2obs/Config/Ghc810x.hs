@@ -38,7 +38,7 @@ targetPackages   = [ "alex >=3.2.5"
                    , "hlint"
                    , "ghcid"
                    , "pandoc >=2.9.2.1"
-                   , "pandoc-citeproc >=0.17"
+                   , "citeproc >=0.17"
                    , "postgresql-simple"    -- needed by emu-incident-report
                    , "SDL >=0.6.6.0"        -- Dmitriy Perlow <dap.darkness@gmail.com> needs the
                    , "SDL-image >=0.6.2.0"  -- SDL packages for games/raincat.
