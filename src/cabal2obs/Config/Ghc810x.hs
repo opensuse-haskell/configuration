@@ -371,7 +371,7 @@ constraintList = [ "adjunctions"
                  , "QuickCheck"
                  , "quickcheck-io"
                  , "random <1.2"        -- don't update yet (2020-07-07)
-                 , "recursion-schemes"
+                 , "recursion-schemes < 5.2.0"        -- cardano-binary-1.5.0 requires version = 5.1.x
                  , "refact"
                  , "reflection"
                  , "regex-applicative"
