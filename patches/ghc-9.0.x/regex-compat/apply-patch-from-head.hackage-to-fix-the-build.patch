@@ -6,7 +6,7 @@ Index: ghc-regex-compat.spec
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
  Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/1.cabal#/%{pkg_name}.cabal
-+Patch1:         https://gitlab.haskell.org/ghc/head.hackage/-/blob/master/patches/regex-compat-0.95.2.0.patch
++Patch1:         https://gitlab.haskell.org/ghc/head.hackage/-/raw/master/patches/regex-compat-0.95.2.0.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-regex-base-devel
