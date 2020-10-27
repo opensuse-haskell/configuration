@@ -448,7 +448,7 @@ constraintList = [ "adjunctions"
                  , "tagged"
                  , "tagsoup"
                  , "tar"
-                 , "tasty"
+                 , "tasty < 1.4"                -- https://github.com/ocharles/tasty-rerun/issues/20
                  , "tasty-hunit"
                  , "tasty-quickcheck"
                  , "tasty-rerun"
