@@ -540,7 +540,8 @@ constraintList = [ "adjunctions"
                  , "yesod-persistent"
                  , "yesod-static"
                  , "zip-archive"
-                 , "zlib"
+                 , "zlib"¨
+                 , "zlib-bindings"
                  ]
 
 flagList :: [(String,String)]
