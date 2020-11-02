@@ -341,7 +341,6 @@ constraintList = [ "adjunctions"
                  , "mono-traversable"
                  , "moo"
                  , "mountpoints"
-                 , "mtl"
                  , "mtl-compat"
                  , "mustache"
                  , "mwc-random < 0.15"  -- needs latest randomn, which many packages not support yet (2020-08-04)
