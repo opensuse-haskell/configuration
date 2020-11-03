@@ -1,0 +1,13 @@
+Index: ghc-cborg.spec
+===================================================================
+--- ghc-cborg.spec	(revision 1)
++++ ghc-cborg.spec	(working copy)
+@@ -76,6 +76,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.15' '< 5'
++cabal-tweak-dep-ver ghc-prim '< 0.7' '< 1'
+ 
+ %build
+ %ghc_lib_build

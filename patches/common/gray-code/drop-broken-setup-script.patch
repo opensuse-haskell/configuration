@@ -1,0 +1,12 @@
+Index: ghc-gray-code.spec
+===================================================================
+--- ghc-gray-code.spec	(revision 1)
++++ ghc-gray-code.spec	(working copy)
+@@ -51,6 +51,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++rm -v Setup.hs
+ 
+ %build
+ %ghc_lib_build

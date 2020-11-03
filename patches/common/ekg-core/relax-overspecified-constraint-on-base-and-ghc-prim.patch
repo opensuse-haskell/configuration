@@ -1,0 +1,13 @@
+Index: ghc-ekg-core.spec
+===================================================================
+--- ghc-ekg-core.spec	(revision 1)
++++ ghc-ekg-core.spec	(working copy)
+@@ -47,6 +47,8 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.15' '< 5'
++cabal-tweak-dep-ver ghc-prim '< 0.7' '< 1'
+ 
+ %build
+ %ghc_lib_build
