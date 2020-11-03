@@ -10,8 +10,11 @@ import Types
 import MyCabal
 
 import Control.Monad
+import qualified Data.List as List
+import qualified Data.Map as Map
 import Data.Map.Strict ( fromList, toList )
 import Data.Maybe
+import qualified Data.Set as Set
 import Development.Shake
 
 ghc90x :: Action PackageSetConfig
@@ -23,7 +26,7 @@ ghc90x = do
   packageSet <- fromList <$>
                   forM (toList constraintList) (\(pn,vr) ->
                     (,) pn <$> askOracle (PackageVersionConstraint pn vr))
-  pure (PackageSetConfig {..})
+  checkConsistency (PackageSetConfig {..})
 
 {-
 targetPackages :: ConstraintSet
@@ -687,3 +690,10 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "unix-2.7.2.2"
                   , "xhtml-3000.2.2.1"
                   ]
+
+checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
+checkConsistency pset@PackageSetConfig {..} = do
+  let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
+  unless (Set.null corePackagesInPackageSet) $
+    fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
+  return pset
