@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module MyCabal
-  ( Version, VersionRange, withinRange, noVersion
+  ( Version, VersionRange, withinRange, noVersion, anyVersion, version0
   , CompilerId(..), Platform(..), OS(..), Arch(..), AbiTag(..), unknownCompilerInfo
   , prettyShow, display
   , PackageName, unPackageName, mkPackageName
@@ -12,7 +12,8 @@ module MyCabal
   , ComponentRequestedSpec(..)
   , FlagName, FlagAssignment, mkFlagAssignment, lowercase, mkFlagName
   , GenericPackageDescription(..), parseGenericPackageDescriptionMaybe, finalizePD
-  , PackageDescription(..)
+  , PackageDescription(..), Library(..), LibraryName(..)
+  , UnqualComponentName, mkUnqualComponentName, unUnqualComponentName
   , License
     -- Parsec
   , Parsec(..), simpleParsec, ParsecParser, simpleParse, CharParsing, skipOptional

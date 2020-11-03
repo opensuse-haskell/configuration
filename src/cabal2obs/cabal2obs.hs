@@ -149,7 +149,7 @@ main = do
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
-      let lookupPackageSet d = Map.member (depPkgName d) (packageSet pset `Map.union` corePackages pset)
+      let lookupPackageSet d = Map.member (depPkgName d) (packageSet pset `Map.union` corePackages pset `Map.union` localLibraries cabal)
       case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
@@ -228,3 +228,9 @@ extractPackageSetIdAndBuildName :: MonadFail m => FilePath -> m (PackageSetId, B
 extractPackageSetIdAndBuildName p
   | [_,psid,bn,_] <- splitDirectories p = pure (PackageSetId psid, BuildName bn)
   | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)
+
+localLibraries :: GenericPackageDescription -> PackageSet
+localLibraries gpd = Map.fromList (libs1 ++ libs2)
+  where
+    libs1 = [ (mkPackageName (unUnqualComponentName lname), version0) | lib <- (subLibraries (packageDescription gpd)), LSubLibName lname <- [libName lib] ]
+    libs2 = [ (mkPackageName (unUnqualComponentName lname), version0) | (lname, _) <- condSubLibraries gpd ]
