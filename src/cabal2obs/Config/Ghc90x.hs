@@ -696,4 +696,4 @@ checkConsistency pset@PackageSetConfig {..} = do
   let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
   unless (Set.null corePackagesInPackageSet) $
     fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-  return pset
+  pure pset

@@ -232,5 +232,5 @@ extractPackageSetIdAndBuildName p
 localLibraries :: GenericPackageDescription -> PackageSet
 localLibraries gpd = Map.fromList (libs1 ++ libs2)
   where
-    libs1 = [ (mkPackageName (unUnqualComponentName lname), version0) | lib <- (subLibraries (packageDescription gpd)), LSubLibName lname <- [libName lib] ]
+    libs1 = [ (mkPackageName (unUnqualComponentName lname), version0) | lib <- subLibraries (packageDescription gpd), LSubLibName lname <- [libName lib] ]
     libs2 = [ (mkPackageName (unUnqualComponentName lname), version0) | (lname, _) <- condSubLibraries gpd ]
