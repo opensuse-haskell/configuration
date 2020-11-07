@@ -388,7 +388,7 @@ constraintList = [ "abstract-deque"
                  , "pem"
                  , "persistent"
                  , "persistent-sqlite"
-                 , "persistent-template < 2.8.3.0"      -- https://github.com/yesodweb/persistent/issues/1101
+                 , "persistent-template"
                  , "pipes"
                  , "pipes-safe"
                  , "polyparse"
