@@ -1,0 +1,21 @@
+Index: ghc-generic-lens.spec
+===================================================================
+--- ghc-generic-lens.spec	(revision 1)
++++ ghc-generic-lens.spec	(working copy)
+@@ -25,6 +25,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch0:         generic-lens-2.0.0.0.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-generic-lens-core-devel
+ BuildRequires:  ghc-profunctors-devel
+@@ -57,7 +58,7 @@
+ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -p1 -n %{pkg_name}-%{version}
+ 
+ %build
+ %ghc_lib_build
