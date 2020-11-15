@@ -1,0 +1,12 @@
+Index: ghc-time-compat.spec
+===================================================================
+--- ghc-time-compat.spec	(revision 2)
++++ ghc-time-compat.spec	(working copy)
+@@ -63,6 +63,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '<5'
+ 
+ %build
+ %ghc_lib_build
