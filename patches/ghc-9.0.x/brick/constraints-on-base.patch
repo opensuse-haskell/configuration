@@ -1,0 +1,12 @@
+Index: ghc-brick.spec
+===================================================================
+--- ghc-brick.spec	(revision 5)
++++ ghc-brick.spec	(working copy)
+@@ -85,6 +85,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '4.15' '4.15.0.0'
+ 
+ %build
+ %ghc_lib_build
