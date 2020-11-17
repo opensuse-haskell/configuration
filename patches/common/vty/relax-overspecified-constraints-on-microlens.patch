@@ -1,0 +1,12 @@
+Index: ghc-vty.spec
+===================================================================
+--- ghc-vty.spec	(revision 7)
++++ ghc-vty.spec	(working copy)
+@@ -92,6 +92,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver microlens '< 0.4.12' '< 0.5'
+ 
+ %build
+ %ghc_lib_build
