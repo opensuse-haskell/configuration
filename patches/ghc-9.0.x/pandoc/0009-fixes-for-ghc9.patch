@@ -1,6 +1,6 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 11)
+--- pandoc.spec	(revision 16)
 +++ pandoc.spec	(working copy)
 @@ -25,6 +25,7 @@
  License:        GPL-2.0-or-later
@@ -10,12 +10,14 @@ Index: pandoc.spec
  BuildRequires:  chrpath
  BuildRequires:  fdupes
  BuildRequires:  ghc-Cabal-devel
-@@ -141,7 +142,7 @@
+@@ -141,8 +142,9 @@
  This package provides the Haskell %{name} library development files.
  
  %prep
 -%autosetup
 +%autosetup -p1
- cabal-tweak-dep-ver base64-bytestring '< 1.2' '< 2'
- cabal-tweak-dep-ver random '< 1.2' '< 1.3'
+ cabal-tweak-dep-ver base64-bytestring '< 1.2' '< 1.3'
++cabal-tweak-dep-ver random '< 1.2' '< 1.3'
  
+ %build
+ %ghc_lib_build

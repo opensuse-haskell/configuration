@@ -1,12 +1,12 @@
 Index: pandoc.spec
 ===================================================================
---- pandoc.spec	(revision 15)
+--- pandoc.spec	(revision 27)
 +++ pandoc.spec	(working copy)
-@@ -140,6 +140,7 @@
+@@ -142,6 +142,7 @@
  
  %prep
  %autosetup
-+cabal-tweak-dep-ver base64-bytestring '< 1.2' '< 2'
++cabal-tweak-dep-ver base64-bytestring '< 1.2' '< 1.3'
  
  %build
  %ghc_lib_build
