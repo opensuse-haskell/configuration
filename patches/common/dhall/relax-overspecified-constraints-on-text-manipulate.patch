@@ -1,0 +1,12 @@
+Index: ghc-dhall.spec
+===================================================================
+--- ghc-dhall.spec	(revision 21)
++++ ghc-dhall.spec	(working copy)
+@@ -118,6 +118,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver text-manipulate '< 0.3' '< 0.4'
+ 
+ %build
+ %ghc_lib_build
