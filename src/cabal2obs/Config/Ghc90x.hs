@@ -236,7 +236,6 @@ constraintList = [ "abstract-deque"
                  , "generic-lens"
                  , "generic-lens-core"
                  , "ghc-byteorder"
-                 , "ghc-core-smallstep"
                  , "ghc-lib-parser == 8.10.*"   -- drop this package ASAP
                  , "ghc-lib-parser-ex"
                  , "ghc-paths"
