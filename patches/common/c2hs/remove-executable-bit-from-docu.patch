@@ -1,0 +1,12 @@
+Index: c2hs.spec
+===================================================================
+--- c2hs.spec	(revision 8)
++++ c2hs.spec	(working copy)
+@@ -54,6 +54,7 @@
+ %prep
+ %autosetup
+ cabal-tweak-dep-ver language-c '< 0.9' '< 1'
++chmod a-x {README,AUTHORS,ChangeLog,ChangeLog.old}
+ 
+ %build
+ %ghc_bin_build
