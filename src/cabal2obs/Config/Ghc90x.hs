@@ -101,7 +101,7 @@ constraintList = [ "abstract-deque"
                  , "base-noprelude"
                  , "base-orphans"
                  , "base-prelude"
-                 , "base16-bytestring < 1"      -- cabal-plan-0.7.1.0 doesn't accept the new version yet
+                 , "base16-bytestring"
                  , "base58-bytestring"
                  , "base64"
                  , "base64-bytestring"
