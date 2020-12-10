@@ -1,0 +1,12 @@
+Index: ghc-aws.spec
+===================================================================
+--- ghc-aws.spec	(revision 5)
++++ ghc-aws.spec	(working copy)
+@@ -94,6 +94,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cabal-tweak-dep-ver base64-bytestring '== 1.0.*' '< 2'
++cabal-tweak-dep-ver base16-bytestring '== 0.1.*' '< 2'
+ 
+ %build
+ %ghc_lib_build
