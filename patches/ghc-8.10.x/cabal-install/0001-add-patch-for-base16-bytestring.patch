@@ -1,0 +1,12 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 13)
++++ cabal-install.spec	(working copy)
+@@ -24,6 +24,7 @@
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Patch01:        ghc-8.10-support-for-3.2.patch
++Patch02:        base16-bytestring.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-array-devel
