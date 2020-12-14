@@ -1,0 +1,12 @@
+Index: ghc-Unique.spec
+===================================================================
+--- ghc-Unique.spec	(revision 1)
++++ ghc-Unique.spec	(working copy)
+@@ -52,6 +52,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<=4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
