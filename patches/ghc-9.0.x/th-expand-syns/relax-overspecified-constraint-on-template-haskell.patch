@@ -1,0 +1,12 @@
+Index: ghc-th-expand-syns.spec
+===================================================================
+--- ghc-th-expand-syns.spec	(revision 1)
++++ ghc-th-expand-syns.spec	(working copy)
+@@ -46,6 +46,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver template-haskell '< 2.17' '< 2.18'
+ 
+ %build
+ %ghc_lib_build
