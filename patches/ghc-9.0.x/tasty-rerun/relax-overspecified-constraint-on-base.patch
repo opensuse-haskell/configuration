@@ -1,0 +1,12 @@
+Index: ghc-tasty-rerun.spec
+===================================================================
+--- ghc-tasty-rerun.spec	(revision 2)
++++ ghc-tasty-rerun.spec	(working copy)
+@@ -53,6 +53,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
