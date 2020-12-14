@@ -1,0 +1,13 @@
+Index: ghc-typerep-map.spec
+===================================================================
+--- ghc-typerep-map.spec	(revision 1)
++++ ghc-typerep-map.spec	(working copy)
+@@ -62,6 +62,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.15' '< 5'
++cabal-tweak-dep-ver ghc-prim '< 0.7' '< 0.8'
+ 
+ %build
+ %ghc_lib_build_without_haddock
