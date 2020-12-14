@@ -1,0 +1,12 @@
+Index: ghc-dbus.spec
+===================================================================
+--- ghc-dbus.spec	(revision 1)
++++ ghc-dbus.spec	(working copy)
+@@ -102,6 +102,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver template-haskell '<2.17.0.0' '< 2.18.0.0'
+ 
+ %build
+ %ghc_lib_build

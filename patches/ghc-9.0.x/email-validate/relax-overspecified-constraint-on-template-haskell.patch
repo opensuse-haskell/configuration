@@ -1,0 +1,12 @@
+Index: ghc-email-validate.spec
+===================================================================
+--- ghc-email-validate.spec	(revision 3)
++++ ghc-email-validate.spec	(working copy)
+@@ -52,6 +52,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ sed -i 's/\r//' LICENSE
++cabal-tweak-dep-ver template-haskell '< 2.17' '< 2.18'
+ 
+ %build
+ %ghc_lib_build

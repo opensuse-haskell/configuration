@@ -1,0 +1,13 @@
+Index: ghc-postgresql-simple.spec
+===================================================================
+--- ghc-postgresql-simple.spec	(revision 2)
++++ ghc-postgresql-simple.spec	(working copy)
+@@ -70,6 +70,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '< 5'
++cabal-tweak-dep-ver template-haskell '<2.17' '< 2.18'
+ 
+ %build
+ %ghc_lib_build
