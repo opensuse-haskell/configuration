@@ -1,0 +1,12 @@
+Index: ghc-show-combinators.spec
+===================================================================
+--- ghc-show-combinators.spec	(revision 1)
++++ ghc-show-combinators.spec	(working copy)
+@@ -45,6 +45,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
