@@ -1,0 +1,12 @@
+Index: ghc-primitive.spec
+===================================================================
+--- ghc-primitive.spec	(revision 3)
++++ ghc-primitive.spec	(working copy)
+@@ -57,6 +57,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
