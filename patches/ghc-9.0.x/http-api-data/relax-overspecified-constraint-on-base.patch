@@ -1,0 +1,12 @@
+Index: ghc-http-api-data.spec
+===================================================================
+--- ghc-http-api-data.spec	(revision 1)
++++ ghc-http-api-data.spec	(working copy)
+@@ -67,6 +67,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
