@@ -1,0 +1,12 @@
+Index: ghc-bech32.spec
+===================================================================
+--- ghc-bech32.spec	(revision 1)
++++ ghc-bech32.spec	(working copy)
+@@ -60,6 +60,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '< 4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
