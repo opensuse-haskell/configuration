@@ -1,0 +1,13 @@
+Index: ghc-protolude.spec
+===================================================================
+--- ghc-protolude.spec	(revision 1)
++++ ghc-protolude.spec	(working copy)
+@@ -54,6 +54,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '< 5'
++cabal-tweak-dep-ver ghc-prim '<0.7' '< 0.8'
+ 
+ %build
+ %ghc_lib_build
