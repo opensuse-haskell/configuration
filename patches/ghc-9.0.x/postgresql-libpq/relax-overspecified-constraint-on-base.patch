@@ -1,0 +1,12 @@
+Index: ghc-postgresql-libpq.spec
+===================================================================
+--- ghc-postgresql-libpq.spec	(revision 3)
++++ ghc-postgresql-libpq.spec	(working copy)
+@@ -51,6 +51,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build
