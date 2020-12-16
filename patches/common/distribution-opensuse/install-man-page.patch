@@ -2,15 +2,15 @@ Index: ghc-distribution-opensuse.spec
 ===================================================================
 --- ghc-distribution-opensuse.spec	(revision 4)
 +++ ghc-distribution-opensuse.spec	(working copy)
-@@ -44,6 +44,7 @@
+@@ -43,6 +43,7 @@
  BuildRequires:  ghc-text-devel
  BuildRequires:  ghc-time-devel
  BuildRequires:  ghc-turtle-devel
 +BuildRequires:  pandoc
- 
- %description
- This library is a loose collection of types, functions, and tools that users
-@@ -67,10 +68,12 @@
+ # GHC dont support i586
+ %ifarch %{ix86}
+ ExclusiveArch:  i586 i686
+@@ -80,10 +81,12 @@
  
  %build
  %ghc_lib_build
@@ -23,12 +23,11 @@ Index: ghc-distribution-opensuse.spec
  
  %post devel
  %ghc_pkg_recache
-@@ -81,6 +84,7 @@
- %files -f %{name}.files
- %license LICENSE
+@@ -96,6 +99,7 @@
+ 
+ %files -n guess-changelog
  %{_bindir}/guess-changelog
 +%{_mandir}/man1/guess-changelog.1%{?ext_man}
  
  %files devel -f %{name}-devel.files
  
-

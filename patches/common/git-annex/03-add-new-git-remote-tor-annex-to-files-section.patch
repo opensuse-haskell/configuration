@@ -1,8 +1,8 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 11)
+--- git-annex.spec	(revision 51)
 +++ git-annex.spec	(working copy)
-@@ -191,6 +191,7 @@
+@@ -196,6 +196,7 @@
  %doc CHANGELOG NEWS README
  %{_bindir}/%{name}
  %{_bindir}/%{name}-shell
@@ -10,7 +10,7 @@ Index: git-annex.spec
  %dir %{_datadir}/icons/hicolor
  %dir %{_datadir}/icons/hicolor/16x16
  %dir %{_datadir}/icons/hicolor/16x16/apps
-@@ -198,6 +199,7 @@
+@@ -203,6 +204,7 @@
  %dir %{_datadir}/icons/hicolor/scalable/apps
  %{_sysconfdir}/xdg/autostart/git-annex.desktop
  %{_mandir}/man1/git-annex*.1%{?ext_man}

@@ -1,8 +1,8 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 18)
+--- git-annex.spec	(revision 56)
 +++ git-annex.spec	(working copy)
-@@ -181,6 +178,8 @@
+@@ -185,6 +185,8 @@
  %install
  %ghc_bin_install
  make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop

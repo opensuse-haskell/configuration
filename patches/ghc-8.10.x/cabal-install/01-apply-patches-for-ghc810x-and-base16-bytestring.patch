@@ -1,12 +1,22 @@
 Index: cabal-install.spec
 ===================================================================
---- cabal-install.spec	(revision 13)
+--- cabal-install.spec	(revision 17)
 +++ cabal-install.spec	(working copy)
-@@ -24,6 +24,7 @@
+@@ -23,6 +23,8 @@
+ License:        BSD-3-Clause
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Patch01:        ghc-8.10-support-for-3.2.patch
++Patch01:        ghc-8.10-support-for-3.2.patch
 +Patch02:        base16-bytestring.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-HTTP-devel
  BuildRequires:  ghc-array-devel
+@@ -69,7 +71,7 @@
+ installation of Haskell libraries and programs.
+ 
+ %prep
+-%autosetup
++%autosetup -p2
+ 
+ %build
+ %ghc_bin_build

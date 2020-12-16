@@ -1,8 +1,8 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 10)
+--- happy.spec	(revision 16)
 +++ happy.spec	(working copy)
-@@ -46,6 +46,7 @@
+@@ -51,6 +51,7 @@
  
  %prep
  %autosetup
@@ -10,4 +10,3 @@ Index: happy.spec
  
  %build
  %ghc_bin_build
-

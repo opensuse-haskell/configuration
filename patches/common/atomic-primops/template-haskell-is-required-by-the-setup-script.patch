@@ -1,11 +1,12 @@
 Index: ghc-atomic-primops.spec
 ===================================================================
---- ghc-atomic-primops.spec	(revision 1)
+--- ghc-atomic-primops.spec	(revision 2)
 +++ ghc-atomic-primops.spec	(working copy)
-@@ -31,4 +31,5 @@
+@@ -27,6 +27,7 @@
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-primitive-devel
  BuildRequires:  ghc-rpm-macros
 +BuildRequires:  ghc-template-haskell-devel
- 
- %description
- After GHC 7.4 a new `casMutVar#` primop became available, but it's difficult to
-
+ # GHC dont support i586
+ %ifarch %{ix86}
+ ExclusiveArch:  i586 i686

@@ -1,15 +1,14 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 8)
+--- xmonad.spec	(revision 10)
 +++ xmonad.spec	(working copy)
-@@ -46,6 +46,9 @@
+@@ -45,6 +45,9 @@
  BuildRequires:  pkgconfig(xinerama)
  Suggests:       ghc-xmonad-contrib-devel
  Suggests:       ghc-xmonad-devel
 +# windowmanager is a generic provides for every WM - there are things (like Xvnc)
 +# That rely on the prsence of 'a WM', but do not care which one it is
 +Provides:       windowmanager
- %if %{with tests}
- BuildRequires:  ghc-QuickCheck-devel
- %endif
-
+ # GHC dont support i586
+ %ifarch %{ix86}
+ ExclusiveArch:  i586 i686

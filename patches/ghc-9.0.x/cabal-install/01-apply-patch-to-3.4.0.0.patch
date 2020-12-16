@@ -1,6 +1,6 @@
 Index: cabal-install.spec
 ===================================================================
---- cabal-install.spec	(revision 11)
+--- cabal-install.spec	(revision 14)
 +++ cabal-install.spec	(working copy)
 @@ -17,12 +17,13 @@
  
@@ -18,22 +18,22 @@ Index: cabal-install.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-HTTP-devel
  BuildRequires:  ghc-array-devel
-@@ -56,6 +57,8 @@
- BuildRequires:  ghc-transformers-devel
- BuildRequires:  ghc-unix-devel
- BuildRequires:  ghc-zlib-devel
+@@ -47,6 +48,8 @@
+ BuildRequires:  ghc-pretty-devel
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-random-devel
 +BuildRequires:  ghc-regex-base-devel
 +BuildRequires:  ghc-regex-posix-devel
- 
- %description
- The 'cabal' command-line program simplifies the process of managing Haskell
-@@ -63,7 +66,8 @@
+ BuildRequires:  ghc-resolv-devel
+ BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-stm-devel
+@@ -69,7 +72,8 @@
  installation of Haskell libraries and programs.
  
  %prep
 -%autosetup
 +%autosetup -p1 -n cabal-install-3.2.0.0
-+cabal-tweak-dep-ver base '< 4.15' '<5'
++cabal-tweak-dep-ver base '< 4.15' '< 5'
  
  %build
  %ghc_bin_build

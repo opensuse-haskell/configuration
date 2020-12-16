@@ -1,27 +1,32 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 8)
+--- happy.spec	(revision 14)
 +++ happy.spec	(working copy)
-@@ -30,6 +30,11 @@
- BuildRequires:  ghc-containers-devel
- BuildRequires:  ghc-mtl-devel
- BuildRequires:  ghc-rpm-macros
+@@ -24,11 +24,16 @@
+ License:        BSD-2-Clause
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
 +BuildRequires:  autoconf
 +BuildRequires:  docbook-dtd
 +BuildRequires:  docbook-xsl-stylesheets
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-rpm-macros
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
- %if %{with tests}
- BuildRequires:  ghc-process-devel
- %endif
-@@ -44,9 +49,14 @@
+ # GHC dont support i586
+ %ifarch %{ix86}
+ ExclusiveArch:  i586 i686
+@@ -49,9 +54,14 @@
  
  %build
  %ghc_bin_build
 +cd doc
 +autoreconf
-+./configure
-+make %{?_smp_mflags} html
++%configure
++%make_build html
  
  %install
  %ghc_bin_install
@@ -29,12 +34,11 @@ Index: happy.spec
  
  %check
  %cabal_test
-@@ -56,6 +66,7 @@
+@@ -61,6 +71,7 @@
  %doc CHANGES README.md TODO doc examples
  %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}
-+%{_mandir}/man1/*
++{_mandir}/man1/*
  %{_datadir}/%{name}-%{version}/GLR_Base
  %{_datadir}/%{name}-%{version}/GLR_Lib
  %{_datadir}/%{name}-%{version}/GLR_Lib-ghc
-

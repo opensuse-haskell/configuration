@@ -1,9 +1,9 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 4)
+--- git-annex.spec	(revision 55)
 +++ git-annex.spec	(working copy)
-@@ -165,6 +165,9 @@
- %build
+@@ -179,6 +179,9 @@
+ %define cabal_configure_options -ftestsuite
  %ghc_bin_build
  
 +%check
@@ -11,5 +11,4 @@ Index: git-annex.spec
 +
  %install
  %ghc_bin_install
- make DESTDIR=%{buildroot} BUILDER=./Setup install-misc install-mans
-
+ make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop
