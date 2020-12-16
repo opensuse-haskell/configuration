@@ -38,7 +38,7 @@ Index: happy.spec
  %doc CHANGES README.md TODO doc examples
  %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}
-+{_mandir}/man1/*
++%{_mandir}/man1/*
  %{_datadir}/%{name}-%{version}/GLR_Base
  %{_datadir}/%{name}-%{version}/GLR_Lib
  %{_datadir}/%{name}-%{version}/GLR_Lib-ghc
