@@ -1,6 +1,6 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 14)
+--- happy.spec	(revision 20)
 +++ happy.spec	(working copy)
 @@ -24,11 +24,16 @@
  License:        BSD-2-Clause
@@ -16,10 +16,10 @@ Index: happy.spec
  BuildRequires:  ghc-rpm-macros
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
- # GHC dont support i586
- %ifarch %{ix86}
- ExclusiveArch:  i586 i686
-@@ -49,9 +54,14 @@
+ ExcludeArch:    %{ix86}
+ %if %{with tests}
+ BuildRequires:  ghc-process-devel
+@@ -44,9 +49,14 @@
  
  %build
  %ghc_bin_build
@@ -34,7 +34,7 @@ Index: happy.spec
  
  %check
  %cabal_test
-@@ -61,6 +71,7 @@
+@@ -56,6 +66,7 @@
  %doc CHANGES README.md TODO doc examples
  %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}

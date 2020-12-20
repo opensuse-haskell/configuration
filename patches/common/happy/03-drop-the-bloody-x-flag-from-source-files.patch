@@ -1,12 +1,12 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 16)
+--- happy.spec	(revision 22)
 +++ happy.spec	(working copy)
-@@ -51,6 +51,7 @@
+@@ -46,6 +46,7 @@
  
  %prep
  %autosetup
-+find . -type f -exec chmod -x {} +
++find . -type f -exec chmod -x {} +}
  
  %build
  %ghc_bin_build

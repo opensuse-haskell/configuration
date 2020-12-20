@@ -1,6 +1,6 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 9)
+--- xmonad.spec	(revision 13)
 +++ xmonad.spec	(working copy)
 @@ -25,6 +25,7 @@
  License:        BSD-3-Clause
@@ -19,10 +19,10 @@ Index: xmonad.spec
 +BuildRequires:  pkgconfig(xinerama)
 +Suggests:       ghc-xmonad-contrib-devel
 +Suggests:       ghc-xmonad-devel
- # GHC dont support i586
- %ifarch %{ix86}
- ExclusiveArch:  i586 i686
-@@ -83,6 +89,11 @@
+ ExcludeArch:    %{ix86}
+ %if %{with tests}
+ BuildRequires:  ghc-QuickCheck-devel
+@@ -78,6 +85,11 @@
  
  %install
  %ghc_lib_install
@@ -34,7 +34,7 @@ Index: xmonad.spec
  %ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
-@@ -98,6 +109,8 @@
+@@ -93,6 +105,8 @@
  %license LICENSE
  %doc CHANGES.md README.md
  %{_bindir}/%{name}

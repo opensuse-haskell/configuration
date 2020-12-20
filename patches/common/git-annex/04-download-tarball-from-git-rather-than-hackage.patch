@@ -1,6 +1,6 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 54)
+--- git-annex.spec	(revision 63)
 +++ git-annex.spec	(working copy)
 @@ -22,7 +22,7 @@
  Summary:        Manage files with git, without checking their contents into git

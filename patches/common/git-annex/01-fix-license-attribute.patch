@@ -1,13 +1,13 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 4)
+--- git-annex.spec	(revision 60)
 +++ git-annex.spec	(working copy)
 @@ -20,7 +20,7 @@
- Version:        8.20200522
+ Version:        8.20201127
  Release:        0
  Summary:        Manage files with git, without checking their contents into git
 -License:        AGPL-3.0-or-later
 +License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-2-Clause AND MIT AND GPL-2.0-only
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- BuildRequires:  curl
+ BuildRequires:  ghc-Cabal-devel

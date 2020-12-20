@@ -1,16 +1,16 @@
 Index: ShellCheck.spec
 ===================================================================
---- ShellCheck.spec	(revision 12)
+--- ShellCheck.spec	(revision 16)
 +++ ShellCheck.spec	(working copy)
 @@ -41,6 +41,7 @@
  BuildRequires:  ghc-process-devel
  BuildRequires:  ghc-regex-tdfa-devel
  BuildRequires:  ghc-rpm-macros
 +BuildRequires:  pandoc
- # GHC dont support i586
- %ifarch %{ix86}
- ExclusiveArch:  i586 i686
-@@ -85,6 +86,8 @@
+ ExcludeArch:    %{ix86}
+ 
+ %description
+@@ -80,6 +81,8 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
@@ -19,11 +19,11 @@ Index: ShellCheck.spec
  
  %check
  %cabal_test
-@@ -99,6 +102,7 @@
+@@ -94,6 +97,7 @@
  %license LICENSE
  %doc README.md
  %{_bindir}/shellcheck
-+%{_mandir}/man1/shellcheck.1*
++%{_mandir}/man1/shellcheck.1%{?ext_man}
  
  %files -n ghc-%{name} -f ghc-%{name}.files
  %license LICENSE

@@ -1,24 +1,25 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 45)
+--- git-annex.spec	(revision 61)
 +++ git-annex.spec	(working copy)
-@@ -120,12 +120,29 @@
+@@ -23,6 +23,9 @@
+ License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-2-Clause AND MIT AND GPL-2.0-only
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++BuildRequires:  bash-completion
++BuildRequires:  chrpath
++BuildRequires:  curl
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-DAV-devel
+ BuildRequires:  ghc-IfElse-devel
+@@ -120,6 +123,20 @@
  BuildRequires:  ghc-yesod-devel
  BuildRequires:  ghc-yesod-form-devel
  BuildRequires:  ghc-yesod-static-devel
 +BuildRequires:  git-core
-+BuildRequires:  rsync
-+BuildRequires:  curl
 +BuildRequires:  gpg2
 +BuildRequires:  lsof
-+BuildRequires:  bash-completion
-+BuildRequires:  chrpath
- # GHC dont support i586
- %ifarch %{ix86}
- ExclusiveArch:  i586 i686
- ExclusiveArch:  i686
- %{expand:%%global optflags %(echo "%{optflags}"|sed -e s/i586/i686/) -march=i686 -mtune=generic}
- %endif
++BuildRequires:  rsync
 +Requires(post): desktop-file-utils
 +Requires(post): hicolor-icon-theme
 +Requires(postun): desktop-file-utils
@@ -29,39 +30,30 @@ Index: git-annex.spec
 +Recommends:     rsync
 +Recommends:     ssh
 +Suggests:       %{name}-bash-completion
+ ExcludeArch:    %{ix86}
  
  %description
- Git-annex allows managing files with git, without checking the file contents
-@@ -145,6 +162,16 @@
+@@ -140,6 +157,15 @@
  transferring them to other computers. The git-annex webapp makes it easy to set
  up and use git-annex this way.
  
 +%package bash-completion
 +Summary:        Bash completion for git-annex
-+Group:          System/Shells
 +Requires:       %{name} = %{version}
 +Requires:       bash-completion
-+Supplements:    packageand(%{name}:bash-completion)
++Supplements:    (%{name} and bash-completion)
 +
 +%description bash-completion
-+Optional dependency offering bash completion for git-annex})}}
++Optional dependency offering bash completion for git-annex
 +
  %prep
  %autosetup
  
-@@ -154,10 +181,33 @@
+@@ -149,10 +175,25 @@
  
  %install
  %ghc_bin_install
 +make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop
-+
-+%post
-+%desktop_database_post
-+%icon_theme_cache_post
-+
-+%postun
-+%desktop_database_postun
-+%icon_theme_cache_postun
  
  %files
  %license COPYRIGHT
@@ -75,7 +67,7 @@ Index: git-annex.spec
 +%dir %{_datadir}/icons/hicolor/scalable
 +%dir %{_datadir}/icons/hicolor/scalable/apps
 +%{_sysconfdir}/xdg/autostart/git-annex.desktop
-+%{_mandir}/man1/git-annex*.1%{ext_man}
++%{_mandir}/man1/git-annex*.1%{?ext_man}
 +%{_datadir}/applications/git-annex.desktop
 +%{_datadir}/icons/hicolor/16x16/apps/git-annex.png
 +%{_datadir}/icons/hicolor/scalable/apps/git-annex.svg

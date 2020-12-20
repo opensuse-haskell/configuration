@@ -1,12 +1,12 @@
 Index: ghc-atomic-primops.spec
 ===================================================================
---- ghc-atomic-primops.spec	(revision 2)
+--- ghc-atomic-primops.spec	(revision 5)
 +++ ghc-atomic-primops.spec	(working copy)
 @@ -27,6 +27,7 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-primitive-devel
  BuildRequires:  ghc-rpm-macros
-+BuildRequires:  ghc-template-haskell-devel
- # GHC dont support i586
- %ifarch %{ix86}
- ExclusiveArch:  i586 i686
++BuildRequires:  ghc-template-haskell
+ ExcludeArch:    %{ix86}
+ 
+ %description

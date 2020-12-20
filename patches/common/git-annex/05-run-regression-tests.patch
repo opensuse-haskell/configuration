@@ -1,13 +1,13 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 55)
+--- git-annex.spec	(revision 64)
 +++ git-annex.spec	(working copy)
-@@ -179,6 +179,9 @@
+@@ -173,6 +173,9 @@
  %define cabal_configure_options -ftestsuite
  %ghc_bin_build
  
 +%check
-+make %{?_smp_mflags} DESTDIR=%{buildroot} BUILDER=./Setup test
++%make_build DESTDIR=%{buildroot} BUILDER=./Setup test
 +
  %install
  %ghc_bin_install
