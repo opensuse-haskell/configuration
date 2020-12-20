@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc810x :: Action PackageSetConfig
 ghc810x = do
-  let compiler = "ghc-8.10.2"
+  let compiler = "ghc-8.10.3"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
@@ -706,25 +706,25 @@ ghcCorePackages :: PackageSet
 ghcCorePackages = [ "array-0.5.4.0"
                   , "base-4.14.1.0"
                   , "binary-0.8.8.0"
-                  , "bytestring-0.10.10.0"
-                  , "Cabal-3.2.0.0"
+                  , "bytestring-0.10.12.0"
+                  , "Cabal-3.2.1.0"
                   , "containers-0.6.2.1"
                   , "deepseq-1.4.4.0"
                   , "directory-1.3.6.0"
                   , "exceptions-0.10.4"
                   , "filepath-1.4.2.1"
-                  , "ghc-8.10.2"
-                  , "ghc-boot-8.10.2"
-                  , "ghc-boot-th-8.10.2"
+                  , "ghc-8.10.3"
+                  , "ghc-boot-8.10.3"
+                  , "ghc-boot-th-8.10.3"
                   , "ghc-compact-0.1.0.0"
-                  , "ghc-heap-8.10.2"
+                  , "ghc-heap-8.10.3"
                   , "ghc-prim-0.6.1"
-                  , "ghci-8.10.1"
+                  , "ghci-8.10.3"
                   , "haskeline-0.8.0.0"
                   , "hpc-0.6.1.0"
                   , "hsc2hs-0.68.7"
                   , "integer-gmp-1.0.3.0"
-                  , "libiserv-8.10.2"
+                  , "libiserv-8.10.3"
                   , "mtl-2.2.2"
                   , "parsec-3.1.14.0"
                   , "pretty-1.1.3.6"
