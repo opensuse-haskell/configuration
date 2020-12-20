@@ -512,6 +512,7 @@ constraintList = [ "abstract-deque"
                  , "tagged"
                  , "tagsoup"
                  , "tar"
+                 , "tar-conduit"
                  , "tasty < 1.4"                -- https://github.com/ocharles/tasty-rerun/issues/20
                  , "tasty-hunit"
                  , "tasty-quickcheck"
