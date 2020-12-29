@@ -6,7 +6,7 @@ Index: happy.spec
  
  %prep
  %autosetup
-+find . -type f -exec chmod -x {} +}
++find . -type f -exec chmod -x {} +
  
  %build
  %ghc_bin_build
