@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc810x :: Action PackageSetConfig
 ghc810x = do
-  let compiler = "ghc-8.10.3"
+  let compiler = "ghc-8.10.4"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
@@ -716,11 +716,11 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "filepath-1.4.2.1"
                   , "ghc-8.10.3"
                   , "ghc-boot-8.10.3"
-                  , "ghc-boot-th-8.10.3"
+                  , "ghc-boot-th-8.10.4"
                   , "ghc-compact-0.1.0.0"
-                  , "ghc-heap-8.10.3"
+                  , "ghc-heap-8.10.4"
                   , "ghc-prim-0.6.1"
-                  , "ghci-8.10.3"
+                  , "ghci-8.10.4"
                   , "haskeline-0.8.0.0"
                   , "hpc-0.6.1.0"
                   , "hsc2hs-0.68.7"
