@@ -244,7 +244,7 @@ constraintList = [ "abstract-deque"
                  , "generic-lens"
                  , "generic-lens-core"
                  , "ghc-byteorder"
-                 , "ghc-lib-parser == 8.10.*"   -- drop this package ASAP
+                 , "ghc-lib-parser == 9.0.*"   -- drop this package ASAP
                  , "ghc-lib-parser-ex"
                  , "ghc-paths"
                  , "ghcid"
@@ -280,6 +280,7 @@ constraintList = [ "abstract-deque"
                  , "hsemail"
                  , "hslogger"
                  , "hslua"
+                 , "hslua-module-path"
                  , "hslua-module-system"
                  , "hslua-module-text"
                  , "hspec"
@@ -310,6 +311,7 @@ constraintList = [ "abstract-deque"
                  , "IfElse"
                  , "indexed-profunctors"
                  , "indexed-traversable"
+                 , "indexed-traversable-instances"
                  , "infer-license"
                  , "integer-logarithms"
                  , "intern"
@@ -626,9 +628,11 @@ constraintList = [ "abstract-deque"
 
 flagList :: [(String,String)]
 flagList =
-  [ -- Don't build hardware-specific optimizations into the binary based on what the
+  [ ("cabal-plan",                     "exe")
+
+    -- Don't build hardware-specific optimizations into the binary based on what the
     -- build machine supports or doesn't support.
-    ("cryptonite",                     "-support_aesni -support_rdrand -support_blake2_sse")
+  , ("cryptonite",                     "-support_aesni -support_rdrand -support_blake2_sse")
 
     -- Don't use the bundled sqlite3 library.
   , ("direct-sqlite",                  "systemlib")
