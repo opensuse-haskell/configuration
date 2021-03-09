@@ -129,7 +129,7 @@ constraintList = [ "abstract-deque"
                  , "bzlib-conduit"
                  , "c2hs"
                  , "cabal-doctest"
-                 , "cabal-install"
+                 , "cabal-install ==3.2.*"
                  , "cabal-plan"
                  , "cabal2spec"
                  , "call-stack"
@@ -257,7 +257,7 @@ constraintList = [ "abstract-deque"
                  , "gray-code"
                  , "groups"
                  , "hackage-security"
-                 , "haddock-library"
+                 , "haddock-library < 1.10"
                  , "half"
                  , "happy"
                  , "hashable"
@@ -281,6 +281,7 @@ constraintList = [ "abstract-deque"
                  , "hsemail"
                  , "hslogger"
                  , "hslua"
+                 , "hslua-module-path"
                  , "hslua-module-system"
                  , "hslua-module-text"
                  , "hspec"
@@ -628,9 +629,11 @@ constraintList = [ "abstract-deque"
 
 flagList :: [(String,String)]
 flagList =
-  [ -- Don't build hardware-specific optimizations into the binary based on what the
+  [ ("cabal-plan",                     "exe")
+
+    -- Don't build hardware-specific optimizations into the binary based on what the
     -- build machine supports or doesn't support.
-    ("cryptonite",                     "-support_aesni -support_rdrand -support_blake2_sse")
+  , ("cryptonite",                     "-support_aesni -support_rdrand -support_blake2_sse")
 
     -- Don't use the bundled sqlite3 library.
   , ("direct-sqlite",                  "systemlib")
