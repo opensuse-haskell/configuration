@@ -1,0 +1,12 @@
+Index: cabal-plan.spec
+===================================================================
+--- cabal-plan.spec	(revision 13)
++++ cabal-plan.spec	(working copy)
+@@ -100,6 +100,7 @@
+ %prep
+ %autosetup
+ cabal-tweak-dep-ver 'optics-core' '^>= 0.3' '^>= 0.4'
++cabal-tweak-dep-ver 'semialign' '^>= 1.1' '^>= 1.2'
+ 
+ %build
+ %define cabal_configure_options -fexe
