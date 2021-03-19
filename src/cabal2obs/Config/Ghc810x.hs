@@ -407,7 +407,7 @@ constraintList = [ "abstract-deque"
                  , "path-io"
                  , "path-pieces"
                  , "pem"
-                 , "persistent"
+                 , "persistent < 2.12.0.0 || > 2.12.0.0" -- buggy release
                  , "persistent-sqlite"
                  , "persistent-template"
                  , "pipes"
