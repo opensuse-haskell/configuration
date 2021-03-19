@@ -1,0 +1,12 @@
+Index: ghc-libsystemd-journal.spec
+===================================================================
+--- ghc-libsystemd-journal.spec	(revision 3)
++++ ghc-libsystemd-journal.spec	(working copy)
+@@ -61,6 +61,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.15' '< 4.16'
+ 
+ %build
+ %ghc_lib_build

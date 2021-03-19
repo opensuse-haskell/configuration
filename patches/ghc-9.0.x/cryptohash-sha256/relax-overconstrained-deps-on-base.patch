@@ -1,0 +1,12 @@
+Index: ghc-cryptohash-sha256.spec
+===================================================================
+--- ghc-cryptohash-sha256.spec	(revision 5)
++++ ghc-cryptohash-sha256.spec	(working copy)
+@@ -90,6 +90,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
+ 
+ %build
+ %ghc_lib_build

@@ -1,0 +1,23 @@
+Index: ghc-protolude.spec
+===================================================================
+--- ghc-protolude.spec	(revision 3)
++++ ghc-protolude.spec	(working copy)
+@@ -24,6 +24,7 @@
+ License:        MIT
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch0:         123.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-async-devel
+@@ -54,7 +55,9 @@
+ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -p1 -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver 'base' '<4.15' '<4.16'
++cabal-tweak-dep-ver 'ghc-prim' '<0.7' '<0.8'
+ 
+ %build
+ %ghc_lib_build

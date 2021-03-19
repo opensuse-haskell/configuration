@@ -1,0 +1,23 @@
+Index: ghc-io-streams.spec
+===================================================================
+--- ghc-io-streams.spec	(revision 8)
++++ ghc-io-streams.spec	(working copy)
+@@ -26,6 +26,7 @@
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/2.cabal#/%{pkg_name}.cabal
++Patch0:         io-streams-1.5.2.0.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-attoparsec-devel
+ BuildRequires:  ghc-bytestring-builder-devel
+@@ -121,8 +122,9 @@
+ This package provides the Haskell %{pkg_name} library development files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -p1 -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver 'base' '<4.15' '<5'
+ 
+ %build
+ %ghc_lib_build
