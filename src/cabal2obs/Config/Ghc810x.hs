@@ -272,7 +272,7 @@ constraintList = [ "abstract-deque"
                  , "hledger-interest"
                  , "hledger-lib"
                  , "hledger-ui"
-                 , "hlint"
+                 , "hlint <= 3.2.7" -- newer versions needs ghc-lib-parser-9.0.x
                  , "hostname"
                  , "hourglass"
                  , "hpack"
