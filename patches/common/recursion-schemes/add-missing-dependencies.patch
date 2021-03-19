@@ -1,0 +1,12 @@
+Index: ghc-recursion-schemes.spec
+===================================================================
+--- ghc-recursion-schemes.spec	(revision 7)
++++ ghc-recursion-schemes.spec	(working copy)
+@@ -26,6 +26,7 @@
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ BuildRequires:  ghc-Cabal-devel
++BuildRequires:  ghc-cabal-doctest-devel
+ BuildRequires:  ghc-base-orphans-devel
+ BuildRequires:  ghc-comonad-devel
+ BuildRequires:  ghc-containers-devel
