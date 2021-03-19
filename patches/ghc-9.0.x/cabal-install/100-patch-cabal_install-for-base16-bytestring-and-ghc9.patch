@@ -1,0 +1,31 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 18)
++++ cabal-install.spec	(working copy)
+@@ -23,6 +23,8 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++Patch0:         7195.patch
++BuildRequires:  gcc-PIE
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-array-devel
+@@ -65,7 +67,8 @@
+ installation of Haskell libraries and programs.
+ 
+ %prep
+-%autosetup
++%autosetup -p1
++cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
+ 
+ %build
+ %ghc_bin_build
+@@ -77,6 +80,6 @@
+ %license LICENSE
+ %doc README.md changelog
+ %{_bindir}/cabal
+-%{_mandir}/man1/cabal.1%{?ext_man}
++#%{_mandir}/man1/cabal.1%{?ext_man}
+ 
+ %changelog
