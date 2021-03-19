@@ -1,0 +1,12 @@
+Index: ghc-servant-client.spec
+===================================================================
+--- ghc-servant-client.spec	(revision 4)
++++ ghc-servant-client.spec	(working copy)
+@@ -88,6 +88,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cabal-tweak-dep-ver http-client '< 0.7' '< 0.8'
++cabal-tweak-dep-ver base '< 4.15' '< 4.16'
+ 
+ %build
+ %ghc_lib_build
