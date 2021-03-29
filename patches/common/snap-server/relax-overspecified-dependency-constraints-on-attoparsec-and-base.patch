@@ -1,12 +1,13 @@
 Index: ghc-snap-server.spec
 ===================================================================
---- ghc-snap-server.spec	(revision 2)
+--- ghc-snap-server.spec	(revision 9)
 +++ ghc-snap-server.spec	(working copy)
-@@ -87,6 +87,7 @@
+@@ -88,6 +88,8 @@
  
  %prep
  %autosetup -n %{pkg_name}-%{version}
-+cabal-tweak-dep-ver base '< 4.15' '< 5'
++cabal-tweak-dep-ver 'attoparsec' '< 0.14' '< 0.15'
++cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
  
  %build
  %ghc_lib_build
