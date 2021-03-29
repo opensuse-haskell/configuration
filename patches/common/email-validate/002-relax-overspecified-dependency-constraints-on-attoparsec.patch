@@ -1,0 +1,12 @@
+Index: ghc-email-validate.spec
+===================================================================
+--- ghc-email-validate.spec	(revision 10)
++++ ghc-email-validate.spec	(working copy)
+@@ -53,6 +53,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ sed -i 's/\r//' LICENSE
++cabal-tweak-dep-ver 'attoparsec' '< 0.14' '< 0.15'
+ 
+ %build
+ %ghc_lib_build
