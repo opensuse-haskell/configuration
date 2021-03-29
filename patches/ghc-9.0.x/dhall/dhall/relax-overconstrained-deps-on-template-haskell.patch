@@ -1,6 +1,6 @@
 Index: ghc-dhall.spec
 ===================================================================
---- ghc-dhall.spec	(revision 14)
+--- ghc-dhall.spec	(revision 16)
 +++ ghc-dhall.spec	(working copy)
 @@ -119,6 +119,7 @@
  
