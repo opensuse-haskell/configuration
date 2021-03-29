@@ -1,0 +1,12 @@
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 42)
++++ pandoc.spec	(working copy)
+@@ -144,6 +144,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver 'attoparsec' '< 0.14' '< 0.15'
+ 
+ %build
+ %ghc_lib_build
