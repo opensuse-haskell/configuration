@@ -90,7 +90,7 @@ main = do
 
     -- Depend on all active package set targets.
     phony "all" $
-      need ["ghc-8.10.x", "ghc-9.0.x"]
+      need ["ghc-8.10.x", "ghc-9.0.x", "ghc-9.2.x"]
 
     -- Every (phony) package set target depends on the (real) spec file.
     forM_ (Set.toList knownPackageSets) $ \psid ->

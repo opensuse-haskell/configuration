@@ -4,8 +4,9 @@
 
 module Config ( knownPackageSets, addConfigOracle ) where
 
-import Config.Ghc90x
 import Config.Ghc810x
+import Config.Ghc90x
+import Config.Ghc92x
 import Types
 
 import Data.Map.Strict ( Map, findWithDefault, keysSet )
@@ -18,8 +19,9 @@ addConfigOracle :: Rules (PackageSetId -> Action PackageSetConfig)
 addConfigOracle = addOracle getPackageSet
 
 packageSets :: Map PackageSetId (Action PackageSetConfig)
-packageSets = [ ("ghc-9.0.x", ghc90x)
-              , ("ghc-8.10.x", ghc810x)
+packageSets = [ ("ghc-8.10.x", ghc810x)
+              , ("ghc-9.0.x", ghc90x)
+              , ("ghc-9.2.x", ghc92x)
               ]
 
 knownPackageSets :: Set PackageSetId

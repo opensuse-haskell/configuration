@@ -9,7 +9,7 @@ license:       GPL-3
 license-file:  LICENSE
 author:        Peter Simons, Ondřej Súkup
 maintainer:    opensuse-haskell@opensuse.org
-tested-with:   GHC == 8.10.2
+tested-with:   GHC == 8.10.4
 category:      Distribution
 homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
@@ -48,8 +48,9 @@ executable cabal2obs
   main-is:          cabal2obs.hs
   other-modules:    Config
                     Config.ForcedExecutables
-                    Config.Ghc90x
                     Config.Ghc810x
+                    Config.Ghc90x
+                    Config.Ghc92x
                     Oracle
                     Oracle.Hackage
                     ParseStackageConfig
