@@ -1,0 +1,21 @@
+Index: ghc-double-conversion.spec
+===================================================================
+--- ghc-double-conversion.spec	(revision 9)
++++ ghc-double-conversion.spec	(working copy)
+@@ -25,6 +25,7 @@
+ License:        BSD-2-Clause
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch0:         riscv.patch
+ BuildRequires:  gcc-c++
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-bytestring-devel
+@@ -70,7 +71,7 @@
+ files.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -p1 -n %{pkg_name}-%{version}
+ 
+ %build
+ %ghc_lib_build
