@@ -1,0 +1,12 @@
+Index: ghc-dhall.spec
+===================================================================
+--- ghc-dhall.spec	(revision 35)
++++ ghc-dhall.spec	(working copy)
+@@ -119,6 +119,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver memory '< 0.16' '< 0.17'
+ 
+ %build
+ %ghc_lib_build
