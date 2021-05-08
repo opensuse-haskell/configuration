@@ -1,6 +1,6 @@
 Index: ghc-servant.spec
 ===================================================================
---- ghc-servant.spec	(revision 4)
+--- ghc-servant.spec	(revision 8)
 +++ ghc-servant.spec	(working copy)
 @@ -25,6 +25,7 @@
  License:        BSD-3-Clause
@@ -10,7 +10,7 @@ Index: ghc-servant.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-QuickCheck-devel
  BuildRequires:  ghc-aeson-devel
-@@ -74,8 +75,9 @@
+@@ -74,10 +75,11 @@
  This package provides the Haskell %{pkg_name} library development files.
  
  %prep
@@ -18,7 +18,8 @@ Index: ghc-servant.spec
 +%autosetup -p1 -n %{pkg_name}-%{version}
  cabal-tweak-dep-ver http-api-data "< 0.4.3" "< 0.5"
  cabal-tweak-dep-ver attoparsec '< 0.14' '< 0.15'
-+cabal-tweak-dep-ver base "< 4.15" "< 4.16"
+ cabal-tweak-dep-ver singleton-bool '< 0.1.6' '< 0.1.7'
++cabal-tweak-dep-ver base '< 4.15' '< 4.16'
  
  %build
  %ghc_lib_build
