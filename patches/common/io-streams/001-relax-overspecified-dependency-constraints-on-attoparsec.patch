@@ -1,11 +1,11 @@
 Index: ghc-io-streams.spec
 ===================================================================
---- ghc-io-streams.spec	(revision 12)
+--- ghc-io-streams.spec	(revision 15)
 +++ ghc-io-streams.spec	(working copy)
-@@ -123,6 +123,7 @@
+@@ -120,6 +120,7 @@
+ 
  %prep
  %autosetup -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +cabal-tweak-dep-ver 'attoparsec' '<0.14' '<0.15'
  
  %build
