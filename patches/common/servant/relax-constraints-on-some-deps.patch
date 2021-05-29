@@ -1,0 +1,15 @@
+Index: ghc-servant.spec
+===================================================================
+--- ghc-servant.spec	(revision 17)
++++ ghc-servant.spec	(working copy)
+@@ -77,6 +77,10 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
++cabal-tweak-dep-ver 'attoparsec' '< 0.14' '< 0.15'
++cabal-tweak-dep-ver 'http-api-data' '< 0.4.3' '< 0.5'
++cabal-tweak-dep-ver 'singleton-bool' '< 0.1.6' '< 0.2'
+ 
+ %build
+ %ghc_lib_build
