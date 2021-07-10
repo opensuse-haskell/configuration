@@ -1,0 +1,12 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 26)
++++ cabal-install.spec	(working copy)
+@@ -67,6 +67,7 @@
+ 
+ %prep
+ %autosetup -p2
++cabal-tweak-dep-ver random '< 1.2' '< 1.3' 
+ 
+ %build
+ %ghc_bin_build
