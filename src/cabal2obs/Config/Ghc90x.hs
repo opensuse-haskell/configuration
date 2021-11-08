@@ -251,6 +251,7 @@ constraintList = [ "abstract-deque"
                  , "generic-random"
                  , "generic-lens"
                  , "generic-lens-core"
+                 , "ghc-bignum-orphans"
                  , "ghc-byteorder"
                  , "ghc-lib-parser == 9.0.*"   -- drop this package ASAP
                  , "ghc-lib-parser-ex"
