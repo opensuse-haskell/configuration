@@ -661,6 +661,10 @@ flagList =
     -- Don't use the bundled sqlite3 library.
   , ("direct-sqlite",                  "systemlib")
 
+
+    -- dont optimize happy with happy ( dep on same package ..)
+  , ("happy",                          "-bootstrap")
+
     -- Build the standalone executable and prefer pcre-light, which uses the system
     -- library rather than a bundled copy.
   , ("highlighting-kate",              "executable pcre-light")
