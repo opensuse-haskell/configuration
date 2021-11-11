@@ -1,6 +1,6 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 20)
+--- happy.spec	(revision 30)
 +++ happy.spec	(working copy)
 @@ -24,11 +24,16 @@
  License:        BSD-2-Clause
@@ -19,9 +19,9 @@ Index: happy.spec
  ExcludeArch:    %{ix86}
  %if %{with tests}
  BuildRequires:  ghc-process-devel
-@@ -44,9 +49,14 @@
- 
+@@ -46,9 +51,14 @@
  %build
+ %define cabal_configure_options -f-bootstrap
  %ghc_bin_build
 +cd doc
 +autoreconf
@@ -34,11 +34,11 @@ Index: happy.spec
  
  %check
  %cabal_test
-@@ -56,6 +66,7 @@
- %doc CHANGES README.md TODO doc examples
+@@ -58,6 +68,7 @@
+ %doc ChangeLog.md README.md doc examples
  %{_bindir}/%{name}
  %dir %{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/*
- %{_datadir}/%{name}-%{version}/GLR_Base
- %{_datadir}/%{name}-%{version}/GLR_Lib
- %{_datadir}/%{name}-%{version}/GLR_Lib-ghc
+ %{_datadir}/%{name}-%{version}/GLR_Base.hs
+ %{_datadir}/%{name}-%{version}/GLR_Lib.hs
+ %{_datadir}/%{name}-%{version}/HappyTemplate.hs
