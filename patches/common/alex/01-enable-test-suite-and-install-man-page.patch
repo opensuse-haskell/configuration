@@ -1,6 +1,6 @@
 Index: alex.spec
 ===================================================================
---- alex.spec	(revision 4)
+--- alex.spec	(revision 21)
 +++ alex.spec	(working copy)
 @@ -16,7 +16,7 @@
  #
@@ -9,9 +9,9 @@ Index: alex.spec
 -%bcond_with tests
 +%bcond_without tests
  Name:           alex
- Version:        3.2.4
+ Version:        3.2.7.1
  Release:        0
-@@ -26,6 +26,7 @@
+@@ -25,6 +25,7 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  BuildRequires:  ghc-Cabal-devel
@@ -19,7 +19,7 @@ Index: alex.spec
  BuildRequires:  ghc-array-devel
  BuildRequires:  ghc-containers-devel
  BuildRequires:  ghc-directory-devel
-@@ -45,9 +46,14 @@
+@@ -44,9 +45,14 @@
  
  %build
  %ghc_bin_build
@@ -34,13 +34,9 @@ Index: alex.spec
  
  %check
  %cabal_test
-@@ -62,6 +68,8 @@
- %{_datadir}/%{name}-%{version}/AlexTemplate-ghc
- %{_datadir}/%{name}-%{version}/AlexTemplate-ghc-debug
- %{_datadir}/%{name}-%{version}/AlexTemplate-ghc-nopred
+@@ -60,3 +66,5 @@
+ %{_datadir}/%{name}-%{version}/AlexWrappers.hs
+ 
+ %changelog
 +%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/*
- %{_datadir}/%{name}-%{version}/AlexWrapper-basic
- %{_datadir}/%{name}-%{version}/AlexWrapper-basic-bytestring
- %{_datadir}/%{name}-%{version}/AlexWrapper-gscan
-
