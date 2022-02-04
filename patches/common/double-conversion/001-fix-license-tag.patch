@@ -1,13 +1,13 @@
 Index: ghc-double-conversion.spec
 ===================================================================
---- ghc-double-conversion.spec	(revision 1)
+--- ghc-double-conversion.spec	(revision 11)
 +++ ghc-double-conversion.spec	(working copy)
-@@ -22,6 +22,6 @@
- Version:        2.0.2.0
+@@ -22,7 +22,7 @@
+ Version:        2.0.4.1
  Release:        0
- Summary:        Fast conversion between double precision floating point and text
+ Summary:        Fast conversion between single and double precision floating point and text
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-
+ BuildRequires:  ghc-Cabal-devel

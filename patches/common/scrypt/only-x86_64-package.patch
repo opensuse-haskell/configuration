@@ -2,11 +2,10 @@ Index: ghc-scrypt.spec
 ===================================================================
 --- ghc-scrypt.spec	(revision 7)
 +++ ghc-scrypt.spec	(working copy)
-@@ -30,7 +30,7 @@
+@@ -30,6 +30,7 @@
  BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-entropy-devel
  BuildRequires:  ghc-rpm-macros
--ExcludeArch:    %{ix86}
 +ExclusiveArch:  x86_64
  %if %{with tests}
  BuildRequires:  ghc-HUnit-devel

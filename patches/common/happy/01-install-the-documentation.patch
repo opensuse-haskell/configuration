@@ -1,11 +1,11 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 30)
+--- happy.spec	(revision 37)
 +++ happy.spec	(working copy)
-@@ -24,11 +24,16 @@
- License:        BSD-2-Clause
+@@ -25,11 +25,16 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
 +BuildRequires:  autoconf
 +BuildRequires:  docbook-dtd
 +BuildRequires:  docbook-xsl-stylesheets
@@ -16,9 +16,9 @@ Index: happy.spec
  BuildRequires:  ghc-rpm-macros
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
- ExcludeArch:    %{ix86}
  %if %{with tests}
  BuildRequires:  ghc-process-devel
+ %endif
 @@ -46,9 +51,14 @@
  %build
  %define cabal_configure_options -f-bootstrap

@@ -1,16 +1,14 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 33)
+--- happy.spec	(revision 38)
 +++ happy.spec	(working copy)
-@@ -58,7 +58,10 @@
+@@ -58,6 +58,9 @@
  
  %install
  %ghc_bin_install
--install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 +# drop artifacts from autoconf that differ across builds to fix build-compare
 +rm -rf doc/autom4te.cache doc/config.log doc/config.status
 + 
-+install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+ install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
  
  %check
- %cabal_test

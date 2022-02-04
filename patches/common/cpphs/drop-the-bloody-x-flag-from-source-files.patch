@@ -1,11 +1,11 @@
 Index: cpphs.spec
 ===================================================================
---- cpphs.spec	(revision 1)
+--- cpphs.spec	(revision 11)
 +++ cpphs.spec	(working copy)
-@@ -60,6 +60,7 @@
- 
+@@ -62,6 +62,7 @@
  %prep
  %autosetup
+ cp -p %{SOURCE1} %{name}.cabal
 +find . -type f -exec chmod -x {} +
  
  %build
