@@ -61,11 +61,11 @@ instance Hashable PackageVersionConstraint
 instance Hashable FlagAssignment where
   hashWithSalt salt = hashWithSalt salt . unFlagAssignment
 
---instance Hashable v => Hashable (Set v) where
---  hashWithSalt s = hashWithSalt s . Set.toAscList
+instance Hashable v => Hashable (Set v) where
+  hashWithSalt s = hashWithSalt s . Set.toAscList
 
---instance (Hashable k, Hashable v) => Hashable (Map k v) where
---  hashWithSalt s = hashWithSalt s . Map.toAscList
+instance (Hashable k, Hashable v) => Hashable (Map k v) where
+ hashWithSalt s = hashWithSalt s . Map.toAscList
 
 instance Pretty License where
   pPrint = Cabal.pretty

@@ -26,7 +26,7 @@ library
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
                   , Cabal                 == 3.2.*
-                  , containers
+                  , containers            >= 0.6
                   , directory
                   , distribution-opensuse >= 1.1.1 && < 1.2
                   , extra
