@@ -2,7 +2,7 @@ Index: happy.spec
 ===================================================================
 --- happy.spec	(revision 37)
 +++ happy.spec	(working copy)
-@@ -25,11 +25,16 @@
+@@ -25,12 +25,17 @@
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
  Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
@@ -14,6 +14,7 @@ Index: happy.spec
  BuildRequires:  ghc-containers-devel
  BuildRequires:  ghc-mtl-devel
  BuildRequires:  ghc-rpm-macros
+ ExcludeArch:    %{ix86}
 +BuildRequires:  libxml2
 +BuildRequires:  libxslt
  %if %{with tests}

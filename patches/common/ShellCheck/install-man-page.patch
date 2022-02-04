@@ -2,10 +2,11 @@ Index: ShellCheck.spec
 ===================================================================
 --- ShellCheck.spec	(revision 16)
 +++ ShellCheck.spec	(working copy)
-@@ -41,5 +41,6 @@
+@@ -41,6 +41,7 @@
  BuildRequires:  ghc-process-devel
  BuildRequires:  ghc-regex-tdfa-devel
  BuildRequires:  ghc-rpm-macros
+ ExcludeArch:    %{ix86}
 +BuildRequires:  pandoc
  
  %description

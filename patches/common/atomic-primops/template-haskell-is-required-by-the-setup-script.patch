@@ -2,10 +2,11 @@ Index: ghc-atomic-primops.spec
 ===================================================================
 --- ghc-atomic-primops.spec	(revision 5)
 +++ ghc-atomic-primops.spec	(working copy)
-@@ -27,5 +27,6 @@
+@@ -27,6 +27,7 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-primitive-devel
  BuildRequires:  ghc-rpm-macros
+ ExcludeArch:    %{ix86}
 +BuildRequires:  ghc-template-haskell
  
  %description

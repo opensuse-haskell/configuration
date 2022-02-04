@@ -1,6 +1,6 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 26)
+--- xmonad.spec	(revision 29)
 +++ xmonad.spec	(working copy)
 @@ -25,6 +25,7 @@
  License:        BSD-3-Clause
@@ -10,10 +10,10 @@ Index: xmonad.spec
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-X11-devel
-@@ -39,6 +40,11 @@
- BuildRequires:  ghc-time-devel
+@@ -40,6 +41,11 @@
  BuildRequires:  ghc-transformers-devel
  BuildRequires:  ghc-unix-devel
+ ExcludeArch:    %{ix86}
 +BuildRequires:  pkgconfig
 +BuildRequires:  update-desktop-files
 +BuildRequires:  pkgconfig(xinerama)
@@ -22,7 +22,7 @@ Index: xmonad.spec
  %if %{with tests}
  BuildRequires:  ghc-QuickCheck-devel
  BuildRequires:  ghc-quickcheck-classes-devel
-@@ -78,6 +84,11 @@
+@@ -79,6 +85,11 @@
  
  %install
  %ghc_lib_install
@@ -34,7 +34,7 @@ Index: xmonad.spec
  %ghc_fix_rpath %{pkg_name}-%{version}
  
  %check
-@@ -93,6 +104,8 @@
+@@ -94,6 +105,8 @@
  %license LICENSE
  %doc CHANGES.md README.md
  %{_bindir}/%{name}

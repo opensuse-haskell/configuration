@@ -1,6 +1,6 @@
 Index: ghc-X11.spec
 ===================================================================
---- ghc-X11.spec	(revision 20)
+--- ghc-X11.spec	(revision 22)
 +++ ghc-X11.spec	(working copy)
 @@ -27,9 +27,13 @@
  BuildRequires:  ghc-Cabal-devel
@@ -16,10 +16,10 @@ Index: ghc-X11.spec
 +BuildRequires:  pkgconfig(xinerama)
 +BuildRequires:  pkgconfig(xrandr)
 +BuildRequires:  pkgconfig(xscrnsaver)
+ ExcludeArch:    %{ix86}
  
  %description
- A Haskell binding to the X11 graphics library. The binding is a direct
-@@ -40,9 +44,12 @@
+@@ -41,9 +45,12 @@
  Summary:        Haskell %{pkg_name} library development files
  Requires:       %{name} = %{version}-%{release}
  Requires:       ghc-compiler = %{ghc_version}

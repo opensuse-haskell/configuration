@@ -2,10 +2,11 @@ Index: ghc-distribution-opensuse.spec
 ===================================================================
 --- ghc-distribution-opensuse.spec	(revision 7)
 +++ ghc-distribution-opensuse.spec	(working copy)
-@@ -43,5 +43,6 @@
+@@ -43,6 +43,7 @@
  BuildRequires:  ghc-text-devel
  BuildRequires:  ghc-time-devel
  BuildRequires:  ghc-turtle-devel
+ ExcludeArch:    %{ix86}
 +BuildRequires:  pandoc
  
  %description
