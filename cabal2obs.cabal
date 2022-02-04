@@ -26,7 +26,7 @@ library
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
                   , Cabal                 == 3.2.*
-                  , containers            >= 0.6
+                  , containers
                   , directory
                   , distribution-opensuse >= 1.1.1 && < 1.2
                   , extra
@@ -36,6 +36,7 @@ library
                   , text
                   , time
                   , turtle
+                  , hashable              > 1.4
   default-language: Haskell2010
   other-extensions: CPP
                     GeneralizedNewtypeDeriving

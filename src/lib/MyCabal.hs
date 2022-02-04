@@ -23,8 +23,6 @@ module MyCabal
 
 import OpenSuse.Prelude
 
-import Data.Map.Strict as Map
-import Data.Set as Set
 import Development.Shake.Classes
 import Distribution.Compat.CharParsing
 import Distribution.Compiler
@@ -60,12 +58,6 @@ instance Hashable PackageVersionConstraint
 
 instance Hashable FlagAssignment where
   hashWithSalt salt = hashWithSalt salt . unFlagAssignment
-
-instance Hashable v => Hashable (Set v) where
-  hashWithSalt s = hashWithSalt s . Set.toAscList
-
-instance (Hashable k, Hashable v) => Hashable (Map k v) where
- hashWithSalt s = hashWithSalt s . Map.toAscList
 
 instance Pretty License where
   pPrint = Cabal.pretty
