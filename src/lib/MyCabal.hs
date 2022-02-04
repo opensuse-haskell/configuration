@@ -40,7 +40,6 @@ import Distribution.System
 import Distribution.Text
 import Distribution.Types.ComponentRequestedSpec
 import Distribution.Types.PackageVersionConstraint
-import Distribution.Types.UnqualComponentName
 import Distribution.Utils.ShortText
 import Distribution.Version
 
