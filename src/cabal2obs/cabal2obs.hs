@@ -59,7 +59,7 @@ main = do
                  | otherwise                           = "ghc-"
       pure $ BuildName (prefix ++ unPackageName pn)
 
-    -- Map a build directory path back to a Cabal package identifirer. This is
+    -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(psid, BuildName bn) -> do
       pset <- getPackageSet psid
