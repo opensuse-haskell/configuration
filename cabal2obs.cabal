@@ -25,7 +25,7 @@ library
                     UpdateChangesFile
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
-                  , Cabal                 == 3.2.*
+                  , Cabal                 == 3.6.2.*
                   , containers
                   , directory
                   , distribution-opensuse >= 1.1.1 && < 1.2
@@ -60,7 +60,7 @@ executable cabal2obs
   build-depends:    base
                   , bytestring
                   , cabal2obs
-                  , cabal2spec            >= 2.6.2 && < 2.7
+                  , cabal2spec            >= 2.6.3 && < 2.7
                   , containers
                   , directory
                   , distribution-opensuse

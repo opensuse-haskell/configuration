@@ -25,6 +25,7 @@ import OpenSuse.Prelude
 
 import Development.Shake.Classes
 import Distribution.Compat.CharParsing
+import Distribution.Compat.NonEmptySet as NESet
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
@@ -55,6 +56,9 @@ instance Hashable VersionRange
 instance Hashable Version
 instance Hashable ShortText
 instance Hashable PackageVersionConstraint
+
+instance Hashable v => Hashable (NonEmptySet v) where
+  hashWithSalt s = hashWithSalt s . NESet.toSet
 
 instance Hashable FlagAssignment where
   hashWithSalt salt = hashWithSalt salt . unFlagAssignment

@@ -15,7 +15,7 @@ constraint :: ParsecParser Dependency
 constraint = try installed <|> parsec
 
 installed :: ParsecParser Dependency
-installed = Dependency <$> parsec <*> (token (string "installed") $> noVersion) <*> pure mempty
+installed = Dependency <$> parsec <*> (token (string "installed") $> noVersion) <*> pure undefined -- TODO: generate empty Dependency type
 
 token :: CharParsing p => p a -> p a
 token p = spaces *> p
