@@ -1,9 +1,9 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 60)
+--- git-annex.spec	(revision 109)
 +++ git-annex.spec	(working copy)
 @@ -20,7 +20,7 @@
- Version:        8.20201127
+ Version:        10.20220127
  Release:        0
  Summary:        Manage files with git, without checking their contents into git
 -License:        AGPL-3.0-or-later
