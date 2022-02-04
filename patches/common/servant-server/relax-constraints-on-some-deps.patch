@@ -2,10 +2,9 @@ Index: ghc-servant-server.spec
 ===================================================================
 --- ghc-servant-server.spec	(revision 14)
 +++ ghc-servant-server.spec	(working copy)
-@@ -94,6 +94,9 @@
+@@ -94,5 +94,8 @@
  %prep
  %autosetup -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
 +cabal-tweak-dep-ver 'base64-bytestring' '< 1.2' '< 2'
 +cabal-tweak-dep-ver 'http-api-data' '< 0.4.3' '< 0.5'
