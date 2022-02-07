@@ -34,9 +34,10 @@ Index: alex.spec
  
  %check
  %cabal_test
-@@ -60,3 +66,5 @@
+@@ -60,1 +66,3 @@
  %{_datadir}/%{name}-%{version}/AlexWrappers.hs
- 
- %changelog
 +%{_datadir}/%{name}-%{version}
 +%{_mandir}/man1/*
+
+ 
+ %changelog
