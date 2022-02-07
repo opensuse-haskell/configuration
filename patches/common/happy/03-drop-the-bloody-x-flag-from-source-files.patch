@@ -1,12 +1,12 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 39)
+--- happy.spec	(revision 45)
 +++ happy.spec	(working copy)
 @@ -46,6 +46,7 @@
  
  %prep
  %autosetup
 +find . -type f -exec chmod -x {} +
- cp -p %{SOURCE1} %{name}.cabal
  
  %build
+ %define cabal_configure_options -f-bootstrap
