@@ -238,7 +238,7 @@ constraintList = [ "abstract-deque"
                  , "file-embed"
                  , "filelock"
                  , "filemanip"
-                 , "filepath-bytestring"
+                 , "filepath-bytestring < 1.4.2.1.10"   -- the latest version requires a more modern bytestring library
                  , "filepattern"
                  , "filtrable"
                  , "fingertree"
