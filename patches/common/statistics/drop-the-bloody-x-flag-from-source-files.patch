@@ -1,0 +1,12 @@
+Index: ghc-statistics.spec
+===================================================================
+--- ghc-statistics.spec	(revision 12)
++++ ghc-statistics.spec	(working copy)
+@@ -84,6 +84,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++find . -type f -exec chmod -x {} +
+ 
+ %build
+ %ghc_lib_build
