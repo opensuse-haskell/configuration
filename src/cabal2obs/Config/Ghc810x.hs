@@ -196,7 +196,7 @@ constraintList = [ "abstract-deque"
                  , "data-default-instances-old-locale"
                  , "data-fix"
                  , "DAV"
-                 , "dbus"
+                 , "dbus <1.2.23"       -- the new version requires template-haskell 2.18.x
                  , "dec"
                  , "Decimal"
                  , "dense-linear-algebra"
