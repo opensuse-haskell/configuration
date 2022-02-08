@@ -269,7 +269,7 @@ constraintList = [ "abstract-deque"
                  , "hackage-security"
                  , "haddock-library <1.11"
                  , "half"
-                 , "happy"
+                 , "happy <1.21.0 || >1.21.0"   -- 1.21.0 is deprecated on Hackage
                  , "hashable"
                  , "hashtables"
                  , "haskell-lexer"
