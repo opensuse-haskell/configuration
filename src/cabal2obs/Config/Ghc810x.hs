@@ -524,7 +524,7 @@ constraintList = [ "abstract-deque"
                  , "split"
                  , "splitmix"
                  , "StateVar"
-                 , "statistics"
+                 , "statistics < 0.16"  -- the latest version is not supported by criterion yet
                  , "statistics-linreg"
                  , "stm-chans"
                  , "store-core"
