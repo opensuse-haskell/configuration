@@ -5,7 +5,7 @@ Index: c2hs.spec
 @@ -54,6 +54,7 @@
  %prep
  %autosetup
- cabal-tweak-dep-ver language-c '< 0.9' '< 1'
+ cp -p %{SOURCE1} %{name}.cabal
 +chmod a-x {README,AUTHORS,ChangeLog,ChangeLog.old}
  
  %build
