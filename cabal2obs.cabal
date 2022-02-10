@@ -69,6 +69,8 @@ executable cabal2obs
                   , pretty
                   , shake                 >= 0.16
                   , tar                   > 0.5
+                  , text
+                  , time
   default-language: Haskell2010
   other-extensions: CPP
                     GeneralizedNewtypeDeriving

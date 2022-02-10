@@ -6,12 +6,13 @@ module Oracle.Hackage where
 import OpenSuse.Prelude
 import MyCabal
 
+import Codec.Archive.Tar.Entry as Tar ( entryTime, entryContent, EntryContent(..), EpochTime )
 import Codec.Archive.Tar.Index ( TarIndex, TarIndexEntry(..) )
-import Codec.Archive.Tar.Entry as Tar ( entryContent, EntryContent(..) )
 import qualified Codec.Archive.Tar.Index as Tar
 import qualified Data.ByteString as BSS
 import qualified Data.ByteString.Lazy as BSL
 import Data.Maybe
+import Data.Time.Clock.POSIX
 import Development.Shake
 import Development.Shake.FilePath
 import System.Directory
@@ -61,7 +62,7 @@ cabalFilePath (PackageIdentifier n v) =
 -- | Cached access to parsed ADT that represent the Cabal files registered in
 -- Hackage.
 
-addCabalFileCache :: Action Hackage -> Rules (PackageIdentifier -> Action ByteString)
+addCabalFileCache :: Action Hackage -> Rules (PackageIdentifier -> Action (UTCTime, ByteString))
 addCabalFileCache hackage = newCache $ \pid -> do
   Hackage idx <- hackage
   off <- case Tar.lookup idx (cabalFilePath pid) of
@@ -73,7 +74,7 @@ addCabalFileCache hackage = newCache $ \pid -> do
   need [tarball]
   e <- liftIO $ withFile tarball ReadMode (`Tar.hReadEntry` off)
   case Tar.entryContent e of
-    NormalFile buf _ -> pure (BSL.toStrict buf)
+    NormalFile buf _ -> pure (posixSecondsToUTCTime (realToFrac (entryTime e)), BSL.toStrict buf)
     x                -> fail (prettyShow pid <> ": unexpected entry type in tarball: " <> show x)
 
 -- | Extract the @x-revision@ header added by Hackage.

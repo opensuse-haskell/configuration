@@ -20,6 +20,8 @@ import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
 import Data.Set as Set ( Set )
+import qualified Data.Text as Text
+import Data.Time.Format
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import System.Directory
@@ -52,7 +54,8 @@ main = do
 
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier pn _)) -> do
-      cabal <- getCabal pkgid >>= parseCabalFile pkgid
+      (_, cbuf) <- getCabal pkgid
+      cabal <- parseCabalFile pkgid cbuf
       pset <- getPackageSet psid
       let forceExe = pn `elem` forcedExectables pset
           prefix | forceExe || not (hasLibrary cabal)  = ""
@@ -129,9 +132,11 @@ main = do
     buildDir </> "*/*/*.changes" %> \out -> do
       (psid, bn) <- extractPackageSetIdAndBuildName out
       pkgid@(PackageIdentifier pn v) <- pkgidFromPath (psid,bn)
-      cabal <- getCabal pkgid >>= parseCabalFile pkgid
+      (ctime, cbuf) <- getCabal pkgid
+      cabal <- parseCabalFile pkgid cbuf
       let rev = packageRevision cabal
-      traced "update-changes-file" $ updateChangesFile Nothing out pn (v, rev) "psimons@suse.com" -- TODO: evil hard-coded constant
+          ts = Text.pack (formatTime defaultTimeLocale "%c" ctime)
+      traced "update-changes-file" $ updateChangesFile (Just ts) out pn (v, rev) "Peter Simons <psimons@suse.com>" -- TODO: evil hard-coded constant
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
@@ -142,7 +147,7 @@ main = do
           pkgDir = takeDirectory out
           cid = compiler pset
           fa = Map.findWithDefault mempty n (flagAssignments pset)
-      cabalFile <- getCabal pkgid
+      (_, cabalFile) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cabalFile
       let rev = packageRevision cabal
       if rev > 0
