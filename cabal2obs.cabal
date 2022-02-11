@@ -28,7 +28,7 @@ library
                   , Cabal                 == 3.6.2.*
                   , containers
                   , directory
-                  , distribution-opensuse >= 1.1.1 && < 1.2
+                  , distribution-opensuse >= 1.1.2 && < 1.2
                   , extra
                   , pretty
                   , regex-posix
