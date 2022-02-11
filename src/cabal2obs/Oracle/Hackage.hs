@@ -6,7 +6,7 @@ module Oracle.Hackage where
 import OpenSuse.Prelude
 import MyCabal
 
-import Codec.Archive.Tar.Entry as Tar ( entryTime, entryContent, EntryContent(..), EpochTime )
+import Codec.Archive.Tar.Entry as Tar ( entryTime, entryContent, EntryContent(..) )
 import Codec.Archive.Tar.Index ( TarIndex, TarIndexEntry(..) )
 import qualified Codec.Archive.Tar.Index as Tar
 import qualified Data.ByteString as BSS
