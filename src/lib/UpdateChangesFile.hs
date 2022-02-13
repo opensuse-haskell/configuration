@@ -97,7 +97,7 @@ prettyGuessedChangeLog _ (NoCommonChangeLogFiles old new)
         \Unfortunately, the automatic updater cannot reliable determine relevant\n\
         \entries for this release."
 
-prettyGuessedChangeLog _ (MoreThanOneChangeLogFile _) = error "more than one"
+prettyGuessedChangeLog _ (MoreThanOneChangeLogFile ps) = error ("more than one" ++ show ps)
 
 prettyGuessedChangeLog ctx (UnmodifiedTopIsTooLarge p _) = para $
         "Upstream's change log file format is strange (too much unmodified text at\n\
