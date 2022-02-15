@@ -135,7 +135,7 @@ constraintList = [ "abstract-deque"
                  , "cabal-install ==3.2.*"
                  , "cabal-plan"
                  , "Cabal-syntax <3.9"
-                 , "cabal2spec"
+                 , "cabal2spec < 2.6.3"         -- the latest version requires Cabal-3.6.x.x
                  , "call-stack"
                  , "canonical-json"
                  , "case-insensitive"
