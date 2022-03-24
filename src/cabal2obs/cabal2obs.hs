@@ -125,7 +125,7 @@ main = do
         if n == "git-annex"
            then command_ [FileStdout out] "curl"
                          [ "-L", "--silent", "--show-error", "--"
-                         , "https://github.com/peti/git-annex/archive/" ++ display v ++".tar.gz"
+                         , "https://github.com/opensuse-haskell/git-annex/archive/" ++ display v ++".tar.gz"
                          ]
            else copyFile' (cabalDir </> "packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
