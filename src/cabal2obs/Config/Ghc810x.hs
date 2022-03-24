@@ -353,7 +353,7 @@ constraintList = [ "abstract-deque"
                  , "language-c"
                  , "language-javascript"
                  , "lens"
-                 , "lens-aeson"
+                 , "lens-aeson < 1.2"           -- newer versions require aeson 2.x
                  , "lens-family-core"
                  , "libmpd"
                  , "libsystemd-journal"
