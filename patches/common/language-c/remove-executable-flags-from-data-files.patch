@@ -2,11 +2,10 @@ Index: ghc-language-c.spec
 ===================================================================
 --- ghc-language-c.spec	(revision 4)
 +++ ghc-language-c.spec	(working copy)
-@@ -57,7 +57,8 @@
+@@ -57,6 +57,7 @@
  
  %prep
  %autosetup -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +find . -type f -exec chmod -x {} +
  
  %build
