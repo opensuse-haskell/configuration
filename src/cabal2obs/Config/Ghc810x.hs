@@ -444,7 +444,7 @@ constraintList = [ "abstract-deque"
                  , "postgresql-simple"
                  , "pretty-hex"
                  , "pretty-show"
-                 , "pretty-simple"
+                 , "pretty-simple < 4.1"        -- newer versions break our old version of dhall
                  , "prettyprinter"
                  , "prettyprinter-ansi-terminal"
                  , "primitive < 0.7.4.0 || > 0.7.4.0"   -- version 0.7.4.0 breaks cborg
