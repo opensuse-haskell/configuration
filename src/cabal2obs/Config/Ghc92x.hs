@@ -253,6 +253,7 @@ constraintList = [ "abstract-deque"
                  , "generic-lens-core"
                  , "generic-monoid"
                  , "generic-random"
+                 , "generically"
                  , "ghc-bignum-orphans"
                  , "ghc-byteorder"
                  , "ghc-lib-parser == 9.0.*"   -- drop this package ASAP
