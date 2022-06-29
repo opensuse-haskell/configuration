@@ -147,7 +147,7 @@ constraintList = [ "abstract-deque"
                  , "cereal"
                  , "charset"
                  , "cipher-aes"
-                 , "citeproc"
+                 , "citeproc < 0.8"     -- pandoc doesn't support the latest version yet
                  , "clay"
                  , "clientsession"
                  , "clock"
