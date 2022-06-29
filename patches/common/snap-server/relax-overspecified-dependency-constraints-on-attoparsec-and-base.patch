@@ -8,7 +8,7 @@ Index: ghc-snap-server.spec
  %autosetup -n %{pkg_name}-%{version}
  cp -p %{SOURCE1} %{pkg_name}.cabal
 +cabal-tweak-dep-ver 'attoparsec' '< 0.14' '< 0.15'
-+cabal-tweak-dep-ver 'base' '< 4.15' '< 5'
++cabal-tweak-dep-ver 'unix-compat' '< 0.6' '< 1'
  
  %build
  %ghc_lib_build
