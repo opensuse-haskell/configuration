@@ -2,9 +2,8 @@ Index: ghc-weeder.spec
 ===================================================================
 --- ghc-weeder.spec	(revision 22)
 +++ ghc-weeder.spec	(working copy)
-@@ -60,4 +60,7 @@
+@@ -60,4 +60,6 @@
  %autosetup -n %{pkg_name}-%{version}
-+cabal-tweak-dep-ver algebraic-graphs '^>= 0.5' '< 1'
 +cabal-tweak-dep-ver lens '^>= 5.0.1' '< 6'
 +cabal-tweak-dep-ver optparse-applicative '^>= 0.16.0.0' '< 1'
  

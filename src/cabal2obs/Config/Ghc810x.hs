@@ -74,7 +74,7 @@ constraintList = [ "abstract-deque"
                  , "aeson-pretty"
                  , "aeson-yaml"
                  , "alex"
-                 , "algebraic-graphs"
+                 , "algebraic-graphs < 0.6"     -- weeder doesn't support newer versions
                  , "alsa-core"
                  , "alsa-mixer"
                  , "annotated-wl-pprint"
