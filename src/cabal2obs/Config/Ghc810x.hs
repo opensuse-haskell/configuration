@@ -314,7 +314,7 @@ constraintList = [ "abstract-deque"
                  , "HsYAML-aeson"
                  , "hsyslog"
                  , "html"
-                 , "HTTP"
+                 , "HTTP < 4000.4"              -- don't update to 4000.4 because it breaks cabal-install
                  , "http-api-data"
                  , "http-client"
                  , "http-client-restricted"
