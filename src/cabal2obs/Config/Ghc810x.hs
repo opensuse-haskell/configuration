@@ -200,7 +200,7 @@ constraintList = [ "abstract-deque"
                  , "dec"
                  , "Decimal"
                  , "dense-linear-algebra"
-                 , "dhall"
+                 , "dhall < 1.41"       -- newer versions break weeder
                  , "dhall-json"
                  , "dhall-yaml"
                  , "Diff"
