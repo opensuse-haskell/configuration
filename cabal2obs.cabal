@@ -65,8 +65,6 @@ executable cabal2obs
                   , directory
                   , distribution-opensuse
                   , extra
-                  , filepath
-                  , pretty
                   , shake                 >= 0.16
                   , tar                   > 0.5
                   , text
