@@ -200,6 +200,7 @@ constraintList = [ "abstract-deque"
                  , "dec"
                  , "Decimal"
                  , "dense-linear-algebra"
+                 , "deriving-aeson >=0.2"
                  , "dhall < 1.41"       -- newer versions break weeder
                  , "dhall-json < 1.7.10"  -- newer versions require dhall 1.41
                  , "dhall-yaml"
