@@ -776,7 +776,7 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "ghci-9.0.0.20200925"
                   , "haskeline-0.8.1.0"
                   , "hpc-0.6.1.0"
-                  , "integer-gmp"             -- backward compactibility record, not built anymore 
+                  , "integer-gmp"             -- backward compactibility record, not built anymore
                   , "libiserv-9.0.0.20200925"
                   , "mtl-2.2.2"
                   , "parsec-3.1.14.0"
