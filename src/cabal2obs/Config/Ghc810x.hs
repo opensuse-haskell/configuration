@@ -135,7 +135,7 @@ constraintList = [ "abstract-deque"
                  , "c2hs"
                  , "cabal-doctest"
                  , "cabal-install ==3.2.*"
-                 , "cabal-plan"
+                 , "cabal-plan < 0.7.2.2"       -- newer versions need aeson 2.x
                  , "Cabal-syntax <3.9"
                  , "cabal2spec < 2.6.3"         -- the latest version requires Cabal-3.6.x.x
                  , "call-stack"
