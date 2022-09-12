@@ -95,7 +95,7 @@ constraintList = [ "abstract-deque"
                  , "attoparsec-iso8601"
                  , "authenticate-oauth"
                  , "auto-update"
-                 , "aws"
+                 , "aws < 0.22.1"               -- avoid need for aeson 2.x
                  , "barbies"
                  , "base-compat"
                  , "base-compat-batteries"
