@@ -359,7 +359,7 @@ constraintList = [ "abstract-deque"
                  , "katip"
                  , "language-c"
                  , "language-javascript"
-                 , "lens"
+                 , "lens < 5.2"                 -- newer versions break dbus
                  , "lens-aeson < 1.2"           -- newer versions require aeson 2.x
                  , "lens-family-core"
                  , "libmpd"
