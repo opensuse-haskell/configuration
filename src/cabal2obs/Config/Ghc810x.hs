@@ -261,7 +261,7 @@ constraintList = [ "abstract-deque"
                  , "ghc-byteorder"
                  , "ghc-lib-parser-ex <= 8.10.0.19" -- 8.10.0.20+ needs ghc9
                  , "ghc-paths"
-                 , "ghcid"
+                 , "ghcid < 0.8.8"      -- avoid this update because of fsnotify-0.4
                  , "git-annex"
                  , "git-lfs"
                  , "githash"
