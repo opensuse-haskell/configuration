@@ -268,7 +268,7 @@ constraintList = [ "abstract-deque"
                  , "gitrev"
                  , "Glob"
                  , "gray-code"
-                 , "gridtables"
+                 , "gridtables < 0.1"   -- pandoc doesn't cope with the latest version
                  , "groups"
                  , "hackage-security < 0.6.2.0" -- avoid pulling in Cabal-syntax
                  , "haddock-library < 1.11"
