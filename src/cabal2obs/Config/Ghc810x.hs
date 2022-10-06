@@ -354,7 +354,7 @@ constraintList = [ "abstract-deque"
                  , "js-dgtable"
                  , "js-flot"
                  , "js-jquery"
-                 , "JuicyPixels"
+                 , "JuicyPixels < 3.3.8"        -- newer versions require vector 0.13
                  , "kan-extensions"
                  , "katip"
                  , "language-c"
@@ -627,7 +627,7 @@ constraintList = [ "abstract-deque"
                  , "uuid-types"
                  , "vault"
                  , "vector >=0.12.0.1 && <0.13"         -- can't update to 0.13.x because of aeson
-                 , "vector-algorithms"
+                 , "vector-algorithms < 0.9"            -- keep tdigests building
                  , "vector-binary-instances"
                  , "vector-builder"
                  , "vector-th-unbox"
