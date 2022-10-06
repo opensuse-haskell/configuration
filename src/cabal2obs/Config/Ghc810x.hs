@@ -251,7 +251,7 @@ constraintList = [ "abstract-deque"
                  , "formatting"
                  , "foundation"
                  , "free"
-                 , "fsnotify"
+                 , "fsnotify < 0.4"     -- avoid this update for hledger-ui
                  , "generic-data"
                  , "generic-deriving"
                  , "generic-lens"
