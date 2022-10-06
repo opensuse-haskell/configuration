@@ -205,7 +205,7 @@ constraintList = [ "abstract-deque"
                  , "deriving-aeson >=0.2"
                  , "dhall < 1.41"       -- newer versions break weeder
                  , "dhall-json < 1.7.10"  -- newer versions require dhall 1.41
-                 , "dhall-yaml"
+                 , "dhall-yaml < 1.2.11"  -- newer versions require dhall-json
                  , "Diff"
                  , "digest"
                  , "disk-free-space"
