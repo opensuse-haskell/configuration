@@ -1,16 +1,16 @@
 Index: ShellCheck.spec
 ===================================================================
---- ShellCheck.spec	(revision 16)
+--- ShellCheck.spec	(revision 10)
 +++ ShellCheck.spec	(working copy)
-@@ -41,6 +41,7 @@
- BuildRequires:  ghc-process-devel
- BuildRequires:  ghc-regex-tdfa-devel
+@@ -44,6 +44,7 @@
  BuildRequires:  ghc-rpm-macros
+ BuildRequires:  ghc-transformers-devel
  ExcludeArch:    %{ix86}
 +BuildRequires:  pandoc
  
  %description
-@@ -80,6 +81,8 @@
+ The goals of ShellCheck are:
+@@ -82,6 +83,8 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
@@ -19,9 +19,9 @@ Index: ShellCheck.spec
  
  %check
  %cabal_test
-@@ -94,6 +97,7 @@
+@@ -96,6 +99,7 @@
  %license LICENSE
- %doc README.md
+ %doc CHANGELOG.md README.md
  %{_bindir}/shellcheck
 +%{_mandir}/man1/shellcheck.1%{?ext_man}
  
