@@ -1,13 +1,13 @@
 Index: ghc-digest.spec
 ===================================================================
---- ghc-digest.spec	(revision 2)
+--- ghc-digest.spec	(revision 16)
 +++ ghc-digest.spec	(working copy)
-@@ -21,6 +21,6 @@
- Version:        0.0.1.2
+@@ -21,7 +21,7 @@
+ Version:        0.0.1.4
  Release:        0
- Summary:        Various cryptographic hashes for bytestrings; CRC32 and Adler32 for now
+ Summary:        Various hashes for bytestrings; CRC32 and Adler32 for now
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-
+ BuildRequires:  ghc-Cabal-devel
