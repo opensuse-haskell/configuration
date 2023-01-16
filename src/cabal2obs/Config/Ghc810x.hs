@@ -253,7 +253,7 @@ constraintList = [ "abstract-deque"
                  , "formatting"
                  , "foundation"
                  , "free"
-                 , "fsnotify < 0.4"     -- avoid this update for hledger-ui
+                 , "fsnotify"
                  , "generic-data"
                  , "generic-deriving"
                  , "generic-lens"
@@ -263,7 +263,7 @@ constraintList = [ "abstract-deque"
                  , "ghc-byteorder"
                  , "ghc-lib-parser-ex <= 8.10.0.19" -- 8.10.0.20+ needs ghc9
                  , "ghc-paths"
-                 , "ghcid < 0.8.8"      -- avoid this update because of fsnotify-0.4
+                 , "ghcid"
                  , "git-annex"
                  , "git-lfs"
                  , "githash"
