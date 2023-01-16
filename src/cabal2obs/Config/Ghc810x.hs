@@ -283,7 +283,7 @@ constraintList = [ "abstract-deque"
                  , "haskell-src-exts"
                  , "haskell-src-meta"
                  , "heaps"
-                 , "hedgehog < 1.1.3"           -- keep tasty-hedgehog building
+                 , "hedgehog == 1.2.*"           -- keep tasty-hedgehog building
                  , "hedgehog-corpus"
                  , "hedgehog-quickcheck"
                  , "hi-file-parser"
