@@ -288,7 +288,7 @@ constraintList = [ "abstract-deque"
                  , "hedgehog-quickcheck"
                  , "hi-file-parser"
                  , "hinotify"
-                 , "hjsmin"
+                 , "hjsmin <= 0.2.0.4"          -- newer versions require bytestring-0.11.x
                  , "hledger"
                  , "hledger-interest"
                  , "hledger-lib"
