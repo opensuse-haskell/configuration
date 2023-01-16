@@ -441,7 +441,7 @@ constraintList = [ "abstract-deque"
                  , "parsers"
                  , "partial-order"
                  , "path"
-                 , "path-io"
+                 , "path-io < 1.8"
                  , "path-pieces"
                  , "pem"
                  , "persistent < 2.12.0.0 || > 2.12.0.0" -- buggy release
