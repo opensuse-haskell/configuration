@@ -1,0 +1,12 @@
+Index: gtk2hs-buildtools.spec
+===================================================================
+--- gtk2hs-buildtools.spec	(revision 1)
++++ gtk2hs-buildtools.spec	(working copy)
+@@ -27,6 +27,7 @@
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
++BuildRequires:  alex happy
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-directory-devel
+ BuildRequires:  ghc-filepath-devel
