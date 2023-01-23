@@ -1,19 +1,19 @@
-diff --git a/pandoc.spec b/pandoc.spec
-index 3df2553..86f2ced 100644
---- a/pandoc.spec
-+++ b/pandoc.spec
-@@ -28,6 +28,7 @@ URL:            https://hackage.haskell.org/package/%{name}
+Index: pandoc.spec
+===================================================================
+--- pandoc.spec	(revision 72)
++++ pandoc.spec	(working copy)
+@@ -28,6 +28,7 @@
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source10:       pandoc-pdf.readme
- BuildRequires:  chrpath
-+BuildRequires:  fdupes
  BuildRequires:  ghc-Cabal-devel
- BuildRequires:  ghc-HTTP-devel
+ BuildRequires:  ghc-Glob-devel
++BuildRequires:  fdupes
  BuildRequires:  ghc-JuicyPixels-devel
-@@ -148,6 +149,8 @@ cp %{SOURCE10} .
+ BuildRequires:  ghc-SHA-devel
+ BuildRequires:  ghc-aeson-devel
+@@ -149,6 +150,8 @@
+ 
  %install
  %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
 +# Link duplicate template files
 +%fdupes %{buildroot}%{_datadir}/%{pkg_name}-%{version}/data/templates/
  
