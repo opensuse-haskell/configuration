@@ -634,7 +634,7 @@ constraintList = [ "abstract-deque"
                  , "uuid"
                  , "uuid-types"
                  , "vault"
-                 , "vector"
+                 , "vector <0.13"         -- can't update to 0.13.x because vector-algorithms because of tdigest
                  , "vector-algorithms < 0.9"            -- keep tdigests building
                  , "vector-binary-instances"
                  , "vector-builder"
