@@ -360,7 +360,7 @@ constraintList = [ "abstract-deque"
                  , "js-dgtable"
                  , "js-flot"
                  , "js-jquery"
-                 , "JuicyPixels < 3.3.8"        -- newer versions require vector 0.13
+                 , "JuicyPixels"
                  , "kan-extensions"
                  , "katip"
                  , "language-c"
