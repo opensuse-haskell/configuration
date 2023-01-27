@@ -205,9 +205,9 @@ constraintList = [ "abstract-deque"
                  , "Decimal"
                  , "dense-linear-algebra"
                  , "deriving-aeson >=0.2"
-                 , "dhall < 1.41"       -- newer versions break weeder
-                 , "dhall-json < 1.7.10"  -- newer versions require dhall 1.41
-                 , "dhall-yaml < 1.2.11"  -- newer versions require dhall-json
+                 , "dhall"
+                 , "dhall-json"
+                 , "dhall-yaml"
                  , "Diff"
                  , "digest"
                  , "disk-free-space"
@@ -457,7 +457,7 @@ constraintList = [ "abstract-deque"
                  , "postgresql-simple"
                  , "pretty-hex"
                  , "pretty-show"
-                 , "pretty-simple < 4.1"        -- newer versions break our old version of dhall
+                 , "pretty-simple"
                  , "prettyprinter"
                  , "prettyprinter-ansi-terminal"
                  , "primitive < 0.7.4.0 || > 0.7.4.0"   -- version 0.7.4.0 breaks cborg
