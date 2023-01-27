@@ -279,8 +279,8 @@ constraintList = [ "abstract-deque"
                  , "haddock-library < 1.11"
                  , "half"
                  , "happy <1.21.0 || >1.21.0"   -- 1.21.0 is deprecated on Hackage
-                 , "hashable < 1.4.0.0"         -- TODO: try to remove this constraint
-                 , "hashtables < 1.3"           -- version 1.3 and beyond need hashable 1.4.x
+                 , "hashable"
+                 , "hashtables"
                  , "haskell-lexer"
                  , "haskell-src-exts"
                  , "haskell-src-meta"
