@@ -1,0 +1,12 @@
+Index: ghc-libmpd.spec
+===================================================================
+--- ghc-libmpd.spec	(revision 1)
++++ ghc-libmpd.spec	(working copy)
+@@ -60,6 +60,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver text '>= 0.11 && < 2' '< 3'
+ 
+ %build
+ %ghc_lib_build
