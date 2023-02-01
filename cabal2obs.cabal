@@ -50,6 +50,7 @@ executable cabal2obs
                     Config.Ghc810x
                     Config.Ghc90x
                     Config.Ghc92x
+                    Config.Ghc94x
                     Oracle
                     Oracle.Hackage
                     ParseStackageConfig
