@@ -1,0 +1,12 @@
+Index: ghc-ghc-lib-parser.spec
+===================================================================
+--- ghc-ghc-lib-parser.spec	(revision 1)
++++ ghc-ghc-lib-parser.spec	(working copy)
+@@ -40,6 +40,7 @@
+ BuildRequires:  ghc-time-devel
+ BuildRequires:  ghc-transformers-devel
+ BuildRequires:  ghc-unix-devel
++BuildRequires:  alex happy
+ ExcludeArch:    %{ix86}
+ 
+ %description
