@@ -77,7 +77,6 @@ forcedExectableNames =
   , "msi-kb-backlit"
   , "omnifmt"
   , "osdkeys"
-  , "pandoc"
   , "pointfree"
   , "pointful"
   , "postgresql-schema"
