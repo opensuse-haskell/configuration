@@ -1,0 +1,12 @@
+Index: ghc-cairo.spec
+===================================================================
+--- ghc-cairo.spec	(revision 3)
++++ ghc-cairo.spec	(working copy)
+@@ -61,6 +61,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver text '>= 1.0.0.0 && < 1.3' '< 5'
+ 
+ %build
+ %ghc_lib_build
