@@ -458,6 +458,7 @@ constraintList = [ "adjunctions ^>= 4.4.2 "
                  , "timezone-series >=0.1 && <0.2 || >=0.1 && <0.2"
                  , "glib >=0.13.0.0 && <0.14"
                  , "pretty-hex"
+                 , "gtk2hs-buildtools"
                  ]
 
 flagList :: [(String,String)]
