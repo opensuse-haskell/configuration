@@ -6,7 +6,7 @@ Index: ShellCheck.spec
  BuildRequires:  ghc-rpm-macros
  BuildRequires:  ghc-transformers-devel
  ExcludeArch:    %{ix86}
-+BuildRequires:  pandoc
++BuildRequires:  pandoc-cli
  
  %description
  The goals of ShellCheck are:
