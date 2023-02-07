@@ -2,4 +2,4 @@
 
 [submodule "tools/spec-cleaner"]
 	path = src/spec-cleaner
-	url = git://github.com/openSUSE/spec-cleaner.git
+	url = https://github.com/rpm-software-management/spec-cleaner.git
