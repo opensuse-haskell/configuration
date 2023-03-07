@@ -2,11 +2,10 @@ Index: happy.spec
 ===================================================================
 --- happy.spec	(revision 43)
 +++ happy.spec	(working copy)
-@@ -24,13 +24,18 @@
+@@ -24,12 +24,17 @@
  License:        BSD-2-Clause
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{name}-%{version}/revision/1.cabal#/%{name}.cabal
 +BuildRequires:  autoconf
 +BuildRequires:  docbook-dtd
 +BuildRequires:  docbook-xsl-stylesheets
