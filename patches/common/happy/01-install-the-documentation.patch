@@ -2,7 +2,7 @@ Index: happy.spec
 ===================================================================
 --- happy.spec	(revision 43)
 +++ happy.spec	(working copy)
-@@ -24,12 +24,17 @@
+@@ -24,17 +24,22 @@
  License:        BSD-2-Clause
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
@@ -11,8 +11,13 @@ Index: happy.spec
 +BuildRequires:  docbook-xsl-stylesheets
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-array-prof
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-base-prof
  BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-containers-prof
  BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-mtl-prof
  BuildRequires:  ghc-rpm-macros
  ExcludeArch:    %{ix86}
 +BuildRequires:  libxml2

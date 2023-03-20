@@ -13,9 +13,9 @@ Index: git-annex.spec
  BuildRequires:  ghc-DAV-devel
  BuildRequires:  ghc-IfElse-devel
 @@ -120,7 +123,21 @@
- BuildRequires:  ghc-yesod-devel
- BuildRequires:  ghc-yesod-form-devel
+ BuildRequires:  ghc-yesod-prof
  BuildRequires:  ghc-yesod-static-devel
+ BuildRequires:  ghc-yesod-static-prof
  ExcludeArch:    %{ix86}
 +BuildRequires:  git-core
 +BuildRequires:  gpg2
