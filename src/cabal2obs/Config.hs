@@ -24,6 +24,7 @@ packageSets = [ ("ghc-8.10.x", ghc810x)
               , ("ghc-9.0.x", ghc90x)
               , ("ghc-9.2.x", ghc92x)
               , ("ghc-9.4.x", ghc94x)
+              , ("ghc-9.6.x", ghc96x)
               ]
 
 knownPackageSets :: Set PackageSetId
