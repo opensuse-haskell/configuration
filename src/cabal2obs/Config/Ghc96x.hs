@@ -44,6 +44,7 @@ ghc96x = do
 --                    , "xmobar"
 --                    , "xmonad"
 --                    , "xmonad-contrib"
+--                    , "hadolint"
 --                    ]
 --
 -- resolveConstraints :: String
