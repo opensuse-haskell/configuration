@@ -8,6 +8,7 @@ import Config.Ghc810x
 import Config.Ghc90x
 import Config.Ghc92x
 import Config.Ghc94x
+import Config.Ghc96x
 import Types
 
 import Data.Map.Strict ( Map, findWithDefault, keysSet )
