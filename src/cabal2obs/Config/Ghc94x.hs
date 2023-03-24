@@ -579,6 +579,14 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "transformers-0.5.6.2"
                   , "unix-2.7.3"
                   , "xhtml-3000.2.2.1"
+
+                  -- This is a bad hack. We have some Hackage packages that are
+                  -- empty and that we don't want to package, but still opther
+                  -- libraries depend on them being available. So we list them
+                  -- as core packages to make the Cabal resolver happy even
+                  -- though we actually don't use them at build time.
+                  , "bytestring-builder-0.10.8.2.0"     -- now part of bytestring
+                  , "persistent-template-2.12.0.0"      -- now part of persistent
                   ]
 
 checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
