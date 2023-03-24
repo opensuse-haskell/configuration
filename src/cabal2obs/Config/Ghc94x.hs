@@ -459,7 +459,7 @@ flagList =
 
     -- Don't build hardware-specific optimizations into the binary based on what the
     -- build machine supports or doesn't support.
-  , ("cryptonite",                     "-support_aesni -support_rdrand -support_blake2_sse")
+  , ("cryptonite",                     "-support_aesni -support_rdrand -support_sse")
 
     -- Don't use the bundled sqlite3 library.
   , ("direct-sqlite",                  "systemlib")
