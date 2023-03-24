@@ -40,9 +40,6 @@ ghc94x = do
 --                    , "pandoc", "pandoc-cli", "pandoc-lua-engine", "pandoc-server"
 --                    , "citeproc"
 --                    , "postgresql-simple"        -- needed by emu-incident-report
---                    , "SDL"                      -- Dmitriy Perlow <dap.darkness@gmail.com> needs the
---                    , "SDL-image"                -- SDL packages for games/raincat.
---                    , "SDL-mixer"
 --                    , "ShellCheck"
 --                    , "xmobar"
 --                    , "xmonad"
@@ -333,9 +330,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "SafeSemaphore ^>= 0.10.1"
                  , "sandi ^>= 0.5"
                  , "scientific ^>= 0.3.7.0"
-                 , "SDL ^>= 0.6.7.0"
-                 , "SDL-image ^>= 0.6.2.0"
-                 , "SDL-mixer ^>= 0.6.3.0"
                  , "securemem ^>= 0.1.10"
                  , "semialign ^>= 1.2.0.1"
                  , "semigroupoids ^>= 5.3.7"
