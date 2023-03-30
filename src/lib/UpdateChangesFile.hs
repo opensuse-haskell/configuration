@@ -12,6 +12,7 @@ import MyCabal
 import Control.Monad.Extra
 import Data.Maybe
 import qualified Data.Text as Text
+import qualified Data.Text.IO as Text
 import Data.Time.Format
 import OpenSuse.GuessChangeLog
 import OpenSuse.Prelude
@@ -41,7 +42,7 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
         tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
         procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
         procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
-        gcl <- liftIO (guessChangeLog (tmpDir </> fromText oldpkg) (tmpDir </> fromText newpkg))
+        gcl <- liftIO (guessChangeLog (tmpDir </> Text.unpack oldpkg) (tmpDir </> Text.unpack newpkg))
         case gcl of
           GuessedChangeLog _ txt -> liftIO (commit txt)
           _                      -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) gcl))))
@@ -52,9 +53,9 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
     commit :: Text -> IO ()
     commit  cl' = do
       now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) pure now'
-      txt <- readTextFile changesFile <|> pure ""
+      txt <- Text.readFile changesFile <|> pure ""
       let cl = Text.unlines (map (\l -> if Text.null l then l else "  " <> l) (Text.lines cl'))
-      writeTextFile changesFile $ format
+      Text.writeFile changesFile $ format
         ("-------------------------------------------------------------------\n\
          \"%s%" - "%s%"\n\
          \\n\
