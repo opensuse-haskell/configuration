@@ -1,0 +1,13 @@
+Index: ghc-spdx.spec
+===================================================================
+--- ghc-spdx.spec	(revision 1)
++++ ghc-spdx.spec	(working copy)
+@@ -76,6 +76,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.17' '< 5'
++cabal-tweak-dep-ver Cabal '^>=3.6.0.0' '< 4'
+ 
+ %build
+ %ghc_lib_build
