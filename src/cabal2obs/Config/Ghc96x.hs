@@ -393,6 +393,9 @@ flagList =
 
     -- Compile against system zstd library
   , ("zstd",                           "-standalone")
+
+    -- Static linking breaks the build.
+  , ("hadolint",                       "-static")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
