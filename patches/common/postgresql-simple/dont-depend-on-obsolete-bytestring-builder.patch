@@ -10,6 +10,15 @@ Index: ghc-postgresql-simple.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-Only-devel
  BuildRequires:  ghc-Only-prof
+@@ -36,8 +36,6 @@
+ BuildRequires:  ghc-attoparsec-prof
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-base-prof
+-BuildRequires:  ghc-bytestring-builder-devel
+-BuildRequires:  ghc-bytestring-builder-prof
+ BuildRequires:  ghc-bytestring-devel
+ BuildRequires:  ghc-bytestring-prof
+ BuildRequires:  ghc-case-insensitive-devel
 @@ -113,7 +114,7 @@
  This package provides the Haskell %{pkg_name} profiling library.
  
