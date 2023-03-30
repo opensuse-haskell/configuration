@@ -1,0 +1,30 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 10)
++++ git-annex.spec	(working copy)
+@@ -23,6 +23,7 @@
+ License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-2-Clause AND MIT AND GPL-2.0-only
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://github.com/opensuse-haskell/git-annex/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
++Patch0:         0001-persistent-2.12.0.1-include-the-code-from-persistent.patch
+ BuildRequires:  bash-completion
+ BuildRequires:  chrpath
+ BuildRequires:  curl
+@@ -146,8 +147,6 @@
+ BuildRequires:  ghc-persistent-prof
+ BuildRequires:  ghc-persistent-sqlite-devel
+ BuildRequires:  ghc-persistent-sqlite-prof
+-BuildRequires:  ghc-persistent-template-devel
+-BuildRequires:  ghc-persistent-template-prof
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-process-prof
+ BuildRequires:  ghc-random-devel
+@@ -265,7 +264,7 @@
+ Optional dependency offering bash completion for git-annex
+ 
+ %prep
+-%autosetup
++%autosetup -p1
+ 
+ %build
+ %define cabal_configure_options -ftestsuite
