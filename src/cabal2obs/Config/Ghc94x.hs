@@ -206,7 +206,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "hledger-ui ^>= 1.28"
                  , "hlint ^>= 3.5"
                  , "hourglass ^>= 0.2.12"
-                 , "hsc2hs ^>= 0.68.8"
                  , "hscolour ^>= 1.24.4"
                  , "hslua ^>= 2.2.1"
                  , "hslua-aeson ^>= 2.2.1"
@@ -590,6 +589,7 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "transformers-0.5.6.2"
                   , "unix-2.7.3"
                   , "xhtml-3000.2.2.1"
+                  , "hsc2hs-0.68.8"  -- also provided by ghc-compiler package
 
                   -- This is a bad hack. We have some Hackage packages that are
                   -- empty and that we don't want to package, but still opther

@@ -154,7 +154,6 @@ constraintList = [ "adjunctions"
                  , "hinotify"
                  , "hlint"
                  , "hourglass"
-                 , "hsc2hs"
                  , "hscolour"
                  , "hslua"
                  , "hslua-aeson"
@@ -449,6 +448,7 @@ ghcCorePackages = [ "array-0.5.5.0"
                   , "transformers-0.6.1.0"
                   , "unix-2.8.1.0"
                   , "xhtml-3000.2.2.1"
+                  , "hsc2hs-0.68.8"  -- also provided by ghc-compiler package
                   ]
 
 checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
