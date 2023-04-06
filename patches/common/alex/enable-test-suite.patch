@@ -1,0 +1,13 @@
+Index: alex.spec
+===================================================================
+--- alex.spec	(revision 21)
++++ alex.spec	(working copy)
+@@ -16,7 +16,7 @@
+ #
+ 
+ 
+-%bcond_with tests
++%bcond_without tests
+ Name:           alex
+ Version:        3.2.7.1
+ Release:        0
