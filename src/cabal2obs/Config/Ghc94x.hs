@@ -213,21 +213,23 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "hlint ^>= 3.5"
                  , "hourglass ^>= 0.2.12"
                  , "hscolour ^>= 1.24.4"
-                 , "hslua ^>= 2.2.1"
-                 , "hslua-aeson ^>= 2.2.1"
-                 , "hslua-classes ^>= 2.2.0"
-                 , "hslua-cli ^>= 1.2.0"
-                 , "hslua-core ^>= 2.2.1"
-                 , "hslua-list ^>= 1.1.0.1"
-                 , "hslua-marshalling ^>= 2.2.1"
-                 , "hslua-module-doclayout ^>= 1.0.4"
-                 , "hslua-module-path ^>= 1.0.3"
-                 , "hslua-module-system ^>= 1.0.2"
-                 , "hslua-module-text ^>= 1.0.3.1"
-                 , "hslua-module-version ^>= 1.0.3"
-                 , "hslua-module-zip ^>= 1.0.0"
-                 , "hslua-objectorientation ^>= 2.2.1"
-                 , "hslua-packaging ^>= 2.2.1"
+                 , "hslua >= 2.2.1"
+                 , "hslua-aeson >= 2.2.1"
+                 , "hslua-classes >= 2.2.0"
+                 , "hslua-cli >=1.4.1 && <1.5"
+                 , "hslua-core >=2.3.1 && <2.4"
+                 , "hslua-list >= 1.1.0.1"
+                 , "hslua-marshalling >= 2.2.1"
+                 , "hslua-module-doclayout >= 1.0.4"
+                 , "hslua-module-path >= 1.0.3"
+                 , "hslua-module-system >= 1.0.2"
+                 , "hslua-module-text >= 1.0.3.1"
+                 , "hslua-module-version >= 1.0.3"
+                 , "hslua-module-zip >= 1.0.0"
+                 , "hslua-objectorientation >= 2.2.1"
+                 , "hslua-packaging >= 2.2.1"
+                 , "hslua-repl >=0.1 && <0.2"
+                 , "hslua-typing >=0.1 && <0.2"
                  , "HsYAML"
                  , "html ^>= 1.0.1.2"
                  , "HTTP ^>= 4000.4.1"
@@ -250,6 +252,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "invariant ^>= 0.6"
                  , "iproute ^>= 1.7.12"
                  , "ipynb ^>= 0.2"
+                 , "isocline >=1.0 && <1.1"
                  , "iwlib ^>= 0.1.2"
                  , "jira-wiki-markup ^>= 1.5.0"
                  , "js-chart ^>= 2.9.4.1"
@@ -264,7 +267,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "lift-type ^>= 0.1.1.1"
                  , "lifted-base ^>= 0.2.3.12"
                  , "lpeg ^>= 1.0.3"
-                 , "lua ^>= 2.2.1"
+                 , "lua >=2.3 && <2.4"
                  , "lucid ^>= 2.11.1"
                  , "lukko ^>= 0.1.1.3"
                  , "magic ^>= 1.1"
@@ -301,7 +304,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "optparse-applicative ^>= 0.17.0.0"
                  , "pandoc ^>= 3.0.1"
                  , "pandoc-cli ^>= 0.1"
-                 , "pandoc-lua-engine == 0.1"
+                 , "pandoc-lua-engine >=0.2 && <0.3"
                  , "pandoc-lua-marshal ^>= 0.2.0"
                  , "pandoc-server ^>= 0.1"
                  , "pandoc-types ^>= 1.23"
@@ -538,6 +541,9 @@ flagList =
 
     -- Static linking breaks the build.
   , ("hadolint",                       "-static")
+
+    -- Enable LUA support.
+  , ("pandoc-cli",                     "+lua +server")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
@@ -603,6 +609,9 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "bytestring-builder-0.10.8.2.0"     -- now part of bytestring
                   , "persistent-template-2.12.0.0"      -- now part of persistent
                   ]
+
+-- TODO: Detect at compile-time or run-time if constraintList contains
+-- duplicate entries.
 
 checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
 checkConsistency pset@PackageSetConfig {..} = do
