@@ -445,8 +445,8 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "wai-cors ^>= 0.2.7"
                  , "wai-extra ^>= 3.1.13.0"
                  , "wai-logger ^>= 2.4.0"
-                 , "warp ^>= 3.3.23"
-                 , "warp-tls ^>= 3.3.4 && (< 3.3.7 || > 3.3.7)" -- version 3.3.7 is deprecated
+                 , "warp < 3.3.26"      -- newer versions depend on crypton
+                 , "warp-tls < 3.3.7"   -- newer versions depend on crypton
                  , "witherable ^>= 0.4.2"
                  , "wizards ^>= 1.0.3"
                  , "word-wrap ^>= 0.5"
