@@ -237,7 +237,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "http-api-data >=0.4.1 && <0.5.1"    -- TODO: constraints from servant-0.19.1
                  , "http-client ^>= 0.7.13.1"
                  , "http-client-restricted ^>= 0.0.5"
-                 , "http-client-tls ^>= 0.3.6.1"
+                 , "http-client-tls < 0.3.6.2"          -- newer versions pull in crypton, which requires tls-1.7.x
                  , "http-conduit ^>= 2.3.8"
                  , "http-date ^>= 0.0.11"
                  , "http-media ^>= 0.8.0.0"
