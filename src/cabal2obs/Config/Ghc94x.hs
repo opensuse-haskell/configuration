@@ -304,7 +304,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "optics-core ^>= 0.4.1"
                  , "optparse-applicative ^>= 0.18.1.0"
                  , "ordered-containers"
-                 , "pandoc >= 3.0.1"
+                 , "pandoc < 3.1.4"     -- newer versions depend on crypton
                  , "pandoc-cli >= 0.1"
                  , "pandoc-lua-engine >=0.2 && <0.3"
                  , "pandoc-lua-marshal >= 0.2.0"
