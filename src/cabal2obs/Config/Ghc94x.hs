@@ -306,7 +306,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "ordered-containers"
                  , "pandoc < 3.1.4"     -- newer versions depend on crypton
                  , "pandoc-cli >= 0.1"
-                 , "pandoc-lua-engine >=0.2 && <0.3"
+                 , "pandoc-lua-engine >=0.2 && <0.2.1"
                  , "pandoc-lua-marshal >= 0.2.0"
                  , "pandoc-server >= 0.1"
                  , "pandoc-types >= 1.23"
