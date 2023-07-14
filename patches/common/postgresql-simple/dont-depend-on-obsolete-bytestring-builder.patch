@@ -2,10 +2,9 @@ Index: ghc-postgresql-simple.spec
 ===================================================================
 --- ghc-postgresql-simple.spec	(revision 15)
 +++ ghc-postgresql-simple.spec	(working copy)
-@@ -27,6 +27,7 @@
+@@ -27,5 +27,6 @@
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/1.cabal#/%{pkg_name}.cabal
 +Patch0:         https://github.com/haskellari/postgresql-simple/pull/110.patch#/dont-depend-on-obsolete-bytestring-builder.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-Only-devel
@@ -19,13 +18,12 @@ Index: ghc-postgresql-simple.spec
  BuildRequires:  ghc-bytestring-devel
  BuildRequires:  ghc-bytestring-prof
  BuildRequires:  ghc-case-insensitive-devel
-@@ -114,8 +113,9 @@
+@@ -114,7 +113,8 @@
  This package provides the Haskell %{pkg_name} profiling library.
  
  %prep
 -%autosetup -n %{pkg_name}-%{version}
 +%setup -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
 +%patch0 -p1
  
  %build
