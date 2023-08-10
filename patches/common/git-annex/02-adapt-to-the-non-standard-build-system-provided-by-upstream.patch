@@ -54,7 +54,7 @@ Index: git-annex.spec
  
  %install
  %ghc_bin_install
-+make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop
++make DESTDIR=%{buildroot} BUILDER=./Setup install-bins install-mans install-completions install-desktop
  
  %files
  %license COPYRIGHT

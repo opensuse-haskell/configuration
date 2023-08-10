@@ -5,7 +5,7 @@ Index: git-annex.spec
 @@ -179,6 +179,8 @@
  %install
  %ghc_bin_install
- make DESTDIR=%{buildroot} BUILDER=./Setup install-mans install-completions install-desktop
+ make DESTDIR=%{buildroot} BUILDER=./Setup install-bins install-mans install-completions install-desktop
 +rm %{buildroot}%{_datadir}/fish/vendor_completions.d/git-annex.fish
 +rm %{buildroot}%{_datadir}/zsh/site-functions/_git-annex
  
