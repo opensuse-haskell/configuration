@@ -417,7 +417,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "type-equality ^>= 1"
                  , "typed-process ^>= 0.2.10.1"
                  , "typst >=0.1 && <0.2"
-                 , "typst-symbols == 0.1.2"             -- newer versions require an update of texmath
+                 , "typst-symbols ^>=0.1.4"
                  , "uglymemo ^>= 0.1.0.1"
                  , "unicode-collation ^>= 0.1.3.3"
                  , "unicode-data ^>= 0.4.0.1"
