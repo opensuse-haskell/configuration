@@ -316,7 +316,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "parser-combinators ^>= 1.3.0"
                  , "path-pieces ^>= 0.2.1"
                  , "pem ^>= 0.2.4"
-                 , "persistent ^>= 2.14.4.4"
+                 , "persistent >= 2.14.4.4 && < 2.14.5.2"       -- newer versions pull in attoparsec-aeson
                  , "persistent-sqlite ^>= 2.13.1.1"
                  , "polyparse ^>= 1.13"
                  , "postgresql-libpq ^>= 0.9.5.0"
