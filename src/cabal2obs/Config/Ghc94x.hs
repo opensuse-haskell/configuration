@@ -388,7 +388,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "tar ^>= 0.5.1.1"
                  , "tasty ^>= 1.4.3"
                  , "tasty-hunit ^>= 0.10.0.3"
-                 , "tasty-quickcheck ^>= 0.10.2"
+                 , "tasty-quickcheck == 0.10.2"  -- Newer versions require the latest tasty.
                  , "tasty-rerun ^>= 1.1.18"
                  , "temporary ^>= 1.3"
                  , "terminal-size ^>= 0.3.3"
