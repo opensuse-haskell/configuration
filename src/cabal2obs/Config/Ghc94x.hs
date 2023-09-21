@@ -467,7 +467,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "xss-sanitize ^>= 0.3.7.1"
                  , "yaml ^>= 0.11.8.0"
                  , "yesod ^>= 1.6.2.1"
-                 , "yesod-core ^>= 1.6.24.0"
+                 , "yesod-core < 1.6.24.5"      -- newer versions depend on attoparsec-aeson
                  , "yesod-form ^>= 1.7.3"
                  , "yesod-persistent ^>= 1.6.0.8"
                  , "yesod-static ^>= 1.6.1.0"
