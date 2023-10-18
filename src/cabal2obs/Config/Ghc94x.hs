@@ -75,7 +75,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "assoc ^>= 1.1"
                  , "async ^>= 2.2.4"
                  , "attoparsec ^>= 0.14.4"
-                 , "attoparsec-iso8601 ^>= 1.1.0.0"
+                 , "attoparsec-iso8601 < 1.1.0.1"       -- can't update because of new integer-conversion dependency
                  , "auto-update ^>= 0.1.6"
                  , "aws ^>= 0.23"
                  , "base-compat >=0.13.0 && <0.14"
