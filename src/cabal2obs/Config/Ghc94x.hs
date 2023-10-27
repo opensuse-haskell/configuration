@@ -376,7 +376,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "skylighting-format-context ^>= 0.1.0.1"
                  , "skylighting-format-latex ^>= 0.1"
                  , "socks ^>= 0.6.1"
-                 , "some ^>= 1.0.4.1"
+                 , "some < 1.0.6"               -- newer versions require the latest base-orphans library
                  , "sop-core ^>= 0.5.0.2"
                  , "spdx"
                  , "split ^>= 0.2.3.5"
