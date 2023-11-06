@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc96x :: Action PackageSetConfig
 ghc96x = do
-  let compiler = "ghc-9.6.1"
+  let compiler = "ghc-9.6.3"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
@@ -434,28 +434,28 @@ readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
 
 ghcCorePackages :: PackageSet
 ghcCorePackages = [ "array-0.5.5.0"
-                  , "base-4.18.0.0"
+                  , "base-4.18.1.0"
                   , "binary-0.8.9.1"
-                  , "bytestring-0.11.4.0"
+                  , "bytestring-0.11.5.2"
                   , "Cabal-3.10.1.0"
                   , "Cabal-syntax-3.10.1.0"
                   , "containers-0.6.7"
                   , "deepseq-1.4.8.1"
                   , "directory-1.3.8.1"
                   , "exceptions-0.10.7"
-                  , "filepath-1.4.100.1"
-                  , "ghc-9.6.1"
+                  , "filepath-1.4.100.4"
+                  , "ghc-9.6.3"
                   , "ghc-bignum-1.3"
-                  , "ghc-boot-9.6.1"
-                  , "ghc-boot-th-9.6.1"
+                  , "ghc-boot-9.6.3"
+                  , "ghc-boot-th-9.6.3"
                   , "ghc-compact-0.1.0.0"
-                  , "ghc-heap-9.6.1"
+                  , "ghc-heap-9.6.3"
                   , "ghc-prim-0.10.0"
-                  , "ghci-9.6.1"
+                  , "ghci-9.6.3"
                   , "haskeline-0.8.2.1"
                   , "hpc-0.6.2.0"
                   , "integer-gmp-1.1"
-                  , "libiserv-9.6.1"
+                  , "libiserv-9.6.3"
                   , "mtl-2.3.1"
                   , "parsec-3.1.16.1"
                   , "pretty-1.1.3.6"
