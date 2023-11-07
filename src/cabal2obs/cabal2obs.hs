@@ -15,6 +15,7 @@ import MyCabal
 
 import Control.Monad.Extra
 import qualified Data.ByteString as BSS
+import qualified Data.ByteString.Char8 as BSS8
 import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
@@ -151,7 +152,7 @@ main = do
       cabal <- parseCabalFile pkgid cabalFile
       let rev = packageRevision cabal
       if rev > 0
-         then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
+         then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") (stripCrLf cabalFile))
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
       let lookupPackageSet d = Map.member (depPkgName d) (packageSet pset `Map.union` corePackages pset `Map.union` localLibraries cabal)
@@ -239,3 +240,6 @@ localLibraries gpd = Map.fromList (libs1 ++ libs2)
   where
     libs1 = [ (mkPackageName (unUnqualComponentName lname), version0) | lib <- subLibraries (packageDescription gpd), LSubLibName lname <- [libName lib] ]
     libs2 = [ (mkPackageName (unUnqualComponentName lname), version0) | (lname, _) <- condSubLibraries gpd ]
+
+stripCrLf :: BSS.ByteString -> BSS.ByteString
+stripCrLf = BSS8.unlines . map (BSS8.dropWhileEnd (=='\r')) . BSS8.lines
