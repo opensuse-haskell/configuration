@@ -1,0 +1,12 @@
+Index: ghc-digits.spec
+===================================================================
+--- ghc-digits.spec	(revision 1)
++++ ghc-digits.spec	(working copy)
+@@ -65,6 +65,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++rm Setup.lhs
+ 
+ %build
+ %ghc_lib_build
