@@ -74,7 +74,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "assoc ^>= 1.1"
                  , "async ^>= 2.2.4"
                  , "attoparsec ^>= 0.14.4"
-                 , "attoparsec-aeson ^>= 2.1.0.0"
                  , "auto-update ^>= 0.1.6"
                  , "aws ^>= 0.24.1"
                  , "base-compat ^>= 0.13.1"
@@ -607,6 +606,7 @@ ghcCorePackages = [ "array-0.5.5.0"
                   -- though we actually don't use them at build time.
                   , "bytestring-builder-0.10.8.2.0"     -- now part of bytestring
                   , "persistent-template-2.12.0.0"      -- now part of persistent
+                  , "attoparsec-aeson-2.1.0.0"          -- part of aeson-2.1, but not 2.2
                   ]
 
 -- TODO: Detect at compile-time or run-time if constraintList contains
