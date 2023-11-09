@@ -438,7 +438,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "vector-stream ^>= 0.1.0.0"
                  , "vector-th-unbox ^>= 0.2.2"
                  , "void ^>= 0.7.3"
-                 , "vty ^>= 6.0"
+                 , "vty < 6.0"          -- the latest version breaks hledger-ui-1.31
                  , "vty-crossplatform ^>= 0.2.0.0"
                  , "vty-unix ^>= 0.1.0.0"
                  , "wai ^>= 3.2.3"
