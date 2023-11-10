@@ -1,0 +1,21 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 5)
++++ xmobar.spec	(working copy)
+@@ -27,6 +27,7 @@
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
+ Patch1:         0001-Fix-build-errors-with-base-4.18.x-and-mtl-2.3.x.patch
++Patch2:         re-enable-support-for-libmpd.patch
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-X11-devel
+@@ -35,6 +36,8 @@
+ BuildRequires:  ghc-X11-xft-prof
+ BuildRequires:  ghc-aeson-devel
+ BuildRequires:  ghc-aeson-prof
++BuildRequires:  ghc-libmpd-devel
++BuildRequires:  ghc-libmpd-prof
+ BuildRequires:  ghc-alsa-core-devel
+ BuildRequires:  ghc-alsa-core-prof
+ BuildRequires:  ghc-alsa-mixer-devel
