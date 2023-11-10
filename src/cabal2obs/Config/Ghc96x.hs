@@ -197,7 +197,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "gtk2hs-buildtools ^>= 0.13"
                  , "hackage-security ^>= 0.6.2.3"
                  , "haddock-library ^>= 1.11.0"
-                 , "hadolint ^>= 1.22.1"
+                 , "hadolint > 2.12"
                  , "happy ^>= 1.20.1.1"
                  , "hashable ^>= 1.4.3.0"
                  , "hashtables ^>= 1.3.1"
@@ -467,6 +467,8 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "yesod-static ^>= 1.6.1.0"
                  , "zip-archive ^>= 0.4.3"
                  , "zlib ^>= 0.6.3.0"
+                 , "colourista", "foldl", "ilist", "semver", "spdx", "timerep >= 2.0", "monoid-subclasses >= 0.4.1"
+                 , "commutative-semigroups >=0.1 && <0.2", "primes >=0.2 && <0.3"
                  ]
 
 flagList :: [(String,String)]
