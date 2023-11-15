@@ -1,16 +1,16 @@
 Index: xmobar.spec
 ===================================================================
---- xmobar.spec	(revision 5)
+--- xmobar.spec	(revision 11)
 +++ xmobar.spec	(working copy)
-@@ -27,6 +27,7 @@
+@@ -26,6 +26,7 @@
+ License:        BSD-3-Clause
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
- Patch1:         0001-Fix-build-errors-with-base-4.18.x-and-mtl-2.3.x.patch
-+Patch2:         re-enable-support-for-libmpd.patch
++Patch1:         re-enable-support-for-libmpd.patch
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-X11-devel
-@@ -35,6 +36,8 @@
+@@ -34,6 +35,8 @@
  BuildRequires:  ghc-X11-xft-prof
  BuildRequires:  ghc-aeson-devel
  BuildRequires:  ghc-aeson-prof
@@ -19,3 +19,12 @@ Index: xmobar.spec
  BuildRequires:  ghc-alsa-core-devel
  BuildRequires:  ghc-alsa-core-prof
  BuildRequires:  ghc-alsa-mixer-devel
+@@ -152,7 +155,7 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup
++%autosetup -p1
+ 
+ %build
+ %define cabal_configure_options -fall_extensions
