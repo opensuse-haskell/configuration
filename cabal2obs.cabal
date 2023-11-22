@@ -59,7 +59,7 @@ executable cabal2obs
                     Types
   hs-source-dirs:   src/cabal2obs
   build-depends:    base
-                  , bytestring            >= 0.10.12.0
+                  , bytestring
                   , cabal2obs
                   , cabal2spec            >= 2.7 && < 2.8
                   , containers
