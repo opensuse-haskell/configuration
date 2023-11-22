@@ -17,7 +17,8 @@ Index: ghc-tasty.spec
  %prep
 -%autosetup -n %{pkg_name}-%{version}
 +%setup -q -n %{pkg_name}-%{version}
- cp -p %{SOURCE1} %{pkg_name}.cabal
+-cp -p %{SOURCE1} %{pkg_name}.cabal
++tr -d '\r' <%{SOURCE1} >%{pkg_name}.cabal
 +%autopatch -p0
  
  %build
