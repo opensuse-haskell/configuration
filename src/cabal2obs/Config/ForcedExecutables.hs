@@ -56,6 +56,7 @@ forcedExectableNames =
   , "highlighting-kate"
   , "hindent"
   , "hledger"
+  , "hledger-ui"
   , "hledger-web"
   , "hlint"
   , "holy-project"
