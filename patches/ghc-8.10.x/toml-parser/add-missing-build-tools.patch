@@ -1,0 +1,12 @@
+Index: ghc-toml-parser.spec
+===================================================================
+--- ghc-toml-parser.spec	(revision 1)
++++ ghc-toml-parser.spec	(working copy)
+@@ -42,6 +42,7 @@
+ BuildRequires:  ghc-text-devel
+ BuildRequires:  ghc-time-devel
+ BuildRequires:  ghc-transformers-devel
++BuildRequires:  alex happy
+ ExcludeArch:    %{ix86}
+ %if %{with tests}
+ BuildRequires:  ghc-hspec-devel
