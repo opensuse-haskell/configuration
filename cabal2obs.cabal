@@ -67,7 +67,7 @@ executable cabal2obs
                   , distribution-opensuse
                   , extra
                   , shake                 >= 0.16
-                  , tar                   > 0.5
+                  , tar                   > 0.6
                   , text
                   , time
   default-language: Haskell2010
