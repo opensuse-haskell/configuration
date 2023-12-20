@@ -1,0 +1,12 @@
+Index: ghc-digest.spec
+===================================================================
+--- ghc-digest.spec	(revision 4)
++++ ghc-digest.spec	(working copy)
+@@ -34,6 +34,7 @@
+ BuildRequires:  pkgconfig
+ BuildRequires:  pkgconfig(zlib)
+ ExcludeArch:    %{ix86}
++BuildRequires:  gcc-c++
+ 
+ %description
+ This package provides efficient hash implementations for strict and lazy
