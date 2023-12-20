@@ -425,7 +425,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "type-equality ^>= 1"
                  , "typed-process ^>= 0.2.11.1"
                  , "typst ^>= 0.3.2.1"
-                 , "typst-symbols < 0.1.5"      -- weirdly, typst doesn't accept the minor version update
+                 , "typst-symbols >=0.1.5 && <0.1.6"
                  , "uglymemo ^>= 0.1.0.1"
                  , "unicode-collation ^>= 0.1.3.5"
                  , "unicode-data ^>= 0.4.0.1"
