@@ -6,7 +6,7 @@ Index: pandoc-cli.spec
  Provides:       pandoc = 3.0.1
  Obsoletes:      pandoc < 3
  ExcludeArch:    %{ix86}
-+Requires:       ghc-pandoc >= 3.0
++Requires:       ghc-pandoc = %{version}
  
  %description
  Pandoc-cli provides a command-line executable that uses the pandoc library to

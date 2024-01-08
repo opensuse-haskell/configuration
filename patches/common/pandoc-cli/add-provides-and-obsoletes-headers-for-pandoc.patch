@@ -6,7 +6,7 @@ Index: pandoc-cli.spec
  BuildRequires:  ghc-wai-extra-devel
  BuildRequires:  ghc-warp-devel
  ExcludeArch:    %{ix86}
-+Provides:       pandoc = 3.0.1
++Provides:       pandoc = %{version}
 +Obsoletes:      pandoc < 3
  
  %description
