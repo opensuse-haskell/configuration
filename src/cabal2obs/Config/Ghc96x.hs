@@ -75,7 +75,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "async ^>= 2.2.4"
                  , "attoparsec ^>= 0.14.4"
                  , "auto-update ^>= 0.1.6"
-                 , "aws ^>= 0.24.1"
+                 , "aws < 0.24.2"       -- avoid depending on aeson 2.2.x
                  , "base-compat ^>= 0.13.1"
                  , "base-compat-batteries ^>= 0.13.1"
                  , "base-orphans ^>= 0.9.1"
