@@ -10,12 +10,8 @@ Index: ghc-yesod-persistent.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel
  BuildRequires:  ghc-base-prof
-@@ -35,8 +36,6 @@
- BuildRequires:  ghc-conduit-prof
+@@ -35,4 +36,3 @@
  BuildRequires:  ghc-persistent-devel
- BuildRequires:  ghc-persistent-prof
 -BuildRequires:  ghc-persistent-template-devel
--BuildRequires:  ghc-persistent-template-prof
  BuildRequires:  ghc-resource-pool-devel
- BuildRequires:  ghc-resource-pool-prof
  BuildRequires:  ghc-resourcet-devel

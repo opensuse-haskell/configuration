@@ -10,14 +10,10 @@ Index: git-annex.spec
  BuildRequires:  bash-completion
  BuildRequires:  chrpath
  BuildRequires:  curl
-@@ -146,8 +147,6 @@
- BuildRequires:  ghc-persistent-prof
+@@ -146,4 +147,3 @@
  BuildRequires:  ghc-persistent-sqlite-devel
- BuildRequires:  ghc-persistent-sqlite-prof
 -BuildRequires:  ghc-persistent-template-devel
--BuildRequires:  ghc-persistent-template-prof
  BuildRequires:  ghc-process-devel
- BuildRequires:  ghc-process-prof
  BuildRequires:  ghc-random-devel
 @@ -265,7 +264,7 @@
  Optional dependency offering bash completion for git-annex
