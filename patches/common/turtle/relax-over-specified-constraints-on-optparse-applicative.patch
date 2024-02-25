@@ -1,0 +1,12 @@
+Index: ghc-turtle.spec
+===================================================================
+--- ghc-turtle.spec	(revision 2e5f49b37f9b4f3b194640d65ceb497e)
++++ ghc-turtle.spec	(working copy)
+@@ -100,6 +100,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver optparse-applicative "< 0.18" "< 1"
+ 
+ %build
+ %ghc_lib_build

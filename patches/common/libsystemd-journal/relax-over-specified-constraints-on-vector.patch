@@ -1,13 +1,12 @@
 Index: ghc-libsystemd-journal.spec
 ===================================================================
---- ghc-libsystemd-journal.spec	(revision 10)
+--- ghc-libsystemd-journal.spec	(revision 532d900672ade22a7e6f6dd4cdc794dc)
 +++ ghc-libsystemd-journal.spec	(working copy)
-@@ -61,7 +61,8 @@
- 
+@@ -63,6 +63,7 @@
  %prep
  %autosetup -n %{pkg_name}-%{version}
  cp -p %{SOURCE1} %{pkg_name}.cabal
-+cabal-tweak-dep-ver semigroups '< 0.20' '< 1'
++cabal-tweak-dep-ver vector "< 0.13" "< 1"
  
  %build
  %ghc_lib_build

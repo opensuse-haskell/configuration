@@ -1,0 +1,12 @@
+Index: ghc-text-metrics.spec
+===================================================================
+--- ghc-text-metrics.spec	(revision e0390055b567671f9df02290d9969c64)
++++ ghc-text-metrics.spec	(working copy)
+@@ -51,6 +51,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver vector "<0.13" "< 1"
+ 
+ %build
+ %ghc_lib_build

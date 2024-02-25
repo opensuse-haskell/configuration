@@ -1,0 +1,13 @@
+Index: ghc-dbus.spec
+===================================================================
+--- ghc-dbus.spec	(revision 77445b0f46d392b5d2720a041fedbe84)
++++ ghc-dbus.spec	(working copy)
+@@ -103,6 +103,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver lens "<5.2" "< 6"
++cabal-tweak-dep-ver vector "<0.13" "< 1"
+ 
+ %build
+ %ghc_lib_build
