@@ -126,7 +126,6 @@ constraintList = [ "adjunctions ^>= 4.4"
                  , "random-shuffle ^>= 0.0.4"
                  , "recursion-schemes ^>= 5.2.2.2"
                  , "reducers ^>= 3.12.4"
-                 , "rio-orphans ^>= 0.1.2.0"
                  , "serialise ^>= 0.2.4.0"
                  , "servant-client"
                  , "servant-client-core"
@@ -182,6 +181,7 @@ constraintList = [ "adjunctions ^>= 4.4"
                  , "vty-crossplatform"
                  , "vty-unix"
 
+                 -- DELETED: rio-orphans
                  -- DELETED: weeder
                  -- DELETED: ekg
                  -- DELETED: ekg-json
