@@ -9,7 +9,7 @@ license:       GPL-3
 license-file:  LICENSE
 author:        Peter Simons, Ondřej Súkup
 maintainer:    opensuse-haskell@opensuse.org
-tested-with:   GHC == 9.4.4
+tested-with:   GHC == 9.4.8 || == 9.6.4 || == 9.8.2
 category:      Distribution
 homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
@@ -25,7 +25,7 @@ library
                     UpdateChangesFile
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
-                  , Cabal                 == 3.8.*
+                  , Cabal                 >= 3.8 && < 3.11
                   , directory
                   , distribution-opensuse >= 1.1.3 && < 1.2
                   , extra
