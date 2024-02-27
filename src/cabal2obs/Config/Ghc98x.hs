@@ -457,7 +457,8 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "zlib ^>= 0.6.3.0"
 
                  , "attoparsec-aeson ^>= 2.2"
-
+                 , "gtk2hs-buildtools"
+                 , "c2hs", "language-c >=0.7.1 && <0.10"
 
                  , "cairo >=0.13", "extensible-exceptions >=0.1 && <0.2", "pango >=0.13", "parsec-numbers >=0.1.0", "regex-compat"
                  , "glib >=0.13.0.0 && <0.14"
