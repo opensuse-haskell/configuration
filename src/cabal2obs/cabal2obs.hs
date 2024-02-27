@@ -93,7 +93,7 @@ main = do
 
     -- Depend on all active package set targets.
     phony "all" $
-      need ["ghc-9.6.x"]
+      need ["ghc-9.8.x"]
 
     -- Every (phony) package set target depends on the (real) spec file.
     forM_ (Set.toList knownPackageSets) $ \psid ->
@@ -172,7 +172,7 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     buildDir </> "packages.csv" %> \out -> do
-      let psid = PackageSetId "ghc-9.6.x"
+      let psid = PackageSetId "ghc-9.8.x"
       pkgs <- packageSet <$> getPackageSet psid
       ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
         BuildName bn <- getBuildName (psid, PackageIdentifier pn v)
