@@ -1,0 +1,12 @@
+Index: ghc-filepath-bytestring.spec
+===================================================================
+--- ghc-filepath-bytestring.spec	(revision 3)
++++ ghc-filepath-bytestring.spec	(working copy)
+@@ -92,6 +92,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base "< 4.19" "< 5"
+ 
+ %build
+ %ghc_lib_build
