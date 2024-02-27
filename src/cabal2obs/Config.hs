@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Config ( knownPackageSets, addConfigOracle ) where
 

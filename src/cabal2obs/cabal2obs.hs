@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Main ( main ) where
 

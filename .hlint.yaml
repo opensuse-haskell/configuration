@@ -20,7 +20,7 @@
   - { name: FlexibleInstances, within: [MyCabal, Oracle.Hackage] }
 
 - flags:
-  - { name: -fno-warn-orphans, within: [MyCabal] }
+  - { name: -fno-warn-orphans, within: [MyCabal, Config, Oracle.Hackage, Main] }
 
 - modules:
   - { name: Distribution.Compat.CharParsing, within: [MyCabal] }
