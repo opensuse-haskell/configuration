@@ -28,8 +28,9 @@ updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> (Vers
 updateChangesFile now' changesFile' pkg (newv,newrv) email =
   ifM (notM (testfile changesFile)) (commit mempty) $ do
     oldVs <- extractVersionUpdates (Text.unpack (format fp changesFile))
-    when (null oldVs) (die (format ("cannot determine previous version number "%fp%" from") changesFile))
-    let (oldv, oldrv) = head oldVs
+    (oldv, oldrv) <- case oldVs of
+                       []  -> die (format ("cannot determine previous version number "%fp%" from") changesFile)
+                       x:_ -> pure x
     when (oldv > newv) (die (format (fp%": unsupported downgrade from version "%wp%" to "%wp) changesFile oldv newv))
     if oldv == newv
       then if | oldrv > newrv -> die (format (fp%": unsupported downgrade from revision "%wp%" to "%wp) changesFile oldrv newrv)

@@ -45,10 +45,11 @@ tryMatch :: SubmatchId -> Pattern -> String -> Maybe Version
 tryMatch i patt l = submatch i (getAllTextSubmatches (match (mkRegex patt) l)) >>= simpleParsec
 
 submatch :: SubmatchId -> [String] -> Maybe String
-submatch i xs
-  | i < 0 || null xs = Nothing
-  | i == 0           = Just (head xs)
-  | otherwise        = submatch (i-1) (tail xs)
+submatch _ [] = Nothing
+submatch i (x:xs)
+  | i < 0     = Nothing
+  | i == 0    = Just x
+  | otherwise = submatch (i-1) xs
 
 mkRegex :: Pattern -> Regex
 mkRegex = makeRegexOpts (defaultCompOpt + compIgnoreCase) execBlank
