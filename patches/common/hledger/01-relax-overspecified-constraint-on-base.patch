@@ -1,0 +1,12 @@
+Index: hledger.spec
+===================================================================
+--- hledger.spec	(revision 4)
++++ hledger.spec	(working copy)
+@@ -154,6 +154,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver base "<4.19" "< 5"
+ 
+ %build
+ %ghc_lib_build
