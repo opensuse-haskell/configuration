@@ -1,0 +1,21 @@
+Index: ghc-language-docker.spec
+===================================================================
+--- ghc-language-docker.spec	(revision 2)
++++ ghc-language-docker.spec	(working copy)
+@@ -26,6 +26,7 @@
+ License:        GPL-3.0-or-later
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch1:         https://github.com/hadolint/language-docker/pull/94.patch#/fix-build-with-ghc-9.8.x.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-base-prof
+@@ -95,7 +96,7 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p1
+ 
+ %build
+ %ghc_lib_build
