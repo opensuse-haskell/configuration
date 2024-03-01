@@ -250,7 +250,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "js-chart ^>= 2.9.4.1"
                  , "JuicyPixels ^>= 3.3.8"
                  , "kan-extensions ^>= 5.2.5"
-                 , "language-docker"
+                 , "language-docker < 12"       -- newer versions break hadolint
                  , "language-javascript ^>= 0.7.1.0"
                  , "lens ^>= 5.2.3"
                  , "libyaml ^>= 0.1.2"
