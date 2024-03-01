@@ -1,0 +1,12 @@
+Index: hadolint.spec
+===================================================================
+--- hadolint.spec	(revision 1)
++++ hadolint.spec	(working copy)
+@@ -139,6 +139,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver deepseq '<1.5' '< 2'
+ 
+ %build
+ %define cabal_configure_options -f-static
