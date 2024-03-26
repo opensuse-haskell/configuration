@@ -45,6 +45,7 @@ ghc810x = do
 
 constraintList :: ConstraintSet
 constraintList = [ "cabal-install ^>= 3.2"
+                 , "cabal-plan"
 
                  -- DELETED: rio-orphans
                  -- DELETED: weeder
@@ -573,6 +574,7 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "nothunks-0.1.3"
                   , "OddWord-1.0.2.0"
                   , "open-browser-0.2.1.0"
+                  , "optics-core-0.4.1.1"
                   , "optional-args-1.0.2"
                   , "optparse-simple-0.1.1.4"
                   , "parallel-3.2.2.0"
@@ -660,6 +662,7 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "timezone-olson-0.2.1"
                   , "timezone-series-0.1.13"
                   , "tls-session-manager-0.0.4"
+                  , "topograph-1.0.0.2"
                   , "torrent-10000.1.1"
                   , "transformers-except-0.1.2"
                   , "uglymemo-0.1.0.1"
