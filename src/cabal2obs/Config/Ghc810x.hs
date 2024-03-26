@@ -48,6 +48,7 @@ constraintList = [ "cabal-install ^>= 3.2"
                  , "cabal-plan"
                  , "hledger-interest"
 
+                 -- DELETED: hlint
                  -- DELETED: rio-orphans
                  -- DELETED: weeder
                  -- DELETED: ekg
