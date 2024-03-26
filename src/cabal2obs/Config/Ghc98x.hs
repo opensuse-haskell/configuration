@@ -96,7 +96,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "byteable ^>= 0.1.1"
                  , "byteorder ^>= 1.0.4"
                  , "cabal-doctest ^>= 1.0.9"
-                 , "cabal-install ^>= 3.10.2.1"
+                 , "cabal-install < 3.10.3.0"   -- ghc-9.8.3 will support that version
                  , "cabal-install-solver (< 3.10.3.0 || > 3.10.3.0)"
                  , "cabal-plan"
                  , "cabal2spec ^>= 2.7.0"
