@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc98x :: Action PackageSetConfig
 ghc98x = do
-  let compiler = "ghc-9.8.1"
+  let compiler = "ghc-9.8.2"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
@@ -576,24 +576,24 @@ readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
 
 ghcCorePackages :: PackageSet
 ghcCorePackages = [ "array-0.5.6.0"
-                  , "base-4.19.0.0"
+                  , "base-4.19.1.0"
                   , "binary-0.8.9.1"
-                  , "bytestring-0.12.0.2"
+                  , "bytestring-0.12.1.0"
                   , "Cabal-3.10.2.0"
                   , "Cabal-syntax-3.10.2.0"
                   , "containers-0.6.8"
                   , "deepseq-1.5.0.0"
                   , "directory-1.3.8.1"
                   , "exceptions-0.10.7"
-                  , "filepath-1.4.100.4"
-                  , "ghc-9.8.1"
+                  , "filepath-1.4.200.1"
+                  , "ghc-9.8.2"
                   , "ghc-bignum-1.3"
-                  , "ghc-boot-9.8.1"
-                  , "ghc-boot-th-9.8.1"
+                  , "ghc-boot-9.8.2"
+                  , "ghc-boot-th-9.8.2"
                   , "ghc-compact-0.1.0.0"
-                  , "ghc-heap-9.8.1"
+                  , "ghc-heap-9.8.2"
                   , "ghc-prim-0.11.0"
-                  , "ghci-9.8.1"
+                  , "ghci-9.8.2"
                   , "haskeline-0.8.2.1"
                   , "hpc-0.7.0.0"
                   , "integer-gmp-1.1"
@@ -607,10 +607,10 @@ ghcCorePackages = [ "array-0.5.6.0"
                   , "system-cxx-std-lib-1.0"
                   , "template-haskell-2.21.0.0"
                   , "terminfo-0.4.1.6"
-                  , "text-2.1"
+                  , "text-2.1.1"
                   , "time-1.12.2"
                   , "transformers-0.6.1.0"
-                  , "unix-2.8.3.0"
+                  , "unix-2.8.4.0"
                   , "xhtml-3000.2.2.1"
 
                   -- This package is a part of ghc-compiler.
