@@ -1,0 +1,12 @@
+Index: hledger.spec
+===================================================================
+--- hledger.spec	(revision 9)
++++ hledger.spec	(working copy)
+@@ -154,6 +154,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver process ">=1.6.19.0" ">=1.6.18.0"
+ 
+ %build
+ %ghc_lib_build
