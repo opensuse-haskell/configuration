@@ -157,7 +157,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "data-default-instances-old-locale ^>= 0.0.1"
                  , "data-fix ^>= 0.3.2"
                  , "DAV ^>= 1.3.4"
-                 , "dbus ^>= 1.3.2"
+                 , "dbus < 1.3.4"       -- TODO: newer versions require an update of network
                  , "dec ^>= 0.0.5"
                  , "Decimal ^>= 0.5.2"
                  , "dense-linear-algebra ^>= 0.1.0.0"
