@@ -432,6 +432,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "typst >=0.5.0.3 && <0.5.1"
                  , "typst-symbols >=0.1.6 && <0.1.7"      -- weirdly, typst doesn't accept minor version updates
                  , "uglymemo ^>= 0.1.0.1"
+                 , "unbounded-delays ^>= 0.1.1.1"
                  , "unicode-collation ^>= 0.1.3.6"
                  , "unicode-data ^>= 0.4.0.1"
                  , "unicode-transforms ^>= 0.4.0.1"
