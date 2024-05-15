@@ -311,9 +311,9 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "ordered-containers ^>= 0.2.3"
                  , "os-string >= 2.0.2"
                  , "pager ^>= 0.1.1.0"
-                 , "pandoc < 3.2"               -- TODO: newer versions break pandoc-server: https://github.com/jgm/pandoc/issues/9765
+                 , "pandoc"
                  , "pandoc-cli"
-                 , "pandoc-lua-engine < 0.2.1.5" -- TODO: newer versions require pandoc 3.2.x
+                 , "pandoc-lua-engine ^>= 0.2.1.5"
                  , "pandoc-lua-marshal ^>= 0.2.4"
                  , "pandoc-server"
                  , "pandoc-types ^>= 1.23.1"
