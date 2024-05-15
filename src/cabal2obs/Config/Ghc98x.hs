@@ -311,7 +311,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "ordered-containers ^>= 0.2.3"
                  , "os-string >= 2.0.2"
                  , "pager ^>= 0.1.1.0"
-                 , "pandoc"
+                 , "pandoc < 3.2"               -- TODO: newer versions break pandoc-server: https://github.com/jgm/pandoc/issues/9765
                  , "pandoc-cli"
                  , "pandoc-lua-engine ^>= 0.2.1.3"
                  , "pandoc-lua-marshal ^>= 0.2.4"
