@@ -446,7 +446,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "utf8-string ^>= 1.0.2"
                  , "utility-ht ^>= 0.0.17.1"
                  , "uuid ^>= 1.3.15"
-                 , "uuid-types ^>= 1.0.5.1"
+                 , "uuid-types (>=1.0.5 && <1.0.6)"     -- uuid doesn't accept a newer version
                  , "vault ^>= 0.3.1.5"
                  , "vector ^>= 0.13.1.0"
                  , "vector-algorithms ^>= 0.9.0.1"
