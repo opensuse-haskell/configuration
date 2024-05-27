@@ -238,7 +238,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "HsYAML ^>= 0.2.1.3"
                  , "html ^>= 1.0.1.2"
                  , "HTTP ^>= 4000.4.1"
-                 , "http-api-data ^>= 0.6"
+                 , "http-api-data < 0.6.1"              -- TODO: newer versions need the latest uuid-types
                  , "http-client ^>= 0.7.16"
                  , "http-client-restricted ^>= 0.1.0"
                  , "http-client-tls ^>= 0.3.6.3"
