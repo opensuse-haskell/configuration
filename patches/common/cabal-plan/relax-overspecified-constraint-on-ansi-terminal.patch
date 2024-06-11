@@ -1,0 +1,11 @@
+Index: cabal-plan.spec
+===================================================================
+--- cabal-plan.spec	(revision 1)
++++ cabal-plan.spec	(working copy)
+@@ -141,5 +141,6 @@
+ %prep
+ %autosetup
++cabal-tweak-dep-ver ansi-terminal "^>=1.1" "< 2"
+ 
+ %build
+ %define cabal_configure_options -fexe
