@@ -561,6 +561,9 @@ flagList =
 
     -- Enable LUA support.
   , ("pandoc-cli",                     "+lua +server")
+
+    -- Disable use of -march=native during compilation.
+  , ("hashable",                       "-arch-native")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
