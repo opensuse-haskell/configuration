@@ -2,23 +2,20 @@ Index: ghc-tasty.spec
 ===================================================================
 --- ghc-tasty.spec	(revision 6)
 +++ ghc-tasty.spec	(working copy)
-@@ -26,6 +26,8 @@
+@@ -26,5 +26,7 @@
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
- Source1:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/revision/2.cabal#/%{pkg_name}.cabal
 +# https://github.com/UnkindPartition/tasty/pull/371
 +Patch0:         riscv64-unbounded-delays.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-ansi-terminal-devel
  BuildRequires:  ghc-ansi-terminal-prof
-@@ -78,8 +80,9 @@
+@@ -78,7 +80,8 @@
  This package provides the Haskell %{pkg_name} profiling library.
  
  %prep
 -%autosetup -n %{pkg_name}-%{version}
 +%setup -q -n %{pkg_name}-%{version}
--cp -p %{SOURCE1} %{pkg_name}.cabal
-+tr -d '\r' <%{SOURCE1} >%{pkg_name}.cabal
 +%autopatch -p0
  
  %build
