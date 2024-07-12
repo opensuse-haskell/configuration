@@ -396,7 +396,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "tagged ^>= 0.8.8"
                  , "tagsoup ^>= 0.14.8"
                  , "tar ^>= 0.5.1.1"
-                 , "tasty ^>= 1.5"
+                 , "tasty ^>= 1.5 && (< 1.5.1 || > 1.5.1)"      -- TODO: tasty-1.5.1 is broken
                  , "tasty-hunit ^>= 0.10.1"
                  , "tasty-quickcheck ^>= 0.10.3"
                  , "tasty-rerun ^>= 1.1.19"
