@@ -205,7 +205,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "haddock-library ^>= 1.11.0"
                  , "hadolint"
                  , "half ^>= 0.3.1"
-                 , "happy ^>= 1.20.1.1"
+                 , "happy >= 1.20.1.1 && (< 1.21.0 || > 1.21.0)"  -- version 1.21.0 is deprecated
                  , "hashable ^>= 1.4.3.0"
                  , "hashtables ^>= 1.3.1"
                  , "haskell-lexer ^>= 1.1.1"
