@@ -383,7 +383,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "socks ^>= 0.6.1"
                  , "some ^>= 1.0.6"
                  , "sop-core ^>= 0.5.0.2"
-                 , "spdx"
+                 , "spdx < 1.1" -- newer versions need Cabal-syntax 3.10.3
                  , "split ^>= 0.2.5"
                  , "splitmix ^>= 0.1.0.5"
                  , "StateVar ^>= 1.2.2"
