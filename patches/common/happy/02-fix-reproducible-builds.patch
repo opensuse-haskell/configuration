@@ -1,8 +1,8 @@
 Index: happy.spec
 ===================================================================
---- happy.spec	(revision 38)
+--- happy.spec	(revision 8)
 +++ happy.spec	(working copy)
-@@ -58,6 +58,9 @@
+@@ -65,6 +65,9 @@
  
  %install
  %ghc_bin_install
