@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc98x :: Action PackageSetConfig
 ghc98x = do
-  let compiler = "ghc-9.8.2"
+  let compiler = "ghc-9.8.3"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
