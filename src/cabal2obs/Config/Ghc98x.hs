@@ -533,7 +533,7 @@ flagList =
   , ("persistent-sqlite",              "systemlib")
 
     -- Make sure we're building with the test suite enabled.
-  , ("git-annex",                      "testsuite")
+  , ("git-annex",                      "+Assistant +Pairing +Production +TorrentParser +MagicMime +Crypton +Servant -Benchmark +Dbus")
 
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.
