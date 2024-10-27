@@ -35,4 +35,4 @@ tests =
 (~~>) txt (v,r) = (txt, (fromMaybe (error ("invalid version: " ++ show v)) (simpleParsec v), r))
 
 prettyVersion :: (Version, Revision) -> String
-prettyVersion = undefined
+prettyVersion (v,r) = "version " <> prettyShow v <> " revision " <> show r
