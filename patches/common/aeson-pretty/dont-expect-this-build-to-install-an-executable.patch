@@ -1,0 +1,12 @@
+Index: ghc-aeson-pretty.spec
+===================================================================
+--- ghc-aeson-pretty.spec	(revision 2)
++++ ghc-aeson-pretty.spec	(working copy)
+@@ -112,7 +112,6 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
+-%{_bindir}/%{pkg_name}
+ 
+ %files devel -f %{name}-devel.files
+ %doc CHANGELOG.markdown README.markdown

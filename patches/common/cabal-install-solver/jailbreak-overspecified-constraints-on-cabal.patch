@@ -1,0 +1,13 @@
+Index: ghc-cabal-install-solver.spec
+===================================================================
+--- ghc-cabal-install-solver.spec	(revision 2)
++++ ghc-cabal-install-solver.spec	(working copy)
+@@ -97,6 +97,8 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver Cabal '^>=3.12.1.0' '< 4'
++cabal-tweak-dep-ver Cabal-syntax '^>=3.12.1.0' '< 4'
+ 
+ %build
+ %ghc_lib_build

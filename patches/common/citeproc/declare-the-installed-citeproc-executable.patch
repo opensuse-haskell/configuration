@@ -1,0 +1,23 @@
+Index: ghc-citeproc.spec
+===================================================================
+--- ghc-citeproc.spec	(revision 2)
++++ ghc-citeproc.spec	(working copy)
+@@ -78,6 +78,10 @@
+ BuildRequires:  ghc-timeit-devel
+ BuildRequires:  ghc-timeit-prof
+ %endif
++BuildRequires:  ghc-aeson-pretty-devel
++BuildRequires:  ghc-aeson-pretty-prof
++BuildRequires:  ghc-text-icu-devel
++BuildRequires:  ghc-text-icu-prof
+ 
+ %description
+ Citeproc parses CSL style files and uses them to generate a list of formatted
+@@ -132,6 +136,7 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
++%{_bindir}/citeproc
+ 
+ %files devel -f %{name}-devel.files
+ %doc CHANGELOG.md README.md
