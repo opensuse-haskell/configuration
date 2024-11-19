@@ -1,0 +1,50 @@
+Index: happy.spec
+===================================================================
+--- happy.spec	(revision 43)
++++ happy.spec	(working copy)
+@@ -24,17 +24,22 @@
+ License:        BSD-2-Clause
+ URL:            https://hackage.haskell.org/package/%{name}
+ Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
++BuildRequires:  autoconf
++BuildRequires:  docbook-dtd
++BuildRequires:  docbook-xsl-stylesheets
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-array-prof
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-base-prof
+ BuildRequires:  ghc-containers-devel
+ BuildRequires:  ghc-containers-prof
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-mtl-prof
+ BuildRequires:  ghc-rpm-macros
+ ExcludeArch:    %{ix86}
++BuildRequires:  libxml2
++BuildRequires:  libxslt
+ %if %{with tests}
+ BuildRequires:  ghc-process-devel
+ %endif
+@@ -45,9 +50,14 @@
+ %build
+ %define cabal_configure_options -f-bootstrap
+ %ghc_bin_build
++cd doc
++autoreconf
++%configure
++%make_build html
+ 
+ %install
+ %ghc_bin_install
++install -D --mode=444 doc/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+ 
+ %check
+ %cabal_test
+@@ -57,6 +67,7 @@
+ %doc CHANGES README.md TODO doc examples
+ %{_bindir}/%{name}
+ %dir %{_datadir}/%{name}-%{version}
++%{_mandir}/man1/*
+ %{_datadir}/%{name}-%{version}/GLR_Base
+ %{_datadir}/%{name}-%{version}/GLR_Lib
+ %{_datadir}/%{name}-%{version}/GLR_Lib-ghc
