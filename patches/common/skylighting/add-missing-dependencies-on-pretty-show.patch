@@ -1,0 +1,21 @@
+Index: ghc-skylighting.spec
+===================================================================
+--- ghc-skylighting.spec	(revision 2)
++++ ghc-skylighting.spec	(working copy)
+@@ -44,6 +44,8 @@
+ BuildRequires:  ghc-skylighting-format-latex-devel
+ BuildRequires:  ghc-skylighting-format-latex-prof
+ ExcludeArch:    %{ix86}
++BuildRequires:  ghc-pretty-show-devel
++BuildRequires:  ghc-pretty-show-prof
+ 
+ %description
+ Skylighting is a syntax highlighting library with support for over one hundred
+@@ -98,6 +100,7 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
++%{_bindir}/skylighting
+ 
+ %files devel -f %{name}-devel.files
+ %doc README.md changelog.md
