@@ -1,0 +1,12 @@
+Index: ghc-persistent-sqlite.spec
+===================================================================
+--- ghc-persistent-sqlite.spec	(revision 2)
++++ ghc-persistent-sqlite.spec	(working copy)
+@@ -84,6 +84,7 @@
+ BuildRequires:  ghc-temporary-devel
+ BuildRequires:  ghc-temporary-prof
+ %endif
++BuildRequires:  sqlite-devel
+ 
+ %description
+ This package includes a thin sqlite3 wrapper based on the direct-sqlite
