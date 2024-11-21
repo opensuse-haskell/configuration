@@ -1,0 +1,12 @@
+Index: ghc-hledger-lib.spec
+===================================================================
+--- ghc-hledger-lib.spec	(revision 2)
++++ ghc-hledger-lib.spec	(working copy)
+@@ -175,6 +175,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.20' '< 5'
+ 
+ %build
+ %ghc_lib_build

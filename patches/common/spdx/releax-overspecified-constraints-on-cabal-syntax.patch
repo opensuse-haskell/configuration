@@ -2,13 +2,11 @@ Index: ghc-spdx.spec
 ===================================================================
 --- ghc-spdx.spec	(revision 1)
 +++ ghc-spdx.spec	(working copy)
-@@ -76,6 +76,9 @@
+@@ -76,6 +76,7 @@
  
  %prep
  %autosetup -n %{pkg_name}-%{version}
-+cabal-tweak-dep-ver base '<4.17' '< 5'
-+cabal-tweak-dep-ver Cabal '^>=3.6.0.0' '< 4'
-+cabal-tweak-dep-ver transformers '<0.6' '< 1'
++cabal-tweak-dep-ver Cabal-syntax '^>=3.12.1.0' '< 4'
  
  %build
  %ghc_lib_build

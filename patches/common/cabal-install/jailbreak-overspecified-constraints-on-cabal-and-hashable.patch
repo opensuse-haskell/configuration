@@ -1,0 +1,14 @@
+Index: cabal-install.spec
+===================================================================
+--- cabal-install.spec	(revision 2)
++++ cabal-install.spec	(working copy)
+@@ -173,6 +173,9 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver Cabal '^>=3.12.1.0' '< 4'
++cabal-tweak-dep-ver Cabal-syntax '^>=3.12.1.0' '< 4'
++cabal-tweak-dep-ver hashable '< 1.5' '< 2'
+ 
+ %build
+ %ghc_lib_build

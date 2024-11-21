@@ -1,13 +1,12 @@
-Index: ghc-feed.spec
+Index: ghc-ilist.spec
 ===================================================================
---- ghc-feed.spec	(revision 6)
-+++ ghc-feed.spec	(working copy)
-@@ -111,6 +111,8 @@
+--- ghc-ilist.spec	(revision 2)
++++ ghc-ilist.spec	(working copy)
+@@ -74,6 +74,7 @@
  %prep
  %autosetup -n %{pkg_name}-%{version}
  cp -p %{SOURCE1} %{pkg_name}.cabal
 +cabal-tweak-dep-ver base '< 4.20' '< 5'
-+cabal-tweak-dep-ver base-compat '< 0.14' '< 1'
  
  %build
  %ghc_lib_build
