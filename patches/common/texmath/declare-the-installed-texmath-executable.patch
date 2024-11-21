@@ -1,0 +1,12 @@
+Index: texmath.spec
+===================================================================
+--- texmath.spec	(revision 3)
++++ texmath.spec	(working copy)
+@@ -143,6 +143,7 @@
+ %files
+ %license LICENSE
+ %doc README.markdown changelog
++%{_bindir}/texmath
+ 
+ %files -n ghc-%{name} -f ghc-%{name}.files
+ %license LICENSE

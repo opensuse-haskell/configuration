@@ -1,0 +1,13 @@
+Index: texmath.spec
+===================================================================
+--- texmath.spec	(revision 2)
++++ texmath.spec	(working copy)
+@@ -65,6 +65,8 @@
+ BuildRequires:  ghc-tasty-golden-prof
+ BuildRequires:  ghc-tasty-prof
+ %endif
++BuildRequires:  ghc-pretty-show-devel
++BuildRequires:  ghc-pretty-show-prof
+ 
+ %description
+ The texmath library provides functions to read and write TeX math, presentation
