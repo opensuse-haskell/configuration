@@ -2,7 +2,7 @@ Index: xmobar.spec
 ===================================================================
 --- xmobar.spec	(revision 5)
 +++ xmobar.spec	(working copy)
-@@ -97,6 +97,22 @@
+@@ -97,6 +97,23 @@
  BuildRequires:  ghc-temporary-devel
  BuildRequires:  ghc-temporary-prof
  %endif
@@ -22,6 +22,7 @@ Index: xmobar.spec
 +BuildRequires:  ghc-timezone-olson-prof
 +BuildRequires:  ghc-timezone-series-devel
 +BuildRequires:  ghc-timezone-series-prof
++BuildRequires:  libXpm-devel
  
  %description
  Xmobar is a minimalistic text based status bar.
