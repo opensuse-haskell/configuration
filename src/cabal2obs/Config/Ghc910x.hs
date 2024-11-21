@@ -534,6 +534,9 @@ flagList =
     -- Prefer the system's library over the bundled one.
   , ("libyaml",                        "+system-libyaml")
 
+    -- Don't install example files.
+  , ("yaml",                            "-no-examples -no-exe")
+
     -- Configure a production-like build environment.
   , ("stack",                          "+hide-dependency-versions +disable-git-info +supported-build")
 
