@@ -1,0 +1,12 @@
+Index: ghc-pandoc-server.spec
+===================================================================
+--- ghc-pandoc-server.spec	(revision 2)
++++ ghc-pandoc-server.spec	(working copy)
+@@ -91,6 +91,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver data-default '< 0.8' '< 1'
+ 
+ %build
+ %ghc_lib_build

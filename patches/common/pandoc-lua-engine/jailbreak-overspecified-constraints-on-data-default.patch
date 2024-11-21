@@ -1,0 +1,12 @@
+Index: ghc-pandoc-lua-engine.spec
+===================================================================
+--- ghc-pandoc-lua-engine.spec	(revision 2)
++++ ghc-pandoc-lua-engine.spec	(working copy)
+@@ -126,6 +126,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver data-default '< 0.8' '< 1'
+ 
+ %build
+ %ghc_lib_build
