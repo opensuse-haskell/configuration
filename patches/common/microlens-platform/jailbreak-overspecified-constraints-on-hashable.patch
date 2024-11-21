@@ -1,0 +1,12 @@
+Index: ghc-microlens-platform.spec
+===================================================================
+--- ghc-microlens-platform.spec	(revision 2)
++++ ghc-microlens-platform.spec	(working copy)
+@@ -95,6 +95,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver hashable '<1.5' '< 2'
+ 
+ %build
+ %ghc_lib_build
