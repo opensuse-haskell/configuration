@@ -1,0 +1,27 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 5)
++++ xmobar.spec	(working copy)
+@@ -97,6 +97,22 @@
+ BuildRequires:  ghc-temporary-devel
+ BuildRequires:  ghc-temporary-prof
+ %endif
++BuildRequires:  ghc-alsa-core-devel
++BuildRequires:  ghc-alsa-core-prof
++BuildRequires:  ghc-alsa-mixer-devel
++BuildRequires:  ghc-alsa-mixer-prof
++BuildRequires:  ghc-dbus-devel
++BuildRequires:  ghc-dbus-prof
++BuildRequires:  ghc-hinotify-devel
++BuildRequires:  ghc-hinotify-prof
++BuildRequires:  ghc-iwlib-devel
++BuildRequires:  ghc-iwlib-prof
++BuildRequires:  ghc-netlink-devel
++BuildRequires:  ghc-netlink-prof
++BuildRequires:  ghc-timezone-olson-devel
++BuildRequires:  ghc-timezone-olson-prof
++BuildRequires:  ghc-timezone-series-devel
++BuildRequires:  ghc-timezone-series-prof
+ 
+ %description
+ Xmobar is a minimalistic text based status bar.
