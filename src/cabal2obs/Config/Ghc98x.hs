@@ -19,7 +19,7 @@ import Development.Shake
 
 ghc98x :: Action PackageSetConfig
 ghc98x = do
-  let compiler = "ghc-9.8.3"
+  let compiler = "ghc-9.8.4"
       flagAssignments = fromList (readFlagAssignents flagList)
       forcedExectables = forcedExectableNames
       corePackages = ghcCorePackages
@@ -191,8 +191,8 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "free ^>= 5.2"
                  , "fsnotify ^>= 0.4.1.0"
                  , "generically ^>= 0.1.1"
-                 , "ghc-lib-parser ^>= 9.8.2.20240223"
-                 , "ghc-lib-parser-ex ^>= 9.8.0.1"
+                 , "ghc-lib-parser ^>= 9.8.4.20241130"
+                 , "ghc-lib-parser-ex ^>= 9.8.0.2"
                  , "git-annex"
                  , "git-lfs ^>= 1.2.2"
                  , "githash ^>= 0.1.7.0"
@@ -594,7 +594,7 @@ ghcCorePackages = [ "array-0.5.6.0"
                   , "deepseq-1.5.0.0"
                   , "directory-1.3.8.1"
                   , "exceptions-0.10.7"
-                  , "filepath-1.4.200.1"
+                  , "filepath-1.4.301.0"
                   , "ghc-9.8.2"
                   , "ghc-bignum-1.3"
                   , "ghc-boot-9.8.2"
@@ -619,7 +619,7 @@ ghcCorePackages = [ "array-0.5.6.0"
                   , "text-2.1.1"
                   , "time-1.12.2"
                   , "transformers-0.6.1.0"
-                  , "unix-2.8.4.0"
+                  , "unix-2.8.6.0"
                   , "xhtml-3000.2.2.1"
 
                   -- This package is a part of ghc-compiler.
