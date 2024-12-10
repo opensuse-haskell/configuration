@@ -444,7 +444,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "wai ^>= 3.2.4"
                  , "wai-app-static ^>= 3.1.9"
                  , "wai-cors ^>= 0.2.7"
-                 , "wai-extra ^>= 3.1.17"
+                 , "wai-extra < 3.1.17"         -- TODO: update breaks yesod-core, see https://github.com/yesodweb/yesod/issues/1854
                  , "wai-logger ^>= 2.5.0"
                  , "warp ^>= 3.4.4"
                  , "warp-tls ^>= 3.4.11"
