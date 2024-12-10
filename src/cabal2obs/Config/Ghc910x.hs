@@ -44,7 +44,6 @@ ghc910x = do
 --                    , "xmobar"
 --                    , "xmonad"
 --                    , "xmonad-contrib"
---                    , "hadolint"
 --                    ]
 
 -- resolveConstraints :: String
@@ -192,7 +191,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "gtk2hs-buildtools"
                  , "hackage-security ^>= 0.6.2.6"
                  , "haddock-library ^>= 1.11.0"
-                 , "hadolint"
                  , "half ^>= 0.3.1"
                  , "happy == 1.20.1.1"     -- TODO: happy 2.1.3 doesn't compile
                  , "hashable ^>= 1.5.0.0"
