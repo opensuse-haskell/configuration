@@ -411,7 +411,7 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "timerep ^>= 2.1.0.0"
                  , "timezone-olson ^>= 0.2.1"
                  , "timezone-series ^>= 0.1.13"
-                 , "tls ^>= 2.1.5"
+                 , "tls < 2.1.9"        -- TODO: the new version needs random-1.3.x
                  , "tls-session-manager ^>= 0.0.7"
                  , "toml-parser ^>= 2.0.1.0"
                  , "topograph ^>= 1.0.1"
