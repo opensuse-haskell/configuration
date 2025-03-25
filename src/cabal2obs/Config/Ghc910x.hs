@@ -563,6 +563,9 @@ flagList =
 
     -- Disable use of -march=native during compilation.
   , ("hashable",                       "-arch-native")
+
+    -- Don't build and install the 'example' binary.
+  , ("open-browser",                   "-example")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
