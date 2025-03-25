@@ -473,6 +473,14 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "yesod-static ^>= 1.6.1.0"
                  , "zip-archive ^>= 0.4.3.2"
                  , "zlib ^>= 0.7.1.0"
+                 , "retry"
+                 , "string-interpolate"
+                 , "mtl-compat"
+                 , "haskell-src-exts <1.24"
+                 , "haskell-src-meta <0.9"
+                 , "th-orphans >=0.12 && <0.14"
+                 , "th-reify-many >=0.1.9 && <0.2"
+                 , "th-expand-syns"
                  ]
 
 flagList :: [(String,String)]
