@@ -1,0 +1,21 @@
+Index: ghc-retry.spec
+===================================================================
+--- ghc-retry.spec	(revision 1)
++++ ghc-retry.spec	(working copy)
+@@ -31,8 +31,6 @@
+ BuildRequires:  ghc-base-prof
+ BuildRequires:  ghc-exceptions-devel
+ BuildRequires:  ghc-exceptions-prof
+-BuildRequires:  ghc-mtl-compat-devel
+-BuildRequires:  ghc-mtl-compat-prof
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-mtl-prof
+ BuildRequires:  ghc-random-devel
+@@ -97,6 +95,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++sed -i -e 's|, mtl-compat||' retry.cabal
+ 
+ %build
+ %ghc_lib_build
