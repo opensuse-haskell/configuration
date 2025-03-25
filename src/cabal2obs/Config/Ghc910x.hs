@@ -475,7 +475,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "zlib ^>= 0.7.1.0"
                  , "retry"
                  , "string-interpolate"
-                 , "mtl-compat"
                  , "haskell-src-exts <1.24"
                  , "haskell-src-meta <0.9"
                  , "th-orphans >=0.12 && <0.14"
@@ -641,6 +640,7 @@ ghcCorePackages = [ "array-0.5.7.0"
                   -- though we actually don't use them at build time.
                   , "bytestring-builder-0.10.8.2.0"     -- now part of bytestring
                   , "persistent-template-2.12.0.0"      -- now part of persistent
+                  , "mtl-compat-0.2.2"                  -- empty library
                   ]
 
 -- TODO: Detect at compile-time or run-time if constraintList contains
