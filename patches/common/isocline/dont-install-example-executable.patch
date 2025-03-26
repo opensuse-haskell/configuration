@@ -1,0 +1,20 @@
+Index: ghc-isocline.spec
+===================================================================
+--- ghc-isocline.spec	(revision 1)
++++ ghc-isocline.spec	(working copy)
+@@ -36,6 +36,7 @@
+ BuildRequires:  ghc-text-devel
+ BuildRequires:  ghc-text-prof
+ ExcludeArch:    %{ix86}
++Patch01:        dont-install-example-exe.patch
+ 
+ %description
+ ![logo](https://raw.githubusercontent.com/daanx/isocline/main/doc/isocline-inline.svg)
+@@ -93,7 +94,6 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ 
