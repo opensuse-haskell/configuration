@@ -1,0 +1,29 @@
+Index: ghc-fsnotify.spec
+===================================================================
+--- ghc-fsnotify.spec	(revision 3)
++++ ghc-fsnotify.spec	(working copy)
+@@ -74,6 +74,7 @@
+ BuildRequires:  ghc-sandwich-devel
+ BuildRequires:  ghc-sandwich-prof
+ %endif
++Patch01:        dont-install-example-exe.patch
+ 
+ %description
+ Cross platform library for file creation, modification, and deletion
+@@ -107,7 +108,7 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p1
+ 
+ %build
+ %ghc_lib_build
+@@ -127,7 +128,6 @@
+ 
+ %files -f %{name}.files
+ %license LICENSE
+-%{_bindir}/example
+ 
+ %files devel -f %{name}-devel.files
+ %doc CHANGELOG.md README.md
