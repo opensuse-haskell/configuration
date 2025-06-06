@@ -12,6 +12,7 @@ import Config.Ghc94x
 import Config.Ghc96x
 import Config.Ghc98x
 import Config.Ghc910x
+import Config.Ghc912x
 import Types
 
 import Data.Map.Strict ( Map, findWithDefault, keysSet )
@@ -31,6 +32,7 @@ packageSets = [ ("ghc-8.10.x", ghc810x)
               , ("ghc-9.6.x", ghc96x)
               , ("ghc-9.8.x", ghc98x)
               , ("ghc-9.10.x", ghc910x)
+              , ("ghc-9.12.x", ghc912x)
               ]
 
 knownPackageSets :: Set PackageSetId
