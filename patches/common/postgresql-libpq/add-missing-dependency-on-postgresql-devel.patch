@@ -1,0 +1,12 @@
+Index: ghc-postgresql-libpq.spec
+===================================================================
+--- ghc-postgresql-libpq.spec	(revision 1)
++++ ghc-postgresql-libpq.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  ghc-tasty-hunit-prof
+ BuildRequires:  ghc-tasty-prof
+ %endif
++BuildRequires:  postgresql-devel
+ 
+ %description
+ This is a binding to libpq: the C application programmer's interface to
