@@ -1,0 +1,21 @@
+Index: ghc-postgresql-libpq-configure.spec
+===================================================================
+--- ghc-postgresql-libpq-configure.spec	(revision 1)
++++ ghc-postgresql-libpq-configure.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%bcond_without haddock
+ %global pkg_name postgresql-libpq-configure
+ %global pkgver %{pkg_name}-%{version}
+ Name:           ghc-%{pkg_name}
+@@ -71,7 +72,7 @@
+ %ghc_lib_build
+ 
+ %install
+-%ghc_lib_install
++%ghc_lib_install -m
+ 
+ %post devel
+ %ghc_pkg_recache

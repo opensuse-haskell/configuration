@@ -1,0 +1,12 @@
+Index: ghc-postgresql-libpq-configure.spec
+===================================================================
+--- ghc-postgresql-libpq-configure.spec	(revision 2)
++++ ghc-postgresql-libpq-configure.spec	(working copy)
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-base-prof
+ BuildRequires:  ghc-rpm-macros
+ ExcludeArch:    %{ix86}
++BuildRequires:  postgresql-devel
+ 
+ %description
+ This is a binding to libpq: the C application programmer's interface to
