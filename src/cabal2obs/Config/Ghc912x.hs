@@ -469,12 +469,14 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "gtk2hs-buildtools"
                  , "alex"
                  , "text-icu"
-                 , "alsa-core ^>= 0.5.0.1"
-                 , "alsa-mixer ^>= 0.3.0.1"
+                 , "alsa-core >= 0.5.0.1"
+                 , "alsa-mixer >= 0.3.0.1"
                  , "iwlib"
-                 , "libmpd ^>= 0.10.0.1"
-                 , "netlink ^>= 1.1.1.0"
+                 , "libmpd"
+                 , "netlink"
                  , "pretty-hex"
+                 , "timezone-olson"
+                 , "timezone-series >=0.1.0 && <0.2"
                  ]
 
 flagList :: [(String,String)]
