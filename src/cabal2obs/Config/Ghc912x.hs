@@ -466,6 +466,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "pango >=0.13"
                  , "parsec-numbers >=0.1.0"
                  , "glib >=0.13.0.0 && <0.14"
+                 , "gtk2hs-buildtools"
                  ]
 
 flagList :: [(String,String)]
