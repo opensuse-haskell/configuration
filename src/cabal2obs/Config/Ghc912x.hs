@@ -474,6 +474,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "iwlib"
                  , "libmpd ^>= 0.10.0.1"
                  , "netlink ^>= 1.1.1.0"
+                 , "pretty-hex"
                  ]
 
 flagList :: [(String,String)]
