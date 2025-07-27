@@ -471,6 +471,8 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "text-icu"
                  , "alsa-core ^>= 0.5.0.1"
                  , "alsa-mixer ^>= 0.3.0.1"
+                 , "iwlib"
+                 , "libmpd ^>= 0.10.0.1"
                  ]
 
 flagList :: [(String,String)]
