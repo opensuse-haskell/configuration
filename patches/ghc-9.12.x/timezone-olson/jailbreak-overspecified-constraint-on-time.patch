@@ -1,0 +1,12 @@
+Index: ghc-timezone-olson.spec
+===================================================================
+--- ghc-timezone-olson.spec	(revision 1)
++++ ghc-timezone-olson.spec	(working copy)
+@@ -81,6 +81,7 @@
+ 
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver time '< 1.14' '< 2'
+ 
+ %build
+ %ghc_lib_build
