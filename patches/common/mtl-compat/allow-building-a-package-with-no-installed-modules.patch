@@ -1,0 +1,21 @@
+Index: ghc-mtl-compat.spec
+===================================================================
+--- ghc-mtl-compat.spec	(revision 1)
++++ ghc-mtl-compat.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%bcond_without haddock
+ %global pkg_name mtl-compat
+ %global pkgver %{pkg_name}-%{version}
+ Name:           ghc-%{pkg_name}
+@@ -81,7 +82,7 @@
+ %ghc_lib_build
+ 
+ %install
+-%ghc_lib_install
++%ghc_lib_install -m
+ 
+ %post devel
+ %ghc_pkg_recache
