@@ -1,0 +1,12 @@
+Index: ghc-timezone-series.spec
+===================================================================
+--- ghc-timezone-series.spec	(revision 1)
++++ ghc-timezone-series.spec	(working copy)
+@@ -73,6 +73,7 @@
+ %prep
+ %autosetup -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver time '< 1.14' '< 2'
+ 
+ %build
+ %ghc_lib_build
