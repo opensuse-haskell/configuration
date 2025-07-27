@@ -468,6 +468,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "glib >=0.13.0.0 && <0.14"
                  , "gtk2hs-buildtools"
                  , "alex"
+                 , "text-icu"
                  ]
 
 flagList :: [(String,String)]
