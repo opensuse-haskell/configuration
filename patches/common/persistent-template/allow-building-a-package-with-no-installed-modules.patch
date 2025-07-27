@@ -1,0 +1,21 @@
+Index: ghc-persistent-template.spec
+===================================================================
+--- ghc-persistent-template.spec	(revision 1)
++++ ghc-persistent-template.spec	(working copy)
+@@ -16,6 +16,7 @@
+ #
+ 
+ 
++%bcond_without haddock
+ %global pkg_name persistent-template
+ %global pkgver %{pkg_name}-%{version}
+ Name:           ghc-%{pkg_name}
+@@ -69,7 +70,7 @@
+ %ghc_lib_build
+ 
+ %install
+-%ghc_lib_install
++%ghc_lib_install -m
+ 
+ %post devel
+ %ghc_pkg_recache
