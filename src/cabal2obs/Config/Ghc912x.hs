@@ -473,6 +473,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "alsa-mixer ^>= 0.3.0.1"
                  , "iwlib"
                  , "libmpd ^>= 0.10.0.1"
+                 , "netlink ^>= 1.1.1.0"
                  ]
 
 flagList :: [(String,String)]
