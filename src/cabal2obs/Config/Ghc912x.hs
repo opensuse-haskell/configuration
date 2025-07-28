@@ -479,6 +479,9 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "timezone-series >=0.1.0 && <0.2"
                  , "filepath-bytestring"
                  , "servant", "servant-client", "servant-client-core", "servant-server"
+                 , "postgresql-libpq"
+                 , "postgresql-libpq-configure"
+                 , "postgresql-simple"
                  ]
 
 flagList :: [(String,String)]
