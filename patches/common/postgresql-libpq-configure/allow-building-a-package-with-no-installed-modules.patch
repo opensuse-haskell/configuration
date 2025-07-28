@@ -6,7 +6,7 @@ Index: ghc-postgresql-libpq-configure.spec
  #
  
  
-+%bcond_without haddock
++%bcond_with haddock
  %global pkg_name postgresql-libpq-configure
  %global pkgver %{pkg_name}-%{version}
  Name:           ghc-%{pkg_name}

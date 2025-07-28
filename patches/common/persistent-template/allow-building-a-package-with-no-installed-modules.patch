@@ -6,7 +6,7 @@ Index: ghc-persistent-template.spec
  #
  
  
-+%bcond_without haddock
++%bcond_with haddock
  %global pkg_name persistent-template
  %global pkgver %{pkg_name}-%{version}
  Name:           ghc-%{pkg_name}
