@@ -477,6 +477,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "pretty-hex"
                  , "timezone-olson"
                  , "timezone-series >=0.1.0 && <0.2"
+                 , "filepath-bytestring"
                  ]
 
 flagList :: [(String,String)]
