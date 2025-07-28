@@ -567,6 +567,12 @@ flagList =
 
     -- Don't build and install the 'example' binary.
   , ("open-browser",                   "-example")
+
+    -- This flag switches the dependency on underlying configuration meta
+    -- library. We should probably use the pkgconfig version, but our initial
+    -- submission to Factory did not, so now we're using the pg_config(1) based
+    -- variant for historical reasons.
+  , ("postgresql-libpq",               "-use-pkg-config")
   ]
 
 readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
