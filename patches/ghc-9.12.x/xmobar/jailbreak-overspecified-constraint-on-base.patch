@@ -1,0 +1,12 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 1)
++++ xmobar.spec	(working copy)
+@@ -154,6 +154,7 @@
+ 
+ %prep
+ %autosetup
++cabal-tweak-dep-ver base '< 4.21' '< 5'
+ 
+ %build
+ %define cabal_configure_options -f+all_extensions
