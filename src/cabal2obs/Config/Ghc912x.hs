@@ -483,6 +483,8 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "postgresql-libpq"
                  , "postgresql-libpq-configure"
                  , "postgresql-simple"
+                 , "c2hs"
+                 , "language-c >=0.7.1 && <0.11"
                  ]
 
 flagList :: [(String,String)]
