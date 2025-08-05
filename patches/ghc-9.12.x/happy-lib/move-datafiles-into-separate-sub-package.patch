@@ -2,13 +2,12 @@ Index: ghc-happy-lib.spec
 ===================================================================
 --- ghc-happy-lib.spec	(revision 1)
 +++ ghc-happy-lib.spec	(working copy)
-@@ -79,6 +80,14 @@
+@@ -79,6 +80,13 @@
  %description -n ghc-%{pkg_name}-doc
  This package provides the Haskell %{pkg_name} library documentation.
  
 +%package templates
 +Summary:        Shared datafiles needed at run-time by both ghc-happy-lib and happy
-+Requires:       %{name} = %{version}
 +BuildArch:      noarch
 +
 +%description templates
