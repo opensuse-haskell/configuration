@@ -1,0 +1,28 @@
+Index: ghc-happy-lib.spec
+===================================================================
+--- ghc-happy-lib.spec	(revision 1)
++++ ghc-happy-lib.spec	(working copy)
+@@ -79,6 +80,14 @@
+ %description -n ghc-%{pkg_name}-doc
+ This package provides the Haskell %{pkg_name} library documentation.
+ 
++%package templates
++Summary:        Shared datafiles needed at run-time by both ghc-happy-lib and happy
++Requires:       %{name} = %{version}
++BuildArch:      noarch
++
++%description templates
++Shared datafiles that are required by both ghc-happy-lib and happy at run-time.
++
+ %package -n ghc-%{pkg_name}-prof
+ Summary:        Haskell %{pkg_name} profiling library
+ Requires:       ghc-%{pkg_name}-devel = %{version}-%{release}
+@@ -103,6 +113,8 @@
+ %ghc_pkg_recache
+ 
+ %files -f %{name}.files
++
++%files templates
+ %dir %{_datadir}/%{pkg_name}-%{version}
+ %{_datadir}/%{pkg_name}-%{version}/GLR_Base.hs
+ %{_datadir}/%{pkg_name}-%{version}/GLR_Lib.hs

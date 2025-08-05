@@ -1,0 +1,20 @@
+Index: ghc-happy-lib.spec
+===================================================================
+--- ghc-happy-lib.spec	(revision 1)
++++ ghc-happy-lib.spec	(working copy)
+@@ -38,6 +38,7 @@
+ BuildRequires:  ghc-transformers-devel
+ BuildRequires:  ghc-transformers-prof
+ ExcludeArch:    %{ix86}
++BuildRequires:  fdupes
+ 
+ %description
+ Happy is a parser generator for Haskell. Given a grammar specification in BNF,
+@@ -95,6 +104,7 @@
+ 
+ %install
+ %ghc_lib_install
++%fdupes %{buildroot}%{_prefix}
+ 
+ %post devel
+ %ghc_pkg_recache
