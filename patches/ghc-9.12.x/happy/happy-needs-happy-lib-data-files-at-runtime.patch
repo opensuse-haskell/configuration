@@ -6,7 +6,7 @@ Index: happy.spec
  BuildRequires:  ghc-process-devel
  BuildRequires:  ghc-process-prof
  %endif
-+Requires:       ghc-happy-lib
++Requires:       ghc-happy-lib-templates
  
  %description
  Happy is a parser generator for Haskell. Given a grammar specification in BNF,
