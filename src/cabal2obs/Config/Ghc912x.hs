@@ -261,7 +261,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "microlens < 0.5" -- update blocked vty and brick
                  , "microlens-ghc < 0.4.15.2"
                  , "microlens-mtl < 0.2.1.1"
-                 , "microlens-platform ^>= 0.4.4.1"
+                 , "microlens-platform < 0.4.4.2"
                  , "microlens-th < 0.4.3.18"
                  , "mime-types ^>= 0.1.2.0"
                  , "mmorph ^>= 1.2.1"
