@@ -453,7 +453,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
 
                  , "raw-strings-qq"
                  , "Diff >=0.2"
-                 , "base-compat >=0.9"
+                 , "base-compat >=0.9 && <0.15"
                  , "fgl ^>=5.8.1.1"
                  , "string-interpolate"
                  , "haskell-src-exts <1.24"
