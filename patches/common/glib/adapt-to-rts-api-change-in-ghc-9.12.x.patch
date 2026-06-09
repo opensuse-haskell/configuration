@@ -1,0 +1,21 @@
+Index: ghc-glib.spec
+===================================================================
+--- ghc-glib.spec	(revision 1)
++++ ghc-glib.spec	(working copy)
+@@ -44,6 +44,7 @@
+ BuildRequires:  pkgconfig(glib-2.0)
+ BuildRequires:  pkgconfig(gobject-2.0)
+ ExcludeArch:    %{ix86}
++Patch01:        https://github.com/gtk2hs/gtk2hs/commit/2e1ddf6f4a28819f42db45859a83f3dd7ed14c0e.patch#/adapt-to-rts-api-change-in-ghc-9.12.x.patch
+ 
+ %description
+ GLib is a collection of C data structures and utility functions for the GObject
+@@ -81,7 +82,7 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p2
+ 
+ %build
+ %ghc_lib_build
