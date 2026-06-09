@@ -1,0 +1,12 @@
+Index: ShellCheck.spec
+===================================================================
+--- ShellCheck.spec	(revision 2)
++++ ShellCheck.spec	(working copy)
+@@ -63,6 +63,7 @@
+ BuildRequires:  ghc-transformers-prof
+ BuildRequires:  pandoc-cli
+ ExcludeArch:    %{ix86}
++Provides:       shellcheck = %{version}-%{release}
+ 
+ %description
+ The goals of ShellCheck are:
