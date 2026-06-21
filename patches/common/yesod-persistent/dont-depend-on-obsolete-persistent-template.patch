@@ -1,12 +1,12 @@
 Index: ghc-yesod-persistent.spec
 ===================================================================
---- ghc-yesod-persistent.spec	(revision 5)
+--- ghc-yesod-persistent.spec	(revision 3)
 +++ ghc-yesod-persistent.spec	(working copy)
 @@ -26,6 +26,7 @@
  License:        MIT
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
-+Patch0:         https://github.com/yesodweb/yesod/pull/1798.patch#/dont-depend-on-obsolete-persistent-template.patch
++Patch0:         dont-depend-on-obsolete-persistent-template.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel
  BuildRequires:  ghc-base-prof
@@ -19,3 +19,12 @@ Index: ghc-yesod-persistent.spec
  BuildRequires:  ghc-resource-pool-devel
  BuildRequires:  ghc-resource-pool-prof
  BuildRequires:  ghc-resourcet-devel
+@@ -90,7 +89,7 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p1
+ 
+ %build
+ %ghc_lib_build
