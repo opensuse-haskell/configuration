@@ -541,8 +541,9 @@ flagList =
     -- Use the system sqlite library rather than the bundled one.
   , ("persistent-sqlite",              "+systemlib")
 
-    -- Make sure we're building with the test suite enabled.
-  , ("git-annex",                      "+Assistant +Pairing +Production +TorrentParser +MagicMime +Crypton +Servant -Benchmark +Dbus")
+    -- Make sure we're building with all features enabled.
+    -- TODO: The OsPath feature needs file-io >= 0.2.0.
+  , ("git-annex",                      "+Assistant +Production +TorrentParser +MagicMime -OsPath -Benchmark +Dbus")
 
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.
