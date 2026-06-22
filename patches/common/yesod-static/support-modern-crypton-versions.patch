@@ -1,0 +1,31 @@
+Index: ghc-yesod-static.spec
+===================================================================
+--- ghc-yesod-static.spec	(revision 5)
++++ ghc-yesod-static.spec	(working copy)
+@@ -26,6 +26,7 @@
+ License:        MIT
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
++Patch01:        https://github.com/yesodweb/yesod/pull/1916.patch#/support-modern-crypton-versions.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-async-devel
+ BuildRequires:  ghc-async-prof
+@@ -99,6 +100,8 @@
+ BuildRequires:  ghc-yesod-test-devel
+ BuildRequires:  ghc-yesod-test-prof
+ %endif
++BuildRequires:  ghc-ram-devel
++BuildRequires:  ghc-ram-prof
+ 
+ %description
+ API docs and the README are available at
+@@ -131,7 +134,8 @@
+ This package provides the Haskell %{pkg_name} profiling library.
+ 
+ %prep
+-%autosetup -n %{pkg_name}-%{version}
++%autosetup -n %{pkg_name}-%{version} -p 2
++cabal-tweak-dep-ver ram '< 0.22' '< 1'
+ 
+ %build
+ %ghc_lib_build
