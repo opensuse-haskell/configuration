@@ -25,7 +25,7 @@ echo
 for n in $new; do
     test -f "$tmp/$n.requests" || osc rq list devel:languages:haskell "$n" >"$tmp/$n.requests"
     if grep --silent -F "No results for package" "$tmp/$n.requests"; then
-        echo osc sr devel:languages:haskell "$n" openSUSE:Factory
+        echo osc sr -m '"initial submission"' devel:languages:haskell "$n" openSUSE:Factory
     else
         echo "# $n has been submitted already: $tmp/$n.requests"
     fi
@@ -37,7 +37,7 @@ echo
 for n in $updated; do
     test -f "$tmp/$n.requests" || osc rq list devel:languages:haskell "$n" >"$tmp/$n.requests"
     if grep --silent -F "No results for package" "$tmp/$n.requests"; then
-        echo osc sr devel:languages:haskell "$n" openSUSE:Factory
+        echo osc sr -m '"version update"' devel:languages:haskell "$n" openSUSE:Factory
     else
         echo "# $n has been submitted already: $tmp/$n.requests"
     fi
