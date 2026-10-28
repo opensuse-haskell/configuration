@@ -453,6 +453,8 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "yesod-static ^>= 1.6.1.0"
                  , "zip-archive ^>= 0.4.3.2"
                  , "zlib ^>= 0.7.1.0"
+                 , "yamlet >=1.0.0.1 && <1.1"
+                 , "yamlet-aeson >=1.0.0.1 && <1.1"
 
                  , "crypton-asn1-parse ^>=0.10.0"
                  , "crypton-asn1-encoding ^>= 0.10.0"
