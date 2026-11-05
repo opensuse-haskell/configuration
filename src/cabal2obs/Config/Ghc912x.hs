@@ -104,7 +104,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "cabal-doctest ^>= 1.0.11"
                  , "cabal-install < 3.14.2.0"
                  , "cabal-install-solver < 3.14.2.0"
-                 , "cabal-plan"
+                 , "cabal-plan < 0.7.7"         -- TODO: newer versions need the latest aeson
                  , "cabal2spec ^>= 2.8.0"
                  , "cairo >=0.13"
                  , "call-stack ^>= 0.4.0"
