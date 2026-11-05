@@ -1,0 +1,12 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 43)
++++ git-annex.spec	(working copy)
+@@ -274,6 +274,7 @@
+ 
+ %prep
+ %autosetup -p1
++cabal-tweak-dep-ver magic '<= 1.1' '< 2'
+ 
+ %build
+ %define cabal_configure_options -f+assistant -f+dbus -f+magicmime -f+production -f+torrentparser -f-benchmark -f-memory -f-ospath

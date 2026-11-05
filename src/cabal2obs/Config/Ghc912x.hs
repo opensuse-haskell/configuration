@@ -198,7 +198,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "ghc-hs-meta <0.2"
                  , "ghc-lib-parser ^>= 9.12.2.20250421"
                  , "ghc-lib-parser-ex ^>= 9.12.0.0"
-                 , "git-annex <= 10.20260624"   -- TODO: support newer versions
+                 , "git-annex"
                  , "git-lfs >=1.2.0"
                  , "githash ^>= 0.1.7.0"
                  , "glib >=0.13.0.0 && <0.14"
@@ -551,7 +551,7 @@ flagList =
 
     -- Make sure we're building with all features enabled.
     -- TODO: The OsPath feature needs file-io >= 0.2.0.
-  , ("git-annex",                      "+Assistant +Production +TorrentParser +MagicMime -OsPath -Benchmark +Dbus")
+  , ("git-annex",                      "+Assistant +Production +TorrentParser +MagicMime -OsPath -Benchmark +Dbus -Memory")
 
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.

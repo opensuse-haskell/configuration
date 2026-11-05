@@ -1,12 +1,20 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 23)
+--- git-annex.spec	(revision 42)
 +++ git-annex.spec	(working copy)
-@@ -24,6 +24,7 @@
+@@ -23,6 +23,7 @@
+ License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-2-Clause AND MIT AND GPL-2.0-only
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://github.com/opensuse-haskell/git-annex/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
- Patch0:         0001-persistent-2.12.0.1-include-the-code-from-persistent.patch
-+Patch1:         0001-Build-with-ram-instead-of-memory-package-to-support-.patch
++Patch01:        0001-Build-with-ram-instead-of-memory-package-to-support-.patch
  BuildRequires:  bash-completion
  BuildRequires:  chrpath
  BuildRequires:  curl
+@@ -272,6 +273,6 @@
+ Optional dependency offering bash completion for git-annex
+
+ %prep
+-%autosetup
++%autosetup -p1
+
+ %build
