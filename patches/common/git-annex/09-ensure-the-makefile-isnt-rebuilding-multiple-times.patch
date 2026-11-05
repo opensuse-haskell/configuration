@@ -1,0 +1,15 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 40)
++++ git-annex.spec	(working copy)
+@@ -277,6 +277,10 @@
+ %build
+ %define cabal_configure_options -f+assistant -f+dbus -f+magicmime -f+production -f+torrentparser -f-benchmark -f-ospath
+ %ghc_bin_build
++# without the stamp, `make install-bins` reconfigures with the Makefile's own
++# options, discarding the ones above, and rebuilds+relinks the binary
++mkdir -p tmp
++touch tmp/configure-stamp
+ 
+ %check
+ %make_build DESTDIR=%{buildroot} BUILDER=./Setup test
