@@ -1,0 +1,13 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 48)
++++ git-annex.spec	(working copy)
+@@ -229,6 +229,8 @@
+ BuildRequires:  ghc-yesod-devel
+ BuildRequires:  ghc-yesod-form-devel
+ BuildRequires:  ghc-yesod-form-prof
++BuildRequires:  ghc-xxhash-ffi-devel
++BuildRequires:  ghc-xxhash-ffi-prof
+ BuildRequires:  ghc-yesod-prof
+ BuildRequires:  ghc-yesod-static-devel
+ BuildRequires:  ghc-yesod-static-prof

@@ -91,11 +91,14 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "bifunctors ^>= 5.6.2"
                  , "bimap ^>= 0.5.0"
                  , "bitvec ^>= 1.1.5.0"
+                 , "blake3 >=0.3"
                  , "blaze-builder ^>= 0.4.3"
                  , "blaze-html ^>= 0.9.2.0"
                  , "blaze-markup ^>= 0.8.3.0"
                  , "bloomfilter ^>= 2.0.1.2"
                  , "boring ^>= 0.2.2"
+                 , "botan-bindings ^>=0.3"
+                 , "botan-low <0.3"
                  , "brick >=2.1.1 && <2.3.2 || >=2.4 && <3"
                  , "bsb-http-chunked ^>= 0.0.0.4"
                  , "byteable ^>= 0.1.1"
@@ -494,6 +497,7 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "xmonad"
                  , "xmonad-contrib"
                  , "xss-sanitize ^>= 0.3.7.2"
+                 , "xxhash-ffi >=0.3"
                  , "yaml ^>= 0.11.11.2"
                  , "yamlet >=1.0.0.1 && <1.1"
                  , "yamlet-aeson >=1.0.0.1 && <1.1"
@@ -551,7 +555,7 @@ flagList =
 
     -- Make sure we're building with all features enabled.
     -- TODO: The OsPath feature needs file-io >= 0.2.0.
-  , ("git-annex",                      "+Assistant +Production +TorrentParser +MagicMime -OsPath -Benchmark +Dbus -Memory")
+  , ("git-annex",                      "+assistant -benchmark +blake3 +botan +dbus -debuglocks +magicmime -memory -nollmdependencies -ospath +production -tastytap +torrentparser +xxh3")
 
     -- Compile against the system library, not the one bundled in the Haskell
     -- source tarball.

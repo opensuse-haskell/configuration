@@ -1,0 +1,13 @@
+Index: git-annex.spec
+===================================================================
+--- git-annex.spec	(revision 46)
++++ git-annex.spec	(working copy)
+@@ -212,6 +212,8 @@
+ BuildRequires:  ghc-uuid-prof
+ BuildRequires:  ghc-vector-devel
+ BuildRequires:  ghc-vector-prof
++BuildRequires:  ghc-botan-low-devel
++BuildRequires:  ghc-botan-low-prof
+ BuildRequires:  ghc-wai-devel
+ BuildRequires:  ghc-wai-extra-devel
+ BuildRequires:  ghc-wai-extra-prof
