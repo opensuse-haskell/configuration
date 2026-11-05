@@ -440,8 +440,8 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "timeit ^>= 2.0"
                  , "timezone-olson"
                  , "timezone-series >=0.1.0 && <0.2"
-                 , "tls ^>= 2.4.3"
-                 , "tls-session-manager ^>= 0.1"
+                 , "tls < 2.4.7"        -- TODO: needs crypton update
+                 , "tls-session-manager < 0.1.2"  -- TODO: newer versions need tls >= 2.4.13
                  , "toml-parser ^>= 2.0.1.2"
                  , "topograph ^>= 1.0.1"
                  , "torrent ^>= 10000.1.3"
