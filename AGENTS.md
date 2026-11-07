@@ -12,3 +12,9 @@ that directory, e.g. `_build/ghc-9.12.x` are the available packages -- one per
 directory. Those packages are OBS builds and they are checked into the public
 OBS project `devel:languages:haskell:ghc-9.12.x` from where they are propagated
 into Tumbleweed automatically at regular intervals.
+
+To build an individual package, run `osc build` in its generated package
+directory. This works, however, only on hosts that have `/usr/bin/build`. Hosts
+that lack this tool can use the `tw-dev` connection to run builds instead. The
+machine shares the project disk with the local host, so absolute project paths
+are identical on both machines; no source synchronization is needed.
