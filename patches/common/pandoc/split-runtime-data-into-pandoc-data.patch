@@ -1,0 +1,35 @@
+--- ghc-pandoc.spec
++++ ghc-pandoc.spec
+@@ -178,6 +178,7 @@
+ BuildRequires:  ghc-zip-archive-prof
+ BuildRequires:  ghc-zlib-devel
+ BuildRequires:  ghc-zlib-prof
++Requires:       pandoc-data = %{version}-%{release}
+ ExcludeArch:    %{ix86}
+ %if %{with tests}
+ BuildRequires:  ghc-Diff-devel
+@@ -218,6 +219,14 @@
+ 
+ For the pandoc command-line program, see the 'pandoc-cli' package.
+ 
++%package -n pandoc-data
++Summary:        Data files for pandoc
++BuildArch:      noarch
++
++%description -n pandoc-data
++This package provides the runtime data files for the pandoc library and
++command-line program.
++
+ %package devel
+ Summary:        Haskell %{pkg_name} library development files
+ Requires:       %{name} = %{version}-%{release}
+@@ -263,6 +272,9 @@
+ %ghc_pkg_recache
+ 
+ %files -f %{name}.files
++%license COPYING.md
++
++%files -n pandoc-data
+ %license COPYING.md
+ %dir %{_datadir}/%{pkg_name}-%{version}
+ %dir %{_datadir}/%{pkg_name}-%{version}/citeproc
