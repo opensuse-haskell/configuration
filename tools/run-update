@@ -24,7 +24,7 @@ trap exit_trap EXIT
 cd "$(dirname "$0")"/..
 
 cabal -v0 v2-update hackage.haskell.org &
-parallel 'if [ -d {}/.osc ]; then cd {} && osc update --unexpand-link >/dev/null; fi' ::: _build/* &
+parallel 'if [ -d {}/.osc ]; then cd {} && osc update --expand-link >/dev/null; fi' ::: _build/* &
 wait
 
 parallel 'if [ -d {}/.osc ]; then cd {} && osc status; fi' ::: _build/* >"$tmpfile"
