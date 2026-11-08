@@ -27,3 +27,8 @@ directory. This works, however, only on hosts that have `/usr/bin/build`. Hosts
 that lack this tool can use the `tw-dev` connection to run builds instead. The
 machine shares the project disk with the local host, so absolute project paths
 are identical on both machines; no source synchronization is needed.
+
+Every package set contains a small number of builds that are *not* generated,
+namely: `ghc`, `ghc-bootstrap`, `ghc-bootstrap-helpers`, `ghc-rpm-macros`.
+Those packages are maintained manually and the build system does not touch them
+in anyway.
