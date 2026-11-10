@@ -1,0 +1,12 @@
+--- ghc-blake3.spec
++++ ghc-blake3.spec
+@@ -74,6 +74,9 @@
+ %autosetup -n %{pkg_name}-%{version}
+ 
+ %build
++%ifnarch x86_64
++%define cabal_configure_options -f "-avx2 -avx512 -sse2 -sse41"
++%endif
+ %ghc_lib_build
+ 
+ %install
