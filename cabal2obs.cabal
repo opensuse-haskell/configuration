@@ -14,6 +14,9 @@ category:      Distribution
 homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
 cabal-version: 2.0
+extra-source-files:
+               tests/run-tests
+               tests/update-changes-file/*.test
 
 source-repository head
   type:     git

@@ -1,0 +1,15 @@
+--- a/.github/workflows/haskell-ci.yml
++++ b/.github/workflows/haskell-ci.yml
+@@ -224,6 +224,12 @@
+       - name: tests
+         run: |
+           $CABAL v2-test $ARG_COMPILER $ARG_TESTS $ARG_BENCH all --test-show-details=direct
++      - name: shelltest
++        run: |
++          ln -sf "${CABAL%% *}" "$HOME/.cabal/bin/cabal"
++          printf 'with-compiler: %s\ntests: True\nbenchmarks: True\n' "$HC" >> cabal.project.local
++          $CABAL v2-build all
++          sh ${PKGDIR_cabal2obs}/tests/run-tests
+       - name: doctest
+         run: |
+           cd ${PKGDIR_cabal2obs} || false
