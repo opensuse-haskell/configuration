@@ -24,11 +24,11 @@ $$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes inval
 >>>= 1
 
 $$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 999.999 0 joe@example.org
->>>2 /cabal: There is no available version of mtl that satisfies ==0/
+>>>2 /There is no available version of mtl that satisfies ==0/
 >>>= 1
 
 $$$ rm -f invalid-package.changes
 $$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 1.0 0 joe@example.org
 $$$ cabal -v0 v2-run update-changes-file -- -t now invalid-package.changes mtl 999.999 0 joe@example.org
->>>2 /cabal: There is no available version of mtl that satisfies ==999.999/
+>>>2 /There is no available version of mtl that satisfies ==999.999/
 >>>= 1
