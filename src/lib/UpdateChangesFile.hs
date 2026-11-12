@@ -43,7 +43,8 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
         tmpDir <- mktempdir systemTempDir "update-changes-file-XXXXXX"
         procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", oldpkg] mempty
         procs "cabal" ["unpack", "-v0", format ("--destdir="%fp) tmpDir, "--", newpkg] mempty
-        gcl <- liftIO (guessChangeLog (tmpDir </> Text.unpack oldpkg) (tmpDir </> Text.unpack newpkg))
+        -- TODO: hard-coding a 10 line maximum header length here is probably a bad idea
+        gcl <- liftIO (guessChangeLog 10 (tmpDir </> Text.unpack oldpkg) (tmpDir </> Text.unpack newpkg))
         case gcl of
           GuessedChangeLog _ txt -> liftIO (commit txt)
           _                      -> liftIO (commit (Text.pack (renderChangeLog (prettyGuessedChangeLog (pkg,oldv,newv) gcl))))
