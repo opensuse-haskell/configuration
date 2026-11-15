@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -29,7 +30,7 @@ import Distribution.Compat.NonEmptySet as NESet
 import Distribution.Compiler
 import Distribution.Package
 import Distribution.PackageDescription
-import Distribution.PackageDescription.Configuration
+import qualified Distribution.PackageDescription.Configuration as Cabal
 import Distribution.PackageDescription.Parsec
 import Distribution.Parsec
 import Distribution.Parsec.FieldLineStream
@@ -39,9 +40,39 @@ import Distribution.Simple.Utils ( lowercase )
 import Distribution.System
 import Distribution.Text
 import Distribution.Types.ComponentRequestedSpec
-import Distribution.Types.PackageVersionConstraint
+#if !MIN_VERSION_Cabal(3,18,0)
 import Distribution.Utils.ShortText
+#endif
+#if MIN_VERSION_Cabal(3,16,0)
+import Distribution.Types.DependencySatisfaction
+import Distribution.Types.MissingDependency
+import Distribution.Types.MissingDependencyReason
+#endif
+import Distribution.Types.PackageVersionConstraint
 import Distribution.Version
+
+-- | Compatibility wrapper around 'Cabal.finalizePD' that accepts a simple
+-- boolean predicate for dependency satisfiability. Cabal 3.16 changed that
+-- predicate to return 'DependencySatisfaction' instead of 'Bool'.
+finalizePD :: FlagAssignment
+           -> ComponentRequestedSpec
+           -> (Dependency -> Bool)
+           -> Platform
+           -> CompilerInfo
+           -> [PackageVersionConstraint]
+           -> GenericPackageDescription
+           -> Either [Dependency] (PackageDescription, FlagAssignment)
+#if MIN_VERSION_Cabal(3,16,0)
+finalizePD fa crs isSatisfied plat cinfo cs gpd =
+  either (Left . fmap (\(MissingDependency d _) -> d)) Right $
+    Cabal.finalizePD fa crs satisfaction plat cinfo cs gpd
+  where
+    satisfaction d
+      | isSatisfied d = Satisfied
+      | otherwise     = Unsatisfied MissingPackage
+#else
+finalizePD = Cabal.finalizePD
+#endif
 
 instance Hashable UnqualComponentName
 instance Hashable LibraryName
@@ -53,8 +84,11 @@ instance Hashable FlagName
 instance Hashable Dependency
 instance Hashable VersionRange
 instance Hashable Version
-instance Hashable ShortText
 instance Hashable PackageVersionConstraint
+#if !MIN_VERSION_Cabal(3,18,0)
+-- Cabal-syntax 3.18 and later define ShortText as a synonym for Text.
+instance Hashable ShortText
+#endif
 
 instance Hashable v => Hashable (NonEmptySet v) where
   hashWithSalt s = hashWithSalt s . NESet.toSet
