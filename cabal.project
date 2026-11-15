@@ -1,6 +1,6 @@
 -- cabal.project
 
-tests: true
+tests: True
 
 packages:
   ./cabal2obs.cabal
