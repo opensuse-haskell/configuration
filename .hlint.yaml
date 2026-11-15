@@ -18,6 +18,7 @@
       - TupleSections
       - TypeFamilies
   - { name: FlexibleInstances, within: [MyCabal, Oracle.Hackage] }
+  - { name: CPP, within: [MyCabal] }
 
 - flags:
   - { name: -fno-warn-orphans, within: [MyCabal, Config, Oracle.Hackage, Main] }
