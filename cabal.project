@@ -5,10 +5,6 @@ tests: True
 packages:
   ./cabal2obs.cabal
 
-optional-packages:
-  ../distribution-opensuse/distribution-opensuse.cabal
-  ../cabal2spec/cabal2spec.cabal
-
 allow-newer:
   turtle:all
 

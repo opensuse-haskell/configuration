@@ -67,7 +67,7 @@ executable cabal2obs
   build-depends:    base
                   , bytestring
                   , cabal2obs
-                  , cabal2spec            ^>= 2.8.1
+                  , cabal2spec            ^>= 2.8.2
                   , containers
                   , directory
                   , distribution-opensuse
