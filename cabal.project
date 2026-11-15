@@ -9,6 +9,9 @@ optional-packages:
   ../distribution-opensuse/distribution-opensuse.cabal
   ../cabal2spec/cabal2spec.cabal
 
+allow-newer:
+  turtle:all
+
 package cabal2obs
   ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
                -Wredundant-constraints -Wunused-packages
