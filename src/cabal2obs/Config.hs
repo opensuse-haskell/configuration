@@ -1,10 +1,10 @@
-{-# LANGUAGE OverloadedLists #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
-
-module Config ( knownPackageSets, addConfigOracle ) where
+module Config
+  ( compiler
+  , packageSet
+  , flagAssignments
+  , forcedExectables
+  , corePackages
+  ) where
 
 import Config.Compiler
 import Config.Flags
@@ -16,34 +16,27 @@ import Oracle.Hackage ( )
 import Types
 
 import Control.Monad
-import Data.Map.Strict ( Map, findWithDefault, fromList, keysSet, toList )
+import Data.Map.Strict ( Map, fromList, toList )
 import Data.Set ( Set )
 import Development.Shake
 
-type instance RuleResult PackageSetId = PackageSetConfig
+compiler :: CompilerId
+compiler = ghcCompiler
 
-addConfigOracle :: Rules (PackageSetId -> Action PackageSetConfig)
-addConfigOracle = addOracle getPackageSet
+-- | Resolve 'constraintList' against Hackage into concrete package versions.
+packageSet :: Action PackageSet
+packageSet = do
+  pset <- fromList <$>
+            forM (toList constraintList) (\(pn,vr) ->
+              (,) pn <$> askOracle (PackageVersionConstraint pn vr))
+  checkConsistency pset corePackages
+  pure pset
 
-packageSets :: Map PackageSetId (Action PackageSetConfig)
-packageSets = [ ("ghc-9.14.x", ghc914x)
-              ]
+flagAssignments :: Map PackageName FlagAssignment
+flagAssignments = fromList (readFlagAssignents flagList)
 
-ghc914x :: Action PackageSetConfig
-ghc914x = do
-  let compiler = ghcCompiler
-      flagAssignments = fromList (readFlagAssignents flagList)
-      forcedExectables = forcedExectableNames
-      corePackages = ghcCorePackages
-  packageSet <- fromList <$>
-                  forM (toList constraintList) (\(pn,vr) ->
-                    (,) pn <$> askOracle (PackageVersionConstraint pn vr))
-  checkConsistency (PackageSetConfig {..})
+forcedExectables :: Set PackageName
+forcedExectables = forcedExectableNames
 
-knownPackageSets :: Set PackageSetId
-knownPackageSets = keysSet packageSets
-
-getPackageSet :: PackageSetId -> Action PackageSetConfig
-getPackageSet psid = findWithDefault err psid packageSets
-  where
-    err = fail ("unknown package set " ++ show (unPackageSetId psid))
+corePackages :: PackageSet
+corePackages = ghcCorePackages

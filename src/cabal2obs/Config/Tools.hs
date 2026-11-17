@@ -1,5 +1,3 @@
-{-# LANGUAGE RecordWildCards #-}
-
 module Config.Tools ( checkConsistency, resolveConstraints ) where
 
 import Config.Flags
@@ -13,12 +11,13 @@ import Data.Map.Strict ( toList )
 import qualified Data.Set as Set
 
 
--- | Sanity-check a package set configuration before it is used to generate
--- builds. Returns the configuration unchanged if it is consistent; otherwise
--- it calls 'fail', which aborts the Shake build with an error message.
+-- | Sanity-check the package set and the compiler's core packages before they
+-- are used to generate builds. Succeeds silently if they are consistent;
+-- otherwise it calls 'fail', which aborts the Shake build with an error
+-- message.
 --
--- The check detects packages that appear both in the package set (i.e. in the
--- compiler's @constraintList@) and in its list of core packages. Core packages
+-- The check detects packages that appear both in the package set (i.e. in
+-- @constraintList@) and in the list of core packages. Core packages
 -- are bundled with GHC itself and are provided by the @ghc@ build, so
 -- generating a separate @ghc-<name>@ build for one of them would produce a
 -- second, conflicting copy of that library. The error message names every
@@ -27,12 +26,11 @@ import qualified Data.Set as Set
 -- TODO: Detect at compile-time or run-time if constraintList contains
 -- duplicate entries.
 
-checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
-checkConsistency pset@PackageSetConfig {..} = do
+checkConsistency :: MonadFail m => PackageSet -> PackageSet -> m ()
+checkConsistency packageSet corePackages = do
   let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
   unless (Set.null corePackagesInPackageSet) $
     fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-  pure pset
 
 resolveConstraints :: ConstraintSet -> String
 resolveConstraints targetPackages = unwords ["cabal", "install", "--dry-run", "--minimize-conflict-set", constraints, flags, pkgs]

@@ -9,7 +9,6 @@ import Prelude hiding ( fail )
 import Cabal2Spec
 import Config
 import Oracle
-import ParseStackageConfig
 import Types
 import UpdateChangesFile
 import MyCabal
@@ -19,17 +18,17 @@ import qualified Data.ByteString as BSS
 import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
-import Data.Set as Set ( Set )
 import qualified Data.Text as Text
 import Data.Time.Format
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import System.Directory
 
-type instance RuleResult (PackageSetId, PackageName) = FlagAssignment
-type instance RuleResult (PackageSetId, BuildName) = PackageIdentifier
-type instance RuleResult (PackageSetId, PackageIdentifier) = BuildName
+type instance RuleResult BuildName = PackageIdentifier
+type instance RuleResult PackageIdentifier = BuildName
+
+packageSetName :: FilePath
+packageSetName = display compiler
 
 main :: IO ()
 main = do
@@ -51,37 +50,33 @@ main = do
     _ <- addConstraintResolverOracle hackage
     getCabal <- addCabalFileCache hackage
 
-    getPackageSet <- addConfigOracle
-
     -- Custom oracle to figure out the rpm package name used for a given build.
-    getBuildName <- addOracle $ \(psid@(PackageSetId _), pkgid@(PackageIdentifier pn _)) -> do
+    getBuildName <- addOracle $ \pkgid@(PackageIdentifier pn _) -> do
       (_, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
-      pset <- getPackageSet psid
-      let forceExe = pn `elem` forcedExectables pset
+      let forceExe = pn `elem` forcedExectables
           prefix | forceExe || not (hasLibrary cabal)  = ""
                  | otherwise                           = "ghc-"
       pure $ BuildName (prefix ++ unPackageName pn)
 
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
-    pkgidFromPath <- addOracle $ \(psid, BuildName bn) -> do
-      pset <- getPackageSet psid
-      let pkgs = packageSet pset
+    pkgidFromPath <- addOracle $ \(BuildName bn) -> do
+      pkgs <- packageSet
       id1 <- case Map.lookup (mkPackageName bn) pkgs of
                Nothing -> pure Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
-                             BuildName bn' <- getBuildName (psid, pkgid)
+                             BuildName bn' <- getBuildName pkgid
                              pure (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
                Nothing  -> pure Nothing
                Just bn' -> case Map.lookup (mkPackageName bn') pkgs of
                              Nothing -> pure Nothing
                              Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
-                                           BuildName bn'' <- getBuildName (psid, pkgid)
+                                           BuildName bn'' <- getBuildName pkgid
                                            pure (if bn == bn'' then Just pkgid else Nothing)
       case (id1,id2) of
-        (Nothing, Nothing) -> fail $ "package set " ++ show (unPackageSetId psid) ++ " contains no build called " ++ show bn
+        (Nothing, Nothing) -> fail $ "package set " ++ show packageSetName ++ " contains no build called " ++ show bn
         (Just pkgid, _)    -> pure pkgid
         (_, Just pkgid)    -> pure pkgid
 
@@ -94,16 +89,15 @@ main = do
 
     -- Depend on all active package set targets.
     phony "all" $
-      need ["ghc-9.14.x"]
+      need [packageSetName]
 
-    -- Every (phony) package set target depends on the (real) spec file.
-    forM_ (Set.toList knownPackageSets) $ \psid ->
-      phony (unPackageSetId psid) $ do
-        pset <- getPackageSet psid
-        specFiles <- forM (Map.toList (packageSet pset)) $ \(pn,pv) -> do
-          BuildName bn <- getBuildName (psid, PackageIdentifier pn pv)
-          pure (buildDir </> unPackageSetId psid </> bn </> bn <.> "spec")
-        need specFiles
+    -- The (phony) package set target depends on the (real) spec files.
+    phony (packageSetName) $ do
+      pkgs <- packageSet
+      specFiles <- forM (Map.toList pkgs) $ \(pn,pv) -> do
+        BuildName bn <- getBuildName (PackageIdentifier pn pv)
+        pure (buildDir </> packageSetName </> bn </> bn <.> "spec")
+      need specFiles
 
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
     -- prefer this over direct downloading becauase "cabal" acts as a cache for
@@ -131,8 +125,8 @@ main = do
            else copyFile' (cabalDir </> "packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     buildDir </> "*/*/*.changes" %> \out -> do
-      (psid, bn) <- extractPackageSetIdAndBuildName out
-      pkgid@(PackageIdentifier pn v) <- pkgidFromPath (psid,bn)
+      bn <- extractBuildName out
+      pkgid@(PackageIdentifier pn v) <- pkgidFromPath bn
       (ctime, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
       let rev = packageRevision cabal
@@ -141,13 +135,12 @@ main = do
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
-      (psid, bn) <- extractPackageSetIdAndBuildName out
-      pset <- getPackageSet psid
-      pkgid@(PackageIdentifier n _) <- pkgidFromPath (psid,bn)
+      bn <- extractBuildName out
+      pkgs <- packageSet
+      pkgid@(PackageIdentifier n _) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
-          cid = compiler pset
-          fa = Map.findWithDefault mempty n (flagAssignments pset)
+          fa = Map.findWithDefault mempty n flagAssignments
       (_, cabalFile) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cabalFile
       let rev = packageRevision cabal
@@ -155,8 +148,8 @@ main = do
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
-      let lookupPackageSet d = Map.member (depPkgName d) (packageSet pset `Map.union` corePackages pset `Map.union` localLibraries cabal)
-      case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
+      let lookupPackageSet d = Map.member (depPkgName d) (pkgs `Map.union` corePackages `Map.union` localLibraries cabal)
+      case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo compiler NoAbiTag) [] cabal of
         Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
@@ -165,7 +158,7 @@ main = do
                 y:_ -> pure y
       command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
-                                      , "patches/" ++ unPackageSetId psid ++ "/" ++ display n ++ "/*.patch"
+                                      , "patches/" ++ packageSetName ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
@@ -175,10 +168,9 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     buildDir </> "packages.csv" %> \out -> do
-      let psid = PackageSetId "ghc-9.14.x"
-      pkgs <- packageSet <$> getPackageSet psid
+      pkgs <- packageSet
       ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
-        BuildName bn <- getBuildName (psid, PackageIdentifier pn v)
+        BuildName bn <- getBuildName (PackageIdentifier pn v)
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
         pure $ intercalate "," [ show (display pn), show (display v), show url]
       writeFile' out (intercalate "\n" ls) -- cannot use 'unlines' because the file mustn't end with a new line
@@ -189,25 +181,10 @@ main = do
           url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
       command_ [FileStdout out] "curl" ["-L", "-s", url]
 
-    "src/cabal2obs/Config/*/Stackage.hs" %> \out -> do
-      let dirname = takeBaseName (takeDirectory out)
-          psid = case dirname of
-                   "Nightly"     -> "nightly"
-                   'L':'T':'S':x -> "lts-" ++ x
-                   _              -> error ("invalid cabal2obs config path " ++ show dirname)
-      buf <- readFile' (buildDir </> "cabal-" ++ psid <.> "config")
-      deps <- parse stackageConfig buf
-      writeFileChanged out (mkStackagePackageSetSourcefile dirname deps)
-
-    -- phony "update" $ need
-    --   [ "tools/cabal2obs/Config" </> getConfigDirname psid </> "Stackage.hs" | psid <- knownPackageSets ]
-
     phony "fetch" $ do
-      psets <- mapM (fmap packageSet . askOracle) (Set.toList knownPackageSets)
-      let pids :: [Set PackageIdentifier]
-          pids = Map.foldrWithKey (\pn pv s -> Set.insert (PackageIdentifier pn pv) s) mempty <$> psets
-          tarball pid@(PackageIdentifier pn pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display pid <.> "tar.gz"
-      need (Set.toList (Set.map tarball (Set.unions pids)))
+      pkgs <- packageSet
+      let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"
+      need (tarball <$> Map.toList pkgs)
 
 verifyLicense :: MonadFail m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = pure ()
@@ -217,24 +194,10 @@ verifyLicense lic = case eitherParsec lic of
              in unless (lic == lic') $
                fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
 
-mkStackagePackageSetSourcefile :: String -> [Dependency] -> String
-mkStackagePackageSetSourcefile vers deps = unlines
-  [ "{-# LANGUAGE OverloadedStrings #-}"
-  , "{-# LANGUAGE OverloadedLists #-}"
-  , ""
-  , "module Config." ++ vers ++ ".Stackage where"
-  , ""
-  , "import Types"
-  , ""
-  , "stackage :: ConstraintSet"
-  , "stackage ="
-  , "  [ " ++ intercalate "\n  , " (map (show . display) deps)
-  , "  ]"
-  ]
-
-extractPackageSetIdAndBuildName :: MonadFail m => FilePath -> m (PackageSetId, BuildName)
-extractPackageSetIdAndBuildName p
-  | [_,psid,bn,_] <- splitDirectories p = pure (PackageSetId psid, BuildName bn)
+extractBuildName :: MonadFail m => FilePath -> m BuildName
+extractBuildName p
+  | [_,psn,bn,_] <- splitDirectories p
+  , psn == packageSetName               = pure (BuildName bn)
   | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)
 
 localLibraries :: GenericPackageDescription -> PackageSet
