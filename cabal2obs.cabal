@@ -49,17 +49,10 @@ library
 executable cabal2obs
   main-is:          cabal2obs.hs
   other-modules:    Config
+                    Config.Compiler
                     Config.Flags
                     Config.ForcedExecutables
-                    Config.Ghc810x
-                    Config.Ghc90x
-                    Config.Ghc92x
-                    Config.Ghc94x
-                    Config.Ghc96x
-                    Config.Ghc98x
-                    Config.Ghc910x
-                    Config.Ghc912x
-                    Config.Ghc914x
+                    Config.PkgSet
                     Config.Tools
                     Oracle
                     Oracle.Hackage
