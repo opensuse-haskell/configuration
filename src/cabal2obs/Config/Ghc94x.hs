@@ -4,17 +4,15 @@
 
 module Config.Ghc94x ( ghc94x ) where
 
+import Config.Flags
 import Config.ForcedExecutables
+import Config.Tools
 import Oracle.Hackage ( )
 import Types
 import MyCabal
 
 import Control.Monad
-import qualified Data.List as List
-import qualified Data.Map as Map
 import Data.Map.Strict ( fromList, toList )
-import Data.Maybe
-import qualified Data.Set as Set
 import Development.Shake
 
 ghc94x :: Action PackageSetConfig
@@ -46,17 +44,6 @@ ghc94x = do
 --                    , "xmonad-contrib"
 --                    , "hadolint"
 --                    ]
-
--- resolveConstraints :: String
--- resolveConstraints = unwords ["cabal", "install", "--dry-run", "--minimize-conflict-set", constraints, flags, pkgs]
---   where
---     pkgs = unwords (display <$> Map.keys targetPackages)
---     constraints = "--constraint=" <> List.intercalate " --constraint=" (show <$> environment)
---     environment = display . uncurry PackageVersionConstraint <$> toList targetPackages
---     flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags'])
---                     | pn <- Map.keys targetPackages
---                     , Just flags' <- [lookup (unPackageName pn) flagList]
---                     ]
 
 constraintList :: ConstraintSet
 constraintList = [ "adjunctions ^>= 4.4.2"
@@ -485,94 +472,6 @@ constraintList = [ "adjunctions ^>= 4.4.2"
                  , "zlib ^>= 0.6.3.0"
                  ]
 
-flagList :: [(String,String)]
-flagList =
-  [ ("cabal-plan",                     "exe")
-
-    -- Don't build hardware-specific optimizations into the binary based on what the
-    -- build machine supports or doesn't support.
-  , ("cryptonite",                     "-support_aesni -support_rdrand -support_sse")
-
-    -- Don't use the bundled sqlite3 library.
-  , ("direct-sqlite",                  "systemlib")
-
-    -- dont optimize happy with happy ( dep on same package ..)
-  , ("happy",                          "-bootstrap")
-
-    -- Build the standalone executable and prefer pcre-light, which uses the system
-    -- library rather than a bundled copy.
-  , ("highlighting-kate",              "executable pcre-light")
-
-    -- Don't use the bundled sass library.
-  , ("hlibsass",                       "externalLibsass")
-
-    -- Use the bundled lua library. People expect this package to provide LUA
-    -- 5.3, but we don't have that yet in openSUSE.
-  , ("hslua",                          "-system-lua")
-
-    -- Allow compilation without having Nix installed.
-  , ("nix-paths",                      "allow-relative-paths")
-
-    -- Build the standalone executable.
-  , ("texmath",                        "executable")
-
-    -- Enable almost all extensions.
-  , ("xmobar",                         "all_extensions")
-
-    -- Enable additional features
-  , ("idris",                          "ffi gmp")
-
-    -- Disable dependencies we don't have.
-  , ("invertible",                     "-hlist -piso")
-
-    -- Use the system sqlite library rather than the bundled one.
-  , ("persistent-sqlite",              "systemlib")
-
-    -- Make sure we're building with the test suite enabled.
-  , ("git-annex",                      "testsuite")
-
-    -- Compile against the system library, not the one bundled in the Haskell
-    -- source tarball.
-  , ("cmark",                          "pkgconfig")
-
-    -- Fix build with modern compilers.
-  , ("cassava",                        "-bytestring--lt-0_10_4")
-
-    -- Prefer the system's library over the bundled one.
-  , ("libyaml",                        "system-libyaml")
-
-    -- Configure a production-like build environment.
-  , ("stack",                          "hide-dependency-versions disable-git-info supported-build")
-
-    -- The command-line utility pulls in other dependencies.
-  , ("aeson-pretty",                   "lib-only")
-
-    -- Build the standalone executable for skylighting.
-  , ("skylighting",                    "executable")
-
-    -- Compile against system zstd library
-  , ("zstd",                           "-standalone")
-
-    -- Static linking breaks the build.
-  , ("hadolint",                       "-static")
-
-    -- Enable LUA support.
-  , ("pandoc-cli",                     "+lua +server")
-  ]
-
-readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
-readFlagAssignents xs = [ (fromJust (simpleParse name), readFlagList (words assignments)) | (name,assignments) <- xs ]
-
-readFlagList :: [String] -> FlagAssignment
-readFlagList = mkFlagAssignment . map (tagWithValue . noMinusF)
-  where
-    tagWithValue ('-':fname) = (mkFlagName (lowercase fname), False)
-    tagWithValue fname       = (mkFlagName (lowercase fname), True)
-
-    noMinusF :: String -> String
-    noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
-    noMinusF x           = x
-
 ghcCorePackages :: PackageSet
 ghcCorePackages = [ "array-0.5.4.0"
                   , "base-4.17.0.0"
@@ -623,13 +522,3 @@ ghcCorePackages = [ "array-0.5.4.0"
                   , "bytestring-builder-0.10.8.2.0"     -- now part of bytestring
                   , "persistent-template-2.12.0.0"      -- now part of persistent
                   ]
-
--- TODO: Detect at compile-time or run-time if constraintList contains
--- duplicate entries.
-
-checkConsistency :: MonadFail m => PackageSetConfig -> m PackageSetConfig
-checkConsistency pset@PackageSetConfig {..} = do
-  let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
-  unless (Set.null corePackagesInPackageSet) $
-    fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-  pure pset
