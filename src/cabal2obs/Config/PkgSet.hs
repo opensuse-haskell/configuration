@@ -454,4 +454,12 @@ constraintList = [ "adjunctions ^>= 4.4.3"
                  , "postgresql-simple"
                  , "c2hs"
                  , "language-c >=0.7.1 && <0.11"
+
+                 , "ghc-hs-meta"
+                 , "botan-low <0.3"
+                 , "botan-bindings ^>=0.3"
+                 , "crypton-conduit >=0.2.3"
+                 , "text-builder >=1.0 && <1.1", "yamlet >=1.0.0.1 && <1.1", "yamlet-aeson >=1.0.0.1 && <1.1"
+                 , "libmagic >=1.3", "blake3 >=0.3", "ram", "xxhash-ffi >=0.3"
+                 , "text-builder-core ^>=0.1.1.1"
                  ]
