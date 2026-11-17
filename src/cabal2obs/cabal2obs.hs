@@ -28,7 +28,7 @@ type instance RuleResult BuildName = PackageIdentifier
 type instance RuleResult PackageIdentifier = BuildName
 
 packageSetName :: FilePath
-packageSetName = display compiler
+packageSetName = "ghc-9.14.x"
 
 main :: IO ()
 main = do
