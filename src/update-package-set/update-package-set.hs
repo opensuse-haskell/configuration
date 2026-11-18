@@ -21,6 +21,8 @@ import Text.PrettyPrint.HughesPJClass hiding ( (<>) )
 
 -- | Generate a @cabal install --dry-run@ command that resolves the given target
 -- packages under the constraints of our package set.
+--
+-- TODO: Honor deprecated packages in the Hackage tarball.
 
 updatePackageSet :: FilePath -> Set.Set PackageName -> [String]
 updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ignore-project", "--lib", "--dry-run", "--with-compiler=" <> ghc, "--minimize-conflict-set", "--upgrade-dependencies"]
@@ -285,8 +287,8 @@ currentPkgSet = [ "adjunctions-4.4.4"
                 , "gtk2hs-buildtools-0.13.12.0"
                 , "hackage-security-0.6.4.0"
                 , "half-0.3.3"
-                , "happy-2.2.1"
-                , "happy-lib-2.2.1"
+                , "happy-2.2"
+                , "happy-lib-2.2"
                 , "hashable-1.5.1.0"
                 , "hashtables-1.4.2"
                 , "haskell-lexer-1.2.1"
