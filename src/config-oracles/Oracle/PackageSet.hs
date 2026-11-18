@@ -4,7 +4,7 @@
 module Oracle.PackageSet ( addPackageSetOracle, addAvailablePackagesOracle ) where
 
 import Config.Compiler ( ghcCorePackages )
-import Config.PkgSet ( packageSet )
+import Config.PackageSet ( packageSet )
 import MyCabal
 import Types
 

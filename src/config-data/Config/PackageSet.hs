@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Config.PkgSet ( packageSet, targetPackages ) where
+module Config.PackageSet ( packageSet, targetPackages ) where
 
 import Config.Tools
 import Types

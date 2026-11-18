@@ -53,7 +53,7 @@ library config-data
   exposed-modules:  Config.Compiler
                     Config.Flags
                     Config.ForcedExecutables
-                    Config.PkgSet
+                    Config.PackageSet
                     Config.Tools
                     Types
   hs-source-dirs:   src/config-data

@@ -5,7 +5,7 @@ module Main ( main ) where
 
 import Config.Compiler
 import Config.Flags
-import Config.PkgSet ( packageSet, targetPackages )
+import Config.PackageSet ( packageSet, targetPackages )
 import MyCabal
 import Types
 
