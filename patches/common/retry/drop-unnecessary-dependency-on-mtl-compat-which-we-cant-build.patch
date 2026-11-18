@@ -2,7 +2,7 @@ Index: ghc-retry.spec
 ===================================================================
 --- ghc-retry.spec	(revision 1)
 +++ ghc-retry.spec	(working copy)
-@@ -29,7 +29,6 @@
+@@ -30,7 +30,6 @@
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel
  BuildRequires:  ghc-exceptions-devel
@@ -10,7 +10,7 @@ Index: ghc-retry.spec
  BuildRequires:  ghc-mtl-devel
  BuildRequires:  ghc-random-devel
  BuildRequires:  ghc-rpm-macros >= 2.9.2
-@@ -39,7 +38,6 @@
+@@ -40,7 +39,6 @@
  %if %{with ghc_prof}
  BuildRequires:  ghc-base-prof
  BuildRequires:  ghc-exceptions-prof
@@ -18,10 +18,10 @@ Index: ghc-retry.spec
  BuildRequires:  ghc-mtl-prof
  BuildRequires:  ghc-random-prof
  BuildRequires:  ghc-transformers-prof
-@@ -102,6 +100,7 @@
+@@ -105,6 +103,7 @@
  
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -p1 -n %{pkg_name}-%{version}
 +sed -i -e 's|, mtl-compat||' retry.cabal
  
  %build
