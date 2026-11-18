@@ -2,16 +2,16 @@ Index: ghc-iwlib.spec
 ===================================================================
 --- ghc-iwlib.spec	(revision 1)
 +++ ghc-iwlib.spec	(working copy)
-@@ -31,6 +31,7 @@
- BuildRequires:  ghc-rpm-macros
- BuildRequires:  libiw-devel
- ExcludeArch:    %{ix86}
+@@ -25,6 +25,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 +Patch01:        add-missing-dependency-on-libm.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-rpm-macros >= 2.9.2
+@@ -68,7 +69,7 @@
  
- %description
- A binding to the iw library for getting info about the current WiFi connection.
-@@ -63,7 +64,7 @@
- This package provides the Haskell %{pkg_name} profiling library.
  
  %prep
 -%autosetup -n %{pkg_name}-%{version}
