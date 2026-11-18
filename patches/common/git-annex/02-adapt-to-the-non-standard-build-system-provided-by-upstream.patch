@@ -1,6 +1,6 @@
 Index: git-annex.spec
 ===================================================================
---- git-annex.spec	(revision 110)
+--- git-annex.spec	(revision 1)
 +++ git-annex.spec	(working copy)
 @@ -23,6 +23,9 @@
  License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND BSD-2-Clause AND MIT AND GPL-2.0-only
@@ -12,11 +12,10 @@ Index: git-annex.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-DAV-devel
  BuildRequires:  ghc-IfElse-devel
-@@ -120,7 +123,22 @@
- BuildRequires:  ghc-yesod-prof
+@@ -128,6 +131,21 @@
+ BuildRequires:  ghc-yesod-devel
+ BuildRequires:  ghc-yesod-form-devel
  BuildRequires:  ghc-yesod-static-devel
- BuildRequires:  ghc-yesod-static-prof
- ExcludeArch:    %{ix86}
 +BuildRequires:  git-core
 +BuildRequires:  gpg2
 +BuildRequires:  lsof
@@ -32,10 +31,10 @@ Index: git-annex.spec
 +Recommends:     ssh
 +Suggests:       %{name}-bash-completion
 +BuildRequires:  sqlite3-devel
- 
- %description
- Git-annex allows managing files with git, without checking the file contents
-@@ -139,6 +156,15 @@
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-Cabal-prof
+@@ -254,6 +272,15 @@
  transferring them to other computers. The git-annex webapp makes it easy to set
  up and use git-annex this way.
  
@@ -51,7 +50,7 @@ Index: git-annex.spec
  %prep
  %autosetup
  
-@@ -148,10 +174,25 @@
+@@ -263,10 +290,25 @@
  
  %install
  %ghc_bin_install
