@@ -2,7 +2,7 @@ Index: ghc-yesod-persistent.spec
 ===================================================================
 --- ghc-yesod-persistent.spec	(revision 1)
 +++ ghc-yesod-persistent.spec	(working copy)
-@@ -26,12 +26,12 @@
+@@ -27,12 +27,12 @@
  License:        MIT
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
@@ -16,7 +16,7 @@ Index: ghc-yesod-persistent.spec
  BuildRequires:  ghc-resource-pool-devel
  BuildRequires:  ghc-resourcet-devel
  BuildRequires:  ghc-rpm-macros >= 2.9.2
-@@ -43,7 +43,6 @@
+@@ -44,7 +44,6 @@
  BuildRequires:  ghc-blaze-builder-prof
  BuildRequires:  ghc-conduit-prof
  BuildRequires:  ghc-persistent-prof
@@ -24,12 +24,3 @@ Index: ghc-yesod-persistent.spec
  BuildRequires:  ghc-resource-pool-prof
  BuildRequires:  ghc-resourcet-prof
  BuildRequires:  ghc-transformers-prof
-@@ -95,7 +94,7 @@
- 
- 
- %prep
--%autosetup -n %{pkg_name}-%{version}
-+%autosetup -n %{pkg_name}-%{version} -p1
- 
- %build
- %ghc_lib_build
