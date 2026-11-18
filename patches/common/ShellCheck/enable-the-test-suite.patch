@@ -1,11 +1,11 @@
 Index: ShellCheck.spec
 ===================================================================
---- ShellCheck.spec	(revision 5)
+--- ShellCheck.spec	(revision 1)
 +++ ShellCheck.spec	(working copy)
-@@ -18,7 +18,7 @@
- 
+@@ -20,7 +20,7 @@
  %global pkg_name ShellCheck
  %global pkgver %{pkg_name}-%{version}
+ %bcond_with ghc_prof
 -%bcond_with tests
 +%bcond_without tests
  Name:           %{pkg_name}
