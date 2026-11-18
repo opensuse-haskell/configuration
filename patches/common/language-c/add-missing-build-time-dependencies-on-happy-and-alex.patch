@@ -1,12 +1,12 @@
 Index: ghc-language-c.spec
 ===================================================================
---- ghc-language-c.spec	(revision 4)
+--- ghc-language-c.spec	(revision 1)
 +++ ghc-language-c.spec	(working copy)
-@@ -49,6 +49,7 @@
- BuildRequires:  ghc-process-prof
- BuildRequires:  ghc-rpm-macros
- ExcludeArch:    %{ix86}
+@@ -38,6 +38,7 @@
+ BuildRequires:  ghc-pretty-devel
+ BuildRequires:  ghc-process-devel
+ BuildRequires:  ghc-rpm-macros >= 2.9.2
 +BuildRequires:  alex happy
- 
- %description
- Language C is a haskell library for the analysis and generation of C code.
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-array-prof
