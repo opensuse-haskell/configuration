@@ -1,12 +1,12 @@
 Index: ShellCheck.spec
 ===================================================================
---- ShellCheck.spec	(revision 2)
+--- ShellCheck.spec	(revision 1)
 +++ ShellCheck.spec	(working copy)
-@@ -63,6 +63,7 @@
- BuildRequires:  ghc-transformers-prof
+@@ -47,6 +47,7 @@
+ BuildRequires:  ghc-rpm-macros >= 2.9.2
+ BuildRequires:  ghc-transformers-devel
  BuildRequires:  pandoc-cli
- ExcludeArch:    %{ix86}
 +Provides:       shellcheck = %{version}-%{release}
- 
- %description
- The goals of ShellCheck are:
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-Diff-prof
