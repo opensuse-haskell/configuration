@@ -1,12 +1,12 @@
 Index: pandoc-cli.spec
 ===================================================================
---- pandoc-cli.spec	(revision 3)
+--- pandoc-cli.spec	(revision 1)
 +++ pandoc-cli.spec	(working copy)
-@@ -36,6 +36,7 @@
- Provides:       pandoc = 3.0.1
+@@ -37,6 +37,7 @@
+ BuildRequires:  ghc-warp-devel
+ Provides:       pandoc = %{version}
  Obsoletes:      pandoc < 3
- ExcludeArch:    %{ix86}
 +Requires:       pandoc-data = %{version}
- 
- %description
- Pandoc-cli provides a command-line executable that uses the pandoc library to
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-base-prof
