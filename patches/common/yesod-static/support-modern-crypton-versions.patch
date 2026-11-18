@@ -1,6 +1,6 @@
 Index: ghc-yesod-static.spec
 ===================================================================
---- ghc-yesod-static.spec	(revision 5)
+--- ghc-yesod-static.spec	(revision 1)
 +++ ghc-yesod-static.spec	(working copy)
 @@ -26,6 +26,7 @@
  License:        MIT
@@ -9,18 +9,25 @@ Index: ghc-yesod-static.spec
 +Patch01:        https://github.com/yesodweb/yesod/pull/1916.patch#/support-modern-crypton-versions.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-async-devel
- BuildRequires:  ghc-async-prof
-@@ -99,6 +100,8 @@
- BuildRequires:  ghc-yesod-test-devel
- BuildRequires:  ghc-yesod-test-prof
- %endif
+ BuildRequires:  ghc-attoparsec-devel
+@@ -57,6 +58,7 @@
+ BuildRequires:  ghc-wai-app-static-devel
+ BuildRequires:  ghc-wai-devel
+ BuildRequires:  ghc-yesod-core-devel
 +BuildRequires:  ghc-ram-devel
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-async-prof
+@@ -88,6 +90,7 @@
+ BuildRequires:  ghc-wai-app-static-prof
+ BuildRequires:  ghc-wai-prof
+ BuildRequires:  ghc-yesod-core-prof
 +BuildRequires:  ghc-ram-prof
+ %endif
+ %if %{with tests}
+ BuildRequires:  ghc-HUnit-devel
+@@ -136,7 +139,8 @@
  
- %description
- API docs and the README are available at
-@@ -131,7 +134,8 @@
- This package provides the Haskell %{pkg_name} profiling library.
  
  %prep
 -%autosetup -n %{pkg_name}-%{version}
