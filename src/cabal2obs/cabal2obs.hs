@@ -64,6 +64,10 @@ main = do
     -- file.
     getFlags <- addFlagAssignmentOracle flagAssignments
 
+    -- Oracle that gives the compiler we generate builds for, so that changing
+    -- it triggers a re-build of the spec files.
+    getCompiler <- addCompilerOracle compiler
+
     -- Oracle that gives the names of all packages that are available to
     -- satisfy dependencies, so that adding or removing a package triggers a
     -- re-build of the spec files.
@@ -156,8 +160,9 @@ main = do
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
       available <- getAvailablePackages
+      cid <- getCompiler
       let lookupPackageSet d = depPkgName d `Set.member` available || depPkgName d `Map.member` localLibraries cabal
-      case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo compiler NoAbiTag) [] cabal of
+      case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo cid NoAbiTag) [] cabal of
         Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
       Stdout year' <- command [Traced "find-copyright-year"] "sed" ["-r", "-n", "-e", "s/.* [0-9][0-9]:[0-9][0-9]:[0-9][0-9] UTC ([0-9]+) - .*/\\1/p", out -<.> "changes"]
@@ -174,19 +179,6 @@ main = do
         command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
-
-    buildDir </> "packages.csv" %> \out -> do
-      ls <- forM (Map.toList packageSet) $ \(pn, v) -> do
-        BuildName bn <- getBuildName (PackageIdentifier pn v)
-        let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
-        pure $ intercalate "," [ show (display pn), show (display v), show url]
-      writeFile' out (intercalate "\n" ls) -- cannot use 'unlines' because the file mustn't end with a new line
-
-    buildDir </> "cabal-*.config" %> \out -> do
-      alwaysRerun
-      let lts = drop 6 (takeBaseName out)
-          url = "https://www.stackage.org/" ++ lts ++"/cabal.config"
-      command_ [FileStdout out] "curl" ["-L", "-s", url]
 
     phony "fetch" $ do
       let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"

@@ -55,6 +55,7 @@ executable cabal2obs
                     Config.PkgSet
                     Config.Tools
                     Oracle
+                    Oracle.Compiler
                     Oracle.Flags
                     Oracle.Hackage
                     Oracle.PackageSet

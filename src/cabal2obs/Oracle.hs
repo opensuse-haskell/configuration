@@ -3,10 +3,11 @@ module Oracle
     addHackageCache, addCabalFileCache
   , parseCabalFile, hasLibrary, packageRevision
     -- * Configuration
-  , addFlagAssignmentOracle, addAvailablePackagesOracle
+  , addFlagAssignmentOracle, addAvailablePackagesOracle, addCompilerOracle
   )
   where
 
+import Oracle.Compiler
 import Oracle.Flags
 import Oracle.Hackage
 import Oracle.PackageSet
