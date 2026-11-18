@@ -8,8 +8,8 @@ Index: ghc-mtl-compat.spec
  
 +%bcond_with haddock
  %global pkg_name mtl-compat
- %global pkgver %{pkg_name}-%{version}
- Name:           ghc-%{pkg_name}
+ %global pkgver %pkg_name-%{version}
+ Name:           ghc-%pkg_name
 @@ -81,7 +82,7 @@
  %ghc_lib_build
  

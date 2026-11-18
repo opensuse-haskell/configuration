@@ -3,7 +3,7 @@ Index: quickbench.spec
 --- quickbench.spec	(revision 4)
 +++ quickbench.spec	(working copy)
 @@ -20,7 +20,7 @@
- Name:           %{pkg_name}
+ Name:           %pkg_name
  Version:        1.0
  Release:        0
 -Summary:        Quick & easy benchmarking of command-line programs

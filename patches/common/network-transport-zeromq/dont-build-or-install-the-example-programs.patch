@@ -4,8 +4,8 @@ Index: ghc-network-transport-zeromq.spec
 +++ ghc-network-transport-zeromq.spec	(working copy)
 @@ -26,7 +26,6 @@
  Group:          Development/Libraries/Haskell
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 -BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-async-devel
@@ -19,7 +19,7 @@ Index: ghc-network-transport-zeromq.spec
  
  %install
  %ghc_lib_install
--%ghc_fix_rpath %{pkg_name}-%{version}
+-%ghc_fix_rpath %pkg_name-%{version}
  
  %check
 @@ -101,7 +99,4 @@

@@ -5,7 +5,7 @@ Index: ghc-gray-code.spec
 @@ -51,6 +51,7 @@
  
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -n %pkg_name-%{version}
 +rm -v Setup.hs
  
  %build

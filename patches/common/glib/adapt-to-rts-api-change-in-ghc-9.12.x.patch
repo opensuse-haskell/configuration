@@ -4,8 +4,8 @@ Index: ghc-glib.spec
 +++ ghc-glib.spec	(working copy)
 @@ -26,6 +26,7 @@
  License:        LGPL-2.1-only
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 +Patch01:        https://github.com/gtk2hs/gtk2hs/commit/2e1ddf6f4a28819f42db45859a83f3dd7ed14c0e.patch#/adapt-to-rts-api-change-in-ghc-9.12.x.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel
@@ -14,8 +14,8 @@ Index: ghc-glib.spec
  
  
  %prep
--%autosetup -p1 -n %{pkg_name}-%{version}
-+%autosetup -p2 -n %{pkg_name}-%{version}
+-%autosetup -p1 -n %pkg_name-%{version}
++%autosetup -p2 -n %pkg_name-%{version}
  
  %build
  %ghc_lib_build

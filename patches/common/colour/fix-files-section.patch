@@ -6,8 +6,8 @@ Index: ghc-colour.spec
  
  %install
  %ghc_lib_install
-+rm %{buildroot}/%{_datadir}/%{pkg_name}-%{version}/README
-+rm %{buildroot}/%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
++rm %{buildroot}/%{_datadir}/%pkg_name-%{version}/README
++rm %{buildroot}/%{_datadir}/%pkg_name-%{version}/CHANGELOG
  
  %check
  %cabal_test
@@ -15,9 +15,9 @@ Index: ghc-colour.spec
  
  %files -f %{name}.files
  %license LICENSE
--%dir %{_datadir}/%{pkg_name}-%{version}
--%{_datadir}/%{pkg_name}-%{version}/CHANGELOG
--%{_datadir}/%{pkg_name}-%{version}/README
+-%dir %{_datadir}/%pkg_name-%{version}
+-%{_datadir}/%pkg_name-%{version}/CHANGELOG
+-%{_datadir}/%pkg_name-%{version}/README
  
  %files devel -f %{name}-devel.files
 +%doc README

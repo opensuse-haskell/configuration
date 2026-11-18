@@ -3,7 +3,7 @@ Index: ghc-cabal-helper.spec
 --- ghc-cabal-helper.spec	(revision 3)
 +++ ghc-cabal-helper.spec	(working copy)
 @@ -86,6 +86,7 @@
- cp -p %{SOURCE1} %{pkg_name}.cabal
+ cp -p %{SOURCE1} %pkg_name.cabal
  
  %build
 +%define cabal_configure_options --libexecdir=%{_libexecdir}
@@ -15,8 +15,8 @@ Index: ghc-cabal-helper.spec
  %doc LICENSE
 -%{_bindir}/cabal-helper-wrapper
 +%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}
-+%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}
-+%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%{pkg_name}-%{version}/cabal-helper-wrapper
++%dir %{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%pkg_name-%{version}
++%{_libexecdir}/%{_arch}-%{_os}-ghc-%{ghc_version}/%pkg_name-%{version}/cabal-helper-wrapper
  
  %files devel -f %{name}-devel.files
 

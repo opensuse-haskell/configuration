@@ -3,7 +3,7 @@
 --- stack-run-auto.spec	(revision 1)
 +++ stack-run-auto.spec	(working copy)
 @@ -21,7 +21,7 @@
- Name:           %{pkg_name}
+ Name:           %pkg_name
  Version:        0.1.1.4
  Release:        0
 -Summary:        FIXME

@@ -3,14 +3,14 @@ Index: ghc-etcd.spec
 --- ghc-etcd.spec	(revision 1)
 +++ ghc-etcd.spec	(working copy)
 @@ -21,7 +21,7 @@
- Name:           ghc-%{pkg_name}
+ Name:           ghc-%pkg_name
  Version:        1.0.5
  Release:        0
 -Summary:        Client for etcd, a highly-available key value store
 +Summary:        Client for etcd, a highly-availability key value store
  License:        Unlicense
  Group:          Development/Libraries/Haskell
- URL:            https://hackage.haskell.org/package/%{pkg_name}
+ URL:            https://hackage.haskell.org/package/%pkg_name
 @@ -43,7 +43,19 @@
  %endif
  

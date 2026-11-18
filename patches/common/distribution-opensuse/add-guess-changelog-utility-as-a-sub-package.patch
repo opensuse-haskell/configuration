@@ -16,7 +16,7 @@ Index: ghc-distribution-opensuse.spec
 +describe the update.
 +
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -n %pkg_name-%{version}
  
 @@ -81,6 +90,8 @@
  

@@ -5,8 +5,8 @@ Index: ghc-fast-builder.spec
 @@ -24,7 +24,9 @@
  Summary:        Fast ByteString Builder
  License:        SUSE-Public-Domain
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 +# PATCH-FIX-UPSTREAM remove-debug-flag.patch ptrommler@icloud.com -- Fix build on PowerPC where debug information is not implemented in GHC yet.
 +Patch1:         remove-debug-flag.patch
  BuildRequires:  ghc-Cabal-devel
@@ -15,7 +15,7 @@ Index: ghc-fast-builder.spec
 @@ -54,6 +56,7 @@
  
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -n %pkg_name-%{version}
 +%patch1 -p1
  
  %build

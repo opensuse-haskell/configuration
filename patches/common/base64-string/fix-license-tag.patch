@@ -8,6 +8,6 @@ Index: ghc-base64-string.spec
  Summary:        Base64 implementation for String's
 -License:        Unknown
 +License:        (GPL-2.0-or-later OR BSD-3-Clause)
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

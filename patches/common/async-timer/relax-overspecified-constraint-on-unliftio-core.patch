@@ -5,7 +5,7 @@ Index: ghc-async-timer.spec
 @@ -54,6 +54,7 @@
  
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -n %pkg_name-%{version}
 +cabal-tweak-dep-ver unliftio-core '<0.2' '<1'
  
  %build

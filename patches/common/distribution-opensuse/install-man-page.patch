@@ -18,7 +18,7 @@ Index: ghc-distribution-opensuse.spec
  
  %install
  %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
+ %ghc_fix_rpath %pkg_name-%{version}
 +install -D -m 644 guess-changelog.1 %{buildroot}%{_mandir}/man1/guess-changelog.1
  
  %post devel

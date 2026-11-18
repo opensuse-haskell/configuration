@@ -8,6 +8,6 @@ Index: ghc-vector-split.spec
  Summary:        Combinator library for splitting vectors
 -License:        MIT
 +License:        BSD-3-Clause
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

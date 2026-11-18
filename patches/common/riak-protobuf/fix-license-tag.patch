@@ -8,6 +8,6 @@ Index: ghc-riak-protobuf.spec
  Summary:        Haskell types for the Riak protocol buffer API
 -License:        Unknown
 +License:        Apache-2.0
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

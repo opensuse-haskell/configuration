@@ -4,7 +4,7 @@ Index: hledger.spec
 +++ hledger.spec	(working copy)
 @@ -168,6 +168,9 @@
  %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
+ %ghc_fix_rpath %pkg_name-%{version}
  
 +install -Dm644 embeddedfiles/%{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 +install -Dm644 embeddedfiles/%{name}.info %{buildroot}%{_infodir}/%{name}.info

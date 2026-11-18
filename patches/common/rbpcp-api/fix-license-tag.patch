@@ -8,6 +8,6 @@ Index: ghc-rbpcp-api.spec
  Summary:        RESTful Bitcoin Payment Channel Protocol Servant API description
 -License:        Unknown
 +License:        CC0-1.0
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

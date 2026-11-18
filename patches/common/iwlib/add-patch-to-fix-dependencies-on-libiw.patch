@@ -4,8 +4,8 @@ Index: ghc-iwlib.spec
 +++ ghc-iwlib.spec	(working copy)
 @@ -26,6 +26,7 @@
  License:        BSD-3-Clause
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 +Patch01:        add-missing-dependency-on-libm.patch
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel

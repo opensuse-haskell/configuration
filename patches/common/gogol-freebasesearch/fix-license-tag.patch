@@ -8,6 +8,6 @@ Index: ghc-gogol-freebasesearch.spec
  Summary:        Google Freebase Search SDK
 -License:        Unknown
 +License:        MPL-2.0
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

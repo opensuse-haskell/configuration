@@ -8,6 +8,6 @@ Index: ghc-charsetdetect-ae.spec
  Summary:        Character set detection using Mozilla's Universal Character Set Detector
 -License:        LGPL-2.0-or-later
 +License:        LGPL-2.1-or-later
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

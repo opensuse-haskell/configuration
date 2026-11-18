@@ -5,7 +5,7 @@ Index: ghc-git-lfs.spec
 @@ -85,6 +85,7 @@
  
  %prep
- %autosetup -p1 -n %{pkg_name}-%{version}
+ %autosetup -p1 -n %pkg_name-%{version}
 +cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
  
  %build

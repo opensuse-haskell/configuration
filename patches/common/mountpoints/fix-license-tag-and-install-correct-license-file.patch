@@ -8,8 +8,8 @@ Index: ghc-mountpoints.spec
  Summary:        List mount points
 -License:        LGPL-2.0-or-later
 +License:        LGPL-2.1-or-later AND BSD-3-Clause
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 @@ -65,5 +65,5 @@
  
  %files -f %{name}.files

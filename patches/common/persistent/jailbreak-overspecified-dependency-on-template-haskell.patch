@@ -5,7 +5,7 @@ Index: ghc-persistent.spec
 @@ -147,6 +147,7 @@
  
  %prep
- %autosetup -p1 -n %{pkg_name}-%{version}
+ %autosetup -p1 -n %pkg_name-%{version}
 +cabal-tweak-dep-ver template-haskell '<2.24' '<2.25'
  
  %build

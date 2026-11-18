@@ -5,7 +5,7 @@ Index: ghc-ghc-core-smallstep.spec
 @@ -49,6 +49,8 @@
  
  %prep
- %autosetup -n %{pkg_name}-%{version}
+ %autosetup -n %pkg_name-%{version}
 +cabal-tweak-dep-ver base '==4.11.*' '<5'
 +cabal-tweak-dep-ver ghc '== 8.4.*' '< 10'
  

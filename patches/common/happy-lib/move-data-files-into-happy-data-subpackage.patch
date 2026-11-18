@@ -11,7 +11,7 @@ Index: ghc-happy-lib.spec
  %if %{with ghc_prof}
  BuildRequires:  ghc-array-prof
 @@ -83,6 +84,15 @@
- %description -n ghc-%{pkg_name}-doc
+ %description -n ghc-%pkg_name-doc
  This package provides the Haskell %{pkg_name} library documentation.
  
 +%package -n happy-data
@@ -24,7 +24,7 @@ Index: ghc-happy-lib.spec
 +and by programs that use the %{pkg_name} library.
 +
  %if %{with ghc_prof}
- %package -n ghc-%{pkg_name}-prof
+ %package -n ghc-%pkg_name-prof
  Summary:        Haskell %{pkg_name} profiling library
 @@ -110,6 +120,8 @@
  %ghc_pkg_recache
@@ -32,6 +32,6 @@ Index: ghc-happy-lib.spec
  %files -f %{name}.files
 +
 +%files -n happy-data
- %dir %{_datadir}/%{pkg_name}-%{version}
- %{_datadir}/%{pkg_name}-%{version}/GLR_Base.hs
- %{_datadir}/%{pkg_name}-%{version}/GLR_Lib.hs
+ %dir %{_datadir}/%pkg_name-%{version}
+ %{_datadir}/%pkg_name-%{version}/GLR_Base.hs
+ %{_datadir}/%pkg_name-%{version}/GLR_Lib.hs

@@ -5,7 +5,7 @@ Index: ghc-csv.spec
 @@ -77,6 +77,7 @@
  
  %prep
- %autosetup -p1 -n %{pkg_name}-%{version}
+ %autosetup -p1 -n %pkg_name-%{version}
 +rm Setup.hs
  
  %build

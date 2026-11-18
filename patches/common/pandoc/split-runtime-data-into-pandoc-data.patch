@@ -32,6 +32,6 @@ Index: ghc-pandoc.spec
 +
 +%files -n pandoc-data
 +%license COPYING.md
- %dir %{_datadir}/%{pkg_name}-%{version}
- %dir %{_datadir}/%{pkg_name}-%{version}/citeproc
- %dir %{_datadir}/%{pkg_name}-%{version}/citeproc/biblatex-localization
+ %dir %{_datadir}/%pkg_name-%{version}
+ %dir %{_datadir}/%pkg_name-%{version}/citeproc
+ %dir %{_datadir}/%pkg_name-%{version}/citeproc/biblatex-localization

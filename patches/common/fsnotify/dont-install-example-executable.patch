@@ -4,8 +4,8 @@ Index: ghc-fsnotify.spec
 +++ ghc-fsnotify.spec	(working copy)
 @@ -27,6 +27,7 @@
  License:        BSD-3-Clause
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 +Patch01:        dont-install-example-exe.patch
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel

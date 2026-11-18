@@ -8,6 +8,6 @@ Index: ghc-wai-util.spec
  Summary:        Collection of utility functions for use with WAI
 -License:        Unknown
 +License:        SUSE-Public-Domain
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 

@@ -4,7 +4,7 @@ Index: hledger-ui.spec
 +++ hledger-ui.spec	(working copy)
 @@ -142,6 +142,9 @@
  %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
+ %ghc_fix_rpath %pkg_name-%{version}
  
 +install -Dm644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 +install -Dm644 %{name}.info %{buildroot}%{_infodir}/%{name}.info

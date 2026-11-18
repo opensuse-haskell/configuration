@@ -5,7 +5,7 @@ Index: cabal-install.spec
 @@ -110,6 +110,8 @@
  %install
  %ghc_lib_install
- %ghc_fix_rpath %{pkg_name}-%{version}
+ %ghc_fix_rpath %pkg_name-%{version}
 +mkdir -p %{buildroot}%{_mandir}/man1
 +%{buildroot}%{_bindir}/cabal man --raw >%{buildroot}%{_mandir}/man1/cabal.1
  

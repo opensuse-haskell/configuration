@@ -5,7 +5,7 @@ Index: ghc-email-validate.spec
 @@ -83,6 +83,7 @@
  
  %prep
- %autosetup -p1 -n %{pkg_name}-%{version}
+ %autosetup -p1 -n %pkg_name-%{version}
 +sed -i 's/\r//' LICENSE
  
  %build

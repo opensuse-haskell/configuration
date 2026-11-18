@@ -8,6 +8,6 @@ Index: ghc-google-translate.spec
  Summary:        Google Translate API bindings
 -License:        BSD-3-Clause
 +License:        BSD-2-Clause
- URL:            https://hackage.haskell.org/package/%{pkg_name}
- Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
 
