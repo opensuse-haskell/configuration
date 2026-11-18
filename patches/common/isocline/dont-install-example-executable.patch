@@ -2,15 +2,15 @@ Index: ghc-isocline.spec
 ===================================================================
 --- ghc-isocline.spec	(revision 1)
 +++ ghc-isocline.spec	(working copy)
-@@ -36,6 +36,7 @@
- BuildRequires:  ghc-text-devel
- BuildRequires:  ghc-text-prof
- ExcludeArch:    %{ix86}
+@@ -26,6 +26,7 @@
+ License:        MIT
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 +Patch01:        dont-install-example-exe.patch
- 
- %description
- ![logo](https://raw.githubusercontent.com/daanx/isocline/main/doc/isocline-inline.svg)
-@@ -93,7 +94,6 @@
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-base-devel
+@@ -98,7 +99,6 @@
  
  %files -f %{name}.files
  %license LICENSE
