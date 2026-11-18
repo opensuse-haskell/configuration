@@ -5,7 +5,7 @@ module Main ( main ) where
 
 import Config.Compiler
 import Config.Flags
-import Config.PkgSet ( constraintList )
+import Config.PkgSet ( packageSet )
 import MyCabal
 import Types
 
@@ -15,7 +15,6 @@ import Data.Map.Strict ( toList )
 import qualified Data.Set as Set
 import Development.Shake.Command ( CmdOption(AddEnv), Stdout(..), cmd )
 import Data.List ( intercalate )
-import Data.Maybe ( fromMaybe )
 import qualified Nix.Paths as Nix
 -- import Distribution.Pretty
 -- import Text.PrettyPrint ( pPrint, text )
@@ -35,7 +34,7 @@ updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ign
                   | (pn, vr) <- toList targetPackages
                   ]
     lowerBounds = [ constraint (unPackageName pn <> " >= " <> display v)
-                  | (pn, v) <- toList currentPkgSet
+                  | (pn, v) <- toList packageSet
                   ]
     installed = [ constraint (unPackageName pn <> " == " <> display v)
                 | (pn, v) <- toList ghcCorePackages
@@ -60,7 +59,7 @@ main = do
   let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet ghc targets)
                          return out
   plan <- resolve solve (Map.keysSet targetPackages) Map.empty
-  let cset = vcat $ punctuate comma [ doubleQuotes (pPrint pkg <> text " == " <> pPrint v) | (pkg,v) <- Map.toList plan
+  let cset = vcat $ punctuate comma [ doubleQuotes (pPrint pkg <> text "-" <> pPrint v) | (pkg,v) <- Map.toList plan
                                                                                            , pkg `Map.notMember` ghcCorePackages
                                     ]
   putStrLn $ display $ lbrack $$ nest 4 cset $$ rbrack
@@ -132,12 +131,3 @@ jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise",
 
 targetPackages :: ConstraintSet
 targetPackages = [ "git-annex" ]
-
--- | The package set we currently have, i.e. the versions pinned in
--- 'constraintList'. Every entry must specify one exact version.
-
-currentPkgSet :: PackageSet
-currentPkgSet = Map.mapWithKey exactVersion constraintList
-  where
-    exactVersion pn vr = fromMaybe (error ("constraintList: " <> unPackageName pn <> " " <> display vr <> " does not specify an exact version"))
-                                   (isSpecificVersion vr)

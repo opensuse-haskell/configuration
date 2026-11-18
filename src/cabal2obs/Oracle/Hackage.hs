@@ -19,8 +19,6 @@ import Development.Shake.FilePath
 import System.Directory
 import System.IO
 
-type Constraint = PackageVersionConstraint
-
 newtype Hackage = Hackage TarIndex
 
 addHackageCache :: Rules (Action Hackage)
@@ -34,22 +32,6 @@ addHackageCache = (\f' -> f' ()) <$> newCache f
             Nothing -> fail (idxFile <> ": could not parse Hackage tarball index")
             Just (idx,rest) | BSS.null rest -> pure (Hackage idx)
                             | otherwise     -> fail (idxFile <> ": unexpected " <> show (BSS.length rest) <> " extra bytes at the end")
-
-type instance RuleResult Constraint = Version
-
--- | Resolve a Hackage 'PackageVersionConstraint' into the latest 'Version'
--- that satisfies the constraint or report an error via 'fail'. This oracle
--- needs access to 'Hackage' through a registered 'addHackageCache' action.
-
-addConstraintResolverOracle :: Action Hackage -> Rules (Constraint -> Action Version)
-addConstraintResolverOracle hackage = addOracle $ \(PackageVersionConstraint name vrange) -> do
-  Hackage idx <- hackage
-  let n = unPackageName name
-  es <- case Tar.lookup idx n of
-          Nothing               -> fail (n <> " is not a valid Hackage package")
-          Just (TarFileEntry _) -> fail ("looking up " <> show n <> " in Hackage gives unexpected file(!) result")
-          Just (TarDir es)      -> pure es
-  pure $ maximum [ v | (p, TarDir _) <- es, v <- [fromString p], v `withinRange` vrange ]
 
 -- | Helper function that maps a given 'PackageIdentifier' into the 'FilePath'
 -- of the corresponding Cabal file. The first function argument gives the

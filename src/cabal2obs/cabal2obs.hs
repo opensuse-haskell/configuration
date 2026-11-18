@@ -47,7 +47,6 @@ main = do
 
     -- Register our custom oracles to query the configuration files.
     hackage <- addHackageCache
-    _ <- addConstraintResolverOracle hackage
     getCabal <- addCabalFileCache hackage
 
     -- Custom oracle to figure out the rpm package name used for a given build.
@@ -62,15 +61,14 @@ main = do
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(BuildName bn) -> do
-      pkgs <- packageSet
-      id1 <- case Map.lookup (mkPackageName bn) pkgs of
+      id1 <- case Map.lookup (mkPackageName bn) packageSet of
                Nothing -> pure Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
                              BuildName bn' <- getBuildName pkgid
                              pure (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
                Nothing  -> pure Nothing
-               Just bn' -> case Map.lookup (mkPackageName bn') pkgs of
+               Just bn' -> case Map.lookup (mkPackageName bn') packageSet of
                              Nothing -> pure Nothing
                              Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
                                            BuildName bn'' <- getBuildName pkgid
@@ -93,8 +91,7 @@ main = do
 
     -- The (phony) package set target depends on the (real) spec files.
     phony packageSetName $ do
-      pkgs <- packageSet
-      specFiles <- forM (Map.toList pkgs) $ \(pn,pv) -> do
+      specFiles <- forM (Map.toList packageSet) $ \(pn,pv) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn pv)
         pure (buildDir </> packageSetName </> bn </> bn <.> "spec")
       need specFiles
@@ -136,7 +133,6 @@ main = do
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
       bn <- extractBuildName out
-      pkgs <- packageSet
       pkgid@(PackageIdentifier n _) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
@@ -148,7 +144,7 @@ main = do
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
-      let lookupPackageSet d = Map.member (depPkgName d) (pkgs `Map.union` corePackages `Map.union` localLibraries cabal)
+      let lookupPackageSet d = Map.member (depPkgName d) (packageSet `Map.union` corePackages `Map.union` localLibraries cabal)
       case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo compiler NoAbiTag) [] cabal of
         Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
@@ -168,8 +164,7 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     buildDir </> "packages.csv" %> \out -> do
-      pkgs <- packageSet
-      ls <- forM (Map.toList pkgs) $ \(pn, v) -> do
+      ls <- forM (Map.toList packageSet) $ \(pn, v) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn v)
         let url = "https://build.opensuse.org/package/show/devel:languages:haskell/" ++ bn
         pure $ intercalate "," [ show (display pn), show (display v), show url]
@@ -182,9 +177,8 @@ main = do
       command_ [FileStdout out] "curl" ["-L", "-s", url]
 
     phony "fetch" $ do
-      pkgs <- packageSet
       let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"
-      need (tarball <$> Map.toList pkgs)
+      need (tarball <$> Map.toList packageSet)
 
 verifyLicense :: MonadFail m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = pure ()

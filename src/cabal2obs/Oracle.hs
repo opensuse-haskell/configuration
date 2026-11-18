@@ -1,6 +1,6 @@
 module Oracle
   ( -- * Access to Hackage
-    addHackageCache, addCabalFileCache, addConstraintResolverOracle
+    addHackageCache, addCabalFileCache
   , parseCabalFile, hasLibrary, packageRevision
   )
   where
