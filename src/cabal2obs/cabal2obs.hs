@@ -166,14 +166,14 @@ main = do
       year <- case lines year' of
                 []  -> fail ("impossible year value " ++ show year' ++ " returned")
                 y:_ -> pure y
-      command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+      command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ packageSetName ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--copyright-year=" ++ year, "-i", "../.." </> out]
+        command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
