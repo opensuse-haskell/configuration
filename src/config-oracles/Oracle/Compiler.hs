@@ -3,6 +3,7 @@
 
 module Oracle.Compiler ( addCompilerOracle ) where
 
+import Config.Compiler ( ghcCompiler )
 import MyCabal
 
 import Development.Shake
@@ -14,10 +15,10 @@ newtype Compiler = Compiler ()
 
 type instance RuleResult Compiler = CompilerId
 
--- | Register an oracle that gives the given compiler. Rules that query it are
--- re-built when the compiler changes in the configuration.
+-- | Register an oracle that gives the compiler we generate builds for. Rules
+-- that query it are re-built when the compiler changes in the configuration.
 
-addCompilerOracle :: CompilerId -> Rules (Action CompilerId)
-addCompilerOracle cid = do
-  getCompiler <- addOracle $ \(Compiler ()) -> pure cid
+addCompilerOracle :: Rules (Action CompilerId)
+addCompilerOracle = do
+  getCompiler <- addOracle $ \(Compiler ()) -> pure ghcCompiler
   pure (getCompiler (Compiler ()))

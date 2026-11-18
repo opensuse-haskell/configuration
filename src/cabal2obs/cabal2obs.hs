@@ -7,7 +7,6 @@ module Main ( main ) where
 import Prelude hiding ( fail )
 
 import Cabal2Spec
-import Config
 import Oracle
 import Types
 import UpdateChangesFile
@@ -50,32 +49,29 @@ main = do
     hackage <- addHackageCache
     getCabal <- addCabalFileCache hackage
 
+    -- Oracles that give access to our configuration. This is the only way to
+    -- access it: the raw data lives in the config-data library, which this
+    -- executable intentionally does not depend on. That way, Shake learns
+    -- about every piece of the configuration that a rule uses.
+    getPackageSet <- addPackageSetOracle
+    getAvailablePackages <- addAvailablePackagesOracle
+    getFlags <- addFlagAssignmentOracle
+    isForcedExecutable <- addForcedExecutableOracle
+    getCompiler <- addCompilerOracle
+
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \pkgid@(PackageIdentifier pn _) -> do
       (_, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
-      let forceExe = pn `elem` forcedExectables
-          prefix | forceExe || not (hasLibrary cabal)  = ""
+      forceExe <- isForcedExecutable pn
+      let prefix | forceExe || not (hasLibrary cabal)  = ""
                  | otherwise                           = "ghc-"
       pure $ BuildName (prefix ++ unPackageName pn)
-
-    -- Oracle that gives the flag assignment for a package, so that changing
-    -- a package's flags in the configuration triggers a re-build of its spec
-    -- file.
-    getFlags <- addFlagAssignmentOracle flagAssignments
-
-    -- Oracle that gives the compiler we generate builds for, so that changing
-    -- it triggers a re-build of the spec files.
-    getCompiler <- addCompilerOracle compiler
-
-    -- Oracle that gives the names of all packages that are available to
-    -- satisfy dependencies, so that adding or removing a package triggers a
-    -- re-build of the spec files.
-    getAvailablePackages <- addAvailablePackagesOracle (Map.keysSet (packageSet `Map.union` corePackages))
 
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(BuildName bn) -> do
+      packageSet <- getPackageSet
       id1 <- case Map.lookup (mkPackageName bn) packageSet of
                Nothing -> pure Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
@@ -106,6 +102,7 @@ main = do
 
     -- The (phony) package set target depends on the (real) spec files.
     phony packageSetName $ do
+      packageSet <- getPackageSet
       specFiles <- forM (Map.toList packageSet) $ \(pn,pv) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn pv)
         pure (buildDir </> packageSetName </> bn </> bn <.> "spec")
@@ -181,6 +178,7 @@ main = do
       mapM_ verifyLicense (lines buf)
 
     phony "fetch" $ do
+      packageSet <- getPackageSet
       let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"
       need (tarball <$> Map.toList packageSet)
 
