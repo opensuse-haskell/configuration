@@ -1,0 +1,12 @@
+Index: ghc-botan-bindings.spec
+===================================================================
+--- ghc-botan-bindings.spec	(revision 1)
++++ ghc-botan-bindings.spec	(working copy)
+@@ -83,6 +83,7 @@
+ 
+ %prep
+ %autosetup -p1 -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver base '<4.22' '<4.23'
+ 
+ %build
+ %ghc_lib_build
