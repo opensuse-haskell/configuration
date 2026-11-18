@@ -1,8 +1,8 @@
 Index: xmonad.spec
 ===================================================================
---- xmonad.spec	(revision 29)
+--- xmonad.spec	(revision 1)
 +++ xmonad.spec	(working copy)
-@@ -25,6 +25,7 @@
+@@ -26,6 +26,7 @@
  License:        BSD-3-Clause
  URL:            https://hackage.haskell.org/package/%{name}
  Source0:        https://hackage.haskell.org/package/%{name}-%{version}/%{name}-%{version}.tar.gz
@@ -10,7 +10,7 @@ Index: xmonad.spec
  BuildRequires:  chrpath
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-X11-devel
-@@ -40,6 +41,11 @@
+@@ -42,6 +43,11 @@
  BuildRequires:  ghc-transformers-devel
  BuildRequires:  ghc-unix-devel
  ExcludeArch:    %{ix86}
@@ -19,11 +19,10 @@ Index: xmonad.spec
 +BuildRequires:  pkgconfig(xinerama)
 +Suggests:       ghc-xmonad-contrib-devel
 +Suggests:       ghc-xmonad-devel
- %if %{with tests}
- BuildRequires:  ghc-QuickCheck-devel
- BuildRequires:  ghc-quickcheck-classes-devel
-@@ -79,6 +85,11 @@
- 
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-X11-prof
+ BuildRequires:  ghc-base-prof
+@@ -117,6 +123,11 @@
  %install
  %ghc_lib_install
  %ghc_fix_rpath %{pkg_name}-%{version}
@@ -34,7 +33,8 @@ Index: xmonad.spec
 +%suse_update_desktop_file %{desktop_src}
  
  %check
-@@ -94,6 +105,8 @@
+ %cabal_test
+@@ -131,6 +142,8 @@
  %license LICENSE
  %doc CHANGES.md README.md
  %{_bindir}/%{name}
