@@ -3,7 +3,7 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module MyCabal
-  ( Version, VersionRange, withinRange, noVersion, anyVersion, version0
+  ( Version, VersionRange, withinRange, noVersion, anyVersion, version0, isSpecificVersion
   , CompilerId(..), Platform(..), OS(..), Arch(..), AbiTag(..), unknownCompilerInfo
   , prettyShow, display
   , PackageName, unPackageName, mkPackageName

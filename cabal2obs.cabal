@@ -96,6 +96,7 @@ executable update-package-set
   main-is:          update-package-set.hs
   other-modules:    Config.Compiler
                     Config.Flags
+                    Config.PkgSet
                     Types
   hs-source-dirs:   src/update-package-set
                     src/cabal2obs
