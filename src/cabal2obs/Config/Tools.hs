@@ -1,13 +1,11 @@
-module Config.Tools ( checkConsistency, resolveConstraints ) where
+module Config.Tools ( checkConsistency ) where
 
-import Config.Flags
 import Types
 import MyCabal
 
 import Control.Monad
 import qualified Data.List as List
 import qualified Data.Map as Map
-import Data.Map.Strict ( toList )
 import qualified Data.Set as Set
 
 
@@ -31,14 +29,3 @@ checkConsistency packageSet corePackages = do
   let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
   unless (Set.null corePackagesInPackageSet) $
     fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-
-resolveConstraints :: ConstraintSet -> String
-resolveConstraints targetPackages = unwords ["cabal", "install", "--dry-run", "--minimize-conflict-set", constraints, flags, pkgs]
-  where
-    pkgs = unwords (display <$> Map.keys targetPackages)
-    constraints = "--constraint=" <> List.intercalate " --constraint=" (show <$> environment)
-    environment = display . uncurry PackageVersionConstraint <$> toList targetPackages
-    flags = unwords [ "--constraint=" <> show (unwords [unPackageName pn, flags'])
-                    | pn <- Map.keys targetPackages
-                    , Just flags' <- [lookup (unPackageName pn) flagList]
-                    ]

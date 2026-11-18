@@ -93,6 +93,19 @@ executable update-changes-file
                     DeriveAnyClass
   ghc-options:      -threaded
 
+executable update-package-set
+  main-is:          update-package-set.hs
+  other-modules:    Config.Compiler
+                    Config.Flags
+                    Types
+  hs-source-dirs:   src/update-package-set
+                    src/cabal2obs
+  build-depends:    base, cabal2obs, containers, nix-paths, pretty, shake
+  default-language: Haskell2010
+  other-extensions: OverloadedLists
+                    OverloadedStrings
+  ghc-options:      -threaded
+
 test-suite regression-test
   type:             exitcode-stdio-1.0
   main-is:          regression-test.hs
