@@ -1,13 +1,13 @@
 Index: alex.spec
 ===================================================================
---- alex.spec	(revision 21)
+--- alex.spec	(revision 1)
 +++ alex.spec	(working copy)
-@@ -16,7 +16,7 @@
- #
+@@ -18,7 +18,7 @@
  
  
+ %bcond_with ghc_prof
 -%bcond_with tests
 +%bcond_without tests
  Name:           alex
- Version:        3.2.7.1
+ Version:        3.5.4.2
  Release:        0
