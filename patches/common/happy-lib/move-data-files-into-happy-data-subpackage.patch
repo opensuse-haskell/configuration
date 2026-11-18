@@ -1,0 +1,37 @@
+Index: ghc-happy-lib.spec
+===================================================================
+--- ghc-happy-lib.spec	(revision 1)
++++ ghc-happy-lib.spec	(working copy)
+@@ -34,6 +34,7 @@
+ BuildRequires:  ghc-mtl-devel
+ BuildRequires:  ghc-rpm-macros >= 2.9.2
+ BuildRequires:  ghc-transformers-devel
++Requires:       happy-data = %{version}
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-array-prof
+@@ -83,6 +84,15 @@
+ %description -n ghc-%{pkg_name}-doc
+ This package provides the Haskell %{pkg_name} library documentation.
+ 
++%package -n happy-data
++Summary:        Code templates used by the Happy parser generator
++BuildArch:      noarch
++
++%description -n happy-data
++This package provides the code templates that the Happy parser generator
++copies into the parsers it generates. They are needed by the happy executable
++and by programs that use the %{pkg_name} library.
++
+ %if %{with ghc_prof}
+ %package -n ghc-%{pkg_name}-prof
+ Summary:        Haskell %{pkg_name} profiling library
+@@ -110,6 +120,8 @@
+ %ghc_pkg_recache
+ 
+ %files -f %{name}.files
++
++%files -n happy-data
+ %dir %{_datadir}/%{pkg_name}-%{version}
+ %{_datadir}/%{pkg_name}-%{version}/GLR_Base.hs
+ %{_datadir}/%{pkg_name}-%{version}/GLR_Lib.hs

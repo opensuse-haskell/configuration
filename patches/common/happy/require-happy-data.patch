@@ -1,0 +1,13 @@
+Index: happy.spec
+===================================================================
+--- happy.spec	(revision 1)
++++ happy.spec	(working copy)
+@@ -30,6 +30,8 @@
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-happy-lib-devel
+ BuildRequires:  ghc-rpm-macros >= 2.9.2
++# happy reads its code templates from the data files of happy-lib at run-time.
++Requires:       happy-data = %{version}
+ ExcludeArch:    %{ix86}
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-base-prof
