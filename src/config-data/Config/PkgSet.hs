@@ -7,21 +7,19 @@ import Config.Tools
 import Types
 
 targetPackages :: ConstraintSet
-targetPackages   = [ "alex"
-                   , "cabal-install"
-                   , "cabal2spec"
-                   , "cabal-plan"
-                   , "git-annex"
-                   , "happy"
-                   , "hledger", "hledger-ui", "hledger-interest"
-                   , "hlint"
-                   , "pandoc", "pandoc-cli", "pandoc-lua-engine", "pandoc-server"
-                   , "citeproc"
-                   , "postgresql-simple"        -- needed by emu-incident-report
-                   , "ShellCheck"
-                   , "xmobar"
-                   , "xmonad"
-                   , "xmonad-contrib"
+targetPackages   = [ "alex >= 3.5.4.2"
+                   , "cabal-install > 3.16"
+            --     , "cabal2spec"
+                   , "git-annex >= 10.20261113"
+                   , "happy >= 2.2"
+                   , "hledger >= 1.52.4", "hledger-ui >= 1.52.4", "hledger-interest >= 2"
+            --     , "hlint"
+                   , "pandoc >= 3.14", "pandoc-cli >= 3.14", "pandoc-lua-engine > 0.5.4", "pandoc-server > 0.1.4"
+                   , "citeproc > 0.14"
+            --     , "postgresql-simple"        -- needed by emu-incident-report
+                   , "ShellCheck >= 0.11"
+            --     , "xmobar"
+            --     , "xmonad", "xmonad-contrib"
                    ]
 
 packageSet :: PackageSet

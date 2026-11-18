@@ -5,7 +5,7 @@ module Main ( main ) where
 
 import Config.Compiler
 import Config.Flags
-import Config.PkgSet ( packageSet )
+import Config.PkgSet ( packageSet, targetPackages )
 import MyCabal
 import Types
 
@@ -129,5 +129,3 @@ jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise",
              , ("botan-bindings","base")
              ]
 
-targetPackages :: ConstraintSet
-targetPackages = [ "git-annex" ]
