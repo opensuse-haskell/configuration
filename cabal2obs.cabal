@@ -56,7 +56,6 @@ executable cabal2obs
                     Config.Tools
                     Oracle
                     Oracle.Hackage
-                    ParseStackageConfig
                     Types
   hs-source-dirs:   src/cabal2obs
   build-depends:    base
