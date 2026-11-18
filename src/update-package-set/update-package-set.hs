@@ -38,10 +38,7 @@ updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ign
     installed = [ constraint (unPackageName pn <> " == " <> display v)
                 | (pn, v) <- toList ghcCorePackages
                 ]
-    flags = [ constraint (unwords [unPackageName pn, flags'])
-            | pn <- Set.toList targets
-            , Just flags' <- [lookup (unPackageName pn) flagList]
-            ]
+    flags = [ constraint (unwords [pn, flags']) | (pn, flags') <- flagList ]
     allowNewer = [ "--allow-newer=" <> unPackageName x <> ":" <> unPackageName y
                  | (x, y) <- jailbreaks
                  ]
