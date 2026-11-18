@@ -2,7 +2,7 @@ Index: ghc-glib.spec
 ===================================================================
 --- ghc-glib.spec	(revision 1)
 +++ ghc-glib.spec	(working copy)
-@@ -25,6 +25,7 @@
+@@ -26,6 +26,7 @@
  License:        LGPL-2.1-only
  URL:            https://hackage.haskell.org/package/%{pkg_name}
  Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
@@ -10,12 +10,12 @@ Index: ghc-glib.spec
  BuildRequires:  ghc-Cabal-devel
  BuildRequires:  ghc-base-devel
  BuildRequires:  ghc-bytestring-devel
-@@ -86,7 +87,7 @@
+@@ -87,7 +88,7 @@
  
  
  %prep
--%autosetup -n %{pkg_name}-%{version}
-+%autosetup -n %{pkg_name}-%{version} -p2
+-%autosetup -p1 -n %{pkg_name}-%{version}
++%autosetup -p2 -n %{pkg_name}-%{version}
  
  %build
  %ghc_lib_build
