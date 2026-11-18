@@ -128,5 +128,6 @@ jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise",
              , ("botan-low","base")
              , ("botan-bindings","base")
              , ("wizards","containers")
+             , ("ShellCheck","QuickCheck")
              ]
 

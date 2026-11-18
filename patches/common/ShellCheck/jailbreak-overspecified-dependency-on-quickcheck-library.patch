@@ -1,0 +1,12 @@
+Index: ShellCheck.spec
+===================================================================
+--- ShellCheck.spec	(revision 1)
++++ ShellCheck.spec	(working copy)
+@@ -118,6 +118,7 @@
+ %prep
+ %autosetup -p1
+ cabal-tweak-dep-ver Diff '< 1.1' '< 3'
++cabal-tweak-dep-ver QuickCheck '< 2.17' '< 2.20'
+ 
+ %build
+ %ghc_lib_build
