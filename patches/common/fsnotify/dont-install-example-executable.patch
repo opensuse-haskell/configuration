@@ -1,25 +1,16 @@
 Index: ghc-fsnotify.spec
 ===================================================================
---- ghc-fsnotify.spec	(revision 3)
+--- ghc-fsnotify.spec	(revision 1)
 +++ ghc-fsnotify.spec	(working copy)
-@@ -74,6 +74,7 @@
- BuildRequires:  ghc-sandwich-devel
- BuildRequires:  ghc-sandwich-prof
- %endif
+@@ -27,6 +27,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%{pkg_name}
+ Source0:        https://hackage.haskell.org/package/%{pkg_name}-%{version}/%{pkg_name}-%{version}.tar.gz
 +Patch01:        dont-install-example-exe.patch
- 
- %description
- Cross platform library for file creation, modification, and deletion
-@@ -107,7 +108,7 @@
- This package provides the Haskell %{pkg_name} profiling library.
- 
- %prep
--%autosetup -n %{pkg_name}-%{version}
-+%autosetup -n %{pkg_name}-%{version} -p1
- 
- %build
- %ghc_lib_build
-@@ -127,7 +128,6 @@
+ BuildRequires:  chrpath
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-async-devel
+@@ -135,7 +136,6 @@
  
  %files -f %{name}.files
  %license LICENSE
