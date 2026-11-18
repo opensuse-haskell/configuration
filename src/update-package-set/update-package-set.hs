@@ -57,7 +57,7 @@ main = do
   ghc <- compiler
   pkgConfig <- pkgConfigPath
   let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet ghc targets)
-                         return out
+                         pure out
   plan <- resolve solve (Map.keysSet targetPackages) Map.empty
   let cset = vcat $ punctuate comma [ doubleQuotes (pPrint pkg <> text "-" <> pPrint v) | (pkg,v) <- Map.toList plan
                                                                                            , pkg `Map.notMember` ghcCorePackages
@@ -70,7 +70,7 @@ resolve :: (Set.Set PackageName -> IO String) -> Set.Set PackageName -> PackageS
 resolve solve targets previous = do
   plan <- parseInstallPlan <$> solve targets
   if plan == previous
-     then return plan
+     then pure plan
      else resolve solve (Map.keysSet targetPackages `Set.union` Map.keysSet plan) plan
 
 -- | Extract the package set from the install plan printed by @cabal install
@@ -96,7 +96,7 @@ parseInstallPlan out = Map.fromList
 compiler :: IO FilePath
 compiler = do
   ghc : _ <- nixBuild "(import <nixpkgs> {}).haskell.compiler.ghc914"
-  return (ghc <> "/bin/ghc")
+  pure (ghc <> "/bin/ghc")
 
 -- | System libraries (as nixpkgs attribute names) that packages in our set
 -- look up via pkg-config, depending on the flags we choose.
@@ -110,14 +110,14 @@ pkgConfigDependencies = [ "libyaml", "sqlite" ]
 pkgConfigPath :: IO String
 pkgConfigPath = do
   paths <- nixBuild ("with import <nixpkgs> {}; map lib.getDev [ " <> unwords pkgConfigDependencies <> " ]")
-  return $ intercalate ":" [ p <> d | p <- paths, d <- ["/lib/pkgconfig", "/share/pkgconfig"] ]
+  pure $ intercalate ":" [ p <> d | p <- paths, d <- ["/lib/pkgconfig", "/share/pkgconfig"] ]
 
 -- | Build a nix expression and return the store paths of its outputs.
 
 nixBuild :: String -> IO [FilePath]
 nixBuild expr = do
   Stdout out <- cmd Nix.nixBuild (["--no-out-link", "-E", expr] :: [String])
-  return (lines out)
+  pure (lines out)
 
 jailbreaks :: [(PackageName, PackageName)]
 jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise", "time")
