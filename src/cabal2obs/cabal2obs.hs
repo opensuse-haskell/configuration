@@ -58,6 +58,11 @@ main = do
                  | otherwise                           = "ghc-"
       pure $ BuildName (prefix ++ unPackageName pn)
 
+    -- Oracle that gives the flag assignment for a package, so that changing
+    -- a package's flags in the configuration triggers a re-build of its spec
+    -- file.
+    getFlags <- addFlagAssignmentOracle flagAssignments
+
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(BuildName bn) -> do
@@ -136,7 +141,7 @@ main = do
       pkgid@(PackageIdentifier n _) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
-          fa = Map.findWithDefault mempty n flagAssignments
+      fa <- getFlags n
       (_, cabalFile) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cabalFile
       let rev = packageRevision cabal

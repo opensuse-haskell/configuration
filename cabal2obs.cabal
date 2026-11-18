@@ -55,6 +55,7 @@ executable cabal2obs
                     Config.PkgSet
                     Config.Tools
                     Oracle
+                    Oracle.Flags
                     Oracle.Hackage
                     Types
   hs-source-dirs:   src/cabal2obs
