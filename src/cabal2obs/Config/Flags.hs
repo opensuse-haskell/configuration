@@ -103,6 +103,7 @@ readFlagList :: [String] -> FlagAssignment
 readFlagList = mkFlagAssignment . map (tagWithValue . specifyPlus . noMinusF)
   where
     tagWithValue ('-':fname) = (mkFlagName (lowercase fname), False)
+    tagWithValue ('+':fname) = (mkFlagName (lowercase fname), True)
     tagWithValue fname       = (mkFlagName (lowercase fname), True)
 
     noMinusF :: String -> String
