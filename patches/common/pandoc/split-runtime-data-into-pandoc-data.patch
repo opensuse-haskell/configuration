@@ -1,14 +1,16 @@
---- ghc-pandoc.spec
-+++ ghc-pandoc.spec
-@@ -178,6 +178,7 @@
- BuildRequires:  ghc-zip-archive-prof
+Index: ghc-pandoc.spec
+===================================================================
+--- ghc-pandoc.spec	(revision 1)
++++ ghc-pandoc.spec	(working copy)
+@@ -103,6 +103,7 @@
+ BuildRequires:  ghc-yamlet-devel
+ BuildRequires:  ghc-zip-archive-devel
  BuildRequires:  ghc-zlib-devel
- BuildRequires:  ghc-zlib-prof
 +Requires:       pandoc-data = %{version}-%{release}
  ExcludeArch:    %{ix86}
- %if %{with tests}
- BuildRequires:  ghc-Diff-devel
-@@ -218,6 +219,14 @@
+ %if %{with ghc_prof}
+ BuildRequires:  ghc-Glob-prof
+@@ -220,6 +221,14 @@
  
  For the pandoc command-line program, see the 'pandoc-cli' package.
  
@@ -23,13 +25,13 @@
  %package devel
  Summary:        Haskell %{pkg_name} library development files
  Requires:       %{name} = %{version}-%{release}
-@@ -263,6 +272,9 @@
- %ghc_pkg_recache
+@@ -269,6 +278,9 @@
  
  %files -f %{name}.files
-+%license COPYING.md
+ %license COPYING.md
 +
 +%files -n pandoc-data
- %license COPYING.md
++%license COPYING.md
  %dir %{_datadir}/%{pkg_name}-%{version}
  %dir %{_datadir}/%{pkg_name}-%{version}/citeproc
+ %dir %{_datadir}/%{pkg_name}-%{version}/citeproc/biblatex-localization
