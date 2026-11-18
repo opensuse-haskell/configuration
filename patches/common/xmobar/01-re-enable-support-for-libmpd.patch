@@ -2,12 +2,19 @@ Index: xmobar.spec
 ===================================================================
 --- xmobar.spec	(revision 1)
 +++ xmobar.spec	(working copy)
-@@ -34,6 +35,8 @@
- BuildRequires:  ghc-X11-xft-prof
+@@ -31,6 +31,7 @@
+ BuildRequires:  ghc-X11-devel
+ BuildRequires:  ghc-X11-xft-devel
  BuildRequires:  ghc-aeson-devel
- BuildRequires:  ghc-aeson-prof
 +BuildRequires:  ghc-libmpd-devel
-+BuildRequires:  ghc-libmpd-prof
  BuildRequires:  ghc-async-devel
- BuildRequires:  ghc-async-prof
  BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-bytestring-devel
+@@ -64,6 +65,7 @@
+ BuildRequires:  ghc-X11-prof
+ BuildRequires:  ghc-X11-xft-prof
+ BuildRequires:  ghc-aeson-prof
++BuildRequires:  ghc-libmpd-prof
+ BuildRequires:  ghc-async-prof
+ BuildRequires:  ghc-base-prof
+ BuildRequires:  ghc-bytestring-prof
