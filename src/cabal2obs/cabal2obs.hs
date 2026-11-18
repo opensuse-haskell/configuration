@@ -92,7 +92,7 @@ main = do
       need [packageSetName]
 
     -- The (phony) package set target depends on the (real) spec files.
-    phony (packageSetName) $ do
+    phony packageSetName $ do
       pkgs <- packageSet
       specFiles <- forM (Map.toList pkgs) $ \(pn,pv) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn pv)
