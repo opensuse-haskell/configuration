@@ -5,6 +5,9 @@ tests: True
 packages:
   ./cabal2obs.cabal
 
+optional-packages:
+  ../cabal2spec
+
 allow-newer:
   turtle:all
 
