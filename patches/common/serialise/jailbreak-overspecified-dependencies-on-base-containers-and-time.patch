@@ -1,0 +1,14 @@
+Index: ghc-serialise.spec
+===================================================================
+--- ghc-serialise.spec	(revision 1)
++++ ghc-serialise.spec	(working copy)
+@@ -129,6 +129,9 @@
+ %prep
+ %autosetup -p1 -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver base '< 4.22' '< 4.23'
++cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
++cabal-tweak-dep-ver time '< 1.15' '< 1.16'
+ 
+ %build
+ %ghc_lib_build
