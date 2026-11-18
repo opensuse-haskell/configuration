@@ -127,5 +127,6 @@ jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise",
              , ("feed","base"), ("feed","base-compat"), ("feed","time")
              , ("botan-low","base")
              , ("botan-bindings","base")
+             , ("wizards","containers")
              ]
 

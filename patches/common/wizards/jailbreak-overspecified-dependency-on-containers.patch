@@ -1,0 +1,12 @@
+Index: ghc-wizards.spec
+===================================================================
+--- ghc-wizards.spec	(revision 1)
++++ ghc-wizards.spec	(working copy)
+@@ -102,6 +102,7 @@
+ %prep
+ %autosetup -p1 -n %{pkg_name}-%{version}
+ cp -p %{SOURCE1} %{pkg_name}.cabal
++cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
+ 
+ %build
+ %ghc_lib_build
