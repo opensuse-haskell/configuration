@@ -149,7 +149,6 @@ constraintList =
         "lens == 5.3.6",
         "libmagic == 1.3.3",
         "libyaml == 0.1.4",
-        "libyaml-clib == 0.2.5",
         "lift-type == 0.1.2.0",
         "lifted-base == 0.2.3.12",
         "megaparsec == 9.8.3",
