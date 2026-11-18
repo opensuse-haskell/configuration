@@ -1,0 +1,12 @@
+Index: ghc-git-lfs.spec
+===================================================================
+--- ghc-git-lfs.spec	(revision 1)
++++ ghc-git-lfs.spec	(working copy)
+@@ -85,6 +85,7 @@
+ 
+ %prep
+ %autosetup -p1 -n %{pkg_name}-%{version}
++cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
+ 
+ %build
+ %ghc_lib_build
