@@ -57,6 +57,7 @@ executable cabal2obs
                     Oracle
                     Oracle.Flags
                     Oracle.Hackage
+                    Oracle.PackageSet
                     Types
   hs-source-dirs:   src/cabal2obs
   build-depends:    base

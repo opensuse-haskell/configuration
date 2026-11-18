@@ -18,6 +18,7 @@ import qualified Data.ByteString as BSS
 import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
+import qualified Data.Set as Set
 import qualified Data.Text as Text
 import Data.Time.Format
 import Development.Shake as Shake
@@ -62,6 +63,11 @@ main = do
     -- a package's flags in the configuration triggers a re-build of its spec
     -- file.
     getFlags <- addFlagAssignmentOracle flagAssignments
+
+    -- Oracle that gives the names of all packages that are available to
+    -- satisfy dependencies, so that adding or removing a package triggers a
+    -- re-build of the spec files.
+    getAvailablePackages <- addAvailablePackagesOracle (Map.keysSet (packageSet `Map.union` corePackages))
 
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
@@ -149,7 +155,8 @@ main = do
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
          else liftIO (removeFiles pkgDir ["*.cabal"])
       need [pkgDir </> display pkgid <.> "tar.gz", out -<.> "changes"]
-      let lookupPackageSet d = Map.member (depPkgName d) (packageSet `Map.union` corePackages `Map.union` localLibraries cabal)
+      available <- getAvailablePackages
+      let lookupPackageSet d = depPkgName d `Set.member` available || depPkgName d `Map.member` localLibraries cabal
       case finalizePD fa (ComponentRequestedSpec False False) lookupPackageSet (Platform X86_64 Linux) (unknownCompilerInfo compiler NoAbiTag) [] cabal of
         Left missing -> fail ("missing dependencies in package set: " ++ intercalate ", " (prettyShow <$> missing))
         Right (desc,_) -> traced "cabal2spec" (createSpecFile out desc isExe False fa Nothing)
