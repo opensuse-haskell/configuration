@@ -41,7 +41,7 @@ updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ign
                 ]
     flags = [ constraint (unwords [pn, flags']) | (pn, flags') <- flagList ]
     allowNewer = [ "--allow-newer=" <> unPackageName x <> ":" <> unPackageName y
-                 | (x, y) <- jailbreaks
+                 | (x, ys) <- jailbreaks, y <- ys
                  ]
     constraint c = "--constraint=any." <> c
 
@@ -119,15 +119,19 @@ nixBuild expr = do
   Stdout out <- cmd Nix.nixBuild (["--no-out-link", "-E", expr] :: [String])
   pure (lines out)
 
-jailbreaks :: [(PackageName, PackageName)]
-jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise", "time")
-             , ("cborg", "base"), ("cborg", "containers")
-             , ("persistent", "template-haskell")
-             , ("git-lfs","containers")
-             , ("feed","base"), ("feed","base-compat"), ("feed","time")
-             , ("botan-low","base")
-             , ("botan-bindings","base")
-             , ("wizards","containers")
-             , ("ShellCheck","QuickCheck"), ("ShellCheck","Diff")
-             , ("ghc-hs-meta","base"), ("ghc-hs-meta","ghc-boot"), ("ghc-hs-meta","ghc"), ("ghc-hs-meta","template-haskell")
+-- | Packages whose version bounds on the listed dependencies we ignore when
+-- resolving the package set. Each of these needs a corresponding patch for
+-- the build, e.g. one that relaxes the bounds with @cabal-tweak-dep-ver@.
+
+jailbreaks :: [(PackageName, [PackageName])]
+jailbreaks = [ ("botan-bindings", ["base"])
+             , ("botan-low", ["base"])
+             , ("cborg", ["base", "containers"])
+             , ("feed", ["base", "base-compat", "time"])
+             , ("ghc-hs-meta", ["base", "ghc-boot", "ghc", "template-haskell"])
+             , ("git-lfs", ["containers"])
+             , ("persistent", ["template-haskell"])
+             , ("serialise", ["base", "containers", "time"])
+             , ("ShellCheck", ["QuickCheck", "Diff"])
+             , ("wizards", ["containers"])
              ]
