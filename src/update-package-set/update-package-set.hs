@@ -102,7 +102,7 @@ compiler = do
 -- look up via pkg-config, depending on the flags we choose.
 
 pkgConfigDependencies :: [String]
-pkgConfigDependencies = [ "libyaml", "sqlite", "icu" ]
+pkgConfigDependencies = [ "libyaml", "sqlite", "icu", "pango", "cairo", "glib" ]
 
 -- | Instantiate all 'pkgConfigDependencies' from nixpkgs and return a search
 -- path for pkg-config that covers their @.pc@ files.
@@ -134,4 +134,8 @@ jailbreaks = [ ("botan-bindings", ["base"])
              , ("serialise", ["base", "containers", "time"])
              , ("ShellCheck", ["QuickCheck", "Diff"])
              , ("wizards", ["containers"])
+             , ("xmobar", ["base"])
+             , ("pango", ["containers", "glib", "Cabal"])
+             , ("glib", ["containers", "Cabal"])
+             , ("cairo", ["Cabal"])
              ]

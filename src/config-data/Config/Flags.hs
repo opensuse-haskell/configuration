@@ -35,8 +35,10 @@ flagList =
     -- Build the standalone executable.
   , ("texmath",                        "+executable -server")
 
-    -- Enable almost all extensions.
-  , ("xmobar",                         "+all_extensions")
+    -- Enable all extensions except with_datezone. all_extensions would enable
+    -- datezone regardless of the with_datezone flag, so we list the flags it
+    -- implies (as of xmobar 0.51.1) explicitly instead.
+  , ("xmobar",                         "+with_alsa +with_dbus +with_inotify +with_mpd +with_mpris +with_nl80211 +with_weather +with_xpm -with_datezone")
 
     -- Enable additional features
   , ("idris",                          "+ffi +gmp")
