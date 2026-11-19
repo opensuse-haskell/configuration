@@ -6,6 +6,7 @@ module Main ( main ) where
 import Config.Compiler
 import Config.Flags
 import Config.PackageSet ( packageSet, targetPackages )
+import Config.Tools ( ppPackageSet )
 import MyCabal
 import Types
 
@@ -16,9 +17,7 @@ import qualified Data.Set as Set
 import Development.Shake.Command ( CmdOption(AddEnv), Stdout(..), cmd )
 import Data.List ( intercalate )
 import qualified Nix.Paths as Nix
--- import Distribution.Pretty
--- import Text.PrettyPrint ( pPrint, text )
-import Text.PrettyPrint.HughesPJClass hiding ( (<>) )
+import Text.PrettyPrint ( render )
 
 -- | Generate a @cabal install --dry-run@ command that resolves the given target
 -- packages under the constraints of our package set.
@@ -59,10 +58,7 @@ main = do
   let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet ghc targets)
                          pure out
   plan <- resolve solve (Map.keysSet targetPackages) Map.empty
-  let cset = vcat $ punctuate comma [ doubleQuotes (pPrint pkg <> text "-" <> pPrint v) | (pkg,v) <- Map.toList plan
-                                                                                           , pkg `Map.notMember` ghcCorePackages
-                                    ]
-  putStrLn $ display $ lbrack $$ nest 4 cset $$ rbrack
+  putStrLn (render (ppPackageSet (plan `Map.withoutKeys` Map.keysSet ghcCorePackages)))
 
 -- | Iterate the solver until the plan is stable.
 

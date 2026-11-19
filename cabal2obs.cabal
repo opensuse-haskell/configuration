@@ -59,7 +59,7 @@ library config-data
                     Config.Tools
                     Types
   hs-source-dirs:   src/config-data
-  build-depends:    base, cabal2obs, containers, shake
+  build-depends:    base, cabal2obs, containers, pretty, shake
   default-language: Haskell2010
   other-extensions: DeriveAnyClass
                     DeriveGeneric

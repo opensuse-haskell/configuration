@@ -1,4 +1,4 @@
-module Config.Tools ( makePackageSet ) where
+module Config.Tools ( makePackageSet, ppPackageSet ) where
 
 import Config.Compiler
 import Types
@@ -7,6 +7,7 @@ import MyCabal
 import qualified Data.List as List
 import qualified Data.Map as Map
 import qualified Data.Set as Set
+import Text.PrettyPrint hiding ( (<>) )
 
 
 -- | Build the package set from the given list of entries and sanity-check it
@@ -34,3 +35,17 @@ makePackageSet entries
     packageSet = Map.fromList entries
     duplicates = Map.filter ((> 1) . length) (Map.fromListWith (flip (<>)) [ (pn, [v]) | (pn, v) <- entries ])
     corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet ghcCorePackages
+
+-- | Pretty-print a package set as a list of quoted package identifiers, one
+-- per line, with leading commas:
+--
+-- > [ "DAV-1.3.4"
+-- > , "Decimal-0.5.2"
+-- > ]
+
+ppPackageSet :: PackageSet -> Doc
+ppPackageSet ps = case entries of
+                    []     -> text "[]"
+                    e : es -> vcat ((text "[ " <> e) : map (text ", " <>) es) $$ rbrack
+  where
+    entries = [ doubleQuotes (text (unPackageName pn <> "-" <> prettyShow v)) | (pn, v) <- Map.toList ps ]
