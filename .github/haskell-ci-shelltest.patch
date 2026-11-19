@@ -1,6 +1,14 @@
 --- a/.github/workflows/haskell-ci.yml
 +++ b/.github/workflows/haskell-ci.yml
-@@ -224,6 +224,12 @@
+@@ -149,6 +149,7 @@
+         uses: actions/checkout@v7
+         with:
+           path: source
++          submodules: true
+       - name: initial cabal.project for sdist
+         run: |
+           touch cabal.project
+@@ -205,6 +206,14 @@
        - name: tests
          run: |
            $CABAL v2-test $ARG_COMPILER $ARG_TESTS $ARG_BENCH all --test-show-details=direct
@@ -9,7 +17,9 @@
 +          ln -sf "${CABAL%% *}" "$HOME/.cabal/bin/cabal"
 +          printf 'with-compiler: %s\ntests: True\nbenchmarks: True\n' "$HC" >> cabal.project.local
 +          $CABAL v2-build all
-+          sh ${PKGDIR_cabal2obs}/tests/run-tests
++          apt-get install -y --no-install-recommends python3-pip
++          pip3 install --break-system-packages python-rpm-spec
++          SPEC_CLEANER_DIR="$GITHUB_WORKSPACE/source/src/spec-cleaner" sh ${PKGDIR_cabal2obs}/tests/run-tests
        - name: doctest
          run: |
            cd ${PKGDIR_cabal2obs} || false

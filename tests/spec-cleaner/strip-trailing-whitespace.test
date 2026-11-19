@@ -11,6 +11,12 @@
 # it with sed while they run, because editors and commit hooks tend to strip
 # trailing whitespace from files stored in the repository.
 #
+# spec-cleaner is taken from the directory given in SPEC_CLEANER_DIR, which
+# defaults to the git submodule in src/spec-cleaner. The CI job sets it,
+# because it runs these tests from the unpacked sdist, which doesn't include
+# spec-cleaner. spec-cleaner needs the "pyrpm" module from the PyPI package
+# python-rpm-spec.
+#
 # Limitations:
 #
 #  - The tests don't add whitespace to the copyright header (lines 1-18). If
@@ -41,7 +47,7 @@ $$$ sed -e '19,$s/$/   /' ghc-happy-lib.spec.in > ghc-happy-lib.spec && grep -c 
 122
 >>>= 0
 
-$$$ PYTHONPATH=../../src/spec-cleaner python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
+$$$ PYTHONPATH="${SPEC_CLEANER_DIR:-../../src/spec-cleaner}" python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
 >>>
 0
 >>>= 1
@@ -58,7 +64,7 @@ $$$ sed -e '19,$s/$/ \t \t/' ghc-happy-lib.spec.in > ghc-happy-lib.spec && grep 
 122
 >>>= 0
 
-$$$ PYTHONPATH=../../src/spec-cleaner python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
+$$$ PYTHONPATH="${SPEC_CLEANER_DIR:-../../src/spec-cleaner}" python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
 >>>
 0
 >>>= 1
@@ -75,7 +81,7 @@ $$$ sed -e '19,$s/^$/  \t  /' ghc-happy-lib.spec.in > ghc-happy-lib.spec && grep
 27
 >>>= 0
 
-$$$ PYTHONPATH=../../src/spec-cleaner python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
+$$$ PYTHONPATH="${SPEC_CLEANER_DIR:-../../src/spec-cleaner}" python3 -m spec_cleaner --suse-copyright --copyright-year=2026 -i ghc-happy-lib.spec && grep -c '[[:space:]]$' ghc-happy-lib.spec
 >>>
 0
 >>>= 1
