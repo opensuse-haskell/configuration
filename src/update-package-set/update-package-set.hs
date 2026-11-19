@@ -129,5 +129,6 @@ jailbreaks = [ ("serialise", "base"), ("serialise", "containers"), ("serialise",
              , ("botan-bindings","base")
              , ("wizards","containers")
              , ("ShellCheck","QuickCheck")
+             , ("ghc-hs-meta","base"), ("ghc-hs-meta","ghc-boot"), ("ghc-hs-meta","ghc"), ("ghc-hs-meta","template-haskell")
              ]
 
