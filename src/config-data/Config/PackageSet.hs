@@ -296,7 +296,6 @@ packageSet = makePackageSet
   , "quote-quot-0.2.2.0"
   , "ram-0.22.1"
   , "random-1.3.1"
-  , "raw-strings-qq-1.1"
   , "recv-0.1.3"
   , "reflection-2.1.9"
   , "regex-base-0.94.0.3"
