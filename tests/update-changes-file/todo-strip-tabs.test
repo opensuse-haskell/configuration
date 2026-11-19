@@ -4,14 +4,14 @@
 
 $$$ rm -f JuicyPixels.changes
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.2.9.5 0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t "Mon Jan  1 00:00:00 UTC 2024" JuicyPixels.changes JuicyPixels 3.2.9.5 0 joe@example.org
 
-$$$ cabal -v0 v2-run update-changes-file -- -t now JuicyPixels.changes JuicyPixels 3.3 0 joe@example.org
+$$$ cabal -v0 v2-run update-changes-file -- -t "Mon Jan  1 00:00:00 UTC 2024" JuicyPixels.changes JuicyPixels 3.3 0 joe@example.org
 
 $$$ cat JuicyPixels.changes
 >>>
 -------------------------------------------------------------------
-now - joe@example.org
+Mon Jan  1 00:00:01 UTC 2024 - joe@example.org
 
 - Update JuicyPixels to version 3.3.
   v3.3 July 2018
@@ -24,7 +24,7 @@ now - joe@example.org
   					hence the version bump.
 
 -------------------------------------------------------------------
-now - joe@example.org
+Mon Jan  1 00:00:00 UTC 2024 - joe@example.org
 
 - Add JuicyPixels at version 3.2.9.5.
 

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module UpdateChangesFile
-  ( updateChangesFile, TimeStamp, EMail, Revision
+  ( updateChangesFile, TimeStamp, parseTimeStamp, EMail, Revision
   )
   where
 
@@ -11,6 +11,7 @@ import MyCabal
 
 import Control.Monad.Extra
 import Data.Maybe
+import Data.Time.Clock ( addUTCTime )
 import qualified Data.Text as Text
 import qualified Data.Text.IO as Text
 import Data.Time.Format
@@ -21,7 +22,7 @@ import System.Directory
 import Text.PrettyPrint.HughesPJ as Pretty hiding ( (<>) )
 import Turtle hiding ( x, l, text, stdout, stderr )
 
-type TimeStamp = Text
+type TimeStamp = UTCTime
 type EMail = Text
 
 updateChangesFile :: Maybe TimeStamp -> Prelude.FilePath -> PackageName -> (Version, Revision) -> EMail -> IO ()
@@ -54,15 +55,22 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
 
     commit :: Text -> IO ()
     commit  cl' = do
-      now <- maybe (Text.pack . formatTime defaultTimeLocale changeLogDateFormat <$> date) pure now'
       txt <- Text.readFile changesFile <|> pure ""
-      let cl = Text.unlines (map (\l -> if Text.null l then l else "  " <> l) (Text.lines cl'))
+      now <- maybe date pure now'
+      -- Entries must be in chronological order, but the time stamp we're
+      -- given may be older than the topmost entry, e.g. because that entry was
+      -- added manually. In that case, we date the new entry one second after
+      -- the topmost one.
+      latest <- either (die . format (fp%": "%s) changesFile) pure (latestTimeStamp txt)
+      let ts = maybe now (max now . addUTCTime 1) latest
+          indent l = if Text.null l then l else "  " <> l
+          cl = Text.unlines (map (indent . Text.stripEnd) (Text.lines cl'))
       Text.writeFile changesFile $ format
         ("-------------------------------------------------------------------\n\
          \"%s%" - "%s%"\n\
          \\n\
          \- "%s%" "%wp%" "%s%" version "%wp%s%".\n"%s%"\n"%s)
-        now email
+        (Text.pack (formatTime defaultTimeLocale changeLogDateFormat ts)) email
         (if Text.null cl' then "Add" else "Update")
         pkg
         (if Text.null cl' then "at" else "to")
@@ -76,6 +84,23 @@ wp = makeFormat (Text.pack . prettyShow)
 -- | Appropriate format parameter for 'formatTime' and 'parseTimeM'.
 changeLogDateFormat :: String
 changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
+
+-- | Parse a time stamp in the format we use in change log entries, e.g.
+-- @Mon Mar  9 11:47:45 UTC 2026@.
+parseTimeStamp :: Text -> Maybe TimeStamp
+parseTimeStamp = parseTimeM False defaultTimeLocale changeLogDateFormat . Text.unpack . Text.strip
+
+-- | Determine the time stamp of the topmost entry in the given change log.
+-- Gives 'Nothing' if the log has no entries and fails if the topmost entry's
+-- time stamp cannot be parsed.
+latestTimeStamp :: Text -> Either Text (Maybe TimeStamp)
+latestTimeStamp txt =
+  case dropWhile (not . isSeparator) (Text.lines txt) of
+    _ : hdr : _ -> let (ts, _) = Text.breakOn " - " hdr
+                      in maybe (Left ("cannot parse time stamp of the latest entry: " <> Text.strip hdr)) (Right . Just) (parseTimeStamp ts)
+    _ -> Right Nothing
+  where
+    isSeparator l = "-----" `Text.isPrefixOf` l
 
 prettyGuessedChangeLog :: (PackageName, Version, Version) -> GuessedChangeLog -> Doc
 

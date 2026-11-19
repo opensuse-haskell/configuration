@@ -1,0 +1,66 @@
+###############################################################################
+# New entries are never dated before the topmost entry of the change log. If
+# the given time stamp is older, the entry is dated one second after it.
+###############################################################################
+
+$$$ rm -f mtl.changes
+
+<<<
+-------------------------------------------------------------------
+Sat Jun 15 12:00:00 UTC 2030 - joe@example.org
+
+- Add mtl at version 2.2.1.
+$$$ cat >mtl.changes
+>>>= 0
+
+$$$ cabal -v0 v2-run update-changes-file -- -t "Mon Jan  1 00:00:00 UTC 2024" mtl.changes mtl 2.2.2 0 joe@example.org
+
+$$$ grep -A1 -e "^-----" mtl.changes
+>>>
+-------------------------------------------------------------------
+Sat Jun 15 12:00:01 UTC 2030 - joe@example.org
+--
+-------------------------------------------------------------------
+Sat Jun 15 12:00:00 UTC 2030 - joe@example.org
+>>>= 0
+
+###############################################################################
+# Newer time stamps are used as given.
+###############################################################################
+
+$$$ rm -f mtl.changes
+
+<<<
+-------------------------------------------------------------------
+Sat Jun 15 12:00:00 UTC 2030 - joe@example.org
+
+- Add mtl at version 2.2.1.
+$$$ cat >mtl.changes
+>>>= 0
+
+$$$ cabal -v0 v2-run update-changes-file -- -t "Tue Jan  1 08:30:00 UTC 2036" mtl.changes mtl 2.2.1 1 joe@example.org
+
+$$$ head -2 mtl.changes
+>>>
+-------------------------------------------------------------------
+Tue Jan  1 08:30:00 UTC 2036 - joe@example.org
+>>>= 0
+
+###############################################################################
+# A topmost entry with an unparsable time stamp is an error.
+###############################################################################
+
+$$$ rm -f mtl.changes
+
+<<<
+-------------------------------------------------------------------
+Thu Feb 10 10:24:16 PM UTC 2022 - joe@example.org
+
+- Add mtl at version 2.2.1.
+$$$ cat >mtl.changes
+>>>= 0
+
+$$$ cabal -v0 v2-run update-changes-file -- -t "Mon Jan  1 00:00:00 UTC 2024" mtl.changes mtl 2.2.1 1 joe@example.org
+>>>2
+update-changes-file: user error (mtl.changes: cannot parse time stamp of the latest entry: Thu Feb 10 10:24:16 PM UTC 2022 - joe@example.org)
+>>>= 1

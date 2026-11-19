@@ -18,8 +18,6 @@ import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
-import qualified Data.Text as Text
-import Data.Time.Format
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import System.Directory
@@ -139,8 +137,7 @@ main = do
       (ctime, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
       let rev = packageRevision cabal
-          ts = Text.pack (formatTime defaultTimeLocale "%c" ctime)
-      traced "update-changes-file" $ updateChangesFile (Just ts) out pn (v, rev) "Peter Simons <psimons@suse.com>" -- TODO: evil hard-coded constant
+      traced "update-changes-file" $ updateChangesFile (Just ctime) out pn (v, rev) "Peter Simons <psimons@suse.com>" -- TODO: evil hard-coded constant
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do

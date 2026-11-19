@@ -20,7 +20,7 @@ type Options = (Maybe TimeStamp, FilePath, PackageName, Version, Revision, EMail
 
 parser :: Parser Options
 parser = do
-  now <- optional (optText "timestamp" 't' "timestamp for the generated change log entry")
+  now <- optional (opt parseTimeStamp "timestamp" 't' "timestamp for the generated change log entry, e.g. \"Mon Mar  9 11:47:45 UTC 2026\"")
   changesFile <- argPath "changes-file" "package change log file to update"
   pkg <- argParsec "package-name" "name of the Hackage package"
   vers <- argParsec "new-version" "version string of the updated package"
