@@ -5,13 +5,26 @@
 # on it the same way cabal2obs does, and check that
 #
 #  - no trailing whitespace is left, and
-#  - nothing else has changed, except possibly for blank lines: spec-cleaner
-#    collapses consecutive blank lines when they contain whitespace.
+#  - nothing else has changed, except possibly for blank lines (see below).
 #
-# The whitespace is added by sed so that editors cannot strip it from these
-# test files. It is added only after the copyright header (line 18), which our
-# patches never touch. spec-cleaner doesn't recognize a header with trailing
-# whitespace and adds a second "Please submit bugfixes" note.
+# The fixture ghc-happy-lib.spec.in has no trailing whitespace. The tests add
+# it with sed while they run, because editors and commit hooks tend to strip
+# trailing whitespace from files stored in the repository.
+#
+# Limitations:
+#
+#  - The tests don't add whitespace to the copyright header (lines 1-18). If
+#    the header lines end in whitespace, spec-cleaner doesn't recognize the
+#    header as the standard one and adds the "Please submit bugfixes or
+#    comments" note a second time. The whitespace is still stripped, but the
+#    result no longer matches the fixture. Our patches never touch the header,
+#    so this case doesn't matter for cabal2obs.
+#
+#  - Two consecutive blank lines stay two when they are truly empty, but
+#    spec-cleaner merges them into one when they contain whitespace. The tests
+#    therefore compare the result to the fixture with "diff -B", which ignores
+#    changes in blank lines. A change spec-cleaner makes only to blank lines
+#    would go unnoticed.
 ###############################################################################
 
 $$$ grep -c '[[:space:]]$' ghc-happy-lib.spec.in
