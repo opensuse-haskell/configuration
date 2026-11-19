@@ -1,0 +1,13 @@
+Index: ghc-pango.spec
+===================================================================
+--- ghc-pango.spec	(revision 1)
++++ ghc-pango.spec	(working copy)
+@@ -103,6 +103,8 @@
+ 
+ %prep
+ %autosetup -p1 -n %pkg_name-%{version}
++cabal-tweak-dep-ver Cabal '< 3.15' '< 3.17'
++cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
+ 
+ %build
+ %ghc_lib_build
