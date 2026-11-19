@@ -1,0 +1,12 @@
+Index: xmobar.spec
+===================================================================
+--- xmobar.spec	(revision 1)
++++ xmobar.spec	(working copy)
+@@ -161,6 +161,7 @@
+ 
+ %prep
+ %autosetup -p1
++cabal-tweak-dep-ver base '<4.22' '<5'
+ 
+ %build
+ %define cabal_configure_options -f-with_datezone -fwith_alsa -fwith_dbus -fwith_inotify -fwith_mpd -fwith_mpris -fwith_nl80211 -fwith_weather -fwith_xpm
