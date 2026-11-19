@@ -1,9 +1,0 @@
-Index: ghc-log-warper.spec
-===================================================================
---- ghc-log-warper.spec	(revision 1)
-+++ ghc-log-warper.spec	(working copy)
-@@ -36,2 +36,3 @@
- BuildRequires:  ghc-markdown-unlit-devel
-+BuildRequires:  markdown-unlit
- BuildRequires:  ghc-microlens-platform-devel
-
