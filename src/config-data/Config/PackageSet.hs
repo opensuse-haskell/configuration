@@ -344,6 +344,7 @@ packageSet = checkConsistency
         "text-builder-core-0.1.1.3",
         "text-builder-linear-0.1.4",
         "text-conversions-0.3.1.1",
+        "text-icu-0.8.0.5",
         "text-iso8601-0.1.1.2",
         "text-short-0.1.6.1",
         "text-zipper-0.13",

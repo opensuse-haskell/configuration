@@ -102,7 +102,7 @@ compiler = do
 -- look up via pkg-config, depending on the flags we choose.
 
 pkgConfigDependencies :: [String]
-pkgConfigDependencies = [ "libyaml", "sqlite" ]
+pkgConfigDependencies = [ "libyaml", "sqlite", "icu" ]
 
 -- | Instantiate all 'pkgConfigDependencies' from nixpkgs and return a search
 -- path for pkg-config that covers their @.pc@ files.

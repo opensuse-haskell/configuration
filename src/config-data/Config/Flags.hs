@@ -72,7 +72,7 @@ flagList =
 
     -- Build the standalone executables for these packages.
   , ("skylighting",                    "+executable")
-  , ("citeproc",                       "+executable")
+  , ("citeproc",                       "+executable +icu")
 
     -- Compile against system zstd library
   , ("zstd",                           "-standalone")
