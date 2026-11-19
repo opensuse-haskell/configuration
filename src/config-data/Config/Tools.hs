@@ -37,23 +37,24 @@ makePackageSet entries
     corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet ghcCorePackages
 
 -- | Pretty-print a package set as a list of quoted package identifiers, one
--- per line, with leading commas:
+-- per line, with leading commas, sorted by name regardless of case:
 --
 -- > [ "DAV-1.3.4"
 -- > , "Decimal-0.5.2"
 -- > ]
 
 ppPackageSet :: PackageSet -> Doc
-ppPackageSet ps = ppList [ unPackageName pn <> "-" <> prettyShow v | (pn, v) <- Map.toList ps ]
+ppPackageSet ps = ppList [ unPackageName pn <> "-" <> prettyShow v | (pn, v) <- List.sortOn (lowercase . unPackageName . fst) (Map.toList ps) ]
 
--- | Pretty-print a constraint set in the same style as 'ppPackageSet':
+-- | Pretty-print a constraint set in the same style and order as
+-- 'ppPackageSet':
 --
 -- > [ "alex >=3.5.4.2"
 -- > , "happy >=2.2"
 -- > ]
 
 ppConstraintSet :: ConstraintSet -> Doc
-ppConstraintSet cs = ppList [ display (PackageVersionConstraint pn vr) | (pn, vr) <- Map.toList cs ]
+ppConstraintSet cs = ppList [ display (PackageVersionConstraint pn vr) | (pn, vr) <- List.sortOn (lowercase . unPackageName . fst) (Map.toList cs) ]
 
 -- | Print strings as a list of quoted entries, one per line, with leading
 -- commas.
