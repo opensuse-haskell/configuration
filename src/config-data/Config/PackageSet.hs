@@ -6,20 +6,20 @@ module Config.PackageSet ( packageSet, targetPackages ) where
 import Config.Tools
 import Types
 
+-- TODO: "hlint"
+--       "postgresql-simple"        -- needed by emu-incident-report
+--       "xmobar"
+--       "xmonad", "xmonad-contrib"
 targetPackages :: ConstraintSet
 targetPackages   = [ "alex >= 3.5.4.2"
                    , "cabal-install > 3.16"
-            --     , "cabal2spec"
+                   , "cabal2spec >= 2.9"
                    , "git-annex >= 10.20261113"
                    , "happy >= 2.2"
                    , "hledger >= 1.52.4", "hledger-ui >= 1.52.4", "hledger-interest >= 2"
-            --     , "hlint"
                    , "pandoc >= 3.14", "pandoc-cli >= 3.14", "pandoc-lua-engine > 0.5.4", "pandoc-server > 0.1.4"
                    , "citeproc > 0.14"
-            --     , "postgresql-simple"        -- needed by emu-incident-report
                    , "ShellCheck >= 0.11"
-            --     , "xmobar"
-            --     , "xmonad", "xmonad-contrib"
                    ]
 
 packageSet :: PackageSet
