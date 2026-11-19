@@ -33,7 +33,7 @@ flagList =
   , ("nix-paths",                      "+allow-relative-paths")
 
     -- Build the standalone executable.
-  , ("texmath",                        "+executable")
+  , ("texmath",                        "+executable -server")
 
     -- Enable almost all extensions.
   , ("xmobar",                         "+all_extensions")
