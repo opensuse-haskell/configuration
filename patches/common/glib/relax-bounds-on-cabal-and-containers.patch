@@ -1,0 +1,13 @@
+Index: ghc-glib.spec
+===================================================================
+--- ghc-glib.spec	(revision 1)
++++ ghc-glib.spec	(working copy)
+@@ -89,6 +89,8 @@
+ 
+ %prep
+ %autosetup -p2 -n %pkg_name-%{version}
++cabal-tweak-dep-ver Cabal '< 3.15' '< 3.17'
++cabal-tweak-dep-ver containers '< 0.8' '< 0.9'
+ 
+ %build
+ %ghc_lib_build
