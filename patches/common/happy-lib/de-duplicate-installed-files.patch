@@ -1,0 +1,20 @@
+Index: ghc-happy-lib.spec
+===================================================================
+--- ghc-happy-lib.spec	(revision 1)
++++ ghc-happy-lib.spec	(working copy)
+@@ -26,6 +26,7 @@
+ License:        BSD-2-Clause
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
++BuildRequires:  fdupes
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-array-devel
+ BuildRequires:  ghc-base-devel
+@@ -101,6 +102,7 @@
+ 
+ %install
+ %ghc_lib_install
++%fdupes %{buildroot}%{_prefix}
+ 
+ %post devel
+ %ghc_pkg_recache
