@@ -23,7 +23,7 @@ targetPackages   = [ "alex >= 3.5.4.2"
                    ]
 
 packageSet :: PackageSet
-packageSet = checkConsistency
+packageSet = makePackageSet
     [   "DAV-1.3.4",
         "Decimal-0.5.2",
         "Diff-1.0.2",

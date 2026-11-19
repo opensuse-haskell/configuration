@@ -1,4 +1,4 @@
-module Config.Tools ( checkConsistency ) where
+module Config.Tools ( makePackageSet ) where
 
 import Config.Compiler
 import Types
@@ -9,23 +9,28 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 
--- | Sanity-check the package set against the compiler's core packages before
--- it is used to generate builds. Returns the package set unchanged if it is
--- consistent; otherwise it aborts with an 'error'.
+-- | Build the package set from the given list of entries and sanity-check it
+-- before it is used to generate builds. Aborts with an 'error' if the set is
+-- inconsistent. The checks detect:
 --
--- The check detects packages that appear both in the package set (i.e. in
--- @packageSet@) and in the list of core packages, 'ghcCorePackages'. Core packages
--- are bundled with GHC itself and are provided by the @ghc@ build, so
--- generating a separate @ghc-<name>@ build for one of them would produce a
--- second, conflicting copy of that library. The error message names every
--- offending package.
+--  * Packages that are listed more than once. Converting the list into a map
+--    would silently keep only the last of those entries, so this check has to
+--    see the list rather than the finished 'PackageSet'.
 --
--- TODO: Detect at compile-time or run-time if packageSet contains
--- duplicate entries.
+--  * Packages that appear both in the package set and in the list of core
+--    packages, 'ghcCorePackages'. Core packages are bundled with GHC itself
+--    and are provided by the @ghc@ build, so generating a separate
+--    @ghc-<name>@ build for one of them would produce a second, conflicting
+--    copy of that library.
+--
+-- The error messages name every offending package.
 
-checkConsistency :: PackageSet -> PackageSet
-checkConsistency packageSet
-  | Set.null corePackagesInPackageSet = packageSet
-  | otherwise = error ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
+makePackageSet :: [(PackageName, Version)] -> PackageSet
+makePackageSet entries
+  | not (Map.null duplicates) = error ("duplicate entries in package set: " <> List.intercalate ", " [ unPackageName pn <> " (" <> List.intercalate ", " (prettyShow <$> vs) <> ")" | (pn, vs) <- Map.toList duplicates ])
+  | not (Set.null corePackagesInPackageSet) = error ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
+  | otherwise = packageSet
   where
+    packageSet = Map.fromList entries
+    duplicates = Map.filter ((> 1) . length) (Map.fromListWith (flip (<>)) [ (pn, [v]) | (pn, v) <- entries ])
     corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet ghcCorePackages
