@@ -1,0 +1,12 @@
+Index: ghc-ghc-hs-meta.spec
+===================================================================
+--- ghc-ghc-hs-meta.spec	(revision 1)
++++ ghc-ghc-hs-meta.spec	(working copy)
+@@ -27,6 +27,7 @@
+ License:        BSD-3-Clause
+ URL:            https://hackage.haskell.org/package/%pkg_name
+ Source0:        https://hackage.haskell.org/package/%pkg_name-%{version}/%pkg_name-%{version}.tar.gz
++Patch01:        https://github.com/zacwood9/ghc-hs-meta/commit/5cf5705f3e47da79fb5580ec63c00d125cf4554a.patch#/support-ghc-9.14.patch
+ BuildRequires:  ghc-Cabal-devel
+ BuildRequires:  ghc-base-devel
+ BuildRequires:  ghc-bytestring-devel
