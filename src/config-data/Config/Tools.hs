@@ -1,4 +1,4 @@
-module Config.Tools ( makePackageSet, ppPackageSet ) where
+module Config.Tools ( makePackageSet, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
 
 import Config.Compiler
 import Types
@@ -44,8 +44,33 @@ makePackageSet entries
 -- > ]
 
 ppPackageSet :: PackageSet -> Doc
-ppPackageSet ps = case entries of
-                    []     -> text "[]"
-                    e : es -> vcat ((text "[ " <> e) : map (text ", " <>) es) $$ rbrack
+ppPackageSet ps = ppList [ unPackageName pn <> "-" <> prettyShow v | (pn, v) <- Map.toList ps ]
+
+-- | Pretty-print a constraint set in the same style as 'ppPackageSet':
+--
+-- > [ "alex >=3.5.4.2"
+-- > , "happy >=2.2"
+-- > ]
+
+ppConstraintSet :: ConstraintSet -> Doc
+ppConstraintSet cs = ppList [ display (PackageVersionConstraint pn vr) | (pn, vr) <- Map.toList cs ]
+
+-- | Print strings as a list of quoted entries, one per line, with leading
+-- commas.
+
+ppList :: [String] -> Doc
+ppList entries = case doubleQuotes . text <$> entries of
+                   []     -> text "[]"
+                   e : es -> vcat ((text "[ " <> e) : map (text ", " <>) es) $$ rbrack
+
+-- | Replace the version range of every target package with a lower bound on
+-- the version that the given package set contains, i.e. @>= x.y.z@. Aborts
+-- with an 'error' that names all target packages missing from the package
+-- set.
+
+updateTargetPackages :: ConstraintSet -> PackageSet -> ConstraintSet
+updateTargetPackages targets ps
+  | not (Set.null missing) = error ("target packages missing from package set: " <> List.intercalate ", " (unPackageName <$> Set.toList missing))
+  | otherwise = orLaterVersion <$> ps `Map.restrictKeys` Map.keysSet targets
   where
-    entries = [ doubleQuotes (text (unPackageName pn <> "-" <> prettyShow v)) | (pn, v) <- Map.toList ps ]
+    missing = Map.keysSet targets `Set.difference` Map.keysSet ps
