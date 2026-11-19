@@ -3,6 +3,8 @@
 
 module UpdateChangesFile
   ( updateChangesFile, TimeStamp, parseTimeStamp, EMail, Revision
+    -- * Internals exposed for testing
+  , latestTimeStamp, nextTimeStamp, indentEntryText
   )
   where
 
@@ -62,9 +64,8 @@ updateChangesFile now' changesFile' pkg (newv,newrv) email =
       -- added manually. In that case, we date the new entry one second after
       -- the topmost one.
       latest <- either (die . format (fp%": "%s) changesFile) pure (latestTimeStamp txt)
-      let ts = maybe now (max now . addUTCTime 1) latest
-          indent l = if Text.null l then l else "  " <> l
-          cl = Text.unlines (map (indent . Text.stripEnd) (Text.lines cl'))
+      let ts = nextTimeStamp now latest
+          cl = indentEntryText cl'
       Text.writeFile changesFile $ format
         ("-------------------------------------------------------------------\n\
          \"%s%" - "%s%"\n\
@@ -84,6 +85,20 @@ wp = makeFormat (Text.pack . prettyShow)
 -- | Appropriate format parameter for 'formatTime' and 'parseTimeM'.
 changeLogDateFormat :: String
 changeLogDateFormat = "%a %b %e %H:%M:%S %Z %Y"
+
+-- | Given the desired time stamp of a new entry and the time stamp of the
+-- topmost existing entry, if any, determine the time stamp the new entry
+-- should get. To keep the change log in chronological order, the new entry is
+-- dated at least one second after the topmost one.
+nextTimeStamp :: TimeStamp -> Maybe TimeStamp -> TimeStamp
+nextTimeStamp now = maybe now (max now . addUTCTime 1)
+
+-- | Indent the body text of a change log entry, stripping trailing whitespace
+-- from every line. Empty lines stay empty.
+indentEntryText :: Text -> Text
+indentEntryText = Text.unlines . map (indent . Text.stripEnd) . Text.lines
+  where
+    indent l = if Text.null l then l else "  " <> l
 
 -- | Parse a time stamp in the format we use in change log entries, e.g.
 -- @Mon Mar  9 11:47:45 UTC 2026@.
