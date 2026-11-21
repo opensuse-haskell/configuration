@@ -12,6 +12,7 @@ import MyCabal
 import Types
 
 import Control.Monad ( unless )
+import Control.Monad.IO.Class ( MonadIO, liftIO )
 import Data.Aeson.Key ( Key )
 import qualified Data.Aeson.Key as Key
 import qualified Data.Aeson.KeyMap as KeyMap
@@ -75,9 +76,9 @@ singleEntry parseValue = withObject "mapping with one entry" $ \o ->
 -- file can't be parsed or if the parser reports any warnings, e.g. about
 -- duplicate keys; the error message lists all of them.
 
-readPackageSetSpecRaw :: FilePath -> IO PackageSetSpecRaw
+readPackageSetSpecRaw :: (MonadIO m, MonadFail m) => FilePath -> m PackageSetSpecRaw
 readPackageSetSpecRaw path = do
-  result <- decodeFileWithWarnings path
+  result <- liftIO (decodeFileWithWarnings path)
   case result of
     Left err -> fail (path <> ": " <> prettyPrintParseException err)
     Right (warnings, raw) -> do

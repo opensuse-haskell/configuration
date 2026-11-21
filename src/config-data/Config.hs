@@ -32,7 +32,7 @@ readPackageSetSpec :: (MonadIO m, MonadFail m) => m PackageSetSpec
 readPackageSetSpec = do
   let path = "conf/default-package-set.yaml"
       context what = what <> " in " <> path
-  PackageSetSpecRaw{..} <- liftIO (readPackageSetSpecRaw path)
+  PackageSetSpecRaw{..} <- readPackageSetSpecRaw path
   let compiler = rawCompiler
   packageSetName        <- getPackageSetName compiler
   corePackages          <- makeMap (context "core-packages") [ (pkgName p, pkgVersion p) | p <- rawCorePackages ]
