@@ -1,4 +1,4 @@
-# conf/default-package-set.yaml: the specification of our default package set
+# our default package set
 
 compiler: ghc-9.14.1
 
