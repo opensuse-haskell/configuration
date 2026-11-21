@@ -50,7 +50,7 @@ updatePackageSet spec ghc targets = ["cabal", "--store=/var/empty", "install", "
 
 main :: IO ()
 main = do
-  spec <- readPackageSetSpec
+  spec <- readPackageSetSpec "conf/default-package-set.yaml"
   ghc <- compiler
   pkgConfig <- pkgConfigPath spec
   let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet spec ghc targets)

@@ -20,6 +20,7 @@ import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
 import Development.Shake as Shake
 import Development.Shake.FilePath
+import System.Console.GetOpt ( ArgDescr(..), OptDescr(..) )
 import System.Directory
 
 type instance RuleResult BuildName = PackageIdentifier
@@ -38,7 +39,7 @@ main = do
                , shakeVersion = "49"    -- version of the build rules, bump to trigger full re-build
                }
 
-  shakeArgs shopts $ do
+  shakeArgsWith shopts [configOption] $ \opts targets -> pure $ Just $ withTargets targets $ do
 
     -- Read the specification of our package set. The name of the package set,
     -- e.g. "ghc-9.14.x", names targets and directories, so it is needed while
@@ -47,7 +48,13 @@ main = do
     -- changes. The package set name doesn't need that mechanism, because it's
     -- baked into every single path, so if the package set name changes, we
     -- re-build everything anyway.
-    (pkgSetName, getPackageSetSpec) <- do spec <- readPackageSetSpec
+    --
+    -- TODO: It should be possible to register multiple config files by giving
+    -- --config several times. The build system should then configure itself
+    -- to build all of those package sets concurrently. For now, the last
+    -- --config wins.
+    let configFile = last (defaultConfigFile : [ f | ConfigFile f <- opts ])
+    (pkgSetName, getPackageSetSpec) <- do spec <- readPackageSetSpec configFile
                                           oracle <- addPackageSetSpecOracle spec
                                           return (packageSetName spec, oracle)
     getPackageSet        <- addPackageSetOracle getPackageSetSpec
@@ -180,6 +187,26 @@ main = do
       packageSet <- getPackageSet
       let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"
       need (tarball <$> Map.toList packageSet)
+
+-- | Command-line options of cabal2obs in addition to Shake's own options.
+
+newtype Flag = ConfigFile FilePath
+
+configOption :: OptDescr (Either String Flag)
+configOption = Option "" ["config"] (ReqArg (Right . ConfigFile) "PATH")
+  ("read the package set specification from PATH (default: " <> defaultConfigFile <> ")")
+
+-- | The package set specification we read unless --config says otherwise.
+
+defaultConfigFile :: FilePath
+defaultConfigFile = "conf/default-package-set.yaml"
+
+-- | Build the given targets, or the default targets if there are none. This
+-- is what 'shakeArgs' does with the targets given on the command line.
+
+withTargets :: [String] -> Rules () -> Rules ()
+withTargets [] rules = rules
+withTargets ts rules = want ts >> withoutActions rules
 
 verifyLicense :: MonadFail m => String -> m ()
 verifyLicense "SUSE-Public-Domain" = pure ()

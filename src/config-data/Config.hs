@@ -22,16 +22,14 @@ import qualified Data.List as List
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
 
--- | Read the specification of our package set from
--- @conf/default-package-set.yaml@. Fails if the file can't be read or if its
--- contents are inconsistent, e.g. if a list contains duplicates, a package
+-- | Read the specification of a package set from the given YAML file. Fails
+-- if the file can't be read or if its contents are inconsistent, e.g. if a list contains duplicates, a package
 -- identifier has no version, a flag is assigned more than once for the same
 -- package, or a core package is listed in the package set.
 
-readPackageSetSpec :: (MonadIO m, MonadFail m) => m PackageSetSpec
-readPackageSetSpec = do
-  let path = "conf/default-package-set.yaml"
-      context what = what <> " in " <> path
+readPackageSetSpec :: (MonadIO m, MonadFail m) => FilePath -> m PackageSetSpec
+readPackageSetSpec path = do
+  let context what = what <> " in " <> path
   PackageSetSpecRaw{..} <- readPackageSetSpecRaw path
   let compiler = rawCompiler
   packageSetName        <- getPackageSetName compiler
