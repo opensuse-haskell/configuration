@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE RecordWildCards #-}
 
 -- | The configuration of our package set. This is the only module of the
@@ -21,6 +23,8 @@ import Types
 
 import Data.Map.Strict ( Map )
 import Data.Set ( Set )
+import Development.Shake.Classes
+import GHC.Generics ( Generic )
 
 -- | Everything that defines a package set.
 
@@ -35,7 +39,7 @@ data PackageSetSpec = PackageSetSpec
   , forcedExecutables     :: PackageNameSet                 -- ^ Packages we build as executables even though they have a library.
   , pkgConfigDependencies :: Set NixpkgsAttribute           -- ^ System libraries that packages look up via pkg-config.
   }
-  deriving (Show)
+  deriving (Show, Eq, Generic, Hashable, Binary, NFData)
 
 -- | Our package set. Fails if the configuration is inconsistent.
 

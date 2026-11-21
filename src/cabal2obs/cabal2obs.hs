@@ -48,11 +48,12 @@ main = do
     -- access it: the raw data lives in the config-data library, which this
     -- executable intentionally does not depend on. That way, Shake learns
     -- about every piece of the configuration that a rule uses.
-    getPackageSet <- addPackageSetOracle
-    getAvailablePackages <- addAvailablePackagesOracle
-    getFlags <- addFlagAssignmentOracle
-    isForcedExecutable <- addForcedExecutableOracle
-    getCompiler <- addCompilerOracle
+    getPackageSetSpec <- addPackageSetSpecOracle
+    getPackageSet <- addPackageSetOracle getPackageSetSpec
+    getAvailablePackages <- addAvailablePackagesOracle getPackageSetSpec
+    getFlags <- addFlagAssignmentOracle getPackageSetSpec
+    isForcedExecutable <- addForcedExecutableOracle getPackageSetSpec
+    getCompiler <- addCompilerOracle getPackageSetSpec
 
     -- The name of the package set, e.g. "ghc-9.14.x". It names targets and
     -- directories, so it is needed while the rules are defined.

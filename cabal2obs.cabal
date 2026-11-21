@@ -72,10 +72,7 @@ library config-data
 
 -- Shake oracles that give access to the configuration in config-data.
 library config-oracles
-  exposed-modules:  Oracle.Compiler
-                    Oracle.Flags
-                    Oracle.ForcedExecutables
-                    Oracle.PackageSet
+  exposed-modules:  Oracle.PackageSetSpec
   reexported-modules: Types
   hs-source-dirs:   src/config-oracles
   build-depends:    base, cabal2obs, config-data, containers, shake
