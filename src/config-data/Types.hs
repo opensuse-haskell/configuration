@@ -21,3 +21,6 @@ type Constraint = Dependency
 type ConstraintSet = Map PackageName VersionRange
 
 type PackageSet = Map PackageName Version
+
+-- | The name of an attribute in nixpkgs, e.g. @"libyaml"@.
+type NixpkgsAttribute = String

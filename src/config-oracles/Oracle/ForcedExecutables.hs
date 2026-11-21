@@ -3,7 +3,7 @@
 
 module Oracle.ForcedExecutables ( addForcedExecutableOracle ) where
 
-import Config.ForcedExecutables ( forcedExectableNames )
+import Config ( PackageSetSpec(forcedExecutables), packageSetSpec )
 import MyCabal
 
 import qualified Data.Set as Set
@@ -23,5 +23,5 @@ type instance RuleResult IsForcedExecutable = Bool
 
 addForcedExecutableOracle :: Rules (PackageName -> Action Bool)
 addForcedExecutableOracle = do
-  isForced <- addOracle $ \(IsForcedExecutable pn) -> pure (pn `Set.member` forcedExectableNames)
+  isForced <- addOracle $ \(IsForcedExecutable pn) -> pure (pn `Set.member` forcedExecutables packageSetSpec)
   pure (isForced . IsForcedExecutable)

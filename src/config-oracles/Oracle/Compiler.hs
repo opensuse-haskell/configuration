@@ -3,7 +3,7 @@
 
 module Oracle.Compiler ( addCompilerOracle ) where
 
-import Config.Compiler ( ghcCompiler )
+import Config ( PackageSetSpec(compiler), packageSetSpec )
 import MyCabal
 
 import Development.Shake
@@ -20,5 +20,5 @@ type instance RuleResult Compiler = CompilerId
 
 addCompilerOracle :: Rules (Action CompilerId)
 addCompilerOracle = do
-  getCompiler <- addOracle $ \(Compiler ()) -> pure ghcCompiler
+  getCompiler <- addOracle $ \(Compiler ()) -> pure (compiler packageSetSpec)
   pure (getCompiler (Compiler ()))

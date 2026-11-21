@@ -52,12 +52,14 @@ library
 -- cabal2obs executable must not depend on this library; it accesses the
 -- configuration only through config-oracles so that Shake can track it.
 library config-data
-  exposed-modules:  Config.Compiler
+  exposed-modules:  Config
+                    Types
+  other-modules:    Config.Compiler
                     Config.Flags
                     Config.ForcedExecutables
                     Config.PackageSet
+                    Config.PkgConfig
                     Config.Tools
-                    Types
   hs-source-dirs:   src/config-data
   build-depends:    base, cabal2obs, containers, pretty, shake
   default-language: Haskell2010

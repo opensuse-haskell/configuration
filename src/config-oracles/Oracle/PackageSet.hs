@@ -3,8 +3,7 @@
 
 module Oracle.PackageSet ( addPackageSetOracle, addAvailablePackagesOracle ) where
 
-import Config.Compiler ( ghcCorePackages )
-import Config.PackageSet ( packageSet )
+import Config ( PackageSetSpec(corePackages, packageSet), packageSetSpec )
 import MyCabal
 import Types
 
@@ -26,7 +25,7 @@ type instance RuleResult ThePackageSet = PackageSet
 
 addPackageSetOracle :: Rules (Action PackageSet)
 addPackageSetOracle = do
-  getPackageSet <- addOracle $ \(ThePackageSet ()) -> pure packageSet
+  getPackageSet <- addOracle $ \(ThePackageSet ()) -> pure (packageSet packageSetSpec)
   pure (getPackageSet (ThePackageSet ()))
 
 -- | Key for the oracle that tracks which packages are available to satisfy
@@ -45,5 +44,5 @@ type instance RuleResult AvailablePackages = Set PackageName
 addAvailablePackagesOracle :: Rules (Action (Set PackageName))
 addAvailablePackagesOracle = do
   getAvailablePackages <- addOracle $ \(AvailablePackages ()) ->
-    pure (Map.keysSet (packageSet `Map.union` ghcCorePackages))
+    pure (Map.keysSet (packageSet packageSetSpec `Map.union` corePackages packageSetSpec))
   pure (getAvailablePackages (AvailablePackages ()))

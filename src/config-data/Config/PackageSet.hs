@@ -1,10 +1,14 @@
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Config.PackageSet ( packageSet, targetPackages ) where
+module Config.PackageSet ( packageSet, targetPackages, allowNewer ) where
 
 import Config.Tools
+import MyCabal ( PackageName )
 import Types
+
+import Data.Map.Strict ( Map )
+import Data.Set ( Set )
 
 -- TODO: "hlint"
 --       "postgresql-simple"        -- needed by emu-incident-report
@@ -441,3 +445,25 @@ packageSet = makePackageSet
   , "zip-archive-0.5"
   , "zlib-0.7.1.1"
   ]
+
+-- | Packages whose version bounds on the listed dependencies we ignore when
+-- resolving the package set. Each of these needs a corresponding patch for
+-- the build, e.g. one that relaxes the bounds with @cabal-tweak-dep-ver@.
+
+allowNewer :: Map PackageName (Set PackageName)
+allowNewer = [ ("botan-bindings", ["base"])
+             , ("botan-low", ["base"])
+             , ("cabal-install", ["open-browser"])
+             , ("cairo", ["Cabal"])
+             , ("cborg", ["base", "containers"])
+             , ("feed", ["base", "base-compat", "time"])
+             , ("ghc-hs-meta", ["base", "ghc-boot", "ghc", "template-haskell"])
+             , ("git-lfs", ["containers"])
+             , ("glib", ["containers", "Cabal"])
+             , ("pango", ["containers", "glib", "Cabal"])
+             , ("persistent", ["template-haskell"])
+             , ("serialise", ["base", "containers", "time"])
+             , ("ShellCheck", ["QuickCheck", "Diff"])
+             , ("wizards", ["containers"])
+             , ("xmobar", ["base"])
+             ]

@@ -3,10 +3,9 @@
 
 module Oracle.Flags ( addFlagAssignmentOracle ) where
 
-import Config.Flags ( flagList, readFlagAssignents )
+import Config ( PackageSetSpec(flags), packageSetSpec )
 import MyCabal
 
-import Data.Map.Strict ( Map )
 import qualified Data.Map.Strict as Map
 import Development.Shake
 import Development.Shake.Classes
@@ -23,8 +22,5 @@ type instance RuleResult FlagsFor = FlagAssignment
 
 addFlagAssignmentOracle :: Rules (PackageName -> Action FlagAssignment)
 addFlagAssignmentOracle = do
-  getFlags <- addOracle $ \(FlagsFor pn) -> pure (Map.findWithDefault mempty pn flagAssignments)
+  getFlags <- addOracle $ \(FlagsFor pn) -> pure (Map.findWithDefault mempty pn (flags packageSetSpec))
   pure (getFlags . FlagsFor)
-
-flagAssignments :: Map PackageName FlagAssignment
-flagAssignments = Map.fromList (readFlagAssignents flagList)

@@ -1,11 +1,17 @@
-module Config.Flags ( flagList, readFlagAssignents ) where
+module Config.Flags ( buildFlags ) where
 
 import MyCabal
 
+import qualified Data.List as List
+import Data.Map.Strict ( Map )
+import qualified Data.Map.Strict as Map
 import Data.Maybe
 
-flagList :: [(String,String)]
-flagList =
+-- | The flags we configure for packages of our package set. Packages that
+-- aren't listed are built with their default flags.
+
+buildFlags :: Map PackageName FlagAssignment
+buildFlags = readFlagAssignments
   [ ("cabal-plan",                     "+exe")
 
     -- Don't build hardware-specific optimizations into the binary based on what the
@@ -98,22 +104,33 @@ flagList =
   , ("postgresql-libpq",               "-use-pkg-config")
   ]
 
-readFlagAssignents :: [(String,String)] -> [(PackageName,FlagAssignment)]
-readFlagAssignents xs = [ (fromJust (simpleParse name), readFlagList (words assignments)) | (name,assignments) <- xs ]
+-- | Parse a list of package names and flag assignments. The assignments use
+-- Cabal's syntax, e.g. @"+exe -server"@. Aborts with an 'error' if an
+-- assignment can't be parsed, or if a package is listed more than once,
+-- because converting the list into a map would silently keep only the last of
+-- those entries.
+--
+-- Every flag must start with @+@ or @-@:
+--
+-- >>> display <$> readFlagAssignments [("foo", "+bar -baz")]
+-- fromList [(PackageName "foo","+bar -baz")]
+--
+-- >>> readFlagAssignments [("foo", "bar")]
+-- fromList *** Exception: foo: invalid flag assignment: ...
+-- unexpected 'b'
+-- expecting "+", "-", white space or end of input
+-- ...
+--
+-- >>> readFlagAssignments [("foo", "+bar baz")]
+-- fromList *** Exception: foo: invalid flag assignment: ...
+-- unexpected 'b'
+-- expecting space, "+", "-", white space or end of input
+-- ...
 
-readFlagList :: [String] -> FlagAssignment
-readFlagList = mkFlagAssignment . map (tagWithValue . specifyPlus . noMinusF)
+readFlagAssignments :: [(String,String)] -> Map PackageName FlagAssignment
+readFlagAssignments xs
+  | not (null duplicates) = error ("duplicate entries in flag list: " <> List.intercalate ", " duplicates)
+  | otherwise             = Map.fromList [ (fromJust (simpleParse name), parseFlags name fs) | (name, fs) <- xs ]
   where
-    tagWithValue ('-':fname) = (mkFlagName (lowercase fname), False)
-    tagWithValue ('+':fname) = (mkFlagName (lowercase fname), True)
-    tagWithValue fname       = (mkFlagName (lowercase fname), True)
-
-    noMinusF :: String -> String
-    noMinusF ('-':'f':_) = error "don't use '-f' in flag assignments; just use the flag's name"
-    noMinusF x           = x
-
-    specifyPlus :: String -> String
-    specifyPlus ""           = error "specifyPlus: invalid empty Cabal flag"
-    specifyPlus x@(c:_)
-      | c == '-' || c == '+' = x
-      | otherwise            = error ("specifyPlus: flag " ++ show x ++ " must start with '-' or '+'")
+    duplicates = [ name | name : _ : _ <- List.group (List.sort (fst <$> xs)) ]
+    parseFlags name fs = either (\err -> error (name <> ": invalid flag assignment: " <> err)) id (eitherParsec fs)
