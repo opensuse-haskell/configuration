@@ -10,7 +10,7 @@ import Cabal2Spec
 import Oracle
 import Types
 import UpdateChangesFile
-import UpdatePackageSet ( cabalInstallResolver, updatePackageSetSpec, updatePackageSetSpecFile )
+import UpdatePackageSet ( cabalInstallResolver, PackageSetSpec(targetPackages), updateTargetPackages, writeBackPackageSetUpdates )
 import MyCabal
 
 import Control.Monad.Extra
@@ -192,8 +192,8 @@ main = do
     phony "update" $ do
       spec <- getPackageSetSpec
       resolved <- cabalInstallResolver spec
-      spec' <- updatePackageSetSpec resolved spec
-      updatePackageSetSpecFile configFile spec'
+      resolvedTargets <- updateTargetPackages (targetPackages spec) resolved
+      writeBackPackageSetUpdates configFile resolved resolvedTargets
 
     phony "fetch" $ do
       packageSet <- getPackageSet

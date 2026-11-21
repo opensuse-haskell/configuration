@@ -6,7 +6,7 @@
 
 module Config
   ( -- * Specification of a package set
-    PackageSetSpec(..), readPackageSetSpec, updatePackageSetSpecFile
+    PackageSetSpec(..), readPackageSetSpec, writeBackPackageSetUpdates
     -- * Tools
   , getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages
   ) where
@@ -15,6 +15,7 @@ import Config.PackageSetSpec
 import Config.PackageSetSpecRaw
 import Config.Tools
 import MyCabal
+import Types
 
 import Control.Monad ( unless )
 import Control.Monad.IO.Class
@@ -22,7 +23,6 @@ import Data.Char ( isSpace )
 import qualified Data.List as List
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
-import System.Directory ( renameFile )
 import System.IO ( readFile' )
 
 -- | Read the specification of a package set from the given YAML file. Fails
@@ -60,30 +60,20 @@ readPackageSetSpec path = do
     fail ("core packages listed in " <> context "package-set" <> ": " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
   pure PackageSetSpec{..}
 
--- | Write the package set and the target packages of the given specification
--- into the given YAML file, replacing the contents of its @package-set@ and
+-- | Write the given package set and target packages into the given YAML file, replacing the contents of its @package-set@ and
 -- @target-packages@ sections. All other lines of the file, including its
 -- comments and formatting, stay as they are. Comments inside the two sections
 -- are lost.
---
--- The updated file is first written to @<file>.new@ and read back. It
--- replaces the original only if reading it gives the given specification;
--- otherwise this function fails and leaves @<file>.new@ for inspection.
 
-updatePackageSetSpecFile :: (MonadIO m, MonadFail m) => FilePath -> PackageSetSpec -> m ()
-updatePackageSetSpecFile path spec = do
+writeBackPackageSetUpdates :: (MonadIO m, MonadFail m) => FilePath -> PackageSet -> ConstraintSet -> m ()
+writeBackPackageSetUpdates path ps ts = do
   old <- liftIO (readFile' path)
   let byName :: [(PackageName, a)] -> [(PackageName, a)]
       byName = List.sortOn (lowercase . unPackageName . fst)
-      packages = [ display (PackageIdentifier pn v) | (pn, v) <- byName (Map.toList (packageSet spec)) ]
-      targets  = [ display (PackageVersionConstraint pn vr) | (pn, vr) <- byName (Map.toList (targetPackages spec)) ]
+      packages = [ display (PackageIdentifier pn v) | (pn, v) <- byName (Map.toList ps) ]
+      targets  = [ display (PackageVersionConstraint pn vr) | (pn, vr) <- byName (Map.toList ts) ]
   new <- replaceSection "package-set" packages old >>= replaceSection "target-packages" targets
-  let tmp = path <> ".new"
-  liftIO (writeFile tmp new)
-  spec' <- readPackageSetSpec tmp
-  unless (spec' == spec) $
-    fail (tmp <> ": the updated file doesn't specify the expected package set")
-  liftIO (renameFile tmp path)
+  liftIO (writeFile path new)
   where
     -- Replace the items of the section with the given key. The section ends
     -- before the next line that starts in the first column; blank lines at

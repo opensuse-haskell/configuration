@@ -5,9 +5,9 @@
 -- --dry-run@ and update the package set specification accordingly. cabal2obs
 -- uses this for its @update@ target.
 
-module UpdatePackageSet ( cabalInstallResolver, updatePackageSetSpec, updatePackageSetSpecFile ) where
+module UpdatePackageSet ( cabalInstallResolver, PackageSetSpec(targetPackages), updateTargetPackages, writeBackPackageSetUpdates ) where
 
-import Config ( PackageSetSpec(..), updatePackageSetSpecFile, updateTargetPackages )
+import Config ( PackageSetSpec(..), writeBackPackageSetUpdates, updateTargetPackages )
 import MyCabal
 import Types
 
@@ -47,15 +47,6 @@ iterateResolver spec solve targets previous = do
   if plan == previous
      then pure plan
      else iterateResolver spec solve (Map.keysSet (targetPackages spec) `Set.union` Map.keysSet plan) plan
-
--- | Put a newly resolved package set into the given specification and raise
--- the bounds of its target packages to the versions that the new package set
--- contains (see 'updateTargetPackages').
-
-updatePackageSetSpec :: MonadFail m => PackageSet -> PackageSetSpec -> m PackageSetSpec
-updatePackageSetSpec ps spec = do
-  targets <- updateTargetPackages (targetPackages spec) ps
-  pure spec { packageSet = ps, targetPackages = targets }
 
 -- | Generate a @cabal install --dry-run@ command that resolves the given target
 -- packages under the constraints of our package set.
