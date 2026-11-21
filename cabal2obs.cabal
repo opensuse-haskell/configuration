@@ -28,12 +28,10 @@ source-repository head
 library
   exposed-modules:  ExtractVersionUpdates
                     MyCabal
-                    Types
                     UpdateChangesFile
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
                   , Cabal                 == 3.14.* || == 3.16.* || == 3.18.*
-                  , containers
                   , directory
                   , distribution-opensuse ^>= 1.2
                   , extra
@@ -57,6 +55,7 @@ executable cabal2obs
                     Oracle.Hackage
                     Oracle.PackageSetSpec
                     PackageSetSpec
+                    Types
                     UpdatePackageSet
   hs-source-dirs:   src/cabal2obs
   build-depends:    base
