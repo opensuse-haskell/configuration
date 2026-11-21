@@ -34,9 +34,7 @@ addHackageCache = (\f' -> f' ()) <$> newCache f
                             | otherwise     -> fail (idxFile <> ": unexpected " <> show (BSS.length rest) <> " extra bytes at the end")
 
 -- | Helper function that maps a given 'PackageIdentifier' into the 'FilePath'
--- of the corresponding Cabal file. The first function argument gives the
--- location of a checked out copy of the
--- <https://github.com/commercialhaskell/all-cabal-files> repository.
+-- of the corresponding Cabal file.
 
 cabalFilePath :: PackageIdentifier -> FilePath
 cabalFilePath (PackageIdentifier n v) =
