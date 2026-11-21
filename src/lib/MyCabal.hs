@@ -3,7 +3,7 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module MyCabal
-  ( Version, VersionRange, versionNumbers, withinRange, noVersion, anyVersion, version0, isSpecificVersion, orLaterVersion
+  ( Version, VersionRange, versionNumbers, version0, orLaterVersion
   , CompilerId(..), Platform(..), OS(..), Arch(..), AbiTag(..), unknownCompilerInfo
   , prettyShow, display
   , PackageName, unPackageName, mkPackageName
@@ -11,15 +11,14 @@ module MyCabal
   , PackageIdentifier(..)
   , Dependency(..), depPkgName
   , ComponentRequestedSpec(..)
-  , FlagName, FlagAssignment, mkFlagAssignment, lowercase, mkFlagName, unFlagName, findDuplicateFlagAssignments
+  , FlagAssignment, lowercase, unFlagName, findDuplicateFlagAssignments
   , GenericPackageDescription(..), parseGenericPackageDescriptionMaybe, finalizePD
   , PackageDescription(..), Library(..), LibraryName(..)
-  , UnqualComponentName, mkUnqualComponentName, unUnqualComponentName
+  , unUnqualComponentName
   , License
     -- Parsec
-  , Parsec(..), simpleParsec, ParsecParser, simpleParse, CharParsing, skipOptional
-  , string, eof, fieldLineStreamFromString, runParsecParser, satisfy, char, spaces
-  , sepBy, try, eitherParsec, parseText
+  , Parsec, simpleParsec, simpleParse
+  , string, eitherParsec, parseText
   ) where
 
 import OpenSuse.Prelude
@@ -33,7 +32,6 @@ import Distribution.PackageDescription
 import qualified Distribution.PackageDescription.Configuration as Cabal
 import Distribution.PackageDescription.Parsec
 import Distribution.Parsec
-import Distribution.Parsec.FieldLineStream
 import qualified Distribution.Pretty as Cabal
 import Distribution.SPDX.License
 import Distribution.Simple.Utils ( lowercase )

@@ -1,4 +1,4 @@
-module Config.Tools ( makeMap, makeSet, getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
+module Config.Tools ( makeMap, makeSet, getPackageSetName, updateTargetPackages ) where
 
 import Types
 import MyCabal
@@ -9,7 +9,6 @@ import Data.Map ( Map )
 import qualified Data.Map as Map
 import Data.Set ( Set )
 import qualified Data.Set as Set
-import Text.PrettyPrint hiding ( (<>) )
 import Text.PrettyPrint.HughesPJClass ( Pretty )
 
 
@@ -57,34 +56,6 @@ getPackageSetName cid@(CompilerId flavor v) =
   case versionNumbers v of
     x : y : _ -> pure (display flavor <> "-" <> show x <> "." <> show y <> ".x")
     _         -> fail ("compiler " <> display cid <> " has no major version number with two components")
-
--- | Pretty-print a package set as a list of quoted package identifiers, one
--- per line, with leading commas, sorted by name regardless of case:
---
--- > [ "DAV-1.3.4"
--- > , "Decimal-0.5.2"
--- > ]
-
-ppPackageSet :: PackageSet -> Doc
-ppPackageSet ps = ppList [ unPackageName pn <> "-" <> prettyShow v | (pn, v) <- List.sortOn (lowercase . unPackageName . fst) (Map.toList ps) ]
-
--- | Pretty-print a constraint set in the same style and order as
--- 'ppPackageSet':
---
--- > [ "alex >=3.5.4.2"
--- > , "happy >=2.2"
--- > ]
-
-ppConstraintSet :: ConstraintSet -> Doc
-ppConstraintSet cs = ppList [ display (PackageVersionConstraint pn vr) | (pn, vr) <- List.sortOn (lowercase . unPackageName . fst) (Map.toList cs) ]
-
--- | Print strings as a list of quoted entries, one per line, with leading
--- commas.
-
-ppList :: [String] -> Doc
-ppList entries = case doubleQuotes . text <$> entries of
-                   []     -> text "[]"
-                   e : es -> vcat ((text "[ " <> e) : map (text ", " <>) es) $$ rbrack
 
 -- | Replace the version range of every target package with a lower bound on
 -- the version that the given package set contains, i.e. @>= x.y.z@. Fails

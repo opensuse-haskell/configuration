@@ -2,7 +2,10 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Oracle.Hackage where
+module Oracle.Hackage
+  ( addHackageCache, addCabalFileCache
+  , parseCabalFile, hasLibrary, packageRevision
+  ) where
 
 import OpenSuse.Prelude
 import MyCabal

@@ -10,7 +10,7 @@ import Cabal2Spec
 import Oracle
 import Types
 import UpdateChangesFile
-import UpdatePackageSet ( cabalInstallResolver, PackageSetSpec(targetPackages), updateTargetPackages, writeBackPackageSetUpdates )
+import UpdatePackageSet ( cabalInstallResolver, updateTargetPackages, writeBackPackageSetUpdates )
 import MyCabal
 
 import Control.Monad.Extra
@@ -79,15 +79,15 @@ main = do
     -- Map a build directory path back to a Cabal package identifier. This is
     -- the inverse of 'getBuildName'.
     pkgidFromPath <- addOracle $ \(BuildName bn) -> do
-      packageSet <- getPackageSet
-      id1 <- case Map.lookup (mkPackageName bn) packageSet of
+      pkgSet <- getPackageSet
+      id1 <- case Map.lookup (mkPackageName bn) pkgSet of
                Nothing -> pure Nothing
                Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn) pv
                              BuildName bn' <- getBuildName pkgid
                              pure (if bn == bn' then Just pkgid else Nothing)
       id2 <- case stripPrefix "ghc-" bn of
                Nothing  -> pure Nothing
-               Just bn' -> case Map.lookup (mkPackageName bn') packageSet of
+               Just bn' -> case Map.lookup (mkPackageName bn') pkgSet of
                              Nothing -> pure Nothing
                              Just pv -> do let pkgid = PackageIdentifier (mkPackageName bn') pv
                                            BuildName bn'' <- getBuildName pkgid
@@ -110,8 +110,8 @@ main = do
 
     -- The (phony) package set target depends on the (real) spec files.
     phony pkgSetName $ do
-      packageSet <- getPackageSet
-      specFiles <- forM (Map.toList packageSet) $ \(pn,pv) -> do
+      pkgSet <- getPackageSet
+      specFiles <- forM (Map.toList pkgSet) $ \(pn,pv) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn pv)
         pure (buildDir </> pkgSetName </> bn </> bn <.> "spec")
       need specFiles
@@ -196,9 +196,9 @@ main = do
       writeBackPackageSetUpdates configFile resolved resolvedTargets
 
     phony "fetch" $ do
-      packageSet <- getPackageSet
+      pkgSet <- getPackageSet
       let tarball (pn, pv) = cabalDir </> "packages/hackage.haskell.org" </> display pn </> display pv </> display (PackageIdentifier pn pv) <.> "tar.gz"
-      need (tarball <$> Map.toList packageSet)
+      need (tarball <$> Map.toList pkgSet)
 
 -- | Command-line options of cabal2obs in addition to Shake's own options.
 

@@ -8,7 +8,7 @@ module Config
   ( -- * Specification of a package set
     PackageSetSpec(..), readPackageSetSpec, writeBackPackageSetUpdates
     -- * Tools
-  , getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages
+  , updateTargetPackages
   ) where
 
 import Config.PackageSetSpec

@@ -5,7 +5,7 @@
 -- --dry-run@ and update the package set specification accordingly. cabal2obs
 -- uses this for its @update@ target.
 
-module UpdatePackageSet ( cabalInstallResolver, PackageSetSpec(targetPackages), updateTargetPackages, writeBackPackageSetUpdates ) where
+module UpdatePackageSet ( cabalInstallResolver, PackageSetSpec(..), updateTargetPackages, writeBackPackageSetUpdates ) where
 
 import Config ( PackageSetSpec(..), writeBackPackageSetUpdates, updateTargetPackages )
 import MyCabal

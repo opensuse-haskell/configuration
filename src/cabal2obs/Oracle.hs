@@ -3,7 +3,7 @@ module Oracle
     addHackageCache, addCabalFileCache
   , parseCabalFile, hasLibrary, packageRevision
     -- * Configuration
-  , PackageSetSpec(packageSetName), readPackageSetSpec, addPackageSetSpecOracle
+  , PackageSetSpec(..), readPackageSetSpec, addPackageSetSpecOracle
   , addPackageSetOracle, addAvailablePackagesOracle
   , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
   )
