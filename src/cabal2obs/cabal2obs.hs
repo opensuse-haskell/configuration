@@ -10,7 +10,7 @@ import Cabal2Spec
 import Oracle
 import Types
 import UpdateChangesFile
-import UpdatePackageSet ( cabalInstallResolver, updateTargetPackages, writeBackPackageSetUpdates )
+import UpdatePackageSet ( updatePackageSetSpecInPlace )
 import MyCabal
 
 import Control.Monad.Extra
@@ -190,10 +190,7 @@ main = do
     -- sections of the configuration file. The rest of the file stays as it
     -- is. This is expensive, so it runs only when "update" is requested.
     phony "update" $ do
-      spec <- getPackageSetSpec
-      resolved <- cabalInstallResolver spec
-      resolvedTargets <- updateTargetPackages (targetPackages spec) resolved
-      writeBackPackageSetUpdates configFile resolved resolvedTargets
+      getPackageSetSpec >>= updatePackageSetSpecInPlace configFile
 
     phony "fetch" $ do
       pkgSet <- getPackageSet

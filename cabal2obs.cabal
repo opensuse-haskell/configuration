@@ -26,31 +26,53 @@ source-repository head
   location: https://github.com/opensuse-haskell/cabal2obs
 
 library
-  exposed-modules:  Config
-                    ExtractVersionUpdates
+  exposed-modules:  ExtractVersionUpdates
                     MyCabal
-                    Oracle.PackageSetSpec
                     Types
                     UpdateChangesFile
-                    UpdatePackageSet
-  other-modules:    Config.PackageSetSpec
-                    Config.PackageSetSpecRaw
-                    Config.Tools
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
-                  , aeson
                   , Cabal                 == 3.14.* || == 3.16.* || == 3.18.*
                   , containers
                   , directory
                   , distribution-opensuse ^>= 1.2
                   , extra
-                  , nix-paths
                   , pretty
                   , regex-posix
                   , shake
                   , text
                   , time
                   , turtle
+  default-language: Haskell2010
+  other-extensions: CPP
+                    GeneralizedNewtypeDeriving
+                    TypeFamilies
+                    OverloadedStrings
+                    DeriveGeneric
+                    DeriveAnyClass
+
+executable cabal2obs
+  main-is:          cabal2obs.hs
+  other-modules:    Oracle
+                    Oracle.Hackage
+                    Oracle.PackageSetSpec
+                    PackageSetSpec
+                    UpdatePackageSet
+  hs-source-dirs:   src/cabal2obs
+  build-depends:    base
+                  , aeson
+                  , bytestring
+                  , cabal2obs
+                  , cabal2spec            ^>= 2.9.0
+                  , containers
+                  , directory
+                  , distribution-opensuse
+                  , extra
+                  , nix-paths
+                  , pretty
+                  , shake                 >= 0.16
+                  , tar                   > 0.6
+                  , time
                   , yaml
   default-language: Haskell2010
   other-extensions: CPP
@@ -61,30 +83,6 @@ library
                     DeriveAnyClass
                     OverloadedLists
                     RecordWildCards
-
-executable cabal2obs
-  main-is:          cabal2obs.hs
-  other-modules:    Oracle
-                    Oracle.Hackage
-  hs-source-dirs:   src/cabal2obs
-  build-depends:    base
-                  , bytestring
-                  , cabal2obs
-                  , cabal2spec            ^>= 2.9.0
-                  , containers
-                  , directory
-                  , distribution-opensuse
-                  , extra
-                  , shake                 >= 0.16
-                  , tar                   > 0.6
-                  , time
-  default-language: Haskell2010
-  other-extensions: CPP
-                    GeneralizedNewtypeDeriving
-                    TypeFamilies
-                    OverloadedStrings
-                    DeriveGeneric
-                    DeriveAnyClass
   ghc-options:      -threaded -with-rtsopts=-qg -with-rtsopts=-qb
 
 executable update-changes-file

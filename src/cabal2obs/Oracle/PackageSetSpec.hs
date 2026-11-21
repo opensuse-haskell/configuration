@@ -17,7 +17,7 @@ module Oracle.PackageSetSpec
   , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
   ) where
 
-import Config ( PackageSetSpec(..), readPackageSetSpec )
+import PackageSetSpec ( PackageSetSpec(..), readPackageSetSpec )
 import MyCabal
 import Types
 

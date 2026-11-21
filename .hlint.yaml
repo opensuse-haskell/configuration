@@ -44,14 +44,10 @@
   - { name: Distribution.Utils.ShortText, within: [MyCabal] }
   - { name: Distribution.Version, within: [MyCabal] }
 
-  # The configuration is read only through Config. Its internal modules are
-  # used by Config alone.
-  - { name: [Config.PackageSetSpec, Config.PackageSetSpecRaw, Config.Tools], within: [Config] }
-
-  # Config is used only by the oracles and by UpdatePackageSet. The cabal2obs
-  # executable must access the configuration through the oracles, so that
-  # Shake can track which parts of it a rule depends on.
-  - { name: Config, within: [Oracle.PackageSetSpec, UpdatePackageSet] }
+  # PackageSetSpec is used only by the oracles and by UpdatePackageSet. The
+  # rules of cabal2obs must access the configuration through the oracles, so
+  # that Shake can track which parts of it a rule depends on.
+  - { name: PackageSetSpec, within: [Oracle.PackageSetSpec, UpdatePackageSet] }
 
 # - functions:
 #   - {name: unsafePerformIO, within: []} # unsafePerformIO can only appear in no modules
