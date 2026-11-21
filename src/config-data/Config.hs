@@ -17,6 +17,7 @@ import Config.Tools
 import MyCabal
 
 import Control.Monad ( unless )
+import Control.Monad.IO.Class
 import qualified Data.List as List
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
@@ -27,11 +28,11 @@ import qualified Data.Set as Set
 -- identifier has no version, a flag is assigned more than once for the same
 -- package, or a core package is listed in the package set.
 
-readPackageSetSpec :: IO PackageSetSpec
+readPackageSetSpec :: (MonadIO m, MonadFail m) => m PackageSetSpec
 readPackageSetSpec = do
   let path = "conf/default-package-set.yaml"
       context what = what <> " in " <> path
-  PackageSetSpecRaw{..} <- readPackageSetSpecRaw path
+  PackageSetSpecRaw{..} <- liftIO (readPackageSetSpecRaw path)
   let compiler = rawCompiler
   packageSetName        <- getPackageSetName compiler
   corePackages          <- makeMap (context "core-packages") [ (pkgName p, pkgVersion p) | p <- rawCorePackages ]
