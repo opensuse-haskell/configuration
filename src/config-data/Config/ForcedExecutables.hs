@@ -3,11 +3,9 @@
 
 module Config.ForcedExecutables ( forcedExectableNames ) where
 
-import MyCabal
+import Types
 
-import Data.Set ( Set )
-
-forcedExectableNames :: Set PackageName
+forcedExectableNames :: PackageNameSet
 forcedExectableNames =
   [ "Agda"
   , "BNFC"

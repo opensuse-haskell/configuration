@@ -6,6 +6,7 @@ module Types where
 import MyCabal
 
 import Data.Map.Strict as Map
+import Data.Set ( Set )
 import Data.String
 import Development.Shake.Classes
 import GHC.Generics ( Generic )
@@ -21,6 +22,8 @@ type Constraint = Dependency
 type ConstraintSet = Map PackageName VersionRange
 
 type PackageSet = Map PackageName Version
+
+type PackageNameSet = Set PackageName
 
 -- | The name of an attribute in nixpkgs, e.g. @"libyaml"@.
 type NixpkgsAttribute = String

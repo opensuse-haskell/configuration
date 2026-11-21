@@ -10,7 +10,6 @@ import Types
 -- import qualified Data.List as List
 import qualified Data.Map as Map
 import Data.Map.Strict ( toList )
-import Data.Set ( Set )
 import qualified Data.Set as Set
 import Development.Shake.Command ( CmdOption(AddEnv), Stdout(..), cmd )
 import Data.List ( intercalate )
@@ -22,7 +21,7 @@ import Text.PrettyPrint ( render )
 --
 -- TODO: Honor deprecated packages in the Hackage tarball.
 
-updatePackageSet :: FilePath -> Set PackageName -> [String]
+updatePackageSet :: FilePath -> PackageNameSet -> [String]
 updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ignore-project", "--lib", "--dry-run", "--with-compiler=" <> ghc, "--minimize-conflict-set", "--upgrade-dependencies"]
                            ++ installed ++ lowerBounds ++ constraints ++ flagOpts ++ allowNewerOpts ++ pkgs
   where
@@ -60,7 +59,7 @@ main = do
 
 -- | Iterate the solver until the plan is stable.
 
-resolve :: (Set PackageName -> IO String) -> Set PackageName -> PackageSet -> IO PackageSet
+resolve :: (PackageNameSet -> IO String) -> PackageNameSet -> PackageSet -> IO PackageSet
 resolve solve targets previous = do
   plan <- parseInstallPlan <$> solve targets
   if plan == previous

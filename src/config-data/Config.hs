@@ -23,14 +23,14 @@ import Data.Set ( Set )
 -- | Everything that defines a package set.
 
 data PackageSetSpec = PackageSetSpec
-  { compiler              :: CompilerId                        -- ^ The compiler we build with.
-  , corePackages          :: PackageSet                        -- ^ The packages bundled with the compiler.
-  , packageSet            :: PackageSet                        -- ^ The packages we generate builds for.
-  , targetPackages        :: ConstraintSet                     -- ^ The packages the package set is resolved for.
-  , allowNewer            :: Map PackageName (Set PackageName) -- ^ Version bounds we ignore when resolving the package set.
-  , flags                 :: Map PackageName FlagAssignment    -- ^ The flags we configure for packages.
-  , forcedExecutables     :: Set PackageName                   -- ^ Packages we build as executables even though they have a library.
-  , pkgConfigDependencies :: Set NixpkgsAttribute              -- ^ System libraries that packages look up via pkg-config.
+  { compiler              :: CompilerId                     -- ^ The compiler we build with.
+  , corePackages          :: PackageSet                     -- ^ The packages bundled with the compiler.
+  , packageSet            :: PackageSet                     -- ^ The packages we generate builds for.
+  , targetPackages        :: ConstraintSet                  -- ^ The packages the package set is resolved for.
+  , allowNewer            :: Map PackageName PackageNameSet -- ^ Version bounds we ignore when resolving the package set.
+  , flags                 :: Map PackageName FlagAssignment -- ^ The flags we configure for packages.
+  , forcedExecutables     :: PackageNameSet                 -- ^ Packages we build as executables even though they have a library.
+  , pkgConfigDependencies :: Set NixpkgsAttribute           -- ^ System libraries that packages look up via pkg-config.
   }
   deriving (Show)
 

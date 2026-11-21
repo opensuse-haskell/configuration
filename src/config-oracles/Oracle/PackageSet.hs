@@ -4,11 +4,9 @@
 module Oracle.PackageSet ( addPackageSetOracle, addAvailablePackagesOracle ) where
 
 import Config ( PackageSetSpec(corePackages, packageSet), packageSetSpec )
-import MyCabal
 import Types
 
 import qualified Data.Map.Strict as Map
-import Data.Set ( Set )
 import Development.Shake
 import Development.Shake.Classes
 
@@ -33,7 +31,7 @@ addPackageSetOracle = do
 newtype AvailablePackages = AvailablePackages ()
   deriving (Show, Eq, Hashable, Binary, NFData)
 
-type instance RuleResult AvailablePackages = Set PackageName
+type instance RuleResult AvailablePackages = PackageNameSet
 
 -- | Register an oracle that gives the names of all packages that are
 -- available to satisfy dependencies, i.e. those in our package set plus the
@@ -41,7 +39,7 @@ type instance RuleResult AvailablePackages = Set PackageName
 -- added to or removed from that set. Changes of package versions don't affect
 -- the result.
 
-addAvailablePackagesOracle :: Rules (Action (Set PackageName))
+addAvailablePackagesOracle :: Rules (Action PackageNameSet)
 addAvailablePackagesOracle = do
   getAvailablePackages <- addOracle $ \(AvailablePackages ()) ->
     pure (Map.keysSet (packageSet packageSetSpec `Map.union` corePackages packageSetSpec))

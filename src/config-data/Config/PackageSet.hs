@@ -8,7 +8,6 @@ import MyCabal ( PackageName )
 import Types
 
 import Data.Map.Strict ( Map )
-import Data.Set ( Set )
 
 -- TODO: "hlint"
 --       "postgresql-simple"        -- needed by emu-incident-report
@@ -450,7 +449,7 @@ packageSet = makePackageSet
 -- resolving the package set. Each of these needs a corresponding patch for
 -- the build, e.g. one that relaxes the bounds with @cabal-tweak-dep-ver@.
 
-allowNewer :: Map PackageName (Set PackageName)
+allowNewer :: Map PackageName PackageNameSet
 allowNewer = [ ("botan-bindings", ["base"])
              , ("botan-low", ["base"])
              , ("cabal-install", ["open-browser"])
