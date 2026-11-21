@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Cabal2obs ( main ) where
+module Main ( main ) where
 
 import Prelude hiding ( fail )
 
@@ -10,6 +10,7 @@ import Cabal2Spec
 import Oracle
 import Types
 import UpdateChangesFile
+import UpdatePackageSet ( cabalInstallResolver, updatePackageSetSpec, updatePackageSetSpecFile )
 import MyCabal
 
 import Control.Monad.Extra
@@ -182,6 +183,17 @@ main = do
         command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
+
+    -- Resolve the package set anew with cabal-install from the current
+    -- Hackage index, raise the bounds of the target packages to the resolved
+    -- versions, and write both into the package-set and target-packages
+    -- sections of the configuration file. The rest of the file stays as it
+    -- is. This is expensive, so it runs only when "update" is requested.
+    phony "update" $ do
+      spec <- getPackageSetSpec
+      resolved <- cabalInstallResolver spec
+      spec' <- updatePackageSetSpec resolved spec
+      updatePackageSetSpecFile configFile spec'
 
     phony "fetch" $ do
       packageSet <- getPackageSet

@@ -87,13 +87,12 @@ ppList entries = case doubleQuotes . text <$> entries of
                    e : es -> vcat ((text "[ " <> e) : map (text ", " <>) es) $$ rbrack
 
 -- | Replace the version range of every target package with a lower bound on
--- the version that the given package set contains, i.e. @>= x.y.z@. Aborts
--- with an 'error' that names all target packages missing from the package
--- set.
+-- the version that the given package set contains, i.e. @>= x.y.z@. Fails
+-- with a message that names all target packages missing from the package set.
 
-updateTargetPackages :: ConstraintSet -> PackageSet -> ConstraintSet
+updateTargetPackages :: MonadFail m => ConstraintSet -> PackageSet -> m ConstraintSet
 updateTargetPackages targets ps
-  | not (Set.null missing) = error ("target packages missing from package set: " <> List.intercalate ", " (unPackageName <$> Set.toList missing))
-  | otherwise = orLaterVersion <$> ps `Map.restrictKeys` Map.keysSet targets
+  | not (Set.null missing) = fail ("target packages missing from package set: " <> List.intercalate ", " (unPackageName <$> Set.toList missing))
+  | otherwise = pure (orLaterVersion <$> ps `Map.restrictKeys` Map.keysSet targets)
   where
     missing = Map.keysSet targets `Set.difference` Map.keysSet ps

@@ -22,7 +22,7 @@
   - { name: GeneralizedNewtypeDeriving, within: [Oracle.PackageSetSpec] }
 
 - flags:
-  - { name: -fno-warn-orphans, within: [MyCabal, Oracle.Hackage, Cabal2obs] }
+  - { name: -fno-warn-orphans, within: [MyCabal, Oracle.Hackage, Main] }
 
 - modules:
   - { name: Distribution.Compat.CharParsing, within: [MyCabal] }
@@ -48,7 +48,7 @@
   # used by Config alone.
   - { name: [Config.PackageSetSpec, Config.PackageSetSpecRaw, Config.Tools], within: [Config] }
 
-  # Config is used only by the oracles and by update-package-set. The cabal2obs
+  # Config is used only by the oracles and by UpdatePackageSet. The cabal2obs
   # executable must access the configuration through the oracles, so that
   # Shake can track which parts of it a rule depends on.
   - { name: Config, within: [Oracle.PackageSetSpec, UpdatePackageSet] }
