@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main ( main ) where
+module UpdatePackageSet ( main ) where
 
 import Config ( PackageSetSpec(allowNewer, corePackages, flags, packageSet, pkgConfigDependencies, targetPackages), readPackageSetSpec, ppPackageSet )
 import MyCabal
@@ -18,8 +18,6 @@ import Text.PrettyPrint ( render )
 
 -- | Generate a @cabal install --dry-run@ command that resolves the given target
 -- packages under the constraints of our package set.
---
--- TODO: Honor deprecated packages in the Hackage tarball.
 
 updatePackageSet :: PackageSetSpec -> FilePath -> PackageNameSet -> [String]
 updatePackageSet spec ghc targets = ["cabal", "--store=/var/empty", "install", "--ignore-project", "--lib", "--dry-run", "--with-compiler=" <> ghc, "--minimize-conflict-set", "--upgrade-dependencies"]

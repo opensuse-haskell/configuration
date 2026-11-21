@@ -1,8 +1,8 @@
 {-# LANGUAGE RecordWildCards #-}
 
 -- | The configuration of our package set, read from a YAML file. This is the
--- only module of the configuration that is visible outside of the config-data
--- library.
+-- only module of the configuration that is visible outside of the cabal2obs
+-- library; the Config.* modules are internal.
 
 module Config
   ( -- * Specification of a package set

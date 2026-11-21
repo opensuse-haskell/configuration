@@ -26,12 +26,20 @@ source-repository head
   location: https://github.com/opensuse-haskell/cabal2obs
 
 library
-  exposed-modules:  ExtractVersionUpdates
+  exposed-modules:  Config
+                    ExtractVersionUpdates
                     MyCabal
+                    Oracle.PackageSetSpec
+                    Types
                     UpdateChangesFile
+  other-modules:    Config.PackageSetSpec
+                    Config.PackageSetSpecRaw
+                    Config.Tools
   hs-source-dirs:   src/lib
   build-depends:    base                  >= 4.13 && < 5
+                  , aeson
                   , Cabal                 == 3.14.* || == 3.16.* || == 3.18.*
+                  , containers
                   , directory
                   , distribution-opensuse ^>= 1.2
                   , extra
@@ -41,6 +49,7 @@ library
                   , text
                   , time
                   , turtle
+                  , yaml
   default-language: Haskell2010
   other-extensions: CPP
                     GeneralizedNewtypeDeriving
@@ -48,33 +57,7 @@ library
                     OverloadedStrings
                     DeriveGeneric
                     DeriveAnyClass
-
--- The raw configuration data: the package set, flags, compiler, etc. The
--- cabal2obs executable must not depend on this library; it accesses the
--- configuration only through config-oracles so that Shake can track it.
-library config-data
-  exposed-modules:  Config
-                    Types
-  other-modules:    Config.PackageSetSpec
-                    Config.PackageSetSpecRaw
-                    Config.Tools
-  hs-source-dirs:   src/config-data
-  build-depends:    aeson, base, cabal2obs, containers, pretty, shake, yaml
-  default-language: Haskell2010
-  other-extensions: DeriveAnyClass
-                    DeriveGeneric
-                    OverloadedStrings
                     RecordWildCards
-
--- Shake oracles that give access to the configuration in config-data.
-library config-oracles
-  exposed-modules:  Oracle.PackageSetSpec
-  reexported-modules: Types
-  hs-source-dirs:   src/config-oracles
-  build-depends:    base, cabal2obs, config-data, containers, shake
-  default-language: Haskell2010
-  other-extensions: GeneralizedNewtypeDeriving
-                    TypeFamilies
 
 executable cabal2obs
   main-is:          cabal2obs.hs
@@ -85,9 +68,6 @@ executable cabal2obs
                   , bytestring
                   , cabal2obs
                   , cabal2spec            ^>= 2.9.0
-                    -- Access the configuration only through these oracles,
-                    -- never directly through config-data.
-                  , config-oracles
                   , containers
                   , directory
                   , distribution-opensuse
@@ -102,7 +82,7 @@ executable cabal2obs
                     OverloadedStrings
                     DeriveGeneric
                     DeriveAnyClass
-  ghc-options:      -threaded -with-rtsopts=-qg -with-rtsopts=-qb
+  ghc-options:      -threaded -with-rtsopts=-qg -with-rtsopts=-qb -main-is Cabal2obs
 
 executable update-changes-file
   main-is:          update-changes-file.hs
@@ -120,11 +100,11 @@ executable update-changes-file
 executable update-package-set
   main-is:          update-package-set.hs
   hs-source-dirs:   src/update-package-set
-  build-depends:    base, cabal2obs, config-data, containers, nix-paths, pretty, shake
+  build-depends:    base, cabal2obs, containers, nix-paths, pretty, shake
   default-language: Haskell2010
   other-extensions: OverloadedLists
                     OverloadedStrings
-  ghc-options:      -threaded
+  ghc-options:      -threaded -main-is UpdatePackageSet
 
 test-suite regression-test
   type:             exitcode-stdio-1.0

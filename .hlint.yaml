@@ -19,10 +19,10 @@
       - TypeFamilies
   - { name: FlexibleInstances, within: [MyCabal, Oracle.Hackage] }
   - { name: CPP, within: [MyCabal] }
-  - { name: GeneralizedNewtypeDeriving, within: [Oracle.Compiler, Oracle.Flags, Oracle.ForcedExecutables, Oracle.PackageSet] }
+  - { name: GeneralizedNewtypeDeriving, within: [Oracle.PackageSetSpec] }
 
 - flags:
-  - { name: -fno-warn-orphans, within: [MyCabal, Oracle.Hackage, Main] }
+  - { name: -fno-warn-orphans, within: [MyCabal, Oracle.Hackage, Cabal2obs] }
 
 - modules:
   - { name: Distribution.Compat.CharParsing, within: [MyCabal] }
@@ -43,6 +43,15 @@
   - { name: Distribution.Types.UnqualComponentName, within: [MyCabal] }
   - { name: Distribution.Utils.ShortText, within: [MyCabal] }
   - { name: Distribution.Version, within: [MyCabal] }
+
+  # The configuration is read only through Config. Its internal modules are
+  # used by Config alone.
+  - { name: [Config.PackageSetSpec, Config.PackageSetSpecRaw, Config.Tools], within: [Config] }
+
+  # Config is used only by the oracles and by update-package-set. The cabal2obs
+  # executable must access the configuration through the oracles, so that
+  # Shake can track which parts of it a rule depends on.
+  - { name: Config, within: [Oracle.PackageSetSpec, UpdatePackageSet] }
 
 # - functions:
 #   - {name: unsafePerformIO, within: []} # unsafePerformIO can only appear in no modules

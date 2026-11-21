@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Main ( main ) where
+module Cabal2obs ( main ) where
 
 import Prelude hiding ( fail )
 
@@ -56,7 +56,7 @@ main = do
     let configFile = last (defaultConfigFile : [ f | ConfigFile f <- opts ])
     (pkgSetName, getPackageSetSpec) <- do spec <- readPackageSetSpec configFile
                                           oracle <- addPackageSetSpecOracle spec
-                                          return (packageSetName spec, oracle)
+                                          pure (packageSetName spec, oracle)
     getPackageSet        <- addPackageSetOracle getPackageSetSpec
     getAvailablePackages <- addAvailablePackagesOracle getPackageSetSpec
     getFlags             <- addFlagAssignmentOracle getPackageSetSpec
