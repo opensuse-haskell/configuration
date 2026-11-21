@@ -22,5 +22,5 @@ type instance RuleResult FlagsFor = FlagAssignment
 
 addFlagAssignmentOracle :: Rules (PackageName -> Action FlagAssignment)
 addFlagAssignmentOracle = do
-  getFlags <- addOracle $ \(FlagsFor pn) -> pure (Map.findWithDefault mempty pn (flags packageSetSpec))
+  getFlags <- addOracle $ \(FlagsFor pn) -> Map.findWithDefault mempty pn . flags <$> packageSetSpec
   pure (getFlags . FlagsFor)

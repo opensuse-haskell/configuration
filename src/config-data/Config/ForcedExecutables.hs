@@ -5,8 +5,8 @@ module Config.ForcedExecutables ( forcedExectableNames ) where
 
 import Types
 
-forcedExectableNames :: PackageNameSet
-forcedExectableNames =
+forcedExectableNames :: MonadFail m => m PackageNameSet
+forcedExectableNames = pure
   [ "Agda"
   , "BNFC"
   , "BlogLiterately"

@@ -65,8 +65,10 @@ library config-data
   default-language: Haskell2010
   other-extensions: DeriveAnyClass
                     DeriveGeneric
+                    MultiWayIf
                     OverloadedLists
                     OverloadedStrings
+                    RecordWildCards
 
 -- Shake oracles that give access to the configuration in config-data.
 library config-oracles

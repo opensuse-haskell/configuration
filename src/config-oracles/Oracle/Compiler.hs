@@ -1,9 +1,9 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Oracle.Compiler ( addCompilerOracle ) where
+module Oracle.Compiler ( addCompilerOracle, readPackageSetName ) where
 
-import Config ( PackageSetSpec(compiler), packageSetSpec )
+import Config ( PackageSetSpec(compiler, packageSetName), packageSetSpec )
 import MyCabal
 
 import Development.Shake
@@ -20,5 +20,12 @@ type instance RuleResult Compiler = CompilerId
 
 addCompilerOracle :: Rules (Action CompilerId)
 addCompilerOracle = do
-  getCompiler <- addOracle $ \(Compiler ()) -> pure (compiler packageSetSpec)
+  getCompiler <- addOracle $ \(Compiler ()) -> compiler <$> packageSetSpec
   pure (getCompiler (Compiler ()))
+
+-- | The name of the package set we generate builds for, e.g. @ghc-9.14.x@.
+-- This is no oracle: the name is part of every path the build system creates,
+-- so if it changes, Shake re-builds everything anyway.
+
+readPackageSetName :: MonadFail m => m FilePath
+readPackageSetName = packageSetName <$> packageSetSpec

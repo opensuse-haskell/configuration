@@ -1,4 +1,6 @@
-module Config.Tools ( makePackageSet, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
+{-# LANGUAGE MultiWayIf #-}
+
+module Config.Tools ( makePackageSet, getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
 
 import Config.Compiler
 import Types
@@ -11,8 +13,7 @@ import Text.PrettyPrint hiding ( (<>) )
 
 
 -- | Build the package set from the given list of entries and sanity-check it
--- before it is used to generate builds. Aborts with an 'error' if the set is
--- inconsistent. The checks detect:
+-- before it is used to generate builds. Fails if the set is inconsistent. The checks detect:
 --
 --  * Packages that are listed more than once. Converting the list into a map
 --    would silently keep only the last of those entries, so this check has to
@@ -26,15 +27,42 @@ import Text.PrettyPrint hiding ( (<>) )
 --
 -- The error messages name every offending package.
 
-makePackageSet :: [(PackageName, Version)] -> PackageSet
-makePackageSet entries
-  | not (Map.null duplicates) = error ("duplicate entries in package set: " <> List.intercalate ", " [ unPackageName pn <> " (" <> List.intercalate ", " (prettyShow <$> vs) <> ")" | (pn, vs) <- Map.toList duplicates ])
-  | not (Set.null corePackagesInPackageSet) = error ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-  | otherwise = packageSet
+makePackageSet :: MonadFail m => [(PackageName, Version)] -> m PackageSet
+makePackageSet entries = do
+  corePackages <- ghcCorePackages
+  let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
+  if | not (Map.null duplicates) -> fail ("duplicate entries in package set: " <> List.intercalate ", " [ unPackageName pn <> " (" <> List.intercalate ", " (prettyShow <$> vs) <> ")" | (pn, vs) <- Map.toList duplicates ])
+     | not (Set.null corePackagesInPackageSet) -> fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
+     | otherwise -> pure packageSet
   where
     packageSet = Map.fromList entries
     duplicates = Map.filter ((> 1) . length) (Map.fromListWith (flip (<>)) [ (pn, [v]) | (pn, v) <- entries ])
-    corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet ghcCorePackages
+
+-- | The name of the package set we build with the given compiler. It
+-- consists of the compiler flavor and the major version, which for GHC are
+-- the first two components of the version number:
+--
+-- >>> :set -XOverloadedStrings
+-- >>> getPackageSetName "ghc-9.14.1.2.3.4"
+-- "ghc-9.14.x"
+--
+-- >>> getPackageSetName "ghc-9.14.1"
+-- "ghc-9.14.x"
+--
+-- >>> getPackageSetName "ghc-10.2"
+-- "ghc-10.2.x"
+--
+-- Fails if the version number has fewer than two components:
+--
+-- >>> getPackageSetName "ghc-9"
+-- *** Exception: user error (compiler ghc-9 has no major version number with two components)
+-- ...
+
+getPackageSetName :: MonadFail m => CompilerId -> m FilePath
+getPackageSetName cid@(CompilerId flavor v) =
+  case versionNumbers v of
+    x : y : _ -> pure (display flavor <> "-" <> show x <> "." <> show y <> ".x")
+    _         -> fail ("compiler " <> display cid <> " has no major version number with two components")
 
 -- | Pretty-print a package set as a list of quoted package identifiers, one
 -- per line, with leading commas, sorted by name regardless of case:

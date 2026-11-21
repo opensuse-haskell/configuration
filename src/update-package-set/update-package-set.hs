@@ -21,23 +21,23 @@ import Text.PrettyPrint ( render )
 --
 -- TODO: Honor deprecated packages in the Hackage tarball.
 
-updatePackageSet :: FilePath -> PackageNameSet -> [String]
-updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ignore-project", "--lib", "--dry-run", "--with-compiler=" <> ghc, "--minimize-conflict-set", "--upgrade-dependencies"]
+updatePackageSet :: PackageSetSpec -> FilePath -> PackageNameSet -> [String]
+updatePackageSet spec ghc targets = ["cabal", "--store=/var/empty", "install", "--ignore-project", "--lib", "--dry-run", "--with-compiler=" <> ghc, "--minimize-conflict-set", "--upgrade-dependencies"]
                            ++ installed ++ lowerBounds ++ constraints ++ flagOpts ++ allowNewerOpts ++ pkgs
   where
     pkgs = display <$> Set.toList targets
     constraints = [ constraint (display (PackageVersionConstraint pn vr))
-                  | (pn, vr) <- toList (targetPackages packageSetSpec)
+                  | (pn, vr) <- toList (targetPackages spec)
                   ]
     lowerBounds = [ constraint (unPackageName pn <> " >= " <> display v)
-                  | (pn, v) <- toList (packageSet packageSetSpec)
+                  | (pn, v) <- toList (packageSet spec)
                   ]
     installed = [ constraint (unPackageName pn <> " == " <> display v)
-                | (pn, v) <- toList (corePackages packageSetSpec)
+                | (pn, v) <- toList (corePackages spec)
                 ]
-    flagOpts = [ constraint (unPackageName pn <> " " <> display fa) | (pn, fa) <- toList (flags packageSetSpec) ]
+    flagOpts = [ constraint (unPackageName pn <> " " <> display fa) | (pn, fa) <- toList (flags spec) ]
     allowNewerOpts = [ "--allow-newer=" <> unPackageName x <> ":" <> unPackageName y
-                     | (x, ys) <- toList (allowNewer packageSetSpec), y <- Set.toList ys
+                     | (x, ys) <- toList (allowNewer spec), y <- Set.toList ys
                      ]
     constraint c = "--constraint=any." <> c
 
@@ -50,21 +50,22 @@ updatePackageSet ghc targets = ["cabal", "--store=/var/empty", "install", "--ign
 
 main :: IO ()
 main = do
+  spec <- packageSetSpec
   ghc <- compiler
-  pkgConfig <- pkgConfigPath
-  let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet ghc targets)
+  pkgConfig <- pkgConfigPath spec
+  let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet spec ghc targets)
                          pure out
-  plan <- resolve solve (Map.keysSet (targetPackages packageSetSpec)) Map.empty
-  putStrLn (render (ppPackageSet (plan `Map.withoutKeys` Map.keysSet (corePackages packageSetSpec))))
+  plan <- resolve spec solve (Map.keysSet (targetPackages spec)) Map.empty
+  putStrLn (render (ppPackageSet (plan `Map.withoutKeys` Map.keysSet (corePackages spec))))
 
 -- | Iterate the solver until the plan is stable.
 
-resolve :: (PackageNameSet -> IO String) -> PackageNameSet -> PackageSet -> IO PackageSet
-resolve solve targets previous = do
+resolve :: PackageSetSpec -> (PackageNameSet -> IO String) -> PackageNameSet -> PackageSet -> IO PackageSet
+resolve spec solve targets previous = do
   plan <- parseInstallPlan <$> solve targets
   if plan == previous
      then pure plan
-     else resolve solve (Map.keysSet (targetPackages packageSetSpec) `Set.union` Map.keysSet plan) plan
+     else resolve spec solve (Map.keysSet (targetPackages spec) `Set.union` Map.keysSet plan) plan
 
 -- | Extract the package set from the install plan printed by @cabal install
 -- --dry-run@. The relevant lines have the form
@@ -94,9 +95,9 @@ compiler = do
 -- | Instantiate all 'pkgConfigDependencies' from nixpkgs and return a search
 -- path for pkg-config that covers their @.pc@ files.
 
-pkgConfigPath :: IO String
-pkgConfigPath = do
-  paths <- nixBuild ("with import <nixpkgs> {}; map lib.getDev [ " <> unwords (Set.toList (pkgConfigDependencies packageSetSpec)) <> " ]")
+pkgConfigPath :: PackageSetSpec -> IO String
+pkgConfigPath spec = do
+  paths <- nixBuild ("with import <nixpkgs> {}; map lib.getDev [ " <> unwords (Set.toList (pkgConfigDependencies spec)) <> " ]")
   pure $ intercalate ":" [ p <> d | p <- paths, d <- ["/lib/pkgconfig", "/share/pkgconfig"] ]
 
 -- | Build a nix expression and return the store paths of its outputs.

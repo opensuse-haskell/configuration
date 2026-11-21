@@ -23,7 +23,7 @@ type instance RuleResult ThePackageSet = PackageSet
 
 addPackageSetOracle :: Rules (Action PackageSet)
 addPackageSetOracle = do
-  getPackageSet <- addOracle $ \(ThePackageSet ()) -> pure (packageSet packageSetSpec)
+  getPackageSet <- addOracle $ \(ThePackageSet ()) -> packageSet <$> packageSetSpec
   pure (getPackageSet (ThePackageSet ()))
 
 -- | Key for the oracle that tracks which packages are available to satisfy
@@ -42,5 +42,5 @@ type instance RuleResult AvailablePackages = PackageNameSet
 addAvailablePackagesOracle :: Rules (Action PackageNameSet)
 addAvailablePackagesOracle = do
   getAvailablePackages <- addOracle $ \(AvailablePackages ()) ->
-    pure (Map.keysSet (packageSet packageSetSpec `Map.union` corePackages packageSetSpec))
+    (\spec -> Map.keysSet (packageSet spec `Map.union` corePackages spec)) <$> packageSetSpec
   pure (getAvailablePackages (AvailablePackages ()))

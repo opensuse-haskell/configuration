@@ -11,8 +11,8 @@ import Data.Map.Strict ( Map )
 
 -- TODO: "hlint"
 --       "postgresql-simple"        -- needed by emu-incident-report
-targetPackages :: ConstraintSet
-targetPackages =
+targetPackages :: MonadFail m => m ConstraintSet
+targetPackages = pure
   [ "alex >=3.5.4.2"
   , "cabal-install >=3.16.0.0"
   , "cabal2spec >=2.9.0"
@@ -32,7 +32,7 @@ targetPackages =
   , "xmonad-contrib >=0.18.2"
   ]
 
-packageSet :: PackageSet
+packageSet :: MonadFail m => m PackageSet
 packageSet = makePackageSet
   [ "adjunctions-4.4.4"
   , "aeson-2.2.5.1"
@@ -449,20 +449,20 @@ packageSet = makePackageSet
 -- resolving the package set. Each of these needs a corresponding patch for
 -- the build, e.g. one that relaxes the bounds with @cabal-tweak-dep-ver@.
 
-allowNewer :: Map PackageName PackageNameSet
-allowNewer = [ ("botan-bindings", ["base"])
-             , ("botan-low", ["base"])
-             , ("cabal-install", ["open-browser"])
-             , ("cairo", ["Cabal"])
-             , ("cborg", ["base", "containers"])
-             , ("feed", ["base", "base-compat", "time"])
-             , ("ghc-hs-meta", ["base", "ghc-boot", "ghc", "template-haskell"])
-             , ("git-lfs", ["containers"])
-             , ("glib", ["containers", "Cabal"])
-             , ("pango", ["containers", "glib", "Cabal"])
-             , ("persistent", ["template-haskell"])
-             , ("serialise", ["base", "containers", "time"])
-             , ("ShellCheck", ["QuickCheck", "Diff"])
-             , ("wizards", ["containers"])
-             , ("xmobar", ["base"])
-             ]
+allowNewer :: MonadFail m => m (Map PackageName PackageNameSet)
+allowNewer = pure [ ("botan-bindings", ["base"])
+                  , ("botan-low", ["base"])
+                  , ("cabal-install", ["open-browser"])
+                  , ("cairo", ["Cabal"])
+                  , ("cborg", ["base", "containers"])
+                  , ("feed", ["base", "base-compat", "time"])
+                  , ("ghc-hs-meta", ["base", "ghc-boot", "ghc", "template-haskell"])
+                  , ("git-lfs", ["containers"])
+                  , ("glib", ["containers", "Cabal"])
+                  , ("pango", ["containers", "glib", "Cabal"])
+                  , ("persistent", ["template-haskell"])
+                  , ("serialise", ["base", "containers", "time"])
+                  , ("ShellCheck", ["QuickCheck", "Diff"])
+                  , ("wizards", ["containers"])
+                  , ("xmobar", ["base"])
+                  ]

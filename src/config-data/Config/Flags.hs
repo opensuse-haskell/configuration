@@ -5,12 +5,11 @@ import MyCabal
 import qualified Data.List as List
 import Data.Map.Strict ( Map )
 import qualified Data.Map.Strict as Map
-import Data.Maybe
 
 -- | The flags we configure for packages of our package set. Packages that
 -- aren't listed are built with their default flags.
 
-buildFlags :: Map PackageName FlagAssignment
+buildFlags :: MonadFail m => m (Map PackageName FlagAssignment)
 buildFlags = readFlagAssignments
   [ ("cabal-plan",                     "+exe")
 
@@ -105,32 +104,35 @@ buildFlags = readFlagAssignments
   ]
 
 -- | Parse a list of package names and flag assignments. The assignments use
--- Cabal's syntax, e.g. @"+exe -server"@. Aborts with an 'error' if an
+-- Cabal's syntax, e.g. @"+exe -server"@. Fails if a package name or an
 -- assignment can't be parsed, or if a package is listed more than once,
 -- because converting the list into a map would silently keep only the last of
 -- those entries.
 --
 -- Every flag must start with @+@ or @-@:
 --
--- >>> display <$> readFlagAssignments [("foo", "+bar -baz")]
+-- >>> fmap display <$> readFlagAssignments [("foo", "+bar -baz")]
 -- fromList [(PackageName "foo","+bar -baz")]
 --
 -- >>> readFlagAssignments [("foo", "bar")]
--- fromList *** Exception: foo: invalid flag assignment: ...
+-- *** Exception: user error (foo: invalid flag assignment: ...
 -- unexpected 'b'
--- expecting "+", "-", white space or end of input
+-- expecting "+", "-", white space or end of input)
 -- ...
 --
 -- >>> readFlagAssignments [("foo", "+bar baz")]
--- fromList *** Exception: foo: invalid flag assignment: ...
+-- *** Exception: user error (foo: invalid flag assignment: ...
 -- unexpected 'b'
--- expecting space, "+", "-", white space or end of input
+-- expecting space, "+", "-", white space or end of input)
 -- ...
 
-readFlagAssignments :: [(String,String)] -> Map PackageName FlagAssignment
+readFlagAssignments :: MonadFail m => [(String,String)] -> m (Map PackageName FlagAssignment)
 readFlagAssignments xs
-  | not (null duplicates) = error ("duplicate entries in flag list: " <> List.intercalate ", " duplicates)
-  | otherwise             = Map.fromList [ (fromJust (simpleParse name), parseFlags name fs) | (name, fs) <- xs ]
+  | not (null duplicates) = fail ("duplicate entries in flag list: " <> List.intercalate ", " duplicates)
+  | otherwise             = Map.fromList <$> traverse parse xs
   where
     duplicates = [ name | name : _ : _ <- List.group (List.sort (fst <$> xs)) ]
-    parseFlags name fs = either (\err -> error (name <> ": invalid flag assignment: " <> err)) id (eitherParsec fs)
+    parse (name, fs) = do
+      pn <- maybe (fail ("invalid package name in flag list: " <> name)) pure (simpleParse name)
+      fa <- either (\err -> fail (name <> ": invalid flag assignment: " <> err)) pure (eitherParsec fs)
+      pure (pn, fa)

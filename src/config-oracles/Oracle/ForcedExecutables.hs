@@ -23,5 +23,5 @@ type instance RuleResult IsForcedExecutable = Bool
 
 addForcedExecutableOracle :: Rules (PackageName -> Action Bool)
 addForcedExecutableOracle = do
-  isForced <- addOracle $ \(IsForcedExecutable pn) -> pure (pn `Set.member` forcedExecutables packageSetSpec)
+  isForced <- addOracle $ \(IsForcedExecutable pn) -> Set.member pn . forcedExecutables <$> packageSetSpec
   pure (isForced . IsForcedExecutable)

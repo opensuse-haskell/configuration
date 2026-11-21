@@ -4,7 +4,7 @@ module Oracle
   , parseCabalFile, hasLibrary, packageRevision
     -- * Configuration
   , addPackageSetOracle, addAvailablePackagesOracle
-  , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
+  , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle, readPackageSetName
   )
   where
 

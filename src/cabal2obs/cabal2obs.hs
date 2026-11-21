@@ -25,9 +25,6 @@ import System.Directory
 type instance RuleResult BuildName = PackageIdentifier
 type instance RuleResult PackageIdentifier = BuildName
 
-packageSetName :: FilePath
-packageSetName = "ghc-9.14.x"
-
 main :: IO ()
 main = do
   cabalDir <- getAppUserDataDirectory "cabal"
@@ -57,6 +54,10 @@ main = do
     isForcedExecutable <- addForcedExecutableOracle
     getCompiler <- addCompilerOracle
 
+    -- The name of the package set, e.g. "ghc-9.14.x". It names targets and
+    -- directories, so it is needed while the rules are defined.
+    pkgSetName <- readPackageSetName
+
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \pkgid@(PackageIdentifier pn _) -> do
       (_, cbuf) <- getCabal pkgid
@@ -83,7 +84,7 @@ main = do
                                            BuildName bn'' <- getBuildName pkgid
                                            pure (if bn == bn'' then Just pkgid else Nothing)
       case (id1,id2) of
-        (Nothing, Nothing) -> fail $ "package set " ++ show packageSetName ++ " contains no build called " ++ show bn
+        (Nothing, Nothing) -> fail $ "package set " ++ show pkgSetName ++ " contains no build called " ++ show bn
         (Just pkgid, _)    -> pure pkgid
         (_, Just pkgid)    -> pure pkgid
 
@@ -96,14 +97,14 @@ main = do
 
     -- Depend on all active package set targets.
     phony "all" $
-      need [packageSetName]
+      need [pkgSetName]
 
     -- The (phony) package set target depends on the (real) spec files.
-    phony packageSetName $ do
+    phony pkgSetName $ do
       packageSet <- getPackageSet
       specFiles <- forM (Map.toList packageSet) $ \(pn,pv) -> do
         BuildName bn <- getBuildName (PackageIdentifier pn pv)
-        pure (buildDir </> packageSetName </> bn </> bn <.> "spec")
+        pure (buildDir </> pkgSetName </> bn </> bn <.> "spec")
       need specFiles
 
     -- Pattern target to trigger source tarball downloads with "cabal fetch". We
@@ -132,7 +133,7 @@ main = do
            else copyFile' (cabalDir </> "packages/hackage.haskell.org" </> unPackageName n </> display v </> pkgid <.> "tar.gz") out
 
     buildDir </> "*/*/*.changes" %> \out -> do
-      bn <- extractBuildName out
+      bn <- extractBuildName pkgSetName out
       pkgid@(PackageIdentifier pn v) <- pkgidFromPath bn
       (ctime, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
@@ -141,7 +142,7 @@ main = do
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
-      bn <- extractBuildName out
+      bn <- extractBuildName pkgSetName out
       pkgid@(PackageIdentifier n _) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
@@ -165,7 +166,7 @@ main = do
                 y:_ -> pure y
       command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
-                                      , "patches/" ++ packageSetName ++ "/" ++ display n ++ "/*.patch"
+                                      , "patches/" ++ pkgSetName ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
@@ -187,10 +188,10 @@ verifyLicense lic = case eitherParsec lic of
              in unless (lic == lic') $
                fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
 
-extractBuildName :: MonadFail m => FilePath -> m BuildName
-extractBuildName p
+extractBuildName :: MonadFail m => FilePath -> FilePath -> m BuildName
+extractBuildName pkgSetName p
   | [_,psn,bn,_] <- splitDirectories p
-  , psn == packageSetName               = pure (BuildName bn)
+  , psn == pkgSetName                   = pure (BuildName bn)
   | otherwise                           = fail ("path does not refer to built *.spec or *.changes file: " ++ show p)
 
 localLibraries :: GenericPackageDescription -> PackageSet
