@@ -32,6 +32,7 @@ library
                     Oracle.PackageSetSpec
                     Types
                     UpdateChangesFile
+                    UpdatePackageSet
   other-modules:    Config.PackageSetSpec
                     Config.PackageSetSpecRaw
                     Config.Tools
@@ -43,6 +44,7 @@ library
                   , directory
                   , distribution-opensuse ^>= 1.2
                   , extra
+                  , nix-paths
                   , pretty
                   , regex-posix
                   , shake
@@ -57,6 +59,7 @@ library
                     OverloadedStrings
                     DeriveGeneric
                     DeriveAnyClass
+                    OverloadedLists
                     RecordWildCards
 
 executable cabal2obs
@@ -100,11 +103,11 @@ executable update-changes-file
 executable update-package-set
   main-is:          update-package-set.hs
   hs-source-dirs:   src/update-package-set
-  build-depends:    base, cabal2obs, containers, nix-paths, pretty, shake
+  build-depends:    base, cabal2obs, pretty
   default-language: Haskell2010
   other-extensions: OverloadedLists
                     OverloadedStrings
-  ghc-options:      -threaded -main-is UpdatePackageSet
+  ghc-options:      -threaded
 
 test-suite regression-test
   type:             exitcode-stdio-1.0

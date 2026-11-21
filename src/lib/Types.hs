@@ -27,3 +27,6 @@ type PackageNameSet = Set PackageName
 
 -- | The name of an attribute in nixpkgs, e.g. @"libyaml"@.
 type NixpkgsAttribute = String
+
+-- | The path of a compiler binary, e.g. @\/nix\/store\/...-ghc-9.14.1\/bin\/ghc@.
+type CompilerPath = FilePath
