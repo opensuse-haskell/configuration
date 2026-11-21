@@ -40,24 +40,26 @@ main = do
 
   shakeArgs shopts $ do
 
+    -- Read the specification of our package set. The name of the package
+    -- set, e.g. "ghc-9.14.x", names targets and directories, so it is needed
+    -- while the rules are defined.
+    spec <- liftIO readPackageSetSpec
+    let pkgSetName = packageSetName spec
+
     -- Register our custom oracles to query the configuration files.
     hackage <- addHackageCache
     getCabal <- addCabalFileCache hackage
 
-    -- Oracles that give access to our configuration. This is the only way to
-    -- access it: the raw data lives in the config-data library, which this
-    -- executable intentionally does not depend on. That way, Shake learns
-    -- about every piece of the configuration that a rule uses.
-    getPackageSetSpec <- addPackageSetSpecOracle
+    -- Oracles that give access to our configuration, which is read from
+    -- conf/default-package-set.yaml. Rules must access it only through these
+    -- oracles, never through 'spec' directly. That way, Shake learns about
+    -- every piece of the configuration that a rule uses.
+    getPackageSetSpec <- addPackageSetSpecOracle spec
     getPackageSet <- addPackageSetOracle getPackageSetSpec
     getAvailablePackages <- addAvailablePackagesOracle getPackageSetSpec
     getFlags <- addFlagAssignmentOracle getPackageSetSpec
     isForcedExecutable <- addForcedExecutableOracle getPackageSetSpec
     getCompiler <- addCompilerOracle getPackageSetSpec
-
-    -- The name of the package set, e.g. "ghc-9.14.x". It names targets and
-    -- directories, so it is needed while the rules are defined.
-    pkgSetName <- readPackageSetName
 
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \pkgid@(PackageIdentifier pn _) -> do

@@ -1,42 +1,36 @@
-{-# LANGUAGE MultiWayIf #-}
+module Config.Tools ( makeMap, makeSet, getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
 
-module Config.Tools ( makePackageSet, getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages ) where
-
-import Config.Compiler
 import Types
 import MyCabal
 
+import Control.Monad ( unless )
 import qualified Data.List as List
+import Data.Map ( Map )
 import qualified Data.Map as Map
+import Data.Set ( Set )
 import qualified Data.Set as Set
 import Text.PrettyPrint hiding ( (<>) )
+import Text.PrettyPrint.HughesPJClass ( Pretty )
 
 
--- | Build the package set from the given list of entries and sanity-check it
--- before it is used to generate builds. Fails if the set is inconsistent. The checks detect:
---
---  * Packages that are listed more than once. Converting the list into a map
---    would silently keep only the last of those entries, so this check has to
---    see the list rather than the finished 'PackageSet'.
---
---  * Packages that appear both in the package set and in the list of core
---    packages, 'ghcCorePackages'. Core packages are bundled with GHC itself
---    and are provided by the @ghc@ build, so generating a separate
---    @ghc-<name>@ build for one of them would produce a second, conflicting
---    copy of that library.
---
--- The error messages name every offending package.
+-- | Turn a list of key-value pairs into a map. Fails if a key occurs more than
+-- once, because the map would silently keep only the last of those entries.
+-- The first argument names the list in the error message, which lists all
+-- duplicate keys.
 
-makePackageSet :: MonadFail m => [(PackageName, Version)] -> m PackageSet
-makePackageSet entries = do
-  corePackages <- ghcCorePackages
-  let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
-  if | not (Map.null duplicates) -> fail ("duplicate entries in package set: " <> List.intercalate ", " [ unPackageName pn <> " (" <> List.intercalate ", " (prettyShow <$> vs) <> ")" | (pn, vs) <- Map.toList duplicates ])
-     | not (Set.null corePackagesInPackageSet) -> fail ("core packages listed in package set: " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
-     | otherwise -> pure packageSet
-  where
-    packageSet = Map.fromList entries
-    duplicates = Map.filter ((> 1) . length) (Map.fromListWith (flip (<>)) [ (pn, [v]) | (pn, v) <- entries ])
+makeMap :: (Ord a, Pretty a, MonadFail m) => String -> [(a, b)] -> m (Map a b)
+makeMap what xs = do
+  let counts = Map.fromListWith (+) [ (k, 1 :: Int) | (k, _) <- xs ]
+      duplicates = Map.keys (Map.filter (> 1) counts)
+  unless (null duplicates) $
+    fail ("duplicate entries in " <> what <> ": " <> List.intercalate ", " (prettyShow <$> duplicates))
+  pure (Map.fromList xs)
+
+-- | Turn a list into a set. Fails if an element occurs more than once, like
+-- 'makeMap'.
+
+makeSet :: (Ord a, Pretty a, MonadFail m) => String -> [a] -> m (Set a)
+makeSet what xs = Map.keysSet <$> makeMap what [ (x, ()) | x <- xs ]
 
 -- | The name of the package set we build with the given compiler. It
 -- consists of the compiler flavor and the major version, which for GHC are

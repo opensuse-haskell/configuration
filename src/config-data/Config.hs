@@ -1,57 +1,59 @@
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE RecordWildCards #-}
 
--- | The configuration of our package set. This is the only module of the
--- configuration that is visible outside of the config-data library.
+-- | The configuration of our package set, read from a YAML file. This is the
+-- only module of the configuration that is visible outside of the config-data
+-- library.
 
 module Config
   ( -- * Specification of a package set
-    PackageSetSpec(..), packageSetSpec
+    PackageSetSpec(..), readPackageSetSpec
     -- * Tools
   , getPackageSetName, ppPackageSet, ppConstraintSet, updateTargetPackages
   ) where
 
-import qualified Config.Compiler
-import qualified Config.Flags
-import qualified Config.ForcedExecutables
-import qualified Config.PackageSet
-import qualified Config.PkgConfig
+import Config.PackageSetSpec
+import Config.PackageSetSpecRaw
 import Config.Tools
-import MyCabal ( CompilerId, FlagAssignment, PackageName )
-import Types
+import MyCabal
 
-import Data.Map.Strict ( Map )
-import Data.Set ( Set )
-import Development.Shake.Classes
-import GHC.Generics ( Generic )
+import Control.Monad ( unless )
+import qualified Data.List as List
+import qualified Data.Map.Strict as Map
+import qualified Data.Set as Set
 
--- | Everything that defines a package set.
+-- | Read the specification of our package set from
+-- @conf/default-package-set.yaml@. Fails if the file can't be read or if its
+-- contents are inconsistent, e.g. if a list contains duplicates, a package
+-- identifier has no version, a flag is assigned more than once for the same
+-- package, or a core package is listed in the package set.
 
-data PackageSetSpec = PackageSetSpec
-  { packageSetName        :: FilePath                       -- ^ The name of the package set, e.g. @ghc-9.14.x@, derived from the compiler.
-  , compiler              :: CompilerId                     -- ^ The compiler we build with.
-  , corePackages          :: PackageSet                     -- ^ The packages bundled with the compiler.
-  , packageSet            :: PackageSet                     -- ^ The packages we generate builds for.
-  , targetPackages        :: ConstraintSet                  -- ^ The packages the package set is resolved for.
-  , allowNewer            :: Map PackageName PackageNameSet -- ^ Version bounds we ignore when resolving the package set.
-  , flags                 :: Map PackageName FlagAssignment -- ^ The flags we configure for packages.
-  , forcedExecutables     :: PackageNameSet                 -- ^ Packages we build as executables even though they have a library.
-  , pkgConfigDependencies :: Set NixpkgsAttribute           -- ^ System libraries that packages look up via pkg-config.
-  }
-  deriving (Show, Eq, Generic, Hashable, Binary, NFData)
-
--- | Our package set. Fails if the configuration is inconsistent.
-
-packageSetSpec :: MonadFail m => m PackageSetSpec
-packageSetSpec = do
-  compiler              <- Config.Compiler.ghcCompiler
+readPackageSetSpec :: IO PackageSetSpec
+readPackageSetSpec = do
+  let path = "conf/default-package-set.yaml"
+      context what = what <> " in " <> path
+  PackageSetSpecRaw{..} <- readPackageSetSpecRaw path
+  let compiler = rawCompiler
   packageSetName        <- getPackageSetName compiler
-  corePackages          <- Config.Compiler.ghcCorePackages
-  packageSet            <- Config.PackageSet.packageSet
-  targetPackages        <- Config.PackageSet.targetPackages
-  allowNewer            <- Config.PackageSet.allowNewer
-  flags                 <- Config.Flags.buildFlags
-  forcedExecutables     <- Config.ForcedExecutables.forcedExectableNames
-  pkgConfigDependencies <- Config.PkgConfig.pkgConfigDependencies
+  corePackages          <- makeMap (context "core-packages") [ (pkgName p, pkgVersion p) | p <- rawCorePackages ]
+  packageSet            <- makeMap (context "package-set") [ (pkgName p, pkgVersion p) | p <- rawPackageSet ]
+  targetPackages        <- makeMap (context "target-packages") [ (pn, vr) | Dependency pn vr _ <- rawTargetPackages ]
+  allowNewer            <- makeMap (context "allow-newer") =<<
+                             traverse (\(pn, deps) -> (,) pn <$> makeSet (context ("allow-newer of " <> unPackageName pn)) deps) rawAllowNewer
+  flags                 <- makeMap (context "flags") rawFlags
+  forcedExecutables     <- makeSet (context "forced-executables") rawForcedExecutables
+  pkgConfigDependencies <- makeSet (context "pkg-config-dependencies") rawPkgConfigDependencies
+  let unversioned = [ "package identifiers without a version in " <> context section <> ": " <> List.intercalate ", " names
+                    | (section, pids) <- [("core-packages", rawCorePackages), ("package-set", rawPackageSet)]
+                    , let names = [ unPackageName (pkgName p) | p <- pids, null (versionNumbers (pkgVersion p)) ]
+                    , not (null names)
+                    ]
+  unless (null unversioned) $
+    fail (List.intercalate "; " unversioned)
+  let duplicateFlags = [ unPackageName pn <> " (" <> List.intercalate ", " (unFlagName <$> fs) <> ")"
+                       | (pn, fa) <- rawFlags, let fs = findDuplicateFlagAssignments fa, not (null fs) ]
+  unless (null duplicateFlags) $
+    fail ("flags assigned more than once in " <> context "flags" <> ": " <> List.intercalate ", " duplicateFlags)
+  let corePackagesInPackageSet = Map.keysSet packageSet `Set.intersection` Map.keysSet corePackages
+  unless (Set.null corePackagesInPackageSet) $
+    fail ("core packages listed in " <> context "package-set" <> ": " <> List.intercalate ", " (unPackageName <$> Set.toList corePackagesInPackageSet))
   pure PackageSetSpec{..}

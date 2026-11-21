@@ -11,14 +11,13 @@
 -- the most specific oracle that gives them what they need.
 
 module Oracle.PackageSetSpec
-  ( PackageSetSpec(..)
+  ( PackageSetSpec(..), readPackageSetSpec
   , addPackageSetSpecOracle
   , addPackageSetOracle, addAvailablePackagesOracle
   , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
-  , readPackageSetName
   ) where
 
-import Config ( PackageSetSpec(..), packageSetSpec )
+import Config ( PackageSetSpec(..), readPackageSetSpec )
 import MyCabal
 import Types
 
@@ -35,14 +34,15 @@ newtype ThePackageSetSpec = ThePackageSetSpec ()
 type instance RuleResult ThePackageSetSpec = PackageSetSpec
 
 -- | Register an oracle that gives the entire specification of our package
--- set. Rules that query it are re-built whenever any part of the
--- configuration changes, so rules that care only about some aspects of it
--- should query one of the more specific oracles below instead. Those take the
--- action this function returns as their argument.
+-- set, as read by 'readPackageSetSpec' when the rules were defined. Rules
+-- that query it are re-built whenever any part of the configuration changes,
+-- so rules that care only about some aspects of it should query one of the
+-- more specific oracles below instead. Those take the action this function
+-- returns as their argument.
 
-addPackageSetSpecOracle :: Rules (Action PackageSetSpec)
-addPackageSetSpecOracle = do
-  getPackageSetSpec <- addOracle $ \(ThePackageSetSpec ()) -> packageSetSpec
+addPackageSetSpecOracle :: PackageSetSpec -> Rules (Action PackageSetSpec)
+addPackageSetSpecOracle spec = do
+  getPackageSetSpec <- addOracle $ \(ThePackageSetSpec ()) -> pure spec
   pure (getPackageSetSpec (ThePackageSetSpec ()))
 
 -- | Key for the oracle that tracks our package set.
@@ -124,10 +124,3 @@ addCompilerOracle :: Action PackageSetSpec -> Rules (Action CompilerId)
 addCompilerOracle getSpec = do
   getCompiler <- addOracle $ \(Compiler ()) -> compiler <$> getSpec
   pure (getCompiler (Compiler ()))
-
--- | The name of the package set we generate builds for, e.g. @ghc-9.14.x@.
--- This is no oracle: the name is part of every path the build system creates,
--- so if it changes, Shake re-builds everything anyway.
-
-readPackageSetName :: MonadFail m => m FilePath
-readPackageSetName = packageSetName <$> packageSetSpec

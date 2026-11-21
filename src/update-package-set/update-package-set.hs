@@ -3,7 +3,7 @@
 
 module Main ( main ) where
 
-import Config ( PackageSetSpec(allowNewer, corePackages, flags, packageSet, pkgConfigDependencies, targetPackages), packageSetSpec, ppPackageSet )
+import Config ( PackageSetSpec(allowNewer, corePackages, flags, packageSet, pkgConfigDependencies, targetPackages), readPackageSetSpec, ppPackageSet )
 import MyCabal
 import Types
 
@@ -50,7 +50,7 @@ updatePackageSet spec ghc targets = ["cabal", "--store=/var/empty", "install", "
 
 main :: IO ()
 main = do
-  spec <- packageSetSpec
+  spec <- readPackageSetSpec
   ghc <- compiler
   pkgConfig <- pkgConfigPath spec
   let solve targets = do Stdout out <- cmd (AddEnv "PKG_CONFIG_PATH" pkgConfig) (updatePackageSet spec ghc targets)

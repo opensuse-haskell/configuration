@@ -11,7 +11,7 @@ module MyCabal
   , PackageIdentifier(..)
   , Dependency(..), depPkgName
   , ComponentRequestedSpec(..)
-  , FlagName, FlagAssignment, mkFlagAssignment, lowercase, mkFlagName
+  , FlagName, FlagAssignment, mkFlagAssignment, lowercase, mkFlagName, unFlagName, findDuplicateFlagAssignments
   , GenericPackageDescription(..), parseGenericPackageDescriptionMaybe, finalizePD
   , PackageDescription(..), Library(..), LibraryName(..)
   , UnqualComponentName, mkUnqualComponentName, unUnqualComponentName

@@ -15,6 +15,7 @@ homepage:      https://github.com/opensuse-haskell/configuration
 build-type:    Simple
 cabal-version: 2.0
 extra-source-files:
+               conf/*.yaml
                tests/run-tests
                tests/spec-cleaner/*.spec.in
                tests/spec-cleaner/*.test
@@ -54,19 +55,14 @@ library
 library config-data
   exposed-modules:  Config
                     Types
-  other-modules:    Config.Compiler
-                    Config.Flags
-                    Config.ForcedExecutables
-                    Config.PackageSet
-                    Config.PkgConfig
+  other-modules:    Config.PackageSetSpec
+                    Config.PackageSetSpecRaw
                     Config.Tools
   hs-source-dirs:   src/config-data
-  build-depends:    base, cabal2obs, containers, pretty, shake
+  build-depends:    aeson, base, cabal2obs, containers, pretty, shake, yaml
   default-language: Haskell2010
   other-extensions: DeriveAnyClass
                     DeriveGeneric
-                    MultiWayIf
-                    OverloadedLists
                     OverloadedStrings
                     RecordWildCards
 
