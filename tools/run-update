@@ -23,19 +23,38 @@ trap exit_trap EXIT
 
 cd "$(dirname "$0")"/..
 
-cabal -v0 v2-update hackage.haskell.org &
-parallel 'if [ -d {}/.osc ]; then cd {} && osc update --expand-link >/dev/null; fi' ::: _build/* &
-wait
-
+if [ -n "$(git status --porcelain)" ]; then
+    error_exit git repository has uncommitted changes
+fi
 parallel 'if [ -d {}/.osc ]; then cd {} && osc status; fi' ::: _build/* >"$tmpfile"
 if [ -s "$tmpfile" ]; then
     error_exit osc checkouts contain uncommitted changes
 fi
 
-git status --porcelain >"$tmpfile"
-if [ -s "$tmpfile" ]; then
-    error_exit git repository has uncommitted changes
-fi
+cabal v2-update hackage.haskell.org >"$tmpfile"
+parallel 'if [ -d {}/.osc ]; then cd {} && osc update --quiet --expand-link >/dev/null; fi' ::: _build/*
+ts=$(sed -rn -e 's/^.*index-state is set to (.*)\.$/\1/p' "$tmpfile")
+test -n "$ts" || error_exit failed to determine the Hackage timestamp
 
-cabal -v0 v2-run cabal2obs -- --no-progress --lint
-parallel 'if [ -d {}/.osc ]; then cd {} && ../../tools/commit >/dev/null; fi' ::: _build/*
+if cabal -v0 v2-run cabal2obs -- --no-progress --lint update; then
+    if cabal -v0 v2-run cabal2obs -- --no-progress --lint; then
+        if git diff --quiet -- conf/ || git commit -m "Updated package set with Hackage state $ts." -- conf/; then
+            if parallel 'if [ -d {}/.osc ]; then cd {} && ../../tools/commit >/dev/null; fi' ::: _build/*; then
+                success=true
+            else
+                what="failed to commit to OBS"
+            fi
+        else
+            what="failed to commit to git"
+        fi
+    else
+        what="failed to re-build 'all' target"
+    fi
+else
+    what="failed to update package set configuration"
+fi
+if [ -z "${success:-}" ]; then
+    git checkout -- conf/
+    parallel 'if [ -d {}/.osc ]; then cd {} && osc --quiet revert * && osc --quiet clean *' ::: _build/* || true
+    error_exit "${what:-something went really wrong}"
+fi
