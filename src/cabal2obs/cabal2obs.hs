@@ -37,7 +37,7 @@ main = do
                , shakeProgress = progressDisplay 5 putStrLn
                , shakeChange = ChangeModtimeAndDigest
                , shakeThreads = 0       -- autodetect the number of available cores
-               , shakeVersion = "49"    -- version of the build rules, bump to trigger full re-build
+               , shakeVersion = "50"    -- version of the build rules, bump to trigger full re-build
                }
 
   shakeArgsWith shopts [configOption] $ \opts targets -> pure $ Just $ withTargets targets $ do
@@ -48,16 +48,19 @@ main = do
     -- an Oracle so that we know what to re-build when the configuration
     -- changes. The package set name doesn't need that mechanism, because it's
     -- baked into every single path, so if the package set name changes, we
-    -- re-build everything anyway.
+    -- re-build everything anyway. The maintainer is read here, too, so that
+    -- the .changes rules don't depend on the spec oracle: a different
+    -- maintainer matters only for new .changes entries, which pick up the
+    -- current value anyway.
     --
     -- TODO: It should be possible to register multiple config files by giving
     -- --config several times. The build system should then configure itself
     -- to build all of those package sets concurrently. For now, the last
     -- --config wins.
     let configFile = last (defaultConfigFile : [ f | ConfigFile f <- opts ])
-    (pkgSetName, getPackageSetSpec) <- do spec <- readPackageSetSpec configFile
-                                          oracle <- addPackageSetSpecOracle spec
-                                          pure (packageSetName spec, oracle)
+    (pkgSetName, maintainerAddress, getPackageSetSpec) <- do spec <- readPackageSetSpec configFile
+                                                             oracle <- addPackageSetSpecOracle spec
+                                                             pure (packageSetName spec, getMaintainer spec, oracle)
     getPackageSet        <- addPackageSetOracle getPackageSetSpec
     getAvailablePackages <- addAvailablePackagesOracle getPackageSetSpec
     getFlags             <- addFlagAssignmentOracle getPackageSetSpec
@@ -149,7 +152,7 @@ main = do
       (ctime, cbuf) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cbuf
       let rev = packageRevision cabal
-      traced "update-changes-file" $ updateChangesFile (Just ctime) out pn (v, rev) "Peter Simons <psimons@suse.com>" -- TODO: evil hard-coded constant
+      traced "update-changes-file" $ updateChangesFile (Just ctime) out pn (v, rev) maintainerAddress
 
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do

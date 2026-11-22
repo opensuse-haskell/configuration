@@ -1,5 +1,8 @@
 # our default package set
 
+# The environment variable $CABAL2OBS_MAINTAINER, if set, overrides this value.
+maintainer: Peter Simons <psimons@suse.com>
+
 compiler: ghc-9.14.1
 
 core-packages:

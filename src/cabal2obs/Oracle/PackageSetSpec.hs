@@ -15,14 +15,16 @@ module Oracle.PackageSetSpec
   , addPackageSetSpecOracle
   , addPackageSetOracle, addAvailablePackagesOracle
   , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
+  , getMaintainer
   ) where
 
 import PackageSetSpec ( PackageSetSpec(..), readPackageSetSpec )
-import MyCabal
+import MyCabal ( CompilerId, FlagAssignment, PackageName )
 import Types
 
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
+import Data.Text ( Text )
 import Development.Shake
 import Development.Shake.Classes
 
@@ -124,3 +126,11 @@ addCompilerOracle :: Action PackageSetSpec -> Rules (Action CompilerId)
 addCompilerOracle getSpec = do
   getCompiler <- addOracle $ \(Compiler ()) -> compiler <$> getSpec
   pure (getCompiler (Compiler ()))
+
+-- | The name and e-mail address of the maintainer, which new entries in
+-- .changes files are attributed to. This is no oracle: a different maintainer
+-- matters only for entries that are written anyway, so a change of the value
+-- needs to re-build nothing.
+
+getMaintainer :: PackageSetSpec -> Text
+getMaintainer = maintainer

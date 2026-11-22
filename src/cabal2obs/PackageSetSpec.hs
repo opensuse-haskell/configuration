@@ -18,17 +18,21 @@ import qualified Data.List as List
 import Data.Map.Strict ( Map )
 import qualified Data.Map.Strict as Map
 import Data.Set ( Set )
+import Data.Text ( Text )
+import qualified Data.Text as Text
 import qualified Data.Set as Set
 import Data.Yaml
 import Data.Yaml.Internal ( Warning(..) )
 import Development.Shake.Classes
 import GHC.Generics ( Generic )
+import System.Environment ( lookupEnv )
 import Text.PrettyPrint.HughesPJClass ( Pretty )
 
 -- | Everything that defines a package set.
 
 data PackageSetSpec = PackageSetSpec
   { packageSetName        :: FilePath                       -- ^ The name of the package set, e.g. @ghc-9.14.x@, derived from the compiler.
+  , maintainer            :: Text                           -- ^ Name and e-mail address of the maintainer, e.g. for new .changes entries.
   , compiler              :: CompilerId                     -- ^ The compiler we build with.
   , corePackages          :: PackageSet                     -- ^ The packages bundled with the compiler.
   , packageSet            :: PackageSet                     -- ^ The packages we generate builds for.
@@ -44,11 +48,15 @@ data PackageSetSpec = PackageSetSpec
 -- if the file can't be read or if its contents are inconsistent, e.g. if a list contains duplicates, a package
 -- identifier has no version, a flag is assigned more than once for the same
 -- package, or a core package is listed in the package set.
+--
+-- If the environment variable @CABAL2OBS_MAINTAINER@ is set, its value
+-- overrides the maintainer given in the file.
 
 readPackageSetSpec :: (MonadIO m, MonadFail m) => FilePath -> m PackageSetSpec
 readPackageSetSpec path = do
   let context what = what <> " in " <> path
   PackageSetSpecRaw{..} <- readPackageSetSpecRaw path
+  maintainer <- maybe rawMaintainer Text.pack <$> liftIO (lookupEnv "CABAL2OBS_MAINTAINER")
   let compiler = rawCompiler
   packageSetName        <- getPackageSetName compiler
   corePackages          <- makeMap (context "core-packages") [ (pkgName p, pkgVersion p) | p <- rawCorePackages ]
@@ -140,7 +148,8 @@ getPackageSetName cid@(CompilerId flavor v) =
 -- that are listed more than once.
 
 data PackageSetSpecRaw = PackageSetSpecRaw
-  { rawCompiler              :: CompilerId                       -- ^ @compiler@
+  { rawMaintainer            :: Text                             -- ^ @maintainer@
+  , rawCompiler              :: CompilerId                       -- ^ @compiler@
   , rawCorePackages          :: [PackageIdentifier]              -- ^ @core-packages@
   , rawTargetPackages        :: [Constraint]                     -- ^ @target-packages@
   , rawPackageSet            :: [PackageIdentifier]              -- ^ @package-set@
@@ -155,7 +164,7 @@ data PackageSetSpecRaw = PackageSetSpecRaw
 -- they are written.
 
 fieldNames :: [Key]
-fieldNames = [ "compiler", "core-packages", "target-packages", "package-set"
+fieldNames = [ "maintainer", "compiler", "core-packages", "target-packages", "package-set"
              , "allow-newer", "flags", "forced-executables", "pkg-config-dependencies" ]
 
 -- | All fields are required, and unknown fields are an error, because their
@@ -167,7 +176,8 @@ instance FromJSON PackageSetSpecRaw where
     unless (null unknown) $
       fail ("unknown fields: " <> unwords (Key.toString <$> unknown))
     PackageSetSpecRaw
-      <$> (o .: "compiler" >>= parseText "CompilerId")
+      <$> o .: "maintainer"
+      <*> (o .: "compiler" >>= parseText "CompilerId")
       <*> (o .: "core-packages" >>= traverse (parseText "PackageIdentifier"))
       <*> (o .: "target-packages" >>= traverse (parseText "Dependency"))
       <*> (o .: "package-set" >>= traverse (parseText "PackageIdentifier"))

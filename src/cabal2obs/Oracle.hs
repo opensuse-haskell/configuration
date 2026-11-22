@@ -5,7 +5,7 @@ module Oracle
     -- * Configuration
   , PackageSetSpec(..), readPackageSetSpec, addPackageSetSpecOracle
   , addPackageSetOracle, addAvailablePackagesOracle
-  , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle
+  , addFlagAssignmentOracle, addForcedExecutableOracle, addCompilerOracle, getMaintainer
   )
   where
 
