@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+"""Print the index-state of a cabal package repository, like `cabal update` does.
+
+Mirrors cabal-install's currentIndexTimestamp: if 01-index.timestamp pins a
+time, use that; otherwise (HEAD) read cacheHeadTs from 01-index.cache.
+
+01-index.cache layout (structuredEncode of Cache, Data.Binary):
+  bytes  0..15  MD5 structure hash
+  byte   16     Timestamp constructor: 0 = NoTimestamp, 1 = TS
+  bytes 17..24  Int64 big-endian, seconds since the Unix epoch
+"""
+import os
+import struct
+import sys
+from datetime import datetime, timezone
+
+DEFAULT_REPO = os.path.expanduser("~/.cabal/packages/hackage.haskell.org")
+
+
+def fmt(secs):
+    return datetime.fromtimestamp(secs, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def main():
+    repo = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_REPO
+
+    try:
+        with open(os.path.join(repo, "01-index.timestamp")) as f:
+            pinned = f.read().strip()
+    except FileNotFoundError:
+        pinned = "HEAD"
+    if pinned != "HEAD":
+        if pinned.startswith("@"):  # cabal also accepts @<posix-seconds>
+            pinned = fmt(int(pinned[1:]))
+        print(f"The index-state is set to {pinned}.")
+        return
+
+    try:
+        with open(os.path.join(repo, "01-index.cache"), "rb") as f:
+            header = f.read(25)
+    except FileNotFoundError:
+        sys.exit(f"{repo}: no 01-index.cache; run `cabal update` first")
+    if len(header) < 17 or header[16] not in (0, 1):
+        sys.exit(f"{repo}: unrecognised 01-index.cache format")
+    if header[16] == 0:
+        sys.exit(f"{repo}: index has no timestamp")
+    (secs,) = struct.unpack(">q", header[17:25])
+    print(f"The index-state is set to {fmt(secs)}.")
+
+
+if __name__ == "__main__":
+    main()
