@@ -16,10 +16,8 @@ from datetime import datetime, timezone
 
 DEFAULT_REPO = os.path.expanduser("~/.cabal/packages/hackage.haskell.org")
 
-
 def fmt(secs):
     return datetime.fromtimestamp(secs, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
 
 def main():
     repo = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_REPO
@@ -45,8 +43,7 @@ def main():
     if header[16] == 0:
         sys.exit(f"{repo}: index has no timestamp")
     (secs,) = struct.unpack(">q", header[17:25])
-    print(f"The index-state is set to {fmt(secs)}.")
-
+    print(fmt(secs))
 
 if __name__ == "__main__":
     main()
