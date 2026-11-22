@@ -302,7 +302,7 @@ package-set:
   - mountpoints-1.0.2
   - mtl-compat-0.2.2
   - netlink-1.1.1.0
-  - network-3.2.14.0
+  - network-3.2.15.0
   - network-bsd-2.8.1.0
   - network-byte-order-0.1.9
   - network-control-0.1.7
