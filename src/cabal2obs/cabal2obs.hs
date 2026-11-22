@@ -65,7 +65,9 @@ main = do
     getCompiler          <- addCompilerOracle getPackageSetSpec
 
     -- Look up the Cabal file for a given PackageIdentifier from Hackage.
-    getCabal <- addHackageCache >>= addCabalFileCache
+    getHackage <- addHackageCache
+    getCabal <- addCabalFileCache getHackage
+    getPreferredVersions <- addPreferredVersionsOracle getHackage
 
     -- Custom oracle to figure out the rpm package name used for a given build.
     getBuildName <- addOracle $ \pkgid@(PackageIdentifier pn _) -> do
@@ -152,9 +154,16 @@ main = do
     -- Pattern rule that generates the package's spec file.
     buildDir </> "*/*/*.spec" %> \out -> do
       bn <- extractBuildName pkgSetName out
-      pkgid@(PackageIdentifier n _) <- pkgidFromPath bn
+      pkgid@(PackageIdentifier n v) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
+      -- Warn if Hackage has deprecated the version we generate a build for.
+      shakeOpts <- getShakeOptions
+      when (shakeVerbosity shakeOpts >= Warn) $ do
+        Dependency _ preferred _ <- getPreferredVersions n
+        unless (v `withinRange` preferred) $ do
+          liftIO $ shakeOutput shakeOpts Warn $
+            "warning: " ++ display pkgid ++ " is a deprecated version; Hackage prefers " ++ display n ++ " " ++ display preferred
       fa <- getFlags n
       (_, cabalFile) <- getCabal pkgid
       cabal <- parseCabalFile pkgid cabalFile

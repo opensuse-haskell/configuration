@@ -19,7 +19,7 @@
       - TypeFamilies
   - { name: FlexibleInstances, within: [MyCabal, Oracle.Hackage] }
   - { name: CPP, within: [MyCabal] }
-  - { name: GeneralizedNewtypeDeriving, within: [Oracle.PackageSetSpec] }
+  - { name: GeneralizedNewtypeDeriving, within: [Oracle.Hackage, Oracle.PackageSetSpec] }
 
 - flags:
   - { name: -fno-warn-orphans, within: [MyCabal, Oracle.Hackage, Main] }

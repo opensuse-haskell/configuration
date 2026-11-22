@@ -1,20 +1,24 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Oracle.Hackage
-  ( addHackageCache, addCabalFileCache
+  ( addHackageCache, addCabalFileCache, addPreferredVersionsOracle
   , parseCabalFile, hasLibrary, packageRevision
   ) where
 
 import OpenSuse.Prelude
 import MyCabal
+import Types ( Constraint )
 
 import Codec.Archive.Tar.Entry as Tar ( entryTime, entryContent, GenEntryContent(..) )
 import Codec.Archive.Tar.Index ( TarIndex, TarIndexEntry(..) )
 import qualified Codec.Archive.Tar.Index as Tar
 import qualified Data.ByteString as BSS
+import qualified Data.ByteString.Char8 as BS8
 import qualified Data.ByteString.Lazy as BSL
+import Data.List ( isPrefixOf )
 import Data.Maybe
 import Data.Time.Clock.POSIX
 import Development.Shake
@@ -60,6 +64,57 @@ addCabalFileCache hackage = newCache $ \pid -> do
   case Tar.entryContent e of
     NormalFile buf _ -> pure (posixSecondsToUTCTime (realToFrac (entryTime e)), BSL.toStrict buf)
     x                -> fail (prettyShow pid <> ": unexpected entry type in tarball: " <> show x)
+
+-- | Key for the oracle that tracks the preferred versions of a package.
+newtype PreferredVersionsOf = PreferredVersionsOf PackageName
+  deriving (Show, Eq, Hashable, Binary, NFData)
+
+type instance RuleResult PreferredVersionsOf = Constraint
+
+-- | Register an oracle that gives the preferred versions of a package, i.e.
+-- the contents of the file @<name>/preferred-versions@ in the Hackage index.
+-- Hackage appends a new entry whenever the preferences change; the tarball
+-- index refers to the latest one. A package without such an entry has no
+-- preference, which is the constraint @<name>@ on any version. Rules that
+-- query the oracle are re-built when the preferred versions of the package
+-- change.
+
+addPreferredVersionsOracle :: Action Hackage -> Rules (PackageName -> Action Constraint)
+addPreferredVersionsOracle hackage = do
+  getPreferredVersions <- addOracle $ \(PreferredVersionsOf pn) -> do
+    Hackage idx <- hackage
+    let path = unPackageName pn </> "preferred-versions"
+    case Tar.lookup idx path of
+      Nothing                 -> parsePreferredVersions pn BSS.empty
+      Just (TarDir _)         -> fail ("looking up " <> path <> " in Hackage gives unexpected directory(!) result")
+      Just (TarFileEntry off) -> do
+        home <- liftIO (getAppUserDataDirectory "cabal")
+        let tarball = home </> "packages/hackage.haskell.org/01-index.tar"
+        need [tarball]
+        e <- liftIO $ withFile tarball ReadMode (`Tar.hReadEntry` off)
+        case Tar.entryContent e of
+          NormalFile buf _ -> parsePreferredVersions pn (BSL.toStrict buf)
+          x                -> fail (path <> ": unexpected entry type in tarball: " <> show x)
+  pure (getPreferredVersions . PreferredVersionsOf)
+
+-- | Parse the contents of a @preferred-versions@ file of the given package.
+-- Empty lines and comment lines starting with @--@ are ignored. The file must
+-- contain at most one constraint, and that constraint must be on the given
+-- package.
+
+parsePreferredVersions :: MonadFail m => PackageName -> ByteString -> m Constraint
+parsePreferredVersions pn buf =
+  case filter relevant (BS8.unpack . BS8.strip <$> BS8.lines buf) of
+    []  -> parseConstraint (unPackageName pn)
+    [l] -> parseConstraint l
+    ls  -> failure ("expected at most one constraint, but found " <> show (length ls))
+  where
+    relevant l = not (null l) && not ("--" `isPrefixOf` l)
+    parseConstraint l = case simpleParse l of
+                          Just c | depPkgName c == pn -> pure c
+                                 | otherwise          -> failure ("constraint on unexpected package: " <> l)
+                          Nothing                     -> failure ("cannot parse constraint: " <> l)
+    failure msg = fail (unPackageName pn <> "/preferred-versions: " <> msg)
 
 -- | Extract the @x-revision@ header added by Hackage.
 

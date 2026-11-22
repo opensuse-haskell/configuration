@@ -1,6 +1,6 @@
 module Oracle
   ( -- * Access to Hackage
-    addHackageCache, addCabalFileCache
+    addHackageCache, addCabalFileCache, addPreferredVersionsOracle
   , parseCabalFile, hasLibrary, packageRevision
     -- * Configuration
   , PackageSetSpec(..), readPackageSetSpec, addPackageSetSpecOracle
