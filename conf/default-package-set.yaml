@@ -305,7 +305,7 @@ package-set:
   - mountpoints-1.0.2
   - mtl-compat-0.2.2
   - netlink-1.1.1.0
-  - network-3.2.15.0
+  - network-3.2.16.0
   - network-bsd-2.8.1.0
   - network-byte-order-0.1.9
   - network-control-0.1.7
@@ -452,7 +452,7 @@ package-set:
   - uuid-types-1.0.6.1
   - vault-0.3.2.0
   - vector-0.13.2.0
-  - vector-algorithms-0.9.1.0
+  - vector-algorithms-0.9.1.1
   - vector-stream-0.1.0.1
   - vty-6.7
   - vty-crossplatform-0.5.0.0
@@ -462,7 +462,7 @@ package-set:
   - wai-cors-0.2.7
   - wai-extra-3.1.18
   - wai-logger-2.5.1
-  - warp-3.4.21
+  - warp-3.4.22
   - warp-tls-3.4.19
   - witherable-0.5
   - wizards-1.0.3
