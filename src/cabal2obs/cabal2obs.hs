@@ -18,17 +18,20 @@ import qualified Data.ByteString as BSS
 import Data.Function
 import Data.List as List ( intercalate, stripPrefix, sortBy )
 import qualified Data.Map.Strict as Map
+import Data.Maybe ( fromMaybe )
 import qualified Data.Set as Set
 import Development.Shake as Shake
 import Development.Shake.FilePath
 import System.Console.GetOpt ( ArgDescr(..), OptDescr(..) )
 import System.Directory
+import System.Environment ( lookupEnv )
 
 type instance RuleResult BuildName = PackageIdentifier
 type instance RuleResult PackageIdentifier = BuildName
 
 main :: IO ()
 main = do
+  python3 <- fromMaybe "python3" <$> lookupEnv "PYTHON3"
   cabalDir <- getAppUserDataDirectory "cabal"
   let buildDir = "_build"
       shopts = shakeOptions
@@ -185,14 +188,14 @@ main = do
       year <- case lines year' of
                 []  -> fail ("impossible year value " ++ show year' ++ " returned")
                 y:_ -> pure y
-      command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
+      command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] python3 ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       patches <- getDirectoryFiles "" [ "patches/common/" ++ display n ++ "/*.patch"
                                       , "patches/" ++ pkgSetName ++ "/" ++ display n ++ "/*.patch"
                                       ]
       need patches
       forM_ (sortBy (compare `on` takeFileName) patches) $ \p -> do
         command_ [] "patch" ["--no-backup-if-mismatch", "--force", "--silent", out, p]
-        command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] "python3" ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
+        command_ [Cwd "src/spec-cleaner", Traced "spec-cleaner"] python3 ["-m", "spec_cleaner", "--suse-copyright", "--copyright-year=" ++ year, "-i", "../.." </> out]
       Stdout buf <- command [Traced "verify-license"] "sed" ["-n", "-e", "s/^License: *//p", out]
       mapM_ verifyLicense (lines buf)
 
