@@ -516,19 +516,12 @@ flags:
   # Don't use the bundled sqlite3 library.
   - direct-sqlite: +systemlib
 
-  # dont optimize happy with happy ( dep on same package ..)
-  - happy: -bootstrap
-
   # Build the standalone executable and prefer pcre-light, which uses the system
   # library rather than a bundled copy.
   - highlighting-kate: +executable +pcre-light
 
   # Don't use the bundled sass library.
   - hlibsass: +externalLibsass
-
-  # Use the bundled lua library. People expect this package to provide LUA
-  # 5.3, but we don't have that yet in openSUSE.
-  - hslua: -system-lua
 
   # Allow compilation without having Nix installed.
   - nix-paths: +allow-relative-paths
@@ -552,14 +545,11 @@ flags:
 
   # Make sure we're building with all features enabled.
   # TODO: The OsPath feature needs file-io >= 0.2.0.
-  - git-annex: +assistant -benchmark +blake3 +botan +dbus -debuglocks +magicmime -memory -nollmdependencies -ospath +production -tastytap +torrentparser +xxh3
+  - git-annex: +assistant -benchmark +blake3 +dbus -debuglocks +magicmime -memory -nollmdependencies -ospath +production -tastytap +torrentparser +xxh3
 
   # Compile against the system library, not the one bundled in the Haskell
   # source tarball.
   - cmark: +pkgconfig
-
-  # Fix build with modern compilers.
-  - cassava: -bytestring--lt-0_10_4
 
   # Prefer the system's library over the bundled one.
   - libyaml: +system-libyaml
