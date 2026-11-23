@@ -163,16 +163,19 @@ main = do
       pkgid@(PackageIdentifier n v) <- pkgidFromPath bn
       let isExe = unPackageName n == unBuildName bn
           pkgDir = takeDirectory out
-      -- Warn if Hackage has deprecated the version we generate a build for.
+      fa <- getFlags n
+      (_, cabalFile) <- getCabal pkgid
+      cabal <- parseCabalFile pkgid cabalFile
+      -- Warn if Hackage has deprecated the version we generate a build for,
+      -- and if our flag assignment doesn't match the flags the package
+      -- declares.
       shakeOpts <- getShakeOptions
       when (shakeVerbosity shakeOpts >= Warn) $ do
         Dependency _ preferred _ <- getPreferredVersions n
         unless (v `withinRange` preferred) $ do
           liftIO $ shakeOutput shakeOpts Warn $
             "warning: " ++ display pkgid ++ " is a deprecated version; Hackage prefers " ++ display n ++ " " ++ display preferred
-      fa <- getFlags n
-      (_, cabalFile) <- getCabal pkgid
-      cabal <- parseCabalFile pkgid cabalFile
+        liftIO $ mapM_ (shakeOutput shakeOpts Warn) (flagWarnings pkgid cabal fa)
       let rev = packageRevision cabal
       if rev > 0
          then liftIO (BSS.writeFile (pkgDir </> unPackageName n <.> "cabal") cabalFile)
@@ -239,6 +242,24 @@ verifyLicense lic = case eitherParsec lic of
   Right l -> let lic' = prettyShow (l :: License)
              in unless (lic == lic') $
                fail ("license " ++ lic ++ " doesn't match expected " ++ lic')
+
+-- | Compare the flags a package declares with the flags our configuration
+-- assigns for it. Returns one warning for every declared flag we don't assign
+-- and one for every assigned flag the package doesn't declare.
+
+flagWarnings :: PackageIdentifier -> GenericPackageDescription -> FlagAssignment -> [String]
+flagWarnings pkgid gpd fa = unassigned ++ undeclared
+  where
+    declared  = Map.fromList [ (flagName f, f) | f <- genPackageFlags gpd ]
+    specified = Map.fromList (unFlagAssignment fa)
+    unassigned = [ "warning: " ++ display pkgid ++ " declares flag " ++ unFlagName fn
+                   ++ " (default " ++ (if flagDefault f then "+" else "-") ++ unFlagName fn
+                   ++ ", " ++ (if flagManual f then "manual" else "automatic")
+                   ++ "), but our configuration doesn't assign it"
+                 | (fn, f) <- Map.toList (declared `Map.difference` specified) ]
+    undeclared = [ "warning: " ++ display pkgid ++ " doesn't declare flag " ++ unFlagName fn
+                   ++ ", but our configuration assigns it"
+                 | fn <- Map.keys (specified `Map.difference` declared) ]
 
 extractBuildName :: MonadFail m => FilePath -> FilePath -> m BuildName
 extractBuildName pkgSetName p
