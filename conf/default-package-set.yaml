@@ -426,7 +426,7 @@ package-set:
   - time-locale-compat-0.1.1.5
   - time-manager-0.5.2
   - timeit-2.0
-  - tls-2.6.3
+  - tls-2.6.4
   - tls-session-manager-0.1.4
   - toml-parser-2.0.2.0
   - torrent-10000.1.3
